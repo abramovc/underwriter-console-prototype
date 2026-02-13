@@ -4,52 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Verification Home</title>
+  <link rel="stylesheet" href="styles/base.css" />
   <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
+    .hero {
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 4.2vw, 48px);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p {
+      max-width: 760px;
+      font-size: 15px;
+    }
+
+    .options-grid {
       display: grid;
-      place-items: center;
-      font-family: Arial, sans-serif;
-      background: #f8fafc;
-      color: #111827;
-    }
-
-    .container {
-      width: min(900px, 92vw);
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0 0 20px 0;
-      font-size: clamp(28px, 4vw, 42px);
-      line-height: 1.15;
-    }
-
-    .grid {
-      display: flex;
-      flex-wrap: wrap;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
-      justify-content: center;
       margin-bottom: 18px;
     }
 
-    .option {
-      display: inline-block;
+    .option-card {
       text-decoration: none;
-      color: #111827;
+      color: inherit;
       border: 1px solid #d1d5db;
-      background: #ffffff;
-      border-radius: 999px;
-      padding: 10px 16px;
-      font-size: 14px;
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      border-radius: 14px;
+      background: #fff;
+      padding: 14px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+      transition: transform 170ms ease, border-color 170ms ease, box-shadow 170ms ease, background 170ms ease;
     }
 
-    .option:hover {
-      background: #eff6ff;
+    .option-card:hover {
+      transform: translateY(-2px);
       border-color: #93c5fd;
-      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(16, 24, 40, 0.08);
+      background: #f8fbff;
+    }
+
+    .option-label {
+      display: block;
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .option-help {
+      display: block;
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.4;
     }
 
     .console-link {
@@ -61,25 +69,80 @@
     .console-link:hover {
       text-decoration: underline;
     }
+
+    @media (max-width: 860px) {
+      .options-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-  <main class="container">
-    <h1>What would you like to verify today?</h1>
+  <div class="page">
+    <div class="container">
+      <nav class="topnav">
+        <a class="logo" href="index.html">Under</a>
+        <div class="topnav-links">
+          <a class="topnav-link" href="index.html">Verify</a>
+          <a class="topnav-link" href="queue.html">Console</a>
+          <a class="topnav-link" href="#">Docs</a>
+        </div>
+      </nav>
+      <main>
+        <header class="hero">
+          <h1>What would you like to verify today?</h1>
+          <p class="muted">Run instant checks across public signals and get a concise verification outcome with a clear public summary.</p>
+          <hr class="divider" />
+        </header>
 
-    <div class="grid">
-      <a class="option" href="verify.html?type=website">website</a>
-      <a class="option" href="verify.html?type=phone">phone number</a>
-      <a class="option" href="verify.html?type=email">email address</a>
-      <a class="option" href="verify.html?type=commercial_address">commercial address</a>
-      <a class="option" href="verify.html?type=personal_address">personal address</a>
-      <a class="option" href="verify.html?type=ip">IP address</a>
-      <a class="option" href="verify.html?type=business">business</a>
-      <a class="option" href="verify.html?type=person">person</a>
-      <a class="option" href="verify.html?type=bank">bank</a>
+        <div class="options-grid">
+          <a class="option-card" href="verify.html?type=website">
+            <span class="option-label">Website</span>
+            <span class="option-help">Domain age, posture, footprint</span>
+          </a>
+          <a class="option-card" href="verify.html?type=phone">
+            <span class="option-label">Phone</span>
+            <span class="option-help">Carrier, line type, range patterns</span>
+          </a>
+          <a class="option-card" href="verify.html?type=email">
+            <span class="option-label">Email</span>
+            <span class="option-help">Domain validity, mail posture, risk traits</span>
+          </a>
+          <a class="option-card" href="verify.html?type=commercial_address">
+            <span class="option-label">Commercial Address</span>
+            <span class="option-help">Deliverability, geocode, business signals</span>
+          </a>
+          <a class="option-card" href="verify.html?type=personal_address">
+            <span class="option-label">Personal Address</span>
+            <span class="option-help">Residential checks, geocode, consistency</span>
+          </a>
+          <a class="option-card" href="verify.html?type=ip">
+            <span class="option-label">IP Address</span>
+            <span class="option-help">Routability, ASN, proxy/VPN traits</span>
+          </a>
+          <a class="option-card" href="verify.html?type=business">
+            <span class="option-label">Business</span>
+            <span class="option-help">Entity footprint and cross-source checks</span>
+          </a>
+          <a class="option-card" href="verify.html?type=person">
+            <span class="option-label">Person</span>
+            <span class="option-help">Identity footprint and disambiguation</span>
+          </a>
+          <a class="option-card" href="verify.html?type=bank">
+            <span class="option-label">Bank</span>
+            <span class="option-help">Institution consistency and risk patterns</span>
+          </a>
+        </div>
+
+        <a class="console-link" href="queue.html">Underwriter Console</a>
+      </main>
     </div>
-
-    <a class="console-link" href="queue.html">Underwriter Console</a>
-  </main>
+  </div>
 </body>
 </html>

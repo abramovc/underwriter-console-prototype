@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Account</title>
+  <link rel="stylesheet" href="styles/base.css" />
   <style>
     body {
       margin: 0;
@@ -62,21 +63,37 @@
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <h1>Create account</h1>
+  <div class="page">
+    <div class="container">
+      <nav class="topnav">
+        <a class="logo" href="index.html">Under</a>
+        <div class="topnav-links">
+          <a class="topnav-link" href="index.html">Verify</a>
+          <a class="topnav-link" href="queue.html">Console</a>
+          <a class="topnav-link" href="#">Docs</a>
+        </div>
+      </nav>
+      <main class="wrap">
+        <header class="page-header">
+          <h1>Create account</h1>
+          <p class="muted">Set up an account to continue into the console experience.</p>
+          <hr class="divider" />
+        </header>
 
-    <form id="signupForm">
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" required />
+        <form id="signupForm">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
 
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" required />
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required />
 
-      <button type="submit">Create account</button>
-    </form>
+          <button type="submit">Create account</button>
+        </form>
 
-    <a href="index.html">Back</a>
-  </main>
+        <a href="index.html">Back</a>
+      </main>
+    </div>
+  </div>
 
   <script>
     const form = document.getElementById("signupForm");
