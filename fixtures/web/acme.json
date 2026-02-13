@@ -1,0 +1,14 @@
+{
+  "provider": "MockCrawler",
+  "type": "Web",
+  "customerId": "acme",
+  "timestamp": "2026-02-13T10:20:00Z",
+  "signals": [
+    { "key": "domain_age_bucket", "value": "new", "confidence": 0.66 },
+    { "key": "policy_page_presence", "value": "detected", "confidence": 0.81 }
+  ],
+  "notes": [
+    "Placeholder crawl output.",
+    "Generated for local prototype behavior."
+  ]
+}

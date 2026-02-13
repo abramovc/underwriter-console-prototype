@@ -1,0 +1,290 @@
+[
+  {
+    "id": "acme",
+    "name": "Acme Processing",
+    "status": "manual_review",
+    "assignee": null,
+    "riskScore": 82,
+    "riskTier": "High",
+    "tags": ["high_risk_mcc", "new_entity"],
+    "highlights": [
+      "Recent incorporation with limited operating history",
+      "Industry category has elevated chargeback exposure",
+      "Ownership structure requires additional verification"
+    ],
+    "nextSteps": [
+      "Request 6 months of processing statements",
+      "Collect beneficial ownership documents",
+      "Schedule enhanced underwriting review"
+    ],
+    "summary": {
+      "KYC": "Primary identity checks passed, but beneficial owner verification is still in progress.",
+      "KYB": "Business registration is recent and requires enhanced KYB due to new entity status.",
+      "Bank": "Settlement account is active with limited history and needs ongoing monitoring.",
+      "Credit": "Credit profile is thin with elevated expected volatility for this MCC."
+    },
+    "evidence": {
+      "KYC": {
+        "summary": [
+          "Government ID submitted and matched to applicant profile.",
+          "Beneficial owner selfie verification remains pending."
+        ],
+        "rawPath": "fixtures/kyc/acme.json"
+      },
+      "KYB": {
+        "summary": [
+          "Entity registration verified with recent incorporation date.",
+          "Ownership structure includes one unresolved control person record."
+        ],
+        "rawPath": "fixtures/kyb/acme.json"
+      },
+      "Bank": {
+        "summary": [
+          "Business checking account ownership confirmed.",
+          "Account tenure is short with limited transaction depth."
+        ],
+        "rawPath": "fixtures/bank/acme.json"
+      },
+      "Credit": {
+        "summary": [
+          "Thin-file commercial credit profile detected.",
+          "No severe delinquencies found, but volatility risk is elevated."
+        ],
+        "rawPath": "fixtures/credit/acme.json"
+      },
+      "Web": {
+        "summary": [
+          "Website content is minimal with limited policy disclosures.",
+          "Domain age is recent and trust signals are still developing."
+        ],
+        "rawPath": "fixtures/web/acme.json"
+      }
+    },
+    "tagEvidenceMap": {
+      "high_risk_mcc": [
+        {
+          "section": "Credit",
+          "reason": "Credit evidence shows elevated volatility aligned with higher-risk merchant category behavior.",
+          "match": "volatility risk is elevated",
+          "source": "summary"
+        },
+        {
+          "section": "Web",
+          "reason": "Limited policy detail on the website can increase customer dispute risk for this category.",
+          "match": "limited policy disclosures",
+          "source": "summary"
+        },
+        {
+          "section": "Credit",
+          "reason": "Thin-file credit signals can amplify risk for higher-risk merchant categories.",
+          "match": "Thin-file commercial credit profile detected",
+          "source": "summary"
+        }
+      ],
+      "new_entity": [
+        {
+          "section": "KYB",
+          "reason": "Entity formation is recent, which supports new-business tagging.",
+          "match": "recent incorporation date",
+          "source": "summary"
+        },
+        {
+          "section": "Bank",
+          "reason": "Short account tenure is consistent with a newly established operation.",
+          "match": "Account tenure is short",
+          "source": "summary"
+        },
+        {
+          "section": "Web",
+          "reason": "A recently aged domain often aligns with newer entities.",
+          "match": "Domain age is recent",
+          "source": "summary"
+        },
+        {
+          "section": "KYC",
+          "reason": "Pending beneficial-owner checks are common in early-stage onboarding.",
+          "match": "remains pending",
+          "source": "summary"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bluehorizon",
+    "name": "Blue Horizon LLC",
+    "status": "manual_review",
+    "assignee": null,
+    "riskScore": 45,
+    "riskTier": "Medium",
+    "tags": ["limited_web_presence"],
+    "highlights": [
+      "Minimal digital footprint",
+      "Short operating history"
+    ],
+    "nextSteps": [
+      "Request business license",
+      "Verify website and domain age"
+    ],
+    "summary": {
+      "KYC": "Owner identity verification completed with minor address documentation gaps.",
+      "KYB": "Entity validation is acceptable, though public business footprint is limited.",
+      "Bank": "Bank account verification matched legal entity details without major exceptions.",
+      "Credit": "Credit indicators are moderate and support conditional standard onboarding."
+    },
+    "evidence": {
+      "KYC": {
+        "summary": [
+          "Primary signer identity verified against submitted documents.",
+          "Address proof required one follow-up clarification."
+        ],
+        "rawPath": "fixtures/kyc/bluehorizon.json"
+      },
+      "KYB": {
+        "summary": [
+          "Business license and registry records align with filing details.",
+          "Operational footprint appears valid but lightly established."
+        ],
+        "rawPath": "fixtures/kyb/bluehorizon.json"
+      },
+      "Bank": {
+        "summary": [
+          "Bank account ownership and routing details successfully validated.",
+          "Transaction pattern is stable for current projected volumes."
+        ],
+        "rawPath": "fixtures/bank/bluehorizon.json"
+      },
+      "Credit": {
+        "summary": [
+          "Commercial credit signals fall within medium-risk thresholds.",
+          "No critical adverse records identified in recent pulls."
+        ],
+        "rawPath": "fixtures/credit/bluehorizon.json"
+      },
+      "Web": {
+        "summary": [
+          "Site is live but includes limited business context and policy depth.",
+          "Domain history is short with modest credibility indicators."
+        ],
+        "rawPath": "fixtures/web/bluehorizon.json"
+      }
+    },
+    "tagEvidenceMap": {
+      "limited_web_presence": [
+        {
+          "section": "Web",
+          "reason": "The site contains sparse business context and limited policy information.",
+          "match": "limited business context and policy depth",
+          "source": "summary"
+        },
+        {
+          "section": "Web",
+          "reason": "Short domain history reduces confidence in long-term web presence.",
+          "match": "Domain history is short",
+          "source": "summary"
+        },
+        {
+          "section": "KYB",
+          "reason": "Lightly established operating footprint supports limited web presence concerns.",
+          "match": "lightly established",
+          "source": "summary"
+        }
+      ]
+    }
+  },
+  {
+    "id": "summit",
+    "name": "Summit Retail",
+    "status": "approved",
+    "assignee": null,
+    "riskScore": 12,
+    "riskTier": "Low",
+    "tags": ["established_business"],
+    "highlights": [
+      "Long operating history with consistent volumes",
+      "Low chargeback trend in prior provider data",
+      "Complete documentation package received"
+    ],
+    "nextSteps": [
+      "Proceed to standard approval",
+      "Set annual review reminder",
+      "Send onboarding checklist"
+    ],
+    "summary": {
+      "KYC": "Customer identity and ownership records are complete and internally consistent.",
+      "KYB": "Business credentials are well established with clean registry and licensing data.",
+      "Bank": "Banking relationship is stable with transaction behavior aligned to stated activity.",
+      "Credit": "Credit performance is strong with low risk signals across reviewed sources."
+    },
+    "evidence": {
+      "KYC": {
+        "summary": [
+          "Owner identity and sanctions checks completed without exceptions.",
+          "Beneficial ownership records are complete and fully matched."
+        ],
+        "rawPath": "fixtures/kyc/summit.json"
+      },
+      "KYB": {
+        "summary": [
+          "Corporate registration and licensing are current and verifiable.",
+          "Long-standing business history supports low operational risk."
+        ],
+        "rawPath": "fixtures/kyb/summit.json"
+      },
+      "Bank": {
+        "summary": [
+          "Operating account history shows consistent settlement activity.",
+          "No unusual account access or ownership anomalies observed."
+        ],
+        "rawPath": "fixtures/bank/summit.json"
+      },
+      "Credit": {
+        "summary": [
+          "Credit profile reflects strong payment performance over time.",
+          "Leverage and delinquency indicators remain comfortably low."
+        ],
+        "rawPath": "fixtures/credit/summit.json"
+      },
+      "Web": {
+        "summary": [
+          "Website includes complete policy and contact disclosures.",
+          "Domain longevity and traffic signals support business legitimacy."
+        ],
+        "rawPath": "fixtures/web/summit.json"
+      }
+    },
+    "tagEvidenceMap": {
+      "established_business": [
+        {
+          "section": "KYB",
+          "reason": "Business-history evidence indicates long-standing operations.",
+          "match": "Long-standing business history",
+          "source": "summary"
+        },
+        {
+          "section": "Bank",
+          "reason": "Stable operating account history supports an established profile.",
+          "match": "consistent settlement activity",
+          "source": "summary"
+        },
+        {
+          "section": "Web",
+          "reason": "Long-lived domain signals reinforce that the business is established.",
+          "match": "Domain longevity",
+          "source": "summary"
+        },
+        {
+          "section": "Credit",
+          "reason": "Strong and sustained credit behavior supports an established-business designation.",
+          "match": "strong payment performance over time",
+          "source": "summary"
+        },
+        {
+          "section": "KYC",
+          "reason": "Complete and matched ownership records align with a mature operating entity.",
+          "match": "fully matched",
+          "source": "summary"
+        }
+      ]
+    }
+  }
+]

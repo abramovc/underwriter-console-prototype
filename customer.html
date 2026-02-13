@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Underwriter Console - Customer</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 24px; color: #1f2937; line-height: 1.4;">
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px;">
+    <a href="queue.html" style="color: #2563eb; text-decoration: none;">&larr; Back to Queue</a>
+    <a id="signOutLink" href="#" style="color: #2563eb; text-decoration: none; font-size: 14px;">Sign out</a>
+  </div>
+
+  <div id="content"></div>
+
+  <script>
+    if (localStorage.getItem("plgAuth") !== "true") {
+      window.location.replace("index.html");
+    }
+
+    const signOutLink = document.getElementById("signOutLink");
+    const content = document.getElementById("content");
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    signOutLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      localStorage.removeItem("plgAuth");
+      localStorage.removeItem("plgUserEmail");
+      window.location.replace("index.html");
+    });
+
+    function renderError(message) {
+      content.innerHTML = `
+        <h1 style="margin: 0 0 12px 0;">Customer Not Found</h1>
+        <p style="margin: 0 0 12px 0; color: #4b5563;">${message}</p>
+        <a href="queue.html" style="color: #2563eb; text-decoration: none;">&larr; Back to Queue</a>
+      `;
+    }
+
+    function renderCustomer(customer) {
+      const evidenceOrder = ["KYC", "KYB", "Bank", "Credit", "Web"];
+      const highlightsHtml = customer.highlights
+        .map(function (item) { return `<li style="margin-bottom: 6px;">${item}</li>`; })
+        .join("");
+
+      const tagsHtml = customer.tags
+        .map(function (tag) {
+          return `<button type="button" data-global-tag="${tag}" style="display: inline-block; padding: 4px 8px; border: 1px solid #d1d5db; border-radius: 999px; margin: 0 8px 8px 0; font-size: 13px; background: #fff; cursor: pointer;">${tag}</button>`;
+        })
+        .join("");
+
+      const stepsHtml = customer.nextSteps
+        .map(function (step) {
+          return `<button type="button" data-step-action="${step}" style="padding: 8px 12px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 6px; margin: 0 8px 8px 0; cursor: pointer;">${step}</button>`;
+        })
+        .join("");
+
+      const evidence = customer.evidence || {};
+      const tagEvidenceMap = customer.tagEvidenceMap || {};
+      const evidenceHtml = evidenceOrder
+        .map(function (section) {
+          const sectionData = evidence[section] || {};
+          const summaryItems = Array.isArray(sectionData.summary) ? sectionData.summary : [];
+          const summaryHtml = summaryItems.length
+            ? summaryItems.map(function (item) {
+              return `<li data-evidence-summary style="margin-bottom: 6px;">${item}</li>`;
+            }).join("")
+            : '<li style="color: #6b7280;">No summary available.</li>';
+          const rawPath = sectionData.rawPath || "";
+          const tagsForSection = Object.keys(tagEvidenceMap).filter(function (tag) {
+            const entries = Array.isArray(tagEvidenceMap[tag]) ? tagEvidenceMap[tag] : [];
+            return entries.some(function (entry) {
+              return entry.section === section;
+            });
+          });
+          const tagChipsHtml = tagsForSection.length
+            ? tagsForSection.map(function (tag) {
+              return `<button type="button" data-evidence-tag="${tag}" data-evidence-section="${section}" style="display: inline-block; margin: 0 8px 8px 0; padding: 4px 8px; border: 1px solid #d1d5db; border-radius: 999px; background: #fff; cursor: pointer; font-size: 12px;">${tag}</button>`;
+            }).join("")
+            : '<span style="color: #6b7280; font-size: 13px;">No tags mapped.</span>';
+
+          return `
+            <div style="border: 1px solid #d1d5db; border-radius: 6px; margin-bottom: 8px;">
+              <button type="button" data-evidence-toggle="${section}" style="width: 100%; text-align: left; padding: 10px 12px; border: none; background: #f9fafb; cursor: pointer; border-radius: 6px;">
+                <strong>${section}</strong> <span data-evidence-caret="${section}" style="float: right;">▸</span>
+              </button>
+              <div data-evidence-panel="${section}" style="display: none; padding: 10px 12px; border-top: 1px solid #e5e7eb;">
+                <ul style="margin: 0 0 10px 18px; padding: 0;">${summaryHtml}</ul>
+                <div style="margin: 0 0 8px 0;">
+                  <p style="margin: 0 0 6px 0; font-size: 13px; color: #4b5563;">Tags triggered by this evidence</p>
+                  <div data-tag-chip-wrap="${section}">${tagChipsHtml}</div>
+                </div>
+                <button type="button" data-view-raw data-evidence-section="${section}" data-raw-path="${rawPath}" style="padding: 6px 10px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 6px; cursor: pointer;">View raw JSON</button>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      content.innerHTML = `
+        <header style="margin-bottom: 20px;">
+          <h1 style="margin: 0 0 8px 0;">${customer.name}</h1>
+          <p style="margin: 0; color: #4b5563;">Risk Tier: <strong>${customer.riskTier}</strong> | Risk Score: <strong>${customer.riskScore}</strong></p>
+        </header>
+
+        <section style="margin-bottom: 20px;">
+          <h2 style="font-size: 18px; margin: 0 0 10px 0;">Highlights</h2>
+          <ul style="margin: 0 0 0 18px; padding: 0;">${highlightsHtml}</ul>
+        </section>
+
+        <section style="margin-bottom: 20px;">
+          <h2 style="font-size: 18px; margin: 0 0 10px 0;">Tags</h2>
+          <div id="mainTags">${tagsHtml}</div>
+          <a id="clearExplainTop" href="#" style="display: none; color: #2563eb; text-decoration: none; font-size: 13px;">Clear</a>
+        </section>
+
+        <section style="margin-bottom: 20px;">
+          <h2 style="font-size: 18px; margin: 0 0 10px 0;">Evidence</h2>
+          <div id="explainWhyPanel" style="display: none; margin-bottom: 10px; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 6px; background: #f9fafb;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+              <h3 id="explainWhyTitle" style="margin: 0; font-size: 15px;">Why this tag</h3>
+              <a id="clearExplainMode" href="#" style="color: #2563eb; text-decoration: none; font-size: 13px;">Clear explain mode</a>
+            </div>
+            <div id="explainWhyContent" style="margin-top: 8px;"></div>
+          </div>
+          <div id="evidenceAccordion">${evidenceHtml}</div>
+        </section>
+
+        <section>
+          <h2 style="font-size: 18px; margin: 0 0 10px 0;">Recommended Next Steps</h2>
+          <div id="nextSteps">${stepsHtml}</div>
+        </section>
+
+        <section style="margin-top: 20px;">
+          <h2 style="font-size: 18px; margin: 0 0 10px 0;">Activity</h2>
+          <button id="clearActivity" type="button" style="padding: 0; border: none; background: none; color: #2563eb; cursor: pointer; margin-bottom: 10px;">Clear Activity</button>
+          <ul id="activityLog" style="margin: 0 0 0 18px; padding: 0;"></ul>
+        </section>
+
+        <div id="rawJsonModalBackdrop" style="display: none; position: fixed; inset: 0; background: rgba(17, 24, 39, 0.45); z-index: 20;"></div>
+        <div id="rawJsonModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(760px, 92vw); max-height: 80vh; overflow: auto; background: #fff; border: 1px solid #d1d5db; border-radius: 8px; z-index: 21;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #e5e7eb;">
+            <h3 id="rawJsonModalTitle" style="margin: 0; font-size: 16px;">Raw JSON</h3>
+            <button id="rawJsonModalClose" type="button" style="border: 1px solid #d1d5db; background: #fff; border-radius: 4px; width: 28px; height: 28px; cursor: pointer;">X</button>
+          </div>
+          <pre id="rawJsonModalContent" style="margin: 0; padding: 12px; font-size: 12px; white-space: pre-wrap; word-break: break-word;"></pre>
+        </div>
+      `;
+
+      const storageKey = "activity:" + id;
+
+      function readActivity() {
+        try {
+          const raw = localStorage.getItem(storageKey);
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function saveActivity(entries) {
+        localStorage.setItem(storageKey, JSON.stringify(entries));
+      }
+
+      function renderActivity() {
+        const activityLog = document.getElementById("activityLog");
+        const entries = readActivity();
+
+        if (!entries.length) {
+          activityLog.innerHTML = '<li style="color: #6b7280;">No activity yet.</li>';
+          return;
+        }
+
+        activityLog.innerHTML = entries
+          .map(function (entry) {
+            return `<li style="margin-bottom: 6px;"><strong>${entry.timestamp}</strong> - ${entry.action}</li>`;
+          })
+          .join("");
+      }
+
+      document.getElementById("nextSteps").addEventListener("click", function (event) {
+        const button = event.target.closest("button[data-step-action]");
+        if (!button) return;
+
+        const entries = readActivity();
+        entries.push({
+          timestamp: new Date().toLocaleString(),
+          action: button.textContent.trim()
+        });
+        saveActivity(entries);
+        renderActivity();
+      });
+
+      document.getElementById("clearActivity").addEventListener("click", function () {
+        localStorage.removeItem(storageKey);
+        renderActivity();
+      });
+
+      const evidenceAccordion = document.getElementById("evidenceAccordion");
+      const mainTags = document.getElementById("mainTags");
+      const clearExplainTop = document.getElementById("clearExplainTop");
+      const explainWhyPanel = document.getElementById("explainWhyPanel");
+      const explainWhyTitle = document.getElementById("explainWhyTitle");
+      const explainWhyContent = document.getElementById("explainWhyContent");
+      const clearExplainMode = document.getElementById("clearExplainMode");
+      const rawJsonModalBackdrop = document.getElementById("rawJsonModalBackdrop");
+      const rawJsonModal = document.getElementById("rawJsonModal");
+      const rawJsonModalTitle = document.getElementById("rawJsonModalTitle");
+      const rawJsonModalContent = document.getElementById("rawJsonModalContent");
+      const rawJsonModalClose = document.getElementById("rawJsonModalClose");
+      let activeExplainTag = null;
+
+      function openRawJsonModal() {
+        rawJsonModalBackdrop.style.display = "block";
+        rawJsonModal.style.display = "block";
+      }
+
+      function closeRawJsonModal() {
+        rawJsonModalBackdrop.style.display = "none";
+        rawJsonModal.style.display = "none";
+      }
+
+      function setPanelOpen(section, open) {
+        const panel = evidenceAccordion.querySelector('[data-evidence-panel="' + section + '"]');
+        const caret = evidenceAccordion.querySelector('[data-evidence-caret="' + section + '"]');
+        if (!panel || !caret) return;
+        panel.style.display = open ? "block" : "none";
+        caret.textContent = open ? "▾" : "▸";
+      }
+
+      function closeAllPanels() {
+        evidenceOrder.forEach(function (section) {
+          setPanelOpen(section, false);
+        });
+      }
+
+      function clearAllHighlightsAndState() {
+        evidenceAccordion.querySelectorAll('li[data-evidence-summary]').forEach(function (item) {
+          item.style.background = "";
+          item.style.borderLeft = "";
+          item.style.paddingLeft = "";
+        });
+        evidenceAccordion.querySelectorAll('button[data-evidence-tag]').forEach(function (chip) {
+          chip.style.background = "#fff";
+          chip.style.borderColor = "#d1d5db";
+        });
+        mainTags.querySelectorAll('button[data-global-tag]').forEach(function (chip) {
+          chip.style.background = "#fff";
+          chip.style.borderColor = "#d1d5db";
+        });
+        explainWhyPanel.style.display = "none";
+        explainWhyContent.innerHTML = "";
+        clearExplainTop.style.display = "none";
+      }
+
+      function getTagEntriesBySection(tag) {
+        const entries = Array.isArray(tagEvidenceMap[tag]) ? tagEvidenceMap[tag] : [];
+        const grouped = {};
+        entries.forEach(function (entry) {
+          if (!grouped[entry.section]) {
+            grouped[entry.section] = [];
+          }
+          grouped[entry.section].push(entry);
+        });
+        return grouped;
+      }
+
+      function clearExplainModeState() {
+        activeExplainTag = null;
+        clearAllHighlightsAndState();
+        closeAllPanels();
+      }
+
+      function applyExplainMode(tag) {
+        clearAllHighlightsAndState();
+        activeExplainTag = tag;
+        const entriesBySection = getTagEntriesBySection(tag);
+        const sections = Object.keys(entriesBySection);
+
+        if (!sections.length) {
+          clearExplainTop.style.display = "inline-block";
+          return;
+        }
+
+        sections.forEach(function (section) {
+          setPanelOpen(section, true);
+          const panel = evidenceAccordion.querySelector('[data-evidence-panel="' + section + '"]');
+          if (!panel) return;
+
+          const matches = entriesBySection[section].map(function (entry) {
+            return String(entry.match || "").toLowerCase();
+          });
+
+          panel.querySelectorAll('li[data-evidence-summary]').forEach(function (item) {
+            const text = item.textContent.toLowerCase();
+            if (matches.some(function (matchText) { return matchText && text.includes(matchText); })) {
+              item.style.background = "#fff7d6";
+              item.style.borderLeft = "3px solid #f59e0b";
+              item.style.paddingLeft = "8px";
+            }
+          });
+        });
+
+        mainTags.querySelectorAll('button[data-global-tag]').forEach(function (chip) {
+          if (chip.getAttribute("data-global-tag") === tag) {
+            chip.style.background = "#eff6ff";
+            chip.style.borderColor = "#93c5fd";
+          }
+        });
+        evidenceAccordion.querySelectorAll('button[data-evidence-tag]').forEach(function (chip) {
+          if (chip.getAttribute("data-evidence-tag") === tag) {
+            chip.style.background = "#eff6ff";
+            chip.style.borderColor = "#93c5fd";
+          }
+        });
+
+        const whySectionsHtml = sections.map(function (section) {
+          const reasonItems = entriesBySection[section]
+            .map(function (entry) {
+              const base = '<li style="margin-bottom: 6px;">' + entry.reason + "</li>";
+              if (entry.source && entry.source !== "summary") {
+                return base + '<li style="margin-bottom: 6px; color: #4b5563;">See raw JSON signals (matched: ' + entry.match + ")</li>";
+              }
+              return base;
+            })
+            .join("");
+          return (
+            '<div style="margin-bottom: 8px;">' +
+            '<p style="margin: 0 0 4px 0;"><strong>' + section + "</strong></p>" +
+            '<ul style="margin: 0 0 0 18px; padding: 0;">' + reasonItems + "</ul>" +
+            "</div>"
+          );
+        }).join("");
+
+        explainWhyTitle.textContent = 'Why this tag: ' + tag;
+        explainWhyContent.innerHTML = whySectionsHtml;
+        explainWhyPanel.style.display = "block";
+        clearExplainTop.style.display = "inline-block";
+      }
+
+      function toggleExplainMode(tag) {
+        if (activeExplainTag === tag) {
+          clearExplainModeState();
+          return;
+        }
+        applyExplainMode(tag);
+      }
+
+      evidenceAccordion.addEventListener("click", function (event) {
+        const toggleButton = event.target.closest("button[data-evidence-toggle]");
+        if (toggleButton) {
+          const section = toggleButton.getAttribute("data-evidence-toggle");
+          const panel = evidenceAccordion.querySelector('[data-evidence-panel="' + section + '"]');
+          const caret = evidenceAccordion.querySelector('[data-evidence-caret="' + section + '"]');
+          const isOpen = panel.style.display === "block";
+          panel.style.display = isOpen ? "none" : "block";
+          caret.textContent = isOpen ? "▸" : "▾";
+          return;
+        }
+
+        const tagChip = event.target.closest("button[data-evidence-tag]");
+        if (tagChip) {
+          const tag = tagChip.getAttribute("data-evidence-tag");
+          toggleExplainMode(tag);
+          return;
+        }
+
+        const rawButton = event.target.closest("button[data-view-raw]");
+        if (!rawButton) return;
+
+        const section = rawButton.getAttribute("data-evidence-section");
+        const rawPath = rawButton.getAttribute("data-raw-path");
+        rawJsonModalTitle.textContent = section + " – Raw JSON";
+        rawJsonModalContent.textContent = "Loading...";
+        openRawJsonModal();
+
+        if (!rawPath) {
+          rawJsonModalContent.textContent = "Could not load raw JSON";
+          return;
+        }
+
+        fetch(rawPath)
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error("Failed to load raw JSON");
+            }
+            return response.json();
+          })
+          .then(function (data) {
+            rawJsonModalContent.textContent = JSON.stringify(data, null, 2);
+          })
+          .catch(function () {
+            rawJsonModalContent.textContent = "Could not load raw JSON";
+          });
+      });
+
+      rawJsonModalClose.addEventListener("click", closeRawJsonModal);
+      rawJsonModalBackdrop.addEventListener("click", closeRawJsonModal);
+      mainTags.addEventListener("click", function (event) {
+        const tagChip = event.target.closest("button[data-global-tag]");
+        if (!tagChip) return;
+        toggleExplainMode(tagChip.getAttribute("data-global-tag"));
+      });
+      clearExplainTop.addEventListener("click", function (event) {
+        event.preventDefault();
+        clearExplainModeState();
+      });
+      clearExplainMode.addEventListener("click", function (event) {
+        event.preventDefault();
+        clearExplainModeState();
+      });
+
+      renderActivity();
+    }
+
+    if (!id) {
+      renderError('Missing customer id. Open this page with a query like <strong>?id=acme</strong>.');
+    } else {
+      content.innerHTML = '<p style="margin: 0; color: #4b5563;">Loading...</p>';
+
+      fetch("data/customers.json")
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Fetch failed");
+          }
+          return response.json();
+        })
+        .then(function (customers) {
+          if (!Array.isArray(customers)) {
+            throw new Error("Invalid data");
+          }
+
+          const customer = customers.find(function (item) {
+            return item.id === id;
+          });
+
+          if (!customer) {
+            renderError('No customer found for id: <strong>' + id + "</strong>.");
+            return;
+          }
+
+          renderCustomer(customer);
+        })
+        .catch(function () {
+          renderError("Unable to load customer data right now.");
+        });
+    }
+  </script>
+</body>
+</html>

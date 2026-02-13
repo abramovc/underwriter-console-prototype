@@ -1,0 +1,14 @@
+{
+  "provider": "TransUnion",
+  "type": "Credit",
+  "customerId": "summit",
+  "timestamp": "2026-02-13T10:15:00Z",
+  "signals": [
+    { "key": "credit_band", "value": "mid", "confidence": 0.78 },
+    { "key": "delinquency_flag", "value": "none", "confidence": 0.87 }
+  ],
+  "notes": [
+    "Synthetic credit signals.",
+    "Not tied to any real person or business."
+  ]
+}

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Underwriter Console - Queue</title>
+  <style>
+    #drawerBackdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.5);
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    #drawerBackdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #nextStepsDrawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(420px, 92vw);
+      height: 100vh;
+      background: #ffffff;
+      border-left: 1px solid #d1d5db;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      z-index: 20;
+      overflow-y: auto;
+    }
+
+    #nextStepsDrawer.open {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 24px; color: #1f2937;">
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px;">
+    <h1 style="margin: 0;">Underwriter Queue</h1>
+    <a id="signOutLink" href="#" style="color: #2563eb; text-decoration: none; font-size: 14px;">Sign out</a>
+  </div>
+
+  <section style="margin-bottom: 16px;">
+    <h2 style="font-size: 18px; margin: 0 0 10px 0;">Filters</h2>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;">
+      <div>
+        <label for="riskTierFilter" style="margin-right: 8px;">Risk Tier:</label>
+        <select id="riskTierFilter" style="padding: 4px 6px; border: 1px solid #d1d5db; border-radius: 4px;">
+          <option value="All">All</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+      <div>
+        <label for="statusFilter" style="margin-right: 8px;">Status:</label>
+        <select id="statusFilter" style="padding: 4px 6px; border: 1px solid #d1d5db; border-radius: 4px;">
+          <option value="All">All</option>
+          <option value="approved">approved</option>
+          <option value="denied">denied</option>
+          <option value="manual_review">manual_review</option>
+          <option value="dormant">dormant</option>
+        </select>
+      </div>
+      <div>
+        <label for="assigneeFilter" style="margin-right: 8px;">Assignee:</label>
+        <select id="assigneeFilter" style="padding: 4px 6px; border: 1px solid #d1d5db; border-radius: 4px;">
+          <option value="All">All</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-bottom: 10px;">
+      <span style="display: inline-block; margin-bottom: 6px;">Tags:</span>
+      <div id="tagsFilters" style="color: #4b5563;">Loading tags...</div>
+    </div>
+    <button id="clearFilters" type="button" style="padding: 0; border: none; background: none; color: #2563eb; cursor: pointer;">Clear filters</button>
+  </section>
+
+  <p id="resultsCount" style="margin: 0 0 10px 0; color: #4b5563;">Loading...</p>
+
+  <table id="queueTable" style="border-collapse: collapse; width: 100%; max-width: 900px;">
+    <thead>
+      <tr style="background-color: #f3f4f6; text-align: left;">
+        <th style="border: 1px solid #d1d5db; padding: 10px; width: 44px;"></th>
+        <th style="border: 1px solid #d1d5db; padding: 10px;">Customer Name</th>
+        <th id="riskScoreHeader" style="border: 1px solid #d1d5db; padding: 10px; cursor: pointer;">Risk Score</th>
+        <th style="border: 1px solid #d1d5db; padding: 10px;">Risk Tier</th>
+        <th style="border: 1px solid #d1d5db; padding: 10px;">Tags</th>
+        <th style="border: 1px solid #d1d5db; padding: 10px;">Status</th>
+        <th style="border: 1px solid #d1d5db; padding: 10px;">Assignee</th>
+      </tr>
+    </thead>
+    <tbody id="queueBody">
+      <tr>
+        <td colspan="7" style="border: 1px solid #d1d5db; padding: 10px; color: #4b5563;">Loading...</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="drawerBackdrop" aria-hidden="true"></div>
+  <aside id="nextStepsDrawer" aria-hidden="true">
+    <div style="padding: 16px; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; background: #fff;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+        <h2 style="margin: 0; font-size: 20px;">Potential Next Steps</h2>
+        <button id="drawerClose" type="button" style="border: 1px solid #d1d5db; background: #fff; border-radius: 4px; width: 28px; height: 28px; cursor: pointer;">X</button>
+      </div>
+      <p id="drawerCustomerMeta" style="margin: 8px 0 0 0; color: #4b5563;">-</p>
+      <a id="drawerReportLink" href="customer.html" style="display: inline-block; margin-top: 8px; color: #2563eb; text-decoration: none;">View full report →</a>
+    </div>
+    <div style="padding: 16px;">
+      <section style="margin-bottom: 16px;">
+        <h3 style="margin: 0 0 6px 0; font-size: 16px;">Send 6-digit authentication code</h3>
+        <p style="margin: 0; color: #4b5563;">This will confirm the owner of the phone has access to this number. This will also confirm device hardware/software and their location.</p>
+        <button type="button" data-add-activity data-action-title="Send 6-digit authentication code" style="margin-top: 8px; padding: 6px 10px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 6px; cursor: pointer;">Add to Activity</button>
+      </section>
+      <section style="margin-bottom: 16px;">
+        <h3 style="margin: 0 0 6px 0; font-size: 16px;">Send a link to take a selfie and photo of license</h3>
+        <p style="margin: 0; color: #4b5563;">This will confirm the liveness of the owner. This will also confirm device hardware/software and their location.</p>
+        <button type="button" data-add-activity data-action-title="Send a link to take a selfie and photo of license" style="margin-top: 8px; padding: 6px 10px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 6px; cursor: pointer;">Add to Activity</button>
+      </section>
+      <section style="margin-bottom: 16px;">
+        <h3 style="margin: 0 0 6px 0; font-size: 16px;">Send a link to connect their bank account via Plaid</h3>
+        <p style="margin: 0; color: #4b5563;">This will confirm the owner of the bank account has access to the credentials. This will also confirm device hardware/software and their location.</p>
+        <button type="button" data-add-activity data-action-title="Send a link to connect their bank account via Plaid" style="margin-top: 8px; padding: 6px 10px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 6px; cursor: pointer;">Add to Activity</button>
+      </section>
+      <section style="margin-bottom: 16px;">
+        <h3 style="margin: 0 0 6px 0; font-size: 16px;">Send an email requesting supporting documentation</h3>
+        <p style="margin: 0; color: #4b5563;">This will allow you to use the email address provided to request supporting documents. You will be able to edit the text directly.</p>
+        <button type="button" data-add-activity data-action-title="Send an email requesting supporting documentation" style="margin-top: 8px; padding: 6px 10px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 6px; cursor: pointer;">Add to Activity</button>
+      </section>
+      <section>
+        <h3 style="margin: 0 0 6px 0; font-size: 16px;">Crawl the website provided</h3>
+        <p style="margin: 0; color: #4b5563;">This website crawl will provide a more comprehensive picture of the website including domain age, visitors, T&amp;Cs, return policies, phone numbers, hyperlinks, page trees, 400 errors</p>
+        <button type="button" data-add-activity data-action-title="Crawl the website provided" style="margin-top: 8px; padding: 6px 10px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 6px; cursor: pointer;">Add to Activity</button>
+      </section>
+      <section style="margin-top: 20px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+        <h3 style="margin: 0 0 8px 0; font-size: 16px;">Activity (recent)</h3>
+        <ul id="drawerRecentActivity" style="margin: 0 0 0 18px; padding: 0;"></ul>
+      </section>
+    </div>
+  </aside>
+  <div id="activityToast" style="position: fixed; right: 16px; bottom: 16px; background: #111827; color: #ffffff; padding: 8px 12px; border-radius: 6px; font-size: 13px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; z-index: 30;">Added to activity</div>
+  <div id="savedToast" style="position: fixed; left: 16px; bottom: 16px; background: #111827; color: #ffffff; padding: 8px 12px; border-radius: 6px; font-size: 13px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; z-index: 30;">Saved</div>
+
+  <script>
+    if (localStorage.getItem("plgAuth") !== "true") {
+      window.location.replace("index.html");
+    }
+
+    const signOutLink = document.getElementById("signOutLink");
+    const riskScoreHeader = document.getElementById("riskScoreHeader");
+    const queueBody = document.getElementById("queueBody");
+    const riskTierFilter = document.getElementById("riskTierFilter");
+    const statusFilter = document.getElementById("statusFilter");
+    const assigneeFilter = document.getElementById("assigneeFilter");
+    const tagsFilters = document.getElementById("tagsFilters");
+    const clearFilters = document.getElementById("clearFilters");
+    const resultsCount = document.getElementById("resultsCount");
+    const activityToast = document.getElementById("activityToast");
+    const savedToast = document.getElementById("savedToast");
+    const STATUS_OPTIONS = ["approved", "denied", "manual_review", "dormant"];
+    let customers = [];
+    let users = [];
+    let sortAscending = false;
+    let expandedCustomerId = null;
+    let selectedDrawerCustomerId = null;
+    let toastTimeoutId = null;
+    let savedToastTimeoutId = null;
+
+    signOutLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      localStorage.removeItem("plgAuth");
+      localStorage.removeItem("plgUserEmail");
+      window.location.replace("index.html");
+    });
+
+    function updateHeaderLabel() {
+      riskScoreHeader.textContent = "Risk Score " + (sortAscending ? "▲" : "▼");
+    }
+
+    function getSelectedTags() {
+      return Array.from(tagsFilters.querySelectorAll('input[type="checkbox"]:checked')).map(function (checkbox) {
+        return checkbox.value;
+      });
+    }
+
+    function getFilteredCustomers() {
+      const selectedTier = riskTierFilter.value;
+      const selectedTags = getSelectedTags();
+      const selectedStatus = statusFilter.value;
+      const selectedAssignee = assigneeFilter.value;
+
+      return customers.filter(function (customer) {
+        const resolved = resolveCustomerDisplayData(customer);
+        const tierMatch = selectedTier === "All" || customer.riskTier === selectedTier;
+        const tagsMatch = selectedTags.length === 0 || selectedTags.every(function (tag) {
+          return customer.tags.includes(tag);
+        });
+        const statusMatch = selectedStatus === "All" || resolved.status === selectedStatus;
+        const assigneeMatch =
+          selectedAssignee === "All" ||
+          (selectedAssignee === "__unassigned__"
+            ? (resolved.assignee === null || resolved.assignee === "")
+            : resolved.assignee === selectedAssignee);
+        return tierMatch && tagsMatch && statusMatch && assigneeMatch;
+      });
+    }
+
+    function renderAssigneeFilterOptions() {
+      const options = ['<option value="All">All</option>', '<option value="__unassigned__">(unassigned)</option>'];
+      users.forEach(function (user) {
+        options.push('<option value="' + user.id + '">' + user.name + "</option>");
+      });
+      assigneeFilter.innerHTML = options.join("");
+      assigneeFilter.value = "All";
+    }
+
+    function renderTagFilters() {
+      const uniqueTags = Array.from(
+        new Set(
+          customers.flatMap(function (customer) {
+            return Array.isArray(customer.tags) ? customer.tags : [];
+          })
+        )
+      ).sort();
+
+      if (!uniqueTags.length) {
+        tagsFilters.innerHTML = '<span style="color: #6b7280;">No tags available.</span>';
+        return;
+      }
+
+      tagsFilters.innerHTML = uniqueTags
+        .map(function (tag) {
+          return '<label style="display: inline-block; margin: 0 12px 8px 0; color: #1f2937;">' +
+            '<input type="checkbox" value="' + tag + '" style="margin-right: 6px;" />' + tag +
+            "</label>";
+        })
+        .join("");
+    }
+
+    function renderRows() {
+      const filteredCustomers = getFilteredCustomers();
+      resultsCount.textContent = "Showing " + filteredCustomers.length + " of " + customers.length + " customers";
+
+      if (!customers.length) {
+        expandedCustomerId = null;
+        queueBody.innerHTML = '<tr><td colspan="7" style="border: 1px solid #d1d5db; padding: 10px; color: #4b5563;">No customers found.</td></tr>';
+        return;
+      }
+
+      if (
+        expandedCustomerId &&
+        !filteredCustomers.some(function (customer) {
+          return customer.id === expandedCustomerId;
+        })
+      ) {
+        expandedCustomerId = null;
+      }
+
+      const sortedCustomers = filteredCustomers.slice().sort(function (a, b) {
+        return sortAscending ? a.riskScore - b.riskScore : b.riskScore - a.riskScore;
+      });
+
+      if (!sortedCustomers.length) {
+        queueBody.innerHTML = '<tr><td colspan="7" style="border: 1px solid #d1d5db; padding: 10px; color: #4b5563;">No matching customers.</td></tr>';
+        return;
+      }
+
+      queueBody.innerHTML = "";
+      sortedCustomers.forEach(function (customer) {
+        const resolvedCustomer = resolveCustomerDisplayData(customer);
+        const row = document.createElement("tr");
+        const isExpanded = customer.id === expandedCustomerId;
+        row.innerHTML =
+          '<td style="border: 1px solid #d1d5db; padding: 10px; text-align: center;">' +
+          '<button type="button" data-toggle-id="' + customer.id + '" style="border: 1px solid #d1d5db; background: #fff; border-radius: 4px; width: 24px; height: 24px; cursor: pointer;">' +
+          (isExpanded ? "▾" : "▸") +
+          "</button></td>" +
+          '<td style="border: 1px solid #d1d5db; padding: 10px;"><a href="customer.html?id=' + customer.id + '" style="color: #2563eb; text-decoration: none;">' + customer.name + "</a></td>" +
+          '<td style="border: 1px solid #d1d5db; padding: 10px;">' + customer.riskScore + "</td>" +
+          '<td style="border: 1px solid #d1d5db; padding: 10px;">' + customer.riskTier + "</td>" +
+          '<td style="border: 1px solid #d1d5db; padding: 10px;">' + customer.tags.join(", ") + "</td>" +
+          '<td style="border: 1px solid #d1d5db; padding: 10px;"><select data-status-select="' + customer.id + '" style="padding: 4px 6px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 12px; max-width: 140px;">' + buildStatusOptions(resolvedCustomer.status) + "</select></td>" +
+          '<td style="border: 1px solid #d1d5db; padding: 10px;"><select data-assignee-select="' + customer.id + '" style="padding: 4px 6px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 12px; max-width: 140px;">' + buildAssigneeOptions(resolvedCustomer.assignee) + "</select></td>";
+        queueBody.appendChild(row);
+
+        if (isExpanded) {
+          const detailsRow = document.createElement("tr");
+          const summary = customer.summary || {};
+          detailsRow.innerHTML =
+            '<td colspan="7" style="border: 1px solid #d1d5db; padding: 12px; background: #fafafa;">' +
+            '<h3 style="margin: 0 0 8px 0; font-size: 16px;">Summary</h3>' +
+            '<p style="margin: 0 0 6px 0;"><strong>KYC:</strong> ' + (summary.KYC || "-") + "</p>" +
+            '<p style="margin: 0 0 6px 0;"><strong>KYB:</strong> ' + (summary.KYB || "-") + "</p>" +
+            '<p style="margin: 0 0 6px 0;"><strong>Bank:</strong> ' + (summary.Bank || "-") + "</p>" +
+            '<p style="margin: 0 0 10px 0;"><strong>Credit:</strong> ' + (summary.Credit || "-") + "</p>" +
+            '<button type="button" data-open-drawer-id="' + customer.id + '" style="padding: 8px 12px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 6px; cursor: pointer;">Potential next steps →</button>' +
+            "</td>";
+          queueBody.appendChild(detailsRow);
+        }
+      });
+    }
+
+    riskScoreHeader.addEventListener("click", function () {
+      sortAscending = !sortAscending;
+      renderRows();
+      updateHeaderLabel();
+    });
+
+    riskTierFilter.addEventListener("change", renderRows);
+    statusFilter.addEventListener("change", renderRows);
+    assigneeFilter.addEventListener("change", renderRows);
+
+    tagsFilters.addEventListener("change", function (event) {
+      if (event.target.matches('input[type="checkbox"]')) {
+        renderRows();
+      }
+    });
+
+    clearFilters.addEventListener("click", function () {
+      riskTierFilter.value = "All";
+      statusFilter.value = "All";
+      assigneeFilter.value = "All";
+      Array.from(tagsFilters.querySelectorAll('input[type="checkbox"]')).forEach(function (checkbox) {
+        checkbox.checked = false;
+      });
+      renderRows();
+    });
+
+    queueBody.addEventListener("change", function (event) {
+      const statusSelect = event.target.closest("select[data-status-select]");
+      if (statusSelect) {
+        const customerId = statusSelect.getAttribute("data-status-select");
+        updateCustomerOverride(customerId, { status: statusSelect.value });
+        showSavedToast();
+        renderRows();
+        return;
+      }
+
+      const assigneeSelect = event.target.closest("select[data-assignee-select]");
+      if (assigneeSelect) {
+        const customerId = assigneeSelect.getAttribute("data-assignee-select");
+        const nextAssignee = assigneeSelect.value || null;
+        updateCustomerOverride(customerId, { assignee: nextAssignee });
+        showSavedToast();
+        renderRows();
+      }
+    });
+
+    queueBody.addEventListener("click", function (event) {
+      const drawerButton = event.target.closest("button[data-open-drawer-id]");
+      if (drawerButton) {
+        openDrawer(drawerButton.getAttribute("data-open-drawer-id"));
+        return;
+      }
+
+      const toggleButton = event.target.closest("button[data-toggle-id]");
+      if (!toggleButton) return;
+
+      const customerId = toggleButton.getAttribute("data-toggle-id");
+      expandedCustomerId = expandedCustomerId === customerId ? null : customerId;
+      renderRows();
+    });
+
+    const drawer = document.getElementById("nextStepsDrawer");
+    const drawerBackdrop = document.getElementById("drawerBackdrop");
+    const drawerClose = document.getElementById("drawerClose");
+    const drawerCustomerMeta = document.getElementById("drawerCustomerMeta");
+    const drawerReportLink = document.getElementById("drawerReportLink");
+    const drawerRecentActivity = document.getElementById("drawerRecentActivity");
+
+    function readActivityEntries(customerId) {
+      const storageKey = "activity:" + customerId;
+      try {
+        const raw = localStorage.getItem(storageKey);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function renderDrawerRecentActivity(customerId) {
+      if (!customerId) {
+        drawerRecentActivity.innerHTML = '<li style="color: #6b7280;">No activity yet.</li>';
+        return;
+      }
+
+      const entries = readActivityEntries(customerId);
+      if (!entries.length) {
+        drawerRecentActivity.innerHTML = '<li style="color: #6b7280;">No activity yet.</li>';
+        return;
+      }
+
+      const recent = entries.slice(-3).reverse();
+      drawerRecentActivity.innerHTML = recent
+        .map(function (entry) {
+          return '<li style="margin-bottom: 6px;"><strong>' + entry.timestamp + "</strong> - " + entry.action + "</li>";
+        })
+        .join("");
+    }
+
+    function openDrawer(customerId) {
+      const customer = customers.find(function (item) {
+        return item.id === customerId;
+      });
+      if (!customer) return;
+
+      selectedDrawerCustomerId = customerId;
+      drawerCustomerMeta.textContent =
+        customer.name + " | " + customer.riskTier + " | Risk Score: " + customer.riskScore;
+      drawerReportLink.href = "customer.html?id=" + customer.id;
+      renderDrawerRecentActivity(customer.id);
+      drawer.classList.add("open");
+      drawerBackdrop.classList.add("open");
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove("open");
+      drawerBackdrop.classList.remove("open");
+    }
+
+    function showActivityToast() {
+      activityToast.style.opacity = "1";
+      if (toastTimeoutId) {
+        clearTimeout(toastTimeoutId);
+      }
+      toastTimeoutId = setTimeout(function () {
+        activityToast.style.opacity = "0";
+      }, 1200);
+    }
+
+    function showSavedToast() {
+      savedToast.style.opacity = "1";
+      if (savedToastTimeoutId) {
+        clearTimeout(savedToastTimeoutId);
+      }
+      savedToastTimeoutId = setTimeout(function () {
+        savedToast.style.opacity = "0";
+      }, 1000);
+    }
+
+    drawerClose.addEventListener("click", closeDrawer);
+    drawerBackdrop.addEventListener("click", closeDrawer);
+    drawer.addEventListener("click", function (event) {
+      const addButton = event.target.closest("button[data-add-activity]");
+      if (!addButton || !selectedDrawerCustomerId) return;
+
+      const storageKey = "activity:" + selectedDrawerCustomerId;
+      const entries = readActivityEntries(selectedDrawerCustomerId);
+
+      entries.push({
+        timestamp: new Date().toLocaleString(),
+        action: addButton.getAttribute("data-action-title")
+      });
+      localStorage.setItem(storageKey, JSON.stringify(entries));
+      renderDrawerRecentActivity(selectedDrawerCustomerId);
+      showActivityToast();
+    });
+
+    function renderError(message) {
+      resultsCount.textContent = "Showing 0 of 0 customers";
+      tagsFilters.innerHTML = '<span style="color: #6b7280;">Unable to load tags.</span>';
+      queueBody.innerHTML =
+        '<tr><td colspan="7" style="border: 1px solid #d1d5db; padding: 10px; color: #b91c1c;">' + message + "</td></tr>";
+    }
+
+    function getOverrideKey(customerId) {
+      return "customerOverrides:" + customerId;
+    }
+
+    function readCustomerOverride(customerId) {
+      try {
+        const raw = localStorage.getItem(getOverrideKey(customerId));
+        if (!raw) return {};
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === "object" ? parsed : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function updateCustomerOverride(customerId, patch) {
+      const current = readCustomerOverride(customerId);
+      const merged = Object.assign({}, current, patch);
+      const clean = {};
+
+      if (typeof merged.status === "string" && STATUS_OPTIONS.includes(merged.status)) {
+        clean.status = merged.status;
+      }
+      if (Object.prototype.hasOwnProperty.call(merged, "assignee")) {
+        clean.assignee = merged.assignee === null || merged.assignee === "" ? null : merged.assignee;
+      }
+
+      if (!Object.keys(clean).length) {
+        localStorage.removeItem(getOverrideKey(customerId));
+        return;
+      }
+
+      localStorage.setItem(getOverrideKey(customerId), JSON.stringify(clean));
+    }
+
+    function resolveCustomerDisplayData(customer) {
+      const override = readCustomerOverride(customer.id);
+      const baseStatus = STATUS_OPTIONS.includes(customer.status) ? customer.status : "manual_review";
+      const status = typeof override.status === "string" && STATUS_OPTIONS.includes(override.status)
+        ? override.status
+        : baseStatus;
+      const assignee = Object.prototype.hasOwnProperty.call(override, "assignee")
+        ? override.assignee
+        : (customer.assignee === null ? null : customer.assignee);
+
+      return {
+        status: status,
+        assignee: assignee
+      };
+    }
+
+    function buildStatusOptions(selectedStatus) {
+      return STATUS_OPTIONS.map(function (status) {
+        const selected = status === selectedStatus ? ' selected' : "";
+        return '<option value="' + status + '"' + selected + ">" + status + "</option>";
+      }).join("");
+    }
+
+    function buildAssigneeOptions(selectedAssignee) {
+      const normalized = selectedAssignee || "";
+      const options = ['<option value="">' + "(unassigned)" + "</option>"];
+      users.forEach(function (user) {
+        const selected = user.id === normalized ? ' selected' : "";
+        options.push('<option value="' + user.id + '"' + selected + ">" + user.name + "</option>");
+      });
+      return options.join("");
+    }
+
+    Promise.all([
+      fetch("data/customers.json").then(function (response) {
+        if (!response.ok) {
+          throw new Error("Failed to load customer data.");
+        }
+        return response.json();
+      }),
+      fetch("data/users.json").then(function (response) {
+        if (!response.ok) {
+          throw new Error("Failed to load users data.");
+        }
+        return response.json();
+      })
+    ])
+      .then(function (results) {
+        customers = Array.isArray(results[0]) ? results[0] : [];
+        users = Array.isArray(results[1]) ? results[1] : [];
+        renderAssigneeFilterOptions();
+        renderTagFilters();
+        renderRows();
+      })
+      .catch(function () {
+        renderError("Unable to load queue data. Please try again.");
+      });
+
+    updateHeaderLabel();
+  </script>
+</body>
+</html>
