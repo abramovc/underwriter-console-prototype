@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev PLG Verify - Activity Log</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    .log-wrap {
+      width: min(1120px, 96vw);
+      margin: 0 auto;
+    }
+
+    .log-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .timeline-card,
+    .sidebar-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    .timeline-card {
+      padding: 14px;
+    }
+
+    .sidebar-card {
+      position: sticky;
+      top: 16px;
+      padding: 14px;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 12px;
+    }
+
+    .filter-btn {
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      background: #fff;
+      padding: 6px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      color: #374151;
+    }
+
+    .filter-btn.is-active {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1e3a8a;
+    }
+
+    .timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .item {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .item.is-stale {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+
+    .item-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .actor-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid #d1d5db;
+    }
+
+    .actor-underwriter {
+      background: #ecfeff;
+      border-color: #a5f3fc;
+      color: #155e75;
+    }
+
+    .actor-applicant {
+      background: #ecfdf3;
+      border-color: #bbf7d0;
+      color: #166534;
+    }
+
+    .actor-system {
+      background: #f3f4f6;
+      border-color: #d1d5db;
+      color: #374151;
+    }
+
+    .status {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .item-title {
+      margin: 0;
+      font-size: 14px;
+      color: #111827;
+    }
+
+    .meta {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .quiet-btn {
+      margin-top: 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      color: #111827;
+    }
+
+    .side-section {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #eef2f7;
+    }
+
+    .responsibility-pill {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      border: 1px solid #d1d5db;
+      background: #f8fafc;
+      color: #1f2937;
+      margin-top: 6px;
+    }
+
+    .stale-list {
+      margin: 8px 0 0 18px;
+      padding: 0;
+      color: #4b5563;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .log-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar-card {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="log-wrap">
+      <nav class="topnav">
+        <a class="logo" href="index.html">Under</a>
+        <div class="topnav-links">
+          <a class="topnav-link" href="index.html">Verify</a>
+          <a class="topnav-link" href="queue.html">Console</a>
+          <a class="topnav-link" href="#">Docs</a>
+        </div>
+      </nav>
+
+      <header class="page-header">
+        <h1 id="logTitle">Activity Log</h1>
+        <p class="muted" id="customerContext" style="margin-top: 6px;"></p>
+        <p class="muted">Timeline + deterministic responsibility engine demo.</p>
+        <hr class="divider" />
+      </header>
+
+      <div class="log-layout">
+        <section class="timeline-card">
+          <h2 style="margin: 0; font-size: 18px;">Timeline</h2>
+          <div class="filter-row" id="filters"></div>
+          <ul class="timeline" id="timeline"></ul>
+        </section>
+
+        <aside class="sidebar-card">
+          <h2 style="margin: 0; font-size: 18px;">Next Actions</h2>
+          <p class="muted" style="margin-top: 6px;">Derived responsibility</p>
+          <div class="responsibility-pill" id="responsibilityPill">-</div>
+          <p class="meta" id="responsibilityReason" style="margin-top: 8px;">-</p>
+
+          <div class="side-section">
+            <p style="margin: 0; font-weight: 600;">Next actions</p>
+            <ul id="nextActions" class="stale-list"></ul>
+          </div>
+
+          <div class="side-section">
+            <p style="margin: 0; font-weight: 600;">Stale Requests</p>
+            <ul id="staleList" class="stale-list"></ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const customerId = params.get("id") || params.get("customer") || "demo-001";
+    const customerName = params.get("name") || null;
+    const logTitleEl = document.getElementById("logTitle");
+    const customerContextEl = document.getElementById("customerContext");
+
+    if (logTitleEl) {
+      if (customerName) {
+        logTitleEl.textContent = "Activity Log · " + customerName;
+      } else {
+        logTitleEl.textContent = "Activity Log";
+      }
+    }
+
+    if (customerContextEl) {
+      customerContextEl.textContent = "Customer ID: " + customerId;
+    }
+
+    document.title = "Activity Log · " + (customerName || customerId);
+
+    const FILTERS = [
+      { key: "all", label: "All" },
+      { key: "underwriter", label: "Underwriter" },
+      { key: "applicant", label: "Applicant" },
+      { key: "system", label: "System" }
+    ];
+
+    const ACTIVITY_LABELS = {
+      request_docs: "Requested processing statements",
+      docs_request_resent: "Processing statement request resent",
+      request_address: "Requested proof of commercial address",
+      request_bank_link: "Requested bank account link via Plaid",
+      docs_uploaded: "Uploaded supporting statements",
+      reminder_sent: "Reminder sent",
+      review_started: "Underwriting review started",
+      review_completed: "Underwriting review checkpoint completed",
+      bank_link_resent: "Bank link resent",
+      address_request_resent: "Address request resent",
+      nightly_sync: "Nightly sync complete"
+    };
+
+    function isoHoursAgo(hoursAgo) {
+      return new Date(Date.now() - hoursAgo * 60 * 60 * 1000).toISOString();
+    }
+
+    const state = {
+      filter: "all",
+      activities: [
+        { id: "a1", ts: isoHoursAgo(72), actorType: "underwriter", actor: "Mike", type: "request_docs", status: "sent", requestKey: "docs", waitsForApplicant: true, resendable: true },
+        { id: "a2", ts: isoHoursAgo(71), actorType: "system", actor: "Under Engine", type: "reminder_sent", status: "sent", requestKey: "docs" },
+        { id: "a3", ts: isoHoursAgo(60), actorType: "applicant", actor: "Acme Owner", type: "docs_uploaded", status: "completed", requestKey: "docs" },
+        { id: "a4", ts: isoHoursAgo(30), actorType: "underwriter", actor: "Mike", type: "request_address", status: "sent", requestKey: "address", waitsForApplicant: true, resendable: true },
+        { id: "a5", ts: isoHoursAgo(29), actorType: "system", actor: "Under Engine", type: "reminder_sent", status: "sent", requestKey: "address" },
+        { id: "a6", ts: isoHoursAgo(12), actorType: "underwriter", actor: "Mike", type: "review_started", status: "in_progress" },
+        { id: "a7", ts: isoHoursAgo(10), actorType: "underwriter", actor: "Mike", type: "review_completed", status: "completed" },
+        { id: "a8", ts: isoHoursAgo(8), actorType: "underwriter", actor: "Mike", type: "request_bank_link", status: "sent", requestKey: "bank_link", waitsForApplicant: true, resendable: true },
+        { id: "a9", ts: isoHoursAgo(8), actorType: "system", actor: "Under Engine", type: "reminder_sent", status: "sent", requestKey: "bank_link" },
+        { id: "a10", ts: isoHoursAgo(3), actorType: "system", actor: "Under Engine", type: "nightly_sync", status: "completed" },
+        { id: "a11", ts: isoHoursAgo(1), actorType: "system", actor: "Under Engine", type: "nightly_sync", status: "completed" }
+      ]
+    };
+
+    const filtersEl = document.getElementById("filters");
+    const timelineEl = document.getElementById("timeline");
+    const responsibilityPillEl = document.getElementById("responsibilityPill");
+    const responsibilityReasonEl = document.getElementById("responsibilityReason");
+    const nextActionsEl = document.getElementById("nextActions");
+    const staleListEl = document.getElementById("staleList");
+
+    function asDate(value) {
+      return new Date(value);
+    }
+
+    function sortByTimeAsc(items) {
+      return items.slice().sort(function (a, b) {
+        return asDate(a.ts) - asDate(b.ts);
+      });
+    }
+
+    function sortByTimeDesc(items) {
+      return items.slice().sort(function (a, b) {
+        return asDate(b.ts) - asDate(a.ts);
+      });
+    }
+
+    function getLatestOutstandingRequests(activities) {
+      const sorted = sortByTimeAsc(activities);
+      const latestRequestByKey = {};
+
+      sorted.forEach(function (item) {
+        if (item.waitsForApplicant && item.requestKey && item.status !== "completed") {
+          latestRequestByKey[item.requestKey] = item;
+        }
+      });
+
+      const requests = Object.keys(latestRequestByKey).map(function (key) {
+        return latestRequestByKey[key];
+      });
+
+      return requests.filter(function (requestItem) {
+        return !sorted.some(function (candidate) {
+          return (
+            candidate.actorType === "applicant" &&
+            candidate.requestKey === requestItem.requestKey &&
+            asDate(candidate.ts) > asDate(requestItem.ts)
+          );
+        });
+      });
+    }
+
+    function getResponsibility(activities) {
+      const sorted = sortByTimeAsc(activities);
+      const outstanding = getLatestOutstandingRequests(sorted);
+      const latestOutstanding = outstanding.sort(function (a, b) {
+        return asDate(b.ts) - asDate(a.ts);
+      })[0];
+
+      if (latestOutstanding) {
+        return {
+          owner: "Waiting on Applicant",
+          reason: "Latest outstanding request: " + (ACTIVITY_LABELS[latestOutstanding.type] || latestOutstanding.type)
+        };
+      }
+
+      const latestApplicant = sortByTimeDesc(sorted).find(function (item) {
+        return item.actorType === "applicant";
+      });
+      const latestUnderwriter = sortByTimeDesc(sorted).find(function (item) {
+        return item.actorType === "underwriter";
+      });
+
+      if (latestApplicant && (!latestUnderwriter || asDate(latestApplicant.ts) > asDate(latestUnderwriter.ts))) {
+        return {
+          owner: "Waiting on Underwriter",
+          reason: "Applicant responded most recently. Queue ready for review."
+        };
+      }
+
+      return {
+        owner: "Waiting on Underwriter",
+        reason: "No pending applicant actions detected."
+      };
+    }
+
+    function isStaleRequest(item, activities) {
+      if (!item.waitsForApplicant || !item.requestKey || item.status === "completed") return false;
+      const latestOutstandingByKey = getLatestOutstandingRequests(activities).find(function (candidate) {
+        return candidate.requestKey === item.requestKey;
+      });
+      if (!latestOutstandingByKey || latestOutstandingByKey.id !== item.id) return false;
+      const elapsedMs = Date.now() - asDate(item.ts).getTime();
+      return elapsedMs > 24 * 60 * 60 * 1000;
+    }
+
+    function formatTs(ts) {
+      return asDate(ts).toLocaleString();
+    }
+
+    function renderFilters() {
+      filtersEl.innerHTML = FILTERS.map(function (f) {
+        const activeClass = state.filter === f.key ? " is-active" : "";
+        return '<button class="filter-btn' + activeClass + '" data-filter="' + f.key + '" type="button">' + f.label + "</button>";
+      }).join("");
+    }
+
+    function renderTimeline() {
+      const source = sortByTimeDesc(state.activities);
+      const filtered = state.filter === "all"
+        ? source
+        : source.filter(function (item) { return item.actorType === state.filter; });
+
+      if (!filtered.length) {
+        timelineEl.innerHTML = '<li class="meta">No activities for this filter.</li>';
+        return;
+      }
+
+      timelineEl.innerHTML = filtered.map(function (item) {
+        const stale = isStaleRequest(item, state.activities);
+        const actorClass = "actor-" + item.actorType;
+        const actorLabel = ({
+          underwriter: "Underwriter",
+          applicant: "Applicant",
+          system: "System"
+        })[item.actorType] || item.actorType;
+        const title = ACTIVITY_LABELS[item.type] || item.type;
+        const resendable = !!item.resendable && item.status !== "completed";
+        return (
+          '<li class="item' + (stale ? " is-stale" : "") + '">' +
+          '<div class="item-head">' +
+          '<div>' +
+          '<span class="actor-pill ' + actorClass + '">' + actorLabel + "</span>" +
+          '<p class="item-title">' + title + "</p>" +
+          '<p class="meta">' + item.actor + " · " + formatTs(item.ts) + "</p>" +
+          "</div>" +
+          '<span class="status">' + item.status + (stale ? " · stale" : "") + "</span>" +
+          "</div>" +
+          (resendable ? '<button class="quiet-btn" type="button" data-resend-id="' + item.id + '">Resend</button>' : "") +
+          "</li>"
+        );
+      }).join("");
+    }
+
+    function getNextActions(activities) {
+      const responsibility = getResponsibility(activities);
+      const outstanding = getLatestOutstandingRequests(activities);
+      const latestOutstanding = outstanding.sort(function (a, b) {
+        return new Date(b.ts) - new Date(a.ts);
+      })[0];
+      const latestIsStale = latestOutstanding ? isStaleRequest(latestOutstanding, activities) : false;
+      if (responsibility.owner === "Waiting on Applicant") {
+        if (latestIsStale) {
+          return ["Resend last request", "Send reminder", "Pause / follow up later"];
+        }
+        return ["Wait for applicant submission", "Optional: send reminder"];
+      }
+      return ["Review latest applicant activity", "Run checks as needed", "Approve / decline / request more"];
+    }
+
+    function renderSidebar() {
+      const responsibility = getResponsibility(state.activities);
+      responsibilityPillEl.textContent = responsibility.owner;
+      responsibilityReasonEl.textContent = responsibility.reason;
+      const staleOutstanding = getLatestOutstandingRequests(state.activities).filter(function (item) {
+        return isStaleRequest(item, state.activities);
+      });
+      const actions = getNextActions(state.activities);
+      nextActionsEl.innerHTML = actions.map(function (action) {
+        return "<li>" + action + "</li>";
+      }).join("");
+
+      if (!staleOutstanding.length) {
+        staleListEl.innerHTML = "<li>None</li>";
+        return;
+      }
+
+      staleListEl.innerHTML = staleOutstanding.map(function (item) {
+        const label = ACTIVITY_LABELS[item.type] || item.type;
+        return "<li>" + label + " (" + Math.floor((Date.now() - asDate(item.ts).getTime()) / (60 * 60 * 1000)) + "h old)</li>";
+      }).join("");
+    }
+
+    function appendResentActivity(sourceActivity) {
+      const resentTypeByKey = {
+        docs: "docs_request_resent",
+        address: "address_request_resent",
+        bank_link: "bank_link_resent"
+      };
+      const next = {
+        id: "r_" + Math.random().toString(36).slice(2, 9),
+        ts: new Date().toISOString(),
+        actorType: "system",
+        actor: "Under Engine",
+        type: resentTypeByKey[sourceActivity.requestKey] || "reminder_sent",
+        status: "sent",
+        requestKey: sourceActivity.requestKey,
+        waitsForApplicant: true,
+        resendable: false
+      };
+      state.activities.push(next);
+    }
+
+    function render() {
+      renderFilters();
+      renderTimeline();
+      renderSidebar();
+    }
+
+    filtersEl.addEventListener("click", function (event) {
+      const btn = event.target.closest("button[data-filter]");
+      if (!btn) return;
+      state.filter = btn.getAttribute("data-filter");
+      render();
+    });
+
+    timelineEl.addEventListener("click", function (event) {
+      const btn = event.target.closest("button[data-resend-id]");
+      if (!btn) return;
+      const id = btn.getAttribute("data-resend-id");
+      const source = state.activities.find(function (item) { return item.id === id; });
+      if (!source) return;
+      appendResentActivity(source);
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

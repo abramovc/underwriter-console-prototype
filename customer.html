@@ -28,6 +28,14 @@
       margin-bottom: 10px;
     }
 
+    .customer-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
     .back-link {
       color: #2563eb;
       text-decoration: none;
@@ -153,6 +161,17 @@
       margin: 0 0 0 18px;
       padding: 0;
     }
+
+    .primary-btn {
+      background: #111827;
+      color: #fff;
+      border-color: #111827;
+    }
+
+    .primary-btn:hover {
+      background: #0b1220;
+      border-color: #0b1220;
+    }
   </style>
 </head>
 <body>
@@ -271,7 +290,16 @@
           <div class="customer-hero-top">
             <a class="back-link" href="queue.html">&larr; Back to Queue</a>
           </div>
-          <h1 style="margin: 0 0 4px 0;">${customer.name}</h1>
+          <div class="customer-title-row">
+            <h1 style="margin: 0 0 4px 0;">${customer.name}</h1>
+            <a 
+              id="viewActivityLogBtn" 
+              class="btn primary-btn" 
+              href="log.html?id=${encodeURIComponent(customer.id || "REPLACE_WITH_ID")}&name=${encodeURIComponent(customer.name || "")}"
+            >
+              View Activity Log
+            </a>
+          </div>
           <div class="risk-pill-row">
             <span class="risk-pill">Risk Tier: ${customer.riskTier}</span>
             <span class="risk-pill">Risk Score: ${customer.riskScore}</span>
