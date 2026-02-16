@@ -268,3 +268,145 @@ tr:last-child td {
     scroll-behavior: auto !important;
   }
 }
+/* --- Verify: PLG rail layout --- */
+.verify-layout{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+
+.verify-main{
+  min-width: 0;
+}
+.verify-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+.verify-main {
+  min-width: 0;
+}
+
+.plg-rail {
+  position: sticky;
+  top: 20px;
+  align-self: start;
+}
+
+@media (max-width: 860px) {
+  .verify-layout {
+    grid-template-columns: 1fr;
+  }
+  .plg-rail {
+    position: static;
+  }
+}
+
+
+.plg-rail{
+  position: sticky;
+  top: 20px;
+  align-self: start;
+
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.plg-heading{
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.insight-row{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.plg-cta{
+  width: 100%;
+}
+
+/* Mobile: stack */
+@media (max-width: 860px){
+  .verify-layout{
+    grid-template-columns: 1fr;
+  }
+  .plg-rail{
+    position: static;
+  }
+}
+
+/* Desktop: use the right rail CTA, hide the inline upsell box */
+.plg-inline {
+  display: none;
+}
+
+/* Mobile: hide the rail, show the inline upsell box */
+@media (max-width: 860px) {
+  .plg-rail {
+    display: none;
+  }
+  .plg-inline {
+    display: block;
+  }
+}
+.plg-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.plg-list li {
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 10px;
+  padding-left: 18px;
+  position: relative;
+}
+
+.plg-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+}
+
+.plg-list {
+  opacity: 0.85;
+}
+
+.unlock-card.plg-inline { display: none; }
+
+.plg-mobile {
+  display: none;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+@media (max-width: 860px) {
+  .plg-mobile {
+    display: block;
+  }
+
+  #plgRail {
+    display: none;
+  }
+}
+
+.chip.active {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}

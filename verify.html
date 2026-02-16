@@ -272,525 +272,625 @@
             </div>
             <p id="processingStatus" class="muted" style="display: none; margin: 0;">Processing...</p>
           </section>
+<div class="verify-layout">
+  <div class="verify-main">
+    <section id="result" class="result">
+      <div class="result-grid">
+        <div>
+          <p style="margin: 0 0 6px 0;"><span class="label">Verified</span></p>
+          <span id="verifiedValue" class="status-pill unsure">-</span>
+        </div>
+        <div>
+          <p style="margin: 0 0 6px 0;"><span class="label">Confidence</span></p>
+          <div id="confidenceValue" class="confidence-number">0%</div>
+          <div class="confidence-caption">Confidence Score</div>
+        </div>
+      </div>
 
-          <section id="result" class="result">
-            <div class="result-grid">
-              <div>
-                <p style="margin: 0 0 6px 0;"><span class="label">Verified</span></p>
-                <span id="verifiedValue" class="status-pill unsure">-</span>
-              </div>
-              <div>
-                <p style="margin: 0 0 6px 0;"><span class="label">Confidence</span></p>
-                <div id="confidenceValue" class="confidence-number">0%</div>
-                <div class="confidence-caption">Confidence Score</div>
-              </div>
-            </div>
-            <p id="hint" class="hint"></p>
-            <p style="margin: 0 0 4px 0;"><span class="label">Public Summary</span></p>
-            <p id="summaryValue" class="summary-block">-</p>
-            <div id="detailsSection">
-              <p style="margin: 0 0 6px 0;"><span class="label">Signals checked:</span></p>
-              <div id="signalsChecked" class="chips"></div>
+      <p id="hint" class="hint"></p>
 
-              <div class="next">
-                <div class="unlock-card">
-                  <p style="margin: 0 0 6px 0;"><span class="label">Unlock full results</span></p>
-                  <ul id="sensitiveOptions" style="margin: 0 0 8px 18px; padding: 0;"></ul>
-                  <p id="fullProfilePrompt" style="margin: 0 0 10px 0;">Would you like to run a full personal or business profile?</p>
-                  <a id="cta" class="btn primary-btn" href="signup.html?from=verify">Create an account to unlock full results</a>
-                </div>
-                <div id="tryAnother" style="margin-top: 12px;">
-                  <p style="margin: 0 0 6px 0;"><span class="label">Verify Another</span></p>
-                  <div id="tryAnotherChips" class="chips"></div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </section>
+      <p style="margin: 0 0 4px 0;"><span class="label">Public Summary</span></p>
+      <p id="summaryValue" class="summary-block">-</p>
+
+      <div id="detailsSection">
+        <p style="margin: 0 0 6px 0;"><span class="label">Signals checked:</span></p>
+        <div id="signalsChecked" class="chips"></div>
+
+        <div class="next">
+          <div class="unlock-card plg-inline">
+            <p style="margin: 0 0 6px 0;"><span class="label">Deeper insights include:</span></p>
+            <ul id="sensitiveOptions" style="margin: 0 0 8px 18px; padding: 0;"></ul>
+            <p id="fullProfilePrompt" style="margin: 0 0 10px 0;">
+              Would you like to run a full personal or business profile?
+            </p>
+
+            <a id="cta" class="btn primary-btn" href="signup.html?from=verify">
+              Create an Account For Deeper Insights
+            </a>
+          </div>
+
+          <div id="tryAnother" style="margin-top: 12px;">
+            <p style="margin: 0 0 6px 0;"><span class="label">Verify Another</span></p>
+            <div id="tryAnotherChips" class="chips"></div>
+          </div>
+          <!-- Mobile-only PLG CTA -->
+<div class="plg-mobile" id="plgMobile">
+  <p class="label" style="margin: 16px 0 8px 0;">Deeper insights include:</p>
+
+<ul class="plg-list" id="plgMobileList"></ul>
+
+<a class="btn primary-btn plg-cta"
+   id="plgMobileCta"
+   href="signup.html?from=verify">
+   Create an Account for Deeper Insights
+</a>
+
+</div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+<aside class="plg-rail" id="plgRail">
+  <h3 class="plg-heading">Deeper insights include:</h3>
+
+<ul class="plg-list" id="plgList"></ul>
+
+<a class="btn primary-btn plg-cta" id="plgCta" href="signup.html?from=verify">
+  Create an Account for Deeper Insights
+</a>
+
+
+</aside>
+
+</div>
+
+
       </main>
     </div>
   </div>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const requestedType = params.get("type") || "website";
-    const autoRun = params.get("auto") === "1";
-    const prefillValue = params.get("value") || "";
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const requestedType = params.get("type") || "website";
+  const autoRun = params.get("auto") === "1";
+  const prefillValue = params.get("value") || "";
 
-    const CONTENT_BY_TYPE = {
-      website: {
-        label: "Website",
-        placeholder: "example.com",
-        hint: "Use a full domain like example.com (or https://example.com).",
-        sensitiveOptions: ["Registrant history", "Infrastructure risk markers", "Historical abuse signals"],
-        fullProfilePrompt: "Would you like to run a full business profile tied to this web presence?",
-        signalsChecked: ["DNS & resolution", "TLS/certificate patterns", "Redirect chain", "Hosting fingerprint", "Public footprint indicators"],
-        yesSummary: function () {
-          return "We analyzed DNS resolution consistency, TLS posture, redirect behavior, hosting fingerprint, and public footprint continuity, and the combined non-sensitive signals aligned with a legitimate website profile.";
-        },
-        noSummary: function () {
-          return "The domain showed multiple high-risk indicators across footprint consistency, hosting posture, and naming patterns, which can reflect synthetic, temporary, or deceptive web infrastructure.";
-        }
+  const CONTENT_BY_TYPE = {
+    website: {
+      label: "Website",
+      placeholder: "example.com",
+      hint: "Use a full domain like example.com (or https://example.com).",
+      sensitiveOptions: ["Registrant history", "Infrastructure risk markers", "Historical abuse signals"],
+      fullProfilePrompt: "Would you like to run a full business profile tied to this web presence?",
+      signalsChecked: ["DNS & resolution", "TLS/certificate patterns", "Redirect chain", "Hosting fingerprint", "Public footprint indicators"],
+      yesSummary: function () {
+        return "We analyzed DNS resolution consistency, TLS posture, redirect behavior, hosting fingerprint, and public footprint continuity, and the combined non-sensitive signals aligned with a legitimate website profile.";
       },
-      phone: {
-        label: "Phone",
-        placeholder: "+1 602 555 0123",
-        hint: "Include country code and full number, for example +1 602 555 0123.",
-        sensitiveOptions: ["Line tenure", "Carrier risk telemetry", "Linked entity indicators"],
-        fullProfilePrompt: "Would you like to run a full personal or business profile linked to this number?",
-        signalsChecked: ["Number validity", "Carrier & line type", "Range risk patterns", "Public footprint indicators"],
-        yesSummary: function () {
-          return "Format validation, carrier/line-type heuristics, and public footprint checks were internally consistent, supporting a lower-risk interpretation for this phone record.";
-        },
-        noSummary: function () {
-          return "Range-level risk signals and abnormal usage-style patterns suggest this number may be unreliable, recycled for abuse, or otherwise elevated risk.";
-        }
+      noSummary: function () {
+        return "The domain showed multiple high-risk indicators across footprint consistency, hosting posture, and naming patterns, which can reflect synthetic, temporary, or deceptive web infrastructure.";
+      }
+    },
+    phone: {
+      label: "Phone",
+      placeholder: "+1 602 555 0123",
+      hint: "Include country code and full number, for example +1 602 555 0123.",
+      sensitiveOptions: ["Line tenure", "Carrier risk telemetry", "Linked entity indicators"],
+      fullProfilePrompt: "Would you like to run a full personal or business profile linked to this number?",
+      signalsChecked: ["Number validity", "Carrier & line type", "Range risk patterns", "Public footprint indicators"],
+      yesSummary: function () {
+        return "Format validation, carrier/line-type heuristics, and public footprint checks were internally consistent, supporting a lower-risk interpretation for this phone record.";
       },
-      email: {
-        label: "Email",
-        placeholder: "name@domain.com",
-        hint: "Use a complete email format, for example name@domain.com.",
-        sensitiveOptions: ["Mailbox risk indicators", "Domain ownership lineage", "Breach exposure context"],
-        fullProfilePrompt: "Would you like to run a full personal or business profile anchored to this email identity?",
-        signalsChecked: ["Domain validity", "Mail posture (SPF/DKIM/DMARC)", "Deliverability signals", "Disposable patterns", "Public footprint indicators"],
-        yesSummary: function () {
-          return "Domain validity, mail-auth posture, and deliverability-oriented checks were coherent with a stable identity footprint, indicating low apparent abuse risk.";
-        },
-        noSummary: function () {
-          return "Disposable-like domain traits and inconsistent mail posture increased fraud risk, suggesting this email may be low-trust or short-lived.";
-        }
+      noSummary: function () {
+        return "Range-level risk signals and abnormal usage-style patterns suggest this number may be unreliable, recycled for abuse, or otherwise elevated risk.";
+      }
+    },
+    email: {
+      label: "Email",
+      placeholder: "name@domain.com",
+      hint: "Use a complete email format, for example name@domain.com.",
+      sensitiveOptions: ["Mailbox risk indicators", "Domain ownership lineage", "Breach exposure context"],
+      fullProfilePrompt: "Would you like to run a full personal or business profile anchored to this email identity?",
+      signalsChecked: ["Domain validity", "Mail posture (SPF/DKIM/DMARC)", "Deliverability signals", "Disposable patterns", "Public footprint indicators"],
+      yesSummary: function () {
+        return "Domain validity, mail-auth posture, and deliverability-oriented checks were coherent with a stable identity footprint, indicating low apparent abuse risk.";
       },
-      commercial_address: {
-        label: "Commercial Address",
-        placeholder: "123 Main St, Phoenix, AZ 85004",
-        hint: "Include street, city, state, and ZIP for better match confidence.",
-        sensitiveOptions: ["Parcel/ownership overlays", "Occupancy risk indicators", "Business registration linkages"],
-        fullProfilePrompt: "Would you like to run a full business profile using this commercial address?",
-        signalsChecked: ["Deliverability", "Geocode consistency", "Address type indicators", "Commercial footprint signals"],
-        yesSummary: function () {
-          return "Deliverability checks, geocode alignment, and commercial footprint indicators were mutually consistent, supporting a credible business-location signal.";
-        },
-        noSummary: function () {
-          return "Geocode and footprint inconsistencies indicate the location may be misrepresented, virtualized, or otherwise high risk for business verification.";
-        }
+      noSummary: function () {
+        return "Disposable-like domain traits and inconsistent mail posture increased fraud risk, suggesting this email may be low-trust or short-lived.";
+      }
+    },
+    commercial_address: {
+      label: "Commercial Address",
+      placeholder: "123 Main St, Phoenix, AZ 85004",
+      hint: "Include street, city, state, and ZIP for better match confidence.",
+      sensitiveOptions: ["Parcel/ownership overlays", "Occupancy risk indicators", "Business registration linkages"],
+      fullProfilePrompt: "Would you like to run a full business profile using this commercial address?",
+      signalsChecked: ["Deliverability", "Geocode consistency", "Address type indicators", "Commercial footprint signals"],
+      yesSummary: function () {
+        return "Deliverability checks, geocode alignment, and commercial footprint indicators were mutually consistent, supporting a credible business-location signal.";
       },
-      personal_address: {
-        label: "Personal Address",
-        placeholder: "123 Main St, Phoenix, AZ 85004",
-        hint: "Include street, city, state, and ZIP for better match confidence.",
-        sensitiveOptions: ["Occupancy timeline", "Historical residency indicators", "Linked identity context"],
-        fullProfilePrompt: "Would you like to run a full personal profile using this address?",
-        signalsChecked: ["Deliverability", "Geocode consistency", "Residential indicators", "Consistency checks"],
-        yesSummary: function () {
-          return "Address-standardization, geocode consistency, and residential indicators aligned without major anomalies, suggesting a plausible personal-location profile.";
-        },
-        noSummary: function () {
-          return "We observed mismatches between geocode, deliverability traits, and residential consistency signals, which may indicate elevated identity-risk posture.";
-        }
+      noSummary: function () {
+        return "Geocode and footprint inconsistencies indicate the location may be misrepresented, virtualized, or otherwise high risk for business verification.";
+      }
+    },
+    personal_address: {
+      label: "Personal Address",
+      placeholder: "123 Main St, Phoenix, AZ 85004",
+      hint: "Include street, city, state, and ZIP for better match confidence.",
+      sensitiveOptions: ["Occupancy timeline", "Historical residency indicators", "Linked identity context"],
+      fullProfilePrompt: "Would you like to run a full personal profile using this address?",
+      signalsChecked: ["Deliverability", "Geocode consistency", "Residential indicators", "Consistency checks"],
+      yesSummary: function () {
+        return "Address-standardization, geocode consistency, and residential indicators aligned without major anomalies, suggesting a plausible personal-location profile.";
       },
-      ip: {
-        label: "IP Address",
-        placeholder: "8.8.8.8",
-        hint: "Use a valid IPv4 format, for example 8.8.8.8.",
-        sensitiveOptions: ["Network history", "Proxy chain indicators", "Threat-intel enrichment"],
-        fullProfilePrompt: "Would you like to run a full profile enriched with network and entity context?",
-        signalsChecked: ["Routability", "Hosting type (ASN)", "Proxy/VPN traits", "Reputation indicators", "Geo consistency"],
-        yesSummary: function () {
-          return "Routability, ASN context, and non-sensitive reputation traits were consistent with expected traffic behavior and did not show obvious masking anomalies.";
-        },
-        noSummary: function () {
-          return "Private/reserved or masking-prone network characteristics, combined with anomalous reputation traits, suggest this IP may be unsuitable for trust decisions.";
-        }
+      noSummary: function () {
+        return "We observed mismatches between geocode, deliverability traits, and residential consistency signals, which may indicate elevated identity-risk posture.";
+      }
+    },
+    ip: {
+      label: "IP Address",
+      placeholder: "8.8.8.8",
+      hint: "Use a valid IPv4 format, for example 8.8.8.8.",
+      sensitiveOptions: ["Network history", "Proxy chain indicators", "Threat-intel enrichment"],
+      fullProfilePrompt: "Would you like to run a full profile enriched with network and entity context?",
+      signalsChecked: ["Routability", "Hosting type (ASN)", "Proxy/VPN traits", "Reputation indicators", "Geo consistency"],
+      yesSummary: function () {
+        return "Routability, ASN context, and non-sensitive reputation traits were consistent with expected traffic behavior and did not show obvious masking anomalies.";
       },
-      business: {
-        label: "Business",
-        placeholder: "Acme Processing LLC",
-        hint: "Provide the full legal business name for best results.",
-        sensitiveOptions: ["Registry history depth", "Beneficial ownership graph", "Adverse media context"],
-        fullProfilePrompt: "Would you like to run a full business profile and ownership review?",
-        signalsChecked: ["Footprint consistency", "Entity disambiguation", "Web presence indicators", "Cross-source consistency"],
-        yesSummary: function () {
-          return "Entity disambiguation, footprint consistency, and cross-source references aligned for this business name, supporting a lower-risk authenticity signal.";
-        },
-        noSummary: function () {
-          return "Cross-source inconsistencies and weak footprint continuity indicate possible synthetic or misrepresented business identity risk.";
-        }
+      noSummary: function () {
+        return "Private/reserved or masking-prone network characteristics, combined with anomalous reputation traits, suggest this IP may be unsuitable for trust decisions.";
+      }
+    },
+    business: {
+      label: "Business",
+      placeholder: "Acme Processing LLC",
+      hint: "Provide the full legal business name for best results.",
+      sensitiveOptions: ["Registry history depth", "Beneficial ownership graph", "Adverse media context"],
+      fullProfilePrompt: "Would you like to run a full business profile and ownership review?",
+      signalsChecked: ["Footprint consistency", "Entity disambiguation", "Web presence indicators", "Cross-source consistency"],
+      yesSummary: function () {
+        return "Entity disambiguation, footprint consistency, and cross-source references aligned for this business name, supporting a lower-risk authenticity signal.";
       },
-      person: {
-        label: "Person",
-        placeholder: "First Last",
-        hint: "Provide at least first and last name for meaningful matching.",
-        sensitiveOptions: ["Identity graph enrichment", "Alias/history context", "Adverse risk markers"],
-        fullProfilePrompt: "Would you like to run a full personal profile with expanded identity checks?",
-        signalsChecked: ["Identity footprint signals", "Disambiguation checks", "Consistency checks", "Risk patterns"],
-        yesSummary: function () {
-          return "Name-level disambiguation and public footprint consistency checks produced aligned non-sensitive signals, supporting a plausible identity profile.";
-        },
-        noSummary: function () {
-          return "Disambiguation conflicts and low-coherence footprint patterns suggest heightened risk of synthetic or mismatched identity claims.";
-        }
+      noSummary: function () {
+        return "Cross-source inconsistencies and weak footprint continuity indicate possible synthetic or misrepresented business identity risk.";
+      }
+    },
+    person: {
+      label: "Person",
+      placeholder: "First Last",
+      hint: "Provide at least first and last name for meaningful matching.",
+      sensitiveOptions: ["Identity graph enrichment", "Alias/history context", "Adverse risk markers"],
+      fullProfilePrompt: "Would you like to run a full personal profile with expanded identity checks?",
+      signalsChecked: ["Identity footprint signals", "Disambiguation checks", "Consistency checks", "Risk patterns"],
+      yesSummary: function () {
+        return "Name-level disambiguation and public footprint consistency checks produced aligned non-sensitive signals, supporting a plausible identity profile.";
       },
-      bank: {
-        label: "Bank",
-        placeholder: "Chase / Wells Fargo / routing number",
-        hint: "Provide a bank name or a full routing number format.",
-        sensitiveOptions: ["Institution ownership context", "Account risk telemetry", "Routing/network lineage"],
-        fullProfilePrompt: "Would you like to run a full financial profile and institution verification?",
-        signalsChecked: ["Institution consistency", "Routing validity (if provided)", "Network indicators", "Risk patterns"],
-        yesSummary: function () {
-          return "Institution naming consistency and routing/network format checks were coherent with known financial-infrastructure patterns at a non-sensitive level.";
-        },
-        noSummary: function () {
-          return "Institution and routing-style signals were inconsistent or risk-elevated, which can indicate fabricated or high-risk financial details.";
-        }
+      noSummary: function () {
+        return "Disambiguation conflicts and low-coherence footprint patterns suggest heightened risk of synthetic or mismatched identity claims.";
       }
-    };
-
-    const type = Object.prototype.hasOwnProperty.call(CONTENT_BY_TYPE, requestedType) ? requestedType : "website";
-    const cfg = CONTENT_BY_TYPE[type];
-
-    const title = document.getElementById("title");
-    const intro = document.getElementById("intro");
-    const input = document.getElementById("valueInput");
-    const runBtn = document.getElementById("runBtn");
-    const processingStatus = document.getElementById("processingStatus");
-    const result = document.getElementById("result");
-    const verifiedValue = document.getElementById("verifiedValue");
-    const confidenceValue = document.getElementById("confidenceValue");
-    const summaryValue = document.getElementById("summaryValue");
-    const hint = document.getElementById("hint");
-    const detailsSection = document.getElementById("detailsSection");
-    const cta = document.getElementById("cta");
-    const sensitiveOptions = document.getElementById("sensitiveOptions");
-    const fullProfilePrompt = document.getElementById("fullProfilePrompt");
-    const signalsChecked = document.getElementById("signalsChecked");
-    const copyShareLinkBtn = document.getElementById("copyShareLinkBtn");
-    const shareLinkInput = document.getElementById("shareLinkInput");
-    const shareCopyStatus = document.getElementById("shareCopyStatus");
-    const tryAnotherChips = document.getElementById("tryAnotherChips");
-    let isProcessing = false;
-    let copyStatusTimer = null;
-    let scoreAnimationFrame = null;
-
-    title.textContent = "Verify: " + cfg.label;
-    intro.textContent = "Enter " + cfg.label.toLowerCase() + " data to verify.";
-    input.placeholder = cfg.placeholder;
-    input.value = prefillValue;
-    cta.href = "signup.html?from=verify&type=" + encodeURIComponent(type);
-    fullProfilePrompt.textContent = cfg.fullProfilePrompt;
-
-    function formatTypeLabel(typeKey) {
-      const entry = CONTENT_BY_TYPE[typeKey];
-      return entry ? entry.label : typeKey;
-    }
-
-    function renderTryAnotherChips() {
-      tryAnotherChips.innerHTML = Object.keys(CONTENT_BY_TYPE).map(function (key) {
-        const isActive = key === type;
-        const extraStyle = isActive ? " background:#eff6ff; border-color:#93c5fd;" : "";
-        return '<a class="chip chip-btn" style="' + extraStyle + '" href="verify.html?type=' + encodeURIComponent(key) + '">' + formatTypeLabel(key) + "</a>";
-      }).join("");
-    }
-
-    function renderSignalsChecked() {
-      signalsChecked.innerHTML = cfg.signalsChecked
-        .map(function (signal) {
-          return '<span class="chip">' + signal + "</span>";
-        })
-        .join("");
-    }
-
-    function renderSensitiveOptions() {
-      sensitiveOptions.innerHTML = cfg.sensitiveOptions
-        .slice(0, 2)
-        .map(function (item) {
-          return "<li>" + item + "</li>";
-        })
-        .join("");
-    }
-
-    function randomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function animateConfidence(targetValue) {
-      if (scoreAnimationFrame) {
-        cancelAnimationFrame(scoreAnimationFrame);
+    },
+    bank: {
+      label: "Bank",
+      placeholder: "Chase / Wells Fargo / routing number",
+      hint: "Provide a bank name or a full routing number format.",
+      sensitiveOptions: ["Institution ownership context", "Account risk telemetry", "Routing/network lineage"],
+      fullProfilePrompt: "Would you like to run a full financial profile and institution verification?",
+      signalsChecked: ["Institution consistency", "Routing validity (if provided)", "Network indicators", "Risk patterns"],
+      yesSummary: function () {
+        return "Institution naming consistency and routing/network format checks were coherent with known financial-infrastructure patterns at a non-sensitive level.";
+      },
+      noSummary: function () {
+        return "Institution and routing-style signals were inconsistent or risk-elevated, which can indicate fabricated or high-risk financial details.";
       }
+    }
+  };
 
-      const duration = 600;
-      const start = performance.now();
+  const type = Object.prototype.hasOwnProperty.call(CONTENT_BY_TYPE, requestedType) ? requestedType : "website";
+  const cfg = CONTENT_BY_TYPE[type];
 
-      function tick(now) {
-        const elapsed = now - start;
-        const progress = Math.min(1, elapsed / duration);
-        const current = Math.round(targetValue * progress);
-        confidenceValue.textContent = current + "%";
-        if (progress < 1) {
-          scoreAnimationFrame = requestAnimationFrame(tick);
-        }
-      }
+  const title = document.getElementById("title");
+  const intro = document.getElementById("intro");
+  const input = document.getElementById("valueInput");
+  const runBtn = document.getElementById("runBtn");
+  const processingStatus = document.getElementById("processingStatus");
+  const result = document.getElementById("result");
+  const verifiedValue = document.getElementById("verifiedValue");
+  const confidenceValue = document.getElementById("confidenceValue");
+  const summaryValue = document.getElementById("summaryValue");
+  const hint = document.getElementById("hint");
+  const detailsSection = document.getElementById("detailsSection");
+  const cta = document.getElementById("cta");
+  const sensitiveOptions = document.getElementById("sensitiveOptions");
+  const fullProfilePrompt = document.getElementById("fullProfilePrompt");
+  const signalsChecked = document.getElementById("signalsChecked");
+  const copyShareLinkBtn = document.getElementById("copyShareLinkBtn");
+  const shareLinkInput = document.getElementById("shareLinkInput");
+  const shareCopyStatus = document.getElementById("shareCopyStatus");
+  const tryAnotherChips = document.getElementById("tryAnotherChips");
+  let isProcessing = false;
+  let copyStatusTimer = null;
+  let scoreAnimationFrame = null;
 
-      scoreAnimationFrame = requestAnimationFrame(tick);
+  title.textContent = "Verify: " + cfg.label;
+  intro.textContent = "Enter " + cfg.label.toLowerCase() + " data to verify.";
+  input.placeholder = cfg.placeholder;
+  input.value = prefillValue;
+  cta.href = "signup.html?from=verify&type=" + encodeURIComponent(type);
+  fullProfilePrompt.textContent = cfg.fullProfilePrompt;
+
+  function formatTypeLabel(typeKey) {
+    const entry = CONTENT_BY_TYPE[typeKey];
+    return entry ? entry.label : typeKey;
+  }
+
+  function renderTryAnotherChips() {
+    tryAnotherChips.innerHTML = Object.keys(CONTENT_BY_TYPE).map(function (key) {
+      const isActive = key === type;
+      const extraStyle = isActive ? " background:#eff6ff; border-color:#93c5fd;" : "";
+      return '<a class="chip chip-btn" style="' + extraStyle + '" href="verify.html?type=' + encodeURIComponent(key) + '">' + formatTypeLabel(key) + "</a>";
+    }).join("");
+  }
+
+  function renderSignalsChecked() {
+    signalsChecked.innerHTML = cfg.signalsChecked
+      .map(function (signal) {
+        return '<span class="chip">' + signal + "</span>";
+      })
+      .join("");
+  }
+
+  function renderSensitiveOptions() {
+    sensitiveOptions.innerHTML = cfg.sensitiveOptions
+      .slice(0, 2)
+      .map(function (item) {
+        return "<li>" + item + "</li>";
+      })
+      .join("");
+  }
+
+  function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function animateConfidence(targetValue) {
+    if (scoreAnimationFrame) {
+      cancelAnimationFrame(scoreAnimationFrame);
     }
 
-    function setVerifiedPill(verified) {
-      verifiedValue.textContent = verified;
-      verifiedValue.classList.remove("yes", "no", "unsure");
-      if (verified === "Yes") {
-        verifiedValue.classList.add("yes");
-      } else if (verified === "No") {
-        verifiedValue.classList.add("no");
-      } else {
-        verifiedValue.classList.add("unsure");
+    const duration = 600;
+    const start = performance.now();
+
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(1, elapsed / duration);
+      const current = Math.round(targetValue * progress);
+      confidenceValue.textContent = current + "%";
+      if (progress < 1) {
+        scoreAnimationFrame = requestAnimationFrame(tick);
       }
     }
 
-    function isPlaceholder(value, type) {
-      const trimmed = value.trim();
-      const lower = trimmed.toLowerCase();
-      const placeholderWords = /(test|example|asdf|qwerty|fake|invalid|unknown|n\/a)/i;
+    scoreAnimationFrame = requestAnimationFrame(tick);
+  }
 
-      if (placeholderWords.test(lower)) {
-        return true;
-      }
+  function setVerifiedPill(verified) {
+    verifiedValue.textContent = verified;
+    verifiedValue.classList.remove("yes", "no", "unsure");
+    if (verified === "Yes") {
+      verifiedValue.classList.add("yes");
+    } else if (verified === "No") {
+      verifiedValue.classList.add("no");
+    } else {
+      verifiedValue.classList.add("unsure");
+    }
+  }
 
-      if (type === "email") {
-        const parts = lower.split("@");
-        const localPart = parts[0] || "";
-        const domain = parts[1] || "";
-        if (domain === "domain.com" || localPart === "name") {
-          return true;
-        }
-      }
+  function parseWebsiteHost(value) {
+    try {
+      const normalized = /^https?:\/\//i.test(value) ? value : "http://" + value;
+      return new URL(normalized).hostname.toLowerCase();
+    } catch (e) {
+      return "";
+    }
+  }
 
-      if (type === "website") {
-        const host = parseWebsiteHost(trimmed);
-        if (host === "example.com" || host.includes("example") || lower === "example.com") {
-          return true;
-        }
-      }
+  function isPlaceholder(value, typeKey) {
+    const trimmed = value.trim();
+    const lower = trimmed.toLowerCase();
+    const placeholderWords = /(test|example|asdf|qwerty|fake|invalid|unknown|n\/a)/i;
 
-      if (type === "phone") {
-        const digits = lower.replace(/\D/g, "");
-        if (/555555/.test(digits) || /^1?555/.test(digits) || /0000$/.test(digits)) {
-          return true;
-        }
-      }
+    if (placeholderWords.test(lower)) return true;
 
-      return false;
+    if (typeKey === "email") {
+      const parts = lower.split("@");
+      const localPart = parts[0] || "";
+      const domain = parts[1] || "";
+      if (domain === "domain.com" || localPart === "name") return true;
     }
 
-    function parseWebsiteHost(value) {
-      try {
-        const normalized = /^https?:\/\//i.test(value) ? value : "http://" + value;
-        return new URL(normalized).hostname.toLowerCase();
-      } catch (e) {
-        return "";
+    if (typeKey === "website") {
+      const host = parseWebsiteHost(trimmed);
+      if (host === "example.com" || host.includes("example") || lower === "example.com") return true;
+    }
+
+    if (typeKey === "phone") {
+      const digits = lower.replace(/\D/g, "");
+      if (/555555/.test(digits) || /^1?555/.test(digits) || /0000$/.test(digits)) return true;
+    }
+
+    return false;
+  }
+
+  function noLikelihood(value) {
+    const v = value.trim();
+    const lower = v.toLowerCase();
+    let noProb = 0.30;
+
+    if (/(test|example|asdf|1234|invalid|fake|unknown|n\/a)/i.test(lower)) noProb += 0.22;
+
+    if (type === "website") {
+      const host = parseWebsiteHost(v);
+      if (/(\.blogspot\.|\.wordpress\.)/i.test(host)) noProb += 0.16;
+      const hyphenCount = (host.match(/-/g) || []).length;
+      if (hyphenCount >= 3) noProb += 0.12;
+      if (/^https?:\/\/\d{1,3}(\.\d{1,3}){3}/i.test(v) || /^\d{1,3}(\.\d{1,3}){3}$/.test(host)) noProb += 0.20;
+    }
+
+    if (type === "email") {
+      const domain = (v.split("@")[1] || "").toLowerCase();
+      if (/(mailinator|tempmail|guerrilla|yopmail)/i.test(domain)) noProb += 0.28;
+    }
+
+    if (type === "phone") {
+      const digits = lower.replace(/\D/g, "");
+      if (/0000/.test(digits) || /555555/.test(digits)) noProb += 0.24;
+    }
+
+    if (type === "ip") {
+      if (/^10\./.test(v) || /^192\.168\./.test(v) || /^127\./.test(v) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(v)) {
+        noProb += 0.30;
       }
     }
 
-    function noLikelihood(value) {
-      const v = value.trim();
-      const lower = v.toLowerCase();
-      let noProb = 0.30;
+    return Math.max(0.05, Math.min(0.95, noProb));
+  }
 
-      const suspiciousPattern = /(test|example|asdf|1234|invalid|fake|unknown|n\/a)/i;
-      if (suspiciousPattern.test(lower)) {
-        noProb += 0.22;
-      }
+  function validateValue(value) {
+    const trimmed = value.trim();
+    if (!trimmed) return false;
 
-      if (type === "website") {
-        const host = parseWebsiteHost(v);
-        if (/(\.blogspot\.|\.wordpress\.)/i.test(host)) noProb += 0.16;
-        const hyphenCount = (host.match(/-/g) || []).length;
-        if (hyphenCount >= 3) noProb += 0.12;
-        if (/^https?:\/\/\d{1,3}(\.\d{1,3}){3}/i.test(v) || /^\d{1,3}(\.\d{1,3}){3}$/.test(host)) noProb += 0.20;
-      }
+    if (type === "website") return /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/.test(trimmed);
+    if (type === "phone") return /^(\+?\d[\d\s\-()]{8,}\d)$/.test(trimmed);
+    if (type === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+    if (type === "commercial_address" || type === "personal_address") return /\d+\s+.+,\s*.+,\s*[A-Z]{2}\s*\d{5}/i.test(trimmed);
+    if (type === "ip") return /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/.test(trimmed);
+    if (type === "business") return trimmed.length >= 4;
+    if (type === "person") return trimmed.split(/\s+/).filter(Boolean).length >= 2;
+    if (type === "bank") return /[A-Za-z]{4,}|\d{9}/.test(trimmed);
+    return true;
+  }
 
-      if (type === "email") {
-        const domain = (v.split("@")[1] || "").toLowerCase();
-        if (/(mailinator|tempmail|guerrilla|yopmail)/i.test(domain)) noProb += 0.28;
-      }
+  function runVerification() {
+    const value = input.value;
+    const trimmed = value.trim();
+    const valid = validateValue(trimmed);
+    const placeholder = isPlaceholder(trimmed, type);
+    let verified;
+    let confidence;
+    let summary;
 
-      if (type === "phone") {
-        const digits = lower.replace(/\D/g, "");
-        if (/0000/.test(digits) || /555555/.test(digits)) noProb += 0.24;
-      }
-
-      if (type === "ip") {
-        if (/^10\./.test(v) || /^192\.168\./.test(v) || /^127\./.test(v) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(v)) {
-          noProb += 0.30;
-        }
-      }
-
-      return Math.max(0.05, Math.min(0.95, noProb));
+    if (!trimmed || !valid) {
+      verified = "Unsure";
+      confidence = randomInt(20, 45);
+      summary = "We ran format and baseline signal checks, but the current input does not provide enough structured detail for a reliable verification outcome.";
+      hint.textContent = cfg.hint;
+      hint.style.display = "block";
+    } else if (placeholder) {
+      verified = "No";
+      confidence = randomInt(80, 90);
+      summary = "The input appears to be placeholder or test data based on common dummy patterns, so it cannot be verified as a real identity or business signal.";
+      hint.textContent = "This looks like placeholder/test data. Try a real value to verify.";
+      hint.style.display = "block";
+    } else {
+      const noProb = noLikelihood(trimmed);
+      verified = Math.random() < noProb ? "No" : "Yes";
+      confidence = verified === "Yes" ? randomInt(78, 96) : randomInt(72, 94);
+      hint.style.display = "none";
+      summary = verified === "Yes" ? cfg.yesSummary(trimmed) : cfg.noSummary(trimmed);
     }
 
-    function validateValue(value) {
-      const trimmed = value.trim();
-      if (!trimmed) return false;
-
-      if (type === "website") {
-        return /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/.test(trimmed);
-      }
-      if (type === "phone") {
-        return /^(\+?\d[\d\s\-()]{8,}\d)$/.test(trimmed);
-      }
-      if (type === "email") {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
-      }
-      if (type === "commercial_address" || type === "personal_address") {
-        return /\d+\s+.+,\s*.+,\s*[A-Z]{2}\s*\d{5}/i.test(trimmed);
-      }
-      if (type === "ip") {
-        return /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/.test(trimmed);
-      }
-      if (type === "business") {
-        return trimmed.length >= 4;
-      }
-      if (type === "person") {
-        return trimmed.split(/\s+/).filter(Boolean).length >= 2;
-      }
-      if (type === "bank") {
-        return /[A-Za-z]{4,}|\d{9}/.test(trimmed);
-      }
-
-      return true;
+    setVerifiedPill(verified);
+    animateConfidence(confidence);
+    summaryValue.textContent = summary;
+    copyShareLinkBtn.disabled = false;
+    if (!trimmed) {
+      detailsSection.style.display = "none";
+    } else {
+      detailsSection.style.display = "block";
+      renderSensitiveOptions();
+      renderSignalsChecked();
+      renderTryAnotherChips();
     }
+    result.classList.add("show");
+  }
 
-    function runVerification() {
-      const value = input.value;
-      const trimmed = value.trim();
-      const valid = validateValue(trimmed);
-      const placeholder = isPlaceholder(trimmed, type);
-      let verified;
-      let confidence;
-      let summary;
+  function startVerificationFlow() {
+    if (isProcessing || runBtn.disabled) return;
 
-      if (!trimmed || !valid) {
-        verified = "Unsure";
-        confidence = randomInt(20, 45);
-        summary = "We ran format and baseline signal checks, but the current input does not provide enough structured detail for a reliable verification outcome.";
-        hint.textContent = cfg.hint;
-        hint.style.display = "block";
-      } else if (placeholder) {
-        verified = "No";
-        confidence = randomInt(80, 90);
-        summary = "The input appears to be placeholder or test data based on common dummy patterns, so it cannot be verified as a real identity or business signal.";
-        hint.textContent = "This looks like placeholder/test data. Try a real value to verify.";
-        hint.style.display = "block";
-      } else {
-        const noProb = noLikelihood(trimmed);
-        verified = Math.random() < noProb ? "No" : "Yes";
-        confidence = verified === "Yes" ? randomInt(78, 96) : randomInt(72, 94);
-        hint.style.display = "none";
-        summary = verified === "Yes" ? cfg.yesSummary(trimmed) : cfg.noSummary(trimmed);
-      }
+    isProcessing = true;
+    runBtn.disabled = true;
+    processingStatus.style.display = "block";
+    shareCopyStatus.textContent = "";
+    result.classList.remove("show");
 
-      setVerifiedPill(verified);
-      animateConfidence(confidence);
-      summaryValue.textContent = summary;
-      copyShareLinkBtn.disabled = false;
-      if (!trimmed) {
-        detailsSection.style.display = "none";
-      } else {
-        detailsSection.style.display = "block";
-        renderSensitiveOptions();
-        renderSignalsChecked();
-        renderTryAnotherChips();
-      }
-      result.classList.add("show");
-    }
+    const delay = randomInt(650, 1100);
+    setTimeout(function () {
+      runVerification();
+      isProcessing = false;
+      processingStatus.style.display = "none";
+      updateRunButtonState();
+    }, delay);
+  }
 
-    function startVerificationFlow() {
-      if (isProcessing || runBtn.disabled) return;
+  function buildShareLink() {
+    const url = new URL(window.location.href);
+    url.searchParams.set("type", type);
+    url.searchParams.set("value", input.value.trim());
+    url.searchParams.set("auto", "1");
+    return url.toString();
+  }
 
-      isProcessing = true;
-      runBtn.disabled = true;
-      processingStatus.style.display = "block";
+  function setCopyStatus(message) {
+    shareCopyStatus.textContent = message;
+    if (copyStatusTimer) clearTimeout(copyStatusTimer);
+    copyStatusTimer = setTimeout(function () {
       shareCopyStatus.textContent = "";
-      result.classList.remove("show");
+    }, 1500);
+  }
 
-      const delay = randomInt(650, 1100);
-      setTimeout(function () {
-        runVerification();
-        isProcessing = false;
-        processingStatus.style.display = "none";
-        updateRunButtonState();
-      }, delay);
-    }
+  function copyShareLink() {
+    const link = buildShareLink();
 
-    function buildShareLink() {
-      const url = new URL(window.location.href);
-      url.searchParams.set("type", type);
-      url.searchParams.set("value", input.value.trim());
-      url.searchParams.set("auto", "1");
-      return url.toString();
-    }
-
-    function setCopyStatus(message) {
-      shareCopyStatus.textContent = message;
-      if (copyStatusTimer) clearTimeout(copyStatusTimer);
-      copyStatusTimer = setTimeout(function () {
-        shareCopyStatus.textContent = "";
-      }, 1500);
-    }
-
-    function copyShareLink() {
-      const link = buildShareLink();
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(link)
-          .then(function () {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(link)
+        .then(function () {
+          setCopyStatus("Copied!");
+        })
+        .catch(function () {
+          shareLinkInput.value = link;
+          shareLinkInput.style.position = "static";
+          shareLinkInput.style.opacity = "1";
+          shareLinkInput.select();
+          try {
+            document.execCommand("copy");
             setCopyStatus("Copied!");
-          })
-          .catch(function () {
-            shareLinkInput.value = link;
-            shareLinkInput.style.position = "static";
-            shareLinkInput.style.opacity = "1";
-            shareLinkInput.select();
-            try {
-              document.execCommand("copy");
-              setCopyStatus("Copied!");
-            } catch (e) {
-              setCopyStatus("Copy failed. Select and copy manually.");
-            }
-            shareLinkInput.style.position = "absolute";
-            shareLinkInput.style.opacity = "0";
-          });
-        return;
-      }
-
-      shareLinkInput.value = link;
-      shareLinkInput.style.position = "static";
-      shareLinkInput.style.opacity = "1";
-      shareLinkInput.select();
-      try {
-        document.execCommand("copy");
-        setCopyStatus("Copied!");
-      } catch (e) {
-        setCopyStatus("Copy failed. Select and copy manually.");
-      }
-      shareLinkInput.style.position = "absolute";
-      shareLinkInput.style.opacity = "0";
+          } catch (e) {
+            setCopyStatus("Copy failed. Select and copy manually.");
+          }
+          shareLinkInput.style.position = "absolute";
+          shareLinkInput.style.opacity = "0";
+        });
+      return;
     }
 
-    function updateRunButtonState() {
-      runBtn.disabled = isProcessing || input.value.trim().length === 0;
+    shareLinkInput.value = link;
+    shareLinkInput.style.position = "static";
+    shareLinkInput.style.opacity = "1";
+    shareLinkInput.select();
+    try {
+      document.execCommand("copy");
+      setCopyStatus("Copied!");
+    } catch (e) {
+      setCopyStatus("Copy failed. Select and copy manually.");
     }
+    shareLinkInput.style.position = "absolute";
+    shareLinkInput.style.opacity = "0";
+  }
 
-    runBtn.addEventListener("click", startVerificationFlow);
-    copyShareLinkBtn.addEventListener("click", copyShareLink);
-    input.addEventListener("input", updateRunButtonState);
-    input.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" && !runBtn.disabled) startVerificationFlow();
-    });
-    updateRunButtonState();
+  function updateRunButtonState() {
+    runBtn.disabled = isProcessing || input.value.trim().length === 0;
+  }
 
-    if (autoRun && input.value.trim()) {
-      startVerificationFlow();
-    }
-  </script>
+  const deeperInsightsByType = {
+    website: [
+      "Registrant history & domain age",
+      "Infrastructure risk markers",
+      "Ownership & entity linkage signals",
+      "Historical redirect behavior",
+      "Hosting / ASN reputation analysis"
+    ],
+    phone: [
+      "Line tenure & stability",
+      "Carrier risk telemetry",
+      "Porting / SIM-swap exposure",
+      "VoIP / virtual number detection",
+      "Abuse pattern indicators"
+    ],
+    email: [
+      "Mailbox age & breach exposure",
+      "Domain reputation & DMARC posture",
+      "Disposable / alias detection",
+      "Account linkage indicators",
+      "Velocity / abuse heuristics"
+    ],
+    commercial_address: [
+      "Deliverability & suite validation",
+      "USPS / postal normalization",
+      "Commercial occupancy signals",
+      "Entity-at-address linkage",
+      "Risk markers & watchlists"
+    ],
+    personal_address: [
+      "Resident tenure & stability",
+      "Household composition signals",
+      "Move / forwarding indicators",
+      "Identity linkage at address",
+      "Anomaly & mismatch flags"
+    ],
+    ip: [
+      "Proxy / VPN detection",
+      "Geolocation consistency",
+      "ASN / hosting reputation",
+      "Threat intelligence signals",
+      "Historical behavior markers"
+    ],
+    business: [
+      "Corporate filings & status",
+      "Ownership & officer linkage",
+      "Industry / NAICS risk mapping",
+      "Sanctions / adverse media hits",
+      "Operating history & stability"
+    ],
+    person: [
+      "Identity consistency checks",
+      "Breach / exposure indicators",
+      "Name / address linkage",
+      "Watchlist screening layers",
+      "Risk marker correlations"
+    ],
+    bank: [
+      "Account verification depth",
+      "Ownership & routing checks",
+      "Bank risk / return signals",
+      "Velocity / fraud heuristics",
+      "Historical stability indicators"
+    ],
+    default: [
+      "Expanded cross-signal consistency",
+      "Infrastructure risk markers",
+      "Entity linkage indicators",
+      "Historical anomalies",
+      "Reputation scoring layers"
+    ]
+  };
+
+  function renderDeeperInsights() {
+    const items = deeperInsightsByType[type] || deeperInsightsByType.default;
+    const desktopList = document.getElementById("plgList");
+    const mobileList = document.getElementById("plgMobileList");
+    if (desktopList) desktopList.innerHTML = items.map(function (i) { return "<li>" + i + "</li>"; }).join("");
+    if (mobileList) mobileList.innerHTML = items.map(function (i) { return "<li>" + i + "</li>"; }).join("");
+    const ctaHref = "signup.html?from=verify&type=" + encodeURIComponent(type);
+    const desktopCta = document.getElementById("plgCta");
+    const mobileCta = document.getElementById("plgMobileCta");
+    if (desktopCta) desktopCta.setAttribute("href", ctaHref);
+    if (mobileCta) mobileCta.setAttribute("href", ctaHref);
+  }
+
+  runBtn.addEventListener("click", startVerificationFlow);
+  copyShareLinkBtn.addEventListener("click", copyShareLink);
+  input.addEventListener("input", updateRunButtonState);
+  input.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !runBtn.disabled) startVerificationFlow();
+  });
+  updateRunButtonState();
+  renderDeeperInsights();
+
+  if (autoRun && input.value.trim()) {
+    startVerificationFlow();
+  }
+</script>
+
 </body>
 </html>
