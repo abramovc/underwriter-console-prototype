@@ -216,6 +216,62 @@
       border-color: #0b1220;
     }
 
+    .verify-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .verify-main {
+      min-width: 0;
+    }
+
+    .plg-rail {
+      display: none;
+      position: sticky;
+      top: 20px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      background: #f9fafb;
+      padding: 14px;
+    }
+
+    .plg-heading {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      color: #111827;
+    }
+
+    .plg-list {
+      margin: 0 0 12px 18px;
+      padding: 0;
+      color: #374151;
+      font-size: 13px;
+    }
+
+    .plg-list li {
+      margin-bottom: 6px;
+    }
+
+    .plg-cta {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .plg-mobile {
+      display: none;
+      margin-top: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      background: #f9fafb;
+      padding: 12px;
+    }
+
+    .plg-show.plg-rail {
+      display: block;
+    }
+
     @media (max-width: 640px) {
       .verify-row {
         grid-template-columns: 1fr;
@@ -227,6 +283,28 @@
 
       .result-grid {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .verify-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .plg-rail {
+        display: none;
+      }
+
+      .plg-mobile {
+        display: none;
+      }
+
+      .plg-show.plg-mobile {
+        display: block;
+      }
+
+      .plg-show.plg-rail {
+        display: none;
       }
     }
   </style>
@@ -297,18 +375,6 @@
         <div id="signalsChecked" class="chips"></div>
 
         <div class="next">
-          <div class="unlock-card plg-inline">
-            <p style="margin: 0 0 6px 0;"><span class="label">Deeper insights include:</span></p>
-            <ul id="sensitiveOptions" style="margin: 0 0 8px 18px; padding: 0;"></ul>
-            <p id="fullProfilePrompt" style="margin: 0 0 10px 0;">
-              Would you like to run a full personal or business profile?
-            </p>
-
-            <a id="cta" class="btn primary-btn" href="signup.html?from=verify">
-              Create an Account For Deeper Insights
-            </a>
-          </div>
-
           <div id="tryAnother" style="margin-top: 12px;">
             <p style="margin: 0 0 6px 0;"><span class="label">Verify Another</span></p>
             <div id="tryAnotherChips" class="chips"></div>
@@ -500,7 +566,7 @@
   const summaryValue = document.getElementById("summaryValue");
   const hint = document.getElementById("hint");
   const detailsSection = document.getElementById("detailsSection");
-  const cta = document.getElementById("cta");
+  const cta = document.getElementById("cta") || document.getElementById("plgCta");
   const sensitiveOptions = document.getElementById("sensitiveOptions");
   const fullProfilePrompt = document.getElementById("fullProfilePrompt");
   const signalsChecked = document.getElementById("signalsChecked");
@@ -508,6 +574,8 @@
   const shareLinkInput = document.getElementById("shareLinkInput");
   const shareCopyStatus = document.getElementById("shareCopyStatus");
   const tryAnotherChips = document.getElementById("tryAnotherChips");
+  const plgRail = document.getElementById("plgRail");
+  const plgMobile = document.getElementById("plgMobile");
   let isProcessing = false;
   let copyStatusTimer = null;
   let scoreAnimationFrame = null;
@@ -516,8 +584,8 @@
   intro.textContent = "Enter " + cfg.label.toLowerCase() + " data to verify.";
   input.placeholder = cfg.placeholder;
   input.value = prefillValue;
-  cta.href = "signup.html?from=verify&type=" + encodeURIComponent(type);
-  fullProfilePrompt.textContent = cfg.fullProfilePrompt;
+  if (cta) cta.href = "signup.html?from=verify&type=" + encodeURIComponent(type);
+  if (fullProfilePrompt) fullProfilePrompt.textContent = cfg.fullProfilePrompt;
 
   function formatTypeLabel(typeKey) {
     const entry = CONTENT_BY_TYPE[typeKey];
@@ -541,6 +609,7 @@
   }
 
   function renderSensitiveOptions() {
+    if (!sensitiveOptions) return;
     sensitiveOptions.innerHTML = cfg.sensitiveOptions
       .slice(0, 2)
       .map(function (item) {
@@ -713,6 +782,12 @@
       renderTryAnotherChips();
     }
     result.classList.add("show");
+    showPlg();
+  }
+
+  function showPlg() {
+    if (plgRail) plgRail.classList.add("plg-show");
+    if (plgMobile) plgMobile.classList.add("plg-show");
   }
 
   function startVerificationFlow() {
