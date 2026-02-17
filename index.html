@@ -21,11 +21,6 @@
       font-size: 15px;
     }
 
-    .hero-subline {
-      margin-top: 6px;
-      font-size: 13px;
-    }
-
     .card {
       border: 1px solid #d1d5db;
       border-radius: 14px;
@@ -71,36 +66,6 @@
       line-height: 1.4;
     }
 
-    .console-link {
-      font-size: 13px;
-      color: #2563eb;
-      text-decoration: none;
-    }
-
-    .console-link:hover {
-      text-decoration: underline;
-    }
-
-    .preview-section {
-      margin: 8px 0 20px 0;
-    }
-
-    .preview-card h3 {
-      margin: 0 0 8px 0;
-      font-size: 16px;
-    }
-
-    .preview-card ul {
-      margin: 0 0 0 18px;
-      padding: 0;
-      color: #4b5563;
-      font-size: 13px;
-    }
-
-    .preview-card li {
-      margin-bottom: 6px;
-    }
-
     @media (max-width: 860px) {
       .grid-3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -129,24 +94,10 @@
         <header class="hero">
           <h1>What would you like to verify today?</h1>
           <p class="muted">Run lightweight checks across public signals and get a clear outcome + AI summary in seconds.</p>
-          <p class="muted hero-subline">Choose a verification type below to continue.</p>
           <hr class="divider" />
         </header>
 
         <div class="grid-3 options-grid" id="optionsGrid"></div>
-
-        <section class="preview-section" aria-label="Verification preview">
-          <article class="preview-card card">
-            <h3>Verify in seconds</h3>
-            <ul>
-              <li>Instant public-signal checks</li>
-              <li>AI-generated summary for quick decisions</li>
-              <li>Premium sources unlock with an account.</li>
-            </ul>
-          </article>
-        </section>
-
-        <a class="console-link" href="queue.html">Underwriter Console</a>
       </main>
     </div>
   </div>
