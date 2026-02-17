@@ -172,6 +172,198 @@
       background: #0b1220;
       border-color: #0b1220;
     }
+
+    #ai-launcher {
+      position: fixed;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 40;
+      border: 1px solid #d1d5db;
+      background: #111827;
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.2);
+    }
+
+    #ai-panel {
+      position: fixed;
+      right: 52px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 360px;
+      height: 430px;
+      min-width: 280px;
+      min-height: 220px;
+      max-width: min(92vw, 760px);
+      max-height: min(86vh, 900px);
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.18);
+      display: none;
+      z-index: 41;
+      overflow: hidden;
+    }
+
+    #ai-panel.ai-open {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #ai-panel.ai-collapsed {
+      height: auto;
+      min-height: 0;
+    }
+
+    #ai-panel.ai-collapsed #ai-body {
+      display: none;
+    }
+
+    #ai-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e5e7eb;
+      background: #f8fafc;
+    }
+
+    #ai-title {
+      margin: 0;
+      font-size: 14px;
+      color: #111827;
+    }
+
+    .ai-btn {
+      border: 1px solid #d1d5db;
+      background: #fff;
+      color: #374151;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    #ai-body {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      flex: 1;
+    }
+
+    #ai-messages {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      padding: 10px 12px;
+      display: grid;
+      gap: 8px;
+      background: #fff;
+    }
+
+    .ai-msg {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 13px;
+      color: #1f2937;
+      max-width: 94%;
+      line-height: 1.4;
+    }
+
+    .ai-msg-user {
+      margin-left: auto;
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .ai-msg-assistant {
+      margin-right: auto;
+      background: #f9fafb;
+      border-color: #e5e7eb;
+    }
+
+    #ai-input-row {
+      display: flex;
+      gap: 8px;
+      border-top: 1px solid #e5e7eb;
+      padding: 10px 12px;
+      background: #fff;
+    }
+
+    #ai-input {
+      flex: 1;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    #ai-send {
+      border: 1px solid #111827;
+      border-radius: 8px;
+      background: #111827;
+      color: #fff;
+      padding: 8px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    #ai-panel.ai-expanded {
+      width: min(680px, 94vw);
+      height: min(82vh, 900px);
+      right: 12px;
+    }
+
+    #ai-tools {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 8px 12px;
+      background: #fff;
+      display: grid;
+      gap: 8px;
+    }
+
+    #ai-suggest-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .ai-suggest-chip {
+      border: 1px solid #d1d5db;
+      background: #fff;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      cursor: pointer;
+      color: #374151;
+    }
+
+    #ai-cite-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #4b5563;
+    }
+
+    #ai-resize {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 16px;
+      height: 16px;
+      cursor: nwse-resize;
+      background:
+        linear-gradient(135deg, transparent 45%, #9ca3af 46%, #9ca3af 54%, transparent 55%),
+        linear-gradient(135deg, transparent 60%, #9ca3af 61%, #9ca3af 69%, transparent 70%);
+      border-bottom-right-radius: 10px;
+    }
   </style>
 </head>
 <body>
@@ -198,6 +390,40 @@
     </div>
   </div>
 
+  <button id="ai-launcher" type="button" aria-controls="ai-panel" aria-expanded="false">AI Chat</button>
+  <section id="ai-panel" aria-label="AI Assistant">
+    <div id="ai-header">
+      <h3 id="ai-title">AI Assistant</h3>
+      <div style="display: inline-flex; gap: 6px;">
+        <button id="ai-expand" type="button" class="ai-btn">Expand</button>
+        <button id="ai-toggle" type="button" class="ai-btn">Collapse</button>
+        <button id="ai-close" type="button" class="ai-btn">Close</button>
+      </div>
+    </div>
+    <div id="ai-body">
+      <div id="ai-tools">
+        <div>
+          <p class="muted" style="font-size: 12px; margin: 0 0 6px 0;">Suggested prompts</p>
+          <div id="ai-suggest-row">
+            <button type="button" class="ai-suggest-chip" data-ai-prompt="Summarize this customer">Summarize</button>
+            <button type="button" class="ai-suggest-chip" data-ai-prompt="What information is missing?">Missing</button>
+            <button type="button" class="ai-suggest-chip" data-ai-prompt="What are the next steps?">Next steps</button>
+            <button type="button" class="ai-suggest-chip" data-ai-prompt="Explain the customer tags">Explain tags</button>
+          </div>
+        </div>
+        <label id="ai-cite-row"><input id="ai-cite" type="checkbox" /> Cite sources</label>
+      </div>
+      <div id="ai-messages">
+        <div class="ai-msg ai-msg-assistant">Hi, I can help summarize this customer and suggest next steps.</div>
+      </div>
+      <div id="ai-input-row">
+        <textarea id="ai-input" placeholder="Ask about this customer..." rows="2" style="resize: none;"></textarea>
+        <button id="ai-send" type="button">Send</button>
+      </div>
+    </div>
+    <div id="ai-resize" aria-hidden="true"></div>
+  </section>
+
   <script>
     if (localStorage.getItem("plgAuth") !== "true") {
       window.location.replace("index.html");
@@ -207,6 +433,7 @@
     const content = document.getElementById("content");
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
+    window.__currentCustomer = null;
 
     signOutLink.addEventListener("click", function (event) {
       event.preventDefault();
@@ -226,6 +453,7 @@
     }
 
     function renderCustomer(customer) {
+      window.__currentCustomer = customer;
       const evidenceOrder = ["KYC", "KYB", "Bank", "Credit", "Web"];
       const highlightsHtml = customer.highlights
         .map(function (item) { return `<li style="margin-bottom: 6px;">${item}</li>`; })
@@ -644,6 +872,180 @@
           renderError("Unable to load customer data right now.");
         });
     }
+  </script>
+  <script>
+    (function () {
+      var launcher = document.getElementById("ai-launcher");
+      var panel = document.getElementById("ai-panel");
+      var expandBtn = document.getElementById("ai-expand");
+      var toggleBtn = document.getElementById("ai-toggle");
+      var closeBtn = document.getElementById("ai-close");
+      var messages = document.getElementById("ai-messages");
+      var suggestRow = document.getElementById("ai-suggest-row");
+      var citeCheckbox = document.getElementById("ai-cite");
+      var input = document.getElementById("ai-input");
+      var sendBtn = document.getElementById("ai-send");
+      var resizeHandle = document.getElementById("ai-resize");
+      if (!launcher || !panel || !expandBtn || !toggleBtn || !closeBtn || !messages || !suggestRow || !citeCheckbox || !input || !sendBtn || !resizeHandle) return;
+
+      function isOpen() {
+        return panel.classList.contains("ai-open");
+      }
+
+      function openPanel() {
+        panel.classList.add("ai-open");
+        panel.classList.remove("ai-collapsed");
+        panel.classList.remove("ai-expanded");
+        toggleBtn.textContent = "Collapse";
+        expandBtn.textContent = "Expand";
+        launcher.setAttribute("aria-expanded", "true");
+      }
+
+      function closePanel() {
+        panel.classList.remove("ai-open");
+        launcher.setAttribute("aria-expanded", "false");
+      }
+
+      function toggleCollapse() {
+        var collapsed = panel.classList.toggle("ai-collapsed");
+        toggleBtn.textContent = collapsed ? "Expand" : "Collapse";
+      }
+
+      function toggleExpand() {
+        var expanded = panel.classList.toggle("ai-expanded");
+        expandBtn.textContent = expanded ? "Shrink" : "Expand";
+      }
+
+      function appendMessage(role, text) {
+        var node = document.createElement("div");
+        node.className = "ai-msg " + (role === "user" ? "ai-msg-user" : "ai-msg-assistant");
+        node.textContent = text;
+        messages.appendChild(node);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function getCustomer() {
+        return window.__currentCustomer || null;
+      }
+
+      function buildSourceSuffix(customer, includeSources) {
+        if (!includeSources || !customer) return "";
+        return " Sources: customer.summary, customer.highlights, customer.nextSteps, customer.tags, customer.evidence.";
+      }
+
+      function getMockReply(userText, includeSources) {
+        var t = userText.toLowerCase();
+        var customer = getCustomer();
+        if (!customer) {
+          return "Mock: No customer record is currently loaded in context.";
+        }
+
+        if (t.indexOf("summary") >= 0 || t.indexOf("summarize") >= 0) {
+          var summary = customer.summary || {};
+          return "Mock summary: " + customer.name + " is " + customer.riskTier + " risk (score " + customer.riskScore + "). KYC: " + (summary.KYC || "n/a") + "; KYB: " + (summary.KYB || "n/a") + "; Bank: " + (summary.Bank || "n/a") + "; Credit: " + (summary.Credit || "n/a") + "." + buildSourceSuffix(customer, includeSources);
+        }
+
+        if (t.indexOf("missing") >= 0) {
+          var missing = [];
+          if (!Array.isArray(customer.highlights) || !customer.highlights.length) missing.push("highlights");
+          if (!Array.isArray(customer.nextSteps) || !customer.nextSteps.length) missing.push("next steps");
+          if (!customer.summary) missing.push("summary");
+          if (!customer.evidence) missing.push("evidence");
+          var msg = missing.length ? "Missing or thin fields: " + missing.join(", ") + "." : "No obvious missing core sections; consider validating freshness of evidence and ownership docs.";
+          return "Mock: " + msg + buildSourceSuffix(customer, includeSources);
+        }
+
+        if (t.indexOf("next") >= 0 || t.indexOf("step") >= 0) {
+          var steps = Array.isArray(customer.nextSteps) ? customer.nextSteps.slice(0, 3) : [];
+          return "Mock next steps: " + (steps.length ? steps.join(" | ") : "Review underwriting checklist, request additional statements, and verify ownership docs.") + "." + buildSourceSuffix(customer, includeSources);
+        }
+
+        if (t.indexOf("tag") >= 0 || t.indexOf("explain") >= 0) {
+          var tags = Array.isArray(customer.tags) ? customer.tags : [];
+          var firstTag = tags[0];
+          var mapping = customer.tagEvidenceMap && firstTag ? customer.tagEvidenceMap[firstTag] : null;
+          var mappingHint = Array.isArray(mapping) && mapping[0] ? " For " + firstTag + ", mapped reason: " + mapping[0].reason + "." : "";
+          return "Mock tag explanation: Active tags are " + (tags.length ? tags.join(", ") : "none") + "." + mappingHint + buildSourceSuffix(customer, includeSources);
+        }
+
+        if (t.indexOf("risk") >= 0) {
+          return "Mock risk view: " + customer.name + " is currently " + customer.riskTier + " (" + customer.riskScore + "). Recommend enhanced review for elevated indicators." + buildSourceSuffix(customer, includeSources);
+        }
+
+        return "Mock: I can summarize this customer, identify missing information, recommend next steps, or explain tag-to-evidence mappings." + buildSourceSuffix(customer, includeSources);
+      }
+
+      function sendMessage() {
+        var text = input.value.trim();
+        if (!text) return;
+        appendMessage("user", text);
+        input.value = "";
+        window.setTimeout(function () {
+          appendMessage("assistant", getMockReply(text, !!citeCheckbox.checked));
+        }, 250);
+      }
+
+      launcher.addEventListener("click", function () {
+        if (isOpen()) {
+          closePanel();
+        } else {
+          openPanel();
+          input.focus();
+        }
+      });
+      closeBtn.addEventListener("click", closePanel);
+      expandBtn.addEventListener("click", toggleExpand);
+      toggleBtn.addEventListener("click", toggleCollapse);
+      sendBtn.addEventListener("click", sendMessage);
+      input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+          sendMessage();
+        }
+      });
+      window.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && isOpen()) {
+          closePanel();
+        }
+      });
+
+      suggestRow.addEventListener("click", function (event) {
+        var chip = event.target.closest("button[data-ai-prompt]");
+        if (!chip) return;
+        var prompt = chip.getAttribute("data-ai-prompt") || "";
+        if (!prompt) return;
+        if (!isOpen()) openPanel();
+        input.value = prompt;
+        input.focus();
+      });
+
+      var resizing = false;
+      var startX = 0;
+      var startY = 0;
+      var startW = 0;
+      var startH = 0;
+
+      resizeHandle.addEventListener("mousedown", function (event) {
+        resizing = true;
+        startX = event.clientX;
+        startY = event.clientY;
+        startW = panel.offsetWidth;
+        startH = panel.offsetHeight;
+        event.preventDefault();
+      });
+
+      window.addEventListener("mousemove", function (event) {
+        if (!resizing) return;
+        var nextW = startW + (event.clientX - startX);
+        var nextH = startH + (event.clientY - startY);
+        panel.style.width = Math.max(280, Math.min(window.innerWidth * 0.92, nextW)) + "px";
+        panel.style.height = Math.max(220, Math.min(window.innerHeight * 0.86, nextH)) + "px";
+      });
+
+      window.addEventListener("mouseup", function () {
+        resizing = false;
+      });
+    })();
   </script>
 </body>
 </html>
