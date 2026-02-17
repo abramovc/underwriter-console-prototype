@@ -6,306 +6,96 @@
   <title>Verify</title>
   <link rel="stylesheet" href="styles/base.css" />
   <style>
-    .verify-wrap {
-      width: min(860px, 92vw);
-      margin: 0 auto;
-    }
+    .verify-wrap { width: min(980px, 94vw); margin: 0 auto; }
+    .verify-card { padding: 20px; }
+    .header-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+    .verify-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; }
+    .input-stack { display: grid; gap: 6px; }
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .tight { margin: 0; }
+    .mt-8 { margin-top: 8px; }
+    .text-12 { font-size: 12px; }
+    .muted-13 { font-size: 13px; color: #6b7280; }
+    .label-block { margin: 0 0 6px 0; }
+    .try-row { margin-top: 8px; font-size: 13px; color: #6b7280; }
+    .try-row a { color: #2563eb; text-decoration: none; }
+    .try-row a:hover { text-decoration: underline; }
+    .share-status { font-size: 12px; min-width: 52px; }
+    .sr-offscreen { position: absolute; left: -9999px; opacity: 0; }
+    .summary-preview { margin: 0 0 10px 0; }
+    .premium-list { margin: 0 0 8px 18px; padding: 0; }
+    .premium-list li { margin-bottom: 6px; }
+    .premium-list li:last-child { margin-bottom: 0; }
+    .premium-copy { margin: 10px 0 0 0; }
+    .inline-link { color: #2563eb; text-decoration: none; }
+    .inline-link:hover { text-decoration: underline; }
 
-    .verify-card {
-      padding: 20px;
-    }
+    .status-pill { display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 600; border: 1px solid #d1d5db; background: #f3f4f6; color: #374151; }
+    .status-pill.yes { border-color: #16a34a; background: #16a34a; color: #fff; }
+    .status-pill.no { border-color: #dc2626; background: #dc2626; color: #fff; }
+    .status-pill.unsure { border-color: #d1d5db; background: #f3f4f6; color: #4b5563; }
 
-    .top-section {
-      display: grid;
-      gap: 12px;
-    }
+    .result-grid { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; margin-bottom: 8px; }
+    .confidence-number { font-size: 30px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+    .confidence-caption { color: #6b7280; font-size: 12px; }
+    .summary-block { max-width: 66ch; margin: 8px 0; color: #1f2937; line-height: 1.6; }
+    .hint { margin: 0 0 8px 0; color: #92400e; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 10px; display: none; }
 
-    .header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
+    .icon-btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid #d1d5db; background: #fff; border-radius: 8px; padding: 6px 9px; font-size: 12px; cursor: pointer; color: #111827; }
+    .icon-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    .verify-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: start;
-    }
+    .primary-btn { background: #111827; color: #fff; border-color: #111827; }
+    .primary-btn:hover { background: #0b1220; border-color: #0b1220; }
 
-    .input-stack {
-      display: grid;
-      gap: 6px;
-    }
+    .verify-layout { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
+    .verify-main { min-width: 0; }
 
-    .muted {
-      color: #4b5563;
-    }
+    .plg-list { margin: 0 0 12px 18px; padding: 0; color: #374151; font-size: 13px; }
+    .plg-list li { margin-bottom: 6px; }
+    .plg-mobile-label { margin: 0 0 8px 0; }
+    .plg-cta { width: 100%; justify-content: center; }
+    .plg-mobile { display: none; margin-top: 14px; border: 1px solid #d1d5db; border-radius: 12px; background: #f9fafb; padding: 12px; }
 
-    .field {
-      width: 100%;
-      box-sizing: border-box;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin: 0;
-      font-size: 14px;
-    }
+    .results-shell { margin-top: 14px; border: 1px solid #d1d5db; border-radius: 12px; background: #fff; padding: 12px; display: none; }
+    .results-shell.show { display: block; }
+    .outcome-box { border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px; background: #fff; margin-bottom: 10px; }
+    .results-placeholder { border: 1px dashed #d1d5db; border-radius: 10px; padding: 10px; color: #6b7280; font-size: 13px; margin-bottom: 10px; }
+    .result-metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .metric-pill { border: 1px solid #d1d5db; border-radius: 999px; padding: 4px 10px; font-size: 12px; color: #374151; background: #f8fafc; }
 
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+    .signal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+    .signal-card { border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; padding: 10px; }
+    .signal-title { margin: 0 0 6px 0; font-size: 13px; font-weight: 600; color: #111827; }
+    .signal-value { margin: 0 0 4px 0; font-size: 13px; color: #1f2937; }
+    .signal-detail { margin: 0; font-size: 12px; }
+    .badge { display: inline-flex; border-radius: 999px; font-size: 11px; padding: 2px 8px; border: 1px solid #d1d5db; margin-bottom: 6px; }
+    .badge.ok { background: #ecfdf3; border-color: #bbf7d0; color: #166534; }
+    .badge.warn { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+    .badge.bad { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
 
-    .result {
-      margin-top: 2px;
-      border-top: 1px solid #e5e7eb;
-      padding-top: 16px;
-      display: block;
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.22s ease, transform 0.22s ease, max-height 0.28s ease;
-    }
+    .ai-box { border: 1px solid #d1d5db; border-radius: 10px; background: #f9fafb; padding: 10px; margin-bottom: 10px; }
+    .ai-bar { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+    .ai-bar-input { flex: 1; }
+    .ai-thread { display: grid; gap: 8px; margin-top: 10px; max-height: 220px; overflow: auto; }
+    .ai-msg { border: 1px solid #e5e7eb; border-radius: 10px; padding: 8px 10px; font-size: 13px; color: #111827; background: #fff; }
+    .ai-msg.user { background: #eff6ff; border-color: #bfdbfe; }
+    .ai-msg.assistant { background: #f9fafb; }
+    .ai-msg.system { background: #f8fafc; color: #374151; }
+    .premium-box { border: 1px solid #d1d5db; border-radius: 10px; background: #fff; padding: 10px; position: relative; overflow: hidden; }
+    .premium-lock { filter: blur(2px); opacity: 0.7; user-select: none; pointer-events: none; }
+    .premium-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.55); }
 
-    .result.show {
-      max-height: 2200px;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .label {
-      font-weight: 700;
-    }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 12px;
-      font-weight: 600;
-      border: 1px solid #d1d5db;
-      background: #f3f4f6;
-      color: #374151;
-    }
-
-    .status-pill.yes {
-      border-color: #16a34a;
-      background: #16a34a;
-      color: #ffffff;
-    }
-
-    .status-pill.no {
-      border-color: #dc2626;
-      background: #dc2626;
-      color: #ffffff;
-    }
-
-    .status-pill.unsure {
-      border-color: #d1d5db;
-      background: #f3f4f6;
-      color: #4b5563;
-    }
-
-    .result-grid {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 16px;
-      align-items: start;
-      margin-bottom: 8px;
-    }
-
-    .confidence-number {
-      font-size: 30px;
-      font-weight: 700;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .confidence-caption {
-      color: #6b7280;
-      font-size: 12px;
-    }
-
-    .summary-block {
-      max-width: 66ch;
-      margin: 8px 0;
-      color: #1f2937;
-      line-height: 1.6;
-    }
-
-    .hint {
-      margin: 0 0 8px 0;
-      color: #92400e;
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 8px;
-      padding: 8px 10px;
-      display: none;
-    }
-
-    .next {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px dashed #d1d5db;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin: 4px 0 10px 0;
-    }
-
-    .chip {
-      display: inline-block;
-      border: 1px solid #d1d5db;
-      border-radius: 999px;
-      padding: 3px 8px;
-      font-size: 12px;
-      background: #fff;
-    }
-
-    .chip-btn {
-      cursor: pointer;
-      text-decoration: none;
-      color: #111827;
-      font-size: 14px;
-      padding: 8px 14px;
-      border-radius: 999px;
-    }
-
-    .icon-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid #d1d5db;
-      background: #fff;
-      border-radius: 8px;
-      padding: 6px 9px;
-      font-size: 12px;
-      cursor: pointer;
-      color: #111827;
-    }
-
-    .icon-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .unlock-card {
-      margin-top: 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      background: #f9fafb;
-      padding: 12px;
-    }
-
-    .primary-btn {
-      background: #111827;
-      color: #fff;
-      border-color: #111827;
-    }
-
-    .primary-btn:hover {
-      background: #0b1220;
-      border-color: #0b1220;
-    }
-
-    .verify-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 320px;
-      gap: 20px;
-      align-items: start;
-    }
-
-    .verify-main {
-      min-width: 0;
-    }
-
-    .plg-rail {
-      display: none;
-      position: sticky;
-      top: 20px;
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      background: #f9fafb;
-      padding: 14px;
-    }
-
-    .plg-heading {
-      margin: 0 0 10px 0;
-      font-size: 14px;
-      color: #111827;
-    }
-
-    .plg-list {
-      margin: 0 0 12px 18px;
-      padding: 0;
-      color: #374151;
-      font-size: 13px;
-    }
-
-    .plg-list li {
-      margin-bottom: 6px;
-    }
-
-    .plg-cta {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .plg-mobile {
-      display: none;
-      margin-top: 14px;
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      background: #f9fafb;
-      padding: 12px;
-    }
-
-    .plg-show.plg-rail {
-      display: block;
+    @media (max-width: 900px) {
+      .verify-layout { grid-template-columns: 1fr; }
+      .plg-mobile { display: none; }
+      .plg-show.plg-mobile { display: block; }
+      .signal-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
-      .verify-row {
-        grid-template-columns: 1fr;
-      }
-
-      .verify-row .btn {
-        width: 100%;
-      }
-
-      .result-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .verify-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .plg-rail {
-        display: none;
-      }
-
-      .plg-mobile {
-        display: none;
-      }
-
-      .plg-show.plg-mobile {
-        display: block;
-      }
-
-      .plg-show.plg-rail {
-        display: none;
-      }
+      .verify-row { grid-template-columns: 1fr; }
+      .verify-row .btn { width: 100%; }
+      .result-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -320,652 +110,533 @@
           <a class="topnav-link" href="#">Docs</a>
         </div>
       </nav>
+
       <main class="verify-wrap">
         <section class="card verify-card">
           <header class="page-header">
             <div class="header-row">
-              <h1 id="title" style="margin: 0;">Verify: Item</h1>
-              <div style="display: inline-flex; align-items: center; gap: 8px;">
+              <h1 id="title" class="tight">Verify: Item</h1>
+              <div class="row">
                 <button id="copyShareLinkBtn" type="button" class="icon-btn" disabled aria-label="Copy share link">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M18 8a3 3 0 1 0-2.8-4H15a3 3 0 0 0 .2 1l-6.1 3.4a3 3 0 0 0-4.2 1.8A3 3 0 0 0 7 14c.8 0 1.5-.3 2.1-.8l6.2 3.5a3 3 0 1 0 .6-1.1L9.7 12a3 3 0 0 0 0-1l6.2-3.5A3 3 0 0 0 18 8Z" fill="currentColor"/>
                   </svg>
                   <span>Share</span>
                 </button>
-                <span id="shareCopyStatus" class="muted" style="font-size: 12px; min-width: 52px;"></span>
-                <input id="shareLinkInput" type="text" readonly style="position: absolute; left: -9999px; opacity: 0;" />
+                <span id="shareCopyStatus" class="muted share-status"></span>
+                <input id="shareLinkInput" class="sr-offscreen" type="text" readonly />
               </div>
             </div>
             <p class="muted" id="intro">Enter data to verify.</p>
             <hr class="divider" />
           </header>
 
-          <section class="top-section">
+          <section>
             <div class="verify-row">
               <div class="input-stack">
                 <input id="valueInput" class="field input" type="text" value="" placeholder="Enter value" />
-                <p class="muted" style="font-size: 12px;">Enter one value per check. We only use non-sensitive public signals in this step.</p>
+                <p class="muted text-12 tight">Enter one value per check. We only use non-sensitive public signals in this step.</p>
               </div>
               <button id="runBtn" class="btn primary-btn" type="button" disabled>Run verification</button>
             </div>
-            <p id="processingStatus" class="muted" style="display: none; margin: 0;">Processing...</p>
+            <p id="tryAnotherRow" class="try-row"></p>
+            <p id="processingStatus" class="muted mt-8 tight" style="display: none;">Processing...</p>
           </section>
-<div class="verify-layout">
-  <div class="verify-main">
-    <section id="result" class="result">
-      <div class="result-grid">
-        <div>
-          <p style="margin: 0 0 6px 0;"><span class="label">Verified</span></p>
-          <span id="verifiedValue" class="status-pill unsure">-</span>
-        </div>
-        <div>
-          <p style="margin: 0 0 6px 0;"><span class="label">Confidence</span></p>
-          <div id="confidenceValue" class="confidence-number">0%</div>
-          <div class="confidence-caption">Confidence Score</div>
-        </div>
-      </div>
 
-      <p id="hint" class="hint"></p>
+          <div class="verify-layout">
+            <div class="verify-main">
+              <section id="resultsShell" class="results-shell">
+                <div id="resultsPlaceholder" class="results-placeholder">Run verification to generate signal cards and AI summary.</div>
+                <div class="outcome-box">
+                  <div class="result-grid">
+                    <div>
+                      <p class="label-block"><span class="label">Verified</span></p>
+                      <span id="verifiedValue" class="status-pill unsure">-</span>
+                    </div>
+                    <div>
+                      <p class="label-block"><span class="label">Confidence</span></p>
+                      <div id="confidenceValue" class="confidence-number">0%</div>
+                      <div class="confidence-caption">Confidence Score</div>
+                    </div>
+                  </div>
+                  <p id="hint" class="hint"></p>
+                  <p class="tight"><span class="label">Public Summary</span></p>
+                  <p id="summaryValue" class="summary-block">-</p>
+                </div>
+                <div class="result-metrics">
+                  <span id="signalScore" class="metric-pill">Signal score: -</span>
+                  <span id="runTime" class="metric-pill">Run time: -</span>
+                  <span id="estCost" class="metric-pill">Estimated cost (lite): -</span>
+                </div>
+                <div id="signalCards" class="signal-grid"></div>
+                <div class="ai-box">
+                  <p class="label-block tight"><strong>AI Summary</strong></p>
+                  <p id="aiSummary" class="muted summary-preview">-</p>
+                  <div class="ai-bar">
+                    <input id="aiBarInput" class="input ai-bar-input" type="text" placeholder="Ask AI — explain these signals, spot inconsistencies, or suggest next steps…" />
+                    <button id="aiBarSend" type="button" class="btn primary-btn">Ask</button>
+                  </div>
+                  <div id="aiThread" class="ai-thread" aria-label="AI conversation"></div>
+                </div>
+                <div class="premium-box">
+                  <div class="premium-lock">
+                    <p class="label-block tight"><strong>Premium Insights</strong></p>
+                    <ul class="premium-list muted-13">
+                      <li>Business ownership &amp; officers</li>
+                      <li>Enhanced watchlists / PEP</li>
+                      <li>Bank account ownership match</li>
+                    </ul>
+                  </div>
+                  <p class="muted muted-13 premium-copy">Create an account to unlock premium sources and save results.</p>
+                  <div class="premium-overlay">
+                    <button id="unlockButton" type="button" class="btn primary-btn">Create account to unlock premium</button>
+                  </div>
+                </div>
+              </section>
 
-      <p style="margin: 0 0 4px 0;"><span class="label">Public Summary</span></p>
-      <p id="summaryValue" class="summary-block">-</p>
-
-      <div id="detailsSection">
-        <p style="margin: 0 0 6px 0;"><span class="label">Signals checked:</span></p>
-        <div id="signalsChecked" class="chips"></div>
-
-        <div class="next">
-          <div id="tryAnother" style="margin-top: 12px;">
-            <p style="margin: 0 0 6px 0;"><span class="label">Verify Another</span></p>
-            <div id="tryAnotherChips" class="chips"></div>
+              <div class="plg-mobile" id="plgMobile">
+                <p class="label plg-mobile-label">Deeper insights include:</p>
+                <ul class="plg-list" id="plgMobileList"></ul>
+                <p class="muted muted-13 tight">
+                  <a id="plgMobileTextLink" class="inline-link" href="signup.html?from=verify">Create an account</a> to unlock premium sources.
+                </p>
+              </div>
+            </div>
           </div>
-          <!-- Mobile-only PLG CTA -->
-<div class="plg-mobile" id="plgMobile">
-  <p class="label" style="margin: 16px 0 8px 0;">Deeper insights include:</p>
-
-<ul class="plg-list" id="plgMobileList"></ul>
-
-<a class="btn primary-btn plg-cta"
-   id="plgMobileCta"
-   href="signup.html?from=verify">
-   Create an Account for Deeper Insights
-</a>
-
-</div>
-
-        </div>
-      </div>
-    </section>
-  </div>
-
-<aside class="plg-rail" id="plgRail">
-  <h3 class="plg-heading">Deeper insights include:</h3>
-
-<ul class="plg-list" id="plgList"></ul>
-
-<a class="btn primary-btn plg-cta" id="plgCta" href="signup.html?from=verify">
-  Create an Account for Deeper Insights
-</a>
-
-
-</aside>
-
-</div>
-
-
+        </section>
       </main>
     </div>
   </div>
 
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const requestedType = params.get("type") || "website";
-  const autoRun = params.get("auto") === "1";
-  const prefillValue = params.get("value") || "";
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const requestedType = params.get("type") || "website";
+    const autoRun = params.get("auto") === "1";
+    const prefillValue = params.get("value") || "";
 
-  const CONTENT_BY_TYPE = {
-    website: {
-      label: "Website",
-      placeholder: "example.com",
-      hint: "Use a full domain like example.com (or https://example.com).",
-      sensitiveOptions: ["Registrant history", "Infrastructure risk markers", "Historical abuse signals"],
-      fullProfilePrompt: "Would you like to run a full business profile tied to this web presence?",
-      signalsChecked: ["DNS & resolution", "TLS/certificate patterns", "Redirect chain", "Hosting fingerprint", "Public footprint indicators"],
-      yesSummary: function () {
-        return "We analyzed DNS resolution consistency, TLS posture, redirect behavior, hosting fingerprint, and public footprint continuity, and the combined non-sensitive signals aligned with a legitimate website profile.";
-      },
-      noSummary: function () {
-        return "The domain showed multiple high-risk indicators across footprint consistency, hosting posture, and naming patterns, which can reflect synthetic, temporary, or deceptive web infrastructure.";
-      }
-    },
-    phone: {
-      label: "Phone",
-      placeholder: "+1 602 555 0123",
-      hint: "Include country code and full number, for example +1 602 555 0123.",
-      sensitiveOptions: ["Line tenure", "Carrier risk telemetry", "Linked entity indicators"],
-      fullProfilePrompt: "Would you like to run a full personal or business profile linked to this number?",
-      signalsChecked: ["Number validity", "Carrier & line type", "Range risk patterns", "Public footprint indicators"],
-      yesSummary: function () {
-        return "Format validation, carrier/line-type heuristics, and public footprint checks were internally consistent, supporting a lower-risk interpretation for this phone record.";
-      },
-      noSummary: function () {
-        return "Range-level risk signals and abnormal usage-style patterns suggest this number may be unreliable, recycled for abuse, or otherwise elevated risk.";
-      }
-    },
-    email: {
-      label: "Email",
-      placeholder: "name@domain.com",
-      hint: "Use a complete email format, for example name@domain.com.",
-      sensitiveOptions: ["Mailbox risk indicators", "Domain ownership lineage", "Breach exposure context"],
-      fullProfilePrompt: "Would you like to run a full personal or business profile anchored to this email identity?",
-      signalsChecked: ["Domain validity", "Mail posture (SPF/DKIM/DMARC)", "Deliverability signals", "Disposable patterns", "Public footprint indicators"],
-      yesSummary: function () {
-        return "Domain validity, mail-auth posture, and deliverability-oriented checks were coherent with a stable identity footprint, indicating low apparent abuse risk.";
-      },
-      noSummary: function () {
-        return "Disposable-like domain traits and inconsistent mail posture increased fraud risk, suggesting this email may be low-trust or short-lived.";
-      }
-    },
-    commercial_address: {
-      label: "Commercial Address",
-      placeholder: "123 Main St, Phoenix, AZ 85004",
-      hint: "Include street, city, state, and ZIP for better match confidence.",
-      sensitiveOptions: ["Parcel/ownership overlays", "Occupancy risk indicators", "Business registration linkages"],
-      fullProfilePrompt: "Would you like to run a full business profile using this commercial address?",
-      signalsChecked: ["Deliverability", "Geocode consistency", "Address type indicators", "Commercial footprint signals"],
-      yesSummary: function () {
-        return "Deliverability checks, geocode alignment, and commercial footprint indicators were mutually consistent, supporting a credible business-location signal.";
-      },
-      noSummary: function () {
-        return "Geocode and footprint inconsistencies indicate the location may be misrepresented, virtualized, or otherwise high risk for business verification.";
-      }
-    },
-    personal_address: {
-      label: "Personal Address",
-      placeholder: "123 Main St, Phoenix, AZ 85004",
-      hint: "Include street, city, state, and ZIP for better match confidence.",
-      sensitiveOptions: ["Occupancy timeline", "Historical residency indicators", "Linked identity context"],
-      fullProfilePrompt: "Would you like to run a full personal profile using this address?",
-      signalsChecked: ["Deliverability", "Geocode consistency", "Residential indicators", "Consistency checks"],
-      yesSummary: function () {
-        return "Address-standardization, geocode consistency, and residential indicators aligned without major anomalies, suggesting a plausible personal-location profile.";
-      },
-      noSummary: function () {
-        return "We observed mismatches between geocode, deliverability traits, and residential consistency signals, which may indicate elevated identity-risk posture.";
-      }
-    },
-    ip: {
-      label: "IP Address",
-      placeholder: "8.8.8.8",
-      hint: "Use a valid IPv4 format, for example 8.8.8.8.",
-      sensitiveOptions: ["Network history", "Proxy chain indicators", "Threat-intel enrichment"],
-      fullProfilePrompt: "Would you like to run a full profile enriched with network and entity context?",
-      signalsChecked: ["Routability", "Hosting type (ASN)", "Proxy/VPN traits", "Reputation indicators", "Geo consistency"],
-      yesSummary: function () {
-        return "Routability, ASN context, and non-sensitive reputation traits were consistent with expected traffic behavior and did not show obvious masking anomalies.";
-      },
-      noSummary: function () {
-        return "Private/reserved or masking-prone network characteristics, combined with anomalous reputation traits, suggest this IP may be unsuitable for trust decisions.";
-      }
-    },
-    business: {
-      label: "Business",
-      placeholder: "Acme Processing LLC",
-      hint: "Provide the full legal business name for best results.",
-      sensitiveOptions: ["Registry history depth", "Beneficial ownership graph", "Adverse media context"],
-      fullProfilePrompt: "Would you like to run a full business profile and ownership review?",
-      signalsChecked: ["Footprint consistency", "Entity disambiguation", "Web presence indicators", "Cross-source consistency"],
-      yesSummary: function () {
-        return "Entity disambiguation, footprint consistency, and cross-source references aligned for this business name, supporting a lower-risk authenticity signal.";
-      },
-      noSummary: function () {
-        return "Cross-source inconsistencies and weak footprint continuity indicate possible synthetic or misrepresented business identity risk.";
-      }
-    },
-    person: {
-      label: "Person",
-      placeholder: "First Last",
-      hint: "Provide at least first and last name for meaningful matching.",
-      sensitiveOptions: ["Identity graph enrichment", "Alias/history context", "Adverse risk markers"],
-      fullProfilePrompt: "Would you like to run a full personal profile with expanded identity checks?",
-      signalsChecked: ["Identity footprint signals", "Disambiguation checks", "Consistency checks", "Risk patterns"],
-      yesSummary: function () {
-        return "Name-level disambiguation and public footprint consistency checks produced aligned non-sensitive signals, supporting a plausible identity profile.";
-      },
-      noSummary: function () {
-        return "Disambiguation conflicts and low-coherence footprint patterns suggest heightened risk of synthetic or mismatched identity claims.";
-      }
-    },
-    bank: {
-      label: "Bank",
-      placeholder: "Chase / Wells Fargo / routing number",
-      hint: "Provide a bank name or a full routing number format.",
-      sensitiveOptions: ["Institution ownership context", "Account risk telemetry", "Routing/network lineage"],
-      fullProfilePrompt: "Would you like to run a full financial profile and institution verification?",
-      signalsChecked: ["Institution consistency", "Routing validity (if provided)", "Network indicators", "Risk patterns"],
-      yesSummary: function () {
-        return "Institution naming consistency and routing/network format checks were coherent with known financial-infrastructure patterns at a non-sensitive level.";
-      },
-      noSummary: function () {
-        return "Institution and routing-style signals were inconsistent or risk-elevated, which can indicate fabricated or high-risk financial details.";
-      }
-    }
-  };
+    const CONTENT_BY_TYPE = {
+      website: { label: "Website", placeholder: "example.com", hint: "Use a full domain like example.com (or https://example.com)." },
+      phone: { label: "Phone", placeholder: "+1 602 555 0123", hint: "Include country code and full number, for example +1 602 555 0123." },
+      email: { label: "Email", placeholder: "name@domain.com", hint: "Use a complete email format, for example name@domain.com." },
+      commercial_address: { label: "Commercial Address", placeholder: "123 Main St, Phoenix, AZ 85004", hint: "Include street, city, state, and ZIP for better match confidence." },
+      personal_address: { label: "Personal Address", placeholder: "123 Main St, Phoenix, AZ 85004", hint: "Include street, city, state, and ZIP for better match confidence." },
+      ip: { label: "IP Address", placeholder: "8.8.8.8", hint: "Use a valid IPv4 format, for example 8.8.8.8." },
+      business: { label: "Business", placeholder: "Acme Processing LLC", hint: "Provide the full legal business name for best results." },
+      person: { label: "Person", placeholder: "First Last", hint: "Provide at least first and last name for meaningful matching." },
+      bank: { label: "Bank", placeholder: "Chase / Wells Fargo / routing number", hint: "Provide a bank name or a full routing number format." }
+    };
 
-  const type = Object.prototype.hasOwnProperty.call(CONTENT_BY_TYPE, requestedType) ? requestedType : "website";
-  const cfg = CONTENT_BY_TYPE[type];
+    const type = Object.prototype.hasOwnProperty.call(CONTENT_BY_TYPE, requestedType) ? requestedType : "website";
+    const cfg = CONTENT_BY_TYPE[type];
 
-  const title = document.getElementById("title");
-  const intro = document.getElementById("intro");
-  const input = document.getElementById("valueInput");
-  const runBtn = document.getElementById("runBtn");
-  const processingStatus = document.getElementById("processingStatus");
-  const result = document.getElementById("result");
-  const verifiedValue = document.getElementById("verifiedValue");
-  const confidenceValue = document.getElementById("confidenceValue");
-  const summaryValue = document.getElementById("summaryValue");
-  const hint = document.getElementById("hint");
-  const detailsSection = document.getElementById("detailsSection");
-  const cta = document.getElementById("cta") || document.getElementById("plgCta");
-  const sensitiveOptions = document.getElementById("sensitiveOptions");
-  const fullProfilePrompt = document.getElementById("fullProfilePrompt");
-  const signalsChecked = document.getElementById("signalsChecked");
-  const copyShareLinkBtn = document.getElementById("copyShareLinkBtn");
-  const shareLinkInput = document.getElementById("shareLinkInput");
-  const shareCopyStatus = document.getElementById("shareCopyStatus");
-  const tryAnotherChips = document.getElementById("tryAnotherChips");
-  const plgRail = document.getElementById("plgRail");
-  const plgMobile = document.getElementById("plgMobile");
-  let isProcessing = false;
-  let copyStatusTimer = null;
-  let scoreAnimationFrame = null;
+    const title = document.getElementById("title");
+    const intro = document.getElementById("intro");
+    const input = document.getElementById("valueInput");
+    const runBtn = document.getElementById("runBtn");
+    const processingStatus = document.getElementById("processingStatus");
+    const verifiedValue = document.getElementById("verifiedValue");
+    const confidenceValue = document.getElementById("confidenceValue");
+    const summaryValue = document.getElementById("summaryValue");
+    const hint = document.getElementById("hint");
+    const copyShareLinkBtn = document.getElementById("copyShareLinkBtn");
+    const shareLinkInput = document.getElementById("shareLinkInput");
+    const shareCopyStatus = document.getElementById("shareCopyStatus");
+    const plgMobile = document.getElementById("plgMobile");
+    const tryAnotherRow = document.getElementById("tryAnotherRow");
 
-  title.textContent = "Verify: " + cfg.label;
-  intro.textContent = "Enter " + cfg.label.toLowerCase() + " data to verify.";
-  input.placeholder = cfg.placeholder;
-  input.value = prefillValue;
-  if (cta) cta.href = "signup.html?from=verify&type=" + encodeURIComponent(type);
-  if (fullProfilePrompt) fullProfilePrompt.textContent = cfg.fullProfilePrompt;
+    const resultsShell = document.getElementById("resultsShell");
+    const resultsPlaceholder = document.getElementById("resultsPlaceholder");
+    const signalCards = document.getElementById("signalCards");
+    const aiSummary = document.getElementById("aiSummary");
+    const signalScore = document.getElementById("signalScore");
+    const runTime = document.getElementById("runTime");
+    const estCost = document.getElementById("estCost");
+    const aiBarInput = document.getElementById("aiBarInput");
+    const aiBarSend = document.getElementById("aiBarSend");
+    const aiThread = document.getElementById("aiThread");
+    const unlockButton = document.getElementById("unlockButton");
+    const plgMobileTextLink = document.getElementById("plgMobileTextLink");
 
-  function formatTypeLabel(typeKey) {
-    const entry = CONTENT_BY_TYPE[typeKey];
-    return entry ? entry.label : typeKey;
-  }
+    let isProcessing = false;
+    let copyStatusTimer = null;
+    let scoreAnimationFrame = null;
+    let runStartedPerf = 0;
 
-  function renderTryAnotherChips() {
-    tryAnotherChips.innerHTML = Object.keys(CONTENT_BY_TYPE).map(function (key) {
-      const isActive = key === type;
-      const extraStyle = isActive ? " background:#eff6ff; border-color:#93c5fd;" : "";
-      return '<a class="chip chip-btn" style="' + extraStyle + '" href="verify.html?type=' + encodeURIComponent(key) + '">' + formatTypeLabel(key) + "</a>";
-    }).join("");
-  }
+    title.textContent = "Verify: " + cfg.label;
+    intro.textContent = "Enter " + cfg.label.toLowerCase() + " data to verify.";
+    input.placeholder = cfg.placeholder;
+    input.value = prefillValue;
 
-  function renderSignalsChecked() {
-    signalsChecked.innerHTML = cfg.signalsChecked
-      .map(function (signal) {
-        return '<span class="chip">' + signal + "</span>";
-      })
-      .join("");
-  }
+    function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
-  function renderSensitiveOptions() {
-    if (!sensitiveOptions) return;
-    sensitiveOptions.innerHTML = cfg.sensitiveOptions
-      .slice(0, 2)
-      .map(function (item) {
-        return "<li>" + item + "</li>";
-      })
-      .join("");
-  }
-
-  function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  function animateConfidence(targetValue) {
-    if (scoreAnimationFrame) {
-      cancelAnimationFrame(scoreAnimationFrame);
-    }
-
-    const duration = 600;
-    const start = performance.now();
-
-    function tick(now) {
-      const elapsed = now - start;
-      const progress = Math.min(1, elapsed / duration);
-      const current = Math.round(targetValue * progress);
-      confidenceValue.textContent = current + "%";
-      if (progress < 1) {
-        scoreAnimationFrame = requestAnimationFrame(tick);
+    function renderTryAnotherRow() {
+      const links = Object.keys(CONTENT_BY_TYPE).map(function (key) {
+        return '<a href="verify.html?type=' + encodeURIComponent(key) + '">' + CONTENT_BY_TYPE[key].label + "</a>";
+      }).join(" · ");
+      if (tryAnotherRow) {
+        tryAnotherRow.innerHTML = "Try: " + links;
       }
     }
 
-    scoreAnimationFrame = requestAnimationFrame(tick);
-  }
-
-  function setVerifiedPill(verified) {
-    verifiedValue.textContent = verified;
-    verifiedValue.classList.remove("yes", "no", "unsure");
-    if (verified === "Yes") {
-      verifiedValue.classList.add("yes");
-    } else if (verified === "No") {
-      verifiedValue.classList.add("no");
-    } else {
-      verifiedValue.classList.add("unsure");
-    }
-  }
-
-  function parseWebsiteHost(value) {
-    try {
-      const normalized = /^https?:\/\//i.test(value) ? value : "http://" + value;
-      return new URL(normalized).hostname.toLowerCase();
-    } catch (e) {
-      return "";
-    }
-  }
-
-  function isPlaceholder(value, typeKey) {
-    const trimmed = value.trim();
-    const lower = trimmed.toLowerCase();
-    const placeholderWords = /(test|example|asdf|qwerty|fake|invalid|unknown|n\/a)/i;
-
-    if (placeholderWords.test(lower)) return true;
-
-    if (typeKey === "email") {
-      const parts = lower.split("@");
-      const localPart = parts[0] || "";
-      const domain = parts[1] || "";
-      if (domain === "domain.com" || localPart === "name") return true;
+    function setRunning(isRunning) {
+      runBtn.disabled = isRunning || input.value.trim().length === 0;
+      runBtn.textContent = isRunning ? "Running..." : "Run verification";
+      processingStatus.style.display = isRunning ? "block" : "none";
     }
 
-    if (typeKey === "website") {
-      const host = parseWebsiteHost(trimmed);
-      if (host === "example.com" || host.includes("example") || lower === "example.com") return true;
+    function animateConfidence(targetValue) {
+      if (scoreAnimationFrame) cancelAnimationFrame(scoreAnimationFrame);
+      const duration = 600;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min(1, (now - start) / duration);
+        confidenceValue.textContent = Math.round(targetValue * progress) + "%";
+        if (progress < 1) scoreAnimationFrame = requestAnimationFrame(tick);
+      }
+      scoreAnimationFrame = requestAnimationFrame(tick);
     }
 
-    if (typeKey === "phone") {
-      const digits = lower.replace(/\D/g, "");
-      if (/555555/.test(digits) || /^1?555/.test(digits) || /0000$/.test(digits)) return true;
+    function setVerifiedPill(verified) {
+      verifiedValue.textContent = verified;
+      verifiedValue.classList.remove("yes", "no", "unsure");
+      verifiedValue.classList.add(verified === "Yes" ? "yes" : verified === "No" ? "no" : "unsure");
     }
 
-    return false;
-  }
-
-  function noLikelihood(value) {
-    const v = value.trim();
-    const lower = v.toLowerCase();
-    let noProb = 0.30;
-
-    if (/(test|example|asdf|1234|invalid|fake|unknown|n\/a)/i.test(lower)) noProb += 0.22;
-
-    if (type === "website") {
-      const host = parseWebsiteHost(v);
-      if (/(\.blogspot\.|\.wordpress\.)/i.test(host)) noProb += 0.16;
-      const hyphenCount = (host.match(/-/g) || []).length;
-      if (hyphenCount >= 3) noProb += 0.12;
-      if (/^https?:\/\/\d{1,3}(\.\d{1,3}){3}/i.test(v) || /^\d{1,3}(\.\d{1,3}){3}$/.test(host)) noProb += 0.20;
-    }
-
-    if (type === "email") {
-      const domain = (v.split("@")[1] || "").toLowerCase();
-      if (/(mailinator|tempmail|guerrilla|yopmail)/i.test(domain)) noProb += 0.28;
-    }
-
-    if (type === "phone") {
-      const digits = lower.replace(/\D/g, "");
-      if (/0000/.test(digits) || /555555/.test(digits)) noProb += 0.24;
-    }
-
-    if (type === "ip") {
-      if (/^10\./.test(v) || /^192\.168\./.test(v) || /^127\./.test(v) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(v)) {
-        noProb += 0.30;
+    function parseWebsiteHost(value) {
+      try {
+        const normalized = /^https?:\/\//i.test(value) ? value : "http://" + value;
+        return new URL(normalized).hostname.toLowerCase();
+      } catch (e) {
+        return "";
       }
     }
 
-    return Math.max(0.05, Math.min(0.95, noProb));
-  }
-
-  function validateValue(value) {
-    const trimmed = value.trim();
-    if (!trimmed) return false;
-
-    if (type === "website") return /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/.test(trimmed);
-    if (type === "phone") return /^(\+?\d[\d\s\-()]{8,}\d)$/.test(trimmed);
-    if (type === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
-    if (type === "commercial_address" || type === "personal_address") return /\d+\s+.+,\s*.+,\s*[A-Z]{2}\s*\d{5}/i.test(trimmed);
-    if (type === "ip") return /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/.test(trimmed);
-    if (type === "business") return trimmed.length >= 4;
-    if (type === "person") return trimmed.split(/\s+/).filter(Boolean).length >= 2;
-    if (type === "bank") return /[A-Za-z]{4,}|\d{9}/.test(trimmed);
-    return true;
-  }
-
-  function runVerification() {
-    const value = input.value;
-    const trimmed = value.trim();
-    const valid = validateValue(trimmed);
-    const placeholder = isPlaceholder(trimmed, type);
-    let verified;
-    let confidence;
-    let summary;
-
-    if (!trimmed || !valid) {
-      verified = "Unsure";
-      confidence = randomInt(20, 45);
-      summary = "We ran format and baseline signal checks, but the current input does not provide enough structured detail for a reliable verification outcome.";
-      hint.textContent = cfg.hint;
-      hint.style.display = "block";
-    } else if (placeholder) {
-      verified = "No";
-      confidence = randomInt(80, 90);
-      summary = "The input appears to be placeholder or test data based on common dummy patterns, so it cannot be verified as a real identity or business signal.";
-      hint.textContent = "This looks like placeholder/test data. Try a real value to verify.";
-      hint.style.display = "block";
-    } else {
-      const noProb = noLikelihood(trimmed);
-      verified = Math.random() < noProb ? "No" : "Yes";
-      confidence = verified === "Yes" ? randomInt(78, 96) : randomInt(72, 94);
-      hint.style.display = "none";
-      summary = verified === "Yes" ? cfg.yesSummary(trimmed) : cfg.noSummary(trimmed);
+    function isPlaceholder(value, typeKey) {
+      const lower = value.trim().toLowerCase();
+      if (/(test|example|asdf|qwerty|fake|invalid|unknown|n\/a)/i.test(lower)) return true;
+      if (typeKey === "email") {
+        const parts = lower.split("@");
+        if ((parts[1] || "") === "domain.com" || (parts[0] || "") === "name") return true;
+      }
+      if (typeKey === "website") {
+        const host = parseWebsiteHost(lower);
+        if (host === "example.com" || host.includes("example") || lower === "example.com") return true;
+      }
+      if (typeKey === "phone") {
+        const digits = lower.replace(/\D/g, "");
+        if (/555555/.test(digits) || /^1?555/.test(digits) || /0000$/.test(digits)) return true;
+      }
+      return false;
     }
 
-    setVerifiedPill(verified);
-    animateConfidence(confidence);
-    summaryValue.textContent = summary;
-    copyShareLinkBtn.disabled = false;
-    if (!trimmed) {
-      detailsSection.style.display = "none";
-    } else {
-      detailsSection.style.display = "block";
-      renderSensitiveOptions();
-      renderSignalsChecked();
-      renderTryAnotherChips();
+    function validateValue(value) {
+      const trimmed = value.trim();
+      if (!trimmed) return false;
+      if (type === "website") return /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/.test(trimmed);
+      if (type === "phone") return /^(\+?\d[\d\s\-()]{8,}\d)$/.test(trimmed);
+      if (type === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+      if (type === "commercial_address" || type === "personal_address") return /\d+\s+.+,\s*.+,\s*[A-Z]{2}\s*\d{5}/i.test(trimmed);
+      if (type === "ip") return /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/.test(trimmed);
+      if (type === "business") return trimmed.length >= 4;
+      if (type === "person") return trimmed.split(/\s+/).filter(Boolean).length >= 2;
+      if (type === "bank") return /[A-Za-z]{4,}|\d{9}/.test(trimmed);
+      return true;
     }
-    result.classList.add("show");
-    showPlg();
-  }
 
-  function showPlg() {
-    if (plgRail) plgRail.classList.add("plg-show");
-    if (plgMobile) plgMobile.classList.add("plg-show");
-  }
+    function costForType(typeKey) {
+      const byType = {
+        website: 0.08,
+        phone: 0.07,
+        email: 0.06,
+        commercial_address: 0.11,
+        personal_address: 0.11,
+        ip: 0.05,
+        business: 0.13,
+        person: 0.12,
+        bank: 0.14
+      };
+      return byType[typeKey] || 0.09;
+    }
 
-  function startVerificationFlow() {
-    if (isProcessing || runBtn.disabled) return;
+    function severityWeight(severity) {
+      if (severity === "ok") return 100;
+      if (severity === "warn") return 62;
+      return 28;
+    }
 
-    isProcessing = true;
-    runBtn.disabled = true;
-    processingStatus.style.display = "block";
-    shareCopyStatus.textContent = "";
-    result.classList.remove("show");
+    function badgeForSeverity(severity) {
+      if (severity === "ok") return "ok";
+      if (severity === "warn") return "warn";
+      return "bad";
+    }
 
-    const delay = randomInt(650, 1100);
-    setTimeout(function () {
-      runVerification();
-      isProcessing = false;
-      processingStatus.style.display = "none";
-      updateRunButtonState();
-    }, delay);
-  }
+    function makeSummary(typeLabel, score, warnCount, badCount) {
+      if (badCount > 0 || score < 55) {
+        return "Lite checks detected elevated risk patterns for this " + typeLabel.toLowerCase() + ", including inconsistent trust signals and indicators that merit deeper review.";
+      }
+      if (warnCount > 0 || score < 76) {
+        return "Lite verification found generally plausible signals for this " + typeLabel.toLowerCase() + ", with a few soft risk flags that should be confirmed before a final decision.";
+      }
+      return "Lite verification signals were stable for this " + typeLabel.toLowerCase() + ", with consistent non-sensitive indicators across format, footprint, and trust posture checks.";
+    }
 
-  function buildShareLink() {
-    const url = new URL(window.location.href);
-    url.searchParams.set("type", type);
-    url.searchParams.set("value", input.value.trim());
-    url.searchParams.set("auto", "1");
-    return url.toString();
-  }
+    function buildLiteSignals(typeKey, value) {
+      const trimmed = value.trim();
+      const lower = trimmed.toLowerCase();
+      const cards = [];
 
-  function setCopyStatus(message) {
-    shareCopyStatus.textContent = message;
-    if (copyStatusTimer) clearTimeout(copyStatusTimer);
-    copyStatusTimer = setTimeout(function () {
-      shareCopyStatus.textContent = "";
-    }, 1500);
-  }
-
-  function copyShareLink() {
-    const link = buildShareLink();
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(link)
-        .then(function () {
-          setCopyStatus("Copied!");
-        })
-        .catch(function () {
-          shareLinkInput.value = link;
-          shareLinkInput.style.position = "static";
-          shareLinkInput.style.opacity = "1";
-          shareLinkInput.select();
-          try {
-            document.execCommand("copy");
-            setCopyStatus("Copied!");
-          } catch (e) {
-            setCopyStatus("Copy failed. Select and copy manually.");
-          }
-          shareLinkInput.style.position = "absolute";
-          shareLinkInput.style.opacity = "0";
+      function addCard(title, severity, cardValue, detail) {
+        cards.push({
+          title: title,
+          badge: badgeForSeverity(severity),
+          severity: severity,
+          value: cardValue,
+          detail: detail
         });
-      return;
+      }
+
+      if (typeKey === "website") {
+        const host = parseWebsiteHost(trimmed) || lower;
+        const shortOrTest = host.length < 6 || host.includes("test");
+        addCard("Domain maturity", shortOrTest ? "warn" : "ok", shortOrTest ? "Potentially new domain" : "Stable pattern", shortOrTest ? "Short/test-like domain patterns often map to newly created properties." : "Domain shape and naming look consistent with established usage.");
+        addCard("DNS posture", "ok", "Resolvable format", "DNS-style structure appears valid in lite checks.");
+        addCard("Hosting fingerprint", host.indexOf("-") >= 0 ? "warn" : "ok", host.indexOf("-") >= 0 ? "Pattern variance" : "Low anomaly", "Name structure can correlate with fast-spun infrastructure in some cases.");
+        addCard("Premium unlock", "ok", "More detail available", "Unlock premium for registration age, historical redirects, and infrastructure lineage.");
+      } else if (typeKey === "email") {
+        const domain = (lower.split("@")[1] || "");
+        const disposable = /(mailinator|tempmail|guerrilla|yopmail)/i.test(domain);
+        addCard("Mailbox pattern", disposable ? "warn" : "ok", disposable ? "Disposable-like domain" : "Stable domain pattern", disposable ? "Disposable patterns reduce trust for identity verification." : "Domain does not match common disposable patterns.");
+        addCard("Format validity", "ok", "RFC-style format", "Address format passes basic validation.");
+        addCard("Mail posture", "warn", "Lite only", "SPF/DKIM/DMARC posture requires premium checks.");
+        addCard("Premium unlock", "ok", "More detail available", "Unlock premium for deliverability depth and breach-linked telemetry.");
+      } else if (typeKey === "phone") {
+        const digits = trimmed.replace(/\D/g, "");
+        const is555 = digits.indexOf("555") >= 0;
+        addCard("Carrier/line heuristic", is555 ? "warn" : "ok", is555 ? "VOIP/test risk" : "Consumer pattern", is555 ? "555 patterns can indicate test or masked numbers." : "Number pattern appears plausible for lite verification.");
+        addCard("Number validity", "ok", "Length/format pass", "E.164-style structure looks valid.");
+        addCard("Range behavior", is555 ? "warn" : "ok", is555 ? "Synthetic risk" : "Normal range", "Range heuristics are non-sensitive and directional only.");
+        addCard("Premium unlock", "ok", "More detail available", "Unlock premium for carrier history and porting risk signals.");
+      } else if (typeKey === "ip") {
+        const privateRange = /^10\./.test(trimmed) || /^192\.168\./.test(trimmed) || /^172\.(1[6-9]|2\d|3[0-1])\./.test(trimmed) || /^127\./.test(trimmed);
+        addCard("Routability", privateRange ? "warn" : "ok", privateRange ? "Private/reserved range" : "Publicly routable", privateRange ? "Private/reserved ranges are high-risk for direct trust decisions." : "Address shape matches routable internet ranges.");
+        addCard("Hosting type", privateRange ? "warn" : "ok", privateRange ? "Unknown external ASN" : "External network", "Lite checks infer network posture without premium enrichment.");
+        addCard("Reputation baseline", "warn", "Lite only", "Threat-reputation depth requires premium sources.");
+        addCard("Premium unlock", "ok", "More detail available", "Unlock premium for ASN intelligence and proxy/VPN traits.");
+      } else if (typeKey === "commercial_address" || typeKey === "personal_address") {
+        addCard("Deliverability", "ok", "Likely deliverable", "Address structure appears mailable in lite checks.");
+        addCard("Geocode consistency", "ok", "Consistent format", "City/state/ZIP combination appears coherent.");
+        addCard("Type indicator", "ok", typeKey === "commercial_address" ? "Commercial (lite)" : "Residential (lite)", "Only lightweight structural checks are applied.");
+        addCard("Premium unlock", "warn", "Depth limited", "Unlock premium for occupancy history and deeper location risk indicators.");
+      } else if (typeKey === "business") {
+        addCard("Entity name quality", "ok", "Plausible legal name", "Name shape appears consistent with a business entity.");
+        addCard("Footprint baseline", "ok", "Directional match", "Lite footprint checks suggest a coherent external presence.");
+        addCard("Registry depth", "warn", "Lite only", "Formal status and filing depth require premium providers.");
+        addCard("Premium unlock", "warn", "Ownership hidden", "Unlock premium for beneficial ownership and adverse media context.");
+      } else if (typeKey === "person") {
+        addCard("Name structure", "ok", "Usable identity string", "Input supports basic identity disambiguation.");
+        addCard("Footprint baseline", "ok", "Directional match", "Lite checks can only provide low-depth confidence.");
+        addCard("Identity risk", "warn", "Limited depth", "Sanctions/adverse context needs premium screening.");
+        addCard("Premium unlock", "warn", "Graph unavailable", "Unlock premium for identity graph and alias coverage.");
+      } else if (typeKey === "bank") {
+        addCard("Institution string", "ok", "Recognizable pattern", "Input is usable for lite institution-level checks.");
+        addCard("Routing posture", /\d{9}/.test(trimmed) ? "ok" : "warn", /\d{9}/.test(trimmed) ? "Routing-like format present" : "No routing number provided", "Routing and ownership confidence improves with full banking checks.");
+        addCard("Network indicators", "warn", "Lite only", "No premium network/return telemetry in lite mode.");
+        addCard("Premium unlock", "warn", "Depth limited", "Unlock premium for account ownership and fraud exposure checks.");
+      }
+
+      const total = cards.reduce(function (sum, card) { return sum + severityWeight(card.severity); }, 0);
+      const score = Math.max(0, Math.min(100, Math.round(total / cards.length)));
+      const warnCount = cards.filter(function (card) { return card.severity === "warn"; }).length;
+      const badCount = cards.filter(function (card) { return card.severity === "bad"; }).length;
+
+      return {
+        cards: cards,
+        estCost: costForType(typeKey),
+        score: score,
+        summary: makeSummary(cfg.label, score, warnCount, badCount)
+      };
     }
 
-    shareLinkInput.value = link;
-    shareLinkInput.style.position = "static";
-    shareLinkInput.style.opacity = "1";
-    shareLinkInput.select();
-    try {
-      document.execCommand("copy");
-      setCopyStatus("Copied!");
-    } catch (e) {
-      setCopyStatus("Copy failed. Select and copy manually.");
+    function renderResultsShell(verified, confidence, summary, liteResult) {
+      resultsShell.classList.add("show");
+      if (resultsPlaceholder) resultsPlaceholder.style.display = "none";
+      const elapsedMs = Math.max(1, Math.round(performance.now() - runStartedPerf));
+      signalScore.textContent = "Signal score: " + liteResult.score + "%";
+      runTime.textContent = "Run time: " + elapsedMs + "ms";
+      estCost.textContent = "Estimated cost (lite): $" + liteResult.estCost.toFixed(2);
+      aiSummary.textContent = summary;
+      if (aiThread) {
+        aiThread.innerHTML = '<div class="ai-msg system">Ask me anything about these results — I can explain signals or recommend next steps.</div>';
+      }
+
+      signalCards.innerHTML = liteResult.cards.map(function (card) {
+        return '<article class="signal-card">' +
+          '<span class="badge ' + card.badge + '">' + card.badge + '</span>' +
+          '<p class="signal-title">' + card.title + '</p>' +
+          '<p class="signal-value">' + card.value + '</p>' +
+          '<p class="muted signal-detail">' + card.detail + '</p>' +
+        '</article>';
+      }).join("");
     }
-    shareLinkInput.style.position = "absolute";
-    shareLinkInput.style.opacity = "0";
-  }
 
-  function updateRunButtonState() {
-    runBtn.disabled = isProcessing || input.value.trim().length === 0;
-  }
+    function showPlg() {
+      if (plgMobile) plgMobile.classList.add("plg-show");
+    }
 
-  const deeperInsightsByType = {
-    website: [
-      "Registrant history & domain age",
-      "Infrastructure risk markers",
-      "Ownership & entity linkage signals",
-      "Historical redirect behavior",
-      "Hosting / ASN reputation analysis"
-    ],
-    phone: [
-      "Line tenure & stability",
-      "Carrier risk telemetry",
-      "Porting / SIM-swap exposure",
-      "VoIP / virtual number detection",
-      "Abuse pattern indicators"
-    ],
-    email: [
-      "Mailbox age & breach exposure",
-      "Domain reputation & DMARC posture",
-      "Disposable / alias detection",
-      "Account linkage indicators",
-      "Velocity / abuse heuristics"
-    ],
-    commercial_address: [
-      "Deliverability & suite validation",
-      "USPS / postal normalization",
-      "Commercial occupancy signals",
-      "Entity-at-address linkage",
-      "Risk markers & watchlists"
-    ],
-    personal_address: [
-      "Resident tenure & stability",
-      "Household composition signals",
-      "Move / forwarding indicators",
-      "Identity linkage at address",
-      "Anomaly & mismatch flags"
-    ],
-    ip: [
-      "Proxy / VPN detection",
-      "Geolocation consistency",
-      "ASN / hosting reputation",
-      "Threat intelligence signals",
-      "Historical behavior markers"
-    ],
-    business: [
-      "Corporate filings & status",
-      "Ownership & officer linkage",
-      "Industry / NAICS risk mapping",
-      "Sanctions / adverse media hits",
-      "Operating history & stability"
-    ],
-    person: [
-      "Identity consistency checks",
-      "Breach / exposure indicators",
-      "Name / address linkage",
-      "Watchlist screening layers",
-      "Risk marker correlations"
-    ],
-    bank: [
-      "Account verification depth",
-      "Ownership & routing checks",
-      "Bank risk / return signals",
-      "Velocity / fraud heuristics",
-      "Historical stability indicators"
-    ],
-    default: [
-      "Expanded cross-signal consistency",
-      "Infrastructure risk markers",
-      "Entity linkage indicators",
-      "Historical anomalies",
-      "Reputation scoring layers"
-    ]
-  };
+    function runVerification() {
+      const trimmed = input.value.trim();
+      const valid = validateValue(trimmed);
+      const placeholder = isPlaceholder(trimmed, type);
+      const liteResult = buildLiteSignals(type, trimmed);
+      let verified;
+      let confidence;
+      let summary;
 
-  function renderDeeperInsights() {
-    const items = deeperInsightsByType[type] || deeperInsightsByType.default;
-    const desktopList = document.getElementById("plgList");
-    const mobileList = document.getElementById("plgMobileList");
-    if (desktopList) desktopList.innerHTML = items.map(function (i) { return "<li>" + i + "</li>"; }).join("");
-    if (mobileList) mobileList.innerHTML = items.map(function (i) { return "<li>" + i + "</li>"; }).join("");
-    const ctaHref = "signup.html?from=verify&type=" + encodeURIComponent(type);
-    const desktopCta = document.getElementById("plgCta");
-    const mobileCta = document.getElementById("plgMobileCta");
-    if (desktopCta) desktopCta.setAttribute("href", ctaHref);
-    if (mobileCta) mobileCta.setAttribute("href", ctaHref);
-  }
+      if (!trimmed || !valid) {
+        verified = "Unsure";
+        confidence = 35;
+        summary = "We ran format and baseline signal checks, but the current input does not provide enough structured detail for a reliable verification outcome.";
+        hint.textContent = cfg.hint;
+        hint.style.display = "block";
+      } else if (placeholder) {
+        verified = "No";
+        confidence = 86;
+        summary = "The input appears to be placeholder or test data based on common dummy patterns, so it cannot be verified as a real identity or business signal.";
+        hint.textContent = "This looks like placeholder/test data. Try a real value to verify.";
+        hint.style.display = "block";
+      } else {
+        verified = liteResult.score >= 70 ? "Yes" : "No";
+        confidence = verified === "Yes"
+          ? Math.max(78, Math.min(96, liteResult.score))
+          : Math.max(72, Math.min(94, liteResult.score + 12));
+        hint.style.display = "none";
+        summary = liteResult.summary;
+      }
 
-  runBtn.addEventListener("click", startVerificationFlow);
-  copyShareLinkBtn.addEventListener("click", copyShareLink);
-  input.addEventListener("input", updateRunButtonState);
-  input.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" && !runBtn.disabled) startVerificationFlow();
-  });
-  updateRunButtonState();
-  renderDeeperInsights();
+      setVerifiedPill(verified);
+      animateConfidence(confidence);
+      summaryValue.textContent = summary;
+      copyShareLinkBtn.disabled = false;
 
-  if (autoRun && input.value.trim()) {
-    startVerificationFlow();
-  }
-</script>
+      renderResultsShell(verified, confidence, summary, liteResult);
+      showPlg();
+    }
 
+    function startVerificationFlow() {
+      if (isProcessing || runBtn.disabled) return;
+      isProcessing = true;
+      runStartedPerf = performance.now();
+      setRunning(true);
+      shareCopyStatus.textContent = "";
+      resultsShell.classList.add("show");
+      if (resultsPlaceholder) resultsPlaceholder.style.display = "block";
+      signalCards.innerHTML = "";
+      aiSummary.textContent = "-";
+      signalScore.textContent = "Signal score: -";
+      runTime.textContent = "Run time: -";
+      estCost.textContent = "Estimated cost (lite): -";
+      setVerifiedPill("-");
+      confidenceValue.textContent = "0%";
+      summaryValue.textContent = "-";
+      hint.style.display = "none";
+      resultsShell.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(function () {
+        runVerification();
+        isProcessing = false;
+        setRunning(false);
+      }, randomInt(650, 1100));
+    }
+
+    function buildShareLink() {
+      const url = new URL(window.location.href);
+      url.searchParams.set("type", type);
+      url.searchParams.set("value", input.value.trim());
+      url.searchParams.set("auto", "1");
+      return url.toString();
+    }
+
+    function setCopyStatus(message) {
+      shareCopyStatus.textContent = message;
+      if (copyStatusTimer) clearTimeout(copyStatusTimer);
+      copyStatusTimer = setTimeout(function () { shareCopyStatus.textContent = ""; }, 1500);
+    }
+
+    function copyShareLink() {
+      const link = buildShareLink();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(link).then(function () { setCopyStatus("Copied!"); }).catch(function () { setCopyStatus("Copy failed. Select and copy manually."); });
+        return;
+      }
+      shareLinkInput.value = link;
+      shareLinkInput.style.position = "static";
+      shareLinkInput.style.opacity = "1";
+      shareLinkInput.select();
+      try { document.execCommand("copy"); setCopyStatus("Copied!"); } catch (e) { setCopyStatus("Copy failed. Select and copy manually."); }
+      shareLinkInput.style.position = "absolute";
+      shareLinkInput.style.opacity = "0";
+    }
+
+    function updateRunButtonState() {
+      runBtn.disabled = isProcessing || input.value.trim().length === 0;
+      if (!isProcessing) {
+        runBtn.textContent = "Run verification";
+      }
+    }
+
+    const deeperInsightsByType = {
+      website: ["Registrant history & domain age", "Infrastructure risk markers", "Ownership & entity linkage signals", "Historical redirect behavior", "Hosting / ASN reputation analysis"],
+      phone: ["Line tenure & stability", "Carrier risk telemetry", "Porting / SIM-swap exposure", "VoIP / virtual number detection", "Abuse pattern indicators"],
+      email: ["Mailbox age & breach exposure", "Domain reputation & DMARC posture", "Disposable / alias detection", "Account linkage indicators", "Velocity / abuse heuristics"],
+      commercial_address: ["Deliverability & suite validation", "USPS / postal normalization", "Commercial occupancy signals", "Entity-at-address linkage", "Risk markers & watchlists"],
+      personal_address: ["Resident tenure & stability", "Household composition signals", "Move / forwarding indicators", "Identity linkage at address", "Anomaly & mismatch flags"],
+      ip: ["Proxy / VPN detection", "Geolocation consistency", "ASN / hosting reputation", "Threat intelligence signals", "Historical behavior markers"],
+      business: ["Corporate filings & status", "Ownership & officer linkage", "Industry / NAICS risk mapping", "Sanctions / adverse media hits", "Operating history & stability"],
+      person: ["Identity consistency checks", "Breach / exposure indicators", "Name / address linkage", "Watchlist screening layers", "Risk marker correlations"],
+      bank: ["Account verification depth", "Ownership & routing checks", "Bank risk / return signals", "Velocity / fraud heuristics", "Historical stability indicators"]
+    };
+
+    function renderDeeperInsights() {
+      const items = deeperInsightsByType[type] || deeperInsightsByType.website;
+      const mobileList = document.getElementById("plgMobileList");
+      const ctaHref = "signup.html?from=verify&type=" + encodeURIComponent(type);
+      if (mobileList) mobileList.innerHTML = items.map(function (i) { return "<li>" + i + "</li>"; }).join("");
+      if (plgMobileTextLink) plgMobileTextLink.setAttribute("href", ctaHref);
+    }
+
+    function appendAI(role, text) {
+      if (!aiThread) return;
+      const node = document.createElement("div");
+      node.className = "ai-msg " + role;
+      node.textContent = text;
+      aiThread.appendChild(node);
+      aiThread.scrollTop = aiThread.scrollHeight;
+    }
+
+    function sendAI() {
+      if (!aiBarInput) return;
+      const q = (aiBarInput.value || "").trim();
+      if (!q) return;
+      appendAI("user", q);
+      aiBarInput.value = "";
+      appendAI("assistant", "AI backend not connected yet (stub).");
+    }
+
+    if (aiBarSend) aiBarSend.addEventListener("click", sendAI);
+    if (aiBarInput) aiBarInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") sendAI();
+    });
+    if (unlockButton) unlockButton.addEventListener("click", function () { window.location.href = "signup.html?from=verify&type=" + encodeURIComponent(type); });
+
+    runBtn.addEventListener("click", startVerificationFlow);
+    copyShareLinkBtn.addEventListener("click", copyShareLink);
+    input.addEventListener("input", updateRunButtonState);
+    input.addEventListener("keydown", function (event) { if (event.key === "Enter" && !runBtn.disabled) startVerificationFlow(); });
+
+    updateRunButtonState();
+    renderTryAnotherRow();
+    renderDeeperInsights();
+
+    if (autoRun && input.value.trim()) startVerificationFlow();
+  </script>
 </body>
 </html>

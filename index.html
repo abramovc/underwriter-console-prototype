@@ -21,7 +21,31 @@
       font-size: 15px;
     }
 
-    .options-grid {
+    .hero-subline {
+      margin-top: 6px;
+      font-size: 13px;
+    }
+
+    .card {
+      border: 1px solid #d1d5db;
+      border-radius: 14px;
+      background: #fff;
+      padding: 14px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    .card-hover {
+      transition: transform 170ms ease, border-color 170ms ease, box-shadow 170ms ease, background 170ms ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-2px);
+      border-color: #93c5fd;
+      box-shadow: 0 8px 22px rgba(16, 24, 40, 0.08);
+      background: #f8fbff;
+    }
+
+    .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
@@ -31,19 +55,6 @@
     .option-card {
       text-decoration: none;
       color: inherit;
-      border: 1px solid #d1d5db;
-      border-radius: 14px;
-      background: #fff;
-      padding: 14px;
-      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
-      transition: transform 170ms ease, border-color 170ms ease, box-shadow 170ms ease, background 170ms ease;
-    }
-
-    .option-card:hover {
-      transform: translateY(-2px);
-      border-color: #93c5fd;
-      box-shadow: 0 8px 22px rgba(16, 24, 40, 0.08);
-      background: #f8fbff;
     }
 
     .option-label {
@@ -70,14 +81,34 @@
       text-decoration: underline;
     }
 
+    .preview-section {
+      margin: 8px 0 20px 0;
+    }
+
+    .preview-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+    }
+
+    .preview-card ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      color: #4b5563;
+      font-size: 13px;
+    }
+
+    .preview-card li {
+      margin-bottom: 6px;
+    }
+
     @media (max-width: 860px) {
-      .options-grid {
+      .grid-3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
     @media (max-width: 560px) {
-      .options-grid {
+      .grid-3 {
         grid-template-columns: 1fr;
       }
     }
@@ -97,52 +128,52 @@
       <main>
         <header class="hero">
           <h1>What would you like to verify today?</h1>
-          <p class="muted">Run instant checks across public signals and get a concise verification outcome with a clear public summary.</p>
+          <p class="muted">Run lightweight checks across public signals and get a clear outcome + AI summary in seconds.</p>
+          <p class="muted hero-subline">Choose a verification type below to continue.</p>
           <hr class="divider" />
         </header>
 
-        <div class="options-grid">
-          <a class="option-card" href="verify.html?type=website">
-            <span class="option-label">Website</span>
-            <span class="option-help">Domain age, posture, footprint</span>
-          </a>
-          <a class="option-card" href="verify.html?type=phone">
-            <span class="option-label">Phone</span>
-            <span class="option-help">Carrier, line type, range patterns</span>
-          </a>
-          <a class="option-card" href="verify.html?type=email">
-            <span class="option-label">Email</span>
-            <span class="option-help">Domain validity, mail posture, risk traits</span>
-          </a>
-          <a class="option-card" href="verify.html?type=commercial_address">
-            <span class="option-label">Commercial Address</span>
-            <span class="option-help">Deliverability, geocode, business signals</span>
-          </a>
-          <a class="option-card" href="verify.html?type=personal_address">
-            <span class="option-label">Personal Address</span>
-            <span class="option-help">Residential checks, geocode, consistency</span>
-          </a>
-          <a class="option-card" href="verify.html?type=ip">
-            <span class="option-label">IP Address</span>
-            <span class="option-help">Routability, ASN, proxy/VPN traits</span>
-          </a>
-          <a class="option-card" href="verify.html?type=business">
-            <span class="option-label">Business</span>
-            <span class="option-help">Entity footprint and cross-source checks</span>
-          </a>
-          <a class="option-card" href="verify.html?type=person">
-            <span class="option-label">Person</span>
-            <span class="option-help">Identity footprint and disambiguation</span>
-          </a>
-          <a class="option-card" href="verify.html?type=bank">
-            <span class="option-label">Bank</span>
-            <span class="option-help">Institution consistency and risk patterns</span>
-          </a>
-        </div>
+        <div class="grid-3 options-grid" id="optionsGrid"></div>
+
+        <section class="preview-section" aria-label="Verification preview">
+          <article class="preview-card card">
+            <h3>Verify in seconds</h3>
+            <ul>
+              <li>Instant public-signal checks</li>
+              <li>AI-generated summary for quick decisions</li>
+              <li>Premium sources unlock with an account.</li>
+            </ul>
+          </article>
+        </section>
 
         <a class="console-link" href="queue.html">Underwriter Console</a>
       </main>
     </div>
   </div>
+  <script>
+    (function () {
+      var VERIFICATION_TYPES = [
+        { key: "website", label: "Website", placeholder: "example.com", helper: "Domain age, DNS, SSL, tech footprint" },
+        { key: "phone", label: "Phone", placeholder: "+1 602 555 0123", helper: "Line type, carrier, country" },
+        { key: "email", label: "Email", placeholder: "name@domain.com", helper: "Deliverability, domain posture, risk traits" },
+        { key: "commercial_address", label: "Commercial Address", placeholder: "123 Main St, Phoenix, AZ 85004", helper: "Deliverability, geocode, business context" },
+        { key: "personal_address", label: "Personal Address", placeholder: "123 Main St, Phoenix, AZ 85004", helper: "Deliverability, geocode, consistency" },
+        { key: "ip", label: "IP Address", placeholder: "8.8.8.8", helper: "Geo, ISP/ASN, VPN/proxy" },
+        { key: "business", label: "Business", placeholder: "Acme Processing LLC", helper: "Registry footprint, web presence" },
+        { key: "person", label: "Person", placeholder: "First Last", helper: "Identity consistency, basic screening" },
+        { key: "bank", label: "Bank", placeholder: "Chase / Wells Fargo / routing number", helper: "Institution validation, routing checks" }
+      ];
+
+      var optionsGrid = document.getElementById("optionsGrid");
+      if (!optionsGrid) return;
+      VERIFICATION_TYPES.forEach(function (item) {
+        var card = document.createElement("a");
+        card.className = "card card-hover option-card";
+        card.href = "verify.html?type=" + encodeURIComponent(item.key);
+        card.innerHTML = '<span class="option-label">' + item.label + '</span><span class="option-help">' + item.helper + "</span>";
+        optionsGrid.appendChild(card);
+      });
+    })();
+  </script>
 </body>
 </html>
