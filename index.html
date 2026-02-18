@@ -105,14 +105,11 @@
     (function () {
       var VERIFICATION_TYPES = [
         { key: "website", label: "Website", placeholder: "example.com", helper: "Domain age, DNS, SSL, tech footprint" },
-        { key: "phone", label: "Phone", placeholder: "+1 602 555 0123", helper: "Line type, carrier, country" },
-        { key: "email", label: "Email", placeholder: "name@domain.com", helper: "Deliverability, domain posture, risk traits" },
-        { key: "commercial_address", label: "Commercial Address", placeholder: "123 Main St, Phoenix, AZ 85004", helper: "Deliverability, geocode, business context" },
-        { key: "personal_address", label: "Personal Address", placeholder: "123 Main St, Phoenix, AZ 85004", helper: "Deliverability, geocode, consistency" },
-        { key: "ip", label: "IP Address", placeholder: "8.8.8.8", helper: "Geo, ISP/ASN, VPN/proxy" },
-        { key: "business", label: "Business", placeholder: "Acme Processing LLC", helper: "Registry footprint, web presence" },
+        { key: "email", label: "Email Address", placeholder: "name@domain.com", helper: "Deliverability, domain posture, risk traits" },
+        { key: "phone", label: "Phone Number", placeholder: "+1 602 555 0123", helper: "Line type, carrier, country" },
         { key: "person", label: "Person", placeholder: "First Last", helper: "Identity consistency, basic screening" },
-        { key: "bank", label: "Bank", placeholder: "Chase / Wells Fargo / routing number", helper: "Institution validation, routing checks" }
+        { key: "business", label: "Business", placeholder: "Acme Processing LLC", helper: "Registry footprint, web presence" },
+        { key: "address", label: "Address", placeholder: "123 Main St, Phoenix, AZ 85004", helper: "Deliverability, geocode, consistency" }
       ];
 
       var optionsGrid = document.getElementById("optionsGrid");

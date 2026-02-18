@@ -246,15 +246,16 @@
     const prefillValue = params.get("value") || "";
 
     const CONTENT_BY_TYPE = {
-      website: { label: "Website", placeholder: "example.com", hint: "Use a full domain like example.com (or https://example.com)." },
-      phone: { label: "Phone", placeholder: "+1 602 555 0123", hint: "Include country code and full number, for example +1 602 555 0123." },
-      email: { label: "Email", placeholder: "name@domain.com", hint: "Use a complete email format, for example name@domain.com." },
-      commercial_address: { label: "Commercial Address", placeholder: "123 Main St, Phoenix, AZ 85004", hint: "Include street, city, state, and ZIP for better match confidence." },
-      personal_address: { label: "Personal Address", placeholder: "123 Main St, Phoenix, AZ 85004", hint: "Include street, city, state, and ZIP for better match confidence." },
-      ip: { label: "IP Address", placeholder: "8.8.8.8", hint: "Use a valid IPv4 format, for example 8.8.8.8." },
-      business: { label: "Business", placeholder: "Acme Processing LLC", hint: "Provide the full legal business name for best results." },
-      person: { label: "Person", placeholder: "First Last", hint: "Provide at least first and last name for meaningful matching." },
-      bank: { label: "Bank", placeholder: "Chase / Wells Fargo / routing number", hint: "Provide a bank name or a full routing number format." }
+      website: { label: "Website", placeholder: "example.com", hint: "Use a full domain like example.com (or https://example.com).", heroSubtext: "Verify a website's domain age, registrar, and risk profile in seconds" },
+      email: { label: "Email", placeholder: "name@domain.com", hint: "Use a complete email format, for example name@domain.com.", heroSubtext: "Confirm the age and deliverability of an email address" },
+      phone: { label: "Phone", placeholder: "+1 602 555 0123", hint: "Include country code and full number, for example +1 602 555 0123.", heroSubtext: "See if a phone number is a VOIP" },
+      person: { label: "Person", placeholder: "First Last", hint: "Provide at least first and last name for meaningful matching.", heroSubtext: "Screen against sanctions" },
+      business: { label: "Business", placeholder: "Acme Processing LLC", hint: "Provide the full legal business name for best results.", heroSubtext: "Check if a business is registered" },
+      address: { label: "Address", placeholder: "123 Main St, Phoenix, AZ 85004", hint: "Include street, city, state, and ZIP for better match confidence.", heroSubtext: "Confirm if an address is commercial or residential and look at the street view" },
+      commercial_address: { label: "Commercial Address", placeholder: "123 Main St, Phoenix, AZ 85004", hint: "Include street, city, state, and ZIP for better match confidence.", heroSubtext: "Confirm if an address is commercial or residential and look at the street view" },
+      personal_address: { label: "Personal Address", placeholder: "123 Main St, Phoenix, AZ 85004", hint: "Include street, city, state, and ZIP for better match confidence.", heroSubtext: "Confirm if an address is commercial or residential and look at the street view" },
+      ip: { label: "IP Address", placeholder: "8.8.8.8", hint: "Use a valid IPv4 format, for example 8.8.8.8.", heroSubtext: "Verify a website's domain age, registrat and risk profile in seconds" },
+      bank: { label: "Bank", placeholder: "Chase / Wells Fargo / routing number", hint: "Provide a bank name or a full routing number format.", heroSubtext: "Check if a business is registered" }
     };
     const INSIGHT_CARDS_BY_TYPE = {
       website: [
@@ -286,6 +287,12 @@
         { id: "personal_home_type", title: "Home Type", statusKey: "address.home_score", rows: [{ label: "Single-family vs apartment", key: "address.home_type" }, { label: "Rural vs urban", key: "address.rural_urban" }], source: "Heuristics + geodata" },
         { id: "personal_unit", title: "Unit Details", statusKey: "address.unit_score", rows: [{ label: "Suite present", key: "address.suite_present" }, { label: "Unit", key: "address.unit" }], source: "Parsed address components" },
         { id: "personal_map", title: "Map Snapshot", statusKey: "address.map_available", rows: [{ label: "Map available", key: "address.map_available" }, { label: "Lat/Lng", key: "address.latlng" }], source: "Google Maps Static Image API" }
+      ],
+      address: [
+        { id: "address_deliverability", title: "Deliverability", statusKey: "address.deliverable", rows: [{ label: "Deliverable", key: "address.deliverable" }, { label: "DPV", key: "address.dpv" }], source: "USPS validation (or Smarty/Lob/Melissa)" },
+        { id: "address_type", title: "Address Type", statusKey: "address.classification_score", rows: [{ label: "Commercial vs residential", key: "address.classification" }, { label: "Building type", key: "address.building_type|address.home_type" }], source: "Classification heuristic / vendor metadata" },
+        { id: "address_unit", title: "Unit Details", statusKey: "address.unit_score", rows: [{ label: "Suite present", key: "address.suite_present" }, { label: "Unit", key: "address.unit" }], source: "Parsed address components" },
+        { id: "address_map", title: "Map Snapshot", statusKey: "address.map_available", rows: [{ label: "Map available", key: "address.map_available" }, { label: "Lat/Lng", key: "address.latlng" }], source: "Google Maps Static Image API" }
       ],
       ip: [
         { id: "ip_geo", title: "Geo", statusKey: "ip.geo_score", rows: [{ label: "Country", key: "ip.country" }, { label: "City", key: "ip.city" }], source: "IPinfo / MaxMind" },
@@ -350,7 +357,7 @@
     let runStartedPerf = 0;
 
     title.textContent = "Verify: " + cfg.label;
-    intro.textContent = "Enter " + cfg.label.toLowerCase() + " data to verify.";
+    intro.textContent = cfg.heroSubtext || CONTENT_BY_TYPE.website.heroSubtext;
     input.placeholder = cfg.placeholder;
     input.value = prefillValue;
 
@@ -422,7 +429,7 @@
       if (type === "website") return /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/.test(trimmed);
       if (type === "phone") return /^(\+?\d[\d\s\-()]{8,}\d)$/.test(trimmed);
       if (type === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
-      if (type === "commercial_address" || type === "personal_address") return /\d+\s+.+,\s*.+,\s*[A-Z]{2}\s*\d{5}/i.test(trimmed);
+      if (type === "commercial_address" || type === "personal_address" || type === "address") return /\d+\s+.+,\s*.+,\s*[A-Z]{2}\s*\d{5}/i.test(trimmed);
       if (type === "ip") return /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/.test(trimmed);
       if (type === "business") return trimmed.length >= 4;
       if (type === "person") return trimmed.split(/\s+/).filter(Boolean).length >= 2;
@@ -576,7 +583,7 @@
           ai: { summary_short: disposable ? "Disposable-like mailbox traits detected." : "Mailbox and domain posture appear generally stable." }
         };
       }
-      if (typeKey === "commercial_address" || typeKey === "personal_address") {
+      if (typeKey === "commercial_address" || typeKey === "personal_address" || typeKey === "address") {
         const hasSuite = /suite|ste|unit|#/.test(value.toLowerCase());
         const lat = (33 + ((seed % 800) / 1000)).toFixed(3);
         const lng = (-112 + ((seed % 1200) / 1000)).toFixed(3);
@@ -591,7 +598,7 @@
             unit_score: hasSuite ? 0.82 : 0.66
           }
         };
-        if (typeKey === "commercial_address") {
+        if (typeKey === "commercial_address" || typeKey === "address") {
           base.address.classification = "Commercial";
           base.address.building_type = pickFrom(["Office", "Retail", "Mixed-use"], seed + 1);
           base.address.classification_score = 0.84;
@@ -841,6 +848,7 @@
       website: ["Registrant history & domain age", "Infrastructure risk markers", "Ownership & entity linkage signals", "Historical redirect behavior", "Hosting / ASN reputation analysis"],
       phone: ["Line tenure & stability", "Carrier risk telemetry", "Porting / SIM-swap exposure", "VoIP / virtual number detection", "Abuse pattern indicators"],
       email: ["Mailbox age & breach exposure", "Domain reputation & DMARC posture", "Disposable / alias detection", "Account linkage indicators", "Velocity / abuse heuristics"],
+      address: ["Deliverability & suite validation", "Address type heuristics", "Geocode consistency", "Map context checks"],
       commercial_address: ["Deliverability & suite validation", "USPS / postal normalization", "Commercial occupancy signals", "Entity-at-address linkage", "Risk markers & watchlists"],
       personal_address: ["Resident tenure & stability", "Household composition signals", "Move / forwarding indicators", "Identity linkage at address", "Anomaly & mismatch flags"],
       ip: ["Proxy / VPN detection", "Geolocation consistency", "ASN / hosting reputation", "Threat intelligence signals", "Historical behavior markers"],
