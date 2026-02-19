@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Verify</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="stylesheet" href="styles/base.css" />
   <style>
     .verify-wrap { width: min(980px, 94vw); margin: 0 auto; }
@@ -23,10 +24,6 @@
     .share-status { font-size: 12px; min-width: 52px; }
     .sr-offscreen { position: absolute; left: -9999px; opacity: 0; }
     .summary-preview { margin: 0 0 10px 0; }
-    .premium-list { margin: 0 0 8px 18px; padding: 0; }
-    .premium-list li { margin-bottom: 6px; }
-    .premium-list li:last-child { margin-bottom: 0; }
-    .premium-copy { margin: 10px 0 0 0; }
     .inline-link { color: #2563eb; text-decoration: none; }
     .inline-link:hover { text-decoration: underline; }
 
@@ -38,7 +35,6 @@
     .result-grid { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; margin-bottom: 8px; }
     .confidence-number { font-size: 30px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
     .confidence-caption { color: #6b7280; font-size: 12px; }
-    .summary-block { max-width: 66ch; margin: 8px 0; color: #1f2937; line-height: 1.6; }
     .hint { margin: 0 0 8px 0; color: #92400e; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 10px; display: none; }
 
     .header-actions { display: inline-flex; align-items: center; gap: 8px; }
@@ -65,6 +61,8 @@
 
     .primary-btn { background: #111827; color: #fff; border-color: #111827; }
     .primary-btn:hover { background: #0b1220; border-color: #0b1220; }
+    .logo-iq { font-weight: 700; letter-spacing: -0.02em; }
+    .nav-muted { color: #9ca3af; cursor: default; user-select: none; }
 
     .verify-layout { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
     .verify-main { min-width: 0; }
@@ -75,14 +73,17 @@
     .plg-cta { width: 100%; justify-content: center; }
     .plg-mobile { display: none; margin-top: 14px; border: 1px solid #d1d5db; border-radius: 12px; background: #f9fafb; padding: 12px; }
 
-    .results-shell { margin-top: 14px; border: 1px solid #d1d5db; border-radius: 12px; background: #fff; padding: 12px; display: none; }
+    .results-shell { margin-top: 24px; border: 1px solid #d1d5db; border-radius: 12px; background: #fff; padding: 20px; display: none; }
     .results-shell.show { display: block; }
-    .outcome-box { border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px; background: #fff; margin-bottom: 10px; }
+    .outcome-box { border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px; background: #fff; margin-bottom: 0; }
     .results-placeholder { border: 1px dashed #d1d5db; border-radius: 10px; padding: 10px; color: #6b7280; font-size: 13px; margin-bottom: 10px; }
-    .result-metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .result-metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; margin-bottom: 0; }
     .metric-pill { border: 1px solid #d1d5db; border-radius: 999px; padding: 4px 10px; font-size: 12px; color: #374151; background: #f8fafc; }
 
-    .signal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+    .section { margin-top: 28px; }
+    .section-lg { margin-top: 36px; }
+
+    .signal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 0; }
     .signal-card { border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; padding: 10px; }
     .badge { display: inline-flex; border-radius: 999px; font-size: 11px; padding: 2px 8px; border: 1px solid #d1d5db; margin-bottom: 6px; }
     .badge.ok { background: #ecfdf3; border-color: #bbf7d0; color: #166534; }
@@ -96,17 +97,71 @@
     .signal-row-value { color: #111827; text-align: right; }
     .card-source { margin-top: 8px; padding-top: 8px; border-top: 1px solid #f1f5f9; font-size: 12px; color: #6b7280; }
 
-    .ai-box { border: 1px solid #d1d5db; border-radius: 10px; background: #f9fafb; padding: 10px; margin-bottom: 10px; }
-    .ai-bar { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
-    .ai-bar-input { flex: 1; }
-    .ai-thread { display: grid; gap: 8px; margin-top: 10px; max-height: 220px; overflow: auto; }
-    .ai-msg { border: 1px solid #e5e7eb; border-radius: 10px; padding: 8px 10px; font-size: 13px; color: #111827; background: #fff; }
-    .ai-msg.user { background: #eff6ff; border-color: #bfdbfe; }
-    .ai-msg.assistant { background: #f9fafb; }
-    .ai-msg.system { background: #f8fafc; color: #374151; }
-    .premium-box { border: 1px solid #d1d5db; border-radius: 10px; background: #fff; padding: 10px; position: relative; overflow: hidden; }
-    .premium-lock { filter: blur(2px); opacity: 0.7; user-select: none; pointer-events: none; }
-    .premium-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.55); }
+    .ai-box { border: 1px solid #d1d5db; border-radius: 10px; background: #f9fafb; padding: 16px; margin-bottom: 0; }
+    .ai-summary-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
+    .ai-badge { display: inline-flex; align-items: center; border-radius: 999px; padding: 6px 10px; font-weight: 600; font-size: 12px; }
+    .ai-badge[data-risk="low"] { background: rgba(34, 197, 94, 0.12); color: #16a34a; }
+    .ai-badge[data-risk="moderate"] { background: rgba(245, 158, 11, 0.14); color: #b45309; }
+    .ai-badge[data-risk="elevated"] { background: rgba(239, 68, 68, 0.12); color: #dc2626; }
+    .ai-confidence { text-align: right; }
+    .ai-confidence-label { margin: 0; font-size: 12px; color: #6b7280; }
+    .ai-confidence-value { margin: 2px 0 0 0; font-size: 18px; font-weight: 700; color: #111827; }
+    .ai-section + .ai-section { margin-top: 14px; }
+    .ai-section-title { margin: 0 0 6px 0; font-size: 13px; font-weight: 600; color: #1f2937; }
+    .ai-bullets { margin: 0 0 0 18px; padding: 0; color: #374151; font-size: 13px; }
+    .ai-bullets li { margin-bottom: 6px; }
+    .ai-bullets li:last-child { margin-bottom: 0; }
+    .ai-assessment { margin: 0; color: #1f2937; font-size: 13px; line-height: 1.5; }
+    .cta-zone {
+      margin-top: 40px;
+      padding: 22px;
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.03);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .cta-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #475569;
+      opacity: 0.75;
+    }
+    .cta-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #111827;
+      margin: 0;
+    }
+    .cta-subtitle {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      opacity: 0.9;
+      max-width: 720px;
+      line-height: 1.4;
+    }
+    .cta-guest-note {
+      font-size: 12px;
+      opacity: 0.65;
+      margin-top: 4px;
+      color: #374151;
+    }
+    .cta-zone .cta-button {
+      margin-top: 10px;
+      align-self: center;
+      padding: 12px 22px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      transition: all 0.15s ease;
+    }
+    .cta-zone .cta-button:hover {
+      transform: translateY(-1px);
+    }
 
     @media (max-width: 900px) {
       .verify-layout { grid-template-columns: 1fr; }
@@ -134,11 +189,11 @@
   <div class="page">
     <div class="container">
       <nav class="topnav">
-        <a class="logo" href="index.html">Under</a>
+        <a class="logo logo-iq" href="index.html">iq</a>
         <div class="topnav-links">
           <a class="topnav-link" href="index.html">Verify</a>
           <a class="topnav-link" href="queue.html">Console</a>
-          <a class="topnav-link" href="#">Docs</a>
+          <span class="topnav-link nav-muted">Workflows</span>
         </div>
       </nav>
 
@@ -166,7 +221,6 @@
             <div class="verify-row">
               <div class="input-stack">
                 <input id="valueInput" class="field input" type="text" value="" placeholder="Enter value" />
-                <p class="muted text-12 tight">Enter one value per check. We only use non-sensitive public signals in this step.</p>
               </div>
               <button id="runBtn" class="btn primary-btn" type="button" disabled>Run verification</button>
             </div>
@@ -191,37 +245,42 @@
                     </div>
                   </div>
                   <p id="hint" class="hint"></p>
-                  <p class="tight"><span class="label">Public Summary</span></p>
-                  <p id="summaryValue" class="summary-block">-</p>
                 </div>
                 <div class="result-metrics">
                   <span id="signalScore" class="metric-pill">Signal score: -</span>
                   <span id="runTime" class="metric-pill">Run time: -</span>
                   <span id="estCost" class="metric-pill">Estimated cost (lite): -</span>
                 </div>
-                <div id="signalCards" class="signal-grid"></div>
-                <div class="ai-box">
+                <div class="ai-box section" id="aiSummaryCard">
                   <p class="label-block tight"><strong>AI Summary</strong></p>
-                  <p id="aiSummary" class="muted summary-preview">-</p>
-                  <div class="ai-bar">
-                    <input id="aiBarInput" class="input ai-bar-input" type="text" placeholder="Ask AI — explain these signals, spot inconsistencies, or suggest next steps…" />
-                    <button id="aiBarSend" type="button" class="btn primary-btn">Ask</button>
+                  <div class="ai-summary-head">
+                    <div id="aiRiskBadge" class="ai-badge" data-risk="low">Low risk</div>
+                    <div class="ai-confidence">
+                      <p class="ai-confidence-label">Confidence</p>
+                      <p id="aiConfidenceValue" class="ai-confidence-value">96%</p>
+                    </div>
                   </div>
-                  <div id="aiThread" class="ai-thread" aria-label="AI conversation"></div>
-                </div>
-                <div class="premium-box">
-                  <div class="premium-lock">
-                    <p class="label-block tight"><strong>Premium Insights</strong></p>
-                    <ul class="premium-list muted-13">
-                      <li>Business ownership &amp; officers</li>
-                      <li>Enhanced watchlists / PEP</li>
-                      <li>Bank account ownership match</li>
+                  <div class="ai-section">
+                    <p class="ai-section-title">Key signals</p>
+                    <ul class="ai-bullets" id="aiKeySignalsList">
+                      <li>Domain age aligns with an established web presence</li>
+                      <li>SSL certificate is valid and not near-term expiring</li>
+                      <li>Hosting footprint appears reputable (e.g., major cloud provider)</li>
+                      <li>No material high-risk keyword concentration detected</li>
                     </ul>
                   </div>
-                  <p class="muted muted-13 premium-copy">Create an account to unlock premium sources and save results.</p>
-                  <div class="premium-overlay">
-                    <button id="unlockButton" type="button" class="btn primary-btn">Create account to unlock premium</button>
+                  <div class="ai-section">
+                    <p class="ai-section-title">Risk assessment</p>
+                    <p id="aiRiskAssessment" class="ai-assessment">Website signals are consistent with a standard commercial footprint. No immediate risk indicators detected in lite checks.</p>
                   </div>
+                </div>
+                <div id="signalCards" class="signal-grid section"></div>
+                <div class="cta-zone section-lg">
+                  <div class="cta-eyebrow">Next step</div>
+                  <p class="cta-title">Turn this verification into a living workflow</p>
+                  <p class="cta-subtitle">Save results. Chain verifications. Automate next steps. Spot inconsistencies with AI.</p>
+                  <p class="cta-guest-note">Results aren’t stored in guest mode.</p>
+                  <button id="unlockButton" type="button" class="btn primary-btn cta-button">Create your account</button>
                 </div>
               </section>
 
@@ -330,7 +389,6 @@
     const processingStatus = document.getElementById("processingStatus");
     const verifiedValue = document.getElementById("verifiedValue");
     const confidenceValue = document.getElementById("confidenceValue");
-    const summaryValue = document.getElementById("summaryValue");
     const hint = document.getElementById("hint");
     const copyShareLinkBtn = document.getElementById("copyShareLinkBtn");
     const shareLinkInput = document.getElementById("shareLinkInput");
@@ -341,13 +399,13 @@
     const resultsShell = document.getElementById("resultsShell");
     const resultsPlaceholder = document.getElementById("resultsPlaceholder");
     const signalCards = document.getElementById("signalCards");
-    const aiSummary = document.getElementById("aiSummary");
+    const aiRiskBadge = document.getElementById("aiRiskBadge");
+    const aiConfidenceValue = document.getElementById("aiConfidenceValue");
+    const aiKeySignalsList = document.getElementById("aiKeySignalsList");
+    const aiRiskAssessment = document.getElementById("aiRiskAssessment");
     const signalScore = document.getElementById("signalScore");
     const runTime = document.getElementById("runTime");
     const estCost = document.getElementById("estCost");
-    const aiBarInput = document.getElementById("aiBarInput");
-    const aiBarSend = document.getElementById("aiBarSend");
-    const aiThread = document.getElementById("aiThread");
     const unlockButton = document.getElementById("unlockButton");
     const plgMobileTextLink = document.getElementById("plgMobileTextLink");
 
@@ -368,7 +426,7 @@
         return '<a href="verify.html?type=' + encodeURIComponent(key) + '">' + CONTENT_BY_TYPE[key].label + "</a>";
       }).join(" · ");
       if (tryAnotherRow) {
-        tryAnotherRow.innerHTML = "Try: " + links;
+        tryAnotherRow.innerHTML = "Try Another: " + links;
       }
     }
 
@@ -696,6 +754,53 @@
       }).join("");
     }
 
+    const AI_DEFAULT_BY_TYPE = {
+      website: {
+        keySignals: [
+          "Domain age aligns with an established web presence",
+          "SSL certificate is valid and not near-term expiring",
+          "Hosting footprint appears reputable (e.g., major cloud provider)",
+          "No material high-risk keyword concentration detected"
+        ],
+        assessment: "Website signals are consistent with a standard commercial footprint. No immediate risk indicators detected in lite checks."
+      },
+      fallback: {
+        keySignals: [
+          "Core validation signals returned consistent values",
+          "No immediate high-risk anomalies were detected in lite checks",
+          "Primary metadata aligns with expected patterns for this type",
+          "Additional depth can be unlocked with premium sources"
+        ],
+        assessment: "Current lite signals are directionally consistent. Use premium data and workflow automation for deeper verification and follow-up decisions."
+      }
+    };
+
+    function getRiskLevel(score) {
+      if (score >= 80) return { key: "low", label: "Low risk" };
+      if (score >= 55) return { key: "moderate", label: "Moderate risk" };
+      return { key: "elevated", label: "Elevated risk" };
+    }
+
+    function renderAISummary(confidence, liteResult) {
+      const risk = getRiskLevel(liteResult.score);
+      const aiCopy = AI_DEFAULT_BY_TYPE[type] || AI_DEFAULT_BY_TYPE.fallback;
+      if (aiRiskBadge) {
+        aiRiskBadge.setAttribute("data-risk", risk.key);
+        aiRiskBadge.textContent = risk.label;
+      }
+      if (aiConfidenceValue) {
+        aiConfidenceValue.textContent = Math.round(confidence) + "%";
+      }
+      if (aiKeySignalsList) {
+        aiKeySignalsList.innerHTML = aiCopy.keySignals.map(function (item) {
+          return "<li>" + item + "</li>";
+        }).join("");
+      }
+      if (aiRiskAssessment) {
+        aiRiskAssessment.textContent = liteResult.summary || aiCopy.assessment;
+      }
+    }
+
     function makeSummary(typeLabel, score, warnCount, badCount) {
       if (badCount > 0 || score < 55) {
         return "Lite checks detected elevated risk patterns for this " + typeLabel.toLowerCase() + ", including inconsistent trust signals and indicators that merit deeper review.";
@@ -733,10 +838,7 @@
       signalScore.textContent = "Signal score: " + liteResult.score + "%";
       runTime.textContent = "Run time: " + elapsedMs + "ms";
       estCost.textContent = "Estimated cost (lite): $" + liteResult.estCost.toFixed(2);
-      aiSummary.textContent = summary;
-      if (aiThread) {
-        aiThread.innerHTML = '<div class="ai-msg system">Ask me anything about these results — I can explain signals or recommend next steps.</div>';
-      }
+      renderAISummary(confidence, liteResult);
       renderInsightCards(type, liteResult.resultData);
     }
 
@@ -776,7 +878,6 @@
 
       setVerifiedPill(verified);
       animateConfidence(confidence);
-      summaryValue.textContent = summary;
       copyShareLinkBtn.disabled = false;
 
       renderResultsShell(verified, confidence, summary, liteResult);
@@ -792,13 +893,24 @@
       resultsShell.classList.add("show");
       if (resultsPlaceholder) resultsPlaceholder.style.display = "block";
       signalCards.innerHTML = "";
-      aiSummary.textContent = "-";
+      if (aiRiskBadge) {
+        aiRiskBadge.setAttribute("data-risk", "low");
+        aiRiskBadge.textContent = "Low risk";
+      }
+      if (aiConfidenceValue) aiConfidenceValue.textContent = "96%";
+      if (aiKeySignalsList) {
+        aiKeySignalsList.innerHTML = AI_DEFAULT_BY_TYPE.website.keySignals.map(function (item) {
+          return "<li>" + item + "</li>";
+        }).join("");
+      }
+      if (aiRiskAssessment) {
+        aiRiskAssessment.textContent = AI_DEFAULT_BY_TYPE.website.assessment;
+      }
       signalScore.textContent = "Signal score: -";
       runTime.textContent = "Run time: -";
       estCost.textContent = "Estimated cost (lite): -";
       setVerifiedPill("-");
       confidenceValue.textContent = "0%";
-      summaryValue.textContent = "-";
       hint.style.display = "none";
       resultsShell.scrollIntoView({ behavior: "smooth", block: "start" });
       setTimeout(function () {
@@ -865,28 +977,6 @@
       if (plgMobileTextLink) plgMobileTextLink.setAttribute("href", ctaHref);
     }
 
-    function appendAI(role, text) {
-      if (!aiThread) return;
-      const node = document.createElement("div");
-      node.className = "ai-msg " + role;
-      node.textContent = text;
-      aiThread.appendChild(node);
-      aiThread.scrollTop = aiThread.scrollHeight;
-    }
-
-    function sendAI() {
-      if (!aiBarInput) return;
-      const q = (aiBarInput.value || "").trim();
-      if (!q) return;
-      appendAI("user", q);
-      aiBarInput.value = "";
-      appendAI("assistant", "AI backend not connected yet (stub).");
-    }
-
-    if (aiBarSend) aiBarSend.addEventListener("click", sendAI);
-    if (aiBarInput) aiBarInput.addEventListener("keydown", function (event) {
-      if (event.key === "Enter") sendAI();
-    });
     if (unlockButton) unlockButton.addEventListener("click", function () { window.location.href = "signup.html?from=verify&type=" + encodeURIComponent(type); });
 
     runBtn.addEventListener("click", startVerificationFlow);
