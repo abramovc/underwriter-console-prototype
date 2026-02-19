@@ -1,4 +1,28 @@
 <!DOCTYPE html>
+<!--
+  Queue bucket rules:
+  - New & Unassigned: unassigned OR created <24h with manual_review status
+  - Back On Your Plate: lastEventType is customer_completed_step / verification_finished / docs_uploaded
+  - Stale / Needs Nudge: awaiting_customer or invite_sent with >3 days inactivity, or needsResend=true
+  - In Progress: running/in-flight checks or provider pending states
+  - Precedence: New & Unassigned > Back On Your Plate > Stale / Needs Nudge > In Progress
+
+  Priority rules:
+  - Start with riskScore
+  - +20 if unassigned
+  - +15 if bucket is Back On Your Plate
+  - +10 if stale > 7 days
+  - Clamp to 0..100
+
+  Actionable toggle rules:
+  - When ON, hide non-actionable rows and hide the In Progress section
+  - Actionable defaults true if ai.nextAction is missing
+  - Actionable labels include: Assign / Review update / Resend / Remind / Request info / Fix / Resolve / Manual review
+
+  AI swap-in point:
+  - Replace derived.ai.* fields with real model outputs for
+    ai.bucket / ai.nextAction / ai.why / ai.priorityScore
+-->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -9,145 +33,435 @@
   <style>
     .logo-iq { font-weight: 700; letter-spacing: -0.02em; }
     .nav-muted { color: #9ca3af; cursor: default; user-select: none; }
+
     .queue-container {
-      width: min(1180px, 96vw);
+      width: min(1220px, 96vw);
       margin: 0 auto;
     }
 
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .menu-wrap {
+      position: relative;
+    }
+
+    .menu-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      color: #374151;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .menu-panel {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 6px);
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #fff;
+      min-width: 160px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+      padding: 6px;
+      display: none;
+      z-index: 5;
+    }
+
+    .menu-panel.open {
+      display: block;
+    }
+
+    .menu-item {
+      width: 100%;
+      border: none;
+      background: #fff;
+      text-align: left;
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #111827;
+      font-size: 13px;
+    }
+
+    .menu-item:hover {
+      background: #f8fafc;
+    }
+
     .filters-card {
-      margin-bottom: 16px;
-      padding: 14px 16px;
+      margin-bottom: 14px;
+      padding: 10px 12px;
       border-radius: 12px;
       border: 1px solid #e5e7eb;
-      background: #ffffff;
+      background: #fff;
       box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
     }
 
-    .filters-row {
+    .filters-inline {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 16px;
-      align-items: end;
-      margin-bottom: 10px;
+      gap: 10px 12px;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .filter-field {
-      display: grid;
-      gap: 6px;
-      min-width: 170px;
+    .filters-left,
+    .filters-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
     }
 
-    .filter-field label {
-      font-size: 13px;
-      color: #4b5563;
-    }
-
-    .filter-control {
-      padding: 7px 10px;
+    .filter-control,
+    .search-control {
       border: 1px solid #d1d5db;
       border-radius: 8px;
       background: #fff;
+      padding: 7px 10px;
       font-size: 13px;
+      color: #1f2937;
+      min-height: 34px;
     }
 
-    .tags-filter-list {
-      display: flex;
-      flex-wrap: wrap;
+    .search-control {
+      flex: 0 0 400px;
+      max-width: 420px;
+      width: 100%;
+      min-width: 240px;
+    }
+
+    .filter-control {
+      min-width: 145px;
+    }
+
+    .filters-more {
+      position: relative;
+    }
+
+    .filters-more > summary {
+      list-style: none;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      background: #fff;
+      user-select: none;
+    }
+
+    .filters-more > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .filters-popover {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      width: 260px;
+      max-height: 220px;
+      overflow: auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+      padding: 10px;
+      z-index: 4;
+      display: grid;
       gap: 8px;
     }
 
-    .tags-filter-list label {
+    .tag-filter-item {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       font-size: 13px;
-      border: 1px solid #d1d5db;
-      border-radius: 999px;
-      padding: 5px 10px;
-      background: #fff;
+      color: #374151;
     }
 
     .clear-link {
-      padding: 0;
       border: none;
       background: none;
       color: #2563eb;
       cursor: pointer;
       font-size: 13px;
+      padding: 0;
+    }
+    .actionable-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      background: #f8fafc;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1f2937;
+      white-space: nowrap;
+    }
+    .actionable-pill input {
+      margin: 0;
     }
 
-    .table-wrap {
+    .results-count {
+      margin: 0 0 12px 0;
+      color: #4b5563;
+      font-size: 13px;
+    }
+
+    .inbox-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .bucket-card {
       border: 1px solid #e5e7eb;
       border-radius: 12px;
       background: #fff;
-      overflow: auto;
       box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+      overflow: hidden;
     }
 
-    #queueTable {
+    .bucket-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid #eef2f7;
+      background: #fafcff;
+    }
+
+    .bucket-title {
+      margin: 0;
+      font-size: 16px;
+      color: #111827;
+    }
+
+    .bucket-meta {
+      margin: 4px 0 0 0;
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .count-badge {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 2px 8px;
+      margin-left: 8px;
+      font-size: 12px;
+      color: #374151;
+      background: #fff;
+    }
+
+    .view-toggle {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      font-size: 12px;
+      color: #111827;
+      padding: 6px 9px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .table-wrap {
+      overflow: auto;
+    }
+
+    .bucket-table {
       width: 100%;
-      min-width: 980px;
+      min-width: 1080px;
       border-collapse: separate;
       border-spacing: 0;
     }
 
-    #queueTable thead th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
+    .bucket-table thead th {
       background: #f8fafc;
       color: #374151;
       border-bottom: 1px solid #e5e7eb;
-      padding: 10px;
+      padding: 9px 10px;
+      font-size: 12px;
       font-weight: 600;
       text-align: left;
       white-space: nowrap;
     }
-
-    #queueTable tbody td {
-      border-bottom: 1px solid #f1f5f9;
-      padding: 10px;
-      vertical-align: top;
-    }
-
-    #queueTable tbody tr:hover td {
-      background: #fbfdff;
-    }
-
-    .cell-center {
+    .th-caret {
+      width: 36px;
       text-align: center;
     }
 
-    .toggle-btn {
-      border: 1px solid #d1d5db;
-      background: #fff;
-      border-radius: 6px;
+    .bucket-table tbody td {
+      border-bottom: 1px solid #f1f5f9;
+      padding: 10px;
+      vertical-align: top;
+      font-size: 13px;
+      color: #111827;
+    }
+
+    .queue-row {
+      cursor: pointer;
+    }
+
+    .queue-row:hover td {
+      background: #fbfdff;
+    }
+
+    .queue-row.is-selected td {
+      background: #eff6ff;
+    }
+    .caret-cell {
+      text-align: center;
+    }
+    .row-caret {
       width: 26px;
       height: 26px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: #fff;
+      color: #374151;
       cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0;
+    }
+    .row-caret:hover {
+      background: #f8fafc;
+    }
+    .preview-row td {
+      background: #fff !important;
+      padding-top: 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .preview-panel {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #f8fbff;
+      padding: 10px 12px;
+    }
+    .preview-title {
+      margin: 0 0 6px 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: #111827;
+    }
+    .preview-text {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.4;
       color: #374151;
     }
-
-    .customer-link {
-      color: #2563eb;
-      text-decoration: none;
-    }
-
-    .tag-pills {
+    .preview-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
+      margin-top: 8px;
+    }
+    .preview-chip {
+      display: inline-flex;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: #4b5563;
+      background: #fff;
+    }
+    .preview-cta-wrap {
+      margin-top: 10px;
+    }
+    .preview-cta {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      color: #111827;
+      padding: 7px 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .preview-cta:hover {
+      background: #f8fafc;
     }
 
-    .tag-pill {
+    .customer-name {
+      font-weight: 600;
+      color: #111827;
+    }
+    .customer-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .customer-link:hover {
+      text-decoration: underline;
+    }
+    .customer-link:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .customer-sub {
+      margin-top: 3px;
+      color: #6b7280;
+      font-size: 12px;
+    }
+
+    .priority-badge {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 12px;
+      border: 1px solid #d1d5db;
+      background: #f8fafc;
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    .priority-high { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+    .priority-medium { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+
+    .action-pill {
       display: inline-flex;
       border: 1px solid #d1d5db;
       border-radius: 999px;
       padding: 2px 8px;
       font-size: 12px;
+      color: #1e3a8a;
+      background: #eff6ff;
+      font-weight: 600;
+    }
+
+    .why-snippet {
       color: #374151;
+      max-width: 320px;
+      line-height: 1.35;
+    }
+
+    .mini-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .mini-tag {
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 2px 7px;
+      font-size: 11px;
+      color: #4b5563;
       background: #fff;
-      white-space: nowrap;
     }
 
     .compact-select {
@@ -155,50 +469,14 @@
       border: 1px solid #d1d5db;
       border-radius: 8px;
       font-size: 12px;
-      max-width: 150px;
       background: #fff;
+      max-width: 170px;
+      width: 100%;
     }
 
-    .details-cell {
-      padding: 0 !important;
-      background: #fff !important;
-    }
-
-    .details-card {
-      margin: 10px;
-      border: 1px solid #e5e7eb;
-      border-left: 3px solid #93c5fd;
-      border-radius: 10px;
-      background: #f8fbff;
-      padding: 12px;
-    }
-
-    .summary-dl {
-      margin: 0 0 12px 0;
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 6px 10px;
-      font-size: 13px;
-    }
-
-    .summary-dl dt {
-      margin: 0;
-      font-weight: 600;
-      color: #374151;
-    }
-
-    .summary-dl dd {
-      margin: 0;
-      color: #4b5563;
-    }
-
-    .quiet-btn {
-      padding: 8px 12px;
-      border: 1px solid #d1d5db;
-      background: #fff;
-      border-radius: 8px;
-      cursor: pointer;
-      color: #111827;
+    .empty-row {
+      color: #6b7280;
+      padding: 12px 10px;
     }
 
     #drawerBackdrop {
@@ -232,6 +510,10 @@
       box-shadow: -10px 0 24px rgba(15, 23, 42, 0.14);
     }
 
+    #nextStepsDrawer.open {
+      transform: translateX(0);
+    }
+
     .drawer-header {
       padding: 16px;
       border-bottom: 1px solid #e5e7eb;
@@ -239,6 +521,16 @@
       top: 0;
       background: #fff;
       z-index: 1;
+    }
+
+    .quiet-btn {
+      padding: 8px 12px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #111827;
+      font-size: 12px;
     }
 
     .drawer-step {
@@ -250,8 +542,127 @@
       box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
     }
 
-    #nextStepsDrawer.open {
-      transform: translateX(0);
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    #activityToast,
+    #savedToast {
+      position: fixed;
+      background: #111827;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 30;
+    }
+
+    #activityToast { right: 16px; bottom: 16px; }
+    #savedToast { left: 16px; bottom: 16px; }
+
+    @media (max-width: 820px) {
+      .filters-inline {
+        gap: 8px;
+        justify-content: flex-start;
+      }
+
+      .search-control {
+        flex: 1 1 100%;
+        max-width: none;
+        min-width: 100%;
+      }
+
+      .filter-control {
+        min-width: calc(50% - 8px);
+      }
+
+      .filters-more {
+        width: calc(50% - 8px);
+      }
+
+      .filters-more > summary {
+        width: 100%;
+      }
+      .filters-right {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .table-wrap {
+        overflow: visible;
+      }
+
+      .bucket-table {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .bucket-table thead {
+        display: none;
+      }
+
+      .bucket-table tbody tr {
+        display: block;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .bucket-table tbody tr:last-child {
+        border-bottom: none;
+      }
+
+      .bucket-table tbody td {
+        display: grid;
+        grid-template-columns: 108px 1fr;
+        gap: 10px;
+        align-items: start;
+        padding: 8px 10px;
+        border-bottom: none;
+      }
+
+      .bucket-table tbody td::before {
+        content: attr(data-label);
+        color: #6b7280;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .bucket-table tbody td.empty-row {
+        display: block;
+        padding: 12px 10px;
+      }
+
+      .bucket-table tbody td.empty-row::before {
+        content: none;
+      }
+      .bucket-table tbody td.caret-cell {
+        display: block;
+        padding: 8px 10px 0 10px;
+      }
+      .bucket-table tbody td.caret-cell::before {
+        content: none;
+      }
+      .preview-row td {
+        display: block;
+      }
+      .preview-row td::before {
+        content: none;
+      }
+
+      .why-snippet {
+        max-width: none;
+      }
+
+      .compact-select {
+        max-width: none;
+      }
     }
   </style>
 </head>
@@ -266,118 +677,125 @@
           <span class="topnav-link nav-muted">Workflows</span>
         </div>
       </nav>
+
       <header class="page-header">
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+        <div class="header-top">
           <h1 style="margin: 0;">Underwriter Queue</h1>
-          <a id="signOutLink" href="#" style="color: #2563eb; text-decoration: none; font-size: 14px;">Sign out</a>
+          <div class="menu-wrap">
+            <button id="headerMenuBtn" class="menu-btn" type="button" aria-label="Open menu">⋯</button>
+            <div id="headerMenuPanel" class="menu-panel" role="menu" aria-label="Header menu">
+              <button class="menu-item" type="button">Settings</button>
+              <button id="headerSignOut" class="menu-item" type="button">Sign out</button>
+            </div>
+          </div>
         </div>
-        <p class="muted">Review queued customers, adjust ownership, and take next-step actions.</p>
+        <p class="muted">Prioritized inbox for underwriting review and next actions.</p>
         <hr class="divider" />
       </header>
 
-  <section class="filters-card">
-    <h2 style="font-size: 18px; margin: 0 0 10px 0;">Filters</h2>
-    <div class="filters-row">
-      <div class="filter-field">
-        <label for="riskTierFilter">Risk Tier</label>
-        <select id="riskTierFilter" class="filter-control">
-          <option value="All">All</option>
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
-      </div>
-      <div class="filter-field">
-        <label for="statusFilter">Status</label>
-        <select id="statusFilter" class="filter-control">
-          <option value="All">All</option>
-          <option value="approved">approved</option>
-          <option value="denied">denied</option>
-          <option value="manual_review">manual_review</option>
-          <option value="dormant">dormant</option>
-        </select>
-      </div>
-      <div class="filter-field">
-        <label for="assigneeFilter">Assignee</label>
-        <select id="assigneeFilter" class="filter-control">
-          <option value="All">All</option>
-        </select>
-      </div>
-    </div>
-    <div style="margin-bottom: 10px;">
-      <span style="display: inline-block; margin-bottom: 6px;">Tags:</span>
-      <div id="tagsFilters" class="tags-filter-list" style="color: #4b5563;">Loading tags...</div>
-    </div>
-    <button id="clearFilters" type="button" class="clear-link">Clear filters</button>
-  </section>
+      <section class="filters-card">
+        <div class="filters-inline">
+          <div class="filters-left">
+            <input id="searchFilter" class="search-control" type="search" placeholder="Search customers..." />
 
-  <p id="resultsCount" style="margin: 0 0 10px 0; color: #4b5563;">Loading...</p>
+            <select id="assigneeFilter" class="filter-control" aria-label="Assignee filter">
+              <option value="all">Assignee: All</option>
+              <option value="unassigned">Assignee: Unassigned</option>
+              <option value="me">Assignee: Me</option>
+            </select>
 
-  <div class="table-wrap">
-  <table id="queueTable">
-    <thead>
-      <tr>
-        <th style="width: 44px;"></th>
-        <th>Customer Name</th>
-        <th id="riskScoreHeader" style="cursor: pointer;">Risk Score</th>
-        <th>Risk Tier</th>
-        <th>Tags</th>
-        <th>Status</th>
-        <th>Assignee</th>
-      </tr>
-    </thead>
-    <tbody id="queueBody">
-      <tr>
-        <td colspan="7" style="padding: 10px; color: #4b5563;">Loading...</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
+            <select id="statusFilter" class="filter-control" aria-label="Status filter">
+              <option value="all">Status: All</option>
+              <option value="manual_review">manual_review</option>
+              <option value="approved">approved</option>
+              <option value="denied">denied</option>
+              <option value="dormant">dormant</option>
+              <option value="in_progress">in_progress</option>
+              <option value="running_checks">running_checks</option>
+              <option value="pending_provider">pending_provider</option>
+              <option value="bank_link_pending">bank_link_pending</option>
+            </select>
+
+            <select id="riskTierFilter" class="filter-control" aria-label="Risk tier filter">
+              <option value="all">Risk: All tiers</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+
+            <details class="filters-more" id="tagsDetails">
+              <summary>Tags</summary>
+              <div id="tagsFilters" class="filters-popover">
+                <span style="color: #6b7280; font-size: 13px;">Loading tags...</span>
+              </div>
+            </details>
+          </div>
+
+          <div class="filters-right">
+            <label class="actionable-pill">
+              <input id="actionableOnlyToggle" type="checkbox" checked />
+              Only show actionable
+            </label>
+
+            <button id="clearFilters" type="button" class="clear-link">Clear</button>
+          </div>
+        </div>
+      </section>
+
+      <p id="resultsCount" class="results-count">Loading queue...</p>
+
+      <div id="inboxSections" class="inbox-grid"></div>
 
       <div id="drawerBackdrop" aria-hidden="true"></div>
       <aside id="nextStepsDrawer" aria-hidden="true">
-    <div class="drawer-header">
-      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-        <h2 style="margin: 0; font-size: 20px;">Potential Next Steps</h2>
-        <button id="drawerClose" type="button" class="quiet-btn" style="width: 30px; height: 30px; padding: 0;">X</button>
-      </div>
-      <p id="drawerCustomerMeta" style="margin: 8px 0 0 0; color: #4b5563;">-</p>
-      <a id="drawerReportLink" href="customer.html" style="display: inline-block; margin-top: 8px; color: #2563eb; text-decoration: none;">View full report →</a>
-    </div>
-    <div style="padding: 16px;">
-      <section class="drawer-step">
-        <h3 style="margin: 0 0 6px 0; font-size: 16px;">Send 6-digit authentication code</h3>
-        <p style="margin: 0; color: #4b5563;">This will confirm the owner of the phone has access to this number. This will also confirm device hardware/software and their location.</p>
-        <button type="button" data-add-activity data-action-title="Send 6-digit authentication code" class="quiet-btn" style="margin-top: 8px;">Add to Activity</button>
-      </section>
-      <section class="drawer-step">
-        <h3 style="margin: 0 0 6px 0; font-size: 16px;">Send a link to take a selfie and photo of license</h3>
-        <p style="margin: 0; color: #4b5563;">This will confirm the liveness of the owner. This will also confirm device hardware/software and their location.</p>
-        <button type="button" data-add-activity data-action-title="Send a link to take a selfie and photo of license" class="quiet-btn" style="margin-top: 8px;">Add to Activity</button>
-      </section>
-      <section class="drawer-step">
-        <h3 style="margin: 0 0 6px 0; font-size: 16px;">Send a link to connect their bank account via Plaid</h3>
-        <p style="margin: 0; color: #4b5563;">This will confirm the owner of the bank account has access to the credentials. This will also confirm device hardware/software and their location.</p>
-        <button type="button" data-add-activity data-action-title="Send a link to connect their bank account via Plaid" class="quiet-btn" style="margin-top: 8px;">Add to Activity</button>
-      </section>
-      <section class="drawer-step">
-        <h3 style="margin: 0 0 6px 0; font-size: 16px;">Send an email requesting supporting documentation</h3>
-        <p style="margin: 0; color: #4b5563;">This will allow you to use the email address provided to request supporting documents. You will be able to edit the text directly.</p>
-        <button type="button" data-add-activity data-action-title="Send an email requesting supporting documentation" class="quiet-btn" style="margin-top: 8px;">Add to Activity</button>
-      </section>
-      <section class="drawer-step">
-        <h3 style="margin: 0 0 6px 0; font-size: 16px;">Crawl the website provided</h3>
-        <p style="margin: 0; color: #4b5563;">This website crawl will provide a more comprehensive picture of the website including domain age, visitors, T&amp;Cs, return policies, phone numbers, hyperlinks, page trees, 400 errors</p>
-        <button type="button" data-add-activity data-action-title="Crawl the website provided" class="quiet-btn" style="margin-top: 8px;">Add to Activity</button>
-      </section>
-      <section style="margin-top: 20px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
-        <h3 style="margin: 0 0 8px 0; font-size: 16px;">Activity (recent)</h3>
-        <ul id="drawerRecentActivity" style="margin: 0 0 0 18px; padding: 0;"></ul>
-      </section>
-    </div>
+        <div class="drawer-header">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+            <h2 style="margin: 0; font-size: 20px;">Customer details</h2>
+            <button id="drawerClose" type="button" class="quiet-btn" style="width: 30px; height: 30px; padding: 0;">X</button>
+          </div>
+          <p id="drawerCustomerMeta" style="margin: 8px 0 0 0; color: #4b5563;">-</p>
+          <a id="drawerReportLink" href="customer.html" style="display: inline-block; margin-top: 8px; color: #2563eb; text-decoration: none;">View full report →</a>
+        </div>
+        <div style="padding: 16px;">
+          <section class="drawer-step">
+            <h3 style="margin: 0 0 6px 0; font-size: 16px;">AI Suggestions</h3>
+            <p style="margin: 0 0 4px 0; color: #6b7280; font-size: 12px;">Next action</p>
+            <p id="drawerAiNextAction" style="margin: 0 0 8px 0; color: #111827; font-weight: 600;">-</p>
+            <p style="margin: 0 0 4px 0; color: #6b7280; font-size: 12px;">Why</p>
+            <p id="drawerAiWhy" style="margin: 0; color: #374151;">-</p>
+            <div class="quick-actions">
+              <button type="button" class="quiet-btn" data-quick-action="assign">Assign to me</button>
+              <button type="button" class="quiet-btn" data-quick-action="resend">Resend</button>
+              <button type="button" class="quiet-btn" data-quick-action="open">Open application</button>
+              <button type="button" class="quiet-btn" data-quick-action="note">Add note</button>
+            </div>
+          </section>
+
+          <section class="drawer-step">
+            <h3 style="margin: 0 0 6px 0; font-size: 16px;">Send 6-digit authentication code</h3>
+            <p style="margin: 0; color: #4b5563;">This confirms phone ownership and helps validate device and location consistency.</p>
+            <button type="button" data-add-activity data-action-title="Send 6-digit authentication code" class="quiet-btn" style="margin-top: 8px;">Add to Activity</button>
+          </section>
+          <section class="drawer-step">
+            <h3 style="margin: 0 0 6px 0; font-size: 16px;">Request selfie + ID capture</h3>
+            <p style="margin: 0; color: #4b5563;">Run liveness checks and capture identity documentation for underwriting support.</p>
+            <button type="button" data-add-activity data-action-title="Request selfie + ID capture" class="quiet-btn" style="margin-top: 8px;">Add to Activity</button>
+          </section>
+          <section class="drawer-step">
+            <h3 style="margin: 0 0 6px 0; font-size: 16px;">Request bank connection via Plaid</h3>
+            <p style="margin: 0; color: #4b5563;">Confirm account control and improve confidence on payout and ownership risk.</p>
+            <button type="button" data-add-activity data-action-title="Request bank connection via Plaid" class="quiet-btn" style="margin-top: 8px;">Add to Activity</button>
+          </section>
+
+          <section style="margin-top: 20px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+            <h3 style="margin: 0 0 8px 0; font-size: 16px;">Activity (recent)</h3>
+            <ul id="drawerRecentActivity" style="margin: 0 0 0 18px; padding: 0;"></ul>
+          </section>
+        </div>
       </aside>
-      <div id="activityToast" style="position: fixed; right: 16px; bottom: 16px; background: #111827; color: #ffffff; padding: 8px 12px; border-radius: 6px; font-size: 13px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; z-index: 30;">Added to activity</div>
-      <div id="savedToast" style="position: fixed; left: 16px; bottom: 16px; background: #111827; color: #ffffff; padding: 8px 12px; border-radius: 6px; font-size: 13px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; z-index: 30;">Saved</div>
+
+      <div id="activityToast">Added to activity</div>
+      <div id="savedToast">Saved</div>
     </div>
   </div>
 
@@ -386,229 +804,49 @@
       window.location.replace("index.html");
     }
 
-    const signOutLink = document.getElementById("signOutLink");
-    const riskScoreHeader = document.getElementById("riskScoreHeader");
-    const queueBody = document.getElementById("queueBody");
-    const riskTierFilter = document.getElementById("riskTierFilter");
-    const statusFilter = document.getElementById("statusFilter");
+    const STATUS_OPTIONS = ["manual_review", "approved", "denied", "dormant", "in_progress", "running_checks", "pending_provider", "bank_link_pending"];
+    const BACK_EVENTS = ["customer_completed_step", "verification_finished", "docs_uploaded"];
+    const STALE_EVENTS = ["awaiting_customer", "invite_sent"];
+    const IN_PROGRESS_EVENTS = ["verification_started", "provider_pending", "webhook_pending", "checks_running"];
+    const ACTIONABLE_NEXT_ACTIONS = ["Assign", "Review update", "Resend / Remind", "Request info", "Fix / Resolve", "Manual review"];
+    const NON_ACTIONABLE_NEXT_ACTIONS = ["Waiting", "Running checks", "Monitoring", "No action"];
+    const BUCKETS = [
+      {
+        key: "new_unassigned",
+        title: "New & Unassigned",
+        label: "Act now",
+        description: "New submissions and any customer not yet assigned."
+      },
+      {
+        key: "back_on_plate",
+        title: "Back On Your Plate",
+        label: "Customer responded",
+        description: "Customers completed their step and need your review."
+      },
+      {
+        key: "stale_needs_nudge",
+        title: "Stale / Needs Nudge",
+        label: "Follow up",
+        description: "Dormant items that may need a resend or reminder."
+      },
+      {
+        key: "in_progress",
+        title: "In Progress",
+        label: "In flight",
+        description: "Waiting on checks or third-party steps."
+      }
+    ];
+
+    const searchFilter = document.getElementById("searchFilter");
     const assigneeFilter = document.getElementById("assigneeFilter");
+    const statusFilter = document.getElementById("statusFilter");
+    const riskTierFilter = document.getElementById("riskTierFilter");
     const tagsFilters = document.getElementById("tagsFilters");
     const clearFilters = document.getElementById("clearFilters");
+    const actionableOnlyToggle = document.getElementById("actionableOnlyToggle");
     const resultsCount = document.getElementById("resultsCount");
-    const activityToast = document.getElementById("activityToast");
-    const savedToast = document.getElementById("savedToast");
-    const STATUS_OPTIONS = ["approved", "denied", "manual_review", "dormant"];
-    let customers = [];
-    let users = [];
-    let sortAscending = false;
-    let expandedCustomerId = null;
-    let selectedDrawerCustomerId = null;
-    let toastTimeoutId = null;
-    let savedToastTimeoutId = null;
-
-    signOutLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      localStorage.removeItem("plgAuth");
-      localStorage.removeItem("plgUserEmail");
-      window.location.replace("index.html");
-    });
-
-    function updateHeaderLabel() {
-      riskScoreHeader.textContent = "Risk Score " + (sortAscending ? "▲" : "▼");
-    }
-
-    function getSelectedTags() {
-      return Array.from(tagsFilters.querySelectorAll('input[type="checkbox"]:checked')).map(function (checkbox) {
-        return checkbox.value;
-      });
-    }
-
-    function getFilteredCustomers() {
-      const selectedTier = riskTierFilter.value;
-      const selectedTags = getSelectedTags();
-      const selectedStatus = statusFilter.value;
-      const selectedAssignee = assigneeFilter.value;
-
-      return customers.filter(function (customer) {
-        const resolved = resolveCustomerDisplayData(customer);
-        const tierMatch = selectedTier === "All" || customer.riskTier === selectedTier;
-        const tagsMatch = selectedTags.length === 0 || selectedTags.every(function (tag) {
-          return customer.tags.includes(tag);
-        });
-        const statusMatch = selectedStatus === "All" || resolved.status === selectedStatus;
-        const assigneeMatch =
-          selectedAssignee === "All" ||
-          (selectedAssignee === "__unassigned__"
-            ? (resolved.assignee === null || resolved.assignee === "")
-            : resolved.assignee === selectedAssignee);
-        return tierMatch && tagsMatch && statusMatch && assigneeMatch;
-      });
-    }
-
-    function renderAssigneeFilterOptions() {
-      const options = ['<option value="All">All</option>', '<option value="__unassigned__">(unassigned)</option>'];
-      users.forEach(function (user) {
-        options.push('<option value="' + user.id + '">' + user.name + "</option>");
-      });
-      assigneeFilter.innerHTML = options.join("");
-      assigneeFilter.value = "All";
-    }
-
-    function renderTagFilters() {
-      const uniqueTags = Array.from(
-        new Set(
-          customers.flatMap(function (customer) {
-            return Array.isArray(customer.tags) ? customer.tags : [];
-          })
-        )
-      ).sort();
-
-      if (!uniqueTags.length) {
-        tagsFilters.innerHTML = '<span style="color: #6b7280;">No tags available.</span>';
-        return;
-      }
-
-      tagsFilters.innerHTML = uniqueTags
-        .map(function (tag) {
-          return '<label>' +
-            '<input type="checkbox" value="' + tag + '" />' + tag +
-            "</label>";
-        })
-        .join("");
-    }
-
-    function renderRows() {
-      const filteredCustomers = getFilteredCustomers();
-      resultsCount.textContent = "Showing " + filteredCustomers.length + " of " + customers.length + " customers";
-
-      if (!customers.length) {
-        expandedCustomerId = null;
-        queueBody.innerHTML = '<tr><td colspan="7" style="padding: 10px; color: #4b5563;">No customers found.</td></tr>';
-        return;
-      }
-
-      if (
-        expandedCustomerId &&
-        !filteredCustomers.some(function (customer) {
-          return customer.id === expandedCustomerId;
-        })
-      ) {
-        expandedCustomerId = null;
-      }
-
-      const sortedCustomers = filteredCustomers.slice().sort(function (a, b) {
-        return sortAscending ? a.riskScore - b.riskScore : b.riskScore - a.riskScore;
-      });
-
-      if (!sortedCustomers.length) {
-        queueBody.innerHTML = '<tr><td colspan="7" style="padding: 10px; color: #4b5563;">No matching customers.</td></tr>';
-        return;
-      }
-
-      queueBody.innerHTML = "";
-      sortedCustomers.forEach(function (customer) {
-        const resolvedCustomer = resolveCustomerDisplayData(customer);
-        const row = document.createElement("tr");
-        const isExpanded = customer.id === expandedCustomerId;
-        const tagPills = (Array.isArray(customer.tags) ? customer.tags : [])
-          .map(function (tag) {
-            return '<span class="tag-pill">' + tag + "</span>";
-          })
-          .join("");
-        row.innerHTML =
-          '<td class="cell-center">' +
-          '<button type="button" class="toggle-btn" data-toggle-id="' + customer.id + '">' +
-          (isExpanded ? "▾" : "▸") +
-          "</button></td>" +
-          '<td><a class="customer-link" href="customer.html?id=' + customer.id + '">' + customer.name + "</a></td>" +
-          "<td>" + customer.riskScore + "</td>" +
-          "<td>" + customer.riskTier + "</td>" +
-          '<td><div class="tag-pills">' + tagPills + "</div></td>" +
-          '<td><select class="compact-select" data-status-select="' + customer.id + '">' + buildStatusOptions(resolvedCustomer.status) + "</select></td>" +
-          '<td><select class="compact-select" data-assignee-select="' + customer.id + '">' + buildAssigneeOptions(resolvedCustomer.assignee) + "</select></td>";
-        queueBody.appendChild(row);
-
-        if (isExpanded) {
-          const detailsRow = document.createElement("tr");
-          const summary = customer.summary || {};
-          detailsRow.innerHTML =
-            '<td colspan="7" class="details-cell">' +
-            '<div class="details-card">' +
-            '<h3 style="margin: 0 0 10px 0; font-size: 15px;">Summary</h3>' +
-            '<dl class="summary-dl">' +
-            "<dt>KYC</dt><dd>" + (summary.KYC || "-") + "</dd>" +
-            "<dt>KYB</dt><dd>" + (summary.KYB || "-") + "</dd>" +
-            "<dt>Bank</dt><dd>" + (summary.Bank || "-") + "</dd>" +
-            "<dt>Credit</dt><dd>" + (summary.Credit || "-") + "</dd>" +
-            "</dl>" +
-            '<button type="button" class="quiet-btn" data-open-drawer-id="' + customer.id + '">Potential next steps →</button>' +
-            "</div>" +
-            "</td>";
-          queueBody.appendChild(detailsRow);
-        }
-      });
-    }
-
-    riskScoreHeader.addEventListener("click", function () {
-      sortAscending = !sortAscending;
-      renderRows();
-      updateHeaderLabel();
-    });
-
-    riskTierFilter.addEventListener("change", renderRows);
-    statusFilter.addEventListener("change", renderRows);
-    assigneeFilter.addEventListener("change", renderRows);
-
-    tagsFilters.addEventListener("change", function (event) {
-      if (event.target.matches('input[type="checkbox"]')) {
-        renderRows();
-      }
-    });
-
-    clearFilters.addEventListener("click", function () {
-      riskTierFilter.value = "All";
-      statusFilter.value = "All";
-      assigneeFilter.value = "All";
-      Array.from(tagsFilters.querySelectorAll('input[type="checkbox"]')).forEach(function (checkbox) {
-        checkbox.checked = false;
-      });
-      renderRows();
-    });
-
-    queueBody.addEventListener("change", function (event) {
-      const statusSelect = event.target.closest("select[data-status-select]");
-      if (statusSelect) {
-        const customerId = statusSelect.getAttribute("data-status-select");
-        updateCustomerOverride(customerId, { status: statusSelect.value });
-        showSavedToast();
-        renderRows();
-        return;
-      }
-
-      const assigneeSelect = event.target.closest("select[data-assignee-select]");
-      if (assigneeSelect) {
-        const customerId = assigneeSelect.getAttribute("data-assignee-select");
-        const nextAssignee = assigneeSelect.value || null;
-        updateCustomerOverride(customerId, { assignee: nextAssignee });
-        showSavedToast();
-        renderRows();
-      }
-    });
-
-    queueBody.addEventListener("click", function (event) {
-      const drawerButton = event.target.closest("button[data-open-drawer-id]");
-      if (drawerButton) {
-        openDrawer(drawerButton.getAttribute("data-open-drawer-id"));
-        return;
-      }
-
-      const toggleButton = event.target.closest("button[data-toggle-id]");
-      if (!toggleButton) return;
-
-      const customerId = toggleButton.getAttribute("data-toggle-id");
-      expandedCustomerId = expandedCustomerId === customerId ? null : customerId;
-      renderRows();
-    });
+    const inboxSections = document.getElementById("inboxSections");
+    const tagsDetails = document.getElementById("tagsDetails");
 
     const drawer = document.getElementById("nextStepsDrawer");
     const drawerBackdrop = document.getElementById("drawerBackdrop");
@@ -616,100 +854,77 @@
     const drawerCustomerMeta = document.getElementById("drawerCustomerMeta");
     const drawerReportLink = document.getElementById("drawerReportLink");
     const drawerRecentActivity = document.getElementById("drawerRecentActivity");
+    const drawerAiNextAction = document.getElementById("drawerAiNextAction");
+    const drawerAiWhy = document.getElementById("drawerAiWhy");
 
-    function readActivityEntries(customerId) {
-      const storageKey = "activity:" + customerId;
-      try {
-        const raw = localStorage.getItem(storageKey);
-        return raw ? JSON.parse(raw) : [];
-      } catch (e) {
-        return [];
-      }
+    const activityToast = document.getElementById("activityToast");
+    const savedToast = document.getElementById("savedToast");
+
+    const headerMenuBtn = document.getElementById("headerMenuBtn");
+    const headerMenuPanel = document.getElementById("headerMenuPanel");
+    const headerSignOut = document.getElementById("headerSignOut");
+
+    const state = {
+      customers: [],
+      users: [],
+      selectedCustomerId: null,
+      selectedDrawerCustomerId: null,
+      expandedBuckets: {
+        new_unassigned: false,
+        back_on_plate: false,
+        stale_needs_nudge: false,
+        in_progress: false
+      },
+      expandedPreviewCustomerId: null,
+      currentUserId: null,
+      toastTimeoutId: null,
+      savedToastTimeoutId: null
+    };
+
+    function nowMs() {
+      return Date.now();
     }
 
-    function renderDrawerRecentActivity(customerId) {
-      if (!customerId) {
-        drawerRecentActivity.innerHTML = '<li style="color: #6b7280;">No activity yet.</li>';
-        return;
-      }
-
-      const entries = readActivityEntries(customerId);
-      if (!entries.length) {
-        drawerRecentActivity.innerHTML = '<li style="color: #6b7280;">No activity yet.</li>';
-        return;
-      }
-
-      const recent = entries.slice(-3).reverse();
-      drawerRecentActivity.innerHTML = recent
-        .map(function (entry) {
-          return '<li style="margin-bottom: 6px;"><strong>' + entry.timestamp + "</strong> - " + entry.action + "</li>";
-        })
-        .join("");
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
     }
 
-    function openDrawer(customerId) {
-      const customer = customers.find(function (item) {
-        return item.id === customerId;
+    function parseTime(value) {
+      const ms = new Date(value).getTime();
+      return Number.isFinite(ms) ? ms : null;
+    }
+
+    function isoFromHoursAgo(hours) {
+      return new Date(nowMs() - hours * 60 * 60 * 1000).toISOString();
+    }
+
+    function hydrateCustomers(raw) {
+      const fallbackStates = [
+        { status: "manual_review", assignee: null, lastEventType: "new_submission", createdHoursAgo: 6, activityHoursAgo: 2, needsResend: false },
+        { status: "manual_review", assignee: "u2", lastEventType: "customer_completed_step", createdHoursAgo: 36, activityHoursAgo: 4, needsResend: false },
+        { status: "dormant", assignee: "u1", lastEventType: "awaiting_customer", createdHoursAgo: 220, activityHoursAgo: 120, needsResend: true },
+        { status: "running_checks", assignee: "u3", lastEventType: "verification_started", createdHoursAgo: 30, activityHoursAgo: 6, needsResend: false },
+        { status: "pending_provider", assignee: "u2", lastEventType: "provider_pending", createdHoursAgo: 48, activityHoursAgo: 8, needsResend: false },
+        { status: "manual_review", assignee: "u1", lastEventType: "docs_uploaded", createdHoursAgo: 72, activityHoursAgo: 5, needsResend: false }
+      ];
+
+      return raw.map(function (customer, index) {
+        const fallback = fallbackStates[index % fallbackStates.length];
+        const createdAt = customer.createdAt || isoFromHoursAgo(fallback.createdHoursAgo + index);
+        const lastActivityAt = customer.lastActivityAt || isoFromHoursAgo(fallback.activityHoursAgo + (index % 3));
+        const event = customer.lastEventType || fallback.lastEventType;
+        const status = STATUS_OPTIONS.includes(customer.status) ? customer.status : fallback.status;
+        const assignee = customer.assignee === undefined ? fallback.assignee : customer.assignee;
+        return Object.assign({}, customer, {
+          createdAt: createdAt,
+          lastActivityAt: lastActivityAt,
+          lastEventType: event,
+          status: status,
+          assignee: assignee,
+          needsResend: typeof customer.needsResend === "boolean" ? customer.needsResend : fallback.needsResend,
+          ai: customer.ai && typeof customer.ai === "object" ? customer.ai : {}
+        });
       });
-      if (!customer) return;
-
-      selectedDrawerCustomerId = customerId;
-      drawerCustomerMeta.textContent =
-        customer.name + " | " + customer.riskTier + " | Risk Score: " + customer.riskScore;
-      drawerReportLink.href = "customer.html?id=" + customer.id;
-      renderDrawerRecentActivity(customer.id);
-      drawer.classList.add("open");
-      drawerBackdrop.classList.add("open");
-    }
-
-    function closeDrawer() {
-      drawer.classList.remove("open");
-      drawerBackdrop.classList.remove("open");
-    }
-
-    function showActivityToast() {
-      activityToast.style.opacity = "1";
-      if (toastTimeoutId) {
-        clearTimeout(toastTimeoutId);
-      }
-      toastTimeoutId = setTimeout(function () {
-        activityToast.style.opacity = "0";
-      }, 1200);
-    }
-
-    function showSavedToast() {
-      savedToast.style.opacity = "1";
-      if (savedToastTimeoutId) {
-        clearTimeout(savedToastTimeoutId);
-      }
-      savedToastTimeoutId = setTimeout(function () {
-        savedToast.style.opacity = "0";
-      }, 1000);
-    }
-
-    drawerClose.addEventListener("click", closeDrawer);
-    drawerBackdrop.addEventListener("click", closeDrawer);
-    drawer.addEventListener("click", function (event) {
-      const addButton = event.target.closest("button[data-add-activity]");
-      if (!addButton || !selectedDrawerCustomerId) return;
-
-      const storageKey = "activity:" + selectedDrawerCustomerId;
-      const entries = readActivityEntries(selectedDrawerCustomerId);
-
-      entries.push({
-        timestamp: new Date().toLocaleString(),
-        action: addButton.getAttribute("data-action-title")
-      });
-      localStorage.setItem(storageKey, JSON.stringify(entries));
-      renderDrawerRecentActivity(selectedDrawerCustomerId);
-      showActivityToast();
-    });
-
-    function renderError(message) {
-      resultsCount.textContent = "Showing 0 of 0 customers";
-      tagsFilters.innerHTML = '<span style="color: #6b7280;">Unable to load tags.</span>';
-      queueBody.innerHTML =
-        '<tr><td colspan="7" style="padding: 10px; color: #b91c1c;">' + message + "</td></tr>";
     }
 
     function getOverrideKey(customerId) {
@@ -747,7 +962,7 @@
       localStorage.setItem(getOverrideKey(customerId), JSON.stringify(clean));
     }
 
-    function resolveCustomerDisplayData(customer) {
+    function resolveDisplayData(customer) {
       const override = readCustomerOverride(customer.id);
       const baseStatus = STATUS_OPTIONS.includes(customer.status) ? customer.status : "manual_review";
       const status = typeof override.status === "string" && STATUS_OPTIONS.includes(override.status)
@@ -755,7 +970,7 @@
         : baseStatus;
       const assignee = Object.prototype.hasOwnProperty.call(override, "assignee")
         ? override.assignee
-        : (customer.assignee === null ? null : customer.assignee);
+        : (customer.assignee || null);
 
       return {
         status: status,
@@ -763,49 +978,634 @@
       };
     }
 
+    function getUserName(userId) {
+      if (!userId) return "Unassigned";
+      const user = state.users.find(function (u) { return u.id === userId; });
+      return user ? user.name : userId;
+    }
+
+    function formatRelativeTime(isoTs) {
+      const ts = parseTime(isoTs);
+      if (!ts) return "-";
+      const diffMs = Math.max(0, nowMs() - ts);
+      const mins = Math.floor(diffMs / (60 * 1000));
+      if (mins < 60) return mins + "m ago";
+      const hours = Math.floor(mins / 60);
+      if (hours < 24) return hours + "h ago";
+      const days = Math.floor(hours / 24);
+      return days + "d ago";
+    }
+
+    function daysSince(isoTs) {
+      const ts = parseTime(isoTs);
+      if (!ts) return 0;
+      return Math.floor((nowMs() - ts) / (24 * 60 * 60 * 1000));
+    }
+
+    function computeBucket(customer, resolved) {
+      const isUnassigned = !resolved.assignee || resolved.assignee === "unassigned";
+      const createdMs = parseTime(customer.createdAt) || nowMs();
+      const ageHours = (nowMs() - createdMs) / (60 * 60 * 1000);
+      const staleDays = daysSince(customer.lastActivityAt);
+
+      if (isUnassigned || (ageHours < 24 && resolved.status === "manual_review")) {
+        return "new_unassigned";
+      }
+      if (BACK_EVENTS.includes(customer.lastEventType)) {
+        return "back_on_plate";
+      }
+      if ((STALE_EVENTS.includes(customer.lastEventType) && staleDays > 3) || customer.needsResend === true) {
+        return "stale_needs_nudge";
+      }
+      if (
+        ["in_progress", "running_checks", "pending_provider", "bank_link_pending"].includes(resolved.status) ||
+        IN_PROGRESS_EVENTS.includes(customer.lastEventType) ||
+        ["Waiting", "Running checks", "Monitoring"].includes((customer.ai && customer.ai.nextAction) || "")
+      ) {
+        return "in_progress";
+      }
+      return "back_on_plate";
+    }
+
+    function buildAiFields(customer, resolved) {
+      const bucket = computeBucket(customer, resolved);
+      const staleDays = daysSince(customer.lastActivityAt);
+      const isUnassigned = !resolved.assignee;
+      let nextAction = "Open";
+      let why = "Ready for underwriting review.";
+
+      if (isUnassigned) {
+        nextAction = "Assign";
+      } else if (bucket === "back_on_plate") {
+        nextAction = "Review update";
+      } else if (bucket === "stale_needs_nudge") {
+        nextAction = "Resend / Remind";
+      } else if (bucket === "in_progress") {
+        nextAction = resolved.status === "running_checks" ? "Running checks" : "Waiting";
+      }
+
+      if (bucket === "new_unassigned") {
+        why = "New submission - needs assignment and initial review.";
+      } else if (bucket === "back_on_plate") {
+        why = "Customer completed their step - ready for your review.";
+      } else if (bucket === "stale_needs_nudge") {
+        why = "No activity in " + staleDays + " days - consider resend or reminder.";
+      } else if (bucket === "in_progress") {
+        why = "Checks are currently in flight - monitor updates before taking action.";
+      }
+
+      let priorityScore = Number(customer.riskScore) || 0;
+      if (isUnassigned) priorityScore += 20;
+      if (bucket === "back_on_plate") priorityScore += 15;
+      if (staleDays > 7) priorityScore += 10;
+      priorityScore = clamp(Math.round(priorityScore), 0, 100);
+
+      return {
+        bucket: bucket,
+        nextAction: nextAction,
+        why: why,
+        priorityScore: priorityScore,
+        staleDays: staleDays
+      };
+    }
+
+    function isActionable(derived) {
+      const action = derived.ai && derived.ai.nextAction;
+      if (!action) return true;
+      if (ACTIONABLE_NEXT_ACTIONS.includes(action)) return true;
+      if (NON_ACTIONABLE_NEXT_ACTIONS.includes(action)) return false;
+      return true;
+    }
+
+    function getPreviewSummary(derived) {
+      const customer = derived.customer;
+      const ai = derived.ai;
+      const status = derived.resolved.status;
+      return ai.why + " Current status: " + status + ". Last event: " + customer.lastEventType + ".";
+    }
+
+    function getPreviewChips(derived) {
+      const chips = [derived.ai.nextAction];
+      if (derived.ai.bucket === "stale_needs_nudge") {
+        chips.push("Send reminder");
+        chips.push("Log follow-up");
+      } else if (derived.ai.bucket === "back_on_plate") {
+        chips.push("Review docs");
+        chips.push("Decision ready");
+      } else if (derived.ai.bucket === "in_progress") {
+        chips.push("View logs");
+        chips.push("Await provider");
+      } else {
+        chips.push("Claim owner");
+        chips.push("Start review");
+      }
+      return chips.slice(0, 3);
+    }
+
+    function getDerivedCustomer(customer) {
+      const resolved = resolveDisplayData(customer);
+      const ai = buildAiFields(customer, resolved);
+      return {
+        customer: customer,
+        resolved: resolved,
+        ai: ai,
+        lastActivityLabel: formatRelativeTime(customer.lastActivityAt),
+        lastActivityTitle: customer.lastActivityAt ? new Date(customer.lastActivityAt).toLocaleString() : "-"
+      };
+    }
+
+    function getSelectedTags() {
+      return Array.from(tagsFilters.querySelectorAll("input[type='checkbox']:checked")).map(function (node) {
+        return node.value;
+      });
+    }
+
+    function getFilteredDerivedCustomers() {
+      const search = (searchFilter.value || "").trim().toLowerCase();
+      const assignee = assigneeFilter.value;
+      const status = statusFilter.value;
+      const tier = riskTierFilter.value;
+      const tags = getSelectedTags();
+
+      return state.customers
+        .map(getDerivedCustomer)
+        .filter(function (item) {
+          const c = item.customer;
+          const resolved = item.resolved;
+
+          const searchMatch = !search || [c.name, c.id, (c.tags || []).join(" ")]
+            .join(" ")
+            .toLowerCase()
+            .includes(search);
+
+          const assigneeMatch =
+            assignee === "all" ||
+            (assignee === "unassigned" && !resolved.assignee) ||
+            (assignee === "me" && resolved.assignee === state.currentUserId) ||
+            resolved.assignee === assignee;
+
+          const statusMatch = status === "all" || resolved.status === status;
+          const tierMatch = tier === "all" || c.riskTier === tier;
+          const tagsMatch = tags.length === 0 || tags.every(function (tag) {
+            return (c.tags || []).includes(tag);
+          });
+
+          return searchMatch && assigneeMatch && statusMatch && tierMatch && tagsMatch;
+        })
+        .filter(function (item) {
+          if (!actionableOnlyToggle || !actionableOnlyToggle.checked) return true;
+          return isActionable(item);
+        });
+    }
+
+    function sortBucketRows(items) {
+      return items.slice().sort(function (a, b) {
+        if (b.ai.priorityScore !== a.ai.priorityScore) {
+          return b.ai.priorityScore - a.ai.priorityScore;
+        }
+        const aTs = parseTime(a.customer.lastActivityAt) || 0;
+        const bTs = parseTime(b.customer.lastActivityAt) || 0;
+        return bTs - aTs;
+      });
+    }
+
     function buildStatusOptions(selectedStatus) {
       return STATUS_OPTIONS.map(function (status) {
-        const selected = status === selectedStatus ? ' selected' : "";
-        return '<option value="' + status + '"' + selected + ">" + status + "</option>";
+        const selected = status === selectedStatus ? " selected" : "";
+        return '<option value="' + status + '"' + selected + '>' + status + "</option>";
       }).join("");
     }
 
     function buildAssigneeOptions(selectedAssignee) {
       const normalized = selectedAssignee || "";
-      const options = ['<option value="">' + "(unassigned)" + "</option>"];
-      users.forEach(function (user) {
-        const selected = user.id === normalized ? ' selected' : "";
-        options.push('<option value="' + user.id + '"' + selected + ">" + user.name + "</option>");
+      const options = ['<option value="">(unassigned)</option>'];
+      state.users.forEach(function (user) {
+        const selected = user.id === normalized ? " selected" : "";
+        options.push('<option value="' + user.id + '"' + selected + '>' + user.name + "</option>");
       });
       return options.join("");
     }
 
+    function priorityClass(score) {
+      if (score >= 85) return "priority-high";
+      if (score >= 65) return "priority-medium";
+      return "";
+    }
+
+    function renderBucketTable(bucketKey, rows) {
+      if (!rows.length) {
+        return '<table class="bucket-table"><tbody><tr><td class="empty-row">No matching customers in this section.</td></tr></tbody></table>';
+      }
+
+      return '<table class="bucket-table">' +
+        '<thead><tr>' +
+        '<th class="th-caret"></th>' +
+        '<th>Customer</th>' +
+        '<th>Priority</th>' +
+        '<th>Next action</th>' +
+        '<th>Why</th>' +
+        '<th>Last activity</th>' +
+        '<th>Risk</th>' +
+        '<th>Status</th>' +
+        '<th>Assignee</th>' +
+        '</tr></thead>' +
+        '<tbody>' + rows.map(function (item) {
+          const c = item.customer;
+          const resolved = item.resolved;
+          const ai = item.ai;
+          const selectedClass = state.selectedCustomerId === c.id ? " is-selected" : "";
+          const expanded = state.expandedPreviewCustomerId === c.id;
+          const tags = (c.tags || []).slice(0, 3).map(function (tag) {
+            return '<span class="mini-tag">' + tag + '</span>';
+          }).join("");
+
+          const baseRow = '<tr class="queue-row' + selectedClass + '" data-customer-id="' + c.id + '" data-bucket="' + bucketKey + '">' +
+            '<td data-label="" class="caret-cell"><button type="button" class="row-caret" data-caret-toggle="' + c.id + '" aria-label="Toggle preview">' + (expanded ? "▾" : "▸") + '</button></td>' +
+            '<td data-label="Customer"><a class="customer-link" href="customer.html?id=' + encodeURIComponent(c.id) + '" aria-label="Open customer record for ' + c.name.replace(/"/g, "&quot;") + '">' + c.name + '</a><div class="customer-sub">ID: ' + c.id + '</div></td>' +
+            '<td data-label="Priority"><span class="priority-badge ' + priorityClass(ai.priorityScore) + '">' + ai.priorityScore + '</span></td>' +
+            '<td data-label="Next action"><span class="action-pill">' + ai.nextAction + '</span></td>' +
+            '<td data-label="Why"><div class="why-snippet">' + ai.why + '</div>' + (tags ? '<div class="mini-tags">' + tags + '</div>' : "") + '</td>' +
+            '<td data-label="Last activity" title="' + item.lastActivityTitle + '">' + item.lastActivityLabel + '</td>' +
+            '<td data-label="Risk">' + c.riskScore + ' · ' + c.riskTier + '</td>' +
+            '<td data-label="Status"><select class="compact-select" data-status-select="' + c.id + '">' + buildStatusOptions(resolved.status) + '</select></td>' +
+            '<td data-label="Assignee"><select class="compact-select" data-assignee-select="' + c.id + '">' + buildAssigneeOptions(resolved.assignee) + '</select></td>' +
+            '</tr>';
+
+          if (!expanded) {
+            return baseRow;
+          }
+
+          const previewChips = getPreviewChips(item).map(function (chip) {
+            return '<span class="preview-chip">' + chip + '</span>';
+          }).join("");
+
+          const previewRow = '<tr class="preview-row">' +
+            '<td colspan="9">' +
+            '<div class="preview-panel">' +
+            '<p class="preview-title">Summary</p>' +
+            '<p class="preview-text">' + getPreviewSummary(item) + '</p>' +
+            '<div class="preview-actions">' + previewChips + '</div>' +
+            '<div class="preview-cta-wrap">' +
+            '<button type="button" class="preview-cta" data-preview-open="' + c.id + '">Review suggested steps →</button>' +
+            '</div>' +
+            '</div>' +
+            '</td>' +
+            '</tr>';
+
+          return baseRow + previewRow;
+        }).join("") + '</tbody></table>';
+    }
+
+    function renderInbox() {
+      const filtered = getFilteredDerivedCustomers();
+      resultsCount.textContent = "Showing " + filtered.length + " of " + state.customers.length + " customers";
+
+      const bucketsMap = {
+        new_unassigned: [],
+        back_on_plate: [],
+        stale_needs_nudge: [],
+        in_progress: []
+      };
+
+      filtered.forEach(function (item) {
+        bucketsMap[item.ai.bucket].push(item);
+      });
+
+      BUCKETS.forEach(function (bucket) {
+        bucketsMap[bucket.key] = sortBucketRows(bucketsMap[bucket.key]);
+      });
+
+      const onlyActionableOn = actionableOnlyToggle && actionableOnlyToggle.checked;
+      const visibleBuckets = BUCKETS.filter(function (bucket) {
+        return !(onlyActionableOn && bucket.key === "in_progress");
+      });
+
+      inboxSections.innerHTML = visibleBuckets.map(function (bucket) {
+        const allRows = bucketsMap[bucket.key] || [];
+        const expanded = !!state.expandedBuckets[bucket.key];
+        const shownRows = expanded ? allRows : allRows.slice(0, 5);
+        const canToggle = allRows.length > 5;
+        const count = allRows.length;
+
+        return '<section class="bucket-card" data-bucket-key="' + bucket.key + '">' +
+          '<div class="bucket-head">' +
+            '<div>' +
+              '<h2 class="bucket-title">' + bucket.title + '<span class="count-badge">' + count + '</span></h2>' +
+              '<p class="bucket-meta">' + bucket.label + ' · ' + bucket.description + '</p>' +
+            '</div>' +
+            (canToggle
+              ? '<button class="view-toggle" type="button" data-bucket-toggle="' + bucket.key + '">' + (expanded ? 'Show less' : 'View all') + '</button>'
+              : '<span class="bucket-meta">Top ' + Math.min(5, count) + '</span>') +
+          '</div>' +
+          '<div class="table-wrap">' + renderBucketTable(bucket.key, shownRows) + '</div>' +
+        '</section>';
+      }).join("");
+
+      if (state.selectedCustomerId) {
+        const exists = filtered.some(function (item) {
+          return item.customer.id === state.selectedCustomerId;
+        });
+        if (!exists) {
+          state.selectedCustomerId = null;
+        }
+      }
+    }
+
+    function renderAssigneeFilterOptions() {
+      const preserved = assigneeFilter.value || "all";
+      const options = [
+        '<option value="all">Assignee: All</option>',
+        '<option value="unassigned">Assignee: Unassigned</option>',
+        '<option value="me">Assignee: Me</option>'
+      ];
+      state.users.forEach(function (user) {
+        options.push('<option value="' + user.id + '">Assignee: ' + user.name + '</option>');
+      });
+      assigneeFilter.innerHTML = options.join("");
+      assigneeFilter.value = options.some(function (opt) {
+        return opt.indexOf('value="' + preserved + '"') >= 0;
+      }) ? preserved : "all";
+    }
+
+    function renderTagFilters() {
+      const uniqueTags = Array.from(new Set(state.customers.flatMap(function (customer) {
+        return Array.isArray(customer.tags) ? customer.tags : [];
+      }))).sort();
+
+      if (!uniqueTags.length) {
+        tagsFilters.innerHTML = '<span style="color: #6b7280; font-size: 13px;">No tags available.</span>';
+        return;
+      }
+
+      tagsFilters.innerHTML = uniqueTags.map(function (tag) {
+        return '<label class="tag-filter-item"><input type="checkbox" value="' + tag + '" />' + tag + '</label>';
+      }).join("");
+    }
+
+    function readActivityEntries(customerId) {
+      const storageKey = "activity:" + customerId;
+      try {
+        const raw = localStorage.getItem(storageKey);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function renderDrawerRecentActivity(customerId) {
+      if (!customerId) {
+        drawerRecentActivity.innerHTML = '<li style="color: #6b7280;">No activity yet.</li>';
+        return;
+      }
+
+      const entries = readActivityEntries(customerId);
+      if (!entries.length) {
+        drawerRecentActivity.innerHTML = '<li style="color: #6b7280;">No activity yet.</li>';
+        return;
+      }
+
+      const recent = entries.slice(-3).reverse();
+      drawerRecentActivity.innerHTML = recent.map(function (entry) {
+        return '<li style="margin-bottom: 6px;"><strong>' + entry.timestamp + '</strong> - ' + entry.action + '</li>';
+      }).join("");
+    }
+
+    function showActivityToast() {
+      activityToast.style.opacity = "1";
+      if (state.toastTimeoutId) clearTimeout(state.toastTimeoutId);
+      state.toastTimeoutId = setTimeout(function () {
+        activityToast.style.opacity = "0";
+      }, 1200);
+    }
+
+    function showSavedToast() {
+      savedToast.style.opacity = "1";
+      if (state.savedToastTimeoutId) clearTimeout(state.savedToastTimeoutId);
+      state.savedToastTimeoutId = setTimeout(function () {
+        savedToast.style.opacity = "0";
+      }, 1000);
+    }
+
+    function openDrawer(customerId) {
+      const customer = state.customers.find(function (item) {
+        return item.id === customerId;
+      });
+      if (!customer) return;
+
+      const derived = getDerivedCustomer(customer);
+      state.selectedDrawerCustomerId = customerId;
+      state.selectedCustomerId = customerId;
+
+      drawerCustomerMeta.textContent = customer.name + " | " + customer.riskTier + " | Risk Score: " + customer.riskScore;
+      drawerReportLink.href = "customer.html?id=" + customer.id;
+      drawerAiNextAction.textContent = derived.ai.nextAction;
+      drawerAiWhy.textContent = derived.ai.why;
+      renderDrawerRecentActivity(customer.id);
+
+      drawer.classList.add("open");
+      drawerBackdrop.classList.add("open");
+      renderInbox();
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove("open");
+      drawerBackdrop.classList.remove("open");
+    }
+
+    function resetFilters() {
+      searchFilter.value = "";
+      assigneeFilter.value = "all";
+      statusFilter.value = "all";
+      riskTierFilter.value = "all";
+      if (actionableOnlyToggle) actionableOnlyToggle.checked = true;
+      Array.from(tagsFilters.querySelectorAll("input[type='checkbox']")).forEach(function (node) {
+        node.checked = false;
+      });
+      renderInbox();
+    }
+
+    function getCurrentUserIdFromEmail() {
+      const email = (localStorage.getItem("plgUserEmail") || "").toLowerCase();
+      if (!email) return state.users[0] ? state.users[0].id : null;
+      const exact = state.users.find(function (user) {
+        return String(user.email || "").toLowerCase() === email;
+      });
+      return exact ? exact.id : (state.users[0] ? state.users[0].id : null);
+    }
+
+    function renderError(message) {
+      resultsCount.textContent = "Showing 0 of 0 customers";
+      inboxSections.innerHTML = '<section class="bucket-card"><div class="empty-row">' + message + '</div></section>';
+      tagsFilters.innerHTML = '<span style="color: #6b7280; font-size: 13px;">Unable to load tags.</span>';
+    }
+
+    headerMenuBtn.addEventListener("click", function () {
+      headerMenuPanel.classList.toggle("open");
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest(".menu-wrap")) {
+        headerMenuPanel.classList.remove("open");
+      }
+    });
+
+    headerSignOut.addEventListener("click", function () {
+      localStorage.removeItem("plgAuth");
+      localStorage.removeItem("plgUserEmail");
+      window.location.replace("index.html");
+    });
+
+    [searchFilter, assigneeFilter, statusFilter, riskTierFilter, actionableOnlyToggle].forEach(function (node) {
+      node.addEventListener(node === searchFilter ? "input" : "change", renderInbox);
+    });
+
+    tagsFilters.addEventListener("change", function (event) {
+      if (event.target.matches("input[type='checkbox']")) {
+        renderInbox();
+      }
+    });
+
+    clearFilters.addEventListener("click", resetFilters);
+
+    inboxSections.addEventListener("click", function (event) {
+      const customerLink = event.target.closest("a.customer-link");
+      if (customerLink) {
+        event.stopPropagation();
+        return;
+      }
+
+      const caretBtn = event.target.closest("button[data-caret-toggle]");
+      if (caretBtn) {
+        const customerId = caretBtn.getAttribute("data-caret-toggle");
+        state.expandedPreviewCustomerId = state.expandedPreviewCustomerId === customerId ? null : customerId;
+        renderInbox();
+        return;
+      }
+
+      const previewOpen = event.target.closest("button[data-preview-open]");
+      if (previewOpen) {
+        openDrawer(previewOpen.getAttribute("data-preview-open"));
+        return;
+      }
+
+      const toggle = event.target.closest("button[data-bucket-toggle]");
+      if (toggle) {
+        const key = toggle.getAttribute("data-bucket-toggle");
+        state.expandedBuckets[key] = !state.expandedBuckets[key];
+        renderInbox();
+        return;
+      }
+
+      if (event.target.closest("select")) return;
+
+      const row = event.target.closest("tr[data-customer-id]");
+      if (!row) return;
+      openDrawer(row.getAttribute("data-customer-id"));
+    });
+
+    inboxSections.addEventListener("change", function (event) {
+      const statusSelect = event.target.closest("select[data-status-select]");
+      if (statusSelect) {
+        const customerId = statusSelect.getAttribute("data-status-select");
+        updateCustomerOverride(customerId, { status: statusSelect.value });
+        showSavedToast();
+        renderInbox();
+        if (state.selectedDrawerCustomerId === customerId) openDrawer(customerId);
+        return;
+      }
+
+      const assigneeSelect = event.target.closest("select[data-assignee-select]");
+      if (assigneeSelect) {
+        const customerId = assigneeSelect.getAttribute("data-assignee-select");
+        const assignee = assigneeSelect.value || null;
+        updateCustomerOverride(customerId, { assignee: assignee });
+        showSavedToast();
+        renderInbox();
+        if (state.selectedDrawerCustomerId === customerId) openDrawer(customerId);
+      }
+    });
+
+    drawerClose.addEventListener("click", closeDrawer);
+    drawerBackdrop.addEventListener("click", closeDrawer);
+
+    drawer.addEventListener("click", function (event) {
+      const quick = event.target.closest("button[data-quick-action]");
+      if (quick && state.selectedDrawerCustomerId) {
+        const action = quick.getAttribute("data-quick-action");
+        if (action === "assign") {
+          updateCustomerOverride(state.selectedDrawerCustomerId, { assignee: state.currentUserId || null });
+          showSavedToast();
+          renderInbox();
+          openDrawer(state.selectedDrawerCustomerId);
+          return;
+        }
+        if (action === "resend") {
+          const customer = state.customers.find(function (item) {
+            return item.id === state.selectedDrawerCustomerId;
+          });
+          if (customer) {
+            customer.needsResend = false;
+            customer.lastActivityAt = new Date().toISOString();
+            customer.lastEventType = "invite_sent";
+          }
+          showSavedToast();
+          renderInbox();
+          openDrawer(state.selectedDrawerCustomerId);
+          return;
+        }
+        if (action === "open") {
+          window.location.href = "customer.html?id=" + encodeURIComponent(state.selectedDrawerCustomerId);
+          return;
+        }
+        if (action === "note") {
+          const storageKey = "activity:" + state.selectedDrawerCustomerId;
+          const entries = readActivityEntries(state.selectedDrawerCustomerId);
+          entries.push({
+            timestamp: new Date().toLocaleString(),
+            action: "Added note from AI suggestions"
+          });
+          localStorage.setItem(storageKey, JSON.stringify(entries));
+          renderDrawerRecentActivity(state.selectedDrawerCustomerId);
+          showActivityToast();
+          return;
+        }
+      }
+
+      const addButton = event.target.closest("button[data-add-activity]");
+      if (!addButton || !state.selectedDrawerCustomerId) return;
+      const storageKey = "activity:" + state.selectedDrawerCustomerId;
+      const entries = readActivityEntries(state.selectedDrawerCustomerId);
+      entries.push({
+        timestamp: new Date().toLocaleString(),
+        action: addButton.getAttribute("data-action-title")
+      });
+      localStorage.setItem(storageKey, JSON.stringify(entries));
+      renderDrawerRecentActivity(state.selectedDrawerCustomerId);
+      showActivityToast();
+    });
+
     Promise.all([
       fetch("data/customers.json").then(function (response) {
-        if (!response.ok) {
-          throw new Error("Failed to load customer data.");
-        }
+        if (!response.ok) throw new Error("Failed to load customer data.");
         return response.json();
       }),
       fetch("data/users.json").then(function (response) {
-        if (!response.ok) {
-          throw new Error("Failed to load users data.");
-        }
+        if (!response.ok) throw new Error("Failed to load users data.");
         return response.json();
       })
     ])
       .then(function (results) {
-        customers = Array.isArray(results[0]) ? results[0] : [];
-        users = Array.isArray(results[1]) ? results[1] : [];
+        state.customers = hydrateCustomers(Array.isArray(results[0]) ? results[0] : []);
+        state.users = Array.isArray(results[1]) ? results[1] : [];
+        state.currentUserId = getCurrentUserIdFromEmail();
+
         renderAssigneeFilterOptions();
         renderTagFilters();
-        renderRows();
+        renderInbox();
       })
       .catch(function () {
         renderError("Unable to load queue data. Please try again.");
       });
-
-    updateHeaderLabel();
   </script>
 </body>
 </html>
