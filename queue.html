@@ -800,7 +800,12 @@
   </div>
 
   <script>
-    if (localStorage.getItem("plgAuth") !== "true") {
+    const AUTH_DISABLED = true;
+    const currentUser = AUTH_DISABLED
+      ? { id: "guest", name: "Guest User", role: "underwriter", email: "guest@local" }
+      : null;
+
+    if (!AUTH_DISABLED && localStorage.getItem("plgAuth") !== "true") {
       window.location.replace("index.html");
     }
 
@@ -1425,6 +1430,7 @@
     }
 
     function getCurrentUserIdFromEmail() {
+      if (AUTH_DISABLED) return (state.users[0] && state.users[0].id) || currentUser.id;
       const email = (localStorage.getItem("plgUserEmail") || "").toLowerCase();
       if (!email) return state.users[0] ? state.users[0].id : null;
       const exact = state.users.find(function (user) {
@@ -1452,7 +1458,9 @@
     headerSignOut.addEventListener("click", function () {
       localStorage.removeItem("plgAuth");
       localStorage.removeItem("plgUserEmail");
-      window.location.replace("index.html");
+      if (!AUTH_DISABLED) {
+        window.location.replace("index.html");
+      }
     });
 
     [searchFilter, assigneeFilter, statusFilter, riskTierFilter, actionableOnlyToggle].forEach(function (node) {

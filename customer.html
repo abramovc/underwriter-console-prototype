@@ -425,7 +425,12 @@
   </section>
 
   <script>
-    if (localStorage.getItem("plgAuth") !== "true") {
+    const AUTH_DISABLED = true;
+    const currentUser = AUTH_DISABLED
+      ? { id: "guest", name: "Guest User", role: "underwriter" }
+      : null;
+
+    if (!AUTH_DISABLED && localStorage.getItem("plgAuth") !== "true") {
       window.location.replace("index.html");
     }
 
@@ -439,7 +444,9 @@
       event.preventDefault();
       localStorage.removeItem("plgAuth");
       localStorage.removeItem("plgUserEmail");
-      window.location.replace("index.html");
+      if (!AUTH_DISABLED) {
+        window.location.replace("index.html");
+      }
     });
 
     function renderError(message) {

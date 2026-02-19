@@ -299,6 +299,7 @@
   </div>
 
   <script>
+    const AUTH_DISABLED = true;
     const params = new URLSearchParams(window.location.search);
     const requestedType = params.get("type") || "website";
     const autoRun = params.get("auto") === "1";
