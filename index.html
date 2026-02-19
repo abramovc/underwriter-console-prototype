@@ -86,17 +86,30 @@
   <div class="page">
     <div class="container">
       <nav class="topnav">
-        <a class="logo logo-iq" href="index.html">iq</a>
-        <div class="topnav-links">
-          <a class="topnav-link" href="index.html">Verify</a>
-          <a class="topnav-link" href="queue.html">Console</a>
-          <span class="topnav-link nav-muted">Workflows</span>
+        <div class="nav-left">
+          <a class="logo logo-iq" href="index.html">iq</a>
+        </div>
+        <a class="nav-center nav-intel" href="intelligence.html" aria-label="Open Intelligence Center" data-tooltip="Intelligence Center">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="12" cy="12" r="2.3" fill="currentColor"/>
+            <path d="M12 3.5a8.5 8.5 0 0 1 8.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M20.5 12a8.5 8.5 0 0 1-8.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.7"/>
+            <path d="M6.6 7.4l3.2 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span class="sr-only">Intelligence Center</span>
+        </a>
+        <div class="nav-right">
+          <a class="nav-link" href="index.html">Verify</a>
+          <a class="nav-link" href="queue.html">Console</a>
+          <a class="nav-link" href="workflows.html">Workflows</a>
         </div>
       </nav>
       <main>
         <header class="hero">
           <h1>What would you like to verify today?</h1>
           <p class="muted">Run lightweight checks across public signals and get a clear outcome + AI summary in seconds.</p>
+          <p class="muted" style="margin-top: 6px;"><a href="intelligence.html" style="text-decoration: none;">Intelligence Center</a></p>
           <hr class="divider" />
         </header>
 
@@ -104,6 +117,19 @@
       </main>
     </div>
   </div>
+  <script>
+    (function () {
+      var path = window.location.pathname || "";
+      var current = path.split("/").pop() || "index.html";
+      document.querySelectorAll(".nav-link, .nav-intel, .intel-nav-link").forEach(function (el) {
+        var href = el.getAttribute("href") || "";
+        var target = href.split("/").pop();
+        if (target && target === current) {
+          el.classList.add("is-active");
+        }
+      });
+    })();
+  </script>
   <script>
     (function () {
       var VERIFICATION_TYPES = [

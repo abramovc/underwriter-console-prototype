@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="coaching">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intelligence Center</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    .intelligence-shell {
+      width: min(1200px, 96vw);
+      margin: 0 auto;
+    }
+
+    .logo-iq { font-weight: 700; letter-spacing: -0.02em; }
+    .nav-muted { color: #9ca3af; cursor: default; user-select: none; }
+
+    .page-top {
+      margin-bottom: 14px;
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .title-stack {
+      display: grid;
+      gap: 6px;
+    }
+
+    .title-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .flagship-pill {
+      display: inline-flex;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      color: #334155;
+      background: #f8fafc;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      color: #6b7280;
+      max-width: 820px;
+      margin: 0;
+    }
+
+    .control-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .control-row details {
+      position: relative;
+    }
+
+    .control-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+      padding: 6px;
+      display: grid;
+      gap: 4px;
+      min-width: 130px;
+      z-index: 6;
+    }
+
+    .mode-wrap {
+      display: grid;
+      justify-items: center;
+      margin: 16px 0 20px;
+    }
+
+    .mode-segmented {
+      position: relative;
+      width: min(520px, 100%);
+      border: 1px solid #d1d5db;
+      border-radius: 14px;
+      background: #fff;
+      padding: 4px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      --active-index: 0;
+    }
+
+    .mode-indicator {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: calc(50% - 6px);
+      height: calc(100% - 8px);
+      border-radius: 10px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      transform: translateX(calc(var(--active-index) * 100%));
+      transition: transform 180ms ease;
+      pointer-events: none;
+    }
+
+    .mode-tab {
+      position: relative;
+      z-index: 1;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
+      padding: 9px 10px;
+      display: grid;
+      gap: 2px;
+      text-align: left;
+      cursor: pointer;
+      color: #334155;
+    }
+
+    .mode-tab[aria-selected="true"] {
+      color: #1d4ed8;
+    }
+
+    .mode-tab-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .mode-tab-desc {
+      font-size: 11px;
+      color: #64748b;
+      line-height: 1.3;
+    }
+
+    .mode-tab svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .kpi-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fff;
+      padding: 10px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    .kpi-label {
+      color: #6b7280;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .kpi-value {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #111827;
+    }
+
+    .kpi-trend {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #475569;
+    }
+
+    .trend-up { color: #15803d; }
+    .trend-down { color: #b45309; }
+
+    .command-strip {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fff;
+      padding: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .command-title {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .intel-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 16px;
+      color: #111827;
+    }
+
+    .card-sub {
+      margin: 2px 0 0;
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .stability-score {
+      margin: 0 0 6px;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+      color: #111827;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      border: 1px solid #d1d5db;
+      margin-bottom: 8px;
+    }
+
+    .status-green { background: #ecfdf3; border-color: #bbf7d0; color: #166534; }
+    .status-yellow { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+    .status-red { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+
+    .body-copy {
+      margin: 0;
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.45;
+    }
+
+    .what-is summary {
+      margin-top: 8px;
+      cursor: pointer;
+      color: #2563eb;
+      font-size: 13px;
+      user-select: none;
+    }
+
+    .what-is p {
+      margin: 6px 0 0;
+      color: #4b5563;
+      font-size: 13px;
+    }
+
+    .feed-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+      max-height: 320px;
+      overflow: auto;
+    }
+
+    .feed-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 9px;
+      background: #fff;
+    }
+
+    .sev-pill {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 2px 7px;
+      font-size: 11px;
+      border: 1px solid #d1d5db;
+      margin-bottom: 5px;
+    }
+
+    .sev-info { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+    .sev-watch { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+    .sev-critical { background: #fef2f2; border-color: #fecaca; color: #b91c1c; }
+
+    .feed-text {
+      margin: 0 0 6px;
+      font-size: 13px;
+      color: #1f2937;
+      line-height: 1.35;
+    }
+
+    .feed-link {
+      border: none;
+      background: none;
+      color: #2563eb;
+      font-size: 12px;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .feed-link:hover { text-decoration: underline; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .perf-table,
+    .model-table,
+    .cluster-table,
+    .breakdown-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .perf-table { min-width: 690px; }
+    .model-table { min-width: 760px; }
+    .cluster-table { min-width: 700px; }
+    .breakdown-table { min-width: 360px; }
+
+    .perf-table th,
+    .perf-table td,
+    .model-table th,
+    .model-table td,
+    .cluster-table th,
+    .cluster-table td,
+    .breakdown-table th,
+    .breakdown-table td {
+      padding: 8px 9px;
+      border-bottom: 1px solid #f1f5f9;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .perf-table th,
+    .model-table th,
+    .cluster-table th,
+    .breakdown-table th {
+      background: #f8fafc;
+      color: #4b5563;
+      font-weight: 600;
+    }
+
+    .perf-table tbody tr:nth-child(even) td,
+    .model-table tbody tr:nth-child(even) td {
+      background: #fcfdff;
+    }
+
+    .score-pill {
+      display: inline-flex;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 2px 7px;
+      font-size: 11px;
+      background: #f8fafc;
+      color: #334155;
+    }
+
+    .score-top {
+      background: #ecfdf3;
+      border-color: #bbf7d0;
+      color: #166534;
+    }
+
+    .signals-list {
+      display: grid;
+      gap: 7px;
+    }
+
+    .signal-row {
+      display: grid;
+      grid-template-columns: 1.5fr 0.65fr 0.65fr 0.9fr;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 8px 9px;
+      background: #fff;
+      font-size: 12px;
+    }
+
+    .impact-pill {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 2px 7px;
+      border: 1px solid #d1d5db;
+      font-size: 11px;
+      justify-self: start;
+    }
+
+    .impact-high { background: #ecfdf3; border-color: #bbf7d0; color: #166534; }
+    .impact-medium { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+    .impact-low { background: #f8fafc; border-color: #d1d5db; color: #475569; }
+
+    .helper {
+      margin-top: 8px;
+      color: #6b7280;
+      font-size: 12px;
+    }
+
+    .secondary-grid {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .flow-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .flow-stage {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 8px;
+      background: #fff;
+      font-size: 12px;
+    }
+
+    .flow-stage p {
+      margin: 2px 0 0;
+      color: #6b7280;
+    }
+
+    .bar-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 90px minmax(0, 1fr) 48px;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .bar-track {
+      height: 8px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: #93c5fd;
+      border-radius: 999px;
+    }
+
+    .cost-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 7px;
+      font-size: 13px;
+    }
+
+    .cost-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 6px;
+    }
+
+    dialog {
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      width: min(920px, 94vw);
+      max-height: 88vh;
+      padding: 0;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.2);
+    }
+
+    dialog::backdrop {
+      background: rgba(15, 23, 42, 0.34);
+    }
+
+    .modal-body {
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 8px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      display: inline-flex;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      background: #fff;
+      color: #475569;
+    }
+
+    .sample-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 7px;
+      max-height: 250px;
+      overflow: auto;
+    }
+
+    .sample-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 12px;
+      background: #fff;
+    }
+
+    .replay-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 8px;
+    }
+
+    .timeline details {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 8px;
+      background: #fff;
+    }
+
+    .timeline summary {
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1f2937;
+      user-select: none;
+    }
+
+    .timeline p,
+    .timeline ul {
+      margin: 6px 0 0;
+      font-size: 13px;
+      color: #374151;
+    }
+
+    .timeline ul {
+      padding-left: 18px;
+    }
+
+    .matters-box {
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      background: #f8fafc;
+      padding: 10px;
+    }
+
+    .matters-title {
+      margin: 0 0 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    @media (max-width: 1020px) {
+      .kpi-strip {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .main-grid,
+      .replay-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .kpi-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .control-row {
+        justify-content: flex-start;
+      }
+
+      .mode-segmented {
+        width: 100%;
+      }
+
+      .flow-row {
+        grid-template-columns: 1fr;
+      }
+
+      .signal-row {
+        grid-template-columns: 1.4fr 0.7fr 0.7fr;
+      }
+
+      .signal-row span:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="intelligence-shell">
+      <nav class="topnav">
+        <div class="nav-left">
+          <a class="logo logo-iq" href="index.html">iq</a>
+        </div>
+        <a class="nav-center nav-intel is-active" href="intelligence.html" aria-label="Open Intelligence Center" data-tooltip="Intelligence Center">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="12" cy="12" r="2.3" fill="currentColor"/>
+            <path d="M12 3.5a8.5 8.5 0 0 1 8.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M20.5 12a8.5 8.5 0 0 1-8.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.7"/>
+            <path d="M6.6 7.4l3.2 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span class="sr-only">Intelligence Center</span>
+        </a>
+        <div class="nav-right">
+          <a class="nav-link" href="index.html">Verify</a>
+          <a class="nav-link" href="queue.html">Console</a>
+          <a class="nav-link" href="workflows.html">Workflows</a>
+        </div>
+      </nav>
+
+      <header class="page-top">
+        <div class="title-row">
+          <div class="title-stack">
+            <div class="title-main">
+              <h1>Intelligence Center</h1>
+              <span class="flagship-pill">Flagship • Intelligence</span>
+            </div>
+            <p class="subtitle">Decision intelligence for underwriting performance, consistency, and portfolio risk.</p>
+          </div>
+
+          <div class="control-row" aria-label="Global controls">
+            <select class="select" aria-label="Date range" style="width:auto; min-width:138px;">
+              <option>Last 7 days</option>
+              <option selected>Last 30 days</option>
+              <option>Last 90 days</option>
+            </select>
+
+            <button id="openFilters" type="button" class="btn">Filters</button>
+
+            <details>
+              <summary class="btn" style="cursor:pointer;">Export</summary>
+              <div class="control-menu" role="menu" aria-label="Export options">
+                <button type="button" class="btn" style="justify-content:flex-start;">CSV</button>
+                <button type="button" class="btn" style="justify-content:flex-start;">PDF</button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="mode-wrap">
+          <div id="modeTabs" class="mode-segmented" role="tablist" aria-label="Intelligence mode">
+            <span class="mode-indicator" aria-hidden="true"></span>
+            <button id="tabCoaching" class="mode-tab" type="button" role="tab" aria-selected="true" aria-controls="modePanel" tabindex="0" data-mode="coaching">
+              <span class="mode-tab-title">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5h8a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2l-3 3-3-3H8a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                Optimize Team
+              </span>
+              <span class="mode-tab-desc">Personalized coaching, consistency, and next actions.</span>
+            </button>
+            <button id="tabGovernance" class="mode-tab" type="button" role="tab" aria-selected="false" aria-controls="modePanel" tabindex="-1" data-mode="governance">
+              <span class="mode-tab-title">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.8 7.8-7 10-4.2-2.2-7-5.5-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                Monitor Risk
+              </span>
+              <span class="mode-tab-desc">Drift monitoring, policy adherence, and executive-ready summaries.</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <section class="kpi-strip" aria-label="Key metrics">
+        <article class="kpi-card"><p class="kpi-label">Approval Rate</p><p class="kpi-value">67.4%</p><p class="kpi-trend trend-up">▲ +1.8% vs prior period</p></article>
+        <article class="kpi-card"><p class="kpi-label">Avg Time to Decision</p><p class="kpi-value">18.2h</p><p class="kpi-trend">▼ -1.2h improvement</p></article>
+        <article class="kpi-card"><p class="kpi-label">Escalation Rate</p><p class="kpi-value">14.1%</p><p class="kpi-trend trend-down">▲ +0.7% week over week</p></article>
+        <article class="kpi-card"><p class="kpi-label">Manual Override %</p><p class="kpi-value">9.6%</p><p class="kpi-trend trend-down">▲ +1.1% above target</p></article>
+        <article class="kpi-card"><p class="kpi-label">Portfolio Risk Index</p><p class="kpi-value">54</p><p class="kpi-trend">▼ -3 points improvement</p></article>
+        <article class="kpi-card"><p class="kpi-label">Cost per Case</p><p class="kpi-value">$3.82</p><p class="kpi-trend trend-down">▲ +$0.24 vs plan</p></article>
+      </section>
+
+      <section class="command-strip" aria-label="Command strip">
+        <span class="command-title">Quick Actions</span>
+        <button id="cmdDivergence" type="button" class="btn">Review Divergence</button>
+        <button id="cmdSignals" type="button" class="btn">Top ROI Signals</button>
+        <button id="cmdReplay" type="button" class="btn">Open Latest Replay</button>
+      </section>
+
+      <section id="modePanel" class="main-grid" aria-label="Primary intelligence panels">
+        <div class="stack">
+          <article class="intel-card" id="stabilityCard">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title">Decision Stability Index</h2>
+                <p class="card-sub" id="stabilityModeCopy"></p>
+              </div>
+            </div>
+            <p id="stabilityScore" class="stability-score">-</p>
+            <span id="stabilityStatus" class="status-pill">-</span>
+            <p id="stabilityText" class="body-copy"></p>
+            <details class="what-is">
+              <summary aria-label="What is this metric">What is this?</summary>
+              <p>A blended heuristic across overrides, escalation variance, and post-decision outcomes. Replace this with model-based calibration once labeled outcomes are available.</p>
+            </details>
+          </article>
+
+          <article class="intel-card">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title">Insights Feed</h2>
+                <p id="feedModeCopy" class="card-sub"></p>
+              </div>
+            </div>
+            <ul id="insightsFeed" class="feed-list"></ul>
+          </article>
+        </div>
+
+        <div class="stack">
+          <article class="intel-card">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title">Team Performance Snapshot</h2>
+                <p id="teamModeCopy" class="card-sub"></p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table id="teamTable" class="perf-table"></table>
+            </div>
+          </article>
+
+          <article class="intel-card">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title">Signal Impact Index</h2>
+                <p id="signalModeCopy" class="card-sub"></p>
+              </div>
+            </div>
+            <div id="signalImpactList" class="signals-list"></div>
+            <p id="signalHelper" class="helper"></p>
+          </article>
+        </div>
+      </section>
+
+      <section id="signalModelSection" class="intel-card" style="margin-bottom: 12px;">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title">Signal Effectiveness Model</h2>
+            <p id="signalModelCopy" class="card-sub">Heuristic signal scoring with effectiveness and ROI placeholders.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="signalModelTable" class="model-table"></table>
+        </div>
+        <p id="signalModelHelper" class="helper">Heuristic model (v0). Replace with outcome-based learning when labels exist.</p>
+      </section>
+
+      <section id="divergenceSection" class="intel-card" style="margin-bottom: 12px;">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title">Case Divergence Detection</h2>
+            <p id="divergenceCopy" class="card-sub">Clusters with elevated decision variance across underwriters.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="clusterTable" class="cluster-table"></table>
+        </div>
+      </section>
+
+      <section class="secondary-grid">
+        <article class="intel-card">
+          <h2 class="card-title" style="margin-bottom: 10px;">Process Flow</h2>
+          <div class="flow-row">
+            <div class="flow-stage"><strong>Submitted</strong><p>1,240 cases · 0.4h avg</p></div>
+            <div class="flow-stage"><strong>Verified</strong><p>1,112 cases · 1.8h avg</p></div>
+            <div class="flow-stage"><strong>Reviewed</strong><p>918 cases · 6.2h avg</p></div>
+            <div class="flow-stage"><strong>Escalated</strong><p>164 cases · 9.1h avg</p></div>
+            <div class="flow-stage"><strong>Decided</strong><p>842 cases · 18.2h avg</p></div>
+          </div>
+        </article>
+
+        <article class="intel-card">
+          <h2 class="card-title" style="margin-bottom: 10px;">Portfolio Risk</h2>
+          <div class="bar-list">
+            <div class="bar-row"><span>Low</span><div class="bar-track"><div class="bar-fill" style="width: 41%;"></div></div><span>41%</span></div>
+            <div class="bar-row"><span>Medium</span><div class="bar-track"><div class="bar-fill" style="width: 33%;"></div></div><span>33%</span></div>
+            <div class="bar-row"><span>High</span><div class="bar-track"><div class="bar-fill" style="width: 19%;"></div></div><span>19%</span></div>
+            <div class="bar-row"><span>Severe</span><div class="bar-track"><div class="bar-fill" style="width: 7%;"></div></div><span>7%</span></div>
+          </div>
+        </article>
+
+        <article class="intel-card">
+          <h2 class="card-title" style="margin-bottom: 10px;">Cost &amp; ROI</h2>
+          <ul class="cost-list">
+            <li><span>Email verification</span><strong>$0.08 / case</strong></li>
+            <li><span>Phone intelligence</span><strong>$0.12 / case</strong></li>
+            <li><span>Domain intelligence</span><strong>$0.11 / case</strong></li>
+            <li><span>Address checks</span><strong>$0.16 / case</strong></li>
+            <li><span>Document verification</span><strong>$1.72 / case</strong></li>
+            <li><span>Manual review time</span><strong>$1.63 / case</strong></li>
+          </ul>
+        </article>
+      </section>
+    </div>
+  </div>
+
+  <dialog id="filtersModal" aria-label="Filters modal">
+    <div class="modal-body">
+      <div class="modal-head">
+        <h2 style="font-size: 18px; margin: 0;">Filters</h2>
+        <button id="closeFilters" type="button" class="btn">Close</button>
+      </div>
+      <p class="muted">Filter controls are a stub in this prototype.</p>
+      <label class="row"><input type="checkbox" checked /> Include approved cases</label>
+      <label class="row"><input type="checkbox" checked /> Include escalated cases</label>
+      <label class="row"><input type="checkbox" /> Exclude severe tier</label>
+    </div>
+  </dialog>
+
+  <dialog id="clusterModal" aria-label="Cluster details">
+    <div class="modal-body">
+      <div class="modal-head">
+        <div>
+          <h2 id="clusterTitle" style="font-size: 18px; margin: 0;">Cluster details</h2>
+          <p id="clusterSubtitle" class="card-sub" style="margin-top: 4px;"></p>
+        </div>
+        <button id="closeCluster" type="button" class="btn">Close</button>
+      </div>
+
+      <div id="clusterDefChips" class="chip-row"></div>
+
+      <div class="table-wrap">
+        <table id="clusterBreakdownTable" class="breakdown-table"></table>
+      </div>
+
+      <ul id="clusterSampleList" class="sample-list"></ul>
+    </div>
+  </dialog>
+
+  <dialog id="replayModal" aria-label="Decision replay">
+    <div class="modal-body">
+      <div class="modal-head">
+        <div>
+          <h2 id="replayTitle" style="font-size: 18px; margin: 0;">Decision Replay</h2>
+          <p id="replaySub" class="card-sub" style="margin-top: 4px;"></p>
+        </div>
+        <div class="row" style="gap: 6px;">
+          <button id="copyReplaySummary" type="button" class="btn">Copy summary</button>
+          <button id="closeReplay" type="button" class="btn">Close</button>
+        </div>
+      </div>
+
+      <div class="replay-layout">
+        <div>
+          <h3 class="card-title" style="font-size: 15px; margin-bottom: 8px;">Timeline</h3>
+          <div id="replayTimeline" class="timeline"></div>
+        </div>
+
+        <div class="stack">
+          <article class="intel-card" style="padding: 10px;">
+            <h3 class="card-title" style="font-size: 15px; margin-bottom: 8px;">Evidence &amp; Similar Cases</h3>
+            <div id="replayEvidence" class="chip-row"></div>
+            <ul id="replaySimilar" class="sample-list" style="margin-top: 10px;"></ul>
+          </article>
+
+          <article class="matters-box">
+            <p class="matters-title" id="mattersTitle">Coaching takeaway</p>
+            <p id="mattersText" class="body-copy" style="font-size: 13px;"></p>
+          </article>
+
+          <article class="intel-card" style="padding: 10px;">
+            <h3 class="card-title" style="font-size: 15px; margin-bottom: 6px;">Policy at time of decision</h3>
+            <p id="policySnippet" class="body-copy" style="font-size: 13px;"></p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      var path = window.location.pathname || "";
+      var current = path.split("/").pop() || "index.html";
+      document.querySelectorAll(".nav-link, .nav-intel, .intel-nav-link").forEach(function (el) {
+        var href = el.getAttribute("href") || "";
+        var target = href.split("/").pop();
+        if (target && target === current) {
+          el.classList.add("is-active");
+        }
+      });
+    })();
+
+    const MODE_KEY = "iq:intelligenceMode";
+    const TIME_VALUE_USD_PER_HOUR = 60;
+
+    const POLICY = {
+      scrutinyDomainAgeDays: 90,
+      voipEscalationWeight: 0.18,
+      severeRiskAutoEscalate: true,
+      minSignalsForApprove: 3
+    };
+
+    const UNDERWRITERS = ["Underwriter A", "Underwriter B", "Underwriter C", "Underwriter D", "Underwriter E"];
+    const INDUSTRIES = ["Retail", "Travel", "Supplements", "Crypto Services", "SaaS", "Gaming"];
+    const REGIONS = ["West", "Central", "East", "South"];
+    const RISK_BANDS = ["low", "medium", "high", "severe"];
+    const SIGNAL_NAMES = ["Domain Age", "Registrar", "SSL Validity", "VOIP", "Sanctions", "Business Registry", "Address Type", "Website Keywords"];
+
+    const SIGNAL_MODEL_INPUT = [
+      { key: "domain_age", name: "Domain Age", usage_rate: 0.74, correlation_to_escalation: 0.79, correlation_to_override: 0.68, time_cost_seconds: 14, provider_cost_usd: 0.08, coachingNote: "Use early for thin-file merchants to anchor review depth.", governanceNote: "High leverage at low cost; maintain in baseline policy." },
+      { key: "registrar", name: "Registrar", usage_rate: 0.58, correlation_to_escalation: 0.52, correlation_to_override: 0.49, time_cost_seconds: 9, provider_cost_usd: 0.04, coachingNote: "Pair with domain age when signals are mixed.", governanceNote: "Moderate leverage; consider weighted usage in drift reports." },
+      { key: "ssl", name: "SSL Validity", usage_rate: 0.67, correlation_to_escalation: 0.66, correlation_to_override: 0.51, time_cost_seconds: 6, provider_cost_usd: 0.03, coachingNote: "Flag expiring certs as secondary risk cue.", governanceNote: "Useful secondary control with strong cost profile." },
+      { key: "voip", name: "VOIP", usage_rate: 0.63, correlation_to_escalation: 0.84, correlation_to_override: 0.75, time_cost_seconds: 16, provider_cost_usd: 0.11, coachingNote: "Escalate when VOIP and new domain co-occur.", governanceNote: "Critical for policy adherence in fraud-sensitive segments." },
+      { key: "sanctions", name: "Sanctions", usage_rate: 0.44, correlation_to_escalation: 0.91, correlation_to_override: 0.86, time_cost_seconds: 18, provider_cost_usd: 0.15, coachingNote: "Document rationale even on clear negatives.", governanceNote: "Highest risk leverage; mandatory evidence trail recommended." },
+      { key: "business_registry", name: "Business Registry", usage_rate: 0.53, correlation_to_escalation: 0.73, correlation_to_override: 0.62, time_cost_seconds: 22, provider_cost_usd: 0.14, coachingNote: "Use to resolve borderline legitimacy signals.", governanceNote: "Strong risk-to-cost tradeoff; monitor provider latency." },
+      { key: "address_type", name: "Address Type", usage_rate: 0.48, correlation_to_escalation: 0.57, correlation_to_override: 0.55, time_cost_seconds: 20, provider_cost_usd: 0.09, coachingNote: "Cross-check with industry and geo risk cues.", governanceNote: "Moderate leverage with occasional false-positive drift." },
+      { key: "website_keywords", name: "Website Keywords", usage_rate: 0.39, correlation_to_escalation: 0.49, correlation_to_override: 0.44, time_cost_seconds: 27, provider_cost_usd: 0.12, coachingNote: "Use as directional signal only; avoid over-weighting.", governanceNote: "Lower leverage; retain as supplemental control." }
+    ];
+
+    const MODE_CONTENT = {
+      coaching: {
+        stabilityCopy: "Consistency signal tuned for coaching and targeted review.",
+        stabilityText: "Patterns suggest several underwriters can improve consistency on borderline merchant cases.",
+        feedCopy: "Actionable coaching signals from the last 30 days.",
+        teamCopy: "Track outcomes and coaching opportunities by underwriter.",
+        signalCopy: "Signal usage patterns to guide underwriter coaching decisions.",
+        signalHelper: "Heuristic placeholder: combines signal confidence, usage frequency, and override correlation for coaching review.",
+        signalModelCopy: "Prioritize high-effectiveness signals while coaching underwriters on practical usage.",
+        divergenceCopy: "Identify clusters where team calibration would improve decision consistency.",
+        mattersTitle: "Coaching takeaway"
+      },
+      governance: {
+        stabilityCopy: "Monitor policy drift and governance readiness across underwriting cohorts.",
+        stabilityText: "Portfolio-level drift is emerging in approval behavior and override patterns; governance review is recommended.",
+        feedCopy: "Portfolio and policy drift indicators from the last 30 days.",
+        teamCopy: "Variance and controls view across underwriting operations.",
+        signalCopy: "Signal dependency monitoring to support governance controls.",
+        signalHelper: "Heuristic placeholder: estimates governance impact from signal dependency shifts and outcome variance.",
+        signalModelCopy: "Evaluate cost-to-risk leverage and identify top ROI controls for policy coverage.",
+        divergenceCopy: "Detect decision drift clusters where policy calibration is warranted.",
+        mattersTitle: "Governance takeaway"
+      }
+    };
+
+    const TEAM_ROWS = [
+      { name: "Underwriter A", cases: 128, approvals: "71%", escalations: "12%", avgTime: "16.2h", consistency: 82, coachingNote: "Calibrate overrides on low-domain-age merchants", variance: "+1.6%" },
+      { name: "Underwriter B", cases: 119, approvals: "64%", escalations: "15%", avgTime: "18.9h", consistency: 77, coachingNote: "Improve notes on sanctions escalations", variance: "-0.4%" },
+      { name: "Underwriter C", cases: 104, approvals: "69%", escalations: "17%", avgTime: "20.1h", consistency: 72, coachingNote: "Reduce manual overrides on VOIP-heavy leads", variance: "+3.2%" },
+      { name: "Underwriter D", cases: 136, approvals: "66%", escalations: "13%", avgTime: "17.4h", consistency: 81, coachingNote: "Strong handling of high-risk industry reviews", variance: "-1.1%" },
+      { name: "Underwriter E", cases: 98, approvals: "62%", escalations: "16%", avgTime: "19.6h", consistency: 75, coachingNote: "Tighten consistency on registry weak signals", variance: "+0.7%" }
+    ];
+
+    const tabCoaching = document.getElementById("tabCoaching");
+    const tabGovernance = document.getElementById("tabGovernance");
+    const modeTabs = document.getElementById("modeTabs");
+
+    const stabilityModeCopy = document.getElementById("stabilityModeCopy");
+    const stabilityText = document.getElementById("stabilityText");
+    const stabilityScore = document.getElementById("stabilityScore");
+    const stabilityStatus = document.getElementById("stabilityStatus");
+
+    const feedModeCopy = document.getElementById("feedModeCopy");
+    const insightsFeed = document.getElementById("insightsFeed");
+
+    const teamModeCopy = document.getElementById("teamModeCopy");
+    const teamTable = document.getElementById("teamTable");
+
+    const signalModeCopy = document.getElementById("signalModeCopy");
+    const signalHelper = document.getElementById("signalHelper");
+    const signalImpactList = document.getElementById("signalImpactList");
+
+    const signalModelSection = document.getElementById("signalModelSection");
+    const signalModelCopy = document.getElementById("signalModelCopy");
+    const signalModelTable = document.getElementById("signalModelTable");
+    const signalModelHelper = document.getElementById("signalModelHelper");
+
+    const divergenceSection = document.getElementById("divergenceSection");
+    const divergenceCopy = document.getElementById("divergenceCopy");
+    const clusterTable = document.getElementById("clusterTable");
+
+    const cmdDivergence = document.getElementById("cmdDivergence");
+    const cmdSignals = document.getElementById("cmdSignals");
+    const cmdReplay = document.getElementById("cmdReplay");
+
+    const openFilters = document.getElementById("openFilters");
+    const closeFilters = document.getElementById("closeFilters");
+    const filtersModal = document.getElementById("filtersModal");
+
+    const clusterModal = document.getElementById("clusterModal");
+    const clusterTitle = document.getElementById("clusterTitle");
+    const clusterSubtitle = document.getElementById("clusterSubtitle");
+    const clusterDefChips = document.getElementById("clusterDefChips");
+    const clusterBreakdownTable = document.getElementById("clusterBreakdownTable");
+    const clusterSampleList = document.getElementById("clusterSampleList");
+    const closeCluster = document.getElementById("closeCluster");
+
+    const replayModal = document.getElementById("replayModal");
+    const replayTitle = document.getElementById("replayTitle");
+    const replaySub = document.getElementById("replaySub");
+    const replayTimeline = document.getElementById("replayTimeline");
+    const replayEvidence = document.getElementById("replayEvidence");
+    const replaySimilar = document.getElementById("replaySimilar");
+    const policySnippet = document.getElementById("policySnippet");
+    const mattersTitle = document.getElementById("mattersTitle");
+    const mattersText = document.getElementById("mattersText");
+    const closeReplay = document.getElementById("closeReplay");
+    const copyReplaySummary = document.getElementById("copyReplaySummary");
+
+    const state = {
+      mode: "coaching",
+      cases: [],
+      clusters: [],
+      signalScores: [],
+      selectedClusterId: null,
+      selectedReplayCaseId: null
+    };
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function seededRandom(seed) {
+      let s = seed % 2147483647;
+      if (s <= 0) s += 2147483646;
+      return function () {
+        s = s * 16807 % 2147483647;
+        return (s - 1) / 2147483646;
+      };
+    }
+
+    function pick(rng, arr) {
+      return arr[Math.floor(rng() * arr.length)];
+    }
+
+    function domainAgeBand(days) {
+      if (days < 90) return "0-90d";
+      if (days < 365) return "91-365d";
+      return "365d+";
+    }
+
+    function recommendationForCase(item) {
+      const hasVoip = item.signals_present.includes("VOIP");
+      const hasSanctions = item.signals_present.includes("Sanctions");
+      const severe = item.risk_band === "severe";
+      const high = item.risk_band === "high";
+      const youngDomain = item.domain_age_days < POLICY.scrutinyDomainAgeDays;
+
+      if (severe || hasSanctions) return "escalate";
+      if ((high && hasVoip) || (youngDomain && hasVoip)) return "escalate";
+      if (high) return "decline";
+      return "approve";
+    }
+
+    function decideWithBias(rng, recommended, underwriter) {
+      const bias = {
+        "Underwriter A": 0.08,
+        "Underwriter B": -0.02,
+        "Underwriter C": 0.12,
+        "Underwriter D": -0.05,
+        "Underwriter E": 0.03
+      }[underwriter] || 0;
+      const roll = rng() + bias;
+      if (recommended === "approve") {
+        if (roll < 0.74) return "approve";
+        if (roll < 0.89) return "escalate";
+        return "decline";
+      }
+      if (recommended === "decline") {
+        if (roll < 0.64) return "decline";
+        if (roll < 0.88) return "escalate";
+        return "approve";
+      }
+      if (roll < 0.68) return "escalate";
+      return roll < 0.86 ? "decline" : "approve";
+    }
+
+    function generateCases(count) {
+      const rng = seededRandom(94721);
+      const now = Date.now();
+      const rows = [];
+
+      for (let i = 0; i < count; i += 1) {
+        const underwriter = UNDERWRITERS[i % UNDERWRITERS.length];
+        const industry = pick(rng, INDUSTRIES);
+        const region = pick(rng, REGIONS);
+        const riskBand = pick(rng, RISK_BANDS);
+        const domainAgeDays = Math.floor(rng() * 1100) + 14;
+        const signals = SIGNAL_NAMES.filter(function () {
+          return rng() > 0.36;
+        });
+        if (!signals.length) signals.push("Domain Age");
+
+        const signalPatternId = signals.slice().sort().slice(0, 3).join("+").toLowerCase().replace(/\s+/g, "_");
+        const recommended = recommendationForCase({
+          risk_band: riskBand,
+          domain_age_days: domainAgeDays,
+          signals_present: signals
+        });
+        const decision = decideWithBias(rng, recommended, underwriter);
+        const ts = new Date(now - Math.floor(rng() * 1000 * 60 * 60 * 24 * 35)).toISOString();
+
+        const reasonCodes = [];
+        if (domainAgeDays < POLICY.scrutinyDomainAgeDays) reasonCodes.push("young_domain");
+        if (signals.includes("VOIP")) reasonCodes.push("voip_detected");
+        if (signals.includes("Sanctions")) reasonCodes.push("sanctions_screen");
+        if (riskBand === "high" || riskBand === "severe") reasonCodes.push("risk_band_high");
+        if (!reasonCodes.length) reasonCodes.push("baseline_clear");
+
+        rows.push({
+          case_id: "case_" + String(i + 1).padStart(4, "0"),
+          underwriter: underwriter,
+          decision: decision,
+          risk_band: riskBand,
+          industry: industry,
+          domain_age_days: domainAgeDays,
+          region: region,
+          signals_present: signals,
+          signal_pattern_id: signalPatternId,
+          timestamp: ts,
+          recommended_decision: recommended,
+          reason_codes: reasonCodes
+        });
+      }
+
+      return rows;
+    }
+
+    function computeSignalScores(signals) {
+      return signals.map(function (signal) {
+        const timeCostUsd = (signal.time_cost_seconds / 3600) * TIME_VALUE_USD_PER_HOUR;
+        const effectiveness = Math.round(100 * (0.5 * signal.correlation_to_escalation + 0.3 * signal.correlation_to_override + 0.2 * signal.usage_rate));
+        const rawRoi = effectiveness / (1 + signal.provider_cost_usd + timeCostUsd);
+        const roi = Math.round(clamp(rawRoi, 0, 10) * 10);
+        return Object.assign({}, signal, {
+          effectiveness_score: effectiveness,
+          roi_score: roi,
+          usage_pct: Math.round(signal.usage_rate * 100),
+          time_cost_usd: timeCostUsd
+        });
+      });
+    }
+
+    function buildClusters(cases) {
+      const clusterMap = {};
+
+      cases.forEach(function (item) {
+        const keyParts = [
+          item.industry,
+          domainAgeBand(item.domain_age_days),
+          item.region,
+          item.risk_band,
+          item.signal_pattern_id
+        ];
+        const key = keyParts.join("|");
+        if (!clusterMap[key]) {
+          clusterMap[key] = {
+            id: key,
+            definition: {
+              industry: item.industry,
+              domain_age_band: domainAgeBand(item.domain_age_days),
+              geo_region: item.region,
+              risk_band: item.risk_band,
+              signal_pattern_id: item.signal_pattern_id
+            },
+            cases: []
+          };
+        }
+        clusterMap[key].cases.push(item);
+      });
+
+      return Object.keys(clusterMap).map(function (key) {
+        const cluster = clusterMap[key];
+        const casesInCluster = cluster.cases;
+        const approvals = casesInCluster.filter(function (c) { return c.decision === "approve"; }).length;
+        const escalations = casesInCluster.filter(function (c) { return c.decision === "escalate"; }).length;
+
+        const byUnderwriter = {};
+        casesInCluster.forEach(function (c) {
+          if (!byUnderwriter[c.underwriter]) {
+            byUnderwriter[c.underwriter] = { total: 0, approvals: 0, escalations: 0 };
+          }
+          byUnderwriter[c.underwriter].total += 1;
+          if (c.decision === "approve") byUnderwriter[c.underwriter].approvals += 1;
+          if (c.decision === "escalate") byUnderwriter[c.underwriter].escalations += 1;
+        });
+
+        const rates = Object.keys(byUnderwriter).map(function (name) {
+          const row = byUnderwriter[name];
+          return row.total ? row.approvals / row.total : 0;
+        });
+        const maxRate = rates.length ? Math.max.apply(null, rates) : 0;
+        const minRate = rates.length ? Math.min.apply(null, rates) : 0;
+        const variance = Math.round((maxRate - minRate) * 100);
+
+        return {
+          id: cluster.id,
+          definition: cluster.definition,
+          case_count: casesInCluster.length,
+          approval_rate: Math.round((approvals / casesInCluster.length) * 100),
+          escalation_rate: Math.round((escalations / casesInCluster.length) * 100),
+          decision_variance_score: clamp(variance, 0, 100),
+          underwriter_breakdown: byUnderwriter,
+          sample_cases: casesInCluster.slice().sort(function (a, b) {
+            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+          }).slice(0, 8)
+        };
+      }).sort(function (a, b) {
+        if (b.decision_variance_score !== a.decision_variance_score) {
+          return b.decision_variance_score - a.decision_variance_score;
+        }
+        return b.case_count - a.case_count;
+      });
+    }
+
+    function getSeverityClass(level) {
+      if (level === "critical") return "sev-critical";
+      if (level === "watch") return "sev-watch";
+      return "sev-info";
+    }
+
+    function buildInsights(mode, cases, clusters) {
+      const latest = cases.slice().sort(function (a, b) {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
+      const byId = function (idx) { return latest[Math.min(idx, latest.length - 1)] || latest[0]; };
+      const c1 = clusters[0];
+      const c2 = clusters[1];
+
+      if (mode === "governance") {
+        return [
+          { severity: "watch", text: "Approval mix shifted toward younger domains while baseline thresholds remained unchanged.", caseId: byId(0).case_id },
+          { severity: "critical", text: "Override utilization variance widened across underwriting cohorts in two high-volume clusters.", caseId: c1 ? c1.sample_cases[0].case_id : byId(1).case_id },
+          { severity: "watch", text: "VOIP signal dependency declined in segments with increasing fraud exposure.", caseId: byId(2).case_id },
+          { severity: "watch", text: "High-risk industry approvals are trending above governance baseline tolerance.", caseId: c2 ? c2.sample_cases[0].case_id : byId(3).case_id },
+          { severity: "critical", text: "Cost per case rose due to repeated documentation and provider retry loops.", caseId: byId(4).case_id },
+          { severity: "info", text: "Escalation path adherence remains stable where sanctions signals were captured in notes.", caseId: byId(5).case_id },
+          { severity: "watch", text: "Decision consistency dispersion increased in registry-low-confidence cohorts.", caseId: byId(6).case_id }
+        ];
+      }
+
+      return [
+        { severity: "watch", text: "Approval rate improved while average domain age declined in retail micro-merchants.", caseId: byId(0).case_id },
+        { severity: "critical", text: "Manual override frequency is rising in one cohort of high-risk submissions.", caseId: c1 ? c1.sample_cases[0].case_id : byId(1).case_id },
+        { severity: "info", text: "VOIP detection usage dropped 9% in recently reviewed phone-heavy applications.", caseId: byId(2).case_id },
+        { severity: "watch", text: "High-risk industry approvals are trending above team baseline in two clusters.", caseId: c2 ? c2.sample_cases[0].case_id : byId(3).case_id },
+        { severity: "watch", text: "Cost per case climbed due to repeated document verification loops.", caseId: byId(4).case_id },
+        { severity: "info", text: "Escalation quality improved where sanctions checks were cited in notes.", caseId: byId(5).case_id },
+        { severity: "critical", text: "Consistency score dropped for same-day reapplications with sparse web history.", caseId: byId(6).case_id }
+      ];
+    }
+
+    function renderInsights(mode) {
+      const insights = buildInsights(mode, state.cases, state.clusters);
+      insightsFeed.innerHTML = insights.map(function (item) {
+        const label = item.severity.charAt(0).toUpperCase() + item.severity.slice(1);
+        return '<li class="feed-item">' +
+          '<span class="sev-pill ' + getSeverityClass(item.severity) + '">' + label + '</span>' +
+          '<p class="feed-text">' + item.text + '</p>' +
+          '<button type="button" class="feed-link" data-open-replay="' + item.caseId + '">View cases</button>' +
+        '</li>';
+      }).join("");
+    }
+
+    function renderTeamTable(mode) {
+      const extraHeader = mode === "governance" ? "Variance vs Team" : "Coaching Note";
+      const extraKey = mode === "governance" ? "variance" : "coachingNote";
+
+      teamTable.innerHTML = '<thead><tr>' +
+        '<th>Underwriter</th>' +
+        '<th>Cases</th>' +
+        '<th>Approvals %</th>' +
+        '<th>Escalations %</th>' +
+        '<th>Avg Time</th>' +
+        '<th>Consistency Score</th>' +
+        '<th>' + extraHeader + '</th>' +
+      '</tr></thead><tbody>' +
+      TEAM_ROWS.map(function (row) {
+        return '<tr>' +
+          '<td>' + row.name + '</td>' +
+          '<td>' + row.cases + '</td>' +
+          '<td>' + row.approvals + '</td>' +
+          '<td>' + row.escalations + '</td>' +
+          '<td>' + row.avgTime + '</td>' +
+          '<td>' + row.consistency + '</td>' +
+          '<td>' + row[extraKey] + '</td>' +
+        '</tr>';
+      }).join("") + '</tbody>';
+    }
+
+    function impactLabel(score) {
+      if (score >= 80) return { label: "High Impact", klass: "impact-high" };
+      if (score >= 60) return { label: "Medium Impact", klass: "impact-medium" };
+      return { label: "Low Impact", klass: "impact-low" };
+    }
+
+    function renderSignalImpact() {
+      signalImpactList.innerHTML = state.signalScores.map(function (row) {
+        const impact = impactLabel(row.effectiveness_score);
+        return '<div class="signal-row">' +
+          '<span>' + row.name + '</span>' +
+          '<span>' + row.effectiveness_score + '</span>' +
+          '<span>' + row.usage_pct + '%</span>' +
+          '<span class="impact-pill ' + impact.klass + '">' + impact.label + '</span>' +
+        '</div>';
+      }).join("");
+    }
+
+    function renderSignalModel(mode) {
+      const sortedByRoi = state.signalScores.slice().sort(function (a, b) {
+        return b.roi_score - a.roi_score;
+      });
+      const top3 = sortedByRoi.slice(0, 3).map(function (s) { return s.key; });
+
+      signalModelTable.innerHTML = '<thead><tr>' +
+        '<th>Signal</th>' +
+        '<th>Effectiveness</th>' +
+        '<th>ROI</th>' +
+        '<th>Usage %</th>' +
+        '<th>Cost (time + $)</th>' +
+        '<th>Notes</th>' +
+      '</tr></thead><tbody>' +
+      state.signalScores.map(function (row) {
+        const costText = '$' + row.provider_cost_usd.toFixed(2) + ' + $' + row.time_cost_usd.toFixed(2);
+        const note = mode === 'governance' ? row.governanceNote : row.coachingNote;
+        const roiClass = mode === "governance" && top3.includes(row.key) ? "score-pill score-top" : "score-pill";
+        return '<tr>' +
+          '<td>' + row.name + '</td>' +
+          '<td><span class="score-pill">' + row.effectiveness_score + '</span></td>' +
+          '<td><span class="' + roiClass + '">' + row.roi_score + '</span></td>' +
+          '<td>' + row.usage_pct + '%</td>' +
+          '<td>' + costText + '</td>' +
+          '<td>' + note + '</td>' +
+        '</tr>';
+      }).join("") + '</tbody>';
+
+      signalModelHelper.textContent = "Heuristic model (v0). Replace with outcome-based learning when labels exist.";
+    }
+
+    function renderClusters() {
+      const top = state.clusters.slice(0, 6);
+      clusterTable.innerHTML = '<thead><tr>' +
+        '<th>Cluster</th>' +
+        '<th>Cases</th>' +
+        '<th>Approval %</th>' +
+        '<th>Escalation %</th>' +
+        '<th>Variance Score</th>' +
+        '<th>View cluster</th>' +
+      '</tr></thead><tbody>' +
+      top.map(function (cluster) {
+        const d = cluster.definition;
+        const name = d.industry + ' · ' + d.domain_age_band + ' · ' + d.geo_region;
+        return '<tr>' +
+          '<td>' + name + '</td>' +
+          '<td>' + cluster.case_count + '</td>' +
+          '<td>' + cluster.approval_rate + '%</td>' +
+          '<td>' + cluster.escalation_rate + '%</td>' +
+          '<td><span class="score-pill">' + cluster.decision_variance_score + '</span></td>' +
+          '<td><button type="button" class="feed-link" data-open-cluster="' + cluster.id.replace(/"/g, '&quot;') + '">View cluster</button></td>' +
+        '</tr>';
+      }).join("") + '</tbody>';
+    }
+
+    function openCluster(clusterId) {
+      const cluster = state.clusters.find(function (c) { return c.id === clusterId; });
+      if (!cluster) return;
+
+      state.selectedClusterId = clusterId;
+      const d = cluster.definition;
+      clusterTitle.textContent = 'Cluster: ' + d.industry + ' · ' + d.domain_age_band + ' · ' + d.geo_region;
+      clusterSubtitle.textContent = document.documentElement.getAttribute('data-mode') === 'governance'
+        ? 'Policy calibration recommended for this variance profile.'
+        : 'Review similar decisions to improve team alignment.';
+
+      clusterDefChips.innerHTML = [
+        'Industry: ' + d.industry,
+        'Domain band: ' + d.domain_age_band,
+        'Region: ' + d.geo_region,
+        'Risk: ' + d.risk_band,
+        'Pattern: ' + d.signal_pattern_id
+      ].map(function (chip) {
+        return '<span class="chip">' + chip + '</span>';
+      }).join('');
+
+      const names = Object.keys(cluster.underwriter_breakdown);
+      clusterBreakdownTable.innerHTML = '<thead><tr><th>Underwriter</th><th>Cases</th><th>Approval %</th><th>Escalation %</th></tr></thead><tbody>' +
+        names.map(function (name) {
+          const row = cluster.underwriter_breakdown[name];
+          const approvalRate = row.total ? Math.round((row.approvals / row.total) * 100) : 0;
+          const escalationRate = row.total ? Math.round((row.escalations / row.total) * 100) : 0;
+          return '<tr><td>' + name + '</td><td>' + row.total + '</td><td>' + approvalRate + '%</td><td>' + escalationRate + '%</td></tr>';
+        }).join('') + '</tbody>';
+
+      clusterSampleList.innerHTML = cluster.sample_cases.map(function (item) {
+        return '<li class="sample-item">' +
+          '<span><strong>' + item.case_id + '</strong> · ' + item.decision + ' · ' + item.risk_band + '</span>' +
+          '<button type="button" class="btn" data-open-replay="' + item.case_id + '">Replay</button>' +
+        '</li>';
+      }).join('');
+
+      if (typeof clusterModal.showModal === 'function') clusterModal.showModal();
+    }
+
+    function buildReplayTimeline(caseRow) {
+      const ts = new Date(caseRow.timestamp);
+      const verifyTs = new Date(ts.getTime() + 26 * 60 * 1000);
+      const summaryTs = new Date(verifyTs.getTime() + 14 * 60 * 1000);
+      const actionTs = new Date(summaryTs.getTime() + 42 * 60 * 1000);
+      const finalTs = new Date(actionTs.getTime() + 57 * 60 * 1000);
+
+      return [
+        {
+          title: 'Submitted',
+          body: '<p>Application submitted at ' + ts.toLocaleString() + ' for ' + caseRow.industry + ' in ' + caseRow.region + '.</p>'
+        },
+        {
+          title: 'Verifications run',
+          body: '<ul>' + caseRow.signals_present.map(function (s) {
+            return '<li>' + s + ' checked at ' + verifyTs.toLocaleTimeString() + '</li>';
+          }).join('') + '</ul>'
+        },
+        {
+          title: 'Risk summary generated',
+          body: '<p>Risk summary flagged ' + caseRow.reason_codes.join(', ') + ' with recommended decision: <strong>' + caseRow.recommended_decision + '</strong>.</p>'
+        },
+        {
+          title: 'Underwriter actions',
+          body: '<p>' + caseRow.underwriter + ' reviewed evidence, added notes, and marked ' + caseRow.decision + ' at ' + actionTs.toLocaleTimeString() + '.</p>'
+        },
+        {
+          title: 'Final decision + reason codes',
+          body: '<p>Decision: <strong>' + caseRow.decision + '</strong> at ' + finalTs.toLocaleString() + '.</p><p>Reason codes: ' + caseRow.reason_codes.join(', ') + '.</p>'
+        }
+      ];
+    }
+
+    function openReplay(caseId) {
+      const row = state.cases.find(function (c) { return c.case_id === caseId; });
+      if (!row) return;
+
+      state.selectedReplayCaseId = caseId;
+
+      replayTitle.textContent = 'Decision Replay - Case ' + caseId;
+      replaySub.textContent = row.industry + ' · ' + row.risk_band + ' risk · ' + row.underwriter;
+
+      const timeline = buildReplayTimeline(row);
+      replayTimeline.innerHTML = timeline.map(function (step, index) {
+        return '<details' + (index === 0 ? ' open' : '') + '><summary>' + step.title + '</summary>' + step.body + '</details>';
+      }).join('');
+
+      replayEvidence.innerHTML = row.signals_present.map(function (signal) {
+        return '<span class="chip">' + signal + '</span>';
+      }).join('');
+
+      const similar = state.cases
+        .filter(function (c) {
+          return c.case_id !== caseId &&
+            c.industry === row.industry &&
+            c.risk_band === row.risk_band;
+        })
+        .slice(0, 5);
+
+      replaySimilar.innerHTML = similar.map(function (c) {
+        return '<li class="sample-item"><span><strong>' + c.case_id + '</strong> · ' + c.decision + ' · ' + c.risk_band + ' · ' + c.underwriter + '</span><button type="button" class="btn" data-open-replay="' + c.case_id + '">Replay</button></li>';
+      }).join('');
+
+      policySnippet.textContent =
+        'Policy baseline: domain_age < ' + POLICY.scrutinyDomainAgeDays +
+        'd increases scrutiny; VOIP adds escalation weight (' + POLICY.voipEscalationWeight +
+        '); severe risk escalates by default.';
+
+      const mode = document.documentElement.getAttribute('data-mode') || 'coaching';
+      mattersTitle.textContent = MODE_CONTENT[mode].mattersTitle;
+      mattersText.textContent = mode === 'coaching'
+        ? 'Coaching takeaway: align decision rationale with similar cases and explicitly document why overrides are justified.'
+        : 'Governance takeaway: verify decision alignment with active policy thresholds and variance tolerance for this cluster.';
+
+      if (typeof replayModal.showModal === 'function') replayModal.showModal();
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise(function (resolve, reject) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          resolve();
+        } catch (e) {
+          reject(e);
+        } finally {
+          document.body.removeChild(ta);
+        }
+      });
+    }
+
+    function setMode(mode) {
+      const normalized = mode === 'governance' ? 'governance' : 'coaching';
+      state.mode = normalized;
+      document.documentElement.setAttribute('data-mode', normalized);
+      localStorage.setItem(MODE_KEY, normalized);
+
+      modeTabs.style.setProperty('--active-index', normalized === 'governance' ? '1' : '0');
+
+      tabCoaching.setAttribute('aria-selected', String(normalized === 'coaching'));
+      tabGovernance.setAttribute('aria-selected', String(normalized === 'governance'));
+      tabCoaching.tabIndex = normalized === 'coaching' ? 0 : -1;
+      tabGovernance.tabIndex = normalized === 'governance' ? 0 : -1;
+
+      const content = MODE_CONTENT[normalized];
+      const score = normalized === 'governance' ? 73 : 78;
+      const statusClass = score >= 80 ? 'status-green' : score >= 65 ? 'status-yellow' : 'status-red';
+      const statusLabel = score >= 80 ? 'Green' : score >= 65 ? 'Yellow' : 'Red';
+
+      stabilityModeCopy.textContent = content.stabilityCopy;
+      stabilityText.textContent = content.stabilityText;
+      stabilityScore.textContent = String(score);
+      stabilityStatus.className = 'status-pill ' + statusClass;
+      stabilityStatus.textContent = statusLabel;
+
+      feedModeCopy.textContent = content.feedCopy;
+      teamModeCopy.textContent = content.teamCopy;
+      signalModeCopy.textContent = content.signalCopy;
+      signalHelper.textContent = content.signalHelper;
+      signalModelCopy.textContent = content.signalModelCopy;
+      signalModelHelper.textContent = 'Heuristic model (v0). Replace with outcome-based learning when labels exist.';
+      divergenceCopy.textContent = content.divergenceCopy;
+
+      renderInsights(normalized);
+      renderTeamTable(normalized);
+      renderSignalImpact();
+      renderSignalModel(normalized);
+      renderClusters();
+    }
+
+    function renderAll() {
+      state.cases = generateCases(72);
+      state.signalScores = computeSignalScores(SIGNAL_MODEL_INPUT);
+      state.clusters = buildClusters(state.cases);
+
+      const savedMode = localStorage.getItem(MODE_KEY) || 'coaching';
+      setMode(savedMode);
+    }
+
+    modeTabs.addEventListener('click', function (event) {
+      const tab = event.target.closest('[data-mode]');
+      if (!tab) return;
+      setMode(tab.getAttribute('data-mode'));
+      tab.focus();
+    });
+
+    modeTabs.addEventListener('keydown', function (event) {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      if (event.key === 'ArrowRight') {
+        setMode('governance');
+        tabGovernance.focus();
+      } else {
+        setMode('coaching');
+        tabCoaching.focus();
+      }
+    });
+
+    cmdDivergence.addEventListener('click', function () {
+      divergenceSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    cmdSignals.addEventListener('click', function () {
+      signalModelSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    cmdReplay.addEventListener('click', function () {
+      const latest = state.cases.slice().sort(function (a, b) {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      })[0];
+      if (latest) openReplay(latest.case_id);
+    });
+
+    document.body.addEventListener('click', function (event) {
+      const replayBtn = event.target.closest('[data-open-replay]');
+      if (replayBtn) {
+        openReplay(replayBtn.getAttribute('data-open-replay'));
+        return;
+      }
+
+      const clusterBtn = event.target.closest('[data-open-cluster]');
+      if (clusterBtn) {
+        openCluster(clusterBtn.getAttribute('data-open-cluster'));
+      }
+    });
+
+    openFilters.addEventListener('click', function () {
+      if (typeof filtersModal.showModal === 'function') filtersModal.showModal();
+    });
+
+    closeFilters.addEventListener('click', function () {
+      if (typeof filtersModal.close === 'function') filtersModal.close();
+    });
+
+    closeCluster.addEventListener('click', function () {
+      if (typeof clusterModal.close === 'function') clusterModal.close();
+    });
+
+    closeReplay.addEventListener('click', function () {
+      if (typeof replayModal.close === 'function') replayModal.close();
+    });
+
+    copyReplaySummary.addEventListener('click', function () {
+      if (!state.selectedReplayCaseId) return;
+      const row = state.cases.find(function (c) { return c.case_id === state.selectedReplayCaseId; });
+      if (!row) return;
+      const text = [
+        'Decision Replay Summary - ' + row.case_id,
+        'Underwriter: ' + row.underwriter,
+        'Decision: ' + row.decision,
+        'Recommended: ' + row.recommended_decision,
+        'Risk band: ' + row.risk_band,
+        'Reason codes: ' + row.reason_codes.join(', '),
+        'Signals: ' + row.signals_present.join(', ')
+      ].join('\n');
+
+      copyText(text).then(function () {
+        copyReplaySummary.textContent = 'Copied';
+        setTimeout(function () {
+          copyReplaySummary.textContent = 'Copy summary';
+        }, 1200);
+      }).catch(function () {
+        copyReplaySummary.textContent = 'Copy failed';
+        setTimeout(function () {
+          copyReplaySummary.textContent = 'Copy summary';
+        }, 1200);
+      });
+    });
+
+    [filtersModal, clusterModal, replayModal].forEach(function (dialog) {
+      dialog.addEventListener('click', function (event) {
+        const rect = dialog.getBoundingClientRect();
+        const inside = rect.top <= event.clientY && event.clientY <= rect.bottom && rect.left <= event.clientX && event.clientX <= rect.right;
+        if (!inside) dialog.close();
+      });
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
