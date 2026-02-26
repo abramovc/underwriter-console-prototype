@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intelligence Center</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="stylesheet" href="styles/base.css" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <style>
     .intelligence-shell {
       width: min(1200px, 96vw);
@@ -1077,7 +1077,9 @@
     <div class="intelligence-shell">
       <nav class="topnav">
         <div class="nav-left">
-          <a class="logo logo-iq" href="index.html">iq</a>
+          <a class="logo" href="index.html" aria-label="Home">
+            <img class="logo-img" src="iq.svg" alt="IQ" />
+          </a>
         </div>
         <a class="nav-center nav-intel is-active" href="intelligence.html" aria-label="Open Intelligence Center" data-tooltip="Intelligence Center">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
