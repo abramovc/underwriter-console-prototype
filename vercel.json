@@ -3,6 +3,14 @@
     {
       "source": "/intuition",
       "destination": "/underwriter-console-prototype/intuition.html"
+    },
+    {
+      "source": "/intelligence",
+      "destination": "/underwriter-console-prototype/intelligence.html"
+    },
+    {
+      "source": "/queue",
+      "destination": "/underwriter-console-prototype/queue.html"
     }
   ]
 }
