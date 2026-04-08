@@ -17,7 +17,7 @@
     }
 
     .container {
-      max-width: 1080px;
+      max-width: 1120px;
       margin: 0 auto;
     }
 
@@ -117,71 +117,23 @@
       color: #111827;
     }
 
-    .tag-rows {
+    .tag-layout {
       display: grid;
-      gap: 10px;
-    }
-
-    .tag-row {
-      display: grid;
-      grid-template-columns: minmax(240px, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 16px;
-      align-items: center;
+      align-items: start;
+    }
+
+    .tag-panel {
       border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 14px 16px;
-      background: #fff;
-    }
-
-    .tag-name {
-      font-size: 14px;
-      font-weight: 600;
-      min-width: 0;
-    }
-
-    .tag-meta {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      align-items: center;
-    }
-
-    .tag-meta .badge {
-      min-width: 56px;
-      padding: 6px 11px;
-    }
-
-    .tag-group {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4px 9px;
-      border: 1px solid #e5e7eb;
-      border-radius: 999px;
-      background: #f8fafc;
-      color: #64748b;
-      font-size: 10px;
-      font-weight: 500;
-      text-transform: capitalize;
-      white-space: nowrap;
-    }
-
-    .signal-groups {
-      display: grid;
-      gap: 12px;
-    }
-
-    .signal-group {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
+      border-radius: 14px;
+      background: #fcfcfd;
       overflow: hidden;
-      background: #fff;
     }
 
-    .signal-group-head {
-      padding: 12px 14px;
-      border-bottom: 1px solid #f1f5f9;
+    .tag-panel-head {
+      padding: 14px 16px;
+      border-bottom: 1px solid #eef2f7;
       background: #f8fafc;
       display: flex;
       align-items: center;
@@ -189,78 +141,172 @@
       gap: 10px;
     }
 
-    .signal-group-title {
+    .tag-panel-title {
       font-size: 14px;
       font-weight: 700;
-      text-transform: capitalize;
+      color: #111827;
     }
 
-    .signal-count {
+    .tag-panel-count {
       font-size: 12px;
       color: #64748b;
     }
 
-    .signal-row {
-      padding: 16px;
-      border-bottom: 1px solid #f8fafc;
+    .tag-panel-body {
+      padding: 12px;
       display: grid;
-      grid-template-columns: minmax(240px, 1.1fr) minmax(260px, 0.9fr) minmax(96px, auto);
-      gap: 24px;
-      align-items: start;
+      gap: 10px;
     }
 
-    .signal-row:last-child {
-      border-bottom: none;
+    .stacked-panels {
+      display: grid;
+      gap: 16px;
+    }
+
+    .tag-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: #fff;
+    }
+
+    .tag-text {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+    }
+
+    .tag-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .tag-concept {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .tag-meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .signals-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .signal-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      background: #fff;
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .signal-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .signal-main {
       display: grid;
-      gap: 6px;
+      gap: 5px;
       min-width: 0;
     }
 
-    .signal-label {
+    .signal-title {
       font-size: 15px;
       font-weight: 700;
       color: #111827;
     }
 
-    .signal-meta {
+    .signal-subtitle {
       font-size: 12px;
       color: #6b7280;
+      line-height: 1.45;
     }
 
-    .signal-source {
+    .signal-code-line {
       font-size: 12px;
       color: #475569;
-      display: grid;
-      gap: 6px;
-      padding: 10px 12px;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      background: #f8fafc;
-      min-width: 0;
+      line-height: 1.45;
+      word-break: break-word;
     }
 
-    .signal-source strong {
+    .signal-code-line strong {
       color: #334155;
     }
 
-    .signal-badges {
+    .signal-meta-row {
       display: flex;
-      gap: 6px;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: flex-end;
-      min-width: 0;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
-    .signal-direction {
+    .source-table {
+      display: grid;
+      gap: 10px;
+    }
+
+    .source-header,
+    .source-row {
+      display: grid;
+      grid-template-columns: minmax(130px, 0.9fr) minmax(180px, 1fr) minmax(320px, 2fr) minmax(90px, 0.5fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .source-header {
+      padding: 0 4px 8px;
       color: #64748b;
-      font-size: 11px;
-      line-height: 1.3;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .source-row {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fff;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .source-service {
+      font-weight: 700;
+      color: #111827;
       text-transform: capitalize;
-      white-space: nowrap;
+    }
+
+    .source-concept {
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .source-label {
+      color: #475569;
+      word-break: break-word;
+    }
+
+    .source-code {
+      color: #111827;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .chip,
@@ -275,12 +321,6 @@
       white-space: nowrap;
       background: #f8fafc;
       color: #334155;
-    }
-
-    .meta-quiet {
-      padding: 4px 9px;
-      font-size: 10px;
-      opacity: 0.92;
     }
 
     .positive {
@@ -309,41 +349,13 @@
       color: #92400e;
     }
 
-    .badge.high,
-    .badge.medium,
-    .badge.low {
-      font-weight: 700;
-    }
-
-    details {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      background: #fcfcfd;
-      padding: 12px 14px;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 14px;
-      user-select: none;
-    }
-
-    pre {
-      margin: 12px 0 0;
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-size: 12px;
-      line-height: 1.45;
-      color: #111827;
-    }
-
     .empty {
       color: #6b7280;
       font-size: 14px;
+      padding: 2px 0;
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 900px) {
       h1 {
         font-size: 34px;
       }
@@ -352,22 +364,22 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .tag-row,
-      .signal-row {
+      .tag-layout {
         grid-template-columns: 1fr;
       }
 
-      .tag-row {
-        gap: 10px;
+      .source-header {
+        display: none;
       }
 
-      .tag-meta,
-      .signal-badges {
-        justify-content: flex-start;
+      .source-row {
+        grid-template-columns: 1fr;
       }
+    }
 
-      .signal-badges {
-        align-items: flex-start;
+    @media (max-width: 640px) {
+      .summary-strip {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -378,7 +390,7 @@
     <h1>Intuition</h1>
     <p class="subtitle">Paste a JSON payload and understand the decision instantly.</p>
 
-    <textarea id="input" placeholder="Paste Alloy sandbox JSON here..."></textarea>
+    <textarea id="input" placeholder="Paste sandbox JSON here..."></textarea>
 
     <div class="toolbar">
       <button id="analyze" class="primary">Analyze</button>
@@ -389,81 +401,250 @@
     <div id="output" hidden>
       <section class="card">
         <h2>Summary</h2>
-        <p class="card-copy">Decision overview generated from the payload.</p>
+        <p class="card-copy">Top-level decision signals from the payload.</p>
         <div class="summary-strip">
           <div class="summary-item">
-            <div class="summary-label">Outcome</div>
-            <div id="summaryOutcome" class="summary-value">—</div>
+            <div class="summary-label">Services Run</div>
+            <div id="summaryServicesRun" class="summary-value">0</div>
           </div>
           <div class="summary-item">
-            <div class="summary-label">Total Tags</div>
-            <div id="summaryTagCount" class="summary-value">0</div>
+            <div class="summary-label">Positive Tags</div>
+            <div id="summaryPositiveTags" class="summary-value">0</div>
           </div>
           <div class="summary-item">
             <div class="summary-label">High Severity Tags</div>
             <div id="summaryHighTags" class="summary-value">0</div>
           </div>
           <div class="summary-item">
-            <div class="summary-label">Requires Review</div>
-            <div id="summaryRequiresReview" class="summary-value">No</div>
+            <div class="summary-label">Outcome</div>
+            <div id="summaryOutcome" class="summary-value">—</div>
           </div>
         </div>
       </section>
 
       <section class="card">
         <h2>Tags</h2>
-        <p class="card-copy">Workflow-level conclusions from Alloy, sorted by severity.</p>
-        <div id="reviewTags" class="tag-rows"></div>
+        <p class="card-copy">Workflow-level tag signals, split into positive, high severity, and medium severity.</p>
+
+        <div class="tag-layout">
+          <div class="tag-panel">
+            <div class="tag-panel-head">
+              <div class="tag-panel-title">Positive Tags</div>
+              <div id="positiveSignalCount" class="tag-panel-count">0 item(s)</div>
+            </div>
+            <div id="positiveSignals" class="tag-panel-body"></div>
+          </div>
+
+          <div class="stacked-panels">
+            <div class="tag-panel">
+              <div class="tag-panel-head">
+                <div class="tag-panel-title">High Severity Tags</div>
+                <div id="highSeveritySignalCount" class="tag-panel-count">0 item(s)</div>
+              </div>
+              <div id="highSeveritySignals" class="tag-panel-body"></div>
+            </div>
+
+            <div class="tag-panel">
+              <div class="tag-panel-head">
+                <div class="tag-panel-title">Medium Severity Tags</div>
+                <div id="mediumSeveritySignalCount" class="tag-panel-count">0 item(s)</div>
+              </div>
+              <div id="mediumSeveritySignals" class="tag-panel-body"></div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="card">
         <h2>Normalized Signals</h2>
-        <p class="card-copy">Underlying provider evidence normalized into canonical concepts.</p>
-        <div id="signals" class="signal-groups"></div>
+        <p class="card-copy">Reason-code evidence normalized into canonical concepts.</p>
+        <div id="normalizedSignals" class="signals-grid"></div>
       </section>
 
       <section class="card">
-        <details>
-          <summary>Decision Details</summary>
-          <pre id="debug"></pre>
-        </details>
+        <h2>Sources with Data</h2>
+        <p class="card-copy">Service, canonical concept, full label, and source number for each normalized signal.</p>
+        <div class="source-table">
+          <div class="source-header">
+            <div>Service</div>
+            <div>Canonical Concept</div>
+            <div>Full Label</div>
+            <div>Number</div>
+          </div>
+          <div id="sourceRows"></div>
+        </div>
       </section>
     </div>
   </div>
 
   <script>
     const REVIEW_TAG_METADATA = {
-      "SSN Warning": { group: "identity", severity: "medium", direction: "negative", requiresReview: true, canContributeToDecline: false },
-      "Watchlist Review": { group: "compliance", severity: "high", direction: "negative", requiresReview: true, canContributeToDecline: false },
-      "KYC Approved": { group: "workflow", severity: "low", direction: "positive", requiresReview: false, canContributeToDecline: false },
-      "Fraud Review": { group: "fraud", severity: "high", direction: "negative", requiresReview: true, canContributeToDecline: false },
-      "Denied Fraud": { group: "fraud", severity: "high", direction: "negative", requiresReview: false, canContributeToDecline: true },
-      "High Fraud Risk": { group: "fraud", severity: "high", direction: "negative", requiresReview: true, canContributeToDecline: true },
-      "Medium Fraud Risk": { group: "fraud", severity: "medium", direction: "negative", requiresReview: true, canContributeToDecline: false },
-      "SSN Velocity Warning": { group: "fraud", severity: "medium", direction: "negative", requiresReview: true, canContributeToDecline: false },
-      "Velocity Warning": { group: "fraud", severity: "medium", direction: "negative", requiresReview: true, canContributeToDecline: false },
-      "Address Warning": { group: "identity", severity: "medium", direction: "negative", requiresReview: true, canContributeToDecline: false },
-      "Socure SSN Match": { group: "identity", severity: "low", direction: "positive", requiresReview: false, canContributeToDecline: false },
-      "Socure Name Match": { group: "identity", severity: "low", direction: "positive", requiresReview: false, canContributeToDecline: false },
-      "Socure DOB Match": { group: "identity", severity: "low", direction: "positive", requiresReview: false, canContributeToDecline: false },
-      "Socure Address Match": { group: "identity", severity: "low", direction: "positive", requiresReview: false, canContributeToDecline: false },
-      "KYC Name Verified": { group: "identity", severity: "low", direction: "positive", requiresReview: false, canContributeToDecline: false },
-      "KYC SSN Verified": { group: "identity", severity: "low", direction: "positive", requiresReview: false, canContributeToDecline: false },
-      "KYC Address Verified": { group: "identity", severity: "low", direction: "positive", requiresReview: false, canContributeToDecline: false },
-      "KYC DOB Verified": { group: "identity", severity: "low", direction: "positive", requiresReview: false, canContributeToDecline: false }
+      "SSN Warning": {
+        group: "identity",
+        canonicalConcept: "ssn_warning",
+        severity: "medium",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: false
+      },
+      "Watchlist Review": {
+        group: "compliance",
+        canonicalConcept: "watchlist_review",
+        severity: "high",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: false
+      },
+      "KYC Approved": {
+        group: "workflow",
+        canonicalConcept: "kyc_approved",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "Fraud Review": {
+        group: "fraud",
+        canonicalConcept: "fraud_review",
+        severity: "high",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: false
+      },
+      "Denied Fraud": {
+        group: "fraud",
+        canonicalConcept: "fraud_denied",
+        severity: "high",
+        direction: "negative",
+        requiresReview: false,
+        canContributeToDecline: true
+      },
+      "High Fraud Risk": {
+        group: "fraud",
+        canonicalConcept: "fraud_risk_high",
+        severity: "high",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: true
+      },
+      "Medium Fraud Risk": {
+        group: "fraud",
+        canonicalConcept: "fraud_risk_medium",
+        severity: "medium",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: false
+      },
+      "SSN Velocity Warning": {
+        group: "fraud",
+        canonicalConcept: "ssn_velocity_warning",
+        severity: "medium",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: false
+      },
+      "Velocity Warning": {
+        group: "fraud",
+        canonicalConcept: "velocity_warning",
+        severity: "medium",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: false
+      },
+      "Address Warning": {
+        group: "identity",
+        canonicalConcept: "address_warning",
+        severity: "medium",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: false
+      },
+      "Socure SSN Match": {
+        group: "identity",
+        canonicalConcept: "ssn_match",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "Socure Name Match": {
+        group: "identity",
+        canonicalConcept: "name_match",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "Socure DOB Match": {
+        group: "identity",
+        canonicalConcept: "dob_match",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "Socure Address Match": {
+        group: "identity",
+        canonicalConcept: "address_match",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "KYC Name Verified": {
+        group: "identity",
+        canonicalConcept: "name_verified",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "KYC SSN Verified": {
+        group: "identity",
+        canonicalConcept: "ssn_verified",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "KYC Address Verified": {
+        group: "identity",
+        canonicalConcept: "address_verified",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "KYC DOB Verified": {
+        group: "identity",
+        canonicalConcept: "dob_verified",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      }
     };
 
-    let PROVIDER_MAPPINGS = { socure: {} };
+    let PROVIDER_MAPPINGS = {};
 
     const inputEl = document.getElementById("input");
     const outputEl = document.getElementById("output");
-    const reviewTagsEl = document.getElementById("reviewTags");
-    const signalsEl = document.getElementById("signals");
-    const debugEl = document.getElementById("debug");
-    const summaryOutcomeEl = document.getElementById("summaryOutcome");
-    const summaryTagCountEl = document.getElementById("summaryTagCount");
+
+    const summaryServicesRunEl = document.getElementById("summaryServicesRun");
+    const summaryPositiveTagsEl = document.getElementById("summaryPositiveTags");
     const summaryHighTagsEl = document.getElementById("summaryHighTags");
-    const summaryRequiresReviewEl = document.getElementById("summaryRequiresReview");
+    const summaryOutcomeEl = document.getElementById("summaryOutcome");
+
+    const positiveSignalsEl = document.getElementById("positiveSignals");
+    const highSeveritySignalsEl = document.getElementById("highSeveritySignals");
+    const mediumSeveritySignalsEl = document.getElementById("mediumSeveritySignals");
+
+    const positiveSignalCountEl = document.getElementById("positiveSignalCount");
+    const highSeveritySignalCountEl = document.getElementById("highSeveritySignalCount");
+    const mediumSeveritySignalCountEl = document.getElementById("mediumSeveritySignalCount");
+
+    const normalizedSignalsEl = document.getElementById("normalizedSignals");
+    const sourceRowsEl = document.getElementById("sourceRows");
 
     const severityRank = { high: 3, medium: 2, low: 1 };
     const directionRank = { negative: 3, neutral: 2, positive: 1 };
@@ -482,11 +663,51 @@
       return "neutral";
     }
 
+    function formatOutcome(value) {
+      if (!value) return "Unknown";
+
+      const normalized = String(value).replace(/_/g, " ").trim();
+      return normalized
+        .split(" ")
+        .map((word) => word ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : "")
+        .join(" ");
+    }
+
+    function formatProviderName(name) {
+      const providerNames = {
+        socure: "Socure",
+        id_analytics: "ID Analytics",
+        lexis_nexis_instant_id: "LexisNexis Instant ID"
+      };
+
+      if (providerNames[name]) return providerNames[name];
+
+      return String(name || "Unknown")
+        .replace(/_/g, " ")
+        .trim()
+        .split(" ")
+        .map((word) => word ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : "")
+        .join(" ");
+    }
+
+    function countServicesRun(services) {
+      if (!services || typeof services !== "object") return 0;
+
+      return Object.values(services).filter((value) => {
+        if (typeof value === "string") {
+          const normalized = value.toLowerCase();
+          return normalized === "executed" || normalized === "complete" || normalized === "completed" || normalized === "success";
+        }
+        return !!value;
+      }).length;
+    }
+
     function buildReviewTags(rawTags) {
       return (rawTags || [])
         .map((tag, index) => {
           const meta = REVIEW_TAG_METADATA[tag] || {
             group: "unknown",
+            canonicalConcept: "needs_review",
             severity: "low",
             direction: "neutral",
             requiresReview: true,
@@ -497,6 +718,7 @@
             id: `review_tag:${tag}:${index}`,
             tag,
             group: meta.group,
+            canonicalConcept: meta.canonicalConcept,
             severity: meta.severity,
             direction: normalizeDirection(meta.direction),
             requiresReview: meta.requiresReview,
@@ -530,16 +752,39 @@
         sourceType,
         sourceCode: code,
         sourceDescription: description || meta.displayLabel || code,
-        canonicalConcept: meta.canonicalConcept,
-        conceptGroup: meta.conceptGroup,
-        signalClass: meta.signalClass,
-        severity: meta.severity,
+        canonicalConcept: meta.canonicalConcept || "needs_review",
+        conceptGroup: meta.conceptGroup || "unknown",
+        signalClass: meta.signalClass || "unknown",
+        severity: meta.severity || "low",
         direction: normalizeDirection(meta.direction),
         requiresReview: !!meta.requiresReview,
         canContributeToDecline: !!meta.canContributeToDecline,
-        displayLabel: meta.displayLabel || meta.canonicalConcept,
-        dedupeKey: code
+        displayLabel: meta.displayLabel || meta.canonicalConcept || "Needs review",
+        dedupeKey: `${provider}:${code}`
       };
+    }
+
+    function getProviderMapping(provider, code) {
+      return PROVIDER_MAPPINGS?.[provider]?.[code] || null;
+    }
+
+    function pushProviderSignals(target, provider, product, codes, descriptionBuilder) {
+      (codes || []).forEach((code, index) => {
+        const mapping = getProviderMapping(provider, code);
+        const fallbackDescription = descriptionBuilder ? descriptionBuilder(code) : `${product} reason code ${code}`;
+
+        target.push(
+          buildNormalizedSignal(
+            provider,
+            product,
+            "reason_code",
+            code,
+            mapping?.displayLabel || fallbackDescription,
+            mapping,
+            index
+          )
+        );
+      });
     }
 
     function normalize(alloy) {
@@ -548,152 +793,173 @@
       const formatted = alloy.formatted_responses || {};
 
       const socureCodes = formatted["Socure 30"]?.data?.reasonCodes || [];
-      socureCodes.forEach((code, index) => {
-        const mapping = PROVIDER_MAPPINGS.socure?.[code];
-        supportingSignals.push(
-          buildNormalizedSignal(
-            "socure",
-            "Socure 30",
-            "reason_code",
-            code,
-            mapping?.displayLabel || `Socure reason code ${code}`,
-            mapping,
-            index
-          )
-        );
-      });
+      pushProviderSignals(
+        supportingSignals,
+        "socure",
+        "Socure 30",
+        socureCodes,
+        (code) => `Socure reason code ${code}`
+      );
 
       const idaCodes = formatted["ID Analytics ID Score"]?.data?.reason_codes || [];
-      idaCodes.forEach((code, index) => {
-        supportingSignals.push(
-          buildNormalizedSignal(
-            "id_analytics",
-            "ID Analytics ID Score",
-            "reason_code",
-            code,
-            `ID Analytics reason code ${code}`,
-            null,
-            index
-          )
-        );
+      pushProviderSignals(
+        supportingSignals,
+        "id_analytics",
+        "ID Analytics ID Score",
+        idaCodes,
+        (code) => `ID Analytics reason code ${code}`
+      );
+
+      const lexisCodes =
+        formatted["LexisNexis Instant ID"]?.data?.reason_codes ||
+        formatted["Lexis Nexis Instant ID"]?.data?.reason_codes ||
+        [];
+      pushProviderSignals(
+        supportingSignals,
+        "lexis_nexis_instant_id",
+        "LexisNexis Instant ID",
+        lexisCodes,
+        (code) => `LexisNexis Instant ID reason code ${code}`
+      );
+
+      const sortedSignals = supportingSignals.sort((a, b) => {
+        const sev = severityRank[b.severity] - severityRank[a.severity];
+        if (sev !== 0) return sev;
+        return directionRank[b.direction] - directionRank[a.direction];
       });
 
       return {
-        outcome: alloy.summary?.outcome || "Unknown",
+        outcome: formatOutcome(alloy.summary?.outcome || "Unknown"),
+        servicesRun: countServicesRun(alloy.summary?.services),
         reviewTags,
-        supportingSignals: supportingSignals.sort((a, b) => {
-          const sev = severityRank[b.severity] - severityRank[a.severity];
-          if (sev !== 0) return sev;
-          return directionRank[b.direction] - directionRank[a.direction];
-        })
+        supportingSignals: sortedSignals
       };
-    }
-
-    function tagClass(directionOrSeverity) {
-      if (directionOrSeverity === "positive") return "positive";
-      if (directionOrSeverity === "negative" || directionOrSeverity === "high") return "negative";
-      if (directionOrSeverity === "medium") return "medium";
-      return "neutral";
     }
 
     function renderSummary(review) {
-      summaryOutcomeEl.textContent = review.outcome;
-      summaryTagCountEl.textContent = String(review.reviewTags.length);
+      summaryServicesRunEl.textContent = String(review.servicesRun);
+      summaryPositiveTagsEl.textContent = String(
+        review.reviewTags.filter((t) => t.direction === "positive").length
+      );
       summaryHighTagsEl.textContent = String(
         review.reviewTags.filter((t) => t.severity === "high").length
       );
-      summaryRequiresReviewEl.textContent = review.reviewTags.some((t) => t.requiresReview) ? "Yes" : "No";
+      summaryOutcomeEl.textContent = review.outcome;
     }
 
-    function renderReviewTags(reviewTags) {
-      reviewTagsEl.innerHTML = "";
+    function renderTagList(container, items, showSeverity) {
+      container.innerHTML = "";
 
-      if (!reviewTags.length) {
-        reviewTagsEl.innerHTML = '<div class="empty">No tags found.</div>';
+      if (!items.length) {
+        container.innerHTML = '<div class="empty">No signals found.</div>';
         return;
       }
 
-      reviewTags.forEach((tag) => {
+      items.forEach((tag) => {
         const row = document.createElement("div");
         row.className = "tag-row";
         row.innerHTML = `
-          <div class="tag-name">${tag.tag}</div>
+          <div class="tag-text">
+            <div class="tag-name">${tag.tag}</div>
+            <div class="tag-concept">${tag.canonicalConcept}</div>
+          </div>
           <div class="tag-meta">
-            <span class="badge ${tag.severity}">${tag.severity}</span>
-            <span class="tag-group">${tag.group}</span>
+            ${showSeverity ? `<span class="badge ${tag.severity}">${tag.severity}</span>` : ""}
           </div>
         `;
-        reviewTagsEl.appendChild(row);
+        container.appendChild(row);
       });
     }
 
-    function groupSignalsByConceptGroup(signals) {
-      const groups = {};
-      signals.forEach((signal) => {
-        const key = signal.conceptGroup || "unknown";
-        if (!groups[key]) groups[key] = [];
-        groups[key].push(signal);
-      });
-      return groups;
+    function renderTags(reviewTags) {
+      const positive = reviewTags.filter((tag) => tag.direction === "positive");
+      const highSeverity = reviewTags.filter((tag) => tag.severity === "high");
+      const mediumSeverity = reviewTags.filter((tag) => tag.severity === "medium");
+
+      positiveSignalCountEl.textContent = `${positive.length} item(s)`;
+      highSeveritySignalCountEl.textContent = `${highSeverity.length} item(s)`;
+      mediumSeveritySignalCountEl.textContent = `${mediumSeverity.length} item(s)`;
+
+      renderTagList(positiveSignalsEl, positive, false);
+      renderTagList(highSeveritySignalsEl, highSeverity, true);
+      renderTagList(mediumSeveritySignalsEl, mediumSeverity, true);
     }
 
-    function renderSignals(signals) {
-      signalsEl.innerHTML = "";
+    function renderNormalizedSignals(signals) {
+      normalizedSignalsEl.innerHTML = "";
 
       if (!signals.length) {
-        signalsEl.innerHTML = '<div class="empty">No normalized signals found.</div>';
+        normalizedSignalsEl.innerHTML = '<div class="empty">No normalized signals found.</div>';
         return;
       }
 
-      const grouped = groupSignalsByConceptGroup(signals);
-
-      Object.keys(grouped).forEach((groupName) => {
-        const group = document.createElement("div");
-        group.className = "signal-group";
-
-        const head = document.createElement("div");
-        head.className = "signal-group-head";
-        head.innerHTML = `
-          <div class="signal-group-title">${groupName}</div>
-          <div class="signal-count">${grouped[groupName].length} item(s)</div>
-        `;
-        group.appendChild(head);
-
-        grouped[groupName].forEach((signal) => {
-          const row = document.createElement("div");
-          row.className = "signal-row";
-          row.innerHTML = `
+      signals.forEach((signal) => {
+        const card = document.createElement("div");
+        card.className = "signal-card";
+        card.innerHTML = `
+          <div class="signal-top">
             <div class="signal-main">
-              <div class="signal-label">${signal.displayLabel || signal.canonicalConcept}</div>
-              <div class="signal-meta">${signal.sourceDescription || signal.sourceCode}</div>
+              <div class="signal-title">${signal.sourceDescription}</div>
+              <div class="signal-subtitle">${signal.canonicalConcept}</div>
+              <div class="signal-code-line">
+                <strong>${signal.sourceCode}</strong> — ${signal.sourceDescription}
+              </div>
             </div>
-            <div class="signal-source">
-              <div><strong>Provider:</strong> ${signal.provider}</div>
-              <div><strong>Code:</strong> ${signal.sourceCode}</div>
-              <div><strong>Concept:</strong> ${signal.canonicalConcept}</div>
-            </div>
-            <div class="signal-badges">
+            <div class="signal-meta-row">
               <span class="badge ${signal.severity}">${signal.severity}</span>
-              <span class="signal-direction">${signal.direction}</span>
+              <span class="chip ${signal.direction === "positive" ? "positive" : signal.direction === "negative" ? "negative" : "neutral"}">${signal.direction}</span>
             </div>
-          `;
-          group.appendChild(row);
-        });
-
-        signalsEl.appendChild(group);
+          </div>
+          <div class="signal-meta-row">
+            <span class="chip">${formatProviderName(signal.provider)}</span>
+            <span class="chip">${signal.signalClass}</span>
+          </div>
+        `;
+        normalizedSignalsEl.appendChild(card);
       });
     }
 
-    function buildDebugView(raw) {
-      return {
-        outcome: raw.summary?.outcome,
-        outcome_reasons: raw.summary?.outcome_reasons,
-        score: raw.summary?.score,
-        services: raw.summary?.services,
-        raw_tags: raw.summary?.tags,
-        socure_reason_codes: raw.formatted_responses?.["Socure 30"]?.data?.reasonCodes,
-        ida_reason_codes: raw.formatted_responses?.["ID Analytics ID Score"]?.data?.reason_codes
-      };
+    function renderSources(signals) {
+      sourceRowsEl.innerHTML = "";
+
+      if (!signals.length) {
+        sourceRowsEl.innerHTML = '<div class="empty">No source rows found.</div>';
+        return;
+      }
+
+      signals.forEach((signal) => {
+        const sourceDescription =
+          getProviderMapping(signal.provider, signal.sourceCode)?.sourceDescription ||
+          signal.sourceDescription;
+        const row = document.createElement("div");
+        row.className = "source-row";
+        row.innerHTML = `
+          <div class="source-service">${formatProviderName(signal.provider)}</div>
+          <div class="source-concept">${signal.canonicalConcept}</div>
+          <div class="source-label">${sourceDescription}</div>
+          <div class="source-code">${signal.sourceCode}</div>
+        `;
+        sourceRowsEl.appendChild(row);
+      });
+    }
+
+    function resetView() {
+      outputEl.hidden = true;
+
+      summaryServicesRunEl.textContent = "0";
+      summaryPositiveTagsEl.textContent = "0";
+      summaryHighTagsEl.textContent = "0";
+      summaryOutcomeEl.textContent = "—";
+
+      positiveSignalCountEl.textContent = "0 item(s)";
+      highSeveritySignalCountEl.textContent = "0 item(s)";
+      mediumSeveritySignalCountEl.textContent = "0 item(s)";
+
+      positiveSignalsEl.innerHTML = "";
+      highSeveritySignalsEl.innerHTML = "";
+      mediumSeveritySignalsEl.innerHTML = "";
+      normalizedSignalsEl.innerHTML = "";
+      sourceRowsEl.innerHTML = "";
     }
 
     document.getElementById("analyze").addEventListener("click", async () => {
@@ -718,9 +984,9 @@
       const review = normalize(raw);
 
       renderSummary(review);
-      renderReviewTags(review.reviewTags);
-      renderSignals(review.supportingSignals);
-      debugEl.textContent = JSON.stringify(buildDebugView(raw), null, 2);
+      renderTags(review.reviewTags);
+      renderNormalizedSignals(review.supportingSignals);
+      renderSources(review.supportingSignals);
 
       outputEl.hidden = false;
     });
@@ -728,10 +994,20 @@
     document.getElementById("sample").addEventListener("click", () => {
       inputEl.value = JSON.stringify({
         summary: {
-          tags: ["SSN Warning", "High Fraud Risk", "KYC Approved", "Denied Fraud"],
-          outcome_reasons: ["Denied Fraud"],
-          outcome: "Denied",
-          score: 0.99,
+          tags: [
+            "Watchlist Review",
+            "Fraud Review",
+            "SSN Velocity Warning",
+            "Velocity Warning",
+            "Socure SSN Match",
+            "Socure Name Match",
+            "Socure DOB Match",
+            "Socure Address Match",
+            "KYC Approved"
+          ],
+          outcome_reasons: ["Watchlist Review", "Fraud Review"],
+          outcome: "Manual Review",
+          score: 0.91,
           services: {
             "Identity Element Velocity": "executed",
             "ID Analytics ID Score": "executed",
@@ -756,14 +1032,7 @@
 
     document.getElementById("clear").addEventListener("click", () => {
       inputEl.value = "";
-      outputEl.hidden = true;
-      reviewTagsEl.innerHTML = "";
-      signalsEl.innerHTML = "";
-      debugEl.textContent = "";
-      summaryOutcomeEl.textContent = "—";
-      summaryTagCountEl.textContent = "0";
-      summaryHighTagsEl.textContent = "0";
-      summaryRequiresReviewEl.textContent = "No";
+      resetView();
     });
   </script>
 </body>
