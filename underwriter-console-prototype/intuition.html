@@ -457,7 +457,7 @@
 
       <section class="card">
         <h2>Normalized Signals</h2>
-        <p class="card-copy">Reason-code evidence normalized into canonical concepts.</p>
+        <p class="card-copy">Underlying provider evidence that may warrant review or action.</p>
         <div id="normalizedSignals" class="signals-grid"></div>
       </section>
 
@@ -768,6 +768,16 @@
       return PROVIDER_MAPPINGS?.[provider]?.[code] || null;
     }
 
+    function getTruthyCodes(obj) {
+      if (!obj || typeof obj !== "object") {
+        return [];
+      }
+
+      return Object.entries(obj)
+        .filter(([, value]) => !!value)
+        .map(([code]) => String(code).toUpperCase());
+    }
+
     function pushProviderSignals(target, provider, product, codes, descriptionBuilder) {
       (codes || []).forEach((code, index) => {
         const mapping = getProviderMapping(provider, code);
@@ -795,13 +805,29 @@
       const reviewTags = buildReviewTags(alloy.summary?.tags || []);
       const supportingSignals = [];
       const formatted = alloy.formatted_responses || {};
+      const socureData = formatted["Socure 30"]?.data || {};
+      const malformedSocureData = formatted["Socure 30"]?.[" data"] || {};
 
-      const socureCodes = formatted["Socure 30"]?.data?.reasonCodes || [];
+      const socureCodes = socureData.reasonCodes || [];
+      const socureWatchlistCodes = getTruthyCodes(socureData.global_watchlist);
+      const socureEcbsvCodes = getTruthyCodes(socureData.eCBSV);
+      const socureMalformedEcbsvCodes = getTruthyCodes(malformedSocureData.eCBSV);
+      const socureRuleCodes = getTruthyCodes(socureData.rules?.reason_codes);
+      const mergedSocureCodes = Array.from(
+        new Set([
+          ...socureCodes.map((code) => String(code).toUpperCase()),
+          ...socureWatchlistCodes,
+          ...socureEcbsvCodes,
+          ...socureMalformedEcbsvCodes,
+          ...socureRuleCodes
+        ])
+      );
+
       pushProviderSignals(
         supportingSignals,
         "socure",
         "Socure 30",
-        socureCodes,
+        mergedSocureCodes,
         (code) => `Socure reason code ${code}`
       );
 
@@ -851,7 +877,7 @@
       summaryOutcomeEl.textContent = review.outcome;
     }
 
-    function renderTagList(container, items, showSeverity) {
+    function renderTagList(container, items) {
       container.innerHTML = "";
 
       if (!items.length) {
@@ -867,9 +893,6 @@
             <div class="tag-name">${tag.tag}</div>
             <div class="tag-concept">${tag.canonicalConcept}</div>
           </div>
-          <div class="tag-meta">
-            ${showSeverity ? `<span class="badge ${tag.severity}">${tag.severity}</span>` : ""}
-          </div>
         `;
         container.appendChild(row);
       });
@@ -884,9 +907,9 @@
       highSeveritySignalCountEl.textContent = `${highSeverity.length} item(s)`;
       mediumSeveritySignalCountEl.textContent = `${mediumSeverity.length} item(s)`;
 
-      renderTagList(positiveSignalsEl, positive, false);
-      renderTagList(highSeveritySignalsEl, highSeverity, true);
-      renderTagList(mediumSeveritySignalsEl, mediumSeverity, true);
+      renderTagList(positiveSignalsEl, positive);
+      renderTagList(highSeveritySignalsEl, highSeverity);
+      renderTagList(mediumSeveritySignalsEl, mediumSeverity);
     }
 
     function renderNormalizedSignals(signals) {
