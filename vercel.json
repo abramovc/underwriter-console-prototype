@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/intuition",
+      "destination": "/underwriter-console-prototype/intuition.html"
+    }
+  ]
+}
