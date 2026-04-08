@@ -772,6 +772,10 @@
       (codes || []).forEach((code, index) => {
         const mapping = getProviderMapping(provider, code);
         const fallbackDescription = descriptionBuilder ? descriptionBuilder(code) : `${product} reason code ${code}`;
+        const description =
+          mapping?.sourceDescription ||
+          mapping?.displayLabel ||
+          fallbackDescription;
 
         target.push(
           buildNormalizedSignal(
@@ -779,7 +783,7 @@
             product,
             "reason_code",
             code,
-            mapping?.displayLabel || fallbackDescription,
+            description,
             mapping,
             index
           )
@@ -894,15 +898,16 @@
       }
 
       signals.forEach((signal) => {
+        const signalLabel = signal.sourceDescription || signal.displayLabel || signal.canonicalConcept;
         const card = document.createElement("div");
         card.className = "signal-card";
         card.innerHTML = `
           <div class="signal-top">
             <div class="signal-main">
-              <div class="signal-title">${signal.sourceDescription}</div>
+              <div class="signal-title">${signalLabel}</div>
               <div class="signal-subtitle">${signal.canonicalConcept}</div>
               <div class="signal-code-line">
-                <strong>${signal.sourceCode}</strong> — ${signal.sourceDescription}
+                <strong>${signal.sourceCode}</strong> — ${signalLabel}
               </div>
             </div>
             <div class="signal-meta-row">
