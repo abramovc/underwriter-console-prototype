@@ -1,0 +1,536 @@
+provider,sourceType,sourceCode,sourceDescription,canonicalConcept,conceptGroup,signalClass,severity,direction,requiresReview,canContributeToDecline,dedupeKey,narrativeKey,notes,status,displayLabel
+middesk,naics_code,100000,"Personal Purpose, No Industry",business_classification_context,business,business,low,neutral,false,false,100000,,,active,"Personal Purpose, No Industry"
+middesk,naics_code,11,"Agriculture, Forestry, Fishing and Hunting",business_classification_context,business,business,low,neutral,false,false,11,,,active,"Agriculture, Forestry, Fishing and Hunting"
+middesk,naics_code,1111,Oilseed and Grain Farming,business_classification_context,business,business,low,neutral,false,false,1111,,,active,Oilseed and Grain Farming
+middesk,naics_code,1112,Vegetable and Melon Farming,business_classification_context,business,business,low,neutral,false,false,1112,,,active,Vegetable and Melon Farming
+middesk,naics_code,1113,Fruit and Tree Nut Farming,business_classification_context,business,business,low,neutral,false,false,1113,,,active,Fruit and Tree Nut Farming
+middesk,naics_code,1114,"Greenhouse, Nursery, and Floriculture Production",business_classification_context,business,business,low,neutral,false,false,1114,,,active,"Greenhouse, Nursery, and Floriculture Production"
+middesk,naics_code,1119,Other Crop Farming,business_classification_context,business,business,low,neutral,false,false,1119,,,active,Other Crop Farming
+middesk,naics_code,1121,Cattle Ranching and Farming,business_classification_context,business,business,low,neutral,false,false,1121,,,active,Cattle Ranching and Farming
+middesk,naics_code,1122,Hog and Pig Farming,business_classification_context,business,business,low,neutral,false,false,1122,,,active,Hog and Pig Farming
+middesk,naics_code,1123,Poultry and Egg Production,business_classification_context,business,business,low,neutral,false,false,1123,,,active,Poultry and Egg Production
+middesk,naics_code,1124,Sheep and Goat Farming,business_classification_context,business,business,low,neutral,false,false,1124,,,active,Sheep and Goat Farming
+middesk,naics_code,1125,Aquaculture,business_classification_context,business,business,low,neutral,false,false,1125,,,active,Aquaculture
+middesk,naics_code,1129,Other Animal Production,business_classification_context,business,business,low,neutral,false,false,1129,,,active,Other Animal Production
+middesk,naics_code,112920,Horses and Other Equine Production,business_classification_context,business,business,low,neutral,false,false,112920,,,active,Horses and Other Equine Production
+middesk,naics_code,1131,Timber Tract Operations,business_classification_context,business,business,low,neutral,false,false,1131,,,active,Timber Tract Operations
+middesk,naics_code,1132,Forest Nurseries and Gathering of Forest Products,business_classification_context,business,business,low,neutral,false,false,1132,,,active,Forest Nurseries and Gathering of Forest Products
+middesk,naics_code,1133,Logging,business_classification_context,business,business,low,neutral,false,false,1133,,,active,Logging
+middesk,naics_code,1141,Fishing,business_classification_context,business,business,low,neutral,false,false,1141,,,active,Fishing
+middesk,naics_code,1142,Hunting and Trapping,business_classification_context,business,business,low,neutral,false,false,1142,,,active,Hunting and Trapping
+middesk,naics_code,1151,Support Activities for Crop Production,business_classification_context,business,business,low,neutral,false,false,1151,,,active,Support Activities for Crop Production
+middesk,naics_code,1152,Support Activities for Animal Production,business_classification_context,business,business,low,neutral,false,false,1152,,,active,Support Activities for Animal Production
+middesk,naics_code,1153,Support Activities for Forestry,business_classification_context,business,business,low,neutral,false,false,1153,,,active,Support Activities for Forestry
+middesk,naics_code,21,Mining,business_classification_context,business,business,low,neutral,false,false,21,,,active,Mining
+middesk,naics_code,2111,Oil and Gas Extraction,business_classification_context,business,business,low,neutral,false,false,2111,,,active,Oil and Gas Extraction
+middesk,naics_code,211120,Crude Petroleum Extraction,business_classification_context,business,business,low,neutral,false,false,211120,,,active,Crude Petroleum Extraction
+middesk,naics_code,2121,Coal Mining,business_classification_context,business,business,low,neutral,false,false,2121,,,active,Coal Mining
+middesk,naics_code,2122,Metal Ore Mining,business_classification_context,business,business,low,neutral,false,false,2122,,,active,Metal Ore Mining
+middesk,naics_code,212222,Silver Ore Mining,business_classification_context,business,business,low,neutral,false,false,212222,,,active,Silver Ore Mining
+middesk,naics_code,2123,Nonmetallic Mineral Mining and Quarrying,business_classification_context,business,business,low,neutral,false,false,2123,,,active,Nonmetallic Mineral Mining and Quarrying
+middesk,naics_code,2131,Support Activities for Mining,business_classification_context,business,business,low,neutral,false,false,2131,,,active,Support Activities for Mining
+middesk,naics_code,22,Utilities,business_classification_context,business,business,low,neutral,false,false,22,,,active,Utilities
+middesk,naics_code,2211,"Electric Power Generation, Transmission and Distribution",business_classification_context,business,business,low,neutral,false,false,2211,,,active,"Electric Power Generation, Transmission and Distribution"
+middesk,naics_code,221113,Nuclear Electric Power Generation,business_classification_context,business,business,low,neutral,false,false,221113,,,active,Nuclear Electric Power Generation
+middesk,naics_code,221114,Solar Electric Power Generation,business_classification_context,business,business,low,neutral,false,false,221114,,,active,Solar Electric Power Generation
+middesk,naics_code,2212,Natural Gas Distribution,business_classification_context,business,business,low,neutral,false,false,2212,,,active,Natural Gas Distribution
+middesk,naics_code,2213,"Water, Sewage and Other Systems",business_classification_context,business,business,low,neutral,false,false,2213,,,active,"Water, Sewage and Other Systems"
+middesk,naics_code,23,Construction,business_classification_context,business,business,low,neutral,false,false,23,,,active,Construction
+middesk,naics_code,2361,Residential Building Construction,business_classification_context,business,business,low,neutral,false,false,2361,,,active,Residential Building Construction
+middesk,naics_code,2362,Nonresidential Building Construction,business_classification_context,business,business,low,neutral,false,false,2362,,,active,Nonresidential Building Construction
+middesk,naics_code,236220,Commercial and Institutional Building Construction,business_classification_context,business,business,low,neutral,false,false,236220,,,active,Commercial and Institutional Building Construction
+middesk,naics_code,2371,Utility System Construction,business_classification_context,business,business,low,neutral,false,false,2371,,,active,Utility System Construction
+middesk,naics_code,2372,Land Subdivision,business_classification_context,business,business,low,neutral,false,false,2372,,,active,Land Subdivision
+middesk,naics_code,2373,"Highway, Street, and Bridge Construction",business_classification_context,business,business,low,neutral,false,false,2373,,,active,"Highway, Street, and Bridge Construction"
+middesk,naics_code,2379,Other Heavy and Civil Engineering Construction,business_classification_context,business,business,low,neutral,false,false,2379,,,active,Other Heavy and Civil Engineering Construction
+middesk,naics_code,237990,Other Heavy and Civil Engineering Construction,business_classification_context,business,business,low,neutral,false,false,237990,,,active,Other Heavy and Civil Engineering Construction
+middesk,naics_code,2381,"Foundation, Structure, and Building Exterior Contractors",business_classification_context,business,business,low,neutral,false,false,2381,,,active,"Foundation, Structure, and Building Exterior Contractors"
+middesk,naics_code,2382,Building Equipment Contractors,business_classification_context,business,business,low,neutral,false,false,2382,,,active,Building Equipment Contractors
+middesk,naics_code,2383,Building Finishing Contractors,business_classification_context,business,business,low,neutral,false,false,2383,,,active,Building Finishing Contractors
+middesk,naics_code,2389,Other Specialty Trade Contractors,business_classification_context,business,business,low,neutral,false,false,2389,,,active,Other Specialty Trade Contractors
+middesk,naics_code,31,Manufacturing,business_classification_context,business,business,low,neutral,false,false,31,,,active,Manufacturing
+middesk,naics_code,3111,Animal Food Manufacturing,business_classification_context,business,business,low,neutral,false,false,3111,,,active,Animal Food Manufacturing
+middesk,naics_code,311119,Other Animal Food Manufacturing,business_classification_context,business,business,low,neutral,false,false,311119,,,active,Other Animal Food Manufacturing
+middesk,naics_code,3112,Grain and Oilseed Milling,business_classification_context,business,business,low,neutral,false,false,3112,,,active,Grain and Oilseed Milling
+middesk,naics_code,311225,Fats and Oils Refining and Blending,business_classification_context,business,business,low,neutral,false,false,311225,,,active,Fats and Oils Refining and Blending
+middesk,naics_code,3113,Sugar and Confectionery Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3113,,,active,Sugar and Confectionery Product Manufacturing
+middesk,naics_code,3114,Fruit and Vegetable Preserving and Specialty Food Manufacturing,business_classification_context,business,business,low,neutral,false,false,3114,,,active,Fruit and Vegetable Preserving and Specialty Food Manufacturing
+middesk,naics_code,3115,Dairy Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3115,,,active,Dairy Product Manufacturing
+middesk,naics_code,311514,"Dry, Condensed, and Evaporated Dairy Product Manufacturing",business_classification_context,business,business,low,neutral,false,false,311514,,,active,"Dry, Condensed, and Evaporated Dairy Product Manufacturing"
+middesk,naics_code,3116,Animal Slaughtering and Processing,business_classification_context,business,business,low,neutral,false,false,3116,,,active,Animal Slaughtering and Processing
+middesk,naics_code,3117,Seafood Product Preparation and Packaging,business_classification_context,business,business,low,neutral,false,false,3117,,,active,Seafood Product Preparation and Packaging
+middesk,naics_code,3118,Bakeries and Tortilla Manufacturing,business_classification_context,business,business,low,neutral,false,false,3118,,,active,Bakeries and Tortilla Manufacturing
+middesk,naics_code,3119,Other Food Manufacturing,business_classification_context,business,business,low,neutral,false,false,3119,,,active,Other Food Manufacturing
+middesk,naics_code,3121,Beverage Manufacturing,business_classification_context,business,business,low,neutral,false,false,3121,,,active,Beverage Manufacturing
+middesk,naics_code,312130,Wineries,business_classification_context,business,business,low,neutral,false,false,312130,,,active,Wineries
+middesk,naics_code,3122,Tobacco Manufacturing,business_regulated_or_illegal,compliance,business,high,negative,true,true,3122,,,active,Tobacco Manufacturing
+middesk,naics_code,312221,Cigarette Manufacturing,business_regulated_or_illegal,compliance,business,high,negative,true,true,312221,,,active,Cigarette Manufacturing
+middesk,naics_code,3131,"Fiber, Yarn, and Thread Mills",business_classification_context,business,business,low,neutral,false,false,3131,,,active,"Fiber, Yarn, and Thread Mills"
+middesk,naics_code,3132,Fabric Mills,business_classification_context,business,business,low,neutral,false,false,3132,,,active,Fabric Mills
+middesk,naics_code,3133,Textile and Fabric Finishing and Fabric Coating Mills,business_classification_context,business,business,low,neutral,false,false,3133,,,active,Textile and Fabric Finishing and Fabric Coating Mills
+middesk,naics_code,3141,Textile Furnishings Mills,business_classification_context,business,business,low,neutral,false,false,3141,,,active,Textile Furnishings Mills
+middesk,naics_code,3149,Other Textile Product Mills,business_classification_context,business,business,low,neutral,false,false,3149,,,active,Other Textile Product Mills
+middesk,naics_code,3151,Apparel Knitting Mills,business_classification_context,business,business,low,neutral,false,false,3151,,,active,Apparel Knitting Mills
+middesk,naics_code,3152,Cut and Sew Apparel Manufacturing,business_classification_context,business,business,low,neutral,false,false,3152,,,active,Cut and Sew Apparel Manufacturing
+middesk,naics_code,3159,Apparel Accessories and Other Apparel Manufacturing,business_classification_context,business,business,low,neutral,false,false,3159,,,active,Apparel Accessories and Other Apparel Manufacturing
+middesk,naics_code,3161,Leather and Hide Tanning and Finishing,business_classification_context,business,business,low,neutral,false,false,3161,,,active,Leather and Hide Tanning and Finishing
+middesk,naics_code,3162,Footwear Manufacturing,business_classification_context,business,business,low,neutral,false,false,3162,,,active,Footwear Manufacturing
+middesk,naics_code,3169,Other Leather and Allied Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3169,,,active,Other Leather and Allied Product Manufacturing
+middesk,naics_code,32,Manufacturing,business_classification_context,business,business,low,neutral,false,false,32,,,active,Manufacturing
+middesk,naics_code,3211,Sawmills and Wood Preservation,business_classification_context,business,business,low,neutral,false,false,3211,,,active,Sawmills and Wood Preservation
+middesk,naics_code,3212,"Veneer, Plywood, and Engineered Wood Product Manufacturing",business_classification_context,business,business,low,neutral,false,false,3212,,,active,"Veneer, Plywood, and Engineered Wood Product Manufacturing"
+middesk,naics_code,3219,Other Wood Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3219,,,active,Other Wood Product Manufacturing
+middesk,naics_code,3221,"Pulp, Paper, and Paperboard Mills",business_classification_context,business,business,low,neutral,false,false,3221,,,active,"Pulp, Paper, and Paperboard Mills"
+middesk,naics_code,3222,Converted Paper Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3222,,,active,Converted Paper Product Manufacturing
+middesk,naics_code,3231,Printing and Related Support Activities,business_classification_context,business,business,low,neutral,false,false,3231,,,active,Printing and Related Support Activities
+middesk,naics_code,323111,Commercial Printing (except Screen and Books),business_classification_context,business,business,low,neutral,false,false,323111,,,active,Commercial Printing (except Screen and Books)
+middesk,naics_code,3241,Petroleum and Coal Products Manufacturing,business_classification_context,business,business,low,neutral,false,false,3241,,,active,Petroleum and Coal Products Manufacturing
+middesk,naics_code,3251,Basic Chemical Manufacturing,business_classification_context,business,business,low,neutral,false,false,3251,,,active,Basic Chemical Manufacturing
+middesk,naics_code,325110,Petrochemical Manufacturing,business_classification_context,business,business,low,neutral,false,false,325110,,,active,Petrochemical Manufacturing
+middesk,naics_code,3252,"Resin, Synthetic Rubber, and Artificial and Synthetic Fibers and Filaments Manufacturing",business_classification_context,business,business,low,neutral,false,false,3252,,,active,"Resin, Synthetic Rubber, and Artificial and Synthetic Fibers and Filaments Manufacturing"
+middesk,naics_code,3253,"Pesticide, Fertilizer, and Other Agricultural Chemical Manufacturing",business_classification_context,business,business,low,neutral,false,false,3253,,,active,"Pesticide, Fertilizer, and Other Agricultural Chemical Manufacturing"
+middesk,naics_code,3254,Pharmaceutical and Medicine Manufacturing,business_classification_context,business,business,low,neutral,false,false,3254,,,active,Pharmaceutical and Medicine Manufacturing
+middesk,naics_code,3255,"Paint, Coating, and Adhesive Manufacturing",business_classification_context,business,business,low,neutral,false,false,3255,,,active,"Paint, Coating, and Adhesive Manufacturing"
+middesk,naics_code,3256,"Soap, Cleaning Compound, and Toilet Preparation Manufacturing",business_classification_context,business,business,low,neutral,false,false,3256,,,active,"Soap, Cleaning Compound, and Toilet Preparation Manufacturing"
+middesk,naics_code,3259,Other Chemical Product and Preparation Manufacturing,business_classification_context,business,business,low,neutral,false,false,3259,,,active,Other Chemical Product and Preparation Manufacturing
+middesk,naics_code,3261,Plastics Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3261,,,active,Plastics Product Manufacturing
+middesk,naics_code,3262,Rubber Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3262,,,active,Rubber Product Manufacturing
+middesk,naics_code,3271,Clay Product and Refractory Manufacturing,business_classification_context,business,business,low,neutral,false,false,3271,,,active,Clay Product and Refractory Manufacturing
+middesk,naics_code,3272,Glass and Glass Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3272,,,active,Glass and Glass Product Manufacturing
+middesk,naics_code,3273,Cement and Concrete Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3273,,,active,Cement and Concrete Product Manufacturing
+middesk,naics_code,3274,Lime and Gypsum Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3274,,,active,Lime and Gypsum Product Manufacturing
+middesk,naics_code,3279,Other Nonmetallic Mineral Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3279,,,active,Other Nonmetallic Mineral Product Manufacturing
+middesk,naics_code,33,Manufacturing,business_classification_context,business,business,low,neutral,false,false,33,,,active,Manufacturing
+middesk,naics_code,3311,Iron and Steel Mills and Ferroalloy Manufacturing,business_classification_context,business,business,low,neutral,false,false,3311,,,active,Iron and Steel Mills and Ferroalloy Manufacturing
+middesk,naics_code,3312,Steel Product Manufacturing from Purchased Steel,business_classification_context,business,business,low,neutral,false,false,3312,,,active,Steel Product Manufacturing from Purchased Steel
+middesk,naics_code,3313,Alumina and Aluminum Production and Processing,business_classification_context,business,business,low,neutral,false,false,3313,,,active,Alumina and Aluminum Production and Processing
+middesk,naics_code,3314,Nonferrous Metal (except Aluminum) Production and Processing,business_classification_context,business,business,low,neutral,false,false,3314,,,active,Nonferrous Metal (except Aluminum) Production and Processing
+middesk,naics_code,331420,"Copper Rolling, Drawing, Extruding, and Alloying",business_classification_context,business,business,low,neutral,false,false,331420,,,active,"Copper Rolling, Drawing, Extruding, and Alloying"
+middesk,naics_code,331492,"Secondary Smelting, Refining, and Alloying of Nonferrous Metal (except Copper and Aluminum)",business_classification_context,business,business,low,neutral,false,false,331492,,,active,"Secondary Smelting, Refining, and Alloying of Nonferrous Metal (except Copper and Aluminum)"
+middesk,naics_code,3315,Foundries,business_classification_context,business,business,low,neutral,false,false,3315,,,active,Foundries
+middesk,naics_code,3321,Forging and Stamping,business_classification_context,business,business,low,neutral,false,false,3321,,,active,Forging and Stamping
+middesk,naics_code,3322,Cutlery and Handtool Manufacturing,business_classification_context,business,business,low,neutral,false,false,3322,,,active,Cutlery and Handtool Manufacturing
+middesk,naics_code,3323,Architectural and Structural Metals Manufacturing,business_classification_context,business,business,low,neutral,false,false,3323,,,active,Architectural and Structural Metals Manufacturing
+middesk,naics_code,3324,"Boiler, Tank, and Shipping Container Manufacturing",business_classification_context,business,business,low,neutral,false,false,3324,,,active,"Boiler, Tank, and Shipping Container Manufacturing"
+middesk,naics_code,3325,Hardware Manufacturing,business_classification_context,business,business,low,neutral,false,false,3325,,,active,Hardware Manufacturing
+middesk,naics_code,3326,Spring and Wire Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3326,,,active,Spring and Wire Product Manufacturing
+middesk,naics_code,3327,"Machine Shops; Turned Product; and Screw, Nut, and Bolt Manufacturing",business_classification_context,business,business,low,neutral,false,false,3327,,,active,"Machine Shops; Turned Product; and Screw, Nut, and Bolt Manufacturing"
+middesk,naics_code,3328,"Coating, Engraving, Heat Treating, and Allied Activities",business_classification_context,business,business,low,neutral,false,false,3328,,,active,"Coating, Engraving, Heat Treating, and Allied Activities"
+middesk,naics_code,332812,"Metal Coating, Engraving (except Jewelry and Silverware), and Allied Services to Manufacturers",business_classification_context,business,business,low,neutral,false,false,332812,,,active,"Metal Coating, Engraving (except Jewelry and Silverware), and Allied Services to Manufacturers"
+middesk,naics_code,3329,Other Fabricated Metal Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3329,,,active,Other Fabricated Metal Product Manufacturing
+middesk,naics_code,3331,"Agriculture, Construction, and Mining Machinery Manufacturing",business_classification_context,business,business,low,neutral,false,false,3331,,,active,"Agriculture, Construction, and Mining Machinery Manufacturing"
+middesk,naics_code,3332,Industrial Machinery Manufacturing,business_classification_context,business,business,low,neutral,false,false,3332,,,active,Industrial Machinery Manufacturing
+middesk,naics_code,3333,Commercial and Service Industry Machinery Manufacturing,business_classification_context,business,business,low,neutral,false,false,3333,,,active,Commercial and Service Industry Machinery Manufacturing
+middesk,naics_code,3334,"Ventilation, Heating, Air-Conditioning, and Commercial Refrigeration Equipment Manufacturing",business_classification_context,business,business,low,neutral,false,false,3334,,,active,"Ventilation, Heating, Air-Conditioning, and Commercial Refrigeration Equipment Manufacturing"
+middesk,naics_code,3335,Metalworking Machinery Manufacturing,business_classification_context,business,business,low,neutral,false,false,3335,,,active,Metalworking Machinery Manufacturing
+middesk,naics_code,333517,Machine Tool Manufacturing,business_classification_context,business,business,low,neutral,false,false,333517,,,active,Machine Tool Manufacturing
+middesk,naics_code,3336,"Engine, Turbine, and Power Transmission Equipment Manufacturing",business_classification_context,business,business,low,neutral,false,false,3336,,,active,"Engine, Turbine, and Power Transmission Equipment Manufacturing"
+middesk,naics_code,3339,Other General Purpose Machinery Manufacturing,business_classification_context,business,business,low,neutral,false,false,3339,,,active,Other General Purpose Machinery Manufacturing
+middesk,naics_code,3341,Computer and Peripheral Equipment Manufacturing,business_classification_context,business,business,low,neutral,false,false,3341,,,active,Computer and Peripheral Equipment Manufacturing
+middesk,naics_code,3342,Communications Equipment Manufacturing,business_classification_context,business,business,low,neutral,false,false,3342,,,active,Communications Equipment Manufacturing
+middesk,naics_code,3343,Audio and Video Equipment Manufacturing,business_classification_context,business,business,low,neutral,false,false,3343,,,active,Audio and Video Equipment Manufacturing
+middesk,naics_code,3344,Semiconductor and Other Electronic Component Manufacturing,business_classification_context,business,business,low,neutral,false,false,3344,,,active,Semiconductor and Other Electronic Component Manufacturing
+middesk,naics_code,3345,"Navigational, Measuring, Electromedical, and Control Instruments Manufacturing",business_classification_context,business,business,low,neutral,false,false,3345,,,active,"Navigational, Measuring, Electromedical, and Control Instruments Manufacturing"
+middesk,naics_code,3346,Manufacturing and Reproducing Magnetic and Optical Media,business_classification_context,business,business,low,neutral,false,false,3346,,,active,Manufacturing and Reproducing Magnetic and Optical Media
+middesk,naics_code,3351,Electric Lighting Equipment Manufacturing,business_classification_context,business,business,low,neutral,false,false,3351,,,active,Electric Lighting Equipment Manufacturing
+middesk,naics_code,3352,Household Appliance Manufacturing,business_classification_context,business,business,low,neutral,false,false,3352,,,active,Household Appliance Manufacturing
+middesk,naics_code,3353,Electrical Equipment Manufacturing,business_classification_context,business,business,low,neutral,false,false,3353,,,active,Electrical Equipment Manufacturing
+middesk,naics_code,3359,Other Electrical Equipment and Component Manufacturing,business_classification_context,business,business,low,neutral,false,false,3359,,,active,Other Electrical Equipment and Component Manufacturing
+middesk,naics_code,3361,Motor Vehicle Manufacturing,business_classification_context,business,business,low,neutral,false,false,3361,,,active,Motor Vehicle Manufacturing
+middesk,naics_code,3362,Motor Vehicle Body and Trailer Manufacturing,business_classification_context,business,business,low,neutral,false,false,3362,,,active,Motor Vehicle Body and Trailer Manufacturing
+middesk,naics_code,3363,Motor Vehicle Parts Manufacturing,business_classification_context,business,business,low,neutral,false,false,3363,,,active,Motor Vehicle Parts Manufacturing
+middesk,naics_code,3364,Aerospace Product and Parts Manufacturing,business_classification_context,business,business,low,neutral,false,false,3364,,,active,Aerospace Product and Parts Manufacturing
+middesk,naics_code,3365,Railroad Rolling Stock Manufacturing,business_classification_context,business,business,low,neutral,false,false,3365,,,active,Railroad Rolling Stock Manufacturing
+middesk,naics_code,3366,Ship and Boat Building,business_classification_context,business,business,low,neutral,false,false,3366,,,active,Ship and Boat Building
+middesk,naics_code,3369,Other Transportation Equipment Manufacturing,business_classification_context,business,business,low,neutral,false,false,3369,,,active,Other Transportation Equipment Manufacturing
+middesk,naics_code,3371,Household and Institutional Furniture and Kitchen Cabinet Manufacturing,business_classification_context,business,business,low,neutral,false,false,3371,,,active,Household and Institutional Furniture and Kitchen Cabinet Manufacturing
+middesk,naics_code,3372,Office Furniture (including Fixtures) Manufacturing,business_classification_context,business,business,low,neutral,false,false,3372,,,active,Office Furniture (including Fixtures) Manufacturing
+middesk,naics_code,3379,Other Furniture Related Product Manufacturing,business_classification_context,business,business,low,neutral,false,false,3379,,,active,Other Furniture Related Product Manufacturing
+middesk,naics_code,3391,Medical Equipment and Supplies Manufacturing,business_classification_context,business,business,low,neutral,false,false,3391,,,active,Medical Equipment and Supplies Manufacturing
+middesk,naics_code,3399,Other Miscellaneous Manufacturing,business_classification_context,business,business,low,neutral,false,false,3399,,,active,Other Miscellaneous Manufacturing
+middesk,naics_code,42,Wholesale Trade,business_classification_context,business,business,low,neutral,false,false,42,,,active,Wholesale Trade
+middesk,naics_code,4231,Motor Vehicle and Motor Vehicle Parts and Supplies Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4231,,,active,Motor Vehicle and Motor Vehicle Parts and Supplies Merchant Wholesalers
+middesk,naics_code,4232,Furniture and Home Furnishing Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4232,,,active,Furniture and Home Furnishing Merchant Wholesalers
+middesk,naics_code,4233,Lumber and Other Construction Materials Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4233,,,active,Lumber and Other Construction Materials Merchant Wholesalers
+middesk,naics_code,423310,"Lumber, Plywood, Millwork, and Wood Panel Merchant Wholesalers",business_classification_context,business,business,low,neutral,false,false,423310,,,active,"Lumber, Plywood, Millwork, and Wood Panel Merchant Wholesalers"
+middesk,naics_code,4234,Professional and Commercial Equipment and Supplies Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4234,,,active,Professional and Commercial Equipment and Supplies Merchant Wholesalers
+middesk,naics_code,423420,Office Equipment Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,423420,,,active,Office Equipment Merchant Wholesalers
+middesk,naics_code,423440,Other Commercial Equipment Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,423440,,,active,Other Commercial Equipment Merchant Wholesalers
+middesk,naics_code,4235,Metal and Mineral (except Petroleum) Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4235,,,active,Metal and Mineral (except Petroleum) Merchant Wholesalers
+middesk,naics_code,4236,Household Appliances and Electrical and Electronic Goods Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4236,,,active,Household Appliances and Electrical and Electronic Goods Merchant Wholesalers
+middesk,naics_code,4237,"Hardware, and Plumbing and Heating Equipment and Supplies Merchant Wholesalers",business_classification_context,business,business,low,neutral,false,false,4237,,,active,"Hardware, and Plumbing and Heating Equipment and Supplies Merchant Wholesalers"
+middesk,naics_code,4238,"Machinery, Equipment, and Supplies Merchant Wholesalers",business_classification_context,business,business,low,neutral,false,false,4238,,,active,"Machinery, Equipment, and Supplies Merchant Wholesalers"
+middesk,naics_code,4239,Miscellaneous Durable Goods Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4239,,,active,Miscellaneous Durable Goods Merchant Wholesalers
+middesk,naics_code,423940,"Jewelry, Watch, Precious Stone, and Precious Metal Merchant Wholesalers",business_classification_context,business,business,low,neutral,false,false,423940,,,active,"Jewelry, Watch, Precious Stone, and Precious Metal Merchant Wholesalers"
+middesk,naics_code,4241,Paper and Paper Product Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4241,,,active,Paper and Paper Product Merchant Wholesalers
+middesk,naics_code,4242,Drugs and Druggists' Sundries Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4242,,,active,Drugs and Druggists' Sundries Merchant Wholesalers
+middesk,naics_code,4243,"Apparel, Piece Goods, and Notions Merchant Wholesalers",business_classification_context,business,business,low,neutral,false,false,4243,,,active,"Apparel, Piece Goods, and Notions Merchant Wholesalers"
+middesk,naics_code,4244,Grocery and Related Product Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4244,,,active,Grocery and Related Product Merchant Wholesalers
+middesk,naics_code,4245,Farm Product Raw Material Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4245,,,active,Farm Product Raw Material Merchant Wholesalers
+middesk,naics_code,4246,Chemical and Allied Products Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4246,,,active,Chemical and Allied Products Merchant Wholesalers
+middesk,naics_code,4247,Petroleum and Petroleum Products Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4247,,,active,Petroleum and Petroleum Products Merchant Wholesalers
+middesk,naics_code,424720,Petroleum and Petroleum Products Merchant Wholesalers (except Bulk Stations and Terminals),business_classification_context,business,business,low,neutral,false,false,424720,,,active,Petroleum and Petroleum Products Merchant Wholesalers (except Bulk Stations and Terminals)
+middesk,naics_code,4248,"Beer, Wine, and Distilled Alcoholic Beverage Merchant Wholesalers",business_classification_context,business,business,low,neutral,false,false,4248,,,active,"Beer, Wine, and Distilled Alcoholic Beverage Merchant Wholesalers"
+middesk,naics_code,4249,Miscellaneous Nondurable Goods Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,4249,,,active,Miscellaneous Nondurable Goods Merchant Wholesalers
+middesk,naics_code,424910,Farm Supplies Merchant Wholesalers,business_classification_context,business,business,low,neutral,false,false,424910,,,active,Farm Supplies Merchant Wholesalers
+middesk,naics_code,4251,Wholesale Trade Agents and Brokers,business_classification_context,business,business,low,neutral,false,false,4251,,,active,Wholesale Trade Agents and Brokers
+middesk,naics_code,425110,Business to Business Electronic Markets,business_classification_context,business,business,low,neutral,false,false,425110,,,active,Business to Business Electronic Markets
+middesk,naics_code,425120,Wholesale Trade Agents and Brokers,business_classification_context,business,business,low,neutral,false,false,425120,,,active,Wholesale Trade Agents and Brokers
+middesk,naics_code,4412,Other Motor Vehicle Dealers,business_classification_context,business,business,low,neutral,false,false,4412,,,active,Other Motor Vehicle Dealers
+middesk,naics_code,441228,"Motorcycle, ATV, and All Other Motor Vehicle Dealers",business_classification_context,business,business,low,neutral,false,false,441228,,,active,"Motorcycle, ATV, and All Other Motor Vehicle Dealers"
+middesk,naics_code,4413,"Automotive Parts, Accessories, and Tire Retailers",business_classification_context,business,business,low,neutral,false,false,4413,,,active,"Automotive Parts, Accessories, and Tire Retailers"
+middesk,naics_code,4441,Building Material and Supplies Dealers,business_classification_context,business,business,low,neutral,false,false,4441,,,active,Building Material and Supplies Dealers
+middesk,naics_code,4442,Lawn and Garden Equipment and Supplies Retailers,business_classification_context,business,business,low,neutral,false,false,4442,,,active,Lawn and Garden Equipment and Supplies Retailers
+middesk,naics_code,"44,45",Retail,business_classification_context,business,business,low,neutral,false,false,"44,45",,,active,Retail
+middesk,naics_code,4451,Grocery and Convenience Retailers,business_classification_context,business,business,low,neutral,false,false,4451,,,active,Grocery and Convenience Retailers
+middesk,naics_code,445110,Supermarkets and Other Grocery (except Convenience) Stores,business_classification_context,business,business,low,neutral,false,false,445110,,,active,Supermarkets and Other Grocery (except Convenience) Stores
+middesk,naics_code,445120,Convenience Stores,business_classification_context,business,business,low,neutral,false,false,445120,,,active,Convenience Stores
+middesk,naics_code,445131,Convenience Retailers,business_classification_context,business,business,low,neutral,false,false,445131,,,active,Convenience Retailers
+middesk,naics_code,4452,Specialty Food Retailers,business_classification_context,business,business,low,neutral,false,false,4452,,,active,Specialty Food Retailers
+middesk,naics_code,445230,Fruit and Vegetable Retailers,business_classification_context,business,business,low,neutral,false,false,445230,,,active,Fruit and Vegetable Retailers
+middesk,naics_code,445240,Meat Retailers,business_classification_context,business,business,low,neutral,false,false,445240,,,active,Meat Retailers
+middesk,naics_code,445291,Baked Goods Retailers,business_classification_context,business,business,low,neutral,false,false,445291,,,active,Baked Goods Retailers
+middesk,naics_code,445292,Confectionery and Nut Retailers,business_classification_context,business,business,low,neutral,false,false,445292,,,active,Confectionery and Nut Retailers
+middesk,naics_code,445298,All Other Specialty Food Retailers,business_classification_context,business,business,low,neutral,false,false,445298,,,active,All Other Specialty Food Retailers
+middesk,naics_code,4453,"Beer, Wine, and Liquor Retailers",business_classification_context,business,business,low,neutral,false,false,4453,,,active,"Beer, Wine, and Liquor Retailers"
+middesk,naics_code,445310,"Beer, Wine, and Liquor Stores",business_classification_context,business,business,low,neutral,false,false,445310,,,active,"Beer, Wine, and Liquor Stores"
+middesk,naics_code,445320,"Beer, Wine, and Liquor Retailers",business_classification_context,business,business,low,neutral,false,false,445320,,,active,"Beer, Wine, and Liquor Retailers"
+middesk,naics_code,446110,Pharmacies and Drug Stores,business_classification_context,business,business,low,neutral,false,false,446110,,,active,Pharmacies and Drug Stores
+middesk,naics_code,446130,Optical Goods Stores,business_classification_context,business,business,low,neutral,false,false,446130,,,active,Optical Goods Stores
+middesk,naics_code,447110,Gasoline Stations with Convenience Stores,business_classification_context,business,business,low,neutral,false,false,447110,,,active,Gasoline Stations with Convenience Stores
+middesk,naics_code,447190,Other Gasoline Stations,business_classification_context,business,business,low,neutral,false,false,447190,,,active,Other Gasoline Stations
+middesk,naics_code,448210,Shoe Stores,business_classification_context,business,business,low,neutral,false,false,448210,,,active,Shoe Stores
+middesk,naics_code,448310,Jewelry Stores,business_classification_context,business,business,low,neutral,false,false,448310,,,active,Jewelry Stores
+middesk,naics_code,4491,Furniture and Home Furnishings Retailers,business_classification_context,business,business,low,neutral,false,false,4491,,,active,Furniture and Home Furnishings Retailers
+middesk,naics_code,4492,Electronics and Appliance Retailers,business_classification_context,business,business,low,neutral,false,false,4492,,,active,Electronics and Appliance Retailers
+middesk,naics_code,451110,Sporting Goods Stores,business_classification_context,business,business,low,neutral,false,false,451110,,,active,Sporting Goods Stores
+middesk,naics_code,452319,All Other General Merchandise Stores,business_classification_context,business,business,low,neutral,false,false,452319,,,active,All Other General Merchandise Stores
+middesk,naics_code,453310,Used Merchandise Stores,business_classification_context,business,business,low,neutral,false,false,453310,,,active,Used Merchandise Stores
+middesk,naics_code,453920,Art Dealers,business_classification_context,business,business,low,neutral,false,false,453920,,,active,Art Dealers
+middesk,naics_code,453991,Tobacco Stores,business_regulated_or_illegal,compliance,business,high,negative,true,true,453991,,,active,Tobacco Stores
+middesk,naics_code,454110,Electronic Shopping and Mail-Order Houses,business_high_risk_marketing,compliance,business,medium,negative,true,false,454110,,,active,Electronic Shopping and Mail-Order Houses
+middesk,naics_code,454210,Vending Machine Operators,business_classification_context,business,business,low,neutral,false,false,454210,,,active,Vending Machine Operators
+middesk,naics_code,454390,Other Direct Selling Establishments,business_high_risk_marketing,compliance,business,medium,negative,true,false,454390,,,active,Other Direct Selling Establishments
+middesk,naics_code,4551,Department Stores,business_classification_context,business,business,low,neutral,false,false,4551,,,active,Department Stores
+middesk,naics_code,4552,"Warehouse Clubs, Supercenters, and Other General Merchandise Retailers",business_classification_context,business,business,low,neutral,false,false,4552,,,active,"Warehouse Clubs, Supercenters, and Other General Merchandise Retailers"
+middesk,naics_code,4561,Health and Personal Care Retailers,business_classification_context,business,business,low,neutral,false,false,4561,,,active,Health and Personal Care Retailers
+middesk,naics_code,4571,Gasoline Stations,business_classification_context,business,business,low,neutral,false,false,4571,,,active,Gasoline Stations
+middesk,naics_code,4572,Fuel Dealers,business_classification_context,business,business,low,neutral,false,false,4572,,,active,Fuel Dealers
+middesk,naics_code,4581,Clothing and Clothing Accessories Retailers,business_classification_context,business,business,low,neutral,false,false,4581,,,active,Clothing and Clothing Accessories Retailers
+middesk,naics_code,458110,Clothing and Clothing Accessories Retailers,business_classification_context,business,business,low,neutral,false,false,458110,,,active,Clothing and Clothing Accessories Retailers
+middesk,naics_code,4583,"Jewelry, Luggage, and Leather Goods Retailers",business_classification_context,business,business,low,neutral,false,false,4583,,,active,"Jewelry, Luggage, and Leather Goods Retailers"
+middesk,naics_code,4591,"Sporting Goods, Hobby, and Musical Instrument Retailers",business_classification_context,business,business,low,neutral,false,false,4591,,,active,"Sporting Goods, Hobby, and Musical Instrument Retailers"
+middesk,naics_code,4592,Book Retailers and News Dealers,business_classification_context,business,business,low,neutral,false,false,4592,,,active,Book Retailers and News Dealers
+middesk,naics_code,459210,Book Retailers and News Dealers,business_classification_context,business,business,low,neutral,false,false,459210,,,active,Book Retailers and News Dealers
+middesk,naics_code,4593,Florists,business_classification_context,business,business,low,neutral,false,false,4593,,,active,Florists
+middesk,naics_code,459310,Florists,business_classification_context,business,business,low,neutral,false,false,459310,,,active,Florists
+middesk,naics_code,4594,"Office Supplies, Stationery, and Gift Retailers",business_classification_context,business,business,low,neutral,false,false,4594,,,active,"Office Supplies, Stationery, and Gift Retailers"
+middesk,naics_code,459420,"Gift, Novelty, and Souvenir Retailers",business_classification_context,business,business,low,neutral,false,false,459420,,,active,"Gift, Novelty, and Souvenir Retailers"
+middesk,naics_code,4595,Used Merchandise Retailers,business_classification_context,business,business,low,neutral,false,false,4595,,,active,Used Merchandise Retailers
+middesk,naics_code,4599,Other Miscellaneous Retailers,business_classification_context,business,business,low,neutral,false,false,4599,,,active,Other Miscellaneous Retailers
+middesk,naics_code,459910,Pet and Pet Supplies Retailers,business_classification_context,business,business,low,neutral,false,false,459910,,,active,Pet and Pet Supplies Retailers
+middesk,naics_code,4811,Scheduled Air Transportation,business_classification_context,business,business,low,neutral,false,false,4811,,,active,Scheduled Air Transportation
+middesk,naics_code,481112,Scheduled Freight Air Transportation,business_classification_context,business,business,low,neutral,false,false,481112,,,active,Scheduled Freight Air Transportation
+middesk,naics_code,4831,"Deep Sea, Coastal, and Great Lakes Water Transportation",business_classification_context,business,business,low,neutral,false,false,4831,,,active,"Deep Sea, Coastal, and Great Lakes Water Transportation"
+middesk,naics_code,4832,Inland Water Transportation,business_classification_context,business,business,low,neutral,false,false,4832,,,active,Inland Water Transportation
+middesk,naics_code,4841,General Freight Trucking,business_classification_context,business,business,low,neutral,false,false,4841,,,active,General Freight Trucking
+middesk,naics_code,4842,Specialized Freight Trucking,business_classification_context,business,business,low,neutral,false,false,4842,,,active,Specialized Freight Trucking
+middesk,naics_code,"48,49",Transportation and Warehousing,business_classification_context,business,business,low,neutral,false,false,"48,49",,,active,Transportation and Warehousing
+middesk,naics_code,4851,Urban Transit Systems,business_classification_context,business,business,low,neutral,false,false,4851,,,active,Urban Transit Systems
+middesk,naics_code,4852,Interurban and Rural Bus Transportation,business_classification_context,business,business,low,neutral,false,false,4852,,,active,Interurban and Rural Bus Transportation
+middesk,naics_code,4853,Taxi and Limousine Service,business_classification_context,business,business,low,neutral,false,false,4853,,,active,Taxi and Limousine Service
+middesk,naics_code,4854,School and Employee Bus Transportation,business_classification_context,business,business,low,neutral,false,false,4854,,,active,School and Employee Bus Transportation
+middesk,naics_code,4855,Charter Bus Industry,business_classification_context,business,business,low,neutral,false,false,4855,,,active,Charter Bus Industry
+middesk,naics_code,4859,Other Transit and Ground Passenger Transportation,business_classification_context,business,business,low,neutral,false,false,4859,,,active,Other Transit and Ground Passenger Transportation
+middesk,naics_code,485999,All Other Transit and Ground Passenger Transportation,business_classification_context,business,business,low,neutral,false,false,485999,,,active,All Other Transit and Ground Passenger Transportation
+middesk,naics_code,4861,Pipeline Transportation of Crude Oil,business_classification_context,business,business,low,neutral,false,false,4861,,,active,Pipeline Transportation of Crude Oil
+middesk,naics_code,4862,Pipeline Transportation of Natural Gas,business_classification_context,business,business,low,neutral,false,false,4862,,,active,Pipeline Transportation of Natural Gas
+middesk,naics_code,4869,Other Pipeline Transportation,business_classification_context,business,business,low,neutral,false,false,4869,,,active,Other Pipeline Transportation
+middesk,naics_code,4871,"Scenic and Sightseeing Transportation, Land",business_classification_context,business,business,low,neutral,false,false,4871,,,active,"Scenic and Sightseeing Transportation, Land"
+middesk,naics_code,4872,"Scenic and Sightseeing Transportation, Water",business_classification_context,business,business,low,neutral,false,false,4872,,,active,"Scenic and Sightseeing Transportation, Water"
+middesk,naics_code,4879,"Scenic and Sightseeing Transportation, Other",business_classification_context,business,business,low,neutral,false,false,4879,,,active,"Scenic and Sightseeing Transportation, Other"
+middesk,naics_code,4881,Support Activities for Air Transportation,business_classification_context,business,business,low,neutral,false,false,4881,,,active,Support Activities for Air Transportation
+middesk,naics_code,4882,Support Activities for Rail Transportation,business_classification_context,business,business,low,neutral,false,false,4882,,,active,Support Activities for Rail Transportation
+middesk,naics_code,4883,Support Activities for Water Transportation,business_classification_context,business,business,low,neutral,false,false,4883,,,active,Support Activities for Water Transportation
+middesk,naics_code,4884,Support Activities for Road Transportation,business_classification_context,business,business,low,neutral,false,false,4884,,,active,Support Activities for Road Transportation
+middesk,naics_code,4885,Freight Transportation Arrangement,business_classification_context,business,business,low,neutral,false,false,4885,,,active,Freight Transportation Arrangement
+middesk,naics_code,488510,Freight Transportation Arrangement,business_classification_context,business,business,low,neutral,false,false,488510,,,active,Freight Transportation Arrangement
+middesk,naics_code,4889,Other Support Activities for Transportation,business_classification_context,business,business,low,neutral,false,false,4889,,,active,Other Support Activities for Transportation
+middesk,naics_code,488999,All Other Support Activities for Transportation,business_classification_context,business,business,low,neutral,false,false,488999,,,active,All Other Support Activities for Transportation
+middesk,naics_code,4911,Postal Service,business_classification_context,business,business,low,neutral,false,false,4911,,,active,Postal Service
+middesk,naics_code,4921,Couriers and Express Delivery Services,business_classification_context,business,business,low,neutral,false,false,4921,,,active,Couriers and Express Delivery Services
+middesk,naics_code,4922,Local Messengers and Local Delivery,business_classification_context,business,business,low,neutral,false,false,4922,,,active,Local Messengers and Local Delivery
+middesk,naics_code,4931,Warehousing and Storage,business_classification_context,business,business,low,neutral,false,false,4931,,,active,Warehousing and Storage
+middesk,naics_code,51,Information,business_classification_context,business,business,low,neutral,false,false,51,,,active,Information
+middesk,naics_code,511120,Periodical Publishers,business_classification_context,business,business,low,neutral,false,false,511120,,,active,Periodical Publishers
+middesk,naics_code,511210,Software Publishers,business_classification_context,business,business,low,neutral,false,false,511210,,,active,Software Publishers
+middesk,naics_code,5121,Motion Picture and Video Industries,business_classification_context,business,business,low,neutral,false,false,5121,,,active,Motion Picture and Video Industries
+middesk,naics_code,512230,Music Publishers,business_classification_context,business,business,low,neutral,false,false,512230,,,active,Music Publishers
+middesk,naics_code,5132,Software Publishers,business_classification_context,business,business,low,neutral,false,false,5132,,,active,Software Publishers
+middesk,naics_code,515120,Television Broadcasting,business_classification_context,business,business,low,neutral,false,false,515120,,,active,Television Broadcasting
+middesk,naics_code,5161,Radio and Television Broadcasting Stations,business_classification_context,business,business,low,neutral,false,false,5161,,,active,Radio and Television Broadcasting Stations
+middesk,naics_code,5162,"Media Streaming Distribution Services, Social Networks, and Other Media Networks and Content Providers",business_classification_context,business,business,low,neutral,false,false,5162,,,active,"Media Streaming Distribution Services, Social Networks, and Other Media Networks and Content Providers"
+middesk,naics_code,5171,Wired and Wireless Telecommunications (except Satellite),business_classification_context,business,business,low,neutral,false,false,5171,,,active,Wired and Wireless Telecommunications (except Satellite)
+middesk,naics_code,517312,Wireless Telecommunications Carriers (except Satellite),business_classification_context,business,business,low,neutral,false,false,517312,,,active,Wireless Telecommunications Carriers (except Satellite)
+middesk,naics_code,5174,Satellite Telecommunications,business_classification_context,business,business,low,neutral,false,false,5174,,,active,Satellite Telecommunications
+middesk,naics_code,5178,All Other Telecommunications,business_classification_context,business,business,low,neutral,false,false,5178,,,active,All Other Telecommunications
+middesk,naics_code,517919,All Other Telecommunications,business_classification_context,business,business,low,neutral,false,false,517919,,,active,All Other Telecommunications
+middesk,naics_code,5182,"Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services",business_classification_context,business,business,low,neutral,false,false,5182,,,active,"Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services"
+middesk,naics_code,518210,"Data Processing, Hosting, and Related Services",business_classification_context,business,business,low,neutral,false,false,518210,,,active,"Data Processing, Hosting, and Related Services"
+middesk,naics_code,519130,Internet Publishing and Broadcasting and Web Search Portals,business_classification_context,business,business,low,neutral,false,false,519130,,,active,Internet Publishing and Broadcasting and Web Search Portals
+middesk,naics_code,519190,All Other Information Services,business_classification_context,business,business,low,neutral,false,false,519190,,,active,All Other Information Services
+middesk,naics_code,52,Finance and Insurance,business_classification_context,business,business,low,neutral,false,false,52,,,active,Finance and Insurance
+middesk,naics_code,5221,Depository Credit Intermediation,business_classification_context,business,business,low,neutral,false,false,5221,,,active,Depository Credit Intermediation
+middesk,naics_code,52211,Commercial Banking,business_classification_context,business,business,low,neutral,false,false,52211,,,active,Commercial Banking
+middesk,naics_code,522110,Commercial Banking,business_classification_context,business,business,low,neutral,false,false,522110,,,active,Commercial Banking
+middesk,naics_code,52212,Savings Institutions,business_classification_context,business,business,low,neutral,false,false,52212,,,active,Savings Institutions
+middesk,naics_code,522120,Savings Institutions,business_classification_context,business,business,low,neutral,false,false,522120,,,active,Savings Institutions
+middesk,naics_code,52213,Credit Unions,business_classification_context,business,business,low,neutral,false,false,52213,,,active,Credit Unions
+middesk,naics_code,522130,Credit Unions,business_classification_context,business,business,low,neutral,false,false,522130,,,active,Credit Unions
+middesk,naics_code,522190,Other Depository Credit Intermediation,business_classification_context,business,business,low,neutral,false,false,522190,,,active,Other Depository Credit Intermediation
+middesk,naics_code,5222,Nondepository Credit Intermediation,business_classification_context,business,business,low,neutral,false,false,5222,,,active,Nondepository Credit Intermediation
+middesk,naics_code,522210,Credit Card Issuing,business_classification_context,business,business,low,neutral,false,false,522210,,,active,Credit Card Issuing
+middesk,naics_code,522292,Real Estate Credit,business_classification_context,business,business,low,neutral,false,false,522292,,,active,Real Estate Credit
+middesk,naics_code,522298,All Other Nondepository Credit Intermediation,business_classification_context,business,business,low,neutral,false,false,522298,,,active,All Other Nondepository Credit Intermediation
+middesk,naics_code,5223,Activities Related to Credit Intermediation,business_classification_context,business,business,low,neutral,false,false,5223,,,active,Activities Related to Credit Intermediation
+middesk,naics_code,522310,Mortgage and Nonmortgage Loan Brokers,business_classification_context,business,business,low,neutral,false,false,522310,,,active,Mortgage and Nonmortgage Loan Brokers
+middesk,naics_code,522320,"Financial Transactions Processing, Reserve, and Clearinghouse Activities",business_financial_services,compliance,business,high,negative,true,true,522320,,,active,"Financial Transactions Processing, Reserve, and Clearinghouse Activities"
+middesk,naics_code,522390,Other Activities Related to Credit Intermediation,business_classification_context,business,business,low,neutral,false,false,522390,,,active,Other Activities Related to Credit Intermediation
+middesk,naics_code,523110,Investment Banking and Securities Dealing,business_financial_services,compliance,business,high,negative,true,true,523110,,,active,Investment Banking and Securities Dealing
+middesk,naics_code,523120,Securities Brokerage,business_financial_services,compliance,business,high,negative,true,true,523120,,,active,Securities Brokerage
+middesk,naics_code,523130,Commodity Contracts Dealing,business_financial_services,compliance,business,high,negative,true,true,523130,,,active,Commodity Contracts Dealing
+middesk,naics_code,523140,Commodity Contracts Brokerage,business_financial_services,compliance,business,high,negative,true,true,523140,,,active,Commodity Contracts Brokerage
+middesk,naics_code,5232,Securities and Commodity Exchanges,business_financial_services,compliance,business,high,negative,true,true,5232,,,active,Securities and Commodity Exchanges
+middesk,naics_code,523210,Securities and Commodity Exchanges,business_financial_services,compliance,business,high,negative,true,true,523210,,,active,Securities and Commodity Exchanges
+middesk,naics_code,5239,Other Financial Investment Activities,business_classification_context,business,business,low,neutral,false,false,5239,,,active,Other Financial Investment Activities
+middesk,naics_code,523910,Miscellaneous Intermediation,business_classification_context,business,business,low,neutral,false,false,523910,,,active,Miscellaneous Intermediation
+middesk,naics_code,523920,Portfolio Management,business_classification_context,business,business,low,neutral,false,false,523920,,,active,Portfolio Management
+middesk,naics_code,523930,Investment Advice,business_classification_context,business,business,low,neutral,false,false,523930,,,active,Investment Advice
+middesk,naics_code,523990,All Other Financial Investment Activities,business_classification_context,business,business,low,neutral,false,false,523990,,,active,All Other Financial Investment Activities
+middesk,naics_code,523991,"Trust, Fiduciary, and Custody Activities",business_classification_context,business,business,low,neutral,false,false,523991,,,active,"Trust, Fiduciary, and Custody Activities"
+middesk,naics_code,523999,Miscellaneous Financial Investment Activities,business_classification_context,business,business,low,neutral,false,false,523999,,,active,Miscellaneous Financial Investment Activities
+middesk,naics_code,5241,Insurance Carriers,business_classification_context,business,business,low,neutral,false,false,5241,,,active,Insurance Carriers
+middesk,naics_code,524113,Direct Life Insurance Carriers,business_classification_context,business,business,low,neutral,false,false,524113,,,active,Direct Life Insurance Carriers
+middesk,naics_code,524114,Direct Health and Medical Insurance Carriers,business_classification_context,business,business,low,neutral,false,false,524114,,,active,Direct Health and Medical Insurance Carriers
+middesk,naics_code,524126,Direct Property and Casualty Insurance Carriers,business_classification_context,business,business,low,neutral,false,false,524126,,,active,Direct Property and Casualty Insurance Carriers
+middesk,naics_code,524130,Reinsurance Carriers,business_classification_context,business,business,low,neutral,false,false,524130,,,active,Reinsurance Carriers
+middesk,naics_code,5242,"Agencies, Brokerages, and Other Insurance Related Activities",business_financial_services,compliance,business,high,negative,true,true,5242,,,active,"Agencies, Brokerages, and Other Insurance Related Activities"
+middesk,naics_code,524210,Insurance Agencies and Brokerages,business_financial_services,compliance,business,high,negative,true,true,524210,,,active,Insurance Agencies and Brokerages
+middesk,naics_code,524292,Third Party Administration of Insurance and Pension Funds,business_classification_context,business,business,low,neutral,false,false,524292,,,active,Third Party Administration of Insurance and Pension Funds
+middesk,naics_code,524298,All Other Insurance Related Activities,business_classification_context,business,business,low,neutral,false,false,524298,,,active,All Other Insurance Related Activities
+middesk,naics_code,5259,Other Investment Pools and Funds,business_classification_context,business,business,low,neutral,false,false,5259,,,active,Other Investment Pools and Funds
+middesk,naics_code,525910,Open-End Investment Funds,business_classification_context,business,business,low,neutral,false,false,525910,,,active,Open-End Investment Funds
+middesk,naics_code,525920,"Trusts, Estates, and Agency Accounts",business_classification_context,business,business,low,neutral,false,false,525920,,,active,"Trusts, Estates, and Agency Accounts"
+middesk,naics_code,525930,Real estate investment trusts,business_classification_context,business,business,low,neutral,false,false,525930,,,active,Real estate investment trusts
+middesk,naics_code,525990,Other Financial Vehicles,business_classification_context,business,business,low,neutral,false,false,525990,,,active,Other Financial Vehicles
+middesk,naics_code,53,Real Estate Rental and Leasing,business_classification_context,business,business,low,neutral,false,false,53,,,active,Real Estate Rental and Leasing
+middesk,naics_code,531110,Lessors of Residential Buildings and Dwellings,business_classification_context,business,business,low,neutral,false,false,531110,,,active,Lessors of Residential Buildings and Dwellings
+middesk,naics_code,531120,Lessors of Nonresidential Buildings (except Miniwarehouses),business_classification_context,business,business,low,neutral,false,false,531120,,,active,Lessors of Nonresidential Buildings (except Miniwarehouses)
+middesk,naics_code,5312,Offices of Real Estate Agents and Brokers,business_classification_context,business,business,low,neutral,false,false,5312,,,active,Offices of Real Estate Agents and Brokers
+middesk,naics_code,531210,Offices of Real Estate Agents and Brokers,business_classification_context,business,business,low,neutral,false,false,531210,,,active,Offices of Real Estate Agents and Brokers
+middesk,naics_code,5313,Activities Related to Real Estate,business_classification_context,business,business,low,neutral,false,false,5313,,,active,Activities Related to Real Estate
+middesk,naics_code,531311,Residential Property Managers,business_classification_context,business,business,low,neutral,false,false,531311,,,active,Residential Property Managers
+middesk,naics_code,531390,Other Activities Related to Real Estate,business_classification_context,business,business,low,neutral,false,false,531390,,,active,Other Activities Related to Real Estate
+middesk,naics_code,5321,Automotive Equipment Rental and Leasing,business_classification_context,business,business,low,neutral,false,false,5321,,,active,Automotive Equipment Rental and Leasing
+middesk,naics_code,5322,Consumer Goods Rental,business_classification_context,business,business,low,neutral,false,false,5322,,,active,Consumer Goods Rental
+middesk,naics_code,532210,Consumer Electronics and Appliances Rental,business_classification_context,business,business,low,neutral,false,false,532210,,,active,Consumer Electronics and Appliances Rental
+middesk,naics_code,5323,General Rental Centers,business_classification_context,business,business,low,neutral,false,false,5323,,,active,General Rental Centers
+middesk,naics_code,5324,Commercial and Industrial Machinery and Equipment Rental and Leasing,business_classification_context,business,business,low,neutral,false,false,5324,,,active,Commercial and Industrial Machinery and Equipment Rental and Leasing
+middesk,naics_code,532411,"Commercial Air, Rail, and Water Transportation Equipment Rental and Leasing",business_classification_context,business,business,low,neutral,false,false,532411,,,active,"Commercial Air, Rail, and Water Transportation Equipment Rental and Leasing"
+middesk,naics_code,532412,"Construction, Mining, and Forestry Machinery and Equipment Rental and Leasing",business_classification_context,business,business,low,neutral,false,false,532412,,,active,"Construction, Mining, and Forestry Machinery and Equipment Rental and Leasing"
+middesk,naics_code,532490,Other Commercial and Industrial Machinery and Equipment Rental and Leasing,business_classification_context,business,business,low,neutral,false,false,532490,,,active,Other Commercial and Industrial Machinery and Equipment Rental and Leasing
+middesk,naics_code,54,"Professional, Scientific, and Technical Services",business_classification_context,business,business,low,neutral,false,false,54,,,active,"Professional, Scientific, and Technical Services"
+middesk,naics_code,54111,Offices of Lawyers,business_classification_context,business,business,low,neutral,false,false,54111,,,active,Offices of Lawyers
+middesk,naics_code,541110,Offices of Lawyers,business_classification_context,business,business,low,neutral,false,false,541110,,,active,Offices of Lawyers
+middesk,naics_code,541191,Title Abstract and Settlement Offices,business_classification_context,business,business,low,neutral,false,false,541191,,,active,Title Abstract and Settlement Offices
+middesk,naics_code,541199,All Other Legal Services,business_classification_context,business,business,low,neutral,false,false,541199,,,active,All Other Legal Services
+middesk,naics_code,5412,"Accounting, Tax Preparation, Bookkeeping, and Payroll Services",business_classification_context,business,business,low,neutral,false,false,5412,,,active,"Accounting, Tax Preparation, Bookkeeping, and Payroll Services"
+middesk,naics_code,541211,Offices of Certified Public Accountants,business_classification_context,business,business,low,neutral,false,false,541211,,,active,Offices of Certified Public Accountants
+middesk,naics_code,541213,Tax Preparation Services,business_classification_context,business,business,low,neutral,false,false,541213,,,active,Tax Preparation Services
+middesk,naics_code,541214,Payroll Services,business_classification_context,business,business,low,neutral,false,false,541214,,,active,Payroll Services
+middesk,naics_code,541219,Other Accounting Services,business_classification_context,business,business,low,neutral,false,false,541219,,,active,Other Accounting Services
+middesk,naics_code,5413,"Architectural, Engineering, and Related Services",business_classification_context,business,business,low,neutral,false,false,5413,,,active,"Architectural, Engineering, and Related Services"
+middesk,naics_code,541330,Engineering Services,business_classification_context,business,business,low,neutral,false,false,541330,,,active,Engineering Services
+middesk,naics_code,5414,Specialized Design Services,business_classification_context,business,business,low,neutral,false,false,5414,,,active,Specialized Design Services
+middesk,naics_code,541430,Graphic Design Services,business_classification_context,business,business,low,neutral,false,false,541430,,,active,Graphic Design Services
+middesk,naics_code,5415,Computer Systems Design and Related Services,business_classification_context,business,business,low,neutral,false,false,5415,,,active,Computer Systems Design and Related Services
+middesk,naics_code,541511,Custom Computer Programming Services,business_classification_context,business,business,low,neutral,false,false,541511,,,active,Custom Computer Programming Services
+middesk,naics_code,541512,Computer Systems Design Services,business_classification_context,business,business,low,neutral,false,false,541512,,,active,Computer Systems Design Services
+middesk,naics_code,541519,Other Computer Related Services,business_classification_context,business,business,low,neutral,false,false,541519,,,active,Other Computer Related Services
+middesk,naics_code,5416,"Management, Scientific, and Technical Consulting Services",business_classification_context,business,business,low,neutral,false,false,5416,,,active,"Management, Scientific, and Technical Consulting Services"
+middesk,naics_code,541611,Administrative Management and General Management Consulting Services,business_classification_context,business,business,low,neutral,false,false,541611,,,active,Administrative Management and General Management Consulting Services
+middesk,naics_code,541612,Human Resources Consulting Services,business_classification_context,business,business,low,neutral,false,false,541612,,,active,Human Resources Consulting Services
+middesk,naics_code,541614,"Process, Physical Distribution, and Logistics Consulting Services",business_classification_context,business,business,low,neutral,false,false,541614,,,active,"Process, Physical Distribution, and Logistics Consulting Services"
+middesk,naics_code,541618,Other Management Consulting Services,business_classification_context,business,business,low,neutral,false,false,541618,,,active,Other Management Consulting Services
+middesk,naics_code,5417,Scientific Research and Development Services,business_classification_context,business,business,low,neutral,false,false,5417,,,active,Scientific Research and Development Services
+middesk,naics_code,541714,Research and Development in Biotechnology (except Nanobiotechnology),business_classification_context,business,business,low,neutral,false,false,541714,,,active,Research and Development in Biotechnology (except Nanobiotechnology)
+middesk,naics_code,541715,"Research and Development in the Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology)",business_classification_context,business,business,low,neutral,false,false,541715,,,active,"Research and Development in the Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology)"
+middesk,naics_code,541720,Research and Development in the Social Sciences and Humanities,business_classification_context,business,business,low,neutral,false,false,541720,,,active,Research and Development in the Social Sciences and Humanities
+middesk,naics_code,5418,"Advertising, Public Relations, and Related Services",business_classification_context,business,business,low,neutral,false,false,5418,,,active,"Advertising, Public Relations, and Related Services"
+middesk,naics_code,541810,Advertising Agencies,business_classification_context,business,business,low,neutral,false,false,541810,,,active,Advertising Agencies
+middesk,naics_code,5419,"Other Professional, Scientific, and Technical Services",business_classification_context,business,business,low,neutral,false,false,5419,,,active,"Other Professional, Scientific, and Technical Services"
+middesk,naics_code,541910,Marketing Research and Public Opinion Polling,business_classification_context,business,business,low,neutral,false,false,541910,,,active,Marketing Research and Public Opinion Polling
+middesk,naics_code,541990,"All Other Professional, Scientific, and Technical Services",business_classification_context,business,business,low,neutral,false,false,541990,,,active,"All Other Professional, Scientific, and Technical Services"
+middesk,naics_code,55,Management of Companies and Enterprises,business_classification_context,business,business,low,neutral,false,false,55,,,active,Management of Companies and Enterprises
+middesk,naics_code,55,Management of Companies and Enterprises,business_classification_context,business,business,low,neutral,false,false,55,,,active,Management of Companies and Enterprises
+middesk,naics_code,551112,Offices of Other Holding Companies,business_classification_context,business,business,low,neutral,false,false,551112,,,active,Offices of Other Holding Companies
+middesk,naics_code,551114,"Corporate, Subsidiary, and Regional Managing Offices",business_classification_context,business,business,low,neutral,false,false,551114,,,active,"Corporate, Subsidiary, and Regional Managing Offices"
+middesk,naics_code,56,Administrative and Support and Waste Management and Remediation Services,business_classification_context,business,business,low,neutral,false,false,56,,,active,Administrative and Support and Waste Management and Remediation Services
+middesk,naics_code,561110,Office Administrative Services,business_classification_context,business,business,low,neutral,false,false,561110,,,active,Office Administrative Services
+middesk,naics_code,5612,Facilities Support Services,business_classification_context,business,business,low,neutral,false,false,5612,,,active,Facilities Support Services
+middesk,naics_code,5613,Employment Services,business_classification_context,business,business,low,neutral,false,false,5613,,,active,Employment Services
+middesk,naics_code,561310,Employment Placement Agencies and Executive Search Services,business_classification_context,business,business,low,neutral,false,false,561310,,,active,Employment Placement Agencies and Executive Search Services
+middesk,naics_code,561311,Employment Placement Agencies,business_classification_context,business,business,low,neutral,false,false,561311,,,active,Employment Placement Agencies
+middesk,naics_code,561320,Temporary Help Services,business_classification_context,business,business,low,neutral,false,false,561320,,,active,Temporary Help Services
+middesk,naics_code,561330,Professional Employer Organizations,business_classification_context,business,business,low,neutral,false,false,561330,,,active,Professional Employer Organizations
+middesk,naics_code,5614,Business Support Services,business_classification_context,business,business,low,neutral,false,false,5614,,,active,Business Support Services
+middesk,naics_code,561499,All Other Business Support Services,business_classification_context,business,business,low,neutral,false,false,561499,,,active,All Other Business Support Services
+middesk,naics_code,5615,Travel Arrangement and Reservation Services,business_classification_context,business,business,low,neutral,false,false,5615,,,active,Travel Arrangement and Reservation Services
+middesk,naics_code,561510,Travel Agencies,business_classification_context,business,business,low,neutral,false,false,561510,,,active,Travel Agencies
+middesk,naics_code,5616,Investigation and Security Services,business_classification_context,business,business,low,neutral,false,false,5616,,,active,Investigation and Security Services
+middesk,naics_code,561613,Armored Car Services,business_classification_context,business,business,low,neutral,false,false,561613,,,active,Armored Car Services
+middesk,naics_code,5617,Services to Buildings and Dwellings,business_classification_context,business,business,low,neutral,false,false,5617,,,active,Services to Buildings and Dwellings
+middesk,naics_code,5619,Other Support Services,business_classification_context,business,business,low,neutral,false,false,5619,,,active,Other Support Services
+middesk,naics_code,561920,Convention and Trade Show Organizers,business_classification_context,business,business,low,neutral,false,false,561920,,,active,Convention and Trade Show Organizers
+middesk,naics_code,561990,All Other Support Services,business_classification_context,business,business,low,neutral,false,false,561990,,,active,All Other Support Services
+middesk,naics_code,5622,Waste Treatment and Disposal,business_classification_context,business,business,low,neutral,false,false,5622,,,active,Waste Treatment and Disposal
+middesk,naics_code,5629,Remediation and Other Waste Management Services,business_classification_context,business,business,low,neutral,false,false,5629,,,active,Remediation and Other Waste Management Services
+middesk,naics_code,61,Educational Services,business_classification_context,business,business,low,neutral,false,false,61,,,active,Educational Services
+middesk,naics_code,6111,Elementary and Secondary Schools,business_classification_context,business,business,low,neutral,false,false,6111,,,active,Elementary and Secondary Schools
+middesk,naics_code,611110,Elementary and Secondary Schools,business_classification_context,business,business,low,neutral,false,false,611110,,,active,Elementary and Secondary Schools
+middesk,naics_code,6112,Junior Colleges,business_classification_context,business,business,low,neutral,false,false,6112,,,active,Junior Colleges
+middesk,naics_code,6113,"Colleges, Universities, and Professional Schools",business_classification_context,business,business,low,neutral,false,false,6113,,,active,"Colleges, Universities, and Professional Schools"
+middesk,naics_code,611310,"Colleges, Universities, and Professional Schools",business_classification_context,business,business,low,neutral,false,false,611310,,,active,"Colleges, Universities, and Professional Schools"
+middesk,naics_code,6114,Business Schools and Computer and Management Training,business_classification_context,business,business,low,neutral,false,false,6114,,,active,Business Schools and Computer and Management Training
+middesk,naics_code,6115,Technical and Trade Schools,business_classification_context,business,business,low,neutral,false,false,6115,,,active,Technical and Trade Schools
+middesk,naics_code,611519,Other Technical and Trade Schools,business_classification_context,business,business,low,neutral,false,false,611519,,,active,Other Technical and Trade Schools
+middesk,naics_code,6116,Other Schools and Instruction,business_classification_context,business,business,low,neutral,false,false,6116,,,active,Other Schools and Instruction
+middesk,naics_code,6117,Educational Support Services,business_classification_context,business,business,low,neutral,false,false,6117,,,active,Educational Support Services
+middesk,naics_code,611710,Educational Support Services,business_classification_context,business,business,low,neutral,false,false,611710,,,active,Educational Support Services
+middesk,naics_code,62,Health Care and Social Assistance,business_classification_context,business,business,low,neutral,false,false,62,,,active,Health Care and Social Assistance
+middesk,naics_code,621111,Offices of Physicians (except Mental Health Specialists),business_classification_context,business,business,low,neutral,false,false,621111,,,active,Offices of Physicians (except Mental Health Specialists)
+middesk,naics_code,621112,"Offices of Physicians, Mental Health Specialists",business_classification_context,business,business,low,neutral,false,false,621112,,,active,"Offices of Physicians, Mental Health Specialists"
+middesk,naics_code,6212,Offices of Dentists,business_classification_context,business,business,low,neutral,false,false,6212,,,active,Offices of Dentists
+middesk,naics_code,6213,Offices of Other Health Practitioners,business_classification_context,business,business,low,neutral,false,false,6213,,,active,Offices of Other Health Practitioners
+middesk,naics_code,621330,Offices of Mental Health Practitioners (except Physicians),business_classification_context,business,business,low,neutral,false,false,621330,,,active,Offices of Mental Health Practitioners (except Physicians)
+middesk,naics_code,6214,Outpatient Care Centers,business_classification_context,business,business,low,neutral,false,false,6214,,,active,Outpatient Care Centers
+middesk,naics_code,621420,Outpatient Mental Health and Substance Abuse Centers,business_classification_context,business,business,low,neutral,false,false,621420,,,active,Outpatient Mental Health and Substance Abuse Centers
+middesk,naics_code,621491,HMO Medical Centers,business_classification_context,business,business,low,neutral,false,false,621491,,,active,HMO Medical Centers
+middesk,naics_code,621498,All Other Outpatient Care Centers,business_classification_context,business,business,low,neutral,false,false,621498,,,active,All Other Outpatient Care Centers
+middesk,naics_code,6215,Medical and Diagnostic Laboratories,business_classification_context,business,business,low,neutral,false,false,6215,,,active,Medical and Diagnostic Laboratories
+middesk,naics_code,621511,Medical Laboratories,business_classification_context,business,business,low,neutral,false,false,621511,,,active,Medical Laboratories
+middesk,naics_code,6216,Home Health Care Services,business_classification_context,business,business,low,neutral,false,false,6216,,,active,Home Health Care Services
+middesk,naics_code,6219,Other Ambulatory Health Care Services,business_classification_context,business,business,low,neutral,false,false,6219,,,active,Other Ambulatory Health Care Services
+middesk,naics_code,621999,All Other Miscellaneous Ambulatory Health Care Services,business_classification_context,business,business,low,neutral,false,false,621999,,,active,All Other Miscellaneous Ambulatory Health Care Services
+middesk,naics_code,6221,General Medical and Surgical Hospitals,business_classification_context,business,business,low,neutral,false,false,6221,,,active,General Medical and Surgical Hospitals
+middesk,naics_code,622110,General Medical and Surgical Hospitals,business_classification_context,business,business,low,neutral,false,false,622110,,,active,General Medical and Surgical Hospitals
+middesk,naics_code,6222,Psychiatric and Substance Abuse Hospitals,business_classification_context,business,business,low,neutral,false,false,6222,,,active,Psychiatric and Substance Abuse Hospitals
+middesk,naics_code,6223,Specialty (except Psychiatric and Substance Abuse) Hospitals,business_classification_context,business,business,low,neutral,false,false,6223,,,active,Specialty (except Psychiatric and Substance Abuse) Hospitals
+middesk,naics_code,6231,Nursing Care Facilities (Skilled Nursing Facilities),business_classification_context,business,business,low,neutral,false,false,6231,,,active,Nursing Care Facilities (Skilled Nursing Facilities)
+middesk,naics_code,6232,"Residential Intellectual and Developmental Disability, Mental Health, and Substance Abuse Facilities",business_classification_context,business,business,low,neutral,false,false,6232,,,active,"Residential Intellectual and Developmental Disability, Mental Health, and Substance Abuse Facilities"
+middesk,naics_code,6233,Continuing Care Retirement Communities and Assisted Living Facilities for the Elderly,business_classification_context,business,business,low,neutral,false,false,6233,,,active,Continuing Care Retirement Communities and Assisted Living Facilities for the Elderly
+middesk,naics_code,623311,Continuing Care Retirement Communities,business_classification_context,business,business,low,neutral,false,false,623311,,,active,Continuing Care Retirement Communities
+middesk,naics_code,6239,Other Residential Care Facilities,business_classification_context,business,business,low,neutral,false,false,6239,,,active,Other Residential Care Facilities
+middesk,naics_code,6241,Individual and Family Services,business_classification_context,business,business,low,neutral,false,false,6241,,,active,Individual and Family Services
+middesk,naics_code,624110,Child and Youth Services,business_classification_context,business,business,low,neutral,false,false,624110,,,active,Child and Youth Services
+middesk,naics_code,624120,Services for the Elderly and Persons with Disabilities,business_classification_context,business,business,low,neutral,false,false,624120,,,active,Services for the Elderly and Persons with Disabilities
+middesk,naics_code,624190,Other Individual and Family Services,business_classification_context,business,business,low,neutral,false,false,624190,,,active,Other Individual and Family Services
+middesk,naics_code,6242,"Community Food and Housing, and Emergency and Other Relief Services",business_classification_context,business,business,low,neutral,false,false,6242,,,active,"Community Food and Housing, and Emergency and Other Relief Services"
+middesk,naics_code,624210,Community Food Services,business_classification_context,business,business,low,neutral,false,false,624210,,,active,Community Food Services
+middesk,naics_code,624220,Community Housing Services,business_classification_context,business,business,low,neutral,false,false,624220,,,active,Community Housing Services
+middesk,naics_code,624221,Temporary Shelters,business_classification_context,business,business,low,neutral,false,false,624221,,,active,Temporary Shelters
+middesk,naics_code,624229,Other Community Housing Services,business_classification_context,business,business,low,neutral,false,false,624229,,,active,Other Community Housing Services
+middesk,naics_code,624230,Emergency and Other Relief Services,business_classification_context,business,business,low,neutral,false,false,624230,,,active,Emergency and Other Relief Services
+middesk,naics_code,6243,Vocational Rehabilitation Services,business_classification_context,business,business,low,neutral,false,false,6243,,,active,Vocational Rehabilitation Services
+middesk,naics_code,624310,Vocational Rehabilitation Services,business_classification_context,business,business,low,neutral,false,false,624310,,,active,Vocational Rehabilitation Services
+middesk,naics_code,6244,Child Care Services,business_classification_context,business,business,low,neutral,false,false,6244,,,active,Child Care Services
+middesk,naics_code,71,"Arts, Entertainment, and Recreation",business_classification_context,business,business,low,neutral,false,false,71,,,active,"Arts, Entertainment, and Recreation"
+middesk,naics_code,7111,Performing Arts Companies,business_classification_context,business,business,low,neutral,false,false,7111,,,active,Performing Arts Companies
+middesk,naics_code,711110,Theater Companies and Dinner Theaters,business_classification_context,business,business,low,neutral,false,false,711110,,,active,Theater Companies and Dinner Theaters
+middesk,naics_code,711120,Dance Companies,business_classification_context,business,business,low,neutral,false,false,711120,,,active,Dance Companies
+middesk,naics_code,7112,Spectator Sports,business_classification_context,business,business,low,neutral,false,false,7112,,,active,Spectator Sports
+middesk,naics_code,7113,"Promoters of Performing Arts, Sports, and Similar Events",business_classification_context,business,business,low,neutral,false,false,7113,,,active,"Promoters of Performing Arts, Sports, and Similar Events"
+middesk,naics_code,711310,"Promoters of Performing Arts, Sports, and Similar Events with Facilities",business_classification_context,business,business,low,neutral,false,false,711310,,,active,"Promoters of Performing Arts, Sports, and Similar Events with Facilities"
+middesk,naics_code,711320,"Promoters of Performing Arts, Sports, and Similar Events without Facilities",business_classification_context,business,business,low,neutral,false,false,711320,,,active,"Promoters of Performing Arts, Sports, and Similar Events without Facilities"
+middesk,naics_code,7114,"Agents and Managers for Artists, Athletes, Entertainers, and Other Public Figures",business_classification_context,business,business,low,neutral,false,false,7114,,,active,"Agents and Managers for Artists, Athletes, Entertainers, and Other Public Figures"
+middesk,naics_code,7115,"Independent Artists, Writers, and Performers",business_classification_context,business,business,low,neutral,false,false,7115,,,active,"Independent Artists, Writers, and Performers"
+middesk,naics_code,7121,"Museums, Historical Sites, and Similar Institutions",business_classification_context,business,business,low,neutral,false,false,7121,,,active,"Museums, Historical Sites, and Similar Institutions"
+middesk,naics_code,712110,Museums,business_classification_context,business,business,low,neutral,false,false,712110,,,active,Museums
+middesk,naics_code,712130,Zoos and Botanical Gardens,business_classification_context,business,business,low,neutral,false,false,712130,,,active,Zoos and Botanical Gardens
+middesk,naics_code,7131,Amusement Parks and Arcades,business_classification_context,business,business,low,neutral,false,false,7131,,,active,Amusement Parks and Arcades
+middesk,naics_code,713110,Amusement and Theme Parks,business_classification_context,business,business,low,neutral,false,false,713110,,,active,Amusement and Theme Parks
+middesk,naics_code,7132,Gambling Industries,business_gambling,compliance,business,high,negative,true,true,7132,,,active,Gambling Industries
+middesk,naics_code,713210,Casinos (except Casino Hotels),business_gambling,compliance,business,high,negative,true,true,713210,,,active,Casinos (except Casino Hotels)
+middesk,naics_code,713290,Other Gambling Industries,business_gambling,compliance,business,high,negative,true,true,713290,,,active,Other Gambling Industries
+middesk,naics_code,7139,Other Amusement and Recreation Industries,business_classification_context,business,business,low,neutral,false,false,7139,,,active,Other Amusement and Recreation Industries
+middesk,naics_code,713910,Golf Courses and Country Clubs,business_classification_context,business,business,low,neutral,false,false,713910,,,active,Golf Courses and Country Clubs
+middesk,naics_code,713930,Marinas,business_classification_context,business,business,low,neutral,false,false,713930,,,active,Marinas
+middesk,naics_code,713940,Fitness and Recreational Sports Centers,business_classification_context,business,business,low,neutral,false,false,713940,,,active,Fitness and Recreational Sports Centers
+middesk,naics_code,713950,Bowling Centers,business_classification_context,business,business,low,neutral,false,false,713950,,,active,Bowling Centers
+middesk,naics_code,713990,All Other Amusement and Recreation Industries,business_classification_context,business,business,low,neutral,false,false,713990,,,active,All Other Amusement and Recreation Industries
+middesk,naics_code,72,Accommodation and Food Services,business_classification_context,business,business,low,neutral,false,false,72,,,active,Accommodation and Food Services
+middesk,naics_code,721110,Hotels (except Casino Hotels) and Motels,business_classification_context,business,business,low,neutral,false,false,721110,,,active,Hotels (except Casino Hotels) and Motels
+middesk,naics_code,721120,Casino Hotels,business_gambling,compliance,business,high,negative,true,true,721120,,,active,Casino Hotels
+middesk,naics_code,7212,RV (Recreational Vehicle) Parks and Recreational Camps,business_classification_context,business,business,low,neutral,false,false,7212,,,active,RV (Recreational Vehicle) Parks and Recreational Camps
+middesk,naics_code,7213,"Rooming and Boarding Houses, Dormitories, and Workers' Camps",business_classification_context,business,business,low,neutral,false,false,7213,,,active,"Rooming and Boarding Houses, Dormitories, and Workers' Camps"
+middesk,naics_code,7223,Special Food Services,business_classification_context,business,business,low,neutral,false,false,7223,,,active,Special Food Services
+middesk,naics_code,722310,Food Service Contractors,business_classification_context,business,business,low,neutral,false,false,722310,,,active,Food Service Contractors
+middesk,naics_code,722320,Caterers,business_classification_context,business,business,low,neutral,false,false,722320,,,active,Caterers
+middesk,naics_code,722330,Mobile Food Services,business_classification_context,business,business,low,neutral,false,false,722330,,,active,Mobile Food Services
+middesk,naics_code,7224,Drinking Places (Alcoholic Beverages),business_classification_context,business,business,low,neutral,false,false,7224,,,active,Drinking Places (Alcoholic Beverages)
+middesk,naics_code,722410,Drinking Places (Alcoholic Beverages),business_classification_context,business,business,low,neutral,false,false,722410,,,active,Drinking Places (Alcoholic Beverages)
+middesk,naics_code,7225,Restaurants and Other Eating Places,business_classification_context,business,business,low,neutral,false,false,7225,,,active,Restaurants and Other Eating Places
+middesk,naics_code,722511,Full-Service Restaurants,business_classification_context,business,business,low,neutral,false,false,722511,,,active,Full-Service Restaurants
+middesk,naics_code,722513,Limited-Service Restaurants,business_classification_context,business,business,low,neutral,false,false,722513,,,active,Limited-Service Restaurants
+middesk,naics_code,722515,Snack and Nonalcoholic Beverage Bars,business_classification_context,business,business,low,neutral,false,false,722515,,,active,Snack and Nonalcoholic Beverage Bars
+middesk,naics_code,81,Other Services (except Public Administration),business_classification_context,business,business,low,neutral,false,false,81,,,active,Other Services (except Public Administration)
+middesk,naics_code,811192,Car Washes,business_classification_context,business,business,low,neutral,false,false,811192,,,active,Car Washes
+middesk,naics_code,8112,Electronic and Precision Equipment Repair and Maintenance,business_classification_context,business,business,low,neutral,false,false,8112,,,active,Electronic and Precision Equipment Repair and Maintenance
+middesk,naics_code,8113,Commercial and Industrial Machinery and Equipment (except Automotive and Electronic) Repair and Maintenance,business_classification_context,business,business,low,neutral,false,false,8113,,,active,Commercial and Industrial Machinery and Equipment (except Automotive and Electronic) Repair and Maintenance
+middesk,naics_code,8114,Personal and Household Goods Repair and Maintenance,business_classification_context,business,business,low,neutral,false,false,8114,,,active,Personal and Household Goods Repair and Maintenance
+middesk,naics_code,8121,Personal Care Services,business_classification_context,business,business,low,neutral,false,false,8121,,,active,Personal Care Services
+middesk,naics_code,812111,Barber Shops,business_classification_context,business,business,low,neutral,false,false,812111,,,active,Barber Shops
+middesk,naics_code,812112,Beauty Salons,business_classification_context,business,business,low,neutral,false,false,812112,,,active,Beauty Salons
+middesk,naics_code,812113,Nail Salons,business_classification_context,business,business,low,neutral,false,false,812113,,,active,Nail Salons
+middesk,naics_code,812199,Other Personal Care Services,business_classification_context,business,business,low,neutral,false,false,812199,,,active,Other Personal Care Services
+middesk,naics_code,8122,Death Care Services,business_classification_context,business,business,low,neutral,false,false,8122,,,active,Death Care Services
+middesk,naics_code,8123,Drycleaning and Laundry Services,business_classification_context,business,business,low,neutral,false,false,8123,,,active,Drycleaning and Laundry Services
+middesk,naics_code,812310,Coin-Operated Laundries and Drycleaners,business_classification_context,business,business,low,neutral,false,false,812310,,,active,Coin-Operated Laundries and Drycleaners
+middesk,naics_code,812331,Linen Supply,business_classification_context,business,business,low,neutral,false,false,812331,,,active,Linen Supply
+middesk,naics_code,812332,Industrial Launderers,business_classification_context,business,business,low,neutral,false,false,812332,,,active,Industrial Launderers
+middesk,naics_code,8129,Other Personal Services,business_classification_context,business,business,low,neutral,false,false,8129,,,active,Other Personal Services
+middesk,naics_code,81299,All Other Personal Services,business_classification_context,business,business,low,neutral,false,false,81299,,,active,All Other Personal Services
+middesk,naics_code,8131,Religious Organizations,business_classification_context,business,business,low,neutral,false,false,8131,,,active,Religious Organizations
+middesk,naics_code,813110,Religious Organizations,business_classification_context,business,business,low,neutral,false,false,813110,,,active,Religious Organizations
+middesk,naics_code,8132,Grantmaking and Giving Services,business_classification_context,business,business,low,neutral,false,false,8132,,,active,Grantmaking and Giving Services
+middesk,naics_code,813210,Grantmaking and Giving Services,business_classification_context,business,business,low,neutral,false,false,813210,,,active,Grantmaking and Giving Services
+middesk,naics_code,813211,Grantmaking Foundations,business_classification_context,business,business,low,neutral,false,false,813211,,,active,Grantmaking Foundations
+middesk,naics_code,813212,Voluntary Health Organizations,business_classification_context,business,business,low,neutral,false,false,813212,,,active,Voluntary Health Organizations
+middesk,naics_code,813219,Other Grantmaking and Giving Services,business_classification_context,business,business,low,neutral,false,false,813219,,,active,Other Grantmaking and Giving Services
+middesk,naics_code,8133,Social Advocacy Organizations,business_classification_context,business,business,low,neutral,false,false,8133,,,active,Social Advocacy Organizations
+middesk,naics_code,813311,Human Rights Organizations,business_classification_context,business,business,low,neutral,false,false,813311,,,active,Human Rights Organizations
+middesk,naics_code,813312,"Environment, Conservation and Wildlife Organizations",business_classification_context,business,business,low,neutral,false,false,813312,,,active,"Environment, Conservation and Wildlife Organizations"
+middesk,naics_code,813319,Other Social Advocacy Organizations,business_classification_context,business,business,low,neutral,false,false,813319,,,active,Other Social Advocacy Organizations
+middesk,naics_code,8134,Civic and Social Organizations,business_classification_context,business,business,low,neutral,false,false,8134,,,active,Civic and Social Organizations
+middesk,naics_code,813410,Civic and Social Organizations,business_classification_context,business,business,low,neutral,false,false,813410,,,active,Civic and Social Organizations
+middesk,naics_code,8139,"Business, Professional, Labor, Political, and Similar Organizations",business_classification_context,business,business,low,neutral,false,false,8139,,,active,"Business, Professional, Labor, Political, and Similar Organizations"
+middesk,naics_code,813910,Business Associations,business_classification_context,business,business,low,neutral,false,false,813910,,,active,Business Associations
+middesk,naics_code,813920,Professional Organizations,business_classification_context,business,business,low,neutral,false,false,813920,,,active,Professional Organizations
+middesk,naics_code,813930,Labor Unions and Similar Labor Organizations,business_classification_context,business,business,low,neutral,false,false,813930,,,active,Labor Unions and Similar Labor Organizations
+middesk,naics_code,813940,Political Organizations,business_classification_context,business,business,low,neutral,false,false,813940,,,active,Political Organizations
+middesk,naics_code,813990,"Other Similar Organizations (except Business, Professional, Labor, and Political Organizations)",business_classification_context,business,business,low,neutral,false,false,813990,,,active,"Other Similar Organizations (except Business, Professional, Labor, and Political Organizations)"
+middesk,naics_code,8141,Private Households,business_classification_context,business,business,low,neutral,false,false,8141,,,active,Private Households
+middesk,naics_code,814110,Private Households,business_classification_context,business,business,low,neutral,false,false,814110,,,active,Private Households
+middesk,naics_code,92,Public Administration,business_classification_context,business,business,low,neutral,false,false,92,,,active,Public Administration
+middesk,naics_code,921120,Legislative Bodies,business_classification_context,business,business,low,neutral,false,false,921120,,,active,Legislative Bodies
+middesk,naics_code,9221,"Justice, Public Order, and Safety Activities",business_classification_context,business,business,low,neutral,false,false,9221,,,active,"Justice, Public Order, and Safety Activities"
+middesk,naics_code,922130,Legal Counsel and Prosecution,business_classification_context,business,business,low,neutral,false,false,922130,,,active,Legal Counsel and Prosecution
+middesk,naics_code,9231,Administration of Human Resource Programs,business_classification_context,business,business,low,neutral,false,false,9231,,,active,Administration of Human Resource Programs
+middesk,naics_code,923130,"Administration of Human Resource Programs (except Education, Public Health, and Veterans' Affairs Programs)",business_classification_context,business,business,low,neutral,false,false,923130,,,active,"Administration of Human Resource Programs (except Education, Public Health, and Veterans' Affairs Programs)"
+middesk,naics_code,9241,Administration of Environmental Quality Programs,business_classification_context,business,business,low,neutral,false,false,9241,,,active,Administration of Environmental Quality Programs
+middesk,naics_code,9251,"Administration of Housing Programs, Urban Planning, and Community Development",business_classification_context,business,business,low,neutral,false,false,9251,,,active,"Administration of Housing Programs, Urban Planning, and Community Development"
+middesk,naics_code,925110,Administration of Housing Programs,business_classification_context,business,business,low,neutral,false,false,925110,,,active,Administration of Housing Programs
+middesk,naics_code,9261,Administration of Economic Programs,business_classification_context,business,business,low,neutral,false,false,9261,,,active,Administration of Economic Programs
+middesk,naics_code,926110,Administration of General Economic Programs,business_classification_context,business,business,low,neutral,false,false,926110,,,active,Administration of General Economic Programs
+middesk,naics_code,9271,Space Research and Technology,business_classification_context,business,business,low,neutral,false,false,9271,,,active,Space Research and Technology
+middesk,naics_code,9281,National Security and International Affairs,business_classification_context,business,business,low,neutral,false,false,9281,,,active,National Security and International Affairs

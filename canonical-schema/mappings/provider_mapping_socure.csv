@@ -798,7 +798,7 @@ identity_liveness_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,I912,SSN was randomly-issued by the SSA,needs_review,identity,identity,low,positive,FALSE,FALSE,I912,,,active
 ,socure,reason_code,I915,Identity has PO Box is dropped in resolved address,needs_review,identity,identity,low,positive,FALSE,FALSE,I915,,,active
 ,socure,reason_code,I917,Full name and address can be resolved to the individual but the SSN/ITIN is not,needs_review,identity,identity,low,positive,FALSE,FALSE,I917,,,active
-,socure,reason_code,I919,"Full name, address, and SSN/ITIN can be resolved to the individual",needs_review,identity,identity,low,positive,FALSE,FALSE,I919,,,active
+,socure,reason_code,I919,"Full name, address, and SSN/ITIN can be resolved to the individual",kyc_match,identity,identity,low,positive,FALSE,FALSE,I919,,,active
 ,socure,reason_code,I920,Emerging identity indicator,needs_review,identity,identity,low,positive,FALSE,FALSE,I920,,,active
 ,socure,reason_code,I921,Address is an accredited college or university,needs_review,identity,identity,low,positive,FALSE,FALSE,I921,,,active
 ,socure,reason_code,I922,Mobile number was not provided at input,needs_review,identity,identity,low,positive,FALSE,FALSE,I922,,,active
@@ -834,7 +834,7 @@ identity_liveness_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R203,Multiple identities are associated with input National ID,needs_review,identity,identity,medium,negative,TRUE,FALSE,R203,,,active
 ,socure,reason_code,R204,Input National ID is associated with multiple last names,needs_review,identity,identity,medium,negative,TRUE,FALSE,R204,,,active
 ,socure,reason_code,R206,Input National ID was issued prior to the input date-of-birth,needs_review,identity,identity,medium,negative,TRUE,FALSE,R206,,,active
-,socure,reason_code,R207,Input National ID is associated with multiple DOBs,needs_review,identity,identity,medium,negative,TRUE,FALSE,R207,,,active
+,socure,reason_code,R207,Input National ID is associated with multiple DOBs,identity_dob_mismatch,identity,identity,medium,negative,TRUE,FALSE,R207,,,active
 ,socure,reason_code,R208,SSN/ITIN is associated with multiple addresses,needs_review,identity,identity,medium,warning,TRUE,FALSE,R208,,,active
 ,socure,reason_code,R209,No former addresses associated with the National ID,needs_review,identity,identity,medium,warning,TRUE,FALSE,R209,,,active
 ,socure,reason_code,R210,Frequency of SSN in Socure records is unusually high,needs_review,identity,identity,medium,negative,TRUE,FALSE,R210,,,active

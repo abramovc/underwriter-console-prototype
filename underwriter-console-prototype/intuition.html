@@ -255,6 +255,23 @@
       gap: 8px;
     }
 
+    .signal-collapsible {
+      margin-top: 4px;
+    }
+
+    .signal-collapsible summary {
+      cursor: pointer;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .signal-collapsible-copy {
+      margin: 10px 0 12px;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
     .source-table {
       display: grid;
       gap: 10px;
@@ -422,6 +439,12 @@
         </div>
       </section>
 
+      <section id="outcomeReasonsSection" class="card">
+        <h2>Outcome Reasons</h2>
+        <p class="card-copy">Primary drivers behind the decision.</p>
+        <div id="outcomeReasons" class="signals-grid"></div>
+      </section>
+
       <section class="card">
         <h2>Tags</h2>
         <p class="card-copy">Workflow-level tag signals, split into positive, high severity, and medium severity.</p>
@@ -456,8 +479,8 @@
       </section>
 
       <section class="card">
-        <h2>Normalized Signals</h2>
-        <p class="card-copy">Underlying provider evidence that may warrant review or action.</p>
+        <h2>Risk & Verification Signals</h2>
+        <p class="card-copy">Provider-native evidence surfaced from identity, fraud, and compliance services that may require review or influence the decision.</p>
         <div id="normalizedSignals" class="signals-grid"></div>
       </section>
 
@@ -469,7 +492,7 @@
             <div>Service</div>
             <div>Canonical Concept</div>
             <div>Full Label</div>
-            <div>Number</div>
+            <div>Code</div>
           </div>
           <div id="sourceRows"></div>
         </div>
@@ -490,6 +513,62 @@
       "Watchlist Review": {
         group: "compliance",
         canonicalConcept: "watchlist_review",
+        severity: "high",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: false
+      },
+      "Secret of State Unmatched": {
+        group: "business",
+        canonicalConcept: "business_registration_match",
+        severity: "high",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: true
+      },
+      "Secret of State Status Inactive/Unknown": {
+        group: "business",
+        canonicalConcept: "business_registration_inactive",
+        severity: "high",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: true
+      },
+      "Business Name Matched": {
+        group: "business",
+        canonicalConcept: "business_name_verification",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "Business Address Matched": {
+        group: "business",
+        canonicalConcept: "business_address_verification",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "FEIN Found": {
+        group: "business",
+        canonicalConcept: "business_tin_verification",
+        severity: "low",
+        direction: "positive",
+        requiresReview: false,
+        canContributeToDecline: false
+      },
+      "Watchlist Warning": {
+        group: "compliance",
+        canonicalConcept: "watchlist_review",
+        severity: "high",
+        direction: "negative",
+        requiresReview: true,
+        canContributeToDecline: true
+      },
+      "Litigations Found": {
+        group: "business",
+        canonicalConcept: "business_litigation_history",
         severity: "high",
         direction: "negative",
         requiresReview: true,
@@ -677,7 +756,8 @@
       const providerNames = {
         socure: "Socure",
         id_analytics: "ID Analytics",
-        lexis_nexis_instant_id: "LexisNexis Instant ID"
+        lexis_nexis_instant_id: "LexisNexis Instant ID",
+        middesk: "Middesk"
       };
 
       if (providerNames[name]) return providerNames[name];
@@ -801,6 +881,299 @@
       });
     }
 
+    function getMiddeskTaskDefaults(status) {
+      const normalizedStatus = String(status || "").toLowerCase();
+
+      if (normalizedStatus === "failure") {
+        return {
+          direction: "negative",
+          severity: "high",
+          requiresReview: true,
+          canContributeToDecline: true
+        };
+      }
+
+      if (normalizedStatus === "warning") {
+        return {
+          direction: "negative",
+          severity: "medium",
+          requiresReview: true,
+          canContributeToDecline: false
+        };
+      }
+
+      if (normalizedStatus === "success") {
+        return {
+          direction: "positive",
+          severity: "low",
+          requiresReview: false,
+          canContributeToDecline: false
+        };
+      }
+
+      return {
+        direction: "neutral",
+        severity: "low",
+        requiresReview: false,
+        canContributeToDecline: false
+      };
+    }
+
+    function getMiddeskTaskMeta(taskKey, status) {
+      const normalizedStatus = String(status || "").toLowerCase();
+      const defaults = getMiddeskTaskDefaults(normalizedStatus);
+      const taskMap = {
+        sos_match: {
+          canonicalConcept: "business_registration_match",
+          conceptGroup: "business"
+        },
+        sos_active: {
+          canonicalConcept: "business_registration_active",
+          conceptGroup: "business"
+        },
+        sos_inactive: {
+          canonicalConcept: "business_registration_inactive",
+          conceptGroup: "business"
+        },
+        sos_domestic: {
+          canonicalConcept: "business_domestic_registration_status",
+          conceptGroup: "business"
+        },
+        sos_domestic_sub_status: {
+          canonicalConcept: "business_good_standing_status",
+          conceptGroup: "business"
+        },
+        watchlist: {
+          canonicalConcept: "compliance_watchlist_match",
+          conceptGroup: "compliance"
+        },
+        website_status: {
+          canonicalConcept: "website_status_check",
+          conceptGroup: "business"
+        },
+        website_verification: {
+          canonicalConcept: "website_verification",
+          conceptGroup: "business"
+        },
+        litigations: {
+          canonicalConcept: "business_litigation_history",
+          conceptGroup: "business"
+        },
+        phone: {
+          canonicalConcept: "business_phone_verification",
+          conceptGroup: "business"
+        },
+        name: {
+          canonicalConcept: "business_name_verification",
+          conceptGroup: "business"
+        },
+        address_verification: {
+          canonicalConcept: "business_address_verification",
+          conceptGroup: "business"
+        },
+        address_deliverability: {
+          canonicalConcept: "business_address_deliverability",
+          conceptGroup: "business"
+        },
+        address_property_type: {
+          canonicalConcept: "business_address_property_type",
+          conceptGroup: "business"
+        },
+        address_risk: {
+          canonicalConcept: "business_address_risk",
+          conceptGroup: "business"
+        },
+        location_frequency: {
+          canonicalConcept: "business_location_frequency",
+          conceptGroup: "business"
+        },
+        person_verification: {
+          canonicalConcept: "business_person_verification",
+          conceptGroup: "business"
+        },
+        tin: {
+          canonicalConcept: "business_tin_verification",
+          conceptGroup: "business"
+        },
+        industry: {
+          canonicalConcept: "business_industry_risk",
+          conceptGroup: "business"
+        }
+      };
+
+      const meta = taskMap[taskKey] || {
+        canonicalConcept: "business_review_task",
+        conceptGroup: "business"
+      };
+
+      const combined = {
+        canonicalConcept: meta.canonicalConcept,
+        conceptGroup: meta.conceptGroup,
+        signalClass: "business",
+        severity: defaults.severity,
+        direction: defaults.direction,
+        requiresReview: defaults.requiresReview,
+        canContributeToDecline: defaults.canContributeToDecline
+      };
+
+      if (
+        normalizedStatus === "failure" &&
+        (taskKey === "watchlist" || taskKey === "sos_inactive" || taskKey === "sos_active" || taskKey === "sos_match")
+      ) {
+        combined.severity = "high";
+        combined.direction = "negative";
+        combined.requiresReview = true;
+        combined.canContributeToDecline = true;
+      }
+
+      if (normalizedStatus === "failure" && taskKey === "litigations") {
+        combined.severity = "high";
+        combined.direction = "negative";
+        combined.requiresReview = true;
+        combined.canContributeToDecline = false;
+      }
+
+      if (normalizedStatus === "failure" && taskKey === "website_status") {
+        combined.severity = "medium";
+        combined.direction = "negative";
+        combined.requiresReview = true;
+      }
+
+      if (normalizedStatus === "warning" && (taskKey === "website_verification" || taskKey === "phone")) {
+        combined.severity = "medium";
+        combined.direction = "negative";
+        combined.requiresReview = true;
+      }
+
+      return combined;
+    }
+
+    function buildMiddeskTaskSignal(task, index) {
+      if (!task?.key) return null;
+
+      const meta = getMiddeskTaskMeta(task.key, task.status);
+      const descriptionParts = [task.message || task.label || task.key];
+      if (task.sub_label) {
+        descriptionParts.push(task.sub_label);
+      }
+      const sourceDescription = descriptionParts.filter(Boolean).join(" — ");
+
+      return {
+        id: `middesk:task:${task.key}:${index}`,
+        provider: "middesk",
+        product: "Middesk",
+        sourceType: "review_task",
+        sourceCode: task.key,
+        sourceDescription,
+        canonicalConcept: meta.canonicalConcept,
+        conceptGroup: meta.conceptGroup,
+        signalClass: "business",
+        severity: meta.severity,
+        direction: meta.direction,
+        requiresReview: meta.requiresReview,
+        canContributeToDecline: meta.canContributeToDecline,
+        displayLabel: task.label || formatOutcome(task.key),
+        dedupeKey: `middesk:${task.key}`
+      };
+    }
+
+    function getMiddeskClassificationMapping(classificationSystem, category) {
+      const system = String(classificationSystem || "").toUpperCase();
+      const prohibitedLabel = (category?.prohibited_labels || []).find(
+        (label) => label && label !== "OTHER_NON_PROHIBITED"
+      );
+
+      if (system === "NAICS") {
+        const code = category?.naics_codes?.[0];
+        return code ? PROVIDER_MAPPINGS?.middesk_naics?.[String(code)] || null : null;
+      }
+
+      if (system === "MCC") {
+        const code = category?.mcc_codes?.[0];
+        return code ? PROVIDER_MAPPINGS?.middesk_mcc?.[String(code)] || null : null;
+      }
+
+      if (system === "PROHIBITED") {
+        return prohibitedLabel ? PROVIDER_MAPPINGS?.middesk_kyb?.[String(prohibitedLabel)] || null : null;
+      }
+
+      return null;
+    }
+
+    function shouldIncludeMiddeskIndustryCategory(classificationSystem, category, mapping) {
+      const prohibitedLabels = (category?.prohibited_labels || []).filter(
+        (label) => label && label !== "OTHER_NON_PROHIBITED"
+      );
+      const hasRiskyProhibitedLabel = String(classificationSystem || "").toUpperCase() === "PROHIBITED" && prohibitedLabels.length > 0;
+      const isHighRisk = category?.high_risk === true;
+      const hasRiskyMapping =
+        !!mapping &&
+        (
+          mapping.direction === "negative" ||
+          mapping.severity === "medium" ||
+          mapping.severity === "high" ||
+          mapping.requiresReview ||
+          mapping.canContributeToDecline
+        );
+
+      return isHighRisk || prohibitedLabels.length > 0 || hasRiskyProhibitedLabel || hasRiskyMapping;
+    }
+
+    function buildMiddeskIndustrySignal(category, classificationSystem, index) {
+      if (!category) return null;
+
+      const mapping = getMiddeskClassificationMapping(classificationSystem, category);
+      if (!shouldIncludeMiddeskIndustryCategory(classificationSystem, category, mapping)) {
+        return null;
+      }
+
+      const system = String(classificationSystem || "").toUpperCase();
+      const sourceCode =
+        category?.naics_codes?.[0] ||
+        category?.mcc_codes?.[0] ||
+        (category?.prohibited_labels || []).find((label) => label && label !== "OTHER_NON_PROHIBITED") ||
+        category?.category ||
+        category?.name ||
+        `industry_${index}`;
+      const meta = mapping || {
+        canonicalConcept: "business_classification_context",
+        conceptGroup: "business",
+        signalClass: "business",
+        severity: "low",
+        direction: "neutral",
+        requiresReview: false,
+        canContributeToDecline: false,
+        displayLabel: category.name || category.category || String(sourceCode)
+      };
+
+      return {
+        id: `middesk:industry:${system}:${sourceCode}:${index}`,
+        provider: "middesk",
+        product: "Middesk",
+        sourceType: "industry_classification",
+        sourceCode: String(sourceCode),
+        sourceDescription: category.name || category.category || String(sourceCode),
+        canonicalConcept: meta.canonicalConcept || "business_classification_context",
+        conceptGroup: meta.conceptGroup || "business",
+        signalClass: meta.signalClass || "business",
+        severity: meta.severity || "low",
+        direction: normalizeDirection(meta.direction),
+        requiresReview: !!meta.requiresReview,
+        canContributeToDecline: !!meta.canContributeToDecline,
+        displayLabel: meta.displayLabel || category.name || category.category || String(sourceCode),
+        dedupeKey: `middesk:industry:${system}:${sourceCode || category?.category || index}`
+      };
+    }
+
+    function getMiddeskObject(alloy) {
+      return (
+        alloy?.formatted?.data?.object ||
+        alloy?.formatted_responses?.Middesk?.data?.object ||
+        alloy?.raw_responses?.Middesk?.[0] ||
+        null
+      );
+    }
+
     function normalize(alloy) {
       const reviewTags = buildReviewTags(alloy.summary?.tags || []);
       const supportingSignals = [];
@@ -841,8 +1214,8 @@
       );
 
       const lexisCodes =
-        formatted["LexisNexis Instant ID"]?.data?.reason_codes ||
-        formatted["Lexis Nexis Instant ID"]?.data?.reason_codes ||
+        formatted["LexisNexis Instant ID"]?.data?.risk_codes ||
+        formatted["Lexis Nexis Instant ID"]?.data?.risk_codes ||
         [];
       pushProviderSignals(
         supportingSignals,
@@ -851,6 +1224,28 @@
         lexisCodes,
         (code) => `LexisNexis Instant ID reason code ${code}`
       );
+
+      const middeskObject = getMiddeskObject(alloy);
+      const middeskTasks = middeskObject?.review?.tasks || [];
+      const middeskCategories = middeskObject?.industry_classification?.categories || [];
+
+      middeskTasks.forEach((task, index) => {
+        const signal = buildMiddeskTaskSignal(task, index);
+        if (signal) {
+          supportingSignals.push(signal);
+        }
+      });
+
+      middeskCategories.forEach((category, index) => {
+        const signal = buildMiddeskIndustrySignal(
+          category,
+          category?.classification_system,
+          index
+        );
+        if (signal) {
+          supportingSignals.push(signal);
+        }
+      });
 
       const sortedSignals = supportingSignals.sort((a, b) => {
         const sev = severityRank[b.severity] - severityRank[a.severity];
@@ -866,6 +1261,16 @@
       };
     }
 
+    function buildOutcomeReasons(alloy, reviewTags) {
+      const explicit = alloy.summary?.outcome_reasons || [];
+
+      return explicit.map((reason, index) => ({
+        id: `outcome_reason:${index}`,
+        label: reason,
+        type: "explicit"
+      }));
+    }
+
     function renderSummary(review) {
       summaryServicesRunEl.textContent = String(review.servicesRun);
       summaryPositiveTagsEl.textContent = String(
@@ -875,6 +1280,35 @@
         review.reviewTags.filter((t) => t.severity === "high").length
       );
       summaryOutcomeEl.textContent = review.outcome;
+    }
+
+    function renderOutcomeReasons(reasons) {
+      const section = document.getElementById("outcomeReasonsSection");
+      const container = document.getElementById("outcomeReasons");
+      container.innerHTML = "";
+
+      if (!reasons.length) {
+        section.hidden = true;
+        return;
+      }
+
+      section.hidden = false;
+
+      reasons.forEach(reason => {
+        const card = document.createElement("div");
+        card.className = "signal-card";
+
+        card.innerHTML = `
+          <div class="signal-top">
+            <div class="signal-main">
+              <div class="signal-title">${reason.label}</div>
+              <div class="signal-subtitle">Outcome reason</div>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
     }
 
     function renderTagList(container, items) {
@@ -912,6 +1346,32 @@
       renderTagList(mediumSeveritySignalsEl, mediumSeverity);
     }
 
+    function createSignalCard(signal) {
+      const signalLabel = signal.sourceDescription || signal.displayLabel || signal.canonicalConcept;
+      const card = document.createElement("div");
+      card.className = "signal-card";
+      card.innerHTML = `
+        <div class="signal-top">
+          <div class="signal-main">
+            <div class="signal-title">${signalLabel}</div>
+            <div class="signal-subtitle">${signal.canonicalConcept}</div>
+            <div class="signal-code-line">
+              <strong>${signal.sourceCode}</strong> — ${signalLabel}
+            </div>
+          </div>
+          <div class="signal-meta-row">
+            <span class="badge ${signal.severity}">${signal.severity}</span>
+            <span class="chip ${signal.direction === "positive" ? "positive" : signal.direction === "negative" ? "negative" : "neutral"}">${signal.direction}</span>
+          </div>
+        </div>
+        <div class="signal-meta-row">
+          <span class="chip">${formatProviderName(signal.provider)}</span>
+          <span class="chip">${signal.signalClass}</span>
+        </div>
+      `;
+      return card;
+    }
+
     function renderNormalizedSignals(signals) {
       normalizedSignalsEl.innerHTML = "";
 
@@ -920,31 +1380,41 @@
         return;
       }
 
-      signals.forEach((signal) => {
-        const signalLabel = signal.sourceDescription || signal.displayLabel || signal.canonicalConcept;
-        const card = document.createElement("div");
-        card.className = "signal-card";
-        card.innerHTML = `
-          <div class="signal-top">
-            <div class="signal-main">
-              <div class="signal-title">${signalLabel}</div>
-              <div class="signal-subtitle">${signal.canonicalConcept}</div>
-              <div class="signal-code-line">
-                <strong>${signal.sourceCode}</strong> — ${signalLabel}
-              </div>
-            </div>
-            <div class="signal-meta-row">
-              <span class="badge ${signal.severity}">${signal.severity}</span>
-              <span class="chip ${signal.direction === "positive" ? "positive" : signal.direction === "negative" ? "negative" : "neutral"}">${signal.direction}</span>
-            </div>
-          </div>
-          <div class="signal-meta-row">
-            <span class="chip">${formatProviderName(signal.provider)}</span>
-            <span class="chip">${signal.signalClass}</span>
-          </div>
-        `;
-        normalizedSignalsEl.appendChild(card);
+      const positiveSignals = signals.filter((signal) => (
+        signal.direction === "positive" &&
+        signal.severity === "low" &&
+        !signal.requiresReview &&
+        !signal.canContributeToDecline
+      ));
+      const primarySignals = signals.filter((signal) => !positiveSignals.includes(signal));
+
+      primarySignals.forEach((signal) => {
+        normalizedSignalsEl.appendChild(createSignalCard(signal));
       });
+
+      if (positiveSignals.length) {
+        const details = document.createElement("details");
+        details.className = "signal-collapsible";
+
+        const summary = document.createElement("summary");
+        summary.textContent = `Positive verification signals (${positiveSignals.length})`;
+        details.appendChild(summary);
+
+        const helper = document.createElement("div");
+        helper.className = "signal-collapsible-copy";
+        helper.textContent = "Low-severity positive evidence from providers.";
+        details.appendChild(helper);
+
+        const positiveGrid = document.createElement("div");
+        positiveGrid.className = "signals-grid";
+
+        positiveSignals.forEach((signal) => {
+          positiveGrid.appendChild(createSignalCard(signal));
+        });
+
+        details.appendChild(positiveGrid);
+        normalizedSignalsEl.appendChild(details);
+      }
     }
 
     function renderSources(signals) {
@@ -959,13 +1429,14 @@
         const sourceDescription =
           getProviderMapping(signal.provider, signal.sourceCode)?.sourceDescription ||
           signal.sourceDescription;
+        const sourceCode = signal.provider === "middesk" ? "" : signal.sourceCode;
         const row = document.createElement("div");
         row.className = "source-row";
         row.innerHTML = `
           <div class="source-service">${formatProviderName(signal.provider)}</div>
           <div class="source-concept">${signal.canonicalConcept}</div>
           <div class="source-label">${sourceDescription}</div>
-          <div class="source-code">${signal.sourceCode}</div>
+          <div class="source-code">${sourceCode}</div>
         `;
         sourceRowsEl.appendChild(row);
       });
@@ -986,6 +1457,7 @@
       positiveSignalsEl.innerHTML = "";
       highSeveritySignalsEl.innerHTML = "";
       mediumSeveritySignalsEl.innerHTML = "";
+      document.getElementById("outcomeReasons").innerHTML = "";
       normalizedSignalsEl.innerHTML = "";
       sourceRowsEl.innerHTML = "";
     }
@@ -1001,7 +1473,20 @@
       }
 
       try {
-        if (!PROVIDER_MAPPINGS.socure || Object.keys(PROVIDER_MAPPINGS.socure).length === 0) {
+        if (
+          !PROVIDER_MAPPINGS.socure ||
+          Object.keys(PROVIDER_MAPPINGS.socure).length === 0 ||
+          !PROVIDER_MAPPINGS.lexis_nexis_instant_id ||
+          Object.keys(PROVIDER_MAPPINGS.lexis_nexis_instant_id).length === 0 ||
+          !PROVIDER_MAPPINGS.id_analytics ||
+          Object.keys(PROVIDER_MAPPINGS.id_analytics).length === 0 ||
+          !PROVIDER_MAPPINGS.middesk_kyb ||
+          Object.keys(PROVIDER_MAPPINGS.middesk_kyb).length === 0 ||
+          !PROVIDER_MAPPINGS.middesk_mcc ||
+          Object.keys(PROVIDER_MAPPINGS.middesk_mcc).length === 0 ||
+          !PROVIDER_MAPPINGS.middesk_naics ||
+          Object.keys(PROVIDER_MAPPINGS.middesk_naics).length === 0
+        ) {
           await loadMappings();
         }
       } catch (err) {
@@ -1010,8 +1495,10 @@
       }
 
       const review = normalize(raw);
+      const outcomeReasons = buildOutcomeReasons(raw, review.reviewTags);
 
       renderSummary(review);
+      renderOutcomeReasons(outcomeReasons);
       renderTags(review.reviewTags);
       renderNormalizedSignals(review.supportingSignals);
       renderSources(review.supportingSignals);

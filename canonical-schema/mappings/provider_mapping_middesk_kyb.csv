@@ -1,0 +1,17 @@
+provider,sourceType,sourceCode,sourceDescription,canonicalConcept,conceptGroup,signalClass,severity,direction,requiresReview,canContributeToDecline,dedupeKey,narrativeKey,notes,status,displayLabel
+middesk,kyb_reason,ADULT_CONTENT,"Pornography, Dating Sites, Pay-per-View Chat",business_adult_content,compliance,business,high,negative,true,true,ADULT_CONTENT,,,active,Adult content
+middesk,kyb_reason,AGGREGATION,"Factoring, Payment Processors, Crowdfunding",business_aggregation,compliance,business,high,negative,true,true,AGGREGATION,,,active,Aggregation business
+middesk,kyb_reason,CANNABIS,"Manufacturers, Distributors, Dispensaries",business_cannabis,compliance,business,high,negative,true,true,CANNABIS,,,active,Cannabis business
+middesk,kyb_reason,COUNTERFEIT_GOODS,"Companies with Fake Brand Name Goods, Unauthorized Resellers",business_counterfeit_goods,compliance,business,high,negative,true,true,COUNTERFEIT_GOODS,,,active,Counterfeit goods
+middesk,kyb_reason,DRUG_OF_CONCERN,"Legal substance that provides the same effect as an illegal drug (e.g., salvia, kratom)",business_drug_of_concern,compliance,business,high,negative,true,true,DRUG_OF_CONCERN,,,active,Drug of concern
+middesk,kyb_reason,DRUG_PARAPHERNALIA,"Drug Manufacturing, Items for Drug Use",business_drug_paraphernalia,compliance,business,high,negative,true,true,DRUG_PARAPHERNALIA,,,active,Drug paraphernalia
+middesk,kyb_reason,GAMBLING,"Casinos, Online Gambling, Fantasy Sports",business_gambling,compliance,business,high,negative,true,true,GAMBLING,,,active,Gambling activity
+middesk,kyb_reason,GET_RICH_QUICK,Companies Promoting High Yield Investment Opportunities or Services,business_high_risk_marketing,compliance,business,high,negative,true,true,GET_RICH_QUICK,,,active,High-risk marketing
+middesk,kyb_reason,GIFT_CARD,Gift Cards,business_gift_card,compliance,business,high,negative,true,true,GIFT_CARD,,,active,Gift card business
+middesk,kyb_reason,INVESTMENT_CREDIT,"Securities Brokers, Lending Instruments, Credit Repair",business_financial_services,compliance,business,high,negative,true,true,INVESTMENT_CREDIT,,,active,Financial services
+middesk,kyb_reason,MONEY_LEGAL,"Bail Bonds, Collections Agencies, Adoption Services",business_legal_services,compliance,business,high,negative,true,true,MONEY_LEGAL,,,active,Legal services
+middesk,kyb_reason,MULTI_LEVEL_MARKETING,"Mulit-level Marketing, Pyramid Schemes",business_mlm,compliance,business,high,negative,true,true,MULTI_LEVEL_MARKETING,,,active,Multi-level marketing
+middesk,kyb_reason,PSEUDO_PHARMACEUTICAL,"Nutraceuticals, Products making health claims not approved by the FDA",business_pseudo_pharma,compliance,business,high,negative,true,true,PSEUDO_PHARMACEUTICAL,,,active,Pseudo-pharmaceuticals
+middesk,kyb_reason,REGULATED_ILLEGAL,"Weapons / Firearms, Tobacco and E-Cig, Prescription Drugs",business_regulated_or_illegal,compliance,business,high,negative,true,true,REGULATED_ILLEGAL,,,active,Regulated or illegal goods
+middesk,kyb_reason,SOCIAL_MEDIA_ACTIVITY,"Sale of Twitter Followers, Sale of Online Traffic, Sale of YouTube Views",business_social_media_manipulation,compliance,business,high,negative,true,true,SOCIAL_MEDIA_ACTIVITY,,,active,Social media manipulation
+middesk,kyb_reason,VIRTUAL_CURRENCY,"Initial Coin Offerings, Digital Wallets, Video Game Credits",business_virtual_currency,compliance,business,high,negative,true,true,VIRTUAL_CURRENCY,,,active,Virtual currency

@@ -1,0 +1,313 @@
+provider,sourceType,sourceCode,sourceDescription,canonicalConcept,conceptGroup,signalClass,severity,direction,requiresReview,canContributeToDecline,dedupeKey,narrativeKey,notes,status,displayLabel
+middesk,mcc_code,0742,Veterinary Services (MCC),business_classification_context,business,business,low,neutral,false,false,0742,,,active,Veterinary Services
+middesk,mcc_code,0763,Agricultural Cooperative (MCC),business_classification_context,business,business,low,neutral,false,false,0763,,,active,Agricultural Cooperative
+middesk,mcc_code,0780,Landscaping Services (MCC),business_classification_context,business,business,low,neutral,false,false,0780,,,active,Landscaping Services
+middesk,mcc_code,1520,General Services (MCC),business_classification_context,business,business,low,neutral,false,false,1520,,,active,General Services
+middesk,mcc_code,1711,"Heating, Plumbing, A/C (MCC)",business_classification_context,business,business,low,neutral,false,false,1711,,,active,"Heating, Plumbing, A/C"
+middesk,mcc_code,1731,Electrical Services (MCC),business_classification_context,business,business,low,neutral,false,false,1731,,,active,Electrical Services
+middesk,mcc_code,1740,"Masonry, Stonework, and Plaster (MCC)",business_classification_context,business,business,low,neutral,false,false,1740,,,active,"Masonry, Stonework, and Plaster"
+middesk,mcc_code,1750,Carpentry Services (MCC),business_classification_context,business,business,low,neutral,false,false,1750,,,active,Carpentry Services
+middesk,mcc_code,1761,"Roofing/Siding, Sheet Metal (MCC)",business_classification_context,business,business,low,neutral,false,false,1761,,,active,"Roofing/Siding, Sheet Metal"
+middesk,mcc_code,1771,Concrete Work Services (MCC),business_classification_context,business,business,low,neutral,false,false,1771,,,active,Concrete Work Services
+middesk,mcc_code,1799,Special Trade Services (MCC),business_classification_context,business,business,low,neutral,false,false,1799,,,active,Special Trade Services
+middesk,mcc_code,2741,Miscellaneous Publishing and Printing (MCC),business_classification_context,business,business,low,neutral,false,false,2741,,,active,Miscellaneous Publishing and Printing
+middesk,mcc_code,2791,"Typesetting, Plate Making, and Related Services (MCC)",business_classification_context,business,business,low,neutral,false,false,2791,,,active,"Typesetting, Plate Making, and Related Services"
+middesk,mcc_code,2842,Specialty Cleaning (MCC),business_classification_context,business,business,low,neutral,false,false,2842,,,active,Specialty Cleaning
+middesk,mcc_code,4011,Railroads (MCC),business_classification_context,business,business,low,neutral,false,false,4011,,,active,Railroads
+middesk,mcc_code,4111,"Commuter Transport, Ferries (MCC)",business_classification_context,business,business,low,neutral,false,false,4111,,,active,"Commuter Transport, Ferries"
+middesk,mcc_code,4112,Passenger Railways (MCC),business_classification_context,business,business,low,neutral,false,false,4112,,,active,Passenger Railways
+middesk,mcc_code,4119,Ambulance Services (MCC),business_classification_context,business,business,low,neutral,false,false,4119,,,active,Ambulance Services
+middesk,mcc_code,4121,Taxicabs/Limousines (MCC),business_classification_context,business,business,low,neutral,false,false,4121,,,active,Taxicabs/Limousines
+middesk,mcc_code,4131,Bus Lines (MCC),business_classification_context,business,business,low,neutral,false,false,4131,,,active,Bus Lines
+middesk,mcc_code,4214,"Motor Freight Carriers and Trucking - Local and Long Distance, Moving and Storage Companies, and Local Delivery Services (MCC)",business_classification_context,business,business,low,neutral,false,false,4214,,,active,"Motor Freight Carriers and Trucking - Local and Long Distance, Moving and Storage Companies, and Local Delivery Services"
+middesk,mcc_code,4215,Courier Services (MCC),business_classification_context,business,business,low,neutral,false,false,4215,,,active,Courier Services
+middesk,mcc_code,4225,"Public Warehousing and Storage - Farm Products, Refrigerated Goods, Household Goods, and Storage (MCC)",business_classification_context,business,business,low,neutral,false,false,4225,,,active,"Public Warehousing and Storage - Farm Products, Refrigerated Goods, Household Goods, and Storage"
+middesk,mcc_code,4411,Automobile Dealers (MCC),business_classification_context,business,business,low,neutral,false,false,4411,,,active,Automobile Dealers
+middesk,mcc_code,4411,Cruise Lines (MCC),business_classification_context,business,business,low,neutral,false,false,4411,,,active,Cruise Lines
+middesk,mcc_code,4457,Boat Rentals and Leases (MCC),business_classification_context,business,business,low,neutral,false,false,4457,,,active,Boat Rentals and Leases
+middesk,mcc_code,4468,"Marinas, Service and Supplies (MCC)",business_classification_context,business,business,low,neutral,false,false,4468,,,active,"Marinas, Service and Supplies"
+middesk,mcc_code,4511,"Airlines, Air Carriers (MCC)",business_classification_context,business,business,low,neutral,false,false,4511,,,active,"Airlines, Air Carriers"
+middesk,mcc_code,4582,Shoe Retailers (MCC),business_classification_context,business,business,low,neutral,false,false,4582,,,active,Shoe Retailers
+middesk,mcc_code,4582,"Airports, Flying Fields (MCC)",business_classification_context,business,business,low,neutral,false,false,4582,,,active,"Airports, Flying Fields"
+middesk,mcc_code,4722,"Travel Agencies, Tour Operators (MCC)",business_high_risk_marketing,compliance,business,medium,negative,true,false,4722,,,active,"Travel Agencies, Tour Operators"
+middesk,mcc_code,4723,TUI Travel - Germany (MCC),business_classification_context,business,business,low,neutral,false,false,4723,,,active,TUI Travel - Germany
+middesk,mcc_code,4784,Tolls/Bridge Fees (MCC),business_classification_context,business,business,low,neutral,false,false,4784,,,active,Tolls/Bridge Fees
+middesk,mcc_code,4789,Transportation Services (Not Elsewhere Classified) (MCC),business_classification_context,business,business,low,neutral,false,false,4789,,,active,Transportation Services (Not Elsewhere Classified)
+middesk,mcc_code,4812,Nonscheduled Air Transportation (MCC),business_classification_context,business,business,low,neutral,false,false,4812,,,active,Nonscheduled Air Transportation
+middesk,mcc_code,4812,Telecommunication Equipment and Telephone Sales (MCC),business_classification_context,business,business,low,neutral,false,false,4812,,,active,Telecommunication Equipment and Telephone Sales
+middesk,mcc_code,4814,Telecommunication Services (MCC),business_classification_context,business,business,low,neutral,false,false,4814,,,active,Telecommunication Services
+middesk,mcc_code,4816,Computer Network Services (MCC),business_classification_context,business,business,low,neutral,false,false,4816,,,active,Computer Network Services
+middesk,mcc_code,4821,Rail Transportation (MCC),business_classification_context,business,business,low,neutral,false,false,4821,,,active,Rail Transportation
+middesk,mcc_code,4821,Telegraph Services (MCC),business_classification_context,business,business,low,neutral,false,false,4821,,,active,Telegraph Services
+middesk,mcc_code,4829,"Wires, Money Orders (MCC)",business_financial_services,compliance,business,high,negative,true,true,4829,,,active,"Wires, Money Orders"
+middesk,mcc_code,4899,"Cable, Satellite, and Other Pay Television and Radio (MCC)",business_classification_context,business,business,low,neutral,false,false,4899,,,active,"Cable, Satellite, and Other Pay Television and Radio"
+middesk,mcc_code,4900,Utilities (MCC),business_classification_context,business,business,low,neutral,false,false,4900,,,active,Utilities
+middesk,mcc_code,5013,Motor Vehicle Supplies and New Parts (MCC),business_classification_context,business,business,low,neutral,false,false,5013,,,active,Motor Vehicle Supplies and New Parts
+middesk,mcc_code,5021,Office and Commercial Furniture (MCC),business_classification_context,business,business,low,neutral,false,false,5021,,,active,Office and Commercial Furniture
+middesk,mcc_code,5039,Construction Materials (Not Elsewhere Classified) (MCC),business_classification_context,business,business,low,neutral,false,false,5039,,,active,Construction Materials (Not Elsewhere Classified)
+middesk,mcc_code,5044,"Photographic, Photocopy, Microfilm Equipment, and Supplies (MCC)",business_classification_context,business,business,low,neutral,false,false,5044,,,active,"Photographic, Photocopy, Microfilm Equipment, and Supplies"
+middesk,mcc_code,5045,"Computers, Peripherals, and Software (MCC)",business_classification_context,business,business,low,neutral,false,false,5045,,,active,"Computers, Peripherals, and Software"
+middesk,mcc_code,5046,Commercial Equipment (Not Elsewhere Classified) (MCC),business_classification_context,business,business,low,neutral,false,false,5046,,,active,Commercial Equipment (Not Elsewhere Classified)
+middesk,mcc_code,5047,"Medical, Dental, Ophthalmic, and Hospital Equipment and Supplies (MCC)",business_classification_context,business,business,low,neutral,false,false,5047,,,active,"Medical, Dental, Ophthalmic, and Hospital Equipment and Supplies"
+middesk,mcc_code,5051,Metal Service Centers (MCC),business_classification_context,business,business,low,neutral,false,false,5051,,,active,Metal Service Centers
+middesk,mcc_code,5065,Electrical Parts and Equipment (MCC),business_classification_context,business,business,low,neutral,false,false,5065,,,active,Electrical Parts and Equipment
+middesk,mcc_code,5072,"Hardware, Equipment, and Supplies (MCC)",business_classification_context,business,business,low,neutral,false,false,5072,,,active,"Hardware, Equipment, and Supplies"
+middesk,mcc_code,5074,"Plumbing, Heating Equipment, and Supplies (MCC)",business_classification_context,business,business,low,neutral,false,false,5074,,,active,"Plumbing, Heating Equipment, and Supplies"
+middesk,mcc_code,5085,Industrial Supplies (Not Elsewhere Classified) (MCC),business_classification_context,business,business,low,neutral,false,false,5085,,,active,Industrial Supplies (Not Elsewhere Classified)
+middesk,mcc_code,5094,"Precious Stones and Metals, Watches and Jewelry (MCC)",business_classification_context,business,business,low,neutral,false,false,5094,,,active,"Precious Stones and Metals, Watches and Jewelry"
+middesk,mcc_code,5099,Durable Goods (Not Elsewhere Classified) (MCC),business_classification_context,business,business,low,neutral,false,false,5099,,,active,Durable Goods (Not Elsewhere Classified)
+middesk,mcc_code,5111,"Stationary, Office Supplies, Printing and Writing Paper (MCC)",business_classification_context,business,business,low,neutral,false,false,5111,,,active,"Stationary, Office Supplies, Printing and Writing Paper"
+middesk,mcc_code,5122,Sound Recording Industries (MCC),business_classification_context,business,business,low,neutral,false,false,5122,,,active,Sound Recording Industries
+middesk,mcc_code,5122,"Drugs, Drug Proprietaries, and Druggist Sundries (MCC)",business_classification_context,business,business,low,neutral,false,false,5122,,,active,"Drugs, Drug Proprietaries, and Druggist Sundries"
+middesk,mcc_code,5131,"Newspaper, Periodical, Book, and Directory Publishers (MCC)",business_classification_context,business,business,low,neutral,false,false,5131,,,active,"Newspaper, Periodical, Book, and Directory Publishers"
+middesk,mcc_code,5131,"Piece Goods, Notions, and Other Dry Goods (MCC)",business_classification_context,business,business,low,neutral,false,false,5131,,,active,"Piece Goods, Notions, and Other Dry Goods"
+middesk,mcc_code,5137,"Uniforms, Commercial Clothing (MCC)",business_classification_context,business,business,low,neutral,false,false,5137,,,active,"Uniforms, Commercial Clothing"
+middesk,mcc_code,5139,Commercial Footwear (MCC),business_classification_context,business,business,low,neutral,false,false,5139,,,active,Commercial Footwear
+middesk,mcc_code,5169,Chemicals and Allied Products (Not Elsewhere Classified) (MCC),business_classification_context,business,business,low,neutral,false,false,5169,,,active,Chemicals and Allied Products (Not Elsewhere Classified)
+middesk,mcc_code,5172,Petroleum and Petroleum Products (MCC),business_classification_context,business,business,low,neutral,false,false,5172,,,active,Petroleum and Petroleum Products
+middesk,mcc_code,5192,"Web Search Portals, Libraries, Archives, and Other Information Services (MCC)",business_classification_context,business,business,low,neutral,false,false,5192,,,active,"Web Search Portals, Libraries, Archives, and Other Information Services"
+middesk,mcc_code,5192,"Books, Periodicals, and Newspapers (MCC)",business_classification_context,business,business,low,neutral,false,false,5192,,,active,"Books, Periodicals, and Newspapers"
+middesk,mcc_code,5193,"Florists Supplies, Nursery Stock, and Flowers (MCC)",business_classification_context,business,business,low,neutral,false,false,5193,,,active,"Florists Supplies, Nursery Stock, and Flowers"
+middesk,mcc_code,5198,"Paints, Varnishes, and Supplies (MCC)",business_classification_context,business,business,low,neutral,false,false,5198,,,active,"Paints, Varnishes, and Supplies"
+middesk,mcc_code,5199,Nondurable Goods (Not Elsewhere Classified) (MCC),business_classification_context,business,business,low,neutral,false,false,5199,,,active,Nondurable Goods (Not Elsewhere Classified)
+middesk,mcc_code,5200,Home Supply Warehouse Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5200,,,active,Home Supply Warehouse Stores
+middesk,mcc_code,5211,Monetary Authorities-Central Bank (MCC),business_classification_context,business,business,low,neutral,false,false,5211,,,active,Monetary Authorities-Central Bank
+middesk,mcc_code,5211,"Lumber, Building Materials Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5211,,,active,"Lumber, Building Materials Stores"
+middesk,mcc_code,5231,Securities and Commodity Contracts Intermediation and Brokerage (MCC),business_financial_services,compliance,business,high,negative,true,true,5231,,,active,Securities and Commodity Contracts Intermediation and Brokerage
+middesk,mcc_code,5231,"Glass, Paint, and Wallpaper Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5231,,,active,"Glass, Paint, and Wallpaper Stores"
+middesk,mcc_code,5251,Insurance and Employee Benefit Funds (MCC),business_classification_context,business,business,low,neutral,false,false,5251,,,active,Insurance and Employee Benefit Funds
+middesk,mcc_code,5251,Hardware Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5251,,,active,Hardware Stores
+middesk,mcc_code,5261,"Nurseries, Lawn and Garden Supply Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5261,,,active,"Nurseries, Lawn and Garden Supply Stores"
+middesk,mcc_code,5262,Marketplaces (MCC),business_classification_context,business,business,low,neutral,false,false,5262,,,active,Marketplaces
+middesk,mcc_code,5271,Mobile Home Dealers (MCC),business_classification_context,business,business,low,neutral,false,false,5271,,,active,Mobile Home Dealers
+middesk,mcc_code,5300,Wholesale Clubs (MCC),business_classification_context,business,business,low,neutral,false,false,5300,,,active,Wholesale Clubs
+middesk,mcc_code,5309,Duty Free Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5309,,,active,Duty Free Stores
+middesk,mcc_code,5310,Discount Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5310,,,active,Discount Stores
+middesk,mcc_code,5311,Lessors of Real Estate (MCC),business_classification_context,business,business,low,neutral,false,false,5311,,,active,Lessors of Real Estate
+middesk,mcc_code,5311,Department Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5311,,,active,Department Stores
+middesk,mcc_code,5331,Lessors of Nonfinancial Intangible Assets (except Copyrighted Works) (MCC),business_classification_context,business,business,low,neutral,false,false,5331,,,active,Lessors of Nonfinancial Intangible Assets (except Copyrighted Works)
+middesk,mcc_code,5331,Variety Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5331,,,active,Variety Stores
+middesk,mcc_code,5399,Miscellaneous General Merchandise (MCC),business_classification_context,business,business,low,neutral,false,false,5399,,,active,Miscellaneous General Merchandise
+middesk,mcc_code,5411,Legal Services (MCC),business_classification_context,business,business,low,neutral,false,false,5411,,,active,Legal Services
+middesk,mcc_code,5411,"Grocery Stores, Supermarkets (MCC)",business_classification_context,business,business,low,neutral,false,false,5411,,,active,"Grocery Stores, Supermarkets"
+middesk,mcc_code,5422,Freezer and Locker Meat Provisioners (MCC),business_classification_context,business,business,low,neutral,false,false,5422,,,active,Freezer and Locker Meat Provisioners
+middesk,mcc_code,5441,"Candy, Nut, and Confectionery Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5441,,,active,"Candy, Nut, and Confectionery Stores"
+middesk,mcc_code,5451,Dairy Products Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5451,,,active,Dairy Products Stores
+middesk,mcc_code,5462,Bakeries (MCC),business_classification_context,business,business,low,neutral,false,false,5462,,,active,Bakeries
+middesk,mcc_code,5499,Miscellaneous Food Stores - Convenience Stores and Specialty Markets (MCC),business_classification_context,business,business,low,neutral,false,false,5499,,,active,Miscellaneous Food Stores - Convenience Stores and Specialty Markets
+middesk,mcc_code,5511,"Car and Truck Dealers (New & Used) Sales, Service, Repairs Parts and Leasing (MCC)",business_classification_context,business,business,low,neutral,false,false,5511,,,active,"Car and Truck Dealers (New & Used) Sales, Service, Repairs Parts and Leasing"
+middesk,mcc_code,5521,"Car and Truck Dealers (Used Only) Sales, Service, Repairs Parts and Leasing (MCC)",business_classification_context,business,business,low,neutral,false,false,5521,,,active,"Car and Truck Dealers (Used Only) Sales, Service, Repairs Parts and Leasing"
+middesk,mcc_code,5531,Auto and Home Supply Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5531,,,active,Auto and Home Supply Stores
+middesk,mcc_code,5532,Automotive Tire Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5532,,,active,Automotive Tire Stores
+middesk,mcc_code,5533,Automotive Parts and Accessories Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5533,,,active,Automotive Parts and Accessories Stores
+middesk,mcc_code,5541,Service Stations (MCC),business_classification_context,business,business,low,neutral,false,false,5541,,,active,Service Stations
+middesk,mcc_code,5542,Automated Fuel Dispensers (MCC),business_classification_context,business,business,low,neutral,false,false,5542,,,active,Automated Fuel Dispensers
+middesk,mcc_code,5551,Boat Dealers (MCC),business_classification_context,business,business,low,neutral,false,false,5551,,,active,Boat Dealers
+middesk,mcc_code,5552,Electric Vehicle Charging (MCC),business_classification_context,business,business,low,neutral,false,false,5552,,,active,Electric Vehicle Charging
+middesk,mcc_code,5561,"Motorcycle Shops, Dealers (MCC)",business_classification_context,business,business,low,neutral,false,false,5561,,,active,"Motorcycle Shops, Dealers"
+middesk,mcc_code,5571,Motorcycle Shops and Dealers (MCC),business_classification_context,business,business,low,neutral,false,false,5571,,,active,Motorcycle Shops and Dealers
+middesk,mcc_code,5592,Motor Homes Dealers (MCC),business_classification_context,business,business,low,neutral,false,false,5592,,,active,Motor Homes Dealers
+middesk,mcc_code,5598,Snowmobile Dealers (MCC),business_classification_context,business,business,low,neutral,false,false,5598,,,active,Snowmobile Dealers
+middesk,mcc_code,5599,Miscellaneous Auto Dealers (MCC),business_classification_context,business,business,low,neutral,false,false,5599,,,active,Miscellaneous Auto Dealers
+middesk,mcc_code,5611,Office Administrative Services (MCC),business_classification_context,business,business,low,neutral,false,false,5611,,,active,Office Administrative Services
+middesk,mcc_code,5611,Mens and Boys Clothing and Accessories Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5611,,,active,Mens and Boys Clothing and Accessories Stores
+middesk,mcc_code,5621,Waste Collection (MCC),business_classification_context,business,business,low,neutral,false,false,5621,,,active,Waste Collection
+middesk,mcc_code,5621,Womens Ready-To-Wear Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5621,,,active,Womens Ready-To-Wear Stores
+middesk,mcc_code,5631,Womens Accessory and Specialty Shops (MCC),business_classification_context,business,business,low,neutral,false,false,5631,,,active,Womens Accessory and Specialty Shops
+middesk,mcc_code,5641,Childrens and Infants Wear Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5641,,,active,Childrens and Infants Wear Stores
+middesk,mcc_code,5651,Family Clothing Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5651,,,active,Family Clothing Stores
+middesk,mcc_code,5655,Sports and Riding Apparel Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5655,,,active,Sports and Riding Apparel Stores
+middesk,mcc_code,5661,Shoe Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5661,,,active,Shoe Stores
+middesk,mcc_code,5681,Furriers and Fur Shops (MCC),business_classification_context,business,business,low,neutral,false,false,5681,,,active,Furriers and Fur Shops
+middesk,mcc_code,5691,"Mens, Womens Clothing Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5691,,,active,"Mens, Womens Clothing Stores"
+middesk,mcc_code,5697,"Tailors, Alterations (MCC)",business_classification_context,business,business,low,neutral,false,false,5697,,,active,"Tailors, Alterations"
+middesk,mcc_code,5698,Wig and Toupee Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5698,,,active,Wig and Toupee Stores
+middesk,mcc_code,5699,Miscellaneous Apparel and Accessory Shops (MCC),business_classification_context,business,business,low,neutral,false,false,5699,,,active,Miscellaneous Apparel and Accessory Shops
+middesk,mcc_code,5712,"Furniture, Home Furnishings, and Equipment Stores, Except Appliances (MCC)",business_classification_context,business,business,low,neutral,false,false,5712,,,active,"Furniture, Home Furnishings, and Equipment Stores, Except Appliances"
+middesk,mcc_code,5713,Floor Covering Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5713,,,active,Floor Covering Stores
+middesk,mcc_code,5714,"Drapery, Window Covering, and Upholstery Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5714,,,active,"Drapery, Window Covering, and Upholstery Stores"
+middesk,mcc_code,5718,"Fireplace, Fireplace Screens, and Accessories Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5718,,,active,"Fireplace, Fireplace Screens, and Accessories Stores"
+middesk,mcc_code,5719,Miscellaneous Home Furnishing Specialty Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5719,,,active,Miscellaneous Home Furnishing Specialty Stores
+middesk,mcc_code,5722,Household Appliance Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5722,,,active,Household Appliance Stores
+middesk,mcc_code,5732,Electronics Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5732,,,active,Electronics Stores
+middesk,mcc_code,5733,"Music Stores-Musical Instruments, Pianos, and Sheet Music (MCC)",business_classification_context,business,business,low,neutral,false,false,5733,,,active,"Music Stores-Musical Instruments, Pianos, and Sheet Music"
+middesk,mcc_code,5734,Computer Software Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5734,,,active,Computer Software Stores
+middesk,mcc_code,5735,Record Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5735,,,active,Record Stores
+middesk,mcc_code,5811,Caterers (MCC),business_classification_context,business,business,low,neutral,false,false,5811,,,active,Caterers
+middesk,mcc_code,5812,"Eating Places, Restaurants (MCC)",business_classification_context,business,business,low,neutral,false,false,5812,,,active,"Eating Places, Restaurants"
+middesk,mcc_code,5813,Drinking Places (MCC),business_classification_context,business,business,low,neutral,false,false,5813,,,active,Drinking Places
+middesk,mcc_code,5814,Fast Food Restaurants (MCC),business_classification_context,business,business,low,neutral,false,false,5814,,,active,Fast Food Restaurants
+middesk,mcc_code,5815,"Digital Goods Media – Books, Movies, Music (MCC)",business_classification_context,business,business,low,neutral,false,false,5815,,,active,"Digital Goods Media – Books, Movies, Music"
+middesk,mcc_code,5816,Digital Goods – Games (MCC),business_classification_context,business,business,low,neutral,false,false,5816,,,active,Digital Goods – Games
+middesk,mcc_code,5817,Digital Goods – Applications (Excludes Games) (MCC),business_classification_context,business,business,low,neutral,false,false,5817,,,active,Digital Goods – Applications (Excludes Games)
+middesk,mcc_code,5818,Digital Goods – Large Digital Goods Merchant (MCC),business_classification_context,business,business,low,neutral,false,false,5818,,,active,Digital Goods – Large Digital Goods Merchant
+middesk,mcc_code,5912,Drug Stores and Pharmacies (MCC),business_classification_context,business,business,low,neutral,false,false,5912,,,active,Drug Stores and Pharmacies
+middesk,mcc_code,5921,"Package Stores-Beer, Wine, and Liquor (MCC)",business_classification_context,business,business,low,neutral,false,false,5921,,,active,"Package Stores-Beer, Wine, and Liquor"
+middesk,mcc_code,5931,Used Merchandise and Secondhand Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5931,,,active,Used Merchandise and Secondhand Stores
+middesk,mcc_code,5932,Antique Shops (MCC),business_classification_context,business,business,low,neutral,false,false,5932,,,active,Antique Shops
+middesk,mcc_code,5933,Pawn Shops (MCC),business_financial_services,compliance,business,high,negative,true,true,5933,,,active,Pawn Shops
+middesk,mcc_code,5935,Wrecking and Salvage Yards (MCC),business_classification_context,business,business,low,neutral,false,false,5935,,,active,Wrecking and Salvage Yards
+middesk,mcc_code,5937,Antique Reproductions (MCC),business_classification_context,business,business,low,neutral,false,false,5937,,,active,Antique Reproductions
+middesk,mcc_code,5940,Bicycle Shops (MCC),business_classification_context,business,business,low,neutral,false,false,5940,,,active,Bicycle Shops
+middesk,mcc_code,5941,Sporting Goods Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5941,,,active,Sporting Goods Stores
+middesk,mcc_code,5942,Book Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5942,,,active,Book Stores
+middesk,mcc_code,5943,"Stationery Stores, Office, and School Supply Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5943,,,active,"Stationery Stores, Office, and School Supply Stores"
+middesk,mcc_code,5944,"Jewelry Stores, Watches, Clocks, and Silverware Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5944,,,active,"Jewelry Stores, Watches, Clocks, and Silverware Stores"
+middesk,mcc_code,5945,"Hobby, Toy, and Game Shops (MCC)",business_classification_context,business,business,low,neutral,false,false,5945,,,active,"Hobby, Toy, and Game Shops"
+middesk,mcc_code,5946,Camera and Photographic Supply Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5946,,,active,Camera and Photographic Supply Stores
+middesk,mcc_code,5947,"Gift, Card, Novelty, and Souvenir Shops (MCC)",business_classification_context,business,business,low,neutral,false,false,5947,,,active,"Gift, Card, Novelty, and Souvenir Shops"
+middesk,mcc_code,5948,Luggage and Leather Goods Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5948,,,active,Luggage and Leather Goods Stores
+middesk,mcc_code,5949,"Sewing, Needlework, Fabric, and Piece Goods Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5949,,,active,"Sewing, Needlework, Fabric, and Piece Goods Stores"
+middesk,mcc_code,5950,"Glassware, Crystal Stores (MCC)",business_classification_context,business,business,low,neutral,false,false,5950,,,active,"Glassware, Crystal Stores"
+middesk,mcc_code,5960,Direct Marketing - Insurance Services (MCC),business_high_risk_marketing,compliance,business,medium,negative,true,false,5960,,,active,Direct Marketing - Insurance Services
+middesk,mcc_code,5962,Direct Marketing - Travel (MCC),business_high_risk_marketing,compliance,business,medium,negative,true,false,5962,,,active,Direct Marketing - Travel
+middesk,mcc_code,5963,Door-To-Door Sales (MCC),business_high_risk_marketing,compliance,business,medium,negative,true,false,5963,,,active,Door-To-Door Sales
+middesk,mcc_code,5964,Direct Marketing - Catalog Merchant (MCC),business_high_risk_marketing,compliance,business,medium,negative,true,false,5964,,,active,Direct Marketing - Catalog Merchant
+middesk,mcc_code,5965,Direct Marketing - Combination Catalog and Retail Merchant (MCC),business_high_risk_marketing,compliance,business,medium,negative,true,false,5965,,,active,Direct Marketing - Combination Catalog and Retail Merchant
+middesk,mcc_code,5966,Direct Marketing - Outbound Telemarketing (MCC),business_high_risk_marketing,compliance,business,medium,negative,true,false,5966,,,active,Direct Marketing - Outbound Telemarketing
+middesk,mcc_code,5967,Direct Marketing - Inbound Telemarketing (MCC),business_high_risk_marketing,compliance,business,medium,negative,true,false,5967,,,active,Direct Marketing - Inbound Telemarketing
+middesk,mcc_code,5968,Direct Marketing - Subscription (MCC),business_high_risk_marketing,compliance,business,medium,negative,true,false,5968,,,active,Direct Marketing - Subscription
+middesk,mcc_code,5969,Direct Marketing - Other (MCC),business_high_risk_marketing,compliance,business,medium,negative,true,false,5969,,,active,Direct Marketing - Other
+middesk,mcc_code,5970,Artists Supply and Craft Shops (MCC),business_classification_context,business,business,low,neutral,false,false,5970,,,active,Artists Supply and Craft Shops
+middesk,mcc_code,5971,Art Dealers and Galleries (MCC),business_classification_context,business,business,low,neutral,false,false,5971,,,active,Art Dealers and Galleries
+middesk,mcc_code,5972,Stamp and Coin Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5972,,,active,Stamp and Coin Stores
+middesk,mcc_code,5973,Religious Goods Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5973,,,active,Religious Goods Stores
+middesk,mcc_code,5975,Hearing Aids Sales and Supplies (MCC),business_classification_context,business,business,low,neutral,false,false,5975,,,active,Hearing Aids Sales and Supplies
+middesk,mcc_code,5976,Orthopedic Goods - Prosthetic Devices (MCC),business_classification_context,business,business,low,neutral,false,false,5976,,,active,Orthopedic Goods - Prosthetic Devices
+middesk,mcc_code,5977,Cosmetic Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5977,,,active,Cosmetic Stores
+middesk,mcc_code,5978,Typewriter Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5978,,,active,Typewriter Stores
+middesk,mcc_code,5983,Fuel Dealers (Non Automotive) (MCC),business_classification_context,business,business,low,neutral,false,false,5983,,,active,Fuel Dealers (Non Automotive)
+middesk,mcc_code,5992,Florists (MCC),business_classification_context,business,business,low,neutral,false,false,5992,,,active,Florists
+middesk,mcc_code,5993,Cigar Stores and Stands (MCC),business_regulated_or_illegal,compliance,business,high,negative,true,true,5993,,,active,Cigar Stores and Stands
+middesk,mcc_code,5994,News Dealers and Newsstands (MCC),business_classification_context,business,business,low,neutral,false,false,5994,,,active,News Dealers and Newsstands
+middesk,mcc_code,5995,"Pet Shops, Pet Food, and Supplies (MCC)",business_classification_context,business,business,low,neutral,false,false,5995,,,active,"Pet Shops, Pet Food, and Supplies"
+middesk,mcc_code,5996,Swimming Pools Sales (MCC),business_classification_context,business,business,low,neutral,false,false,5996,,,active,Swimming Pools Sales
+middesk,mcc_code,5997,Electric Razor Stores (MCC),business_classification_context,business,business,low,neutral,false,false,5997,,,active,Electric Razor Stores
+middesk,mcc_code,5998,Tent and Awning Shops (MCC),business_classification_context,business,business,low,neutral,false,false,5998,,,active,Tent and Awning Shops
+middesk,mcc_code,5999,Miscellaneous Specialty Retail (MCC),business_classification_context,business,business,low,neutral,false,false,5999,,,active,Miscellaneous Specialty Retail
+middesk,mcc_code,6010,Manual Cash Disburse (MCC),business_financial_services,compliance,business,high,negative,true,true,6010,,,active,Manual Cash Disburse
+middesk,mcc_code,6011,Automated Cash Disburse (MCC),business_financial_services,compliance,business,high,negative,true,true,6011,,,active,Automated Cash Disburse
+middesk,mcc_code,6012,Financial Institutions (MCC),business_financial_services,compliance,business,high,negative,true,true,6012,,,active,Financial Institutions
+middesk,mcc_code,6051,"Non-FI, Money Orders (MCC)",business_financial_services,compliance,business,high,negative,true,true,6051,,,active,"Non-FI, Money Orders"
+middesk,mcc_code,6211,Offices of Physicians (MCC),business_classification_context,business,business,low,neutral,false,false,6211,,,active,Offices of Physicians
+middesk,mcc_code,6211,Security Brokers/Dealers (MCC),business_financial_services,compliance,business,high,negative,true,true,6211,,,active,Security Brokers/Dealers
+middesk,mcc_code,6300,"Insurance Underwriting, Premiums (MCC)",business_financial_services,compliance,business,high,negative,true,true,6300,,,active,"Insurance Underwriting, Premiums"
+middesk,mcc_code,6399,Insurance - Default (MCC),business_classification_context,business,business,low,neutral,false,false,6399,,,active,Insurance - Default
+middesk,mcc_code,6513,Real Estate Agents and Managers - Rentals (MCC),business_classification_context,business,business,low,neutral,false,false,6513,,,active,Real Estate Agents and Managers - Rentals
+middesk,mcc_code,6540,"Non-FI, Stored Value Card Purchase/Load (MCC)",business_financial_services,compliance,business,high,negative,true,true,6540,,,active,"Non-FI, Stored Value Card Purchase/Load"
+middesk,mcc_code,7011,"Hotels, Motels, and Resorts (MCC)",business_classification_context,business,business,low,neutral,false,false,7011,,,active,"Hotels, Motels, and Resorts"
+middesk,mcc_code,7012,Timeshares (MCC),business_high_risk_marketing,compliance,business,medium,negative,true,false,7012,,,active,Timeshares
+middesk,mcc_code,7032,Sporting/Recreation Camps (MCC),business_classification_context,business,business,low,neutral,false,false,7032,,,active,Sporting/Recreation Camps
+middesk,mcc_code,7033,"Trailer Parks, Campgrounds (MCC)",business_classification_context,business,business,low,neutral,false,false,7033,,,active,"Trailer Parks, Campgrounds"
+middesk,mcc_code,7210,"Laundry, Cleaning Services (MCC)",business_classification_context,business,business,low,neutral,false,false,7210,,,active,"Laundry, Cleaning Services"
+middesk,mcc_code,7211,Traveler Accommodation (MCC),business_classification_context,business,business,low,neutral,false,false,7211,,,active,Traveler Accommodation
+middesk,mcc_code,7211,Laundries (MCC),business_classification_context,business,business,low,neutral,false,false,7211,,,active,Laundries
+middesk,mcc_code,7216,Dry Cleaners (MCC),business_classification_context,business,business,low,neutral,false,false,7216,,,active,Dry Cleaners
+middesk,mcc_code,7217,Carpet/Upholstery Cleaning (MCC),business_classification_context,business,business,low,neutral,false,false,7217,,,active,Carpet/Upholstery Cleaning
+middesk,mcc_code,7221,Photographic Studios (MCC),business_classification_context,business,business,low,neutral,false,false,7221,,,active,Photographic Studios
+middesk,mcc_code,7230,Barber and Beauty Shops (MCC),business_classification_context,business,business,low,neutral,false,false,7230,,,active,Barber and Beauty Shops
+middesk,mcc_code,7251,Shoe Repair/Hat Cleaning (MCC),business_classification_context,business,business,low,neutral,false,false,7251,,,active,Shoe Repair/Hat Cleaning
+middesk,mcc_code,7261,"Funeral Services, Crematories (MCC)",business_classification_context,business,business,low,neutral,false,false,7261,,,active,"Funeral Services, Crematories"
+middesk,mcc_code,7273,Dating/Escort Services (MCC),business_adult_content,compliance,business,high,negative,true,true,7273,,,active,Dating/Escort Services
+middesk,mcc_code,7276,Tax Preparation Services (MCC),business_classification_context,business,business,low,neutral,false,false,7276,,,active,Tax Preparation Services
+middesk,mcc_code,7277,Counseling Services (MCC),business_classification_context,business,business,low,neutral,false,false,7277,,,active,Counseling Services
+middesk,mcc_code,7278,Buying/Shopping Services (MCC),business_classification_context,business,business,low,neutral,false,false,7278,,,active,Buying/Shopping Services
+middesk,mcc_code,7296,Clothing Rental (MCC),business_classification_context,business,business,low,neutral,false,false,7296,,,active,Clothing Rental
+middesk,mcc_code,7297,Massage Parlors (MCC),business_adult_content,compliance,business,high,negative,true,true,7297,,,active,Massage Parlors
+middesk,mcc_code,7298,Health and Beauty Spas (MCC),business_classification_context,business,business,low,neutral,false,false,7298,,,active,Health and Beauty Spas
+middesk,mcc_code,7299,Miscellaneous General Services (MCC),business_classification_context,business,business,low,neutral,false,false,7299,,,active,Miscellaneous General Services
+middesk,mcc_code,7311,Advertising Services (MCC),business_classification_context,business,business,low,neutral,false,false,7311,,,active,Advertising Services
+middesk,mcc_code,7321,Credit Reporting Agencies (MCC),business_financial_services,compliance,business,high,negative,true,true,7321,,,active,Credit Reporting Agencies
+middesk,mcc_code,7333,"Commercial Photography, Art and Graphics (MCC)",business_classification_context,business,business,low,neutral,false,false,7333,,,active,"Commercial Photography, Art and Graphics"
+middesk,mcc_code,7338,"Quick Copy, Repro, and Blueprint (MCC)",business_classification_context,business,business,low,neutral,false,false,7338,,,active,"Quick Copy, Repro, and Blueprint"
+middesk,mcc_code,7339,Secretarial Support Services (MCC),business_classification_context,business,business,low,neutral,false,false,7339,,,active,Secretarial Support Services
+middesk,mcc_code,7342,Exterminating Services (MCC),business_classification_context,business,business,low,neutral,false,false,7342,,,active,Exterminating Services
+middesk,mcc_code,7349,Cleaning and Maintenance (MCC),business_classification_context,business,business,low,neutral,false,false,7349,,,active,Cleaning and Maintenance
+middesk,mcc_code,7361,Employment/Temp Agencies (MCC),business_classification_context,business,business,low,neutral,false,false,7361,,,active,Employment/Temp Agencies
+middesk,mcc_code,7372,Computer Programming (MCC),business_classification_context,business,business,low,neutral,false,false,7372,,,active,Computer Programming
+middesk,mcc_code,7375,Information Retrieval Services (MCC),business_classification_context,business,business,low,neutral,false,false,7375,,,active,Information Retrieval Services
+middesk,mcc_code,7379,Computer Repair (MCC),business_classification_context,business,business,low,neutral,false,false,7379,,,active,Computer Repair
+middesk,mcc_code,7392,"Consulting, Public Relations (MCC)",business_classification_context,business,business,low,neutral,false,false,7392,,,active,"Consulting, Public Relations"
+middesk,mcc_code,7393,Detective Agencies (MCC),business_classification_context,business,business,low,neutral,false,false,7393,,,active,Detective Agencies
+middesk,mcc_code,7394,Equipment Rental (MCC),business_classification_context,business,business,low,neutral,false,false,7394,,,active,Equipment Rental
+middesk,mcc_code,7395,Photo Developing (MCC),business_classification_context,business,business,low,neutral,false,false,7395,,,active,Photo Developing
+middesk,mcc_code,7399,Miscellaneous Business Services (MCC),business_classification_context,business,business,low,neutral,false,false,7399,,,active,Miscellaneous Business Services
+middesk,mcc_code,7511,Truck StopIteration (MCC),business_classification_context,business,business,low,neutral,false,false,7511,,,active,Truck StopIteration
+middesk,mcc_code,7512,Car Rental Agencies (MCC),business_classification_context,business,business,low,neutral,false,false,7512,,,active,Car Rental Agencies
+middesk,mcc_code,7513,Truck/Utility Trailer Rentals (MCC),business_classification_context,business,business,low,neutral,false,false,7513,,,active,Truck/Utility Trailer Rentals
+middesk,mcc_code,7519,Recreational Vehicle Rentals (MCC),business_classification_context,business,business,low,neutral,false,false,7519,,,active,Recreational Vehicle Rentals
+middesk,mcc_code,7523,"Parking Lots, Garages (MCC)",business_classification_context,business,business,low,neutral,false,false,7523,,,active,"Parking Lots, Garages"
+middesk,mcc_code,7531,Auto Body Repair Shops (MCC),business_classification_context,business,business,low,neutral,false,false,7531,,,active,Auto Body Repair Shops
+middesk,mcc_code,7534,Tire Retreading and Repair (MCC),business_classification_context,business,business,low,neutral,false,false,7534,,,active,Tire Retreading and Repair
+middesk,mcc_code,7535,Auto Paint Shops (MCC),business_classification_context,business,business,low,neutral,false,false,7535,,,active,Auto Paint Shops
+middesk,mcc_code,7538,Auto Service Shops (MCC),business_classification_context,business,business,low,neutral,false,false,7538,,,active,Auto Service Shops
+middesk,mcc_code,7542,Car Washes (MCC),business_classification_context,business,business,low,neutral,false,false,7542,,,active,Car Washes
+middesk,mcc_code,7549,Towing Services (MCC),business_classification_context,business,business,low,neutral,false,false,7549,,,active,Towing Services
+middesk,mcc_code,7622,Electronics Repair Shops (MCC),business_classification_context,business,business,low,neutral,false,false,7622,,,active,Electronics Repair Shops
+middesk,mcc_code,7623,"A/C, Refrigeration Repair (MCC)",business_classification_context,business,business,low,neutral,false,false,7623,,,active,"A/C, Refrigeration Repair"
+middesk,mcc_code,7629,Small Appliance Repair (MCC),business_classification_context,business,business,low,neutral,false,false,7629,,,active,Small Appliance Repair
+middesk,mcc_code,7631,Watch/Jewelry Repair (MCC),business_classification_context,business,business,low,neutral,false,false,7631,,,active,Watch/Jewelry Repair
+middesk,mcc_code,7641,"Furniture Repair, Refinishing (MCC)",business_classification_context,business,business,low,neutral,false,false,7641,,,active,"Furniture Repair, Refinishing"
+middesk,mcc_code,7692,Welding Repair (MCC),business_classification_context,business,business,low,neutral,false,false,7692,,,active,Welding Repair
+middesk,mcc_code,7699,Miscellaneous Repair Shops (MCC),business_classification_context,business,business,low,neutral,false,false,7699,,,active,Miscellaneous Repair Shops
+middesk,mcc_code,7800,Government-Owned Lotteries (US Region only) (MCC),business_gambling,compliance,business,high,negative,true,true,7800,,,active,Government-Owned Lotteries
+middesk,mcc_code,7801,Government Licensed On-line Casinos (On-Line Gambling)(US Region only) (MCC),business_gambling,compliance,business,high,negative,true,true,7801,,,active,Government Licensed On-line Casinos (On-Line Gambling)
+middesk,mcc_code,7802,Government-Licensed Horse/Dog Racing (US Region only) (MCC),business_gambling,compliance,business,high,negative,true,true,7802,,,active,Government-Licensed Horse/Dog Racing
+middesk,mcc_code,7829,Picture/Video Production (MCC),business_classification_context,business,business,low,neutral,false,false,7829,,,active,Picture/Video Production
+middesk,mcc_code,7832,Motion Picture Theaters (MCC),business_classification_context,business,business,low,neutral,false,false,7832,,,active,Motion Picture Theaters
+middesk,mcc_code,7841,Video Tape Rental Stores (MCC),business_classification_context,business,business,low,neutral,false,false,7841,,,active,Video Tape Rental Stores
+middesk,mcc_code,7911,"Dance Hall, Studios, Schools (MCC)",business_classification_context,business,business,low,neutral,false,false,7911,,,active,"Dance Hall, Studios, Schools"
+middesk,mcc_code,7922,Theatrical Ticket Agencies (MCC),business_classification_context,business,business,low,neutral,false,false,7922,,,active,Theatrical Ticket Agencies
+middesk,mcc_code,7929,"Bands, Orchestras (MCC)",business_classification_context,business,business,low,neutral,false,false,7929,,,active,"Bands, Orchestras"
+middesk,mcc_code,7932,Billiard/Pool Establishments (MCC),business_classification_context,business,business,low,neutral,false,false,7932,,,active,Billiard/Pool Establishments
+middesk,mcc_code,7933,Bowling Alleys (MCC),business_classification_context,business,business,low,neutral,false,false,7933,,,active,Bowling Alleys
+middesk,mcc_code,7941,Sports Clubs/Fields (MCC),business_classification_context,business,business,low,neutral,false,false,7941,,,active,Sports Clubs/Fields
+middesk,mcc_code,7991,Tourist Attractions and Exhibits (MCC),business_classification_context,business,business,low,neutral,false,false,7991,,,active,Tourist Attractions and Exhibits
+middesk,mcc_code,7992,Golf Courses - Public (MCC),business_classification_context,business,business,low,neutral,false,false,7992,,,active,Golf Courses - Public
+middesk,mcc_code,7993,Video Amusement Game Supplies (MCC),business_classification_context,business,business,low,neutral,false,false,7993,,,active,Video Amusement Game Supplies
+middesk,mcc_code,7994,Video Game Arcades (MCC),business_classification_context,business,business,low,neutral,false,false,7994,,,active,Video Game Arcades
+middesk,mcc_code,7995,Betting/Casino Gambling (MCC),business_gambling,compliance,business,high,negative,true,true,7995,,,active,Betting/Casino Gambling
+middesk,mcc_code,7996,Amusement Parks/Carnivals (MCC),business_classification_context,business,business,low,neutral,false,false,7996,,,active,Amusement Parks/Carnivals
+middesk,mcc_code,7997,Country Clubs (MCC),business_classification_context,business,business,low,neutral,false,false,7997,,,active,Country Clubs
+middesk,mcc_code,7998,Aquariums (MCC),business_classification_context,business,business,low,neutral,false,false,7998,,,active,Aquariums
+middesk,mcc_code,7999,Miscellaneous Recreation Services (MCC),business_classification_context,business,business,low,neutral,false,false,7999,,,active,Miscellaneous Recreation Services
+middesk,mcc_code,8011,Doctors (MCC),business_classification_context,business,business,low,neutral,false,false,8011,,,active,Doctors
+middesk,mcc_code,8021,"Dentists, Orthodontists (MCC)",business_classification_context,business,business,low,neutral,false,false,8021,,,active,"Dentists, Orthodontists"
+middesk,mcc_code,8031,Osteopaths (MCC),business_classification_context,business,business,low,neutral,false,false,8031,,,active,Osteopaths
+middesk,mcc_code,8041,Chiropractors (MCC),business_classification_context,business,business,low,neutral,false,false,8041,,,active,Chiropractors
+middesk,mcc_code,8042,"Optometrists, Ophthalmologist (MCC)",business_classification_context,business,business,low,neutral,false,false,8042,,,active,"Optometrists, Ophthalmologist"
+middesk,mcc_code,8043,"Opticians, Eyeglasses (MCC)",business_classification_context,business,business,low,neutral,false,false,8043,,,active,"Opticians, Eyeglasses"
+middesk,mcc_code,8049,"Chiropodists, Podiatrists (MCC)",business_classification_context,business,business,low,neutral,false,false,8049,,,active,"Chiropodists, Podiatrists"
+middesk,mcc_code,8050,Nursing/Personal Care (MCC),business_classification_context,business,business,low,neutral,false,false,8050,,,active,Nursing/Personal Care
+middesk,mcc_code,8062,Hospitals (MCC),business_classification_context,business,business,low,neutral,false,false,8062,,,active,Hospitals
+middesk,mcc_code,8071,Medical and Dental Labs (MCC),business_classification_context,business,business,low,neutral,false,false,8071,,,active,Medical and Dental Labs
+middesk,mcc_code,8099,Medical Services (MCC),business_classification_context,business,business,low,neutral,false,false,8099,,,active,Medical Services
+middesk,mcc_code,8111,Automotive Repair and Maintenance (MCC),business_classification_context,business,business,low,neutral,false,false,8111,,,active,Automotive Repair and Maintenance
+middesk,mcc_code,8111,"Legal Services, Attorneys (MCC)",business_classification_context,business,business,low,neutral,false,false,8111,,,active,"Legal Services, Attorneys"
+middesk,mcc_code,8211,"Elementary, Secondary Schools (MCC)",business_classification_context,business,business,low,neutral,false,false,8211,,,active,"Elementary, Secondary Schools"
+middesk,mcc_code,8220,"Colleges, Universities (MCC)",business_classification_context,business,business,low,neutral,false,false,8220,,,active,"Colleges, Universities"
+middesk,mcc_code,8241,Correspondence Schools (MCC),business_classification_context,business,business,low,neutral,false,false,8241,,,active,Correspondence Schools
+middesk,mcc_code,8244,Business/Secretarial Schools (MCC),business_classification_context,business,business,low,neutral,false,false,8244,,,active,Business/Secretarial Schools
+middesk,mcc_code,8249,Vocational/Trade Schools (MCC),business_classification_context,business,business,low,neutral,false,false,8249,,,active,Vocational/Trade Schools
+middesk,mcc_code,8299,Educational Services (MCC),business_classification_context,business,business,low,neutral,false,false,8299,,,active,Educational Services
+middesk,mcc_code,8351,Child Care Services (MCC),business_classification_context,business,business,low,neutral,false,false,8351,,,active,Child Care Services
+middesk,mcc_code,8398,Charitable and Social Service Organizations - Fundraising (MCC),business_classification_context,business,business,low,neutral,false,false,8398,,,active,Charitable and Social Service Organizations - Fundraising
+middesk,mcc_code,8641,"Civic, Social, Fraternal Associations (MCC)",business_classification_context,business,business,low,neutral,false,false,8641,,,active,"Civic, Social, Fraternal Associations"
+middesk,mcc_code,8651,Political Organizations (MCC),business_classification_context,business,business,low,neutral,false,false,8651,,,active,Political Organizations
+middesk,mcc_code,8661,Religious Organizations (MCC),business_classification_context,business,business,low,neutral,false,false,8661,,,active,Religious Organizations
+middesk,mcc_code,8675,Automobile Associations (MCC),business_classification_context,business,business,low,neutral,false,false,8675,,,active,Automobile Associations
+middesk,mcc_code,8699,Membership Organizations (MCC),business_classification_context,business,business,low,neutral,false,false,8699,,,active,Membership Organizations
+middesk,mcc_code,8734,Testing Laboratories (MCC),business_classification_context,business,business,low,neutral,false,false,8734,,,active,Testing Laboratories
+middesk,mcc_code,8911,Architectural/Surveying Services (MCC),business_classification_context,business,business,low,neutral,false,false,8911,,,active,Architectural/Surveying Services
+middesk,mcc_code,8931,Accounting/Bookkeeping Services (MCC),business_classification_context,business,business,low,neutral,false,false,8931,,,active,Accounting/Bookkeeping Services
+middesk,mcc_code,8999,Professional Services (MCC),business_classification_context,business,business,low,neutral,false,false,8999,,,active,Professional Services
+middesk,mcc_code,9211,"Court Costs, Including Alimony and Child Support - Courts of Law (MCC)",business_classification_context,business,business,low,neutral,false,false,9211,,,active,"Court Costs, Including Alimony and Child Support - Courts of Law"
+middesk,mcc_code,9222,Fines - Government Administrative Entities (MCC),business_classification_context,business,business,low,neutral,false,false,9222,,,active,Fines - Government Administrative Entities
+middesk,mcc_code,9223,Bail and Bond Payments (MCC),business_classification_context,business,business,low,neutral,false,false,9223,,,active,Bail and Bond Payments
+middesk,mcc_code,9311,Tax Payments - Government Agencies (MCC),business_classification_context,business,business,low,neutral,false,false,9311,,,active,Tax Payments - Government Agencies
+middesk,mcc_code,9399,Government Services (Not Elsewhere Classified) (MCC),business_classification_context,business,business,low,neutral,false,false,9399,,,active,Government Services (Not Elsewhere Classified)
+middesk,mcc_code,9402,Postal Services - Government Only (MCC),business_classification_context,business,business,low,neutral,false,false,9402,,,active,Postal Services - Government Only
+middesk,mcc_code,9405,U.S. Federal Government Agencies or Departments (MCC),business_classification_context,business,business,low,neutral,false,false,9405,,,active,U.S. Federal Government Agencies or Departments
+middesk,mcc_code,9406,Government-Owned Lotteries (Non-US region) (MCC),business_gambling,compliance,business,high,negative,true,true,9406,,,active,Government-Owned Lotteries
+middesk,mcc_code,9702,Emergency Services (GCAS) (Visa use only) (MCC),business_classification_context,business,business,low,neutral,false,false,9702,,,active,Emergency Services (GCAS)
+middesk,mcc_code,9950,Intra-Company Purchases (MCC),business_classification_context,business,business,low,neutral,false,false,9950,,,active,Intra-Company Purchases
