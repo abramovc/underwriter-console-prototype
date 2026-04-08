@@ -1,0 +1,871 @@
+reason_code_id,code,description,service_name,service_internal_name,service_id
+6713,akaEquivalent,Alias match based on the same alias meaning,Socure 30,Socure3,80
+6697,akaEquivalent-dobExact,"Alias match based on the same alias meaning, exact DOB match",Socure 30,Socure3,80
+6698,akaEquivalent-dobFuzzy,"Alias match based on the same alias meaning, fuzzy DOB match",Socure 30,Socure3,80
+6699,akaEquivalent-dobNoMatch,"Alias match based on the same alias meaning, DOB does not match the input DOB",Socure 30,Socure3,80
+6700,akaEquivalent-dobNotOnRecord,"Alias match based on the same alias meaning, source did not return a DOB",Socure 30,Socure3,80
+6706,akaExact,Exact alias match,Socure 30,Socure3,80
+6669,akaExact-dobExact,"Exact alias match, exact DOB match",Socure 30,Socure3,80
+6670,akaExact-dobFuzzy,"Exact alias match, fuzzy DOB match",Socure 30,Socure3,80
+6671,akaExact-dobNoMatch,"Exact alias match, DOB does not match the input DOB",Socure 30,Socure3,80
+6672,akaExact-dobNotOnRecord,"Exact alias match, source did not return a DOB",Socure 30,Socure3,80
+6712,akaFuzzy,Fuzzy alias match,Socure 30,Socure3,80
+6693,akaFuzzy-dobExact,"Fuzzy alias match, exact DOB match",Socure 30,Socure3,80
+6694,akaFuzzy-dobFuzzy,"Fuzzy alias match, fuzzy DOB match",Socure 30,Socure3,80
+6695,akaFuzzy-dobNoMatch,"Fuzzy alias match, DOB does not match the input DOB",Socure 30,Socure3,80
+6696,akaFuzzy-dobNotOnRecord,"Fuzzy alias match, source did not return a DOB",Socure 30,Socure3,80
+6714,akaPhonetic,Alias name match based on phonetic similarity,Socure 30,Socure3,80
+6701,akaPhonetic-dobExact,"Alias name match based on phonetic similarity, exact DOB match",Socure 30,Socure3,80
+6702,akaPhonetic-dobFuzzy,"Alias name match based on phonetic similarity, fuzzy DOB match",Socure 30,Socure3,80
+6703,akaPhonetic-dobNoMatch,"Alias name match based on phonetic similarity, DOB does not match the input DOB",Socure 30,Socure3,80
+6704,akaPhonetic-dobNotOnRecord,"Alias name match based on phonetic similarity, source did not return a DOB",Socure 30,Socure3,80
+2228,E102,Watchlist check error,Socure 30,Socure3,80
+10812,I1001,Identity not found within Consortium Institutions,Socure 30,Socure3,80
+10813,I1002,National ID was not provided and Socure was unable to prefill National ID for the given identity,Socure 30,Socure3,80
+10814,I1003,National ID was not provided and Socure was able to prefill National ID for the given identity,Socure 30,Socure3,80
+10815,I1004,Matched identity onto at least 1 other Consortium Institution,Socure 30,Socure3,80
+10816,I1005,Matched identity onto at least 4 other Consortium Institutions,Socure 30,Socure3,80
+2057,I121,Social networks match,Socure 30,Socure3,80
+2059,I127,Online sources are representative of a broader digital footprint than just social networks,Socure 30,Socure3,80
+2060,I128,(Deprecated) - Social accounts history good,Socure 30,Socure3,80
+2061,I129,(Deprecated) - Social accounts connections good,Socure 30,Socure3,80
+2062,I130,(Deprecated) - Social accounts activity good,Socure 30,Socure3,80
+2063,I131,(Deprecated) - Social accounts well maintained,Socure 30,Socure3,80
+11291,I140,Email address tagged as positive,Socure 30,Socure3,80
+11292,I141,Email domain tagged as positive,Socure 30,Socure3,80
+11293,I142,Phone number tagged as positive,Socure 30,Socure3,80
+11294,I143,IP Address tagged as positive,Socure 30,Socure3,80
+11295,I144,Full name tagged as positive,Socure 30,Socure3,80
+11296,I145,SSN tagged as positive,Socure 30,Socure3,80
+11297,I146,Device tagged as positive,Socure 30,Socure3,80
+2058,I196,Entity did not match any selected watchlists,Socure 30,Socure3,80
+6397,I201,"(Deprecated) - Name, address and SSN match",Socure 30,Socure3,80
+6398,I202,The input National ID is an ITIN,Socure 30,Socure3,80
+6957,I203,National ID was first seen in credit header records between 5 to 10 years ago,Socure 30,Socure3,80
+6958,I204,National ID is first seen in credit header records more than 10 years ago,Socure 30,Socure3,80
+6959,I205,National ID is found to be inquired once every 2 to 3 months,Socure 30,Socure3,80
+6960,I206,National ID is found to be inquired once every 3 to 6 months,Socure 30,Socure3,80
+6961,I207,National ID is found to be inquired once every 6 to 12 months,Socure 30,Socure3,80
+6962,I208,National ID is found to be inquired less than once a year,Socure 30,Socure3,80
+9071,I209,Input full name and dob combination found in property records,Socure 30,Socure3,80
+9072,I210,Input full name and dob combination found in education/university records,Socure 30,Socure3,80
+9073,I211,Input full name and dob matches a drivers license record,Socure 30,Socure3,80
+12443,I212,Input National ID is associated with multiple addresses,Socure 30,Socure3,80
+13496,I213,Input National ID seems to have a 1-digit error,Socure 30,Socure3,80
+13497,I214,Input National ID seems to have a 1-digit typo,Socure 30,Socure3,80
+13498,I215,Input birth year seems to have a 1-digit error,Socure 30,Socure3,80
+8242,I301,Account is correlated with the first name,Socure 30,Socure3,80
+8342,I301,Account is correlated with the first name,Socure 30,Socure3,80
+8243,I302,Account is conditionally correlated with the first name,Socure 30,Socure3,80
+8343,I302,Account is conditionally correlated with the first name,Socure 30,Socure3,80
+8244,I303,(Deprecated) - First name of the account holder is unknown ,Socure 30,Socure3,80
+8344,I303,(Deprecated) - First name of the account holder is unknown,Socure 30,Socure3,80
+8245,I304,Account is correlated with the last name,Socure 30,Socure3,80
+8345,I304,Account is correlated with the last name,Socure 30,Socure3,80
+8246,I305,Account is conditionally correlated with the last name,Socure 30,Socure3,80
+8346,I305,Account is conditionally correlated with the last name,Socure 30,Socure3,80
+8247,I306,(Deprecated) - Last name of the account holder is unknown,Socure 30,Socure3,80
+8347,I306,(Deprecated) - Last name of the account holder is unknown,Socure 30,Socure3,80
+8248,I307,Account is correlated with the business name,Socure 30,Socure3,80
+8348,I307,Account is correlated with the business name,Socure 30,Socure3,80
+8249,I308,Account is conditionally correlated with the business name,Socure 30,Socure3,80
+8349,I308,Account is conditionally correlated with the business name,Socure 30,Socure3,80
+8250,I309,(Deprecated) - Business name of the account is unknown,Socure 30,Socure3,80
+8350,I309,(Deprecated) - Business name of the account is unknown,Socure 30,Socure3,80
+8251,I310,Account is correlated with the DOB,Socure 30,Socure3,80
+8351,I310,Account is correlated with the DOB,Socure 30,Socure3,80
+8252,I311,Account is conditionally correlated with the DOB,Socure 30,Socure3,80
+8352,I311,Account is conditionally correlated with the DOB,Socure 30,Socure3,80
+8253,I312,(Deprecated) - DOB of the account holder is unknown,Socure 30,Socure3,80
+8353,I312,(Deprecated) - DOB of the account holder is unknown,Socure 30,Socure3,80
+8254,I313,Account is correlated with the SSN,Socure 30,Socure3,80
+8354,I313,Account is correlated with the SSN,Socure 30,Socure3,80
+8255,I314,Account is conditionally correlated with the SSN,Socure 30,Socure3,80
+8355,I314,Account is conditionally correlated with the SSN,Socure 30,Socure3,80
+8256,I315,(Deprecated) - SSN/ITIN of the account holder is unknown,Socure 30,Socure3,80
+8356,I315,(Deprecated) - SSN/ITIN of the account holder is unknown,Socure 30,Socure3,80
+8257,I316,Account is correlated with the address,Socure 30,Socure3,80
+8357,I316,Account is correlated with the address,Socure 30,Socure3,80
+8258,I317,Account is conditionally correlated with the address,Socure 30,Socure3,80
+8358,I317,Account is conditionally correlated with the address,Socure 30,Socure3,80
+8259,I318,(Deprecated) - Address of the account holder is unknown,Socure 30,Socure3,80
+8359,I318,(Deprecated) - Address of the account holder is unknown,Socure 30,Socure3,80
+8260,I319,Account is correlated with the phone,Socure 30,Socure3,80
+8360,I319,Account is correlated with the phone,Socure 30,Socure3,80
+8261,I320,Account is conditionally correlated with the phone,Socure 30,Socure3,80
+8361,I320,Account is conditionally correlated with the phone,Socure 30,Socure3,80
+8262,I321,(Deprecated) - Phone number of the account holder is unknown,Socure 30,Socure3,80
+8362,I321,(Deprecated) - Phone number of the account holder is unknown,Socure 30,Socure3,80
+8263,I322,Account is correlated with the EIN,Socure 30,Socure3,80
+8363,I322,Account is correlated with the EIN,Socure 30,Socure3,80
+8264,I323,Account is conditionally correlated with the EIN,Socure 30,Socure3,80
+8364,I323,Account is conditionally correlated with the EIN,Socure 30,Socure3,80
+8265,I324,(Deprecated) - EIN number of the account holder is unknown,Socure 30,Socure3,80
+8365,I324,(Deprecated) - EIN number of the account holder is unknown,Socure 30,Socure3,80
+8761,I325,SSN derived from ID Graph,Socure 30,Socure3,80
+8762,I326,DOB derived from ID Graph,Socure 30,Socure3,80
+10817,I328,Indicates if the account has been seen in the last 15 days,Socure 30,Socure3,80
+10818,I329,Indicates if the account has been seen in the between 15 and 30 days,Socure 30,Socure3,80
+10819,I330,Indicates if the account has been seen in the between 30 and 45 days,Socure 30,Socure3,80
+10820,I331,Indicates if the account has been seen in the between 45 and 60 days,Socure 30,Socure3,80
+10821,I332,Indicates if the account has been seen in the between 60 and 75 days,Socure 30,Socure3,80
+10822,I333,Indicates if the account has been seen in the between 75 and 90 days,Socure 30,Socure3,80
+10823,I334,Indicates if the account has been seen in the between 90 and 120 days,Socure 30,Socure3,80
+10824,I335,Indicates if the account has been seen in the between 120 and 150 days,Socure 30,Socure3,80
+10825,I336,Indicates if the account has been seen in the between 150 and 180 days,Socure 30,Socure3,80
+10826,I337,Indicates if the account has been seen in the between 180 and 210 days,Socure 30,Socure3,80
+10827,I338,Indicates if the account has been seen in the between 210 and 240 days,Socure 30,Socure3,80
+10828,I339,Indicates if the account has been seen in the between 240 and 270 days,Socure 30,Socure3,80
+10829,I340,(Deprecated) - Indicates if the account has been seen over 270 days ago,Socure 30,Socure3,80
+11298,I341,Indicates if the account has been seen in the between 270 and 300 days,Socure 30,Socure3,80
+11299,I342,Indicates if the account has been seen in the between 300 and 365 days,Socure 30,Socure3,80
+11300,I343,Indicates if the account has been seen in the between 365 and 730 days,Socure 30,Socure3,80
+11301,I344,Indicates if the account has been seen over 730 days ago,Socure 30,Socure3,80
+4568,I350,DOB indicates an age between 18 and 20,Socure 30,Socure3,80
+4569,I351,DOB indicates an age of 21 and over,Socure 30,Socure3,80
+2430,I380,(Deprecated) - Document authentic,Socure 30,Socure3,80
+2433,I382,(Deprecated) - Document image quality good,Socure 30,Socure3,80
+2437,I385,(Deprecated) - Image represents an ID,Socure 30,Socure3,80
+4570,I401,Device token previously encountered,Socure 30,Socure3,80
+4571,I402,Multiple users associated with device,Socure 30,Socure3,80
+4572,I403,Identity may not be primary device user,Socure 30,Socure3,80
+4573,I404,Identity associated with primary device owner,Socure 30,Socure3,80
+4574,I405,Device token previously associated with phone number,Socure 30,Socure3,80
+4575,I406,Device token previously associated with email address,Socure 30,Socure3,80
+4576,I407,Device token previously associated with first name,Socure 30,Socure3,80
+4577,I408,Device token previously associated with last name,Socure 30,Socure3,80
+4578,I409,Device token not encountered within the past 5 days,Socure 30,Socure3,80
+4579,I410,Device session is associated with more than 2 phone numbers,Socure 30,Socure3,80
+4580,I411,Device session is associated with more than 2 emails,Socure 30,Socure3,80
+4581,I412,Device session is associated with more than 2 first names,Socure 30,Socure3,80
+4582,I413,Device session is associated with more than 2 last names,Socure 30,Socure3,80
+4583,I414,Session connected using a proxy,Socure 30,Socure3,80
+4584,I415,Session connected using an IP located more than 100 miles from the address,Socure 30,Socure3,80
+4585,I416,Session IP originates from within the United States,Socure 30,Socure3,80
+4586,I417,Session IP originates from outside the United States,Socure 30,Socure3,80
+4587,I419,Session connected using a residential IP address,Socure 30,Socure3,80
+4588,I420,Session connected using a commercial IP address,Socure 30,Socure3,80
+4589,I421,Session connected using a mobile IP address,Socure 30,Socure3,80
+4590,I423,Device is a physical device,Socure 30,Socure3,80
+4732,I424,The device type is a desktop or laptop computer,Socure 30,Socure3,80
+4733,I425,"The device type is mobile, tablet or wearable",Socure 30,Socure3,80
+8548,I428,Mobile network associated with the device is a non-US carrier,Socure 30,Socure3,80
+11839,I429,The IP address associated with the request comes from US or a US territory,Socure 30,Socure3,80
+11840,I430,The IP address associated with the request does not come from US or a US territory,Socure 30,Socure3,80
+11841,I431,The timezone set on the device indicates that the device is in the US,Socure 30,Socure3,80
+2064,I520,Emailrisk score represents low risk,Socure 30,Socure3,80
+4591,I550,Email address is more than 180 days and less than 1 year old,Socure 30,Socure3,80
+4534,I551,Email address is more than 1 year and less than 2 years old,Socure 30,Socure3,80
+2065,I552,(Deprecated) - Email address is between 180 days and 2 years old,Socure 30,Socure3,80
+2066,I553,Email address is more than 2 years old,Socure 30,Socure3,80
+5388,I554,High-confidence match between the email and first name,Socure 30,Socure3,80
+2067,I555,Email address domain is more than 180 days old,Socure 30,Socure3,80
+2068,I556,Email address can be resolved to the individual,Socure 30,Socure3,80
+2988,I557,Email is correlated with the first name,Socure 30,Socure3,80
+2987,I558,Email is correlated with the last name,Socure 30,Socure3,80
+5389,I559,High-confidence match between the email and last name,Socure 30,Socure3,80
+5390,I560,Email address domain represents a Fortune 500 company,Socure 30,Socure3,80
+5391,I561,Email address domain represents a US College/University,Socure 30,Socure3,80
+5392,I562,Email username contains ZIP code of current application,Socure 30,Socure3,80
+5393,I563,"Email address domain contains a special use domain (RFC, arpa, example, invalid, local, onion, etc.)",Socure 30,Socure3,80
+5394,I564,Special characters which are not periods or underscores found in email alias,Socure 30,Socure3,80
+5395,I565,"Email username contains a role-level alias (employees, support, info, postmaster, admin, user, noreply, etc.)",Socure 30,Socure3,80
+5396,I566,Email address provider is found in Public Web Source,Socure 30,Socure3,80
+5397,I567,Email username contains five or more alphabetic sections,Socure 30,Socure3,80
+6908,I568,Email handle contains a name,Socure 30,Socure3,80
+6909,I569,Email handle contains input first name,Socure 30,Socure3,80
+6910,I570,Email handle contains input surname,Socure 30,Socure3,80
+8549,I571,Email top-level domain represents a non-US country,Socure 30,Socure3,80
+8725,I572,Input email sub domain possibly a typo of a popular email domain,Socure 30,Socure3,80
+8726,I573,Input email top level domain possibly a typo of a popular TLD,Socure 30,Socure3,80
+12444,I574,Email domain is private relay,Socure 30,Socure3,80
+8797,I575,Provided email is possible filler email,Socure 30,Socure3,80
+8798,I576,The email handle aligns to the pattern of valid email addresses,Socure 30,Socure3,80
+12445,I577,Email is associated to small businesses,Socure 30,Socure3,80
+12446,I578,Email belongs to a corporate,Socure 30,Socure3,80
+8550,I592,The provided email-handle (per n-gram frequencies in Socure consortium) is consistent with Socure consortium email-handle patterns,Socure 30,Socure3,80
+2069,I601,Phone number is a landline,Socure 30,Socure3,80
+2070,I602,Phone number is a mobile line,Socure 30,Socure3,80
+2071,I605,(Deprecated) - Phone number is a premium-rate line,Socure 30,Socure3,80
+2072,I608,Phone number is commercial or dual-purpose,Socure 30,Socure3,80
+2073,I609,Phone number is consumer or residential,Socure 30,Socure3,80
+3445,I610,Phone number is correlated with the address,Socure 30,Socure3,80
+2074,I611,Phone number is associated with a major carrier,Socure 30,Socure3,80
+2075,I614,Phone number has been in service more than 365 days,Socure 30,Socure3,80
+2076,I616,Phone number is associated with a Mobile Virtual Network Operator,Socure 30,Socure3,80
+2077,I618,Phone number can be resolved to the individual,Socure 30,Socure3,80
+2427,I620,Phonerisk score represents low risk,Socure 30,Socure3,80
+2985,I621,Phone is correlated with the first name,Socure 30,Socure3,80
+2984,I622,Phone is correlated with the last name,Socure 30,Socure3,80
+5398,I623,High-confidence match between the phone and first name,Socure 30,Socure3,80
+5399,I624,High-confidence match between the phone and last name,Socure 30,Socure3,80
+3446,I625,Phone number has never been ported,Socure 30,Socure3,80
+3447,I626,Phone number was ported at least 60 days ago,Socure 30,Socure3,80
+12447,I627,Phone and National ID are linked,Socure 30,Socure3,80
+3448,I630,Phone subscriber has been correlated with the input phone number for more than 365 days,Socure 30,Socure3,80
+4734,I631,IP address is provided by a mobile carrier,Socure 30,Socure3,80
+4735,I632,IP Connection is consumer,Socure 30,Socure3,80
+4736,I633,IP Connection is business,Socure 30,Socure3,80
+4737,I634,Proxy is an educational institution,Socure 30,Socure3,80
+4738,I635,Proxy is registered to a corporation,Socure 30,Socure3,80
+4798,I636,IP address originates from the US or US territories,Socure 30,Socure3,80
+6785,I637,Email address is associated with the input phone number,Socure 30,Socure3,80
+8034,I638,IP proxy is originating from Google or Apple consumer privacy networks,Socure 30,Socure3,80
+8035,I639,IP address is a consumer privacy network proxy,Socure 30,Socure3,80
+8763,I640,Phone number might have been mistyped,Socure 30,Socure3,80
+11842,I641,Presented identity shows high overall correlation in Socures network,Socure 30,Socure3,80
+2078,I704,Address is multi-unit or high rise,Socure 30,Socure3,80
+2079,I705,Address is single unit,Socure 30,Socure3,80
+4592,I706,Address is an accredited college or university,Socure 30,Socure3,80
+2080,I707,Address is residential,Socure 30,Socure3,80
+2081,I708,Address can be resolved to the individual,Socure 30,Socure3,80
+2986,I709,Address is correlated with the first name,Socure 30,Socure3,80
+2983,I710,Address is correlated with the last name,Socure 30,Socure3,80
+4593,I711,Address is confirmed as deliverable,Socure 30,Socure3,80
+4594,I712,"Address is confirmed deliverable by dropping secondary information (apartment, unit, etc.)",Socure 30,Socure3,80
+4595,I713,"Address is confirmed deliverable but was missing secondary information (apartment, unit, etc.)",Socure 30,Socure3,80
+4596,I714,Address is valid but does not currently receive US Postal Service street delivery,Socure 30,Socure3,80
+4597,I715,Address is correlated with a past address,Socure 30,Socure3,80
+5400,I716,Address is a Small Office/Home Office (SOHO),Socure 30,Socure3,80
+5401,I718,High-confidence match between the address and first name,Socure 30,Socure3,80
+5402,I719,High-confidence match between the address and last name,Socure 30,Socure3,80
+2429,I720,Addressrisk score represents low risk,Socure 30,Socure3,80
+6786,I721,Email address is correlated with the input physical address,Socure 30,Socure3,80
+6787,I722,Email address is partially correlated with the input physical address,Socure 30,Socure3,80
+8551,I730,Distance between input address and store address is less than15 miles,Socure 30,Socure3,80
+8552,I731,Distance between input address and store address is between 15 miles and 30 miles,Socure 30,Socure3,80
+8553,I732,Distance between input address and store address is between 30 miles and 60 miles,Socure 30,Socure3,80
+3449,I803,Check Digit Integrity passed,Socure 30,Socure3,80
+3450,I805,(Deprecated) - Image DPI not sufficient for detailed analysis; some tests were not conducted,Socure 30,Socure3,80
+4598,I820,Headshot passes integrity checks,Socure 30,Socure3,80
+3451,I822,First name matches input data,Socure 30,Socure3,80
+3452,I823,Last name matches input data,Socure 30,Socure3,80
+3453,I824,Address matches input data,Socure 30,Socure3,80
+3454,I825,DOB matches input data,Socure 30,Socure3,80
+3455,I826,Document ID information is consistent,Socure 30,Socure3,80
+3456,I831,Bar code data is valid,Socure 30,Socure3,80
+3457,I832,(Deprecated) - ID bar code matches the document data,Socure 30,Socure3,80
+3458,I833,MRZ data is valid,Socure 30,Socure3,80
+3459,I835,Profile image contains one face,Socure 30,Socure3,80
+3460,I836,Profile image matches ID image,Socure 30,Socure3,80
+3461,I838,"Barcode data could not be read, and was not used in document analysis",Socure 30,Socure3,80
+4599,I845,Age meets minimum requirements,Socure 30,Socure3,80
+4600,I849,Incorrect ID type selected,Socure 30,Socure3,80
+4601,I854,The back of the license was not passed; no barcode to extract information,Socure 30,Socure3,80
+6399,I855,First Name matches with a known Nick Name or Alias,Socure 30,Socure3,80
+6400,I856,Liveness was not determined,Socure 30,Socure3,80
+11843,I859,Image validated against past headshots,Socure 30,Socure3,80
+6866,I860,Image correlation was not calculated for alert list,Socure 30,Socure3,80
+13499,I866,AAMVA ran successfully,Socure 30,Socure3,80
+13500,I867,All fields matched AAMVA,Socure 30,Socure3,80
+13501,I868,Jurisdiction or ID Type not supported by AAMVA,Socure 30,Socure3,80
+13502,I869,ID number did match AAMVA,Socure 30,Socure3,80
+13503,I870,DOB did match AAMVA,Socure 30,Socure3,80
+13504,I871,Last Name exact did match AAMVA,Socure 30,Socure3,80
+13505,I872,Last name fuzzy did match AAMVA,Socure 30,Socure3,80
+13506,I873,Last name fuzzy alternate did match AAMVA,Socure 30,Socure3,80
+13507,I874,First name exact did match AAMVA,Socure 30,Socure3,80
+13508,I875,First name fuzzy did match AAMVA,Socure 30,Socure3,80
+13509,I876,First name fuzzy alternate did match AAMVA,Socure 30,Socure3,80
+13510,I877,Middle name exact did match AAMVA,Socure 30,Socure3,80
+13511,I878,Middle fuzzy did match AAMVA,Socure 30,Socure3,80
+13512,I879,Middle fuzzy alternate did match AAMVA,Socure 30,Socure3,80
+13513,I880,Middle initial did match AAMVA,Socure 30,Socure3,80
+13514,I881,Name suffix did match AAMVA,Socure 30,Socure3,80
+13515,I882,Doc Category did match AAMVA,Socure 30,Socure3,80
+13516,I883,Issue date did match AAMVA,Socure 30,Socure3,80
+13517,I884,Expiration did match AAMVA,Socure 30,Socure3,80
+13518,I885,Sex did match AAMVA,Socure 30,Socure3,80
+13519,I886,Height did match AAMVA,Socure 30,Socure3,80
+13520,I887,Weight did match AAMVA,Socure 30,Socure3,80
+13521,I888,Eye color did match AAMVA,Socure 30,Socure3,80
+13522,I889,Address 1 did match AAMVA,Socure 30,Socure3,80
+13523,I890,Address 2 did match AAMVA,Socure 30,Socure3,80
+13524,I891,Address city did match AAMVA,Socure 30,Socure3,80
+13525,I892,Address state did match AAMVA,Socure 30,Socure3,80
+13526,I893,Address zip 5 did match AAMVA,Socure 30,Socure3,80
+13527,I894,Address zip 4 did match AAMVA,Socure 30,Socure3,80
+2082,I901,(Deprecated) - Entered phone number is mobile number,Socure 30,Socure3,80
+2083,I902,(Deprecated) - Entered name missing,Socure 30,Socure3,80
+2084,I903,Address was not provided at input,Socure 30,Socure3,80
+2085,I904,SSN/ITIN was not provided at input,Socure 30,Socure3,80
+2086,I905,SSN/ITIN provided at input contained only 4 digits,Socure 30,Socure3,80
+2087,I906,DOB was not provided at input,Socure 30,Socure3,80
+2088,I907,SSN is issued to a non-US citizen,Socure 30,Socure3,80
+2089,I908,Address is correlated with a military ZIP code,Socure 30,Socure3,80
+2090,I909,First name and last name are possibly reversed,Socure 30,Socure3,80
+2091,I910,Address is correlated with a past address,Socure 30,Socure3,80
+2092,I911,Address is a PO Box,Socure 30,Socure3,80
+2093,I912,SSN was randomly-issued by the SSA,Socure 30,Socure3,80
+2094,I913,SSN has not been reported as deceased,Socure 30,Socure3,80
+2095,I914,Identity has not been reported as deceased,Socure 30,Socure3,80
+2096,I915,Identity has PO Box is dropped in resolved address,Socure 30,Socure3,80
+2097,I916,"(Deprecated) - First name, surname, address and phone match KYC data from NAP correlation analysis",Socure 30,Socure3,80
+2098,I917,Full name and address can be resolved to the individual but the SSN/ITIN is not,Socure 30,Socure3,80
+2099,I918,"First name, surname and SSN match KYC data from NAS correlation analysis",Socure 30,Socure3,80
+2100,I919,"Full name, address, and SSN/ITIN can be resolved to the individual",Socure 30,Socure3,80
+2101,I920,Emerging identity indicator,Socure 30,Socure3,80
+3462,I921,Address is an accredited college or university,Socure 30,Socure3,80
+11844,I922,Mobile number was not provided at input,Socure 30,Socure3,80
+11845,I923,Email address was not provided at input,Socure 30,Socure3,80
+13528,I924,SSN/ITIN missing at input but available on record,Socure 30,Socure3,80
+4799,I930,The name and DOB of the identity matches a notable personality/celebrity,Socure 30,Socure3,80
+5403,I931,First name or last name may refer to a non-person entity,Socure 30,Socure3,80
+9285,I932,The name and DOB of the identity matches an active notable individual in the sports industry,Socure 30,Socure3,80
+11846,I933,Multi-party application detected,Socure 30,Socure3,80
+11847,I934,The name and DOB of the identity matches an individual formerly in the sports industry,Socure 30,Socure3,80
+4602,I975,Non-MLA covered borrower status,Socure 30,Socure3,80
+13529,I990,Either emergent address or recent move,Socure 30,Socure3,80
+13600,I992,Name verified by the SSA,Socure 30,Socure3,80
+13601,I993,SSN verified by the SSA,Socure 30,Socure3,80
+13602,I994,DOB verified by the SSA,Socure 30,Socure3,80
+4603,I998,"Name, SSN and DOB correlation verified by SSA",Socure 30,Socure3,80
+4604,I999,Identity decease unverified by SSA,Socure 30,Socure3,80
+6708,nameEquivalent,Name match based on the same name meaning,Socure 30,Socure3,80
+6677,nameEquivalent-dobExact,"Name match based on the same name meaning, exact DOB match",Socure 30,Socure3,80
+6678,nameEquivalent-dobFuzzy,"Name match based on the same name meaning, fuzzy DOB match",Socure 30,Socure3,80
+6679,nameEquivalent-dobNoMatch,"Name match based on the same name meaning, DOB does not match the input DOB",Socure 30,Socure3,80
+6680,nameEquivalent-dobNotOnRecord,"Name match based on the same name meaning, source did not return a DOB",Socure 30,Socure3,80
+6705,nameExact,Exact name match,Socure 30,Socure3,80
+6665,nameExact-dobExact,"Exact name match, exact DOB match",Socure 30,Socure3,80
+6666,nameExact-dobFuzzy,"Exact name match, fuzzy DOB match",Socure 30,Socure3,80
+6667,nameExact-dobNoMatch,"Exact name match, DOB does not match the input DOB",Socure 30,Socure3,80
+6668,nameExact-dobNotOnRecord,"Exact name match, source did not return a DOB",Socure 30,Socure3,80
+6707,nameFuzzy,Fuzzy name match,Socure 30,Socure3,80
+6673,nameFuzzy-dobExact,"Fuzzy name match, exact DOB match",Socure 30,Socure3,80
+6674,nameFuzzy-dobFuzzy,"Fuzzy name match, fuzzy DOB match",Socure 30,Socure3,80
+6675,nameFuzzy-dobNoMatch,"Fuzzy name match, DOB does not match the input DOB",Socure 30,Socure3,80
+6676,nameFuzzy-dobNotOnRecord,"Fuzzy name match, source did not return a DOB",Socure 30,Socure3,80
+6710,nameInitialized,Name match based on initials,Socure 30,Socure3,80
+6685,nameInitialized-dobExact,"Name match based on initials, exact DOB match",Socure 30,Socure3,80
+6686,nameInitialized-dobFuzzy,"Name match based on initials, fuzzy DOB match",Socure 30,Socure3,80
+6687,nameInitialized-dobNoMatch,"Name match based on initials, DOB does not match the input DOB",Socure 30,Socure3,80
+6688,nameInitialized-dobNotOnRecord,"Name match based on initials, source did not return a DOB",Socure 30,Socure3,80
+6711,namePhonetic,Name match based on phonetic similarity,Socure 30,Socure3,80
+6689,namePhonetic-dobExact,"Name match based on phonetic similarity, exact DOB match",Socure 30,Socure3,80
+6690,namePhonetic-dobFuzzy,"Name match based on phonetic similarity, fuzzy DOB match",Socure 30,Socure3,80
+6691,namePhonetic-dobNoMatch,"Name match based on phonetic similarity, DOB does not match the input DOB",Socure 30,Socure3,80
+6692,namePhonetic-dobNotOnRecord,"Name match based on phonetic similarity, source did not return a DOB",Socure 30,Socure3,80
+10830,R1001,Found at least 2 distinct DOBs associated with the given identity,Socure 30,Socure3,80
+10831,R1002,Found at least 4 distinct first names associated with the given identity,Socure 30,Socure3,80
+10832,R1003,Found at least 4 distinct last names associated with the given identity,Socure 30,Socure3,80
+10833,R1004,Found at least 3 distinct phone numbers associated with the given identity,Socure 30,Socure3,80
+10834,R1005,Found at least 3 distinct emails associated with the given identity,Socure 30,Socure3,80
+10835,R1006,Found at least 1 application marked as fraudulent associated with the given identity,Socure 30,Socure3,80
+10836,R1007,Found at least 1 application marked as third party fraud associated with the given identity,Socure 30,Socure3,80
+10837,R1008,Found at least 2 applications within 30 days of each other associated with the given identity,Socure 30,Socure3,80
+10838,R1009,Found at least 2 applications within 90 days of each other associated with the given identity,Socure 30,Socure3,80
+10839,R1010,Found at least 1 account marked as fraudulent associated with the given identity,Socure 30,Socure3,80
+10840,R1011,Found at least 1 account marked as suspected Third-Party Fraud associated with the given identity,Socure 30,Socure3,80
+10841,R1012,Found at least 1 account marked as suspected First-Party Fraud associated with the given identity,Socure 30,Socure3,80
+10842,R1013,Found at least 1 account marked as Other Fraud associated with the given identity,Socure 30,Socure3,80
+10843,R1014,Found at least 1 account marked as Delinquency associated with the given identity,Socure 30,Socure3,80
+10844,R1015,Found at least 1 closed account associated with the given identity,Socure 30,Socure3,80
+10845,R1016,Found at least 5 closed accounts associated with the given identity,Socure 30,Socure3,80
+10846,R1017,Found at least 2 accounts that were opened within 30 days from each other associated with the given identity,Socure 30,Socure3,80
+10847,R1018,Found at least 2 accounts that were opened within 90 days from each other associated with the given identity,Socure 30,Socure3,80
+10848,R1019,Found at least 2 accounts that were closed within 30 days from each other associated with the given identity,Socure 30,Socure3,80
+10849,R1020,Found at least 2 accounts that were reported as Fraud within 30 days from each other associated with the given identity,Socure 30,Socure3,80
+10850,R1021,Found at least 1 account that has been closed within 30 days from opening associated with the given identity,Socure 30,Socure3,80
+10851,R1022,Found at least 1 account that has been reported as Fraud within 30 days from opening associated with the given identity,Socure 30,Socure3,80
+10852,R1023,Found at least 1 ACH transaction reported as Fraud associated with the given identity,Socure 30,Socure3,80
+10853,R1024,Found at least 1 ACH transaction reported as Suspected Third-Party Fraud associated with the given identity,Socure 30,Socure3,80
+10854,R1025,Found at least 1 ACH transaction reported as Suspected First-Party Fraud associated with the given identity,Socure 30,Socure3,80
+10855,R1026,Found at least 1 ACH transaction reported as Other Fraud associated with the given identity,Socure 30,Socure3,80
+10856,R1027,Found at least 1 ACH transaction reported as Delinquency associated with the given identity,Socure 30,Socure3,80
+10857,R1028,Found at least 10 returned ACH transactions associated with the given identity,Socure 30,Socure3,80
+10858,R1029,Found at least 1 returned ACH transaction with return category Fraudulent Behavior associated with the given identity,Socure 30,Socure3,80
+10859,R1030,Found at least 1 ACH transaction reported as Fraud within 7 days from one another associated with the given identity,Socure 30,Socure3,80
+10860,R1031,Found at least 1 ACH transaction reported as Fraud which was committed within 7 days from account opening associated with the given identity,Socure 30,Socure3,80
+10861,R1032,Found at least 1 ACH transaction reported as Fraud which was committed within 30 days from account opening associated with the given identity,Socure 30,Socure3,80
+10862,R1033,Found at least 1 Check transaction reported as Fraud associated with the given identity,Socure 30,Socure3,80
+10863,R1034,Found at least 1 Check transaction reported as Suspected Third-Party Fraud associated with the given identity,Socure 30,Socure3,80
+10864,R1035,Found at least 1 Check transaction reported as Suspected First-Party Fraud associated with the given identity,Socure 30,Socure3,80
+10865,R1036,Found at least 1 Check transaction reported as Other Fraud associated with the given identity,Socure 30,Socure3,80
+10866,R1037,Found at least 1 Check transaction reported as Delinquency associated with the given identity,Socure 30,Socure3,80
+10867,R1038,Found at least 1 returned Check transaction with a return category Fraudulent Behavior associated with the given identity,Socure 30,Socure3,80
+10868,R1039,Found at least 2 check transactions reported as Fraud within 7 days from one another associated with the given identity,Socure 30,Socure3,80
+10869,R1040,Found at least 2 check transactions reported as Fraud within 30 days from one another associated with the given identity,Socure 30,Socure3,80
+10870,R1041,Found at least 1 Check transaction reported as Fraud which was committed within 7 days from account opening associated with the given identity,Socure 30,Socure3,80
+10871,R1042,Found at least 1 Check transaction reported as Fraud which was committed within 30 days from account opening associated with the given identity,Socure 30,Socure3,80
+10872,R1043,Found at least 10 disputed Card transactions associated with the given identity,Socure 30,Socure3,80
+10873,R1044,Found at least 20 disputed Card transactions associated with the given identity,Socure 30,Socure3,80
+10874,R1045,Found at least 5 Unauthorized disputed Card transactions associated with the given identity,Socure 30,Socure3,80
+10875,R1046,Found at least 5 Authorized disputed Card transactions associated with the given identity,Socure 30,Socure3,80
+10876,R1047,Found at least 5 Granted disputed Card transactions associated with the given identity,Socure 30,Socure3,80
+10877,R1048,Found at least 10 Granted disputed Card transactions associated with the given identity,Socure 30,Socure3,80
+10878,R1049,Found at least 2 disputed Card transactions within 1 day from one another associated with the given identity,Socure 30,Socure3,80
+10879,R1050,Found at least 2 disputed Card transactions within 7 days from one another associated with the given identity,Socure 30,Socure3,80
+10880,R1051,Found at least 1 disputed Card transaction committed within 1 day from account opening associated with the given identity,Socure 30,Socure3,80
+10881,R1052,Found at least 1 disputed Card transaction committed within 7 days from account opening associated with the given identity,Socure 30,Socure3,80
+12448,R1053,Found at least 7 distinct emails associated with the given fullname and date of birth combination,Socure 30,Socure3,80
+12449,R1054,Found at least 7 distinct phones associated with the given identity,Socure 30,Socure3,80
+12450,R1055,Matched identity onto at least 17 other transaction consortium institutions,Socure 30,Socure3,80
+12451,R1056,Matched Fullname and date of birth combination onto at least 16 other transaction consortium institutions,Socure 30,Socure3,80
+12452,R1057,"Matched Fullname, date of birth and SSN combination onto at least 10 other transaction consortium institutions",Socure 30,Socure3,80
+12453,R1058,Found at least 4 distinct emails associated with the given identity,Socure 30,Socure3,80
+12454,R1059,Found at least 3 to 6 distinct emails associated with the given fullname and date of birth combination,Socure 30,Socure3,80
+2102,R106,Identity element in Alert List,Socure 30,Socure3,80
+12455,R1060,Seen input phone number in at least 10 other transaction consortium institutions,Socure 30,Socure3,80
+12456,R1061,Seen input phone number with in at least 4 distinct emails in transaction consortium,Socure 30,Socure3,80
+12457,R1062,Found at least 1 fraud event reported for the input identity,Socure 30,Socure3,80
+3379,R110,Alert List email address match,Socure 30,Socure3,80
+3380,R111,Alert List SSN/ITIN match,Socure 30,Socure3,80
+3381,R112,(Deprecated) - IP Address on Alert List,Socure 30,Socure3,80
+3382,R113,Alert List phone number match,Socure 30,Socure3,80
+2103,R128,(Deprecated) - Social accounts history insufficient,Socure 30,Socure3,80
+2104,R129,(Deprecated) - Social accounts connections unnatural,Socure 30,Socure3,80
+2105,R130,(Deprecated) - Social accounts activity unnatural,Socure 30,Socure3,80
+2106,R131,(Deprecated) - Social accounts unmaintained,Socure 30,Socure3,80
+11302,R140,Email address tagged as negative,Socure 30,Socure3,80
+11303,R141,Email domain tagged as negative,Socure 30,Socure3,80
+11304,R142,Phone number tagged as negative,Socure 30,Socure3,80
+11305,R143,IP Address tagged as negative,Socure 30,Socure3,80
+11306,R144,Full name tagged as negative,Socure 30,Socure3,80
+11307,R145,SSN tagged as negative,Socure 30,Socure3,80
+11308,R146,Device tagged as negative,Socure 30,Socure3,80
+11848,R150,Unable to call Negative/Positive service,Socure 30,Socure3,80
+11309,R160,Email address tagged as suspect,Socure 30,Socure3,80
+11310,R161,Email domain tagged as suspect,Socure 30,Socure3,80
+11311,R162,Phone number tagged as suspect,Socure 30,Socure3,80
+11312,R163,IP Address tagged as suspect,Socure 30,Socure3,80
+11313,R164,Full name tagged as suspect,Socure 30,Socure3,80
+11314,R165,SSN tagged as suspect,Socure 30,Socure3,80
+11315,R166,Device tagged as suspect,Socure 30,Socure3,80
+11316,R170,IP address originates from an OFAC sanctioned country,Socure 30,Socure3,80
+11317,R171,Phone number is from an OFAC sanctioned country,Socure 30,Socure3,80
+11318,R172,Email is from an OFAC sanctioned country,Socure 30,Socure3,80
+13603,R173,National ID is from an OFAC sanctioned country,Socure 30,Socure3,80
+6747,R180,Entity has at least 1 match on an OFAC SDN watchlist,Socure 30,Socure3,80
+6748,R181,Entity has at least one match on an OFAC Non-SDN watchlist,Socure 30,Socure3,80
+6749,R182,Entity has at least 1 match on a sanctions watchlist,Socure 30,Socure3,80
+6750,R183,Entity has at least 1 match on an enforcement list,Socure 30,Socure3,80
+6751,R184,Entity has at least 1 hit on a politically exposed person list,Socure 30,Socure3,80
+6752,R185,Entity has at least 1 hit on an adverse media article,Socure 30,Socure3,80
+2107,R186,Entity matched selected watchlists,Socure 30,Socure3,80
+4605,R187,Address resolves to a High-Intensity Drug Trafficking Area,Socure 30,Socure3,80
+4606,R188,Address resolves to a High-Intensity Financial Crime Area,Socure 30,Socure3,80
+8554,R189,Entity has at least 1 match on a custom watchlist,Socure 30,Socure3,80
+12458,R190,Email has at least 1 match on a sanctions watchlist,Socure 30,Socure3,80
+12459,R191,Phone number has at least 1 match on a sanctions watchlist,Socure 30,Socure3,80
+13604,R192,Crypto Handle has at least 1 match on a sanctions list,Socure 30,Socure3,80
+13605,R193,Routing number has at least 1 match on a sanctions list,Socure 30,Socure3,80
+13606,R194,Account number has at least 1 match on a sanctions list,Socure 30,Socure3,80
+12460,R195,National ID has at least 1 match on a sanctions list,Socure 30,Socure3,80
+6401,R201,Input National ID is invalid,Socure 30,Socure3,80
+6402,R202,The input SSN is reported as deceased,Socure 30,Socure3,80
+6403,R203,Multiple identities are associated with input National ID,Socure 30,Socure3,80
+6404,R204,Input National ID is associated with multiple last names,Socure 30,Socure3,80
+6405,R205,Input National ID is associated with a different name and address,Socure 30,Socure3,80
+6406,R206,Input National ID was issued prior to the input date-of-birth,Socure 30,Socure3,80
+6407,R207,Input National ID is associated with multiple DOBs,Socure 30,Socure3,80
+6408,R208,SSN/ITIN is associated with multiple addresses,Socure 30,Socure3,80
+6409,R209,No former addresses associated with the National ID,Socure 30,Socure3,80
+6867,R210,Frequency of SSN in Socure records is unusually high,Socure 30,Socure3,80
+6868,R211,SSN seen in frozen credit files,Socure 30,Socure3,80
+6911,R212,Input last name is not associated with the National ID,Socure 30,Socure3,80
+6912,R213,Name does not correlate with the name for the resolved individual,Socure 30,Socure3,80
+6913,R214,Input National ID is not found in best-matched identity,Socure 30,Socure3,80
+6914,R215,First name is not associated with the National ID,Socure 30,Socure3,80
+6915,R216,Input DOB is not found in best-matched identity,Socure 30,Socure3,80
+6916,R217,SSN was randomly-issued by the SSA,Socure 30,Socure3,80
+6917,R218,Input National ID is not the primary National ID for the resolved identity,Socure 30,Socure3,80
+6918,R219,Input National ID is not found in public records,Socure 30,Socure3,80
+6963,R220,Issue date for the provided SSN could not be resolved,Socure 30,Socure3,80
+6964,R221,National ID associated with input phone number could not be confirmed,Socure 30,Socure3,80
+6965,R222,Input SSN could not be confirmed,Socure 30,Socure3,80
+6966,R223,Input National ID did not match any of the National IDs associated with the input phone number in the last two years,Socure 30,Socure3,80
+6967,R224,4 or more different National IDs have been found to be inquired against the input phone,Socure 30,Socure3,80
+6968,R225,4 or more different first names have been found to be inquired against the input National ID,Socure 30,Socure3,80
+6969,R226,Multiple phones are marked current for the input National ID,Socure 30,Socure3,80
+6970,R227,National ID is found to be inquired at an unusually high frequency (more than once a month),Socure 30,Socure3,80
+6971,R228,Only 1 component of the input DOB matches the best matched entity,Socure 30,Socure3,80
+6972,R229,Only 2 components of the input DOB matches the best matched entity,Socure 30,Socure3,80
+6973,R230,National ID was first seen in credit header records within the last 1 year,Socure 30,Socure3,80
+6974,R231,National ID was first seen in credit header records between 1 to 3 years ago,Socure 30,Socure3,80
+6975,R232,National ID was first seen in credit header records between 3 to 5 years ago,Socure 30,Socure3,80
+6976,R233,No National ID found in credit header records for the given full name and DOB,Socure 30,Socure3,80
+6977,R234,National IDs in credit header data associated with full name and DOB differ from input National ID by 1 digit,Socure 30,Socure3,80
+6978,R235,Input full name could not be fuzzy-matched with full names associated with SSN in header and inquiry records,Socure 30,Socure3,80
+6979,R236,Input DOB month does not match any DOB month found on inquiry records,Socure 30,Socure3,80
+6980,R237,Input National ID is not an exact match to the National IDs associated with the given full name and DOB,Socure 30,Socure3,80
+6981,R238,National IDs in credit header data associated with full name and DOB differ from input National ID by up to 2 digits,Socure 30,Socure3,80
+6982,R239,National IDs in credit header data associated with full name and DOB differ from input National ID by up to 3 digits,Socure 30,Socure3,80
+9074,R240,Input SSN was issued more than 2 years after the resolved birth year,Socure 30,Socure3,80
+13530,R241,Input National ID seems to have a 2-digit error,Socure 30,Socure3,80
+13531,R242,Input National ID seems to be off by more than 2 digits from the individuals National ID,Socure 30,Socure3,80
+13532,R243,Individual seems to be changing their date of birth to appear 18 or older,Socure 30,Socure3,80
+13533,R244,Individual seems to be changing their date of birth to appear 21 or older,Socure 30,Socure3,80
+6983,R298,Identity resembles a manipulated Synthetic identity,Socure 30,Socure3,80
+6984,R299,Identity resembles a fabricated Synthetic identity,Socure 30,Socure3,80
+8266,R301,Account is not correlated with the first name,Socure 30,Socure3,80
+8366,R301,Account is not correlated with the first name,Socure 30,Socure3,80
+8267,R302,Account is not correlated with the last name,Socure 30,Socure3,80
+8367,R302,Account is not correlated with the last name,Socure 30,Socure3,80
+8268,R303,Account is not correlated with the business name,Socure 30,Socure3,80
+8368,R303,Account is not correlated with the business name,Socure 30,Socure3,80
+8269,R304,Account is not correlated with the DOB,Socure 30,Socure3,80
+8369,R304,Account is not correlated with the DOB,Socure 30,Socure3,80
+8270,R305,Account is not correlated with the SSN,Socure 30,Socure3,80
+8370,R305,Account is not correlated with the SSN,Socure 30,Socure3,80
+8271,R306,Account is not correlated with the address,Socure 30,Socure3,80
+8371,R306,Account is not correlated with the address,Socure 30,Socure3,80
+8272,R307,Account is not correlated with the phone,Socure 30,Socure3,80
+8372,R307,Account is not correlated with the phone,Socure 30,Socure3,80
+8273,R308,Account is not correlated with the EIN,Socure 30,Socure3,80
+8373,R308,Account is not correlated with the EIN,Socure 30,Socure3,80
+8274,R309,Provided routing number is invalid,Socure 30,Socure3,80
+8374,R309,Provided routing number is invalid,Socure 30,Socure3,80
+8275,R310,Provided account number is invalid,Socure 30,Socure3,80
+8375,R310,Provided account number is invalid,Socure 30,Socure3,80
+8727,R311,Account warning,Socure 30,Socure3,80
+8728,R312,Account information is not available,Socure 30,Socure3,80
+8764,R313,Account structure issue,Socure 30,Socure3,80
+10882,R314,Deceased signal from ID Graph,Socure 30,Socure3,80
+10883,R315,Elevated account return risk,Socure 30,Socure3,80
+13607,R316,Primary Failure Indicator,Socure 30,Socure3,80
+13608,R317,Account Closed Indicator,Socure 30,Socure3,80
+13609,R318,Account Blocked Indicator,Socure 30,Socure3,80
+13610,R319,Invalid Account Number Indicator,Socure 30,Socure3,80
+2108,R350,DOB indicates individual is less than 16 or more than 100 years old,Socure 30,Socure3,80
+4607,R351,DOB indicates COPPA review,Socure 30,Socure3,80
+4608,R352,DOB indicates an age between 13 and 15,Socure 30,Socure3,80
+4609,R353,DOB indicates an age between 16 and 17,Socure 30,Socure3,80
+4610,R355,(Deprecated) - DOB indicates an improbable age,Socure 30,Socure3,80
+2431,R380,(Deprecated) - Document forged,Socure 30,Socure3,80
+2432,R381,(Deprecated) - Document verification inconclusive,Socure 30,Socure3,80
+2434,R382,(Deprecated) - Document image quality bad,Socure 30,Socure3,80
+2435,R383,(Deprecated) - Document image quality unassessable,Socure 30,Socure3,80
+2436,R384,(Deprecated) - Document expired,Socure 30,Socure3,80
+2438,R385,(Deprecated) - Image does not represent an ID,Socure 30,Socure3,80
+4739,R401,Device token was not previously encountered,Socure 30,Socure3,80
+4740,R402,Invalid device token,Socure 30,Socure3,80
+4611,R403,Device is a virtual device,Socure 30,Socure3,80
+5404,R405,"The Device Risk module was called, but a device token was not provided",Socure 30,Socure3,80
+6410,R406,Device risk score represents high risk,Socure 30,Socure3,80
+8555,R408,Associated device is likely to be an emulator,Socure 30,Socure3,80
+8556,R409,Associated device is connected to mobile network which are historically risky,Socure 30,Socure3,80
+8557,R410,Transaction may not be from primary user associated with the device and looks risky,Socure 30,Socure3,80
+11849,R411,The device has an uncommon language set for North America,Socure 30,Socure3,80
+11850,R412,The IP the request was made from does not match the devices IP address,Socure 30,Socure3,80
+11851,R413,The devices IP address more than 3 timezones away from the IP the request is made from,Socure 30,Socure3,80
+12461,R414,Device operating system is running an uncommon/old version,Socure 30,Socure3,80
+2425,R520,Emailrisk score represents high risk,Socure 30,Socure3,80
+2109,R551,Email address is invalid,Socure 30,Socure3,80
+2110,R557,Email address is disposable,Socure 30,Socure3,80
+2111,R558,(Deprecated) - Email address is auto-generated,Socure 30,Socure3,80
+2112,R559,Email address cannot be resolved to the individual,Socure 30,Socure3,80
+5405,R560,Majority of the characters in the input email are numbers,Socure 30,Socure3,80
+2113,R561,Email address is less than 180 days old,Socure 30,Socure3,80
+2114,R562,Email address domain is less than 180 days old,Socure 30,Socure3,80
+2115,R563,Email address domain is invalid,Socure 30,Socure3,80
+2116,R564,Email address username is invalid,Socure 30,Socure3,80
+3463,R565,Email address domain represents high risk,Socure 30,Socure3,80
+3464,R566,Email address has not been seen before,Socure 30,Socure3,80
+3465,R567,Email address top-level domain represents high risk,Socure 30,Socure3,80
+5406,R568,Email username appears to be scrambled,Socure 30,Socure3,80
+5407,R569,Email string is unusually long,Socure 30,Socure3,80
+6788,R571,Low activity observed on the email address in the last 180 days,Socure 30,Socure3,80
+6869,R572,Email associated with more than 2 phone numbers in the last 2 years,Socure 30,Socure3,80
+6919,R573,The email handle contains patterns of characters that exhibit an unusually low frequency of occurrences,Socure 30,Socure3,80
+6920,R574,Email handle is composed of more than 50% duplicate characters,Socure 30,Socure3,80
+8558,R575,High probability of tumbling activity in input email,Socure 30,Socure3,80
+8559,R576,Email with gmail.com domain has an alias ,Socure 30,Socure3,80
+8560,R577,Email handle has an abnormal number pattern,Socure 30,Socure3,80
+8561,R578,Email handle has an abnormal special character pattern,Socure 30,Socure3,80
+8799,R579,The email handle is not consistent with Socures consortium email-handle patterns,Socure 30,Socure3,80
+8800,R580,The email handle exhibits abnormal input behavior,Socure 30,Socure3,80
+8801,R581,The domain appears to occur far more frequently than usual based on our consortium data,Socure 30,Socure3,80
+11319,R582,Email is first seen under 30 days,Socure 30,Socure3,80
+11320,R583,Email is first seen between 30 to 60 days,Socure 30,Socure3,80
+11321,R584,Email is first seen between 60 to 90 days,Socure 30,Socure3,80
+11322,R585,Email is first seen between 90 to 180 days,Socure 30,Socure3,80
+12462,R586,Email originates from a OFAC sanctioned country,Socure 30,Socure3,80
+12463,R587,Email is a possible fake email,Socure 30,Socure3,80
+12464,R588,Email is a possible distribution list,Socure 30,Socure3,80
+8562,R593,The provided email-handle (per n-gram frequencies in Socure consortium) is uncommon with Socure consortium email-handle patterns,Socure 30,Socure3,80
+8563,R594,The provided email-handle has a high raw type distance (per Qwerty keyboard positions),Socure 30,Socure3,80
+8564,R595,The domain provided appears 30% more on average in the last 1 day as compared to the last 30 days,Socure 30,Socure3,80
+8565,R596,"For account, the daily average of the proportion of the provided email domain is less than 1% (30 days)",Socure 30,Socure3,80
+8566,R597,"For account, the daily average of the proportion of the provided email domains between 1% and 4% (30 days)",Socure 30,Socure3,80
+2117,R601,Phone number associated address is not correlated with the input address,Socure 30,Socure3,80
+2118,R602,Phone number associated address is not correlated with the input country,Socure 30,Socure3,80
+2119,R603,Phone number is invalid,Socure 30,Socure3,80
+2120,R604,Phone number has not been actively used within the past 90 days,Socure 30,Socure3,80
+2121,R605,Phone number has not been actively used for more than 90 days,Socure 30,Socure3,80
+2122,R606,There has been minimal activity associated with the phone number,Socure 30,Socure3,80
+2123,R607,Phone number associated address is partially correlated with the input address,Socure 30,Socure3,80
+2124,R608,Phone number cannot be resolved to the individual,Socure 30,Socure3,80
+2125,R610,IP address geolocation places user more than 100 miles from address,Socure 30,Socure3,80
+2126,R611,Phone number is not allowed for consumers,Socure 30,Socure3,80
+2127,R613,Phone number is fixed or traditional VoIP,Socure 30,Socure3,80
+2128,R614,Phone number is toll-free,Socure 30,Socure3,80
+2129,R615,Phone number is non-fixed or over-the-top VoIP,Socure 30,Socure3,80
+2130,R616,Phone number is prepaid,Socure 30,Socure3,80
+2131,R617,Phone number is not associated with a major carrier,Socure 30,Socure3,80
+2132,R618,Phone number has been in service between 90 and 365 days,Socure 30,Socure3,80
+2133,R619,IP address is a known proxy,Socure 30,Socure3,80
+2426,R620,Phonerisk score represents high risk,Socure 30,Socure3,80
+3466,R621,(Deprecated) - Phone number has been in service less than 7 days,Socure 30,Socure3,80
+3467,R622,Phone number has been in service for less than 30 days,Socure 30,Socure3,80
+3468,R623,Phone number has been in service between 30 and 90 days,Socure 30,Socure3,80
+3469,R624,(Deprecated) - Phone number has been changed more than once in the past 90 days,Socure 30,Socure3,80
+3470,R625,Phone number has ported within the past 24 hours,Socure 30,Socure3,80
+3471,R626,Phone number has been ported within the past 2 to 7 days,Socure 30,Socure3,80
+3472,R627,Phone number has been ported within the past 7 to 30 days,Socure 30,Socure3,80
+3473,R628,Phone number has been ported within the past 30 to 60 days,Socure 30,Socure3,80
+3474,R629,(Deprecated) - Phone number has been ported more than once in past 90 days,Socure 30,Socure3,80
+3475,R630,(Deprecated) - Phone subscriber has been correlated with the input phone number for less than 7 days,Socure 30,Socure3,80
+3476,R631,Phone subscriber has been correlated with the input phone number for between 0 and 30 days,Socure 30,Socure3,80
+3477,R632,Phone subscriber has been correlated with the input phone number for between 30 and 90 days,Socure 30,Socure3,80
+3478,R633,Phone subscriber has been correlated with the input phone number for between 90 and 365 days,Socure 30,Socure3,80
+13534,R634,Phone number has been ported within the past 48 hours,Socure 30,Socure3,80
+3479,R635,(Deprecated) - The device has changed once within the past 7 days and at least once more within the past 90 days,Socure 30,Socure3,80
+3480,R636,(Deprecated) - Mobile device tenure is less than 90 days,Socure 30,Socure3,80
+3481,R637,(Deprecated) - Mobile SIM tenure is less than 90 days,Socure 30,Socure3,80
+4741,R638,IP address originates from the US or US territories,Socure 30,Socure3,80
+4742,R639,IP address originates from outside of the US or US territories,Socure 30,Socure3,80
+4743,R640,IP address is from an OFAC sanctioned country,Socure 30,Socure3,80
+4744,R641,"Proxy is from services that change location to beat DRM,TOR points, temporary proxies and other masking services",Socure 30,Socure3,80
+4745,R642,IP address is associated with a cloud hosting provider and is likely a proxy. Users are not usually located in a hosting facility,Socure 30,Socure3,80
+4746,R643,IP address is associated with a location allowing public internet access,Socure 30,Socure3,80
+4747,R644,IP proxy is cloud-based,Socure 30,Socure3,80
+4748,R645,IP proxy is TOR-based,Socure 30,Socure3,80
+4749,R646,IP proxy is VPN-based,Socure 30,Socure3,80
+4750,R647,IP proxy is cloud-security-based,Socure 30,Socure3,80
+6789,R648,Phone number has had a name change in the last 3 days,Socure 30,Socure3,80
+8036,R650,IP address is associated with an anonymizing proxy,Socure 30,Socure3,80
+8037,R652,IP address is associated with spam activity,Socure 30,Socure3,80
+8038,R653,IP address origin and usage indicates non-human traffic,Socure 30,Socure3,80
+6870,R654,Phone number seen in frozen credit files,Socure 30,Socure3,80
+6871,R655,Phone number was first seen less than 50 days ago as per Socure consortium network,Socure 30,Socure3,80
+6872,R656,Phone number seen in credit files flagged as having initial fraud alerts,Socure 30,Socure3,80
+6873,R657,Input Surname has not been used with the phone number in the last 2 years based on the Socure network,Socure 30,Socure3,80
+6874,R658,Input surname has not been primarily used with the phone number for more than 2 years,Socure 30,Socure3,80
+6921,R659,Phone number has been associated with more than two email addresses in the last 60 days as per Socure consortium network,Socure 30,Socure3,80
+6922,R660,Two or more addresses are marked as current in the phone public records,Socure 30,Socure3,80
+6923,R661,No inquiry is found against this phone number,Socure 30,Socure3,80
+6924,R662,The phone number was first seen less than sixty days ago within Socure network,Socure 30,Socure3,80
+8658,R663,IP address geolocation places user more than 300 miles from address,Socure 30,Socure3,80
+11852,R664,Phone number and national ID show low correlation in Socures network,Socure 30,Socure3,80
+11853,R665,Presented identity shows low overall correlation in Socures network,Socure 30,Socure3,80
+11854,R666,Phone characteristics show anomalous behavior,Socure 30,Socure3,80
+11855,R667,Presented identity uses uncommon communication channels,Socure 30,Socure3,80
+11856,R668,Transaction characteristics match an ongoing anomaly,Socure 30,Socure3,80
+11857,R669,"PII operates greater than 1,000 miles from usual location",Socure 30,Socure3,80
+11858,R670,Phone and email characteristics are unlikely to belong together,Socure 30,Socure3,80
+12465,R671,There is a more recent phone number associated with the identity,Socure 30,Socure3,80
+13535,R673,Phone number is deactivated,Socure 30,Socure3,80
+2134,R701,"Address is inactive, not receiving mail, or vacant",Socure 30,Socure3,80
+4612,R702,Address is not confirmed as deliverable,Socure 30,Socure3,80
+2135,R703,Address is invalid or does not exist,Socure 30,Socure3,80
+2136,R704,Address is a correctional facility,Socure 30,Socure3,80
+2137,R705,Address cannot be resolved to the individual,Socure 30,Socure3,80
+2138,R707,Address is a commercial mail receiving agency or commercial mail drop,Socure 30,Socure3,80
+2139,R708,Address is a PO Box,Socure 30,Socure3,80
+2140,R709,Address is commercial or dual-purpose,Socure 30,Socure3,80
+3482,R710,Address is a military location,Socure 30,Socure3,80
+4613,R711,"Address is a unique ZIP code, or corporate only, routing all mail internally by the assigned organization rather than by the USPS",Socure 30,Socure3,80
+4614,R712,"Unable to verify ZIP code for the input address, city and state combination",Socure 30,Socure3,80
+4615,R713,"Address mismatch between city, state, and ZIP code",Socure 30,Socure3,80
+4616,R714,Address is fuzzy matched to the address on record,Socure 30,Socure3,80
+2428,R720,Addressrisk score represents high risk,Socure 30,Socure3,80
+6790,R721,Email address is not correlated with the input physical address,Socure 30,Socure3,80
+6791,R722,The input state or ZIP was corrected during address standardisation,Socure 30,Socure3,80
+12466,R723,Address is a virtual mailbox,Socure 30,Socure3,80
+12467,R724,Address is a filler address,Socure 30,Socure3,80
+12468,R725,Two or more recent addresses found for matched identity,Socure 30,Socure3,80
+12469,R726,Input Address is older than 5 years and a more recent address found for the matched identity,Socure 30,Socure3,80
+8567,R733,Distance between input address and store address is between 60 miles and 100 miles,Socure 30,Socure3,80
+8568,R734,Distance between input address and store address is between 100 miles and 500 miles,Socure 30,Socure3,80
+8569,R735,Distance between input address and store address is greater than=500 miles,Socure 30,Socure3,80
+3483,R801,Photo from the ID document could not be extracted or is not usable,Socure 30,Socure3,80
+3484,R803,Check Digit Assessment failed on the barcode,Socure 30,Socure3,80
+3485,R804,(Deprecated) - The image doesnt meet the minimum color requirements,Socure 30,Socure3,80
+3486,R805,Document ID is a paper copy,Socure 30,Socure3,80
+3487,R806,The image was processed with editing software tool,Socure 30,Socure3,80
+3488,R807,The Image Capture Integrity failed,Socure 30,Socure3,80
+3489,R809,The text in the document has been modified,Socure 30,Socure3,80
+3490,R810,The layout and patterns integrity of the document failed,Socure 30,Socure3,80
+13611,R811,Invalidated or voided ID,Socure 30,Socure3,80
+3491,R812,The photograph placement in the submitted image is not authentic,Socure 30,Socure3,80
+13612,R815,Device tampering or injection risk,Socure 30,Socure3,80
+3492,R817,The submitted ID image has been altered,Socure 30,Socure3,80
+3493,R819,"Image captured from a screen, or is a paper copy of an ID",Socure 30,Socure3,80
+3494,R820,The biometric data in the document image has been modified,Socure 30,Socure3,80
+3495,R821,The biographic data in the document image has been modified,Socure 30,Socure3,80
+3496,R822,The first name on the ID does not match with submitted data,Socure 30,Socure3,80
+3497,R823,The last name on the ID does not match with  submitted data,Socure 30,Socure3,80
+3498,R824,The address on the ID does not match with submitted data,Socure 30,Socure3,80
+3499,R825,The DOB on the ID does not match with submitted data,Socure 30,Socure3,80
+3500,R826,The ID on the document is inconsistent with submitted data,Socure 30,Socure3,80
+3501,R827,The document has expired,Socure 30,Socure3,80
+3502,R828,The ID expiration date inconsistent with DOB and issue date,Socure 30,Socure3,80
+3503,R829,The ID issue date is inconsistent with DOB and expiration date,Socure 30,Socure3,80
+3504,R830,The DOB is not valid,Socure 30,Socure3,80
+3505,R831,Cannot extract the minimum information from barcode,Socure 30,Socure3,80
+3506,R832,(Deprecated) - The document bar code does not match the document ID,Socure 30,Socure3,80
+4617,R833,Cannot extract the minimum required information from MRZ,Socure 30,Socure3,80
+3507,R834,Selfie fails the liveness check,Socure 30,Socure3,80
+3508,R835,(Deprecated) - More than one face detected in the selfie,Socure 30,Socure3,80
+3509,R836,Profile Image does not match the ID image,Socure 30,Socure3,80
+3510,R837,The ID extracted from the bar code is not valid,Socure 30,Socure3,80
+3511,R838,Unable to extract the full name from the document/bar code,Socure 30,Socure3,80
+3512,R839,(Deprecated) - Name on the ID does not match the name from the Bar code/MRZ,Socure 30,Socure3,80
+3513,R840,(Deprecated) - Address on the ID does not match the address from the Bar code/MRZ,Socure 30,Socure3,80
+13613,R844,User is a minor (under 18),Socure 30,Socure3,80
+4618,R845,Minimum age criteria not met,Socure 30,Socure3,80
+4619,R853,Unable to classify the ID or this is an unsupported ID type,Socure 30,Socure3,80
+6411,R856,Obstructions on the face affecting the liveness,Socure 30,Socure3,80
+6412,R857,No face found in the selfie frame,Socure 30,Socure3,80
+6875,R859,ID image correlates to another ID image,Socure 30,Socure3,80
+10884,R861,Data extracted from document does not match with barcode or MRZ,Socure 30,Socure3,80
+11859,R864,Image upload from file detected,Socure 30,Socure3,80
+11860,R865,Disallowed ID Type,Socure 30,Socure3,80
+13536,R866,AAMVA failed to run,Socure 30,Socure3,80
+13537,R867,Some fields did not match AAMVA,Socure 30,Socure3,80
+13538,R868,AAMVA under maintenance,Socure 30,Socure3,80
+13539,R869,ID number did not match AAMVA,Socure 30,Socure3,80
+13540,R870,DOB did not match AAMVA,Socure 30,Socure3,80
+13541,R871,Last Name exact did not match AAMVA,Socure 30,Socure3,80
+13542,R872,Last name fuzzy did not match AAMVA,Socure 30,Socure3,80
+13543,R873,Last name fuzzy alternate did not match AAMVA,Socure 30,Socure3,80
+13544,R874,First name exact did not match AAMVA,Socure 30,Socure3,80
+13545,R875,First name fuzzy did not match AAMVA,Socure 30,Socure3,80
+13546,R876,First name fuzzy alternate did not match AAMVA,Socure 30,Socure3,80
+13547,R877,Middle name exact did not match AAMVA,Socure 30,Socure3,80
+13548,R878,Middle fuzzy did not match AAMVA,Socure 30,Socure3,80
+13549,R879,Middle fuzzy alternate did not match AAMVA,Socure 30,Socure3,80
+13550,R880,Middle initial did not match AAMVA,Socure 30,Socure3,80
+13551,R881,Name suffix did not match AAMVA,Socure 30,Socure3,80
+13552,R882,Doc Category did not match AAMVA,Socure 30,Socure3,80
+13553,R883,Issue date did not match AAMVA,Socure 30,Socure3,80
+13554,R884,Expiration did not match AAMVA,Socure 30,Socure3,80
+13555,R885,Sex did not match AAMVA,Socure 30,Socure3,80
+13556,R886,Height did not match AAMVA,Socure 30,Socure3,80
+13557,R887,Weight did not match AAMVA,Socure 30,Socure3,80
+13558,R888,Eye color did not match AAMVA,Socure 30,Socure3,80
+13559,R889,Address 1 did not match AAMVA,Socure 30,Socure3,80
+13560,R890,Address 2 did not match AAMVA,Socure 30,Socure3,80
+13561,R891,Address city did not match AAMVA,Socure 30,Socure3,80
+13562,R892,Address state did not match AAMVA,Socure 30,Socure3,80
+13563,R893,Address zip 5 did not match AAMVA,Socure 30,Socure3,80
+13564,R894,Address zip 4 did not match AAMVA,Socure 30,Socure3,80
+2141,R901,SSN/ITIN cannot be resolved to the individual,Socure 30,Socure3,80
+2142,R902,Name cannot be resolved to the individual,Socure 30,Socure3,80
+2143,R903,(Deprecated) - DOB cannot be resolved to the individual,Socure 30,Socure3,80
+2144,R904,(Deprecated) - KYC record validation failed on Address,Socure 30,Socure3,80
+2145,R905,(Deprecated) - KYC record validation failed on Mobile Number,Socure 30,Socure3,80
+2146,R906,(Deprecated) - KYC record validation failed on Driver License,Socure 30,Socure3,80
+2147,R907,SSN has been reported as deceased,Socure 30,Socure3,80
+2148,R908,Some ID elements not verified,Socure 30,Socure3,80
+2149,R909,Identity has been reported as deceased,Socure 30,Socure3,80
+2150,R911,SSN issued prior to DOB,Socure 30,Socure3,80
+2151,R912,(Deprecated) - Entered last name and SSN verified but not with entered address and phone,Socure 30,Socure3,80
+2152,R913,SSN/ITIN is invalid,Socure 30,Socure3,80
+2153,R914,(Deprecated) - Entered phone number may be disconnected,Socure 30,Socure3,80
+2154,R915,Entered phone number potentially invalid,Socure 30,Socure3,80
+2155,R916,Address is invalid or does not exist,Socure 30,Socure3,80
+2156,R917,(Deprecated) - Entered phone number and input ZIP code combination invalid,Socure 30,Socure3,80
+2157,R918,"Unable to verify name, address, SSN/TIN and phone",Socure 30,Socure3,80
+2158,R919,Address cannot be resolved to the individual,Socure 30,Socure3,80
+2159,R920,Identity has an unusual gap in address history,Socure 30,Socure3,80
+2160,R921,(Deprecated) - Unable to verify phone number,Socure 30,Socure3,80
+2161,R922,DOB cannot be resolved to the individual,Socure 30,Socure3,80
+2162,R923,SSN/ITIN was fuzzy matched to the SSN/ITIN on record,Socure 30,Socure3,80
+2163,R924,Address was fuzzy matched to the address on record,Socure 30,Socure3,80
+2164,R925,(Deprecated) - Entered phone number possibly miskeyed,Socure 30,Socure3,80
+2165,R926,(Deprecated) - Entered name on OFAC watchlist,Socure 30,Socure3,80
+2166,R927,Name does not correlate with the name for the resolved individual,Socure 30,Socure3,80
+2167,R928,SSN/ITIN is associated with multiple last names,Socure 30,Socure3,80
+2168,R929,(Deprecated) - Entered driver license number invalid for entered driver license state,Socure 30,Socure3,80
+2169,R930,First name does not correlate with the first name for the resolved individual,Socure 30,Socure3,80
+2170,R931,(Deprecated) - Entered phone and address geographically distant (>10 miles),Socure 30,Socure3,80
+2171,R932,Address is a correctional facility,Socure 30,Socure3,80
+2172,R933,Last name is not correlated with the SSN/ITIN on record,Socure 30,Socure3,80
+2173,R934,First name is not correlated with the SSN/ITIN on record,Socure 30,Socure3,80
+2174,R935,(Deprecated) - Entered home phone and work phone geographically distant (>100 miles),Socure 30,Socure3,80
+2175,R936,(Deprecated) - Entered work phone potentially invalid,Socure 30,Socure3,80
+2176,R937,(Deprecated) - Entered work phone potentially disconnected,Socure 30,Socure3,80
+2177,R938,(Deprecated) - Entered address returns different phone number,Socure 30,Socure3,80
+2178,R939,SSN/ITIN is correlated with the first name but not the last name,Socure 30,Socure3,80
+2179,R940,SSN/ITIN not found in public records,Socure 30,Socure3,80
+2180,R941,SSN/ITIN is correlated with at least 1 other name and address,Socure 30,Socure3,80
+2181,R942,The resolved identity has greater than1 SSN on record,Socure 30,Socure3,80
+2182,R943,(Deprecated) - Entered name and address associated with an unlisted/nonpublished phone number,Socure 30,Socure3,80
+2183,R944,Last name was fuzzy matched to the name on record,Socure 30,Socure3,80
+2184,R945,(Deprecated) - Entered name and address return different phone number,Socure 30,Socure3,80
+2185,R946,DOB was fuzzy matched to the DOB on record,Socure 30,Socure3,80
+2186,R947,SSN/ITIN is not the primary SSN/ITIN for the resolved identity,Socure 30,Socure3,80
+2187,R948,"Address mismatch between city, state, and ZIP code",Socure 30,Socure3,80
+2188,R949,(Deprecated) - Different driver license number found for applicant,Socure 30,Socure3,80
+2189,R950,Input national ID is an ITIN but has a better matching SSN,Socure 30,Socure3,80
+2190,R951,(Deprecated) - Entered driver license number possibly miskeyed,Socure 30,Socure3,80
+2191,R952,(Deprecated) - Unable to verify driver license number,Socure 30,Socure3,80
+2192,R953,(Deprecated) - SSN was randomly-issued by the SSA and cannot be resolved to the individual,Socure 30,Socure3,80
+2193,R954,SSN/ITIN entered is an ITIN,Socure 30,Socure3,80
+2194,R955,SSN/ITIN is correlated to multiple identities,Socure 30,Socure3,80
+2195,R956,Identity is correlated to multiple SSN/ITINs,Socure 30,Socure3,80
+2196,R957,DOB is not on record and cannot be verified,Socure 30,Socure3,80
+2197,R958,Entered address State differs from best associated State for input identity,Socure 30,Socure3,80
+2198,R959,Address mismatch on secondary address range,Socure 30,Socure3,80
+2199,R960,Entered name match on non-OFAC global watchlists,Socure 30,Socure3,80
+2200,R961,Address ZIP code is invalid,Socure 30,Socure3,80
+2201,R962,(Deprecated) - Entered phone number is pager number,Socure 30,Socure3,80
+2202,R963,Address ZIP code only serves PO Boxes,Socure 30,Socure3,80
+2203,R964,Address is a commercial or institutional address,Socure 30,Socure3,80
+2204,R965,Address is an embassy or consulate,Socure 30,Socure3,80
+2205,R966,Entered SSN recently issued,Socure 30,Socure3,80
+2206,R967,Entered phone area code changing,Socure 30,Socure3,80
+2207,R968,Entered work phone is pager number,Socure 30,Socure3,80
+2208,R969,Entered work phone is mobile number,Socure 30,Socure3,80
+2209,R970,Entered SSN issued within last three years,Socure 30,Socure3,80
+2210,R971,"Entered SSN issued after age five, post-1990",Socure 30,Socure3,80
+2211,R972,Address is a commercial mail receiving agency or commercial mail drop,Socure 30,Socure3,80
+2212,R973,"Address is a unique ZIP code, or corporate only, routing all mail internally by the assigned organization rather than by the USPS",Socure 30,Socure3,80
+4620,R975,MLA covered borrower status,Socure 30,Socure3,80
+4621,R976,Identity is associated with an active duty alert,Socure 30,Socure3,80
+4622,R977,Identity is associated with an active duty alert and a fraud victim initial alert,Socure 30,Socure3,80
+4623,R978,Identity is associated with a fraud victim initial alert,Socure 30,Socure3,80
+4624,R979,Identity is associated with an active duty alert and a fraud victim extended alert,Socure 30,Socure3,80
+4625,R980,Identity is associated with a fraud victim extended alert,Socure 30,Socure3,80
+13565,R981,Identity has no known history in the state where the input SSN was issued,Socure 30,Socure3,80
+13566,R982,Identity has first name and last name same,Socure 30,Socure3,80
+13614,R983,The input SSN was issued unusually later than the input DOB,Socure 30,Socure3,80
+13615,R992,Name cannot be verified by the SSA,Socure 30,Socure3,80
+13616,R993,SSN cannot be verified by the SSA,Socure 30,Socure3,80
+13617,R994,DOB cannot be verified by the SSA,Socure 30,Socure3,80
+13567,R995,Better matching SSN is found in the file,Socure 30,Socure3,80
+9286,R996,The permitted entity certification is invalid,Socure 30,Socure3,80
+9287,R997,The eCBSV service has incurred an error,Socure 30,Socure3,80
+4626,R998,"Name, SSN and DOB correlation unverified by SSA",Socure 30,Socure3,80
+4627,R999,Identity decease verified by SSA,Socure 30,Socure3,80
+6709,removedPersonalTitle,Partial name match due to the removal of an honorary title within the input name,Socure 30,Socure3,80
+6681,removedPersonalTitle-dobExact,"Partial name match due to the removal of an honorary title within the input name, exact DOB match",Socure 30,Socure3,80
+6682,removedPersonalTitle-dobFuzzy,"Partial name match due to the removal of an honorary title within the input name, fuzzy DOB match",Socure 30,Socure3,80
+6683,removedPersonalTitle-dobNoMatch,"Partial name match due to the removal of an honorary title within the input name, DOB does not match the input DOB",Socure 30,Socure3,80
+6684,removedPersonalTitle-dobNotOnRecord,"Partial name match due to the removal of an honorary title within the input name, source did not return a DOB",Socure 30,Socure3,80
+2213,V101,State must be two characters,Socure 30,Socure3,80
+2214,V102,Country code must meet ISO 3166-1 alpha-2 character standard,Socure 30,Socure3,80
+2215,V103,State permitted only when country=US,Socure 30,Socure3,80
+2216,V104,Physical address requires at least zip/country or city/country,Socure 30,Socure3,80
+2217,V105,Physical address and city in US requires at least zip or state,Socure 30,Socure3,80
+2218,V106,"Country code required unless physical address, city, state, and zip are specified",Socure 30,Socure3,80
+2219,V107,"Supported date of birth formats are yyyyMMdd, yyyy-MM-dd, and yyyy/MM/dd",Socure 30,Socure3,80
+2220,V108,IP address must meet IPV4 or IPV6 standard,Socure 30,Socure3,80
+2221,V109,Invalid geocode format,Socure 30,Socure3,80
+2222,V110,Supported phone number formats are +12345678901 and +1 234 567 8901,Socure 30,Socure3,80
+2223,V116,National ID permitted only when country=US,Socure 30,Socure3,80
+2224,V117,Invalid driver license format,Socure 30,Socure3,80
+2225,V118,Invalid National ID format,Socure 30,Socure3,80
+2226,V119,Invalid image file,Socure 30,Socure3,80
+2227,V120,Invalid name,Socure 30,Socure3,80
+3514,V806,Insufficient resolution in submitted image,Socure 30,Socure3,80
+3515,V807,Image entropy failure,Socure 30,Socure3,80
+3516,V810,Unacceptable blur in document,Socure 30,Socure3,80
+3517,V817,Color spectrum analysis failed,Socure 30,Socure3,80
+3518,V818,The image is not in focus,Socure 30,Socure3,80
+3519,V819,Glare in the image obscures details,Socure 30,Socure3,80
+3520,V820,Text is too small,Socure 30,Socure3,80
+3521,V827,The document is about to expire,Socure 30,Socure3,80
+3522,V836,Profile Image not considered in the decision,Socure 30,Socure3,80

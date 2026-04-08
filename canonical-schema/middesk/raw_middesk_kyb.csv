@@ -1,0 +1,17 @@
+reason_code_id,code,description,service_name,service_internal_name,service_id,middesk_bucket
+4899,ADULT_CONTENT,"Pornography, Dating Sites, Pay-per-View Chat",Middesk,Middesk,641,kyb
+4901,AGGREGATION,"Factoring, Payment Processors, Crowdfunding",Middesk,Middesk,641,kyb
+4897,CANNABIS,"Manufacturers, Distributors, Dispensaries",Middesk,Middesk,641,kyb
+4907,COUNTERFEIT_GOODS,"Companies with Fake Brand Name Goods, Unauthorized Resellers",Middesk,Middesk,641,kyb
+4912,DRUG_OF_CONCERN,"Legal substance that provides the same effect as an illegal drug (e.g., salvia, kratom)",Middesk,Middesk,641,kyb
+4898,DRUG_PARAPHERNALIA,"Drug Manufacturing, Items for Drug Use",Middesk,Middesk,641,kyb
+4900,GAMBLING,"Casinos, Online Gambling, Fantasy Sports",Middesk,Middesk,641,kyb
+4909,GET_RICH_QUICK,Companies Promoting High Yield Investment Opportunities or Services,Middesk,Middesk,641,kyb
+4906,GIFT_CARD,Gift Cards,Middesk,Middesk,641,kyb
+4904,INVESTMENT_CREDIT,"Securities Brokers, Lending Instruments, Credit Repair",Middesk,Middesk,641,kyb
+4902,MONEY_LEGAL,"Bail Bonds, Collections Agencies, Adoption Services",Middesk,Middesk,641,kyb
+4908,MULTI_LEVEL_MARKETING,"Mulit-level Marketing, Pyramid Schemes",Middesk,Middesk,641,kyb
+4911,PSEUDO_PHARMACEUTICAL,"Nutraceuticals, Products making health claims not approved by the FDA",Middesk,Middesk,641,kyb
+4905,REGULATED_ILLEGAL,"Weapons / Firearms, Tobacco and E-Cig, Prescription Drugs",Middesk,Middesk,641,kyb
+4910,SOCIAL_MEDIA_ACTIVITY,"Sale of Twitter Followers, Sale of Online Traffic, Sale of YouTube Views",Middesk,Middesk,641,kyb
+4903,VIRTUAL_CURRENCY,"Initial Coin Offerings, Digital Wallets, Video Game Credits",Middesk,Middesk,641,kyb

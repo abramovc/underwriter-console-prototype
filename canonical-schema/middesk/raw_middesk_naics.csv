@@ -1,0 +1,536 @@
+reason_code_id,code,description,service_name,service_internal_name,service_id,middesk_bucket
+12096,100000,"Personal Purpose, No Industry",Middesk,Middesk,641,naics
+11355,11,"Agriculture, Forestry, Fishing and Hunting",Middesk,Middesk,641,naics
+11356,1111,Oilseed and Grain Farming,Middesk,Middesk,641,naics
+11357,1112,Vegetable and Melon Farming,Middesk,Middesk,641,naics
+11358,1113,Fruit and Tree Nut Farming,Middesk,Middesk,641,naics
+11359,1114,"Greenhouse, Nursery, and Floriculture Production",Middesk,Middesk,641,naics
+11360,1119,Other Crop Farming,Middesk,Middesk,641,naics
+11361,1121,Cattle Ranching and Farming,Middesk,Middesk,641,naics
+11362,1122,Hog and Pig Farming,Middesk,Middesk,641,naics
+11363,1123,Poultry and Egg Production,Middesk,Middesk,641,naics
+11364,1124,Sheep and Goat Farming,Middesk,Middesk,641,naics
+11365,1125,Aquaculture,Middesk,Middesk,641,naics
+11366,1129,Other Animal Production,Middesk,Middesk,641,naics
+12095,112920,Horses and Other Equine Production,Middesk,Middesk,641,naics
+11367,1131,Timber Tract Operations,Middesk,Middesk,641,naics
+11368,1132,Forest Nurseries and Gathering of Forest Products,Middesk,Middesk,641,naics
+11369,1133,Logging,Middesk,Middesk,641,naics
+11370,1141,Fishing,Middesk,Middesk,641,naics
+11371,1142,Hunting and Trapping,Middesk,Middesk,641,naics
+11372,1151,Support Activities for Crop Production,Middesk,Middesk,641,naics
+11373,1152,Support Activities for Animal Production,Middesk,Middesk,641,naics
+11374,1153,Support Activities for Forestry,Middesk,Middesk,641,naics
+11375,21,Mining,Middesk,Middesk,641,naics
+11376,2111,Oil and Gas Extraction,Middesk,Middesk,641,naics
+12094,211120,Crude Petroleum Extraction,Middesk,Middesk,641,naics
+11377,2121,Coal Mining,Middesk,Middesk,641,naics
+11378,2122,Metal Ore Mining,Middesk,Middesk,641,naics
+12093,212222,Silver Ore Mining,Middesk,Middesk,641,naics
+11379,2123,Nonmetallic Mineral Mining and Quarrying,Middesk,Middesk,641,naics
+11380,2131,Support Activities for Mining,Middesk,Middesk,641,naics
+11381,22,Utilities,Middesk,Middesk,641,naics
+11382,2211,"Electric Power Generation, Transmission and Distribution",Middesk,Middesk,641,naics
+12092,221113,Nuclear Electric Power Generation,Middesk,Middesk,641,naics
+12091,221114,Solar Electric Power Generation,Middesk,Middesk,641,naics
+11383,2212,Natural Gas Distribution,Middesk,Middesk,641,naics
+11384,2213,"Water, Sewage and Other Systems",Middesk,Middesk,641,naics
+11385,23,Construction,Middesk,Middesk,641,naics
+11386,2361,Residential Building Construction,Middesk,Middesk,641,naics
+11387,2362,Nonresidential Building Construction,Middesk,Middesk,641,naics
+12090,236220,Commercial and Institutional Building Construction,Middesk,Middesk,641,naics
+11388,2371,Utility System Construction,Middesk,Middesk,641,naics
+11389,2372,Land Subdivision,Middesk,Middesk,641,naics
+11390,2373,"Highway, Street, and Bridge Construction",Middesk,Middesk,641,naics
+11391,2379,Other Heavy and Civil Engineering Construction,Middesk,Middesk,641,naics
+12089,237990,Other Heavy and Civil Engineering Construction,Middesk,Middesk,641,naics
+11392,2381,"Foundation, Structure, and Building Exterior Contractors",Middesk,Middesk,641,naics
+11393,2382,Building Equipment Contractors,Middesk,Middesk,641,naics
+11394,2383,Building Finishing Contractors,Middesk,Middesk,641,naics
+11395,2389,Other Specialty Trade Contractors,Middesk,Middesk,641,naics
+11396,31,Manufacturing,Middesk,Middesk,641,naics
+11399,3111,Animal Food Manufacturing,Middesk,Middesk,641,naics
+12088,311119,Other Animal Food Manufacturing,Middesk,Middesk,641,naics
+11400,3112,Grain and Oilseed Milling,Middesk,Middesk,641,naics
+12087,311225,Fats and Oils Refining and Blending,Middesk,Middesk,641,naics
+11401,3113,Sugar and Confectionery Product Manufacturing,Middesk,Middesk,641,naics
+11402,3114,Fruit and Vegetable Preserving and Specialty Food Manufacturing,Middesk,Middesk,641,naics
+11403,3115,Dairy Product Manufacturing,Middesk,Middesk,641,naics
+12086,311514,"Dry, Condensed, and Evaporated Dairy Product Manufacturing",Middesk,Middesk,641,naics
+11404,3116,Animal Slaughtering and Processing,Middesk,Middesk,641,naics
+11405,3117,Seafood Product Preparation and Packaging,Middesk,Middesk,641,naics
+11406,3118,Bakeries and Tortilla Manufacturing,Middesk,Middesk,641,naics
+11407,3119,Other Food Manufacturing,Middesk,Middesk,641,naics
+11408,3121,Beverage Manufacturing,Middesk,Middesk,641,naics
+12137,312130,Wineries,Middesk,Middesk,641,naics
+11409,3122,Tobacco Manufacturing,Middesk,Middesk,641,naics
+12085,312221,Cigarette Manufacturing,Middesk,Middesk,641,naics
+11410,3131,"Fiber, Yarn, and Thread Mills",Middesk,Middesk,641,naics
+11411,3132,Fabric Mills,Middesk,Middesk,641,naics
+11412,3133,Textile and Fabric Finishing and Fabric Coating Mills,Middesk,Middesk,641,naics
+11413,3141,Textile Furnishings Mills,Middesk,Middesk,641,naics
+11414,3149,Other Textile Product Mills,Middesk,Middesk,641,naics
+11415,3151,Apparel Knitting Mills,Middesk,Middesk,641,naics
+11416,3152,Cut and Sew Apparel Manufacturing,Middesk,Middesk,641,naics
+11417,3159,Apparel Accessories and Other Apparel Manufacturing,Middesk,Middesk,641,naics
+11418,3161,Leather and Hide Tanning and Finishing,Middesk,Middesk,641,naics
+11419,3162,Footwear Manufacturing,Middesk,Middesk,641,naics
+11420,3169,Other Leather and Allied Product Manufacturing,Middesk,Middesk,641,naics
+11397,32,Manufacturing,Middesk,Middesk,641,naics
+11421,3211,Sawmills and Wood Preservation,Middesk,Middesk,641,naics
+11422,3212,"Veneer, Plywood, and Engineered Wood Product Manufacturing",Middesk,Middesk,641,naics
+11423,3219,Other Wood Product Manufacturing,Middesk,Middesk,641,naics
+11424,3221,"Pulp, Paper, and Paperboard Mills",Middesk,Middesk,641,naics
+11425,3222,Converted Paper Product Manufacturing,Middesk,Middesk,641,naics
+11426,3231,Printing and Related Support Activities,Middesk,Middesk,641,naics
+12084,323111,Commercial Printing (except Screen and Books),Middesk,Middesk,641,naics
+11427,3241,Petroleum and Coal Products Manufacturing,Middesk,Middesk,641,naics
+11428,3251,Basic Chemical Manufacturing,Middesk,Middesk,641,naics
+12083,325110,Petrochemical Manufacturing,Middesk,Middesk,641,naics
+11429,3252,"Resin, Synthetic Rubber, and Artificial and Synthetic Fibers and Filaments Manufacturing",Middesk,Middesk,641,naics
+11430,3253,"Pesticide, Fertilizer, and Other Agricultural Chemical Manufacturing",Middesk,Middesk,641,naics
+11431,3254,Pharmaceutical and Medicine Manufacturing,Middesk,Middesk,641,naics
+11432,3255,"Paint, Coating, and Adhesive Manufacturing",Middesk,Middesk,641,naics
+11433,3256,"Soap, Cleaning Compound, and Toilet Preparation Manufacturing",Middesk,Middesk,641,naics
+11434,3259,Other Chemical Product and Preparation Manufacturing,Middesk,Middesk,641,naics
+11435,3261,Plastics Product Manufacturing,Middesk,Middesk,641,naics
+11436,3262,Rubber Product Manufacturing,Middesk,Middesk,641,naics
+11437,3271,Clay Product and Refractory Manufacturing,Middesk,Middesk,641,naics
+11438,3272,Glass and Glass Product Manufacturing,Middesk,Middesk,641,naics
+11439,3273,Cement and Concrete Product Manufacturing,Middesk,Middesk,641,naics
+11440,3274,Lime and Gypsum Product Manufacturing,Middesk,Middesk,641,naics
+11441,3279,Other Nonmetallic Mineral Product Manufacturing,Middesk,Middesk,641,naics
+11398,33,Manufacturing,Middesk,Middesk,641,naics
+11442,3311,Iron and Steel Mills and Ferroalloy Manufacturing,Middesk,Middesk,641,naics
+11443,3312,Steel Product Manufacturing from Purchased Steel,Middesk,Middesk,641,naics
+11444,3313,Alumina and Aluminum Production and Processing,Middesk,Middesk,641,naics
+11445,3314,Nonferrous Metal (except Aluminum) Production and Processing,Middesk,Middesk,641,naics
+12082,331420,"Copper Rolling, Drawing, Extruding, and Alloying",Middesk,Middesk,641,naics
+12081,331492,"Secondary Smelting, Refining, and Alloying of Nonferrous Metal (except Copper and Aluminum)",Middesk,Middesk,641,naics
+11446,3315,Foundries,Middesk,Middesk,641,naics
+11447,3321,Forging and Stamping,Middesk,Middesk,641,naics
+11448,3322,Cutlery and Handtool Manufacturing,Middesk,Middesk,641,naics
+11449,3323,Architectural and Structural Metals Manufacturing,Middesk,Middesk,641,naics
+11450,3324,"Boiler, Tank, and Shipping Container Manufacturing",Middesk,Middesk,641,naics
+11451,3325,Hardware Manufacturing,Middesk,Middesk,641,naics
+11452,3326,Spring and Wire Product Manufacturing,Middesk,Middesk,641,naics
+11453,3327,"Machine Shops; Turned Product; and Screw, Nut, and Bolt Manufacturing",Middesk,Middesk,641,naics
+11454,3328,"Coating, Engraving, Heat Treating, and Allied Activities",Middesk,Middesk,641,naics
+12080,332812,"Metal Coating, Engraving (except Jewelry and Silverware), and Allied Services to Manufacturers",Middesk,Middesk,641,naics
+11455,3329,Other Fabricated Metal Product Manufacturing,Middesk,Middesk,641,naics
+11456,3331,"Agriculture, Construction, and Mining Machinery Manufacturing",Middesk,Middesk,641,naics
+11457,3332,Industrial Machinery Manufacturing,Middesk,Middesk,641,naics
+11458,3333,Commercial and Service Industry Machinery Manufacturing,Middesk,Middesk,641,naics
+11459,3334,"Ventilation, Heating, Air-Conditioning, and Commercial Refrigeration Equipment Manufacturing",Middesk,Middesk,641,naics
+11460,3335,Metalworking Machinery Manufacturing,Middesk,Middesk,641,naics
+12079,333517,Machine Tool Manufacturing,Middesk,Middesk,641,naics
+11461,3336,"Engine, Turbine, and Power Transmission Equipment Manufacturing",Middesk,Middesk,641,naics
+11462,3339,Other General Purpose Machinery Manufacturing,Middesk,Middesk,641,naics
+11463,3341,Computer and Peripheral Equipment Manufacturing,Middesk,Middesk,641,naics
+11464,3342,Communications Equipment Manufacturing,Middesk,Middesk,641,naics
+11465,3343,Audio and Video Equipment Manufacturing,Middesk,Middesk,641,naics
+11466,3344,Semiconductor and Other Electronic Component Manufacturing,Middesk,Middesk,641,naics
+11467,3345,"Navigational, Measuring, Electromedical, and Control Instruments Manufacturing",Middesk,Middesk,641,naics
+11468,3346,Manufacturing and Reproducing Magnetic and Optical Media,Middesk,Middesk,641,naics
+11469,3351,Electric Lighting Equipment Manufacturing,Middesk,Middesk,641,naics
+11470,3352,Household Appliance Manufacturing,Middesk,Middesk,641,naics
+11471,3353,Electrical Equipment Manufacturing,Middesk,Middesk,641,naics
+11472,3359,Other Electrical Equipment and Component Manufacturing,Middesk,Middesk,641,naics
+11473,3361,Motor Vehicle Manufacturing,Middesk,Middesk,641,naics
+11474,3362,Motor Vehicle Body and Trailer Manufacturing,Middesk,Middesk,641,naics
+11475,3363,Motor Vehicle Parts Manufacturing,Middesk,Middesk,641,naics
+11476,3364,Aerospace Product and Parts Manufacturing,Middesk,Middesk,641,naics
+11477,3365,Railroad Rolling Stock Manufacturing,Middesk,Middesk,641,naics
+11478,3366,Ship and Boat Building,Middesk,Middesk,641,naics
+11479,3369,Other Transportation Equipment Manufacturing,Middesk,Middesk,641,naics
+11480,3371,Household and Institutional Furniture and Kitchen Cabinet Manufacturing,Middesk,Middesk,641,naics
+11481,3372,Office Furniture (including Fixtures) Manufacturing,Middesk,Middesk,641,naics
+11482,3379,Other Furniture Related Product Manufacturing,Middesk,Middesk,641,naics
+11483,3391,Medical Equipment and Supplies Manufacturing,Middesk,Middesk,641,naics
+11484,3399,Other Miscellaneous Manufacturing,Middesk,Middesk,641,naics
+11485,42,Wholesale Trade,Middesk,Middesk,641,naics
+11486,4231,Motor Vehicle and Motor Vehicle Parts and Supplies Merchant Wholesalers,Middesk,Middesk,641,naics
+11487,4232,Furniture and Home Furnishing Merchant Wholesalers,Middesk,Middesk,641,naics
+11488,4233,Lumber and Other Construction Materials Merchant Wholesalers,Middesk,Middesk,641,naics
+12078,423310,"Lumber, Plywood, Millwork, and Wood Panel Merchant Wholesalers",Middesk,Middesk,641,naics
+11489,4234,Professional and Commercial Equipment and Supplies Merchant Wholesalers,Middesk,Middesk,641,naics
+12077,423420,Office Equipment Merchant Wholesalers,Middesk,Middesk,641,naics
+12076,423440,Other Commercial Equipment Merchant Wholesalers,Middesk,Middesk,641,naics
+11490,4235,Metal and Mineral (except Petroleum) Merchant Wholesalers,Middesk,Middesk,641,naics
+11491,4236,Household Appliances and Electrical and Electronic Goods Merchant Wholesalers,Middesk,Middesk,641,naics
+11492,4237,"Hardware, and Plumbing and Heating Equipment and Supplies Merchant Wholesalers",Middesk,Middesk,641,naics
+11493,4238,"Machinery, Equipment, and Supplies Merchant Wholesalers",Middesk,Middesk,641,naics
+11494,4239,Miscellaneous Durable Goods Merchant Wholesalers,Middesk,Middesk,641,naics
+12075,423940,"Jewelry, Watch, Precious Stone, and Precious Metal Merchant Wholesalers",Middesk,Middesk,641,naics
+11495,4241,Paper and Paper Product Merchant Wholesalers,Middesk,Middesk,641,naics
+11496,4242,Drugs and Druggists' Sundries Merchant Wholesalers,Middesk,Middesk,641,naics
+11497,4243,"Apparel, Piece Goods, and Notions Merchant Wholesalers",Middesk,Middesk,641,naics
+11498,4244,Grocery and Related Product Merchant Wholesalers,Middesk,Middesk,641,naics
+11499,4245,Farm Product Raw Material Merchant Wholesalers,Middesk,Middesk,641,naics
+11500,4246,Chemical and Allied Products Merchant Wholesalers,Middesk,Middesk,641,naics
+11501,4247,Petroleum and Petroleum Products Merchant Wholesalers,Middesk,Middesk,641,naics
+12074,424720,Petroleum and Petroleum Products Merchant Wholesalers (except Bulk Stations and Terminals),Middesk,Middesk,641,naics
+11502,4248,"Beer, Wine, and Distilled Alcoholic Beverage Merchant Wholesalers",Middesk,Middesk,641,naics
+11503,4249,Miscellaneous Nondurable Goods Merchant Wholesalers,Middesk,Middesk,641,naics
+12073,424910,Farm Supplies Merchant Wholesalers,Middesk,Middesk,641,naics
+11504,4251,Wholesale Trade Agents and Brokers,Middesk,Middesk,641,naics
+12072,425110,Business to Business Electronic Markets,Middesk,Middesk,641,naics
+12071,425120,Wholesale Trade Agents and Brokers,Middesk,Middesk,641,naics
+11507,4412,Other Motor Vehicle Dealers,Middesk,Middesk,641,naics
+12070,441228,"Motorcycle, ATV, and All Other Motor Vehicle Dealers",Middesk,Middesk,641,naics
+11508,4413,"Automotive Parts, Accessories, and Tire Retailers",Middesk,Middesk,641,naics
+11509,4441,Building Material and Supplies Dealers,Middesk,Middesk,641,naics
+11510,4442,Lawn and Garden Equipment and Supplies Retailers,Middesk,Middesk,641,naics
+11505,"44,45",Retail,Middesk,Middesk,641,naics
+11511,4451,Grocery and Convenience Retailers,Middesk,Middesk,641,naics
+12069,445110,Supermarkets and Other Grocery (except Convenience) Stores,Middesk,Middesk,641,naics
+12068,445120,Convenience Stores,Middesk,Middesk,641,naics
+12130,445131,Convenience Retailers,Middesk,Middesk,641,naics
+11512,4452,Specialty Food Retailers,Middesk,Middesk,641,naics
+12132,445230,Fruit and Vegetable Retailers,Middesk,Middesk,641,naics
+12136,445240,Meat Retailers,Middesk,Middesk,641,naics
+12129,445291,Baked Goods Retailers,Middesk,Middesk,641,naics
+12134,445292,Confectionery and Nut Retailers,Middesk,Middesk,641,naics
+12131,445298,All Other Specialty Food Retailers,Middesk,Middesk,641,naics
+11513,4453,"Beer, Wine, and Liquor Retailers",Middesk,Middesk,641,naics
+12067,445310,"Beer, Wine, and Liquor Stores",Middesk,Middesk,641,naics
+12135,445320,"Beer, Wine, and Liquor Retailers",Middesk,Middesk,641,naics
+12066,446110,Pharmacies and Drug Stores,Middesk,Middesk,641,naics
+12065,446130,Optical Goods Stores,Middesk,Middesk,641,naics
+12064,447110,Gasoline Stations with Convenience Stores,Middesk,Middesk,641,naics
+12063,447190,Other Gasoline Stations,Middesk,Middesk,641,naics
+12062,448210,Shoe Stores,Middesk,Middesk,641,naics
+12061,448310,Jewelry Stores,Middesk,Middesk,641,naics
+11514,4491,Furniture and Home Furnishings Retailers,Middesk,Middesk,641,naics
+11515,4492,Electronics and Appliance Retailers,Middesk,Middesk,641,naics
+12060,451110,Sporting Goods Stores,Middesk,Middesk,641,naics
+12059,452319,All Other General Merchandise Stores,Middesk,Middesk,641,naics
+12058,453310,Used Merchandise Stores,Middesk,Middesk,641,naics
+12057,453920,Art Dealers,Middesk,Middesk,641,naics
+12056,453991,Tobacco Stores,Middesk,Middesk,641,naics
+12055,454110,Electronic Shopping and Mail-Order Houses,Middesk,Middesk,641,naics
+12054,454210,Vending Machine Operators,Middesk,Middesk,641,naics
+12053,454390,Other Direct Selling Establishments,Middesk,Middesk,641,naics
+11516,4551,Department Stores,Middesk,Middesk,641,naics
+11517,4552,"Warehouse Clubs, Supercenters, and Other General Merchandise Retailers",Middesk,Middesk,641,naics
+11518,4561,Health and Personal Care Retailers,Middesk,Middesk,641,naics
+11519,4571,Gasoline Stations,Middesk,Middesk,641,naics
+11520,4572,Fuel Dealers,Middesk,Middesk,641,naics
+11521,4581,Clothing and Clothing Accessories Retailers,Middesk,Middesk,641,naics
+12139,458110,Clothing and Clothing Accessories Retailers,Middesk,Middesk,641,naics
+11523,4583,"Jewelry, Luggage, and Leather Goods Retailers",Middesk,Middesk,641,naics
+11524,4591,"Sporting Goods, Hobby, and Musical Instrument Retailers",Middesk,Middesk,641,naics
+11525,4592,Book Retailers and News Dealers,Middesk,Middesk,641,naics
+12138,459210,Book Retailers and News Dealers,Middesk,Middesk,641,naics
+11526,4593,Florists,Middesk,Middesk,641,naics
+12141,459310,Florists,Middesk,Middesk,641,naics
+11527,4594,"Office Supplies, Stationery, and Gift Retailers",Middesk,Middesk,641,naics
+12133,459420,"Gift, Novelty, and Souvenir Retailers",Middesk,Middesk,641,naics
+11528,4595,Used Merchandise Retailers,Middesk,Middesk,641,naics
+11529,4599,Other Miscellaneous Retailers,Middesk,Middesk,641,naics
+12140,459910,Pet and Pet Supplies Retailers,Middesk,Middesk,641,naics
+11531,4811,Scheduled Air Transportation,Middesk,Middesk,641,naics
+12052,481112,Scheduled Freight Air Transportation,Middesk,Middesk,641,naics
+11534,4831,"Deep Sea, Coastal, and Great Lakes Water Transportation",Middesk,Middesk,641,naics
+11535,4832,Inland Water Transportation,Middesk,Middesk,641,naics
+11536,4841,General Freight Trucking,Middesk,Middesk,641,naics
+11537,4842,Specialized Freight Trucking,Middesk,Middesk,641,naics
+11530,"48,49",Transportation and Warehousing,Middesk,Middesk,641,naics
+11538,4851,Urban Transit Systems,Middesk,Middesk,641,naics
+11539,4852,Interurban and Rural Bus Transportation,Middesk,Middesk,641,naics
+11540,4853,Taxi and Limousine Service,Middesk,Middesk,641,naics
+11541,4854,School and Employee Bus Transportation,Middesk,Middesk,641,naics
+11542,4855,Charter Bus Industry,Middesk,Middesk,641,naics
+11543,4859,Other Transit and Ground Passenger Transportation,Middesk,Middesk,641,naics
+12051,485999,All Other Transit and Ground Passenger Transportation,Middesk,Middesk,641,naics
+11544,4861,Pipeline Transportation of Crude Oil,Middesk,Middesk,641,naics
+11545,4862,Pipeline Transportation of Natural Gas,Middesk,Middesk,641,naics
+11546,4869,Other Pipeline Transportation,Middesk,Middesk,641,naics
+11547,4871,"Scenic and Sightseeing Transportation, Land",Middesk,Middesk,641,naics
+11548,4872,"Scenic and Sightseeing Transportation, Water",Middesk,Middesk,641,naics
+11549,4879,"Scenic and Sightseeing Transportation, Other",Middesk,Middesk,641,naics
+11550,4881,Support Activities for Air Transportation,Middesk,Middesk,641,naics
+11551,4882,Support Activities for Rail Transportation,Middesk,Middesk,641,naics
+11552,4883,Support Activities for Water Transportation,Middesk,Middesk,641,naics
+11553,4884,Support Activities for Road Transportation,Middesk,Middesk,641,naics
+11554,4885,Freight Transportation Arrangement,Middesk,Middesk,641,naics
+12050,488510,Freight Transportation Arrangement,Middesk,Middesk,641,naics
+11555,4889,Other Support Activities for Transportation,Middesk,Middesk,641,naics
+12049,488999,All Other Support Activities for Transportation,Middesk,Middesk,641,naics
+11556,4911,Postal Service,Middesk,Middesk,641,naics
+11557,4921,Couriers and Express Delivery Services,Middesk,Middesk,641,naics
+11558,4922,Local Messengers and Local Delivery,Middesk,Middesk,641,naics
+11559,4931,Warehousing and Storage,Middesk,Middesk,641,naics
+11560,51,Information,Middesk,Middesk,641,naics
+12048,511120,Periodical Publishers,Middesk,Middesk,641,naics
+12047,511210,Software Publishers,Middesk,Middesk,641,naics
+11561,5121,Motion Picture and Video Industries,Middesk,Middesk,641,naics
+12046,512230,Music Publishers,Middesk,Middesk,641,naics
+11564,5132,Software Publishers,Middesk,Middesk,641,naics
+12045,515120,Television Broadcasting,Middesk,Middesk,641,naics
+11565,5161,Radio and Television Broadcasting Stations,Middesk,Middesk,641,naics
+11566,5162,"Media Streaming Distribution Services, Social Networks, and Other Media Networks and Content Providers",Middesk,Middesk,641,naics
+11567,5171,Wired and Wireless Telecommunications (except Satellite),Middesk,Middesk,641,naics
+12044,517312,Wireless Telecommunications Carriers (except Satellite),Middesk,Middesk,641,naics
+11568,5174,Satellite Telecommunications,Middesk,Middesk,641,naics
+11569,5178,All Other Telecommunications,Middesk,Middesk,641,naics
+12043,517919,All Other Telecommunications,Middesk,Middesk,641,naics
+11570,5182,"Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services",Middesk,Middesk,641,naics
+12042,518210,"Data Processing, Hosting, and Related Services",Middesk,Middesk,641,naics
+12041,519130,Internet Publishing and Broadcasting and Web Search Portals,Middesk,Middesk,641,naics
+12040,519190,All Other Information Services,Middesk,Middesk,641,naics
+11572,52,Finance and Insurance,Middesk,Middesk,641,naics
+11574,5221,Depository Credit Intermediation,Middesk,Middesk,641,naics
+12039,52211,Commercial Banking,Middesk,Middesk,641,naics
+12038,522110,Commercial Banking,Middesk,Middesk,641,naics
+12037,52212,Savings Institutions,Middesk,Middesk,641,naics
+12036,522120,Savings Institutions,Middesk,Middesk,641,naics
+12035,52213,Credit Unions,Middesk,Middesk,641,naics
+12034,522130,Credit Unions,Middesk,Middesk,641,naics
+12033,522190,Other Depository Credit Intermediation,Middesk,Middesk,641,naics
+11575,5222,Nondepository Credit Intermediation,Middesk,Middesk,641,naics
+12032,522210,Credit Card Issuing,Middesk,Middesk,641,naics
+12031,522292,Real Estate Credit,Middesk,Middesk,641,naics
+12030,522298,All Other Nondepository Credit Intermediation,Middesk,Middesk,641,naics
+11576,5223,Activities Related to Credit Intermediation,Middesk,Middesk,641,naics
+12029,522310,Mortgage and Nonmortgage Loan Brokers,Middesk,Middesk,641,naics
+12028,522320,"Financial Transactions Processing, Reserve, and Clearinghouse Activities",Middesk,Middesk,641,naics
+12027,522390,Other Activities Related to Credit Intermediation,Middesk,Middesk,641,naics
+12026,523110,Investment Banking and Securities Dealing,Middesk,Middesk,641,naics
+12025,523120,Securities Brokerage,Middesk,Middesk,641,naics
+12024,523130,Commodity Contracts Dealing,Middesk,Middesk,641,naics
+12023,523140,Commodity Contracts Brokerage,Middesk,Middesk,641,naics
+11578,5232,Securities and Commodity Exchanges,Middesk,Middesk,641,naics
+12022,523210,Securities and Commodity Exchanges,Middesk,Middesk,641,naics
+11579,5239,Other Financial Investment Activities,Middesk,Middesk,641,naics
+12021,523910,Miscellaneous Intermediation,Middesk,Middesk,641,naics
+12020,523920,Portfolio Management,Middesk,Middesk,641,naics
+12019,523930,Investment Advice,Middesk,Middesk,641,naics
+12018,523990,All Other Financial Investment Activities,Middesk,Middesk,641,naics
+12017,523991,"Trust, Fiduciary, and Custody Activities",Middesk,Middesk,641,naics
+12016,523999,Miscellaneous Financial Investment Activities,Middesk,Middesk,641,naics
+11580,5241,Insurance Carriers,Middesk,Middesk,641,naics
+12015,524113,Direct Life Insurance Carriers,Middesk,Middesk,641,naics
+12014,524114,Direct Health and Medical Insurance Carriers,Middesk,Middesk,641,naics
+12013,524126,Direct Property and Casualty Insurance Carriers,Middesk,Middesk,641,naics
+12012,524130,Reinsurance Carriers,Middesk,Middesk,641,naics
+11581,5242,"Agencies, Brokerages, and Other Insurance Related Activities",Middesk,Middesk,641,naics
+12011,524210,Insurance Agencies and Brokerages,Middesk,Middesk,641,naics
+12010,524292,Third Party Administration of Insurance and Pension Funds,Middesk,Middesk,641,naics
+12009,524298,All Other Insurance Related Activities,Middesk,Middesk,641,naics
+11583,5259,Other Investment Pools and Funds,Middesk,Middesk,641,naics
+12008,525910,Open-End Investment Funds,Middesk,Middesk,641,naics
+12007,525920,"Trusts, Estates, and Agency Accounts",Middesk,Middesk,641,naics
+12006,525930,Real estate investment trusts,Middesk,Middesk,641,naics
+12005,525990,Other Financial Vehicles,Middesk,Middesk,641,naics
+11584,53,Real Estate Rental and Leasing,Middesk,Middesk,641,naics
+12004,531110,Lessors of Residential Buildings and Dwellings,Middesk,Middesk,641,naics
+12003,531120,Lessors of Nonresidential Buildings (except Miniwarehouses),Middesk,Middesk,641,naics
+11586,5312,Offices of Real Estate Agents and Brokers,Middesk,Middesk,641,naics
+12002,531210,Offices of Real Estate Agents and Brokers,Middesk,Middesk,641,naics
+11587,5313,Activities Related to Real Estate,Middesk,Middesk,641,naics
+12001,531311,Residential Property Managers,Middesk,Middesk,641,naics
+12000,531390,Other Activities Related to Real Estate,Middesk,Middesk,641,naics
+11588,5321,Automotive Equipment Rental and Leasing,Middesk,Middesk,641,naics
+11589,5322,Consumer Goods Rental,Middesk,Middesk,641,naics
+11999,532210,Consumer Electronics and Appliances Rental,Middesk,Middesk,641,naics
+11590,5323,General Rental Centers,Middesk,Middesk,641,naics
+11591,5324,Commercial and Industrial Machinery and Equipment Rental and Leasing,Middesk,Middesk,641,naics
+11998,532411,"Commercial Air, Rail, and Water Transportation Equipment Rental and Leasing",Middesk,Middesk,641,naics
+11997,532412,"Construction, Mining, and Forestry Machinery and Equipment Rental and Leasing",Middesk,Middesk,641,naics
+11996,532490,Other Commercial and Industrial Machinery and Equipment Rental and Leasing,Middesk,Middesk,641,naics
+11593,54,"Professional, Scientific, and Technical Services",Middesk,Middesk,641,naics
+11995,54111,Offices of Lawyers,Middesk,Middesk,641,naics
+11994,541110,Offices of Lawyers,Middesk,Middesk,641,naics
+11993,541191,Title Abstract and Settlement Offices,Middesk,Middesk,641,naics
+11992,541199,All Other Legal Services,Middesk,Middesk,641,naics
+11595,5412,"Accounting, Tax Preparation, Bookkeeping, and Payroll Services",Middesk,Middesk,641,naics
+11991,541211,Offices of Certified Public Accountants,Middesk,Middesk,641,naics
+11990,541213,Tax Preparation Services,Middesk,Middesk,641,naics
+11989,541214,Payroll Services,Middesk,Middesk,641,naics
+11988,541219,Other Accounting Services,Middesk,Middesk,641,naics
+11596,5413,"Architectural, Engineering, and Related Services",Middesk,Middesk,641,naics
+11987,541330,Engineering Services,Middesk,Middesk,641,naics
+11597,5414,Specialized Design Services,Middesk,Middesk,641,naics
+11986,541430,Graphic Design Services,Middesk,Middesk,641,naics
+11598,5415,Computer Systems Design and Related Services,Middesk,Middesk,641,naics
+11985,541511,Custom Computer Programming Services,Middesk,Middesk,641,naics
+11984,541512,Computer Systems Design Services,Middesk,Middesk,641,naics
+11983,541519,Other Computer Related Services,Middesk,Middesk,641,naics
+11599,5416,"Management, Scientific, and Technical Consulting Services",Middesk,Middesk,641,naics
+11982,541611,Administrative Management and General Management Consulting Services,Middesk,Middesk,641,naics
+11981,541612,Human Resources Consulting Services,Middesk,Middesk,641,naics
+11980,541614,"Process, Physical Distribution, and Logistics Consulting Services",Middesk,Middesk,641,naics
+11979,541618,Other Management Consulting Services,Middesk,Middesk,641,naics
+11600,5417,Scientific Research and Development Services,Middesk,Middesk,641,naics
+11978,541714,Research and Development in Biotechnology (except Nanobiotechnology),Middesk,Middesk,641,naics
+11977,541715,"Research and Development in the Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology)",Middesk,Middesk,641,naics
+11976,541720,Research and Development in the Social Sciences and Humanities,Middesk,Middesk,641,naics
+11601,5418,"Advertising, Public Relations, and Related Services",Middesk,Middesk,641,naics
+11975,541810,Advertising Agencies,Middesk,Middesk,641,naics
+11602,5419,"Other Professional, Scientific, and Technical Services",Middesk,Middesk,641,naics
+11974,541910,Marketing Research and Public Opinion Polling,Middesk,Middesk,641,naics
+11973,541990,"All Other Professional, Scientific, and Technical Services",Middesk,Middesk,641,naics
+11603,55,Management of Companies and Enterprises,Middesk,Middesk,641,naics
+11604,55,Management of Companies and Enterprises,Middesk,Middesk,641,naics
+11972,551112,Offices of Other Holding Companies,Middesk,Middesk,641,naics
+11971,551114,"Corporate, Subsidiary, and Regional Managing Offices",Middesk,Middesk,641,naics
+11605,56,Administrative and Support and Waste Management and Remediation Services,Middesk,Middesk,641,naics
+11970,561110,Office Administrative Services,Middesk,Middesk,641,naics
+11607,5612,Facilities Support Services,Middesk,Middesk,641,naics
+11608,5613,Employment Services,Middesk,Middesk,641,naics
+11969,561310,Employment Placement Agencies and Executive Search Services,Middesk,Middesk,641,naics
+11968,561311,Employment Placement Agencies,Middesk,Middesk,641,naics
+11967,561320,Temporary Help Services,Middesk,Middesk,641,naics
+11966,561330,Professional Employer Organizations,Middesk,Middesk,641,naics
+11609,5614,Business Support Services,Middesk,Middesk,641,naics
+11965,561499,All Other Business Support Services,Middesk,Middesk,641,naics
+11610,5615,Travel Arrangement and Reservation Services,Middesk,Middesk,641,naics
+11964,561510,Travel Agencies,Middesk,Middesk,641,naics
+11611,5616,Investigation and Security Services,Middesk,Middesk,641,naics
+11963,561613,Armored Car Services,Middesk,Middesk,641,naics
+11612,5617,Services to Buildings and Dwellings,Middesk,Middesk,641,naics
+11613,5619,Other Support Services,Middesk,Middesk,641,naics
+11962,561920,Convention and Trade Show Organizers,Middesk,Middesk,641,naics
+11961,561990,All Other Support Services,Middesk,Middesk,641,naics
+11615,5622,Waste Treatment and Disposal,Middesk,Middesk,641,naics
+11616,5629,Remediation and Other Waste Management Services,Middesk,Middesk,641,naics
+11617,61,Educational Services,Middesk,Middesk,641,naics
+11618,6111,Elementary and Secondary Schools,Middesk,Middesk,641,naics
+11960,611110,Elementary and Secondary Schools,Middesk,Middesk,641,naics
+11619,6112,Junior Colleges,Middesk,Middesk,641,naics
+11620,6113,"Colleges, Universities, and Professional Schools",Middesk,Middesk,641,naics
+11959,611310,"Colleges, Universities, and Professional Schools",Middesk,Middesk,641,naics
+11621,6114,Business Schools and Computer and Management Training,Middesk,Middesk,641,naics
+11622,6115,Technical and Trade Schools,Middesk,Middesk,641,naics
+11958,611519,Other Technical and Trade Schools,Middesk,Middesk,641,naics
+11623,6116,Other Schools and Instruction,Middesk,Middesk,641,naics
+11624,6117,Educational Support Services,Middesk,Middesk,641,naics
+11957,611710,Educational Support Services,Middesk,Middesk,641,naics
+11625,62,Health Care and Social Assistance,Middesk,Middesk,641,naics
+11956,621111,Offices of Physicians (except Mental Health Specialists),Middesk,Middesk,641,naics
+11955,621112,"Offices of Physicians, Mental Health Specialists",Middesk,Middesk,641,naics
+11627,6212,Offices of Dentists,Middesk,Middesk,641,naics
+11628,6213,Offices of Other Health Practitioners,Middesk,Middesk,641,naics
+11954,621330,Offices of Mental Health Practitioners (except Physicians),Middesk,Middesk,641,naics
+11629,6214,Outpatient Care Centers,Middesk,Middesk,641,naics
+11953,621420,Outpatient Mental Health and Substance Abuse Centers,Middesk,Middesk,641,naics
+11952,621491,HMO Medical Centers,Middesk,Middesk,641,naics
+11951,621498,All Other Outpatient Care Centers,Middesk,Middesk,641,naics
+11630,6215,Medical and Diagnostic Laboratories,Middesk,Middesk,641,naics
+11950,621511,Medical Laboratories,Middesk,Middesk,641,naics
+11631,6216,Home Health Care Services,Middesk,Middesk,641,naics
+11632,6219,Other Ambulatory Health Care Services,Middesk,Middesk,641,naics
+11949,621999,All Other Miscellaneous Ambulatory Health Care Services,Middesk,Middesk,641,naics
+11633,6221,General Medical and Surgical Hospitals,Middesk,Middesk,641,naics
+11948,622110,General Medical and Surgical Hospitals,Middesk,Middesk,641,naics
+11634,6222,Psychiatric and Substance Abuse Hospitals,Middesk,Middesk,641,naics
+11635,6223,Specialty (except Psychiatric and Substance Abuse) Hospitals,Middesk,Middesk,641,naics
+11636,6231,Nursing Care Facilities (Skilled Nursing Facilities),Middesk,Middesk,641,naics
+11637,6232,"Residential Intellectual and Developmental Disability, Mental Health, and Substance Abuse Facilities",Middesk,Middesk,641,naics
+11638,6233,Continuing Care Retirement Communities and Assisted Living Facilities for the Elderly,Middesk,Middesk,641,naics
+11947,623311,Continuing Care Retirement Communities,Middesk,Middesk,641,naics
+11639,6239,Other Residential Care Facilities,Middesk,Middesk,641,naics
+11640,6241,Individual and Family Services,Middesk,Middesk,641,naics
+11946,624110,Child and Youth Services,Middesk,Middesk,641,naics
+11945,624120,Services for the Elderly and Persons with Disabilities,Middesk,Middesk,641,naics
+11944,624190,Other Individual and Family Services,Middesk,Middesk,641,naics
+11641,6242,"Community Food and Housing, and Emergency and Other Relief Services",Middesk,Middesk,641,naics
+11943,624210,Community Food Services,Middesk,Middesk,641,naics
+11942,624220,Community Housing Services,Middesk,Middesk,641,naics
+11941,624221,Temporary Shelters,Middesk,Middesk,641,naics
+11940,624229,Other Community Housing Services,Middesk,Middesk,641,naics
+11939,624230,Emergency and Other Relief Services,Middesk,Middesk,641,naics
+11642,6243,Vocational Rehabilitation Services,Middesk,Middesk,641,naics
+11938,624310,Vocational Rehabilitation Services,Middesk,Middesk,641,naics
+11643,6244,Child Care Services,Middesk,Middesk,641,naics
+11644,71,"Arts, Entertainment, and Recreation",Middesk,Middesk,641,naics
+11645,7111,Performing Arts Companies,Middesk,Middesk,641,naics
+11937,711110,Theater Companies and Dinner Theaters,Middesk,Middesk,641,naics
+11936,711120,Dance Companies,Middesk,Middesk,641,naics
+11646,7112,Spectator Sports,Middesk,Middesk,641,naics
+11647,7113,"Promoters of Performing Arts, Sports, and Similar Events",Middesk,Middesk,641,naics
+11935,711310,"Promoters of Performing Arts, Sports, and Similar Events with Facilities",Middesk,Middesk,641,naics
+11934,711320,"Promoters of Performing Arts, Sports, and Similar Events without Facilities",Middesk,Middesk,641,naics
+11648,7114,"Agents and Managers for Artists, Athletes, Entertainers, and Other Public Figures",Middesk,Middesk,641,naics
+11649,7115,"Independent Artists, Writers, and Performers",Middesk,Middesk,641,naics
+11650,7121,"Museums, Historical Sites, and Similar Institutions",Middesk,Middesk,641,naics
+11933,712110,Museums,Middesk,Middesk,641,naics
+11932,712130,Zoos and Botanical Gardens,Middesk,Middesk,641,naics
+11651,7131,Amusement Parks and Arcades,Middesk,Middesk,641,naics
+11931,713110,Amusement and Theme Parks,Middesk,Middesk,641,naics
+11652,7132,Gambling Industries,Middesk,Middesk,641,naics
+11930,713210,Casinos (except Casino Hotels),Middesk,Middesk,641,naics
+11929,713290,Other Gambling Industries,Middesk,Middesk,641,naics
+11653,7139,Other Amusement and Recreation Industries,Middesk,Middesk,641,naics
+11928,713910,Golf Courses and Country Clubs,Middesk,Middesk,641,naics
+12145,713930,Marinas,Middesk,Middesk,641,naics
+11927,713940,Fitness and Recreational Sports Centers,Middesk,Middesk,641,naics
+11926,713950,Bowling Centers,Middesk,Middesk,641,naics
+11925,713990,All Other Amusement and Recreation Industries,Middesk,Middesk,641,naics
+11654,72,Accommodation and Food Services,Middesk,Middesk,641,naics
+11924,721110,Hotels (except Casino Hotels) and Motels,Middesk,Middesk,641,naics
+11923,721120,Casino Hotels,Middesk,Middesk,641,naics
+11656,7212,RV (Recreational Vehicle) Parks and Recreational Camps,Middesk,Middesk,641,naics
+11657,7213,"Rooming and Boarding Houses, Dormitories, and Workers' Camps",Middesk,Middesk,641,naics
+11658,7223,Special Food Services,Middesk,Middesk,641,naics
+11922,722310,Food Service Contractors,Middesk,Middesk,641,naics
+11921,722320,Caterers,Middesk,Middesk,641,naics
+11920,722330,Mobile Food Services,Middesk,Middesk,641,naics
+11659,7224,Drinking Places (Alcoholic Beverages),Middesk,Middesk,641,naics
+11919,722410,Drinking Places (Alcoholic Beverages),Middesk,Middesk,641,naics
+11660,7225,Restaurants and Other Eating Places,Middesk,Middesk,641,naics
+11661,722511,Full-Service Restaurants,Middesk,Middesk,641,naics
+11662,722513,Limited-Service Restaurants,Middesk,Middesk,641,naics
+11663,722515,Snack and Nonalcoholic Beverage Bars,Middesk,Middesk,641,naics
+11664,81,Other Services (except Public Administration),Middesk,Middesk,641,naics
+11918,811192,Car Washes,Middesk,Middesk,641,naics
+11666,8112,Electronic and Precision Equipment Repair and Maintenance,Middesk,Middesk,641,naics
+11667,8113,Commercial and Industrial Machinery and Equipment (except Automotive and Electronic) Repair and Maintenance,Middesk,Middesk,641,naics
+11668,8114,Personal and Household Goods Repair and Maintenance,Middesk,Middesk,641,naics
+11669,8121,Personal Care Services,Middesk,Middesk,641,naics
+12142,812111,Barber Shops,Middesk,Middesk,641,naics
+12143,812112,Beauty Salons,Middesk,Middesk,641,naics
+12144,812113,Nail Salons,Middesk,Middesk,641,naics
+11917,812199,Other Personal Care Services,Middesk,Middesk,641,naics
+11670,8122,Death Care Services,Middesk,Middesk,641,naics
+11671,8123,Drycleaning and Laundry Services,Middesk,Middesk,641,naics
+11916,812310,Coin-Operated Laundries and Drycleaners,Middesk,Middesk,641,naics
+11915,812331,Linen Supply,Middesk,Middesk,641,naics
+11914,812332,Industrial Launderers,Middesk,Middesk,641,naics
+11672,8129,Other Personal Services,Middesk,Middesk,641,naics
+11913,81299,All Other Personal Services,Middesk,Middesk,641,naics
+11673,8131,Religious Organizations,Middesk,Middesk,641,naics
+11912,813110,Religious Organizations,Middesk,Middesk,641,naics
+11674,8132,Grantmaking and Giving Services,Middesk,Middesk,641,naics
+11911,813210,Grantmaking and Giving Services,Middesk,Middesk,641,naics
+11910,813211,Grantmaking Foundations,Middesk,Middesk,641,naics
+11909,813212,Voluntary Health Organizations,Middesk,Middesk,641,naics
+11908,813219,Other Grantmaking and Giving Services,Middesk,Middesk,641,naics
+11675,8133,Social Advocacy Organizations,Middesk,Middesk,641,naics
+11907,813311,Human Rights Organizations,Middesk,Middesk,641,naics
+11906,813312,"Environment, Conservation and Wildlife Organizations",Middesk,Middesk,641,naics
+11905,813319,Other Social Advocacy Organizations,Middesk,Middesk,641,naics
+11676,8134,Civic and Social Organizations,Middesk,Middesk,641,naics
+11904,813410,Civic and Social Organizations,Middesk,Middesk,641,naics
+11677,8139,"Business, Professional, Labor, Political, and Similar Organizations",Middesk,Middesk,641,naics
+11903,813910,Business Associations,Middesk,Middesk,641,naics
+11902,813920,Professional Organizations,Middesk,Middesk,641,naics
+11901,813930,Labor Unions and Similar Labor Organizations,Middesk,Middesk,641,naics
+11900,813940,Political Organizations,Middesk,Middesk,641,naics
+11899,813990,"Other Similar Organizations (except Business, Professional, Labor, and Political Organizations)",Middesk,Middesk,641,naics
+11678,8141,Private Households,Middesk,Middesk,641,naics
+11898,814110,Private Households,Middesk,Middesk,641,naics
+11679,92,Public Administration,Middesk,Middesk,641,naics
+11897,921120,Legislative Bodies,Middesk,Middesk,641,naics
+11681,9221,"Justice, Public Order, and Safety Activities",Middesk,Middesk,641,naics
+11896,922130,Legal Counsel and Prosecution,Middesk,Middesk,641,naics
+11682,9231,Administration of Human Resource Programs,Middesk,Middesk,641,naics
+11895,923130,"Administration of Human Resource Programs (except Education, Public Health, and Veterans' Affairs Programs)",Middesk,Middesk,641,naics
+11683,9241,Administration of Environmental Quality Programs,Middesk,Middesk,641,naics
+11684,9251,"Administration of Housing Programs, Urban Planning, and Community Development",Middesk,Middesk,641,naics
+11894,925110,Administration of Housing Programs,Middesk,Middesk,641,naics
+11685,9261,Administration of Economic Programs,Middesk,Middesk,641,naics
+11893,926110,Administration of General Economic Programs,Middesk,Middesk,641,naics
+11686,9271,Space Research and Technology,Middesk,Middesk,641,naics
+11687,9281,National Security and International Affairs,Middesk,Middesk,641,naics

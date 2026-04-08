@@ -1,0 +1,865 @@
+reason_code_id,code,description,service_name,service_internal_name,service_id
+12867,0742,Veterinary Services (MCC),Middesk,Middesk,641
+12589,0763,Agricultural Cooperative (MCC),Middesk,Middesk,641
+12747,0780,Landscaping Services (MCC),Middesk,Middesk,641
+12096,100000,"Personal Purpose, No Industry",Middesk,Middesk,641
+11355,11,"Agriculture, Forestry, Fishing and Hunting",Middesk,Middesk,641
+11356,1111,Oilseed and Grain Farming,Middesk,Middesk,641
+11357,1112,Vegetable and Melon Farming,Middesk,Middesk,641
+11358,1113,Fruit and Tree Nut Farming,Middesk,Middesk,641
+11359,1114,"Greenhouse, Nursery, and Floriculture Production",Middesk,Middesk,641
+11360,1119,Other Crop Farming,Middesk,Middesk,641
+11361,1121,Cattle Ranching and Farming,Middesk,Middesk,641
+11362,1122,Hog and Pig Farming,Middesk,Middesk,641
+11363,1123,Poultry and Egg Production,Middesk,Middesk,641
+11364,1124,Sheep and Goat Farming,Middesk,Middesk,641
+11365,1125,Aquaculture,Middesk,Middesk,641
+11366,1129,Other Animal Production,Middesk,Middesk,641
+12095,112920,Horses and Other Equine Production,Middesk,Middesk,641
+11367,1131,Timber Tract Operations,Middesk,Middesk,641
+11368,1132,Forest Nurseries and Gathering of Forest Products,Middesk,Middesk,641
+11369,1133,Logging,Middesk,Middesk,641
+11370,1141,Fishing,Middesk,Middesk,641
+11371,1142,Hunting and Trapping,Middesk,Middesk,641
+11372,1151,Support Activities for Crop Production,Middesk,Middesk,641
+11373,1152,Support Activities for Animal Production,Middesk,Middesk,641
+11374,1153,Support Activities for Forestry,Middesk,Middesk,641
+12720,1520,General Services (MCC),Middesk,Middesk,641
+12735,1711,"Heating, Plumbing, A/C (MCC)",Middesk,Middesk,641
+12698,1731,Electrical Services (MCC),Middesk,Middesk,641
+12756,1740,"Masonry, Stonework, and Plaster (MCC)",Middesk,Middesk,641
+12631,1750,Carpentry Services (MCC),Middesk,Middesk,641
+12820,1761,"Roofing/Siding, Sheet Metal (MCC)",Middesk,Middesk,641
+12654,1771,Concrete Work Services (MCC),Middesk,Middesk,641
+12829,1799,Special Trade Services (MCC),Middesk,Middesk,641
+11375,21,Mining,Middesk,Middesk,641
+11376,2111,Oil and Gas Extraction,Middesk,Middesk,641
+12094,211120,Crude Petroleum Extraction,Middesk,Middesk,641
+11377,2121,Coal Mining,Middesk,Middesk,641
+11378,2122,Metal Ore Mining,Middesk,Middesk,641
+12093,212222,Silver Ore Mining,Middesk,Middesk,641
+11379,2123,Nonmetallic Mineral Mining and Quarrying,Middesk,Middesk,641
+11380,2131,Support Activities for Mining,Middesk,Middesk,641
+11381,22,Utilities,Middesk,Middesk,641
+11382,2211,"Electric Power Generation, Transmission and Distribution",Middesk,Middesk,641
+12092,221113,Nuclear Electric Power Generation,Middesk,Middesk,641
+12091,221114,Solar Electric Power Generation,Middesk,Middesk,641
+11383,2212,Natural Gas Distribution,Middesk,Middesk,641
+11384,2213,"Water, Sewage and Other Systems",Middesk,Middesk,641
+11385,23,Construction,Middesk,Middesk,641
+11386,2361,Residential Building Construction,Middesk,Middesk,641
+11387,2362,Nonresidential Building Construction,Middesk,Middesk,641
+12090,236220,Commercial and Institutional Building Construction,Middesk,Middesk,641
+11388,2371,Utility System Construction,Middesk,Middesk,641
+11389,2372,Land Subdivision,Middesk,Middesk,641
+11390,2373,"Highway, Street, and Bridge Construction",Middesk,Middesk,641
+11391,2379,Other Heavy and Civil Engineering Construction,Middesk,Middesk,641
+12089,237990,Other Heavy and Civil Engineering Construction,Middesk,Middesk,641
+11392,2381,"Foundation, Structure, and Building Exterior Contractors",Middesk,Middesk,641
+11393,2382,Building Equipment Contractors,Middesk,Middesk,641
+11394,2383,Building Finishing Contractors,Middesk,Middesk,641
+11395,2389,Other Specialty Trade Contractors,Middesk,Middesk,641
+12772,2741,Miscellaneous Publishing and Printing (MCC),Middesk,Middesk,641
+12860,2791,"Typesetting, Plate Making, and Related Services (MCC)",Middesk,Middesk,641
+12830,2842,Specialty Cleaning (MCC),Middesk,Middesk,641
+11396,31,Manufacturing,Middesk,Middesk,641
+11399,3111,Animal Food Manufacturing,Middesk,Middesk,641
+12088,311119,Other Animal Food Manufacturing,Middesk,Middesk,641
+11400,3112,Grain and Oilseed Milling,Middesk,Middesk,641
+12087,311225,Fats and Oils Refining and Blending,Middesk,Middesk,641
+11401,3113,Sugar and Confectionery Product Manufacturing,Middesk,Middesk,641
+11402,3114,Fruit and Vegetable Preserving and Specialty Food Manufacturing,Middesk,Middesk,641
+11403,3115,Dairy Product Manufacturing,Middesk,Middesk,641
+12086,311514,"Dry, Condensed, and Evaporated Dairy Product Manufacturing",Middesk,Middesk,641
+11404,3116,Animal Slaughtering and Processing,Middesk,Middesk,641
+11405,3117,Seafood Product Preparation and Packaging,Middesk,Middesk,641
+11406,3118,Bakeries and Tortilla Manufacturing,Middesk,Middesk,641
+11407,3119,Other Food Manufacturing,Middesk,Middesk,641
+11408,3121,Beverage Manufacturing,Middesk,Middesk,641
+12137,312130,Wineries,Middesk,Middesk,641
+11409,3122,Tobacco Manufacturing,Middesk,Middesk,641
+12085,312221,Cigarette Manufacturing,Middesk,Middesk,641
+11410,3131,"Fiber, Yarn, and Thread Mills",Middesk,Middesk,641
+11411,3132,Fabric Mills,Middesk,Middesk,641
+11412,3133,Textile and Fabric Finishing and Fabric Coating Mills,Middesk,Middesk,641
+11413,3141,Textile Furnishings Mills,Middesk,Middesk,641
+11414,3149,Other Textile Product Mills,Middesk,Middesk,641
+11415,3151,Apparel Knitting Mills,Middesk,Middesk,641
+11416,3152,Cut and Sew Apparel Manufacturing,Middesk,Middesk,641
+11417,3159,Apparel Accessories and Other Apparel Manufacturing,Middesk,Middesk,641
+11418,3161,Leather and Hide Tanning and Finishing,Middesk,Middesk,641
+11419,3162,Footwear Manufacturing,Middesk,Middesk,641
+11420,3169,Other Leather and Allied Product Manufacturing,Middesk,Middesk,641
+11397,32,Manufacturing,Middesk,Middesk,641
+11421,3211,Sawmills and Wood Preservation,Middesk,Middesk,641
+11422,3212,"Veneer, Plywood, and Engineered Wood Product Manufacturing",Middesk,Middesk,641
+11423,3219,Other Wood Product Manufacturing,Middesk,Middesk,641
+11424,3221,"Pulp, Paper, and Paperboard Mills",Middesk,Middesk,641
+11425,3222,Converted Paper Product Manufacturing,Middesk,Middesk,641
+11426,3231,Printing and Related Support Activities,Middesk,Middesk,641
+12084,323111,Commercial Printing (except Screen and Books),Middesk,Middesk,641
+11427,3241,Petroleum and Coal Products Manufacturing,Middesk,Middesk,641
+11428,3251,Basic Chemical Manufacturing,Middesk,Middesk,641
+12083,325110,Petrochemical Manufacturing,Middesk,Middesk,641
+11429,3252,"Resin, Synthetic Rubber, and Artificial and Synthetic Fibers and Filaments Manufacturing",Middesk,Middesk,641
+11430,3253,"Pesticide, Fertilizer, and Other Agricultural Chemical Manufacturing",Middesk,Middesk,641
+11431,3254,Pharmaceutical and Medicine Manufacturing,Middesk,Middesk,641
+11432,3255,"Paint, Coating, and Adhesive Manufacturing",Middesk,Middesk,641
+11433,3256,"Soap, Cleaning Compound, and Toilet Preparation Manufacturing",Middesk,Middesk,641
+11434,3259,Other Chemical Product and Preparation Manufacturing,Middesk,Middesk,641
+11435,3261,Plastics Product Manufacturing,Middesk,Middesk,641
+11436,3262,Rubber Product Manufacturing,Middesk,Middesk,641
+11437,3271,Clay Product and Refractory Manufacturing,Middesk,Middesk,641
+11438,3272,Glass and Glass Product Manufacturing,Middesk,Middesk,641
+11439,3273,Cement and Concrete Product Manufacturing,Middesk,Middesk,641
+11440,3274,Lime and Gypsum Product Manufacturing,Middesk,Middesk,641
+11441,3279,Other Nonmetallic Mineral Product Manufacturing,Middesk,Middesk,641
+11398,33,Manufacturing,Middesk,Middesk,641
+11442,3311,Iron and Steel Mills and Ferroalloy Manufacturing,Middesk,Middesk,641
+11443,3312,Steel Product Manufacturing from Purchased Steel,Middesk,Middesk,641
+11444,3313,Alumina and Aluminum Production and Processing,Middesk,Middesk,641
+11445,3314,Nonferrous Metal (except Aluminum) Production and Processing,Middesk,Middesk,641
+12082,331420,"Copper Rolling, Drawing, Extruding, and Alloying",Middesk,Middesk,641
+12081,331492,"Secondary Smelting, Refining, and Alloying of Nonferrous Metal (except Copper and Aluminum)",Middesk,Middesk,641
+11446,3315,Foundries,Middesk,Middesk,641
+11447,3321,Forging and Stamping,Middesk,Middesk,641
+11448,3322,Cutlery and Handtool Manufacturing,Middesk,Middesk,641
+11449,3323,Architectural and Structural Metals Manufacturing,Middesk,Middesk,641
+11450,3324,"Boiler, Tank, and Shipping Container Manufacturing",Middesk,Middesk,641
+11451,3325,Hardware Manufacturing,Middesk,Middesk,641
+11452,3326,Spring and Wire Product Manufacturing,Middesk,Middesk,641
+11453,3327,"Machine Shops; Turned Product; and Screw, Nut, and Bolt Manufacturing",Middesk,Middesk,641
+11454,3328,"Coating, Engraving, Heat Treating, and Allied Activities",Middesk,Middesk,641
+12080,332812,"Metal Coating, Engraving (except Jewelry and Silverware), and Allied Services to Manufacturers",Middesk,Middesk,641
+11455,3329,Other Fabricated Metal Product Manufacturing,Middesk,Middesk,641
+11456,3331,"Agriculture, Construction, and Mining Machinery Manufacturing",Middesk,Middesk,641
+11457,3332,Industrial Machinery Manufacturing,Middesk,Middesk,641
+11458,3333,Commercial and Service Industry Machinery Manufacturing,Middesk,Middesk,641
+11459,3334,"Ventilation, Heating, Air-Conditioning, and Commercial Refrigeration Equipment Manufacturing",Middesk,Middesk,641
+11460,3335,Metalworking Machinery Manufacturing,Middesk,Middesk,641
+12079,333517,Machine Tool Manufacturing,Middesk,Middesk,641
+11461,3336,"Engine, Turbine, and Power Transmission Equipment Manufacturing",Middesk,Middesk,641
+11462,3339,Other General Purpose Machinery Manufacturing,Middesk,Middesk,641
+11463,3341,Computer and Peripheral Equipment Manufacturing,Middesk,Middesk,641
+11464,3342,Communications Equipment Manufacturing,Middesk,Middesk,641
+11465,3343,Audio and Video Equipment Manufacturing,Middesk,Middesk,641
+11466,3344,Semiconductor and Other Electronic Component Manufacturing,Middesk,Middesk,641
+11467,3345,"Navigational, Measuring, Electromedical, and Control Instruments Manufacturing",Middesk,Middesk,641
+11468,3346,Manufacturing and Reproducing Magnetic and Optical Media,Middesk,Middesk,641
+11469,3351,Electric Lighting Equipment Manufacturing,Middesk,Middesk,641
+11470,3352,Household Appliance Manufacturing,Middesk,Middesk,641
+11471,3353,Electrical Equipment Manufacturing,Middesk,Middesk,641
+11472,3359,Other Electrical Equipment and Component Manufacturing,Middesk,Middesk,641
+11473,3361,Motor Vehicle Manufacturing,Middesk,Middesk,641
+11474,3362,Motor Vehicle Body and Trailer Manufacturing,Middesk,Middesk,641
+11475,3363,Motor Vehicle Parts Manufacturing,Middesk,Middesk,641
+11476,3364,Aerospace Product and Parts Manufacturing,Middesk,Middesk,641
+11477,3365,Railroad Rolling Stock Manufacturing,Middesk,Middesk,641
+11478,3366,Ship and Boat Building,Middesk,Middesk,641
+11479,3369,Other Transportation Equipment Manufacturing,Middesk,Middesk,641
+11480,3371,Household and Institutional Furniture and Kitchen Cabinet Manufacturing,Middesk,Middesk,641
+11481,3372,Office Furniture (including Fixtures) Manufacturing,Middesk,Middesk,641
+11482,3379,Other Furniture Related Product Manufacturing,Middesk,Middesk,641
+11483,3391,Medical Equipment and Supplies Manufacturing,Middesk,Middesk,641
+11484,3399,Other Miscellaneous Manufacturing,Middesk,Middesk,641
+12814,4011,Railroads (MCC),Middesk,Middesk,641
+12648,4111,"Commuter Transport, Ferries (MCC)",Middesk,Middesk,641
+12798,4112,Passenger Railways (MCC),Middesk,Middesk,641
+12592,4119,Ambulance Services (MCC),Middesk,Middesk,641
+12843,4121,Taxicabs/Limousines (MCC),Middesk,Middesk,641
+12621,4131,Bus Lines (MCC),Middesk,Middesk,641
+11485,42,Wholesale Trade,Middesk,Middesk,641
+12778,4214,"Motor Freight Carriers and Trucking - Local and Long Distance, Moving and Storage Companies, and Local Delivery Services (MCC)",Middesk,Middesk,641
+12661,4215,Courier Services (MCC),Middesk,Middesk,641
+12812,4225,"Public Warehousing and Storage - Farm Products, Refrigerated Goods, Household Goods, and Storage (MCC)",Middesk,Middesk,641
+11486,4231,Motor Vehicle and Motor Vehicle Parts and Supplies Merchant Wholesalers,Middesk,Middesk,641
+11487,4232,Furniture and Home Furnishing Merchant Wholesalers,Middesk,Middesk,641
+11488,4233,Lumber and Other Construction Materials Merchant Wholesalers,Middesk,Middesk,641
+12078,423310,"Lumber, Plywood, Millwork, and Wood Panel Merchant Wholesalers",Middesk,Middesk,641
+11489,4234,Professional and Commercial Equipment and Supplies Merchant Wholesalers,Middesk,Middesk,641
+12077,423420,Office Equipment Merchant Wholesalers,Middesk,Middesk,641
+12076,423440,Other Commercial Equipment Merchant Wholesalers,Middesk,Middesk,641
+11490,4235,Metal and Mineral (except Petroleum) Merchant Wholesalers,Middesk,Middesk,641
+11491,4236,Household Appliances and Electrical and Electronic Goods Merchant Wholesalers,Middesk,Middesk,641
+11492,4237,"Hardware, and Plumbing and Heating Equipment and Supplies Merchant Wholesalers",Middesk,Middesk,641
+11493,4238,"Machinery, Equipment, and Supplies Merchant Wholesalers",Middesk,Middesk,641
+11494,4239,Miscellaneous Durable Goods Merchant Wholesalers,Middesk,Middesk,641
+12075,423940,"Jewelry, Watch, Precious Stone, and Precious Metal Merchant Wholesalers",Middesk,Middesk,641
+11495,4241,Paper and Paper Product Merchant Wholesalers,Middesk,Middesk,641
+11496,4242,Drugs and Druggists' Sundries Merchant Wholesalers,Middesk,Middesk,641
+11497,4243,"Apparel, Piece Goods, and Notions Merchant Wholesalers",Middesk,Middesk,641
+11498,4244,Grocery and Related Product Merchant Wholesalers,Middesk,Middesk,641
+11499,4245,Farm Product Raw Material Merchant Wholesalers,Middesk,Middesk,641
+11500,4246,Chemical and Allied Products Merchant Wholesalers,Middesk,Middesk,641
+11501,4247,Petroleum and Petroleum Products Merchant Wholesalers,Middesk,Middesk,641
+12074,424720,Petroleum and Petroleum Products Merchant Wholesalers (except Bulk Stations and Terminals),Middesk,Middesk,641
+11502,4248,"Beer, Wine, and Distilled Alcoholic Beverage Merchant Wholesalers",Middesk,Middesk,641
+11503,4249,Miscellaneous Nondurable Goods Merchant Wholesalers,Middesk,Middesk,641
+12073,424910,Farm Supplies Merchant Wholesalers,Middesk,Middesk,641
+11504,4251,Wholesale Trade Agents and Brokers,Middesk,Middesk,641
+12072,425110,Business to Business Electronic Markets,Middesk,Middesk,641
+12071,425120,Wholesale Trade Agents and Brokers,Middesk,Middesk,641
+11506,4411,Automobile Dealers (MCC),Middesk,Middesk,641
+12664,4411,Cruise Lines (MCC),Middesk,Middesk,641
+11507,4412,Other Motor Vehicle Dealers,Middesk,Middesk,641
+12070,441228,"Motorcycle, ATV, and All Other Motor Vehicle Dealers",Middesk,Middesk,641
+11508,4413,"Automotive Parts, Accessories, and Tire Retailers",Middesk,Middesk,641
+11509,4441,Building Material and Supplies Dealers,Middesk,Middesk,641
+11510,4442,Lawn and Garden Equipment and Supplies Retailers,Middesk,Middesk,641
+11505,"44,45",Retail,Middesk,Middesk,641
+11511,4451,Grocery and Convenience Retailers,Middesk,Middesk,641
+12069,445110,Supermarkets and Other Grocery (except Convenience) Stores,Middesk,Middesk,641
+12068,445120,Convenience Stores,Middesk,Middesk,641
+12130,445131,Convenience Retailers,Middesk,Middesk,641
+11512,4452,Specialty Food Retailers,Middesk,Middesk,641
+12132,445230,Fruit and Vegetable Retailers,Middesk,Middesk,641
+12136,445240,Meat Retailers,Middesk,Middesk,641
+12129,445291,Baked Goods Retailers,Middesk,Middesk,641
+12134,445292,Confectionery and Nut Retailers,Middesk,Middesk,641
+12131,445298,All Other Specialty Food Retailers,Middesk,Middesk,641
+11513,4453,"Beer, Wine, and Liquor Retailers",Middesk,Middesk,641
+12067,445310,"Beer, Wine, and Liquor Stores",Middesk,Middesk,641
+12135,445320,"Beer, Wine, and Liquor Retailers",Middesk,Middesk,641
+12617,4457,Boat Rentals and Leases (MCC),Middesk,Middesk,641
+12066,446110,Pharmacies and Drug Stores,Middesk,Middesk,641
+12065,446130,Optical Goods Stores,Middesk,Middesk,641
+12754,4468,"Marinas, Service and Supplies (MCC)",Middesk,Middesk,641
+12064,447110,Gasoline Stations with Convenience Stores,Middesk,Middesk,641
+12063,447190,Other Gasoline Stations,Middesk,Middesk,641
+12062,448210,Shoe Stores,Middesk,Middesk,641
+12061,448310,Jewelry Stores,Middesk,Middesk,641
+11514,4491,Furniture and Home Furnishings Retailers,Middesk,Middesk,641
+11515,4492,Electronics and Appliance Retailers,Middesk,Middesk,641
+12590,4511,"Airlines, Air Carriers (MCC)",Middesk,Middesk,641
+12060,451110,Sporting Goods Stores,Middesk,Middesk,641
+12059,452319,All Other General Merchandise Stores,Middesk,Middesk,641
+12058,453310,Used Merchandise Stores,Middesk,Middesk,641
+12057,453920,Art Dealers,Middesk,Middesk,641
+12056,453991,Tobacco Stores,Middesk,Middesk,641
+12055,454110,Electronic Shopping and Mail-Order Houses,Middesk,Middesk,641
+12054,454210,Vending Machine Operators,Middesk,Middesk,641
+12053,454390,Other Direct Selling Establishments,Middesk,Middesk,641
+11516,4551,Department Stores,Middesk,Middesk,641
+11517,4552,"Warehouse Clubs, Supercenters, and Other General Merchandise Retailers",Middesk,Middesk,641
+11518,4561,Health and Personal Care Retailers,Middesk,Middesk,641
+11519,4571,Gasoline Stations,Middesk,Middesk,641
+11520,4572,Fuel Dealers,Middesk,Middesk,641
+11521,4581,Clothing and Clothing Accessories Retailers,Middesk,Middesk,641
+12139,458110,Clothing and Clothing Accessories Retailers,Middesk,Middesk,641
+11522,4582,Shoe Retailers (MCC),Middesk,Middesk,641
+12591,4582,"Airports, Flying Fields (MCC)",Middesk,Middesk,641
+11523,4583,"Jewelry, Luggage, and Leather Goods Retailers",Middesk,Middesk,641
+11524,4591,"Sporting Goods, Hobby, and Musical Instrument Retailers",Middesk,Middesk,641
+11525,4592,Book Retailers and News Dealers,Middesk,Middesk,641
+12138,459210,Book Retailers and News Dealers,Middesk,Middesk,641
+11526,4593,Florists,Middesk,Middesk,641
+12141,459310,Florists,Middesk,Middesk,641
+11527,4594,"Office Supplies, Stationery, and Gift Retailers",Middesk,Middesk,641
+12133,459420,"Gift, Novelty, and Souvenir Retailers",Middesk,Middesk,641
+11528,4595,Used Merchandise Retailers,Middesk,Middesk,641
+11529,4599,Other Miscellaneous Retailers,Middesk,Middesk,641
+12140,459910,Pet and Pet Supplies Retailers,Middesk,Middesk,641
+12857,4722,"Travel Agencies, Tour Operators (MCC)",Middesk,Middesk,641
+12839,4723,TUI Travel - Germany (MCC),Middesk,Middesk,641
+12852,4784,Tolls/Bridge Fees (MCC),Middesk,Middesk,641
+12856,4789,Transportation Services (Not Elsewhere Classified) (MCC),Middesk,Middesk,641
+11531,4811,Scheduled Air Transportation,Middesk,Middesk,641
+12052,481112,Scheduled Freight Air Transportation,Middesk,Middesk,641
+11532,4812,Nonscheduled Air Transportation (MCC),Middesk,Middesk,641
+12844,4812,Telecommunication Equipment and Telephone Sales (MCC),Middesk,Middesk,641
+12845,4814,Telecommunication Services (MCC),Middesk,Middesk,641
+12649,4816,Computer Network Services (MCC),Middesk,Middesk,641
+11533,4821,Rail Transportation (MCC),Middesk,Middesk,641
+12846,4821,Telegraph Services (MCC),Middesk,Middesk,641
+12876,4829,"Wires, Money Orders (MCC)",Middesk,Middesk,641
+11534,4831,"Deep Sea, Coastal, and Great Lakes Water Transportation",Middesk,Middesk,641
+11535,4832,Inland Water Transportation,Middesk,Middesk,641
+11536,4841,General Freight Trucking,Middesk,Middesk,641
+11537,4842,Specialized Freight Trucking,Middesk,Middesk,641
+11530,"48,49",Transportation and Warehousing,Middesk,Middesk,641
+11538,4851,Urban Transit Systems,Middesk,Middesk,641
+11539,4852,Interurban and Rural Bus Transportation,Middesk,Middesk,641
+11540,4853,Taxi and Limousine Service,Middesk,Middesk,641
+11541,4854,School and Employee Bus Transportation,Middesk,Middesk,641
+11542,4855,Charter Bus Industry,Middesk,Middesk,641
+11543,4859,Other Transit and Ground Passenger Transportation,Middesk,Middesk,641
+12051,485999,All Other Transit and Ground Passenger Transportation,Middesk,Middesk,641
+11544,4861,Pipeline Transportation of Crude Oil,Middesk,Middesk,641
+11545,4862,Pipeline Transportation of Natural Gas,Middesk,Middesk,641
+11546,4869,Other Pipeline Transportation,Middesk,Middesk,641
+11547,4871,"Scenic and Sightseeing Transportation, Land",Middesk,Middesk,641
+11548,4872,"Scenic and Sightseeing Transportation, Water",Middesk,Middesk,641
+11549,4879,"Scenic and Sightseeing Transportation, Other",Middesk,Middesk,641
+11550,4881,Support Activities for Air Transportation,Middesk,Middesk,641
+11551,4882,Support Activities for Rail Transportation,Middesk,Middesk,641
+11552,4883,Support Activities for Water Transportation,Middesk,Middesk,641
+11553,4884,Support Activities for Road Transportation,Middesk,Middesk,641
+11554,4885,Freight Transportation Arrangement,Middesk,Middesk,641
+12050,488510,Freight Transportation Arrangement,Middesk,Middesk,641
+11555,4889,Other Support Activities for Transportation,Middesk,Middesk,641
+12049,488999,All Other Support Activities for Transportation,Middesk,Middesk,641
+12624,4899,"Cable, Satellite, and Other Pay Television and Radio (MCC)",Middesk,Middesk,641
+12865,4900,Utilities (MCC),Middesk,Middesk,641
+11556,4911,Postal Service,Middesk,Middesk,641
+11557,4921,Couriers and Express Delivery Services,Middesk,Middesk,641
+11558,4922,Local Messengers and Local Delivery,Middesk,Middesk,641
+11559,4931,Warehousing and Storage,Middesk,Middesk,641
+12780,5013,Motor Vehicle Supplies and New Parts (MCC),Middesk,Middesk,641
+12790,5021,Office and Commercial Furniture (MCC),Middesk,Middesk,641
+12655,5039,Construction Materials (Not Elsewhere Classified) (MCC),Middesk,Middesk,641
+12804,5044,"Photographic, Photocopy, Microfilm Equipment, and Supplies (MCC)",Middesk,Middesk,641
+12653,5045,"Computers, Peripherals, and Software (MCC)",Middesk,Middesk,641
+12645,5046,Commercial Equipment (Not Elsewhere Classified) (MCC),Middesk,Middesk,641
+12760,5047,"Medical, Dental, Ophthalmic, and Hospital Equipment and Supplies (MCC)",Middesk,Middesk,641
+12764,5051,Metal Service Centers (MCC),Middesk,Middesk,641
+12697,5065,Electrical Parts and Equipment (MCC),Middesk,Middesk,641
+12732,5072,"Hardware, Equipment, and Supplies (MCC)",Middesk,Middesk,641
+12807,5074,"Plumbing, Heating Equipment, and Supplies (MCC)",Middesk,Middesk,641
+12741,5085,Industrial Supplies (Not Elsewhere Classified) (MCC),Middesk,Middesk,641
+12810,5094,"Precious Stones and Metals, Watches and Jewelry (MCC)",Middesk,Middesk,641
+12691,5099,Durable Goods (Not Elsewhere Classified) (MCC),Middesk,Middesk,641
+11560,51,Information,Middesk,Middesk,641
+12836,5111,"Stationary, Office Supplies, Printing and Writing Paper (MCC)",Middesk,Middesk,641
+12048,511120,Periodical Publishers,Middesk,Middesk,641
+12047,511210,Software Publishers,Middesk,Middesk,641
+11561,5121,Motion Picture and Video Industries,Middesk,Middesk,641
+11562,5122,Sound Recording Industries (MCC),Middesk,Middesk,641
+12689,5122,"Drugs, Drug Proprietaries, and Druggist Sundries (MCC)",Middesk,Middesk,641
+12046,512230,Music Publishers,Middesk,Middesk,641
+11563,5131,"Newspaper, Periodical, Book, and Directory Publishers (MCC)",Middesk,Middesk,641
+12806,5131,"Piece Goods, Notions, and Other Dry Goods (MCC)",Middesk,Middesk,641
+11564,5132,Software Publishers,Middesk,Middesk,641
+12863,5137,"Uniforms, Commercial Clothing (MCC)",Middesk,Middesk,641
+12646,5139,Commercial Footwear (MCC),Middesk,Middesk,641
+12045,515120,Television Broadcasting,Middesk,Middesk,641
+11565,5161,Radio and Television Broadcasting Stations,Middesk,Middesk,641
+11566,5162,"Media Streaming Distribution Services, Social Networks, and Other Media Networks and Content Providers",Middesk,Middesk,641
+12635,5169,Chemicals and Allied Products (Not Elsewhere Classified) (MCC),Middesk,Middesk,641
+11567,5171,Wired and Wireless Telecommunications (except Satellite),Middesk,Middesk,641
+12801,5172,Petroleum and Petroleum Products (MCC),Middesk,Middesk,641
+12044,517312,Wireless Telecommunications Carriers (except Satellite),Middesk,Middesk,641
+11568,5174,Satellite Telecommunications,Middesk,Middesk,641
+11569,5178,All Other Telecommunications,Middesk,Middesk,641
+12043,517919,All Other Telecommunications,Middesk,Middesk,641
+11570,5182,"Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services",Middesk,Middesk,641
+12042,518210,"Data Processing, Hosting, and Related Services",Middesk,Middesk,641
+12041,519130,Internet Publishing and Broadcasting and Web Search Portals,Middesk,Middesk,641
+12040,519190,All Other Information Services,Middesk,Middesk,641
+11571,5192,"Web Search Portals, Libraries, Archives, and Other Information Services (MCC)",Middesk,Middesk,641
+12619,5192,"Books, Periodicals, and Newspapers (MCC)",Middesk,Middesk,641
+12713,5193,"Florists Supplies, Nursery Stock, and Flowers (MCC)",Middesk,Middesk,641
+12796,5198,"Paints, Varnishes, and Supplies (MCC)",Middesk,Middesk,641
+12787,5199,Nondurable Goods (Not Elsewhere Classified) (MCC),Middesk,Middesk,641
+11572,52,Finance and Insurance,Middesk,Middesk,641
+12737,5200,Home Supply Warehouse Stores (MCC),Middesk,Middesk,641
+11573,5211,Monetary Authorities-Central Bank (MCC),Middesk,Middesk,641
+12752,5211,"Lumber, Building Materials Stores (MCC)",Middesk,Middesk,641
+11574,5221,Depository Credit Intermediation,Middesk,Middesk,641
+12039,52211,Commercial Banking,Middesk,Middesk,641
+12038,522110,Commercial Banking,Middesk,Middesk,641
+12037,52212,Savings Institutions,Middesk,Middesk,641
+12036,522120,Savings Institutions,Middesk,Middesk,641
+12035,52213,Credit Unions,Middesk,Middesk,641
+12034,522130,Credit Unions,Middesk,Middesk,641
+12033,522190,Other Depository Credit Intermediation,Middesk,Middesk,641
+11575,5222,Nondepository Credit Intermediation,Middesk,Middesk,641
+12032,522210,Credit Card Issuing,Middesk,Middesk,641
+12031,522292,Real Estate Credit,Middesk,Middesk,641
+12030,522298,All Other Nondepository Credit Intermediation,Middesk,Middesk,641
+11576,5223,Activities Related to Credit Intermediation,Middesk,Middesk,641
+12029,522310,Mortgage and Nonmortgage Loan Brokers,Middesk,Middesk,641
+12028,522320,"Financial Transactions Processing, Reserve, and Clearinghouse Activities",Middesk,Middesk,641
+12027,522390,Other Activities Related to Credit Intermediation,Middesk,Middesk,641
+11577,5231,Securities and Commodity Contracts Intermediation and Brokerage (MCC),Middesk,Middesk,641
+12722,5231,"Glass, Paint, and Wallpaper Stores (MCC)",Middesk,Middesk,641
+12026,523110,Investment Banking and Securities Dealing,Middesk,Middesk,641
+12025,523120,Securities Brokerage,Middesk,Middesk,641
+12024,523130,Commodity Contracts Dealing,Middesk,Middesk,641
+12023,523140,Commodity Contracts Brokerage,Middesk,Middesk,641
+11578,5232,Securities and Commodity Exchanges,Middesk,Middesk,641
+12022,523210,Securities and Commodity Exchanges,Middesk,Middesk,641
+11579,5239,Other Financial Investment Activities,Middesk,Middesk,641
+12021,523910,Miscellaneous Intermediation,Middesk,Middesk,641
+12020,523920,Portfolio Management,Middesk,Middesk,641
+12019,523930,Investment Advice,Middesk,Middesk,641
+12018,523990,All Other Financial Investment Activities,Middesk,Middesk,641
+12017,523991,"Trust, Fiduciary, and Custody Activities",Middesk,Middesk,641
+12016,523999,Miscellaneous Financial Investment Activities,Middesk,Middesk,641
+11580,5241,Insurance Carriers,Middesk,Middesk,641
+12015,524113,Direct Life Insurance Carriers,Middesk,Middesk,641
+12014,524114,Direct Health and Medical Insurance Carriers,Middesk,Middesk,641
+12013,524126,Direct Property and Casualty Insurance Carriers,Middesk,Middesk,641
+12012,524130,Reinsurance Carriers,Middesk,Middesk,641
+11581,5242,"Agencies, Brokerages, and Other Insurance Related Activities",Middesk,Middesk,641
+12011,524210,Insurance Agencies and Brokerages,Middesk,Middesk,641
+12010,524292,Third Party Administration of Insurance and Pension Funds,Middesk,Middesk,641
+12009,524298,All Other Insurance Related Activities,Middesk,Middesk,641
+11582,5251,Insurance and Employee Benefit Funds (MCC),Middesk,Middesk,641
+12731,5251,Hardware Stores (MCC),Middesk,Middesk,641
+11583,5259,Other Investment Pools and Funds,Middesk,Middesk,641
+12008,525910,Open-End Investment Funds,Middesk,Middesk,641
+12007,525920,"Trusts, Estates, and Agency Accounts",Middesk,Middesk,641
+12006,525930,Real estate investment trusts,Middesk,Middesk,641
+12005,525990,Other Financial Vehicles,Middesk,Middesk,641
+12788,5261,"Nurseries, Lawn and Garden Supply Stores (MCC)",Middesk,Middesk,641
+12755,5262,Marketplaces (MCC),Middesk,Middesk,641
+12776,5271,Mobile Home Dealers (MCC),Middesk,Middesk,641
+11584,53,Real Estate Rental and Leasing,Middesk,Middesk,641
+12874,5300,Wholesale Clubs (MCC),Middesk,Middesk,641
+12692,5309,Duty Free Stores (MCC),Middesk,Middesk,641
+12683,5310,Discount Stores (MCC),Middesk,Middesk,641
+11585,5311,Lessors of Real Estate (MCC),Middesk,Middesk,641
+12669,5311,Department Stores (MCC),Middesk,Middesk,641
+12004,531110,Lessors of Residential Buildings and Dwellings,Middesk,Middesk,641
+12003,531120,Lessors of Nonresidential Buildings (except Miniwarehouses),Middesk,Middesk,641
+11586,5312,Offices of Real Estate Agents and Brokers,Middesk,Middesk,641
+12002,531210,Offices of Real Estate Agents and Brokers,Middesk,Middesk,641
+11587,5313,Activities Related to Real Estate,Middesk,Middesk,641
+12001,531311,Residential Property Managers,Middesk,Middesk,641
+12000,531390,Other Activities Related to Real Estate,Middesk,Middesk,641
+11588,5321,Automotive Equipment Rental and Leasing,Middesk,Middesk,641
+11589,5322,Consumer Goods Rental,Middesk,Middesk,641
+11999,532210,Consumer Electronics and Appliances Rental,Middesk,Middesk,641
+11590,5323,General Rental Centers,Middesk,Middesk,641
+11591,5324,Commercial and Industrial Machinery and Equipment Rental and Leasing,Middesk,Middesk,641
+11998,532411,"Commercial Air, Rail, and Water Transportation Equipment Rental and Leasing",Middesk,Middesk,641
+11997,532412,"Construction, Mining, and Forestry Machinery and Equipment Rental and Leasing",Middesk,Middesk,641
+11996,532490,Other Commercial and Industrial Machinery and Equipment Rental and Leasing,Middesk,Middesk,641
+11592,5331,Lessors of Nonfinancial Intangible Assets (except Copyrighted Works) (MCC),Middesk,Middesk,641
+12866,5331,Variety Stores (MCC),Middesk,Middesk,641
+12769,5399,Miscellaneous General Merchandise (MCC),Middesk,Middesk,641
+11593,54,"Professional, Scientific, and Technical Services",Middesk,Middesk,641
+11594,5411,Legal Services (MCC),Middesk,Middesk,641
+12730,5411,"Grocery Stores, Supermarkets (MCC)",Middesk,Middesk,641
+11995,54111,Offices of Lawyers,Middesk,Middesk,641
+11994,541110,Offices of Lawyers,Middesk,Middesk,641
+11993,541191,Title Abstract and Settlement Offices,Middesk,Middesk,641
+11992,541199,All Other Legal Services,Middesk,Middesk,641
+11595,5412,"Accounting, Tax Preparation, Bookkeeping, and Payroll Services",Middesk,Middesk,641
+11991,541211,Offices of Certified Public Accountants,Middesk,Middesk,641
+11990,541213,Tax Preparation Services,Middesk,Middesk,641
+11989,541214,Payroll Services,Middesk,Middesk,641
+11988,541219,Other Accounting Services,Middesk,Middesk,641
+11596,5413,"Architectural, Engineering, and Related Services",Middesk,Middesk,641
+11987,541330,Engineering Services,Middesk,Middesk,641
+11597,5414,Specialized Design Services,Middesk,Middesk,641
+11986,541430,Graphic Design Services,Middesk,Middesk,641
+11598,5415,Computer Systems Design and Related Services,Middesk,Middesk,641
+11985,541511,Custom Computer Programming Services,Middesk,Middesk,641
+11984,541512,Computer Systems Design Services,Middesk,Middesk,641
+11983,541519,Other Computer Related Services,Middesk,Middesk,641
+11599,5416,"Management, Scientific, and Technical Consulting Services",Middesk,Middesk,641
+11982,541611,Administrative Management and General Management Consulting Services,Middesk,Middesk,641
+11981,541612,Human Resources Consulting Services,Middesk,Middesk,641
+11980,541614,"Process, Physical Distribution, and Logistics Consulting Services",Middesk,Middesk,641
+11979,541618,Other Management Consulting Services,Middesk,Middesk,641
+11600,5417,Scientific Research and Development Services,Middesk,Middesk,641
+11978,541714,Research and Development in Biotechnology (except Nanobiotechnology),Middesk,Middesk,641
+11977,541715,"Research and Development in the Physical, Engineering, and Life Sciences (except Nanotechnology and Biotechnology)",Middesk,Middesk,641
+11976,541720,Research and Development in the Social Sciences and Humanities,Middesk,Middesk,641
+11601,5418,"Advertising, Public Relations, and Related Services",Middesk,Middesk,641
+11975,541810,Advertising Agencies,Middesk,Middesk,641
+11602,5419,"Other Professional, Scientific, and Technical Services",Middesk,Middesk,641
+11974,541910,Marketing Research and Public Opinion Polling,Middesk,Middesk,641
+11973,541990,"All Other Professional, Scientific, and Technical Services",Middesk,Middesk,641
+12714,5422,Freezer and Locker Meat Provisioners (MCC),Middesk,Middesk,641
+12626,5441,"Candy, Nut, and Confectionery Stores (MCC)",Middesk,Middesk,641
+12665,5451,Dairy Products Stores (MCC),Middesk,Middesk,641
+12610,5462,Bakeries (MCC),Middesk,Middesk,641
+12768,5499,Miscellaneous Food Stores - Convenience Stores and Specialty Markets (MCC),Middesk,Middesk,641
+11603,55,Management of Companies and Enterprises,Middesk,Middesk,641
+11604,55,Management of Companies and Enterprises,Middesk,Middesk,641
+12629,5511,"Car and Truck Dealers (New & Used) Sales, Service, Repairs Parts and Leasing (MCC)",Middesk,Middesk,641
+11972,551112,Offices of Other Holding Companies,Middesk,Middesk,641
+11971,551114,"Corporate, Subsidiary, and Regional Managing Offices",Middesk,Middesk,641
+12630,5521,"Car and Truck Dealers (Used Only) Sales, Service, Repairs Parts and Leasing (MCC)",Middesk,Middesk,641
+12603,5531,Auto and Home Supply Stores (MCC),Middesk,Middesk,641
+12608,5532,Automotive Tire Stores (MCC),Middesk,Middesk,641
+12607,5533,Automotive Parts and Accessories Stores (MCC),Middesk,Middesk,641
+12823,5541,Service Stations (MCC),Middesk,Middesk,641
+12605,5542,Automated Fuel Dispensers (MCC),Middesk,Middesk,641
+12616,5551,Boat Dealers (MCC),Middesk,Middesk,641
+12696,5552,Electric Vehicle Charging (MCC),Middesk,Middesk,641
+12782,5561,"Motorcycle Shops, Dealers (MCC)",Middesk,Middesk,641
+12781,5571,Motorcycle Shops and Dealers (MCC),Middesk,Middesk,641
+12779,5592,Motor Homes Dealers (MCC),Middesk,Middesk,641
+12828,5598,Snowmobile Dealers (MCC),Middesk,Middesk,641
+12766,5599,Miscellaneous Auto Dealers (MCC),Middesk,Middesk,641
+11605,56,Administrative and Support and Waste Management and Remediation Services,Middesk,Middesk,641
+11606,5611,Office Administrative Services (MCC),Middesk,Middesk,641
+12762,5611,Mens and Boys Clothing and Accessories Stores (MCC),Middesk,Middesk,641
+11970,561110,Office Administrative Services,Middesk,Middesk,641
+11607,5612,Facilities Support Services,Middesk,Middesk,641
+11608,5613,Employment Services,Middesk,Middesk,641
+11969,561310,Employment Placement Agencies and Executive Search Services,Middesk,Middesk,641
+11968,561311,Employment Placement Agencies,Middesk,Middesk,641
+11967,561320,Temporary Help Services,Middesk,Middesk,641
+11966,561330,Professional Employer Organizations,Middesk,Middesk,641
+11609,5614,Business Support Services,Middesk,Middesk,641
+11965,561499,All Other Business Support Services,Middesk,Middesk,641
+11610,5615,Travel Arrangement and Reservation Services,Middesk,Middesk,641
+11964,561510,Travel Agencies,Middesk,Middesk,641
+11611,5616,Investigation and Security Services,Middesk,Middesk,641
+11963,561613,Armored Car Services,Middesk,Middesk,641
+11612,5617,Services to Buildings and Dwellings,Middesk,Middesk,641
+11613,5619,Other Support Services,Middesk,Middesk,641
+11962,561920,Convention and Trade Show Organizers,Middesk,Middesk,641
+11961,561990,All Other Support Services,Middesk,Middesk,641
+11614,5621,Waste Collection (MCC),Middesk,Middesk,641
+12878,5621,Womens Ready-To-Wear Stores (MCC),Middesk,Middesk,641
+11615,5622,Waste Treatment and Disposal,Middesk,Middesk,641
+11616,5629,Remediation and Other Waste Management Services,Middesk,Middesk,641
+12877,5631,Womens Accessory and Specialty Shops (MCC),Middesk,Middesk,641
+12637,5641,Childrens and Infants Wear Stores (MCC),Middesk,Middesk,641
+12706,5651,Family Clothing Stores (MCC),Middesk,Middesk,641
+12834,5655,Sports and Riding Apparel Stores (MCC),Middesk,Middesk,641
+12826,5661,Shoe Stores (MCC),Middesk,Middesk,641
+12719,5681,Furriers and Fur Shops (MCC),Middesk,Middesk,641
+12763,5691,"Mens, Womens Clothing Stores (MCC)",Middesk,Middesk,641
+12840,5697,"Tailors, Alterations (MCC)",Middesk,Middesk,641
+12875,5698,Wig and Toupee Stores (MCC),Middesk,Middesk,641
+12765,5699,Miscellaneous Apparel and Accessory Shops (MCC),Middesk,Middesk,641
+12718,5712,"Furniture, Home Furnishings, and Equipment Stores, Except Appliances (MCC)",Middesk,Middesk,641
+12711,5713,Floor Covering Stores (MCC),Middesk,Middesk,641
+12686,5714,"Drapery, Window Covering, and Upholstery Stores (MCC)",Middesk,Middesk,641
+12710,5718,"Fireplace, Fireplace Screens, and Accessories Stores (MCC)",Middesk,Middesk,641
+12771,5719,Miscellaneous Home Furnishing Specialty Stores (MCC),Middesk,Middesk,641
+12740,5722,Household Appliance Stores (MCC),Middesk,Middesk,641
+12700,5732,Electronics Stores (MCC),Middesk,Middesk,641
+12783,5733,"Music Stores-Musical Instruments, Pianos, and Sheet Music (MCC)",Middesk,Middesk,641
+12652,5734,Computer Software Stores (MCC),Middesk,Middesk,641
+12816,5735,Record Stores (MCC),Middesk,Middesk,641
+12633,5811,Caterers (MCC),Middesk,Middesk,641
+12693,5812,"Eating Places, Restaurants (MCC)",Middesk,Middesk,641
+12687,5813,Drinking Places (MCC),Middesk,Middesk,641
+12707,5814,Fast Food Restaurants (MCC),Middesk,Middesk,641
+12671,5815,"Digital Goods Media – Books, Movies, Music (MCC)",Middesk,Middesk,641
+12673,5816,Digital Goods – Games (MCC),Middesk,Middesk,641
+12672,5817,Digital Goods – Applications (Excludes Games) (MCC),Middesk,Middesk,641
+12674,5818,Digital Goods – Large Digital Goods Merchant (MCC),Middesk,Middesk,641
+12688,5912,Drug Stores and Pharmacies (MCC),Middesk,Middesk,641
+12795,5921,"Package Stores-Beer, Wine, and Liquor (MCC)",Middesk,Middesk,641
+12864,5931,Used Merchandise and Secondhand Stores (MCC),Middesk,Middesk,641
+12595,5932,Antique Shops (MCC),Middesk,Middesk,641
+12799,5933,Pawn Shops (MCC),Middesk,Middesk,641
+12879,5935,Wrecking and Salvage Yards (MCC),Middesk,Middesk,641
+12594,5937,Antique Reproductions (MCC),Middesk,Middesk,641
+12614,5940,Bicycle Shops (MCC),Middesk,Middesk,641
+12831,5941,Sporting Goods Stores (MCC),Middesk,Middesk,641
+12618,5942,Book Stores (MCC),Middesk,Middesk,641
+12837,5943,"Stationery Stores, Office, and School Supply Stores (MCC)",Middesk,Middesk,641
+12746,5944,"Jewelry Stores, Watches, Clocks, and Silverware Stores (MCC)",Middesk,Middesk,641
+12736,5945,"Hobby, Toy, and Game Shops (MCC)",Middesk,Middesk,641
+12625,5946,Camera and Photographic Supply Stores (MCC),Middesk,Middesk,641
+12721,5947,"Gift, Card, Novelty, and Souvenir Shops (MCC)",Middesk,Middesk,641
+12751,5948,Luggage and Leather Goods Stores (MCC),Middesk,Middesk,641
+12824,5949,"Sewing, Needlework, Fabric, and Piece Goods Stores (MCC)",Middesk,Middesk,641
+12723,5950,"Glassware, Crystal Stores (MCC)",Middesk,Middesk,641
+12678,5960,Direct Marketing - Insurance Services (MCC),Middesk,Middesk,641
+12682,5962,Direct Marketing - Travel (MCC),Middesk,Middesk,641
+12685,5963,Door-To-Door Sales (MCC),Middesk,Middesk,641
+12675,5964,Direct Marketing - Catalog Merchant (MCC),Middesk,Middesk,641
+12676,5965,Direct Marketing - Combination Catalog and Retail Merchant (MCC),Middesk,Middesk,641
+12680,5966,Direct Marketing - Outbound Telemarketing (MCC),Middesk,Middesk,641
+12677,5967,Direct Marketing - Inbound Telemarketing (MCC),Middesk,Middesk,641
+12681,5968,Direct Marketing - Subscription (MCC),Middesk,Middesk,641
+12679,5969,Direct Marketing - Other (MCC),Middesk,Middesk,641
+12599,5970,Artists Supply and Craft Shops (MCC),Middesk,Middesk,641
+12598,5971,Art Dealers and Galleries (MCC),Middesk,Middesk,641
+12835,5972,Stamp and Coin Stores (MCC),Middesk,Middesk,641
+12818,5973,Religious Goods Stores (MCC),Middesk,Middesk,641
+12734,5975,Hearing Aids Sales and Supplies (MCC),Middesk,Middesk,641
+12793,5976,Orthopedic Goods - Prosthetic Devices (MCC),Middesk,Middesk,641
+12658,5977,Cosmetic Stores (MCC),Middesk,Middesk,641
+12861,5978,Typewriter Stores (MCC),Middesk,Middesk,641
+12715,5983,Fuel Dealers (Non Automotive) (MCC),Middesk,Middesk,641
+12712,5992,Florists (MCC),Middesk,Middesk,641
+12640,5993,Cigar Stores and Stands (MCC),Middesk,Middesk,641
+12784,5994,News Dealers and Newsstands (MCC),Middesk,Middesk,641
+12800,5995,"Pet Shops, Pet Food, and Supplies (MCC)",Middesk,Middesk,641
+12838,5996,Swimming Pools Sales (MCC),Middesk,Middesk,641
+12695,5997,Electric Razor Stores (MCC),Middesk,Middesk,641
+12847,5998,Tent and Awning Shops (MCC),Middesk,Middesk,641
+12775,5999,Miscellaneous Specialty Retail (MCC),Middesk,Middesk,641
+12753,6010,Manual Cash Disburse (MCC),Middesk,Middesk,641
+12604,6011,Automated Cash Disburse (MCC),Middesk,Middesk,641
+12708,6012,Financial Institutions (MCC),Middesk,Middesk,641
+12785,6051,"Non-FI, Money Orders (MCC)",Middesk,Middesk,641
+11617,61,Educational Services,Middesk,Middesk,641
+11618,6111,Elementary and Secondary Schools,Middesk,Middesk,641
+11960,611110,Elementary and Secondary Schools,Middesk,Middesk,641
+11619,6112,Junior Colleges,Middesk,Middesk,641
+11620,6113,"Colleges, Universities, and Professional Schools",Middesk,Middesk,641
+11959,611310,"Colleges, Universities, and Professional Schools",Middesk,Middesk,641
+11621,6114,Business Schools and Computer and Management Training,Middesk,Middesk,641
+11622,6115,Technical and Trade Schools,Middesk,Middesk,641
+11958,611519,Other Technical and Trade Schools,Middesk,Middesk,641
+11623,6116,Other Schools and Instruction,Middesk,Middesk,641
+11624,6117,Educational Support Services,Middesk,Middesk,641
+11957,611710,Educational Support Services,Middesk,Middesk,641
+11625,62,Health Care and Social Assistance,Middesk,Middesk,641
+11626,6211,Offices of Physicians (MCC),Middesk,Middesk,641
+12822,6211,Security Brokers/Dealers (MCC),Middesk,Middesk,641
+11956,621111,Offices of Physicians (except Mental Health Specialists),Middesk,Middesk,641
+11955,621112,"Offices of Physicians, Mental Health Specialists",Middesk,Middesk,641
+11627,6212,Offices of Dentists,Middesk,Middesk,641
+11628,6213,Offices of Other Health Practitioners,Middesk,Middesk,641
+11954,621330,Offices of Mental Health Practitioners (except Physicians),Middesk,Middesk,641
+11629,6214,Outpatient Care Centers,Middesk,Middesk,641
+11953,621420,Outpatient Mental Health and Substance Abuse Centers,Middesk,Middesk,641
+11952,621491,HMO Medical Centers,Middesk,Middesk,641
+11951,621498,All Other Outpatient Care Centers,Middesk,Middesk,641
+11630,6215,Medical and Diagnostic Laboratories,Middesk,Middesk,641
+11950,621511,Medical Laboratories,Middesk,Middesk,641
+11631,6216,Home Health Care Services,Middesk,Middesk,641
+11632,6219,Other Ambulatory Health Care Services,Middesk,Middesk,641
+11949,621999,All Other Miscellaneous Ambulatory Health Care Services,Middesk,Middesk,641
+11633,6221,General Medical and Surgical Hospitals,Middesk,Middesk,641
+11948,622110,General Medical and Surgical Hospitals,Middesk,Middesk,641
+11634,6222,Psychiatric and Substance Abuse Hospitals,Middesk,Middesk,641
+11635,6223,Specialty (except Psychiatric and Substance Abuse) Hospitals,Middesk,Middesk,641
+11636,6231,Nursing Care Facilities (Skilled Nursing Facilities),Middesk,Middesk,641
+11637,6232,"Residential Intellectual and Developmental Disability, Mental Health, and Substance Abuse Facilities",Middesk,Middesk,641
+11638,6233,Continuing Care Retirement Communities and Assisted Living Facilities for the Elderly,Middesk,Middesk,641
+11947,623311,Continuing Care Retirement Communities,Middesk,Middesk,641
+11639,6239,Other Residential Care Facilities,Middesk,Middesk,641
+11640,6241,Individual and Family Services,Middesk,Middesk,641
+11946,624110,Child and Youth Services,Middesk,Middesk,641
+11945,624120,Services for the Elderly and Persons with Disabilities,Middesk,Middesk,641
+11944,624190,Other Individual and Family Services,Middesk,Middesk,641
+11641,6242,"Community Food and Housing, and Emergency and Other Relief Services",Middesk,Middesk,641
+11943,624210,Community Food Services,Middesk,Middesk,641
+11942,624220,Community Housing Services,Middesk,Middesk,641
+11941,624221,Temporary Shelters,Middesk,Middesk,641
+11940,624229,Other Community Housing Services,Middesk,Middesk,641
+11939,624230,Emergency and Other Relief Services,Middesk,Middesk,641
+11642,6243,Vocational Rehabilitation Services,Middesk,Middesk,641
+11938,624310,Vocational Rehabilitation Services,Middesk,Middesk,641
+11643,6244,Child Care Services,Middesk,Middesk,641
+12744,6300,"Insurance Underwriting, Premiums (MCC)",Middesk,Middesk,641
+12743,6399,Insurance - Default (MCC),Middesk,Middesk,641
+12815,6513,Real Estate Agents and Managers - Rentals (MCC),Middesk,Middesk,641
+12786,6540,"Non-FI, Stored Value Card Purchase/Load (MCC)",Middesk,Middesk,641
+12739,7011,"Hotels, Motels, and Resorts (MCC)",Middesk,Middesk,641
+12850,7012,Timeshares (MCC),Middesk,Middesk,641
+12832,7032,Sporting/Recreation Camps (MCC),Middesk,Middesk,641
+12855,7033,"Trailer Parks, Campgrounds (MCC)",Middesk,Middesk,641
+11644,71,"Arts, Entertainment, and Recreation",Middesk,Middesk,641
+11645,7111,Performing Arts Companies,Middesk,Middesk,641
+11937,711110,Theater Companies and Dinner Theaters,Middesk,Middesk,641
+11936,711120,Dance Companies,Middesk,Middesk,641
+11646,7112,Spectator Sports,Middesk,Middesk,641
+11647,7113,"Promoters of Performing Arts, Sports, and Similar Events",Middesk,Middesk,641
+11935,711310,"Promoters of Performing Arts, Sports, and Similar Events with Facilities",Middesk,Middesk,641
+11934,711320,"Promoters of Performing Arts, Sports, and Similar Events without Facilities",Middesk,Middesk,641
+11648,7114,"Agents and Managers for Artists, Athletes, Entertainers, and Other Public Figures",Middesk,Middesk,641
+11649,7115,"Independent Artists, Writers, and Performers",Middesk,Middesk,641
+11650,7121,"Museums, Historical Sites, and Similar Institutions",Middesk,Middesk,641
+11933,712110,Museums,Middesk,Middesk,641
+11932,712130,Zoos and Botanical Gardens,Middesk,Middesk,641
+11651,7131,Amusement Parks and Arcades,Middesk,Middesk,641
+11931,713110,Amusement and Theme Parks,Middesk,Middesk,641
+11652,7132,Gambling Industries,Middesk,Middesk,641
+11930,713210,Casinos (except Casino Hotels),Middesk,Middesk,641
+11929,713290,Other Gambling Industries,Middesk,Middesk,641
+11653,7139,Other Amusement and Recreation Industries,Middesk,Middesk,641
+11928,713910,Golf Courses and Country Clubs,Middesk,Middesk,641
+12145,713930,Marinas,Middesk,Middesk,641
+11927,713940,Fitness and Recreational Sports Centers,Middesk,Middesk,641
+11926,713950,Bowling Centers,Middesk,Middesk,641
+11925,713990,All Other Amusement and Recreation Industries,Middesk,Middesk,641
+11654,72,Accommodation and Food Services,Middesk,Middesk,641
+12749,7210,"Laundry, Cleaning Services (MCC)",Middesk,Middesk,641
+11655,7211,Traveler Accommodation (MCC),Middesk,Middesk,641
+12748,7211,Laundries (MCC),Middesk,Middesk,641
+11924,721110,Hotels (except Casino Hotels) and Motels,Middesk,Middesk,641
+11923,721120,Casino Hotels,Middesk,Middesk,641
+11656,7212,RV (Recreational Vehicle) Parks and Recreational Camps,Middesk,Middesk,641
+11657,7213,"Rooming and Boarding Houses, Dormitories, and Workers' Camps",Middesk,Middesk,641
+12690,7216,Dry Cleaners (MCC),Middesk,Middesk,641
+12632,7217,Carpet/Upholstery Cleaning (MCC),Middesk,Middesk,641
+12803,7221,Photographic Studios (MCC),Middesk,Middesk,641
+11658,7223,Special Food Services,Middesk,Middesk,641
+11922,722310,Food Service Contractors,Middesk,Middesk,641
+11921,722320,Caterers,Middesk,Middesk,641
+11920,722330,Mobile Food Services,Middesk,Middesk,641
+11659,7224,Drinking Places (Alcoholic Beverages),Middesk,Middesk,641
+11919,722410,Drinking Places (Alcoholic Beverages),Middesk,Middesk,641
+11660,7225,Restaurants and Other Eating Places,Middesk,Middesk,641
+11661,722511,Full-Service Restaurants,Middesk,Middesk,641
+11662,722513,Limited-Service Restaurants,Middesk,Middesk,641
+11663,722515,Snack and Nonalcoholic Beverage Bars,Middesk,Middesk,641
+12612,7230,Barber and Beauty Shops (MCC),Middesk,Middesk,641
+12825,7251,Shoe Repair/Hat Cleaning (MCC),Middesk,Middesk,641
+12716,7261,"Funeral Services, Crematories (MCC)",Middesk,Middesk,641
+12667,7273,Dating/Escort Services (MCC),Middesk,Middesk,641
+12842,7276,Tax Preparation Services (MCC),Middesk,Middesk,641
+12659,7277,Counseling Services (MCC),Middesk,Middesk,641
+12623,7278,Buying/Shopping Services (MCC),Middesk,Middesk,641
+12643,7296,Clothing Rental (MCC),Middesk,Middesk,641
+12757,7297,Massage Parlors (MCC),Middesk,Middesk,641
+12733,7298,Health and Beauty Spas (MCC),Middesk,Middesk,641
+12770,7299,Miscellaneous General Services (MCC),Middesk,Middesk,641
+12587,7311,Advertising Services (MCC),Middesk,Middesk,641
+12663,7321,Credit Reporting Agencies (MCC),Middesk,Middesk,641
+12647,7333,"Commercial Photography, Art and Graphics (MCC)",Middesk,Middesk,641
+12813,7338,"Quick Copy, Repro, and Blueprint (MCC)",Middesk,Middesk,641
+12821,7339,Secretarial Support Services (MCC),Middesk,Middesk,641
+12705,7342,Exterminating Services (MCC),Middesk,Middesk,641
+12642,7349,Cleaning and Maintenance (MCC),Middesk,Middesk,641
+12703,7361,Employment/Temp Agencies (MCC),Middesk,Middesk,641
+12650,7372,Computer Programming (MCC),Middesk,Middesk,641
+12742,7375,Information Retrieval Services (MCC),Middesk,Middesk,641
+12651,7379,Computer Repair (MCC),Middesk,Middesk,641
+12656,7392,"Consulting, Public Relations (MCC)",Middesk,Middesk,641
+12670,7393,Detective Agencies (MCC),Middesk,Middesk,641
+12704,7394,Equipment Rental (MCC),Middesk,Middesk,641
+12802,7395,Photo Developing (MCC),Middesk,Middesk,641
+12767,7399,Miscellaneous Business Services (MCC),Middesk,Middesk,641
+12858,7511,Truck StopIteration (MCC),Middesk,Middesk,641
+12627,7512,Car Rental Agencies (MCC),Middesk,Middesk,641
+12859,7513,Truck/Utility Trailer Rentals (MCC),Middesk,Middesk,641
+12817,7519,Recreational Vehicle Rentals (MCC),Middesk,Middesk,641
+12797,7523,"Parking Lots, Garages (MCC)",Middesk,Middesk,641
+12600,7531,Auto Body Repair Shops (MCC),Middesk,Middesk,641
+12851,7534,Tire Retreading and Repair (MCC),Middesk,Middesk,641
+12601,7535,Auto Paint Shops (MCC),Middesk,Middesk,641
+12602,7538,Auto Service Shops (MCC),Middesk,Middesk,641
+12628,7542,Car Washes (MCC),Middesk,Middesk,641
+12854,7549,Towing Services (MCC),Middesk,Middesk,641
+12699,7622,Electronics Repair Shops (MCC),Middesk,Middesk,641
+12586,7623,"A/C, Refrigeration Repair (MCC)",Middesk,Middesk,641
+12827,7629,Small Appliance Repair (MCC),Middesk,Middesk,641
+12872,7631,Watch/Jewelry Repair (MCC),Middesk,Middesk,641
+12717,7641,"Furniture Repair, Refinishing (MCC)",Middesk,Middesk,641
+12873,7692,Welding Repair (MCC),Middesk,Middesk,641
+12774,7699,Miscellaneous Repair Shops (MCC),Middesk,Middesk,641
+12729,7800,Government-Owned Lotteries (US Region only) (MCC),Middesk,Middesk,641
+12725,7801,Government Licensed On-line Casinos (On-Line Gambling)(US Region only) (MCC),Middesk,Middesk,641
+12727,7802,Government-Licensed Horse/Dog Racing (US Region only) (MCC),Middesk,Middesk,641
+12805,7829,Picture/Video Production (MCC),Middesk,Middesk,641
+12777,7832,Motion Picture Theaters (MCC),Middesk,Middesk,641
+12870,7841,Video Tape Rental Stores (MCC),Middesk,Middesk,641
+12666,7911,"Dance Hall, Studios, Schools (MCC)",Middesk,Middesk,641
+12849,7922,Theatrical Ticket Agencies (MCC),Middesk,Middesk,641
+12611,7929,"Bands, Orchestras (MCC)",Middesk,Middesk,641
+12615,7932,Billiard/Pool Establishments (MCC),Middesk,Middesk,641
+12620,7933,Bowling Alleys (MCC),Middesk,Middesk,641
+12833,7941,Sports Clubs/Fields (MCC),Middesk,Middesk,641
+12853,7991,Tourist Attractions and Exhibits (MCC),Middesk,Middesk,641
+12724,7992,Golf Courses - Public (MCC),Middesk,Middesk,641
+12868,7993,Video Amusement Game Supplies (MCC),Middesk,Middesk,641
+12869,7994,Video Game Arcades (MCC),Middesk,Middesk,641
+12613,7995,Betting/Casino Gambling (MCC),Middesk,Middesk,641
+12593,7996,Amusement Parks/Carnivals (MCC),Middesk,Middesk,641
+12660,7997,Country Clubs (MCC),Middesk,Middesk,641
+12596,7998,Aquariums (MCC),Middesk,Middesk,641
+12773,7999,Miscellaneous Recreation Services (MCC),Middesk,Middesk,641
+12684,8011,Doctors (MCC),Middesk,Middesk,641
+12668,8021,"Dentists, Orthodontists (MCC)",Middesk,Middesk,641
+12794,8031,Osteopaths (MCC),Middesk,Middesk,641
+12639,8041,Chiropractors (MCC),Middesk,Middesk,641
+12792,8042,"Optometrists, Ophthalmologist (MCC)",Middesk,Middesk,641
+12791,8043,"Opticians, Eyeglasses (MCC)",Middesk,Middesk,641
+12638,8049,"Chiropodists, Podiatrists (MCC)",Middesk,Middesk,641
+12789,8050,Nursing/Personal Care (MCC),Middesk,Middesk,641
+12738,8062,Hospitals (MCC),Middesk,Middesk,641
+12759,8071,Medical and Dental Labs (MCC),Middesk,Middesk,641
+12758,8099,Medical Services (MCC),Middesk,Middesk,641
+11664,81,Other Services (except Public Administration),Middesk,Middesk,641
+11665,8111,Automotive Repair and Maintenance (MCC),Middesk,Middesk,641
+12750,8111,"Legal Services, Attorneys (MCC)",Middesk,Middesk,641
+11918,811192,Car Washes,Middesk,Middesk,641
+11666,8112,Electronic and Precision Equipment Repair and Maintenance,Middesk,Middesk,641
+11667,8113,Commercial and Industrial Machinery and Equipment (except Automotive and Electronic) Repair and Maintenance,Middesk,Middesk,641
+11668,8114,Personal and Household Goods Repair and Maintenance,Middesk,Middesk,641
+11669,8121,Personal Care Services,Middesk,Middesk,641
+12142,812111,Barber Shops,Middesk,Middesk,641
+12143,812112,Beauty Salons,Middesk,Middesk,641
+12144,812113,Nail Salons,Middesk,Middesk,641
+11917,812199,Other Personal Care Services,Middesk,Middesk,641
+11670,8122,Death Care Services,Middesk,Middesk,641
+11671,8123,Drycleaning and Laundry Services,Middesk,Middesk,641
+11916,812310,Coin-Operated Laundries and Drycleaners,Middesk,Middesk,641
+11915,812331,Linen Supply,Middesk,Middesk,641
+11914,812332,Industrial Launderers,Middesk,Middesk,641
+11672,8129,Other Personal Services,Middesk,Middesk,641
+11913,81299,All Other Personal Services,Middesk,Middesk,641
+11673,8131,Religious Organizations,Middesk,Middesk,641
+11912,813110,Religious Organizations,Middesk,Middesk,641
+11674,8132,Grantmaking and Giving Services,Middesk,Middesk,641
+11911,813210,Grantmaking and Giving Services,Middesk,Middesk,641
+11910,813211,Grantmaking Foundations,Middesk,Middesk,641
+11909,813212,Voluntary Health Organizations,Middesk,Middesk,641
+11908,813219,Other Grantmaking and Giving Services,Middesk,Middesk,641
+11675,8133,Social Advocacy Organizations,Middesk,Middesk,641
+11907,813311,Human Rights Organizations,Middesk,Middesk,641
+11906,813312,"Environment, Conservation and Wildlife Organizations",Middesk,Middesk,641
+11905,813319,Other Social Advocacy Organizations,Middesk,Middesk,641
+11676,8134,Civic and Social Organizations,Middesk,Middesk,641
+11904,813410,Civic and Social Organizations,Middesk,Middesk,641
+11677,8139,"Business, Professional, Labor, Political, and Similar Organizations",Middesk,Middesk,641
+11903,813910,Business Associations,Middesk,Middesk,641
+11902,813920,Professional Organizations,Middesk,Middesk,641
+11901,813930,Labor Unions and Similar Labor Organizations,Middesk,Middesk,641
+11900,813940,Political Organizations,Middesk,Middesk,641
+11899,813990,"Other Similar Organizations (except Business, Professional, Labor, and Political Organizations)",Middesk,Middesk,641
+11678,8141,Private Households,Middesk,Middesk,641
+11898,814110,Private Households,Middesk,Middesk,641
+12701,8211,"Elementary, Secondary Schools (MCC)",Middesk,Middesk,641
+12644,8220,"Colleges, Universities (MCC)",Middesk,Middesk,641
+12657,8241,Correspondence Schools (MCC),Middesk,Middesk,641
+12622,8244,Business/Secretarial Schools (MCC),Middesk,Middesk,641
+12871,8249,Vocational/Trade Schools (MCC),Middesk,Middesk,641
+12694,8299,Educational Services (MCC),Middesk,Middesk,641
+12636,8351,Child Care Services (MCC),Middesk,Middesk,641
+12634,8398,Charitable and Social Service Organizations - Fundraising (MCC),Middesk,Middesk,641
+12641,8641,"Civic, Social, Fraternal Associations (MCC)",Middesk,Middesk,641
+12808,8651,Political Organizations (MCC),Middesk,Middesk,641
+12819,8661,Religious Organizations (MCC),Middesk,Middesk,641
+12606,8675,Automobile Associations (MCC),Middesk,Middesk,641
+12761,8699,Membership Organizations (MCC),Middesk,Middesk,641
+12848,8734,Testing Laboratories (MCC),Middesk,Middesk,641
+12597,8911,Architectural/Surveying Services (MCC),Middesk,Middesk,641
+12588,8931,Accounting/Bookkeeping Services (MCC),Middesk,Middesk,641
+12811,8999,Professional Services (MCC),Middesk,Middesk,641
+11679,92,Public Administration,Middesk,Middesk,641
+11680,9211,"Executive, Legislative, and Other General Government Support (MCC)",Middesk,Middesk,641
+12662,9211,"Court Costs, Including Alimony and Child Support - Courts of Law (MCC)",Middesk,Middesk,641
+11897,921120,Legislative Bodies,Middesk,Middesk,641
+11681,9221,"Justice, Public Order, and Safety Activities",Middesk,Middesk,641
+11896,922130,Legal Counsel and Prosecution,Middesk,Middesk,641
+12709,9222,Fines - Government Administrative Entities (MCC),Middesk,Middesk,641
+12609,9223,Bail and Bond Payments (MCC),Middesk,Middesk,641
+11682,9231,Administration of Human Resource Programs,Middesk,Middesk,641
+11895,923130,"Administration of Human Resource Programs (except Education, Public Health, and Veterans' Affairs Programs)",Middesk,Middesk,641
+11683,9241,Administration of Environmental Quality Programs,Middesk,Middesk,641
+11684,9251,"Administration of Housing Programs, Urban Planning, and Community Development",Middesk,Middesk,641
+11894,925110,Administration of Housing Programs,Middesk,Middesk,641
+11685,9261,Administration of Economic Programs,Middesk,Middesk,641
+11893,926110,Administration of General Economic Programs,Middesk,Middesk,641
+11686,9271,Space Research and Technology,Middesk,Middesk,641
+11687,9281,National Security and International Affairs,Middesk,Middesk,641
+12841,9311,Tax Payments - Government Agencies (MCC),Middesk,Middesk,641
+12726,9399,Government Services (Not Elsewhere Classified) (MCC),Middesk,Middesk,641
+12809,9402,Postal Services - Government Only (MCC),Middesk,Middesk,641
+12862,9405,U.S. Federal Government Agencies or Departments (MCC),Middesk,Middesk,641
+12728,9406,Government-Owned Lotteries (Non-US region) (MCC),Middesk,Middesk,641
+12702,9702,Emergency Services (GCAS) (Visa use only) (MCC),Middesk,Middesk,641
+12745,9950,Intra-Company Purchases (MCC),Middesk,Middesk,641
+4899,ADULT_CONTENT,"Pornography, Dating Sites, Pay-per-View Chat",Middesk,Middesk,641
+4901,AGGREGATION,"Factoring, Payment Processors, Crowdfunding",Middesk,Middesk,641
+4897,CANNABIS,"Manufacturers, Distributors, Dispensaries",Middesk,Middesk,641
+4907,COUNTERFEIT_GOODS,"Companies with Fake Brand Name Goods, Unauthorized Resellers",Middesk,Middesk,641
+4912,DRUG_OF_CONCERN,"Legal substance that provides the same effect as an illegal drug (e.g., salvia, kratom)",Middesk,Middesk,641
+4898,DRUG_PARAPHERNALIA,"Drug Manufacturing, Items for Drug Use",Middesk,Middesk,641
+4900,GAMBLING,"Casinos, Online Gambling, Fantasy Sports",Middesk,Middesk,641
+4909,GET_RICH_QUICK,Companies Promoting High Yield Investment Opportunities or Services,Middesk,Middesk,641
+4906,GIFT_CARD,Gift Cards,Middesk,Middesk,641
+4904,INVESTMENT_CREDIT,"Securities Brokers, Lending Instruments, Credit Repair",Middesk,Middesk,641
+4902,MONEY_LEGAL,"Bail Bonds, Collections Agencies, Adoption Services",Middesk,Middesk,641
+4908,MULTI_LEVEL_MARKETING,"Mulit-level Marketing, Pyramid Schemes",Middesk,Middesk,641
+4911,PSEUDO_PHARMACEUTICAL,"Nutraceuticals, Products making health claims not approved by the FDA",Middesk,Middesk,641
+4905,REGULATED_ILLEGAL,"Weapons / Firearms, Tobacco and E-Cig, Prescription Drugs",Middesk,Middesk,641
+4910,SOCIAL_MEDIA_ACTIVITY,"Sale of Twitter Followers, Sale of Online Traffic, Sale of YouTube Views",Middesk,Middesk,641
+4903,VIRTUAL_CURRENCY,"Initial Coin Offerings, Digital Wallets, Video Game Credits",Middesk,Middesk,641

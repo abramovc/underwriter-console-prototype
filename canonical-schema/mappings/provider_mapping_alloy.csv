@@ -1,0 +1,69 @@
+provider,product,input_type,input_value,concept,bucket,severity,action
+alloy,workflow,tag,SSN Miskey,identity_mismatch,identity,medium,Confirm SSN with applicant
+alloy,workflow,tag,Watchlist Review,watchlist_match,compliance,high,Escalate to compliance
+alloy,workflow,tag,Phone Review,phone_risky,contact,medium,Verify phone ownership
+alloy,workflow,tag,KYC Approved,identity_verified,identity,low,No action needed
+alloy,workflow,tag,Fraud Review,fraud_medium_risk,fraud,medium,Manual fraud review
+alloy,workflow,tag,Denied Fraud,fraud_high_risk,fraud,high,Escalate to fraud team
+alloy,workflow,tag,TU Credit Manual Review,credit_review_required,credit,medium,Manual credit review
+alloy,workflow,tag,TU Credit Denied,credit_denied,credit,high,Deny or review manually
+alloy,workflow,tag,TU Credit Approved,credit_approved,credit,low,No action needed
+alloy,workflow,tag,SSN Warning,identity_mismatch,identity,medium,Verify SSN
+alloy,workflow,tag,High Fraud Risk,fraud_high_risk,fraud,high,Escalate to fraud team
+alloy,workflow,tag,Medium Fraud Risk,fraud_medium_risk,fraud,medium,Manual review
+alloy,workflow,tag,SSN Velocity Warning,velocity_risk,fraud,medium,Review application velocity
+alloy,workflow,tag,Email Address Velocity Warning,velocity_risk,fraud,medium,Review email activity
+alloy,workflow,tag,Velocity Warning,velocity_risk,fraud,medium,Review velocity signals
+alloy,workflow,tag,Address Warning,address_risky,contact,medium,Verify address
+alloy,workflow,tag,DOB Miskey,identity_mismatch,identity,medium,Confirm DOB
+alloy,workflow,tag,Phone Match,phone_supporting,contact,low,No action needed
+alloy,workflow,tag,LN SSN Match,identity_verified,identity,low,No action needed
+alloy,workflow,tag,LN DOB Match,identity_verified,identity,low,No action needed
+alloy,workflow,tag,LN Address Match,identity_verified,identity,low,No action needed
+alloy,workflow,tag,LN Name Match,identity_verified,identity,low,No action needed
+alloy,workflow,tag,Socure SSN Match,identity_verified,identity,low,No action needed
+alloy,workflow,tag,Socure Name Match,identity_verified,identity,low,No action needed
+alloy,workflow,tag,Socure DOB Match,identity_verified,identity,low,No action needed
+alloy,workflow,tag,Socure Address Match,identity_verified,identity,low,No action needed
+alloy,workflow,tag,Watchlist Warning,watchlist_match,compliance,high,Escalate to compliance
+alloy,workflow,tag,Adverse Media,adverse_media,compliance,medium,Review adverse media details
+alloy,workflow,tag,PEP Match,pep_match,compliance,high,Escalate to compliance / run EDD
+alloy,workflow,tag,High Synthetic Fraud Risk,synthetic_identity_high,fraud,high,Escalate to fraud team
+alloy,workflow,tag,Email Warning,email_risky,contact,medium,Verify email ownership
+alloy,workflow,tag,Deceased Warning,identity_deceased,identity,high,Deny application
+alloy,workflow,tag,Medium Synthetic Fraud Risk,synthetic_identity_medium,fraud,medium,Manual review
+alloy,workflow,tag,KYC Address Verified,identity_verified,identity,low,No action needed
+alloy,workflow,tag,KYC DOB Verified,identity_verified,identity,low,No action needed
+alloy,workflow,tag,KYC Name Verified,identity_verified,identity,low,No action needed
+alloy,workflow,tag,KYC SSN Verified,identity_verified,identity,low,No action needed
+alloy,workflow,tag,KYC Address Not Verified,identity_not_verified,identity,high,Request documentation
+alloy,workflow,tag,KYC DOB Not Verified,identity_not_verified,identity,high,Request documentation
+alloy,workflow,tag,KYC Name Not Verified,identity_not_verified,identity,high,Request documentation
+alloy,workflow,tag,KYC SSN Not Verified,identity_not_verified,identity,high,Request documentation
+alloy,workflow,tag,KYC Review,identity_review_required,identity,medium,Manual review
+alloy,workflow,tag,SSN on Denylist,identity_not_verified,identity,high,Deny application
+alloy,workflow,tag,Bank Routing Number Provided,bank_info_provided,bank,low,No action needed
+alloy,workflow,tag,Bank Account Number Provided,bank_info_provided,bank,low,No action needed
+alloy,workflow,tag,Business Name Provided,business_info_provided,business,low,No action needed
+alloy,workflow,tag,Bank Account Status Valid,bank_valid,bank,low,No action needed
+alloy,workflow,tag,Bank Account Status Unknown,bank_unknown,bank,medium,Verify bank account
+alloy,workflow,tag,Bank Account Status Invalid,bank_invalid,bank,high,Request new bank account
+alloy,workflow,tag,Bank Account Ownership Unknown,bank_ownership_unknown,bank,medium,Verify ownership
+alloy,workflow,tag,Bank Account Ownership Mismatch,bank_ownership_mismatch,bank,high,Request bank statement
+alloy,workflow,tag,Bank Account Ownership Match,bank_ownership_match,bank,low,No action needed
+alloy,workflow,tag,First Name Provided,identity_info_provided,identity,low,No action needed
+alloy,workflow,tag,Last Name Provided,identity_info_provided,identity,low,No action needed
+alloy,workflow,tag,Open Liens Found,liens_detected,legal,medium,Review lien details
+alloy,workflow,tag,Bankruptcy 36 months,bankruptcy_detected,legal,high,Review financial risk
+alloy,workflow,tag,Litigations Found,litigation_detected,legal,medium,Review litigation history
+alloy,workflow,tag,Secretary of State Match,business_verified,business,low,No action needed
+alloy,workflow,tag,FEIN Found,business_verified,business,low,No action needed
+alloy,workflow,tag,FEIN Unmatched,business_mismatch,business,high,Verify FEIN
+alloy,workflow,tag,FEIN Document Required,business_not_found,business,high,Request FEIN documentation
+alloy,workflow,tag,Business Address Matched,business_verified,business,low,No action needed
+alloy,workflow,tag,Address Not Verified,address_risky,contact,medium,Verify address
+alloy,workflow,tag,Business Name Matched,business_verified,business,low,No action needed
+alloy,workflow,tag,Business Name Unmatched,business_mismatch,business,medium,Verify business name
+alloy,workflow,tag,Secret of State Status Inactive/Unknown,business_inactive,business,high,Verify business status
+alloy,workflow,tag,Secret of State Unmatched,business_not_found,business,high,Request business documentation
+alloy,workflow,tag,High Risk Industry,high_risk_industry,business,medium,Review industry risk

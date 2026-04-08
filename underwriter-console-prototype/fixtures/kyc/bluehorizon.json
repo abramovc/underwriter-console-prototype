@@ -1,0 +1,14 @@
+{
+  "provider": "Socure",
+  "type": "KYC",
+  "customerId": "bluehorizon",
+  "timestamp": "2026-02-13T10:00:00Z",
+  "signals": [
+    { "key": "id_match", "value": "pass", "confidence": 0.93 },
+    { "key": "selfie_liveness", "value": "review", "confidence": 0.74 }
+  ],
+  "notes": [
+    "Placeholder data only.",
+    "Do not use for production underwriting decisions."
+  ]
+}

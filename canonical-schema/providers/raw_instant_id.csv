@@ -1,0 +1,86 @@
+reason_code_id,code,description,service_name,service_internal_name,service_id
+2340,02,Risk Codes: The input SSN is reported as deceased,Lexis Nexis Instant ID,InstantID,6
+2341,03,Risk Codes: The input SSN was issued prior to the input date-of-birth,Lexis Nexis Instant ID,InstantID,6
+2342,04,"Risk Codes: The input last name and SSN are verified, but not with the input address and phone",Lexis Nexis Instant ID,InstantID,6
+2343,06,Risk Codes: The input SSN is invalid,Lexis Nexis Instant ID,InstantID,6
+2344,07,Risk Codes: The input phone number may be disconnected,Lexis Nexis Instant ID,InstantID,6
+2345,08,Risk Codes: The input phone number is potentially invalid,Lexis Nexis Instant ID,InstantID,6
+2346,09,Risk Codes: The input phone number is a pager number,Lexis Nexis Instant ID,InstantID,6
+2347,10,Risk Codes: The input phone number is a mobile number,Lexis Nexis Instant ID,InstantID,6
+2348,11,Risk Codes: The input address may be invalid according to postal specifications,Lexis Nexis Instant ID,InstantID,6
+2349,12,Risk Codes: The input zip code belongs to a post office box,Lexis Nexis Instant ID,InstantID,6
+2350,14,Risk Codes: The input address is a transient commercial or institutional address,Lexis Nexis Instant ID,InstantID,6
+2351,15,Risk Codes: The input phone number matches a transient commercial or institutional address,Lexis Nexis Instant ID,InstantID,6
+2352,16,Risk Codes: The input phone number and input zip code combination is invalid,Lexis Nexis Instant ID,InstantID,6
+2353,19,"Risk Codes: Unable to verify name, address, SSN/TIN and phone",Lexis Nexis Instant ID,InstantID,6
+2354,25,Risk Codes: Unable to verify address,Lexis Nexis Instant ID,InstantID,6
+2355,26,Risk Codes: Unable to verify SSN/TIN,Lexis Nexis Instant ID,InstantID,6
+2356,27,Risk Codes: Unable to verify phone number,Lexis Nexis Instant ID,InstantID,6
+2357,28,Risk Codes: Unable to verify date-of-birth,Lexis Nexis Instant ID,InstantID,6
+2358,29,Risk Codes: The input SSN/TIN may have been miskeyed,Lexis Nexis Instant ID,InstantID,6
+2359,30,Risk Codes: The input address may have been miskeyed,Lexis Nexis Instant ID,InstantID,6
+2360,31,Risk Codes: The input phone number may have been miskeyed,Lexis Nexis Instant ID,InstantID,6
+2361,32,Risk Codes: The input name matches the OFAC file,Lexis Nexis Instant ID,InstantID,6
+2362,37,Risk Codes: Unable to verify name,Lexis Nexis Instant ID,InstantID,6
+2363,38,Risk Codes: The input SSN is associated with multiple last names,Lexis Nexis Instant ID,InstantID,6
+2364,39,Risk Codes: The input SSN is recently issued,Lexis Nexis Instant ID,InstantID,6
+2365,41,Risk Codes: The input drivers license number is invalid for the input DL State,Lexis Nexis Instant ID,InstantID,6
+2366,44,Risk Codes: The input phone area code is changing,Lexis Nexis Instant ID,InstantID,6
+2367,46,Risk Codes: The input work phone is a pager number,Lexis Nexis Instant ID,InstantID,6
+2368,48,Risk Codes: Unable to verify first name,Lexis Nexis Instant ID,InstantID,6
+2369,49,Risk Codes: The input phone and address are geographically distant (>10 miles),Lexis Nexis Instant ID,InstantID,6
+2370,50,Risk Codes: The input address matches a prison address,Lexis Nexis Instant ID,InstantID,6
+2371,51,Risk Codes: The input last name is not associated with the input SSN,Lexis Nexis Instant ID,InstantID,6
+2372,52,Risk Codes: The input first name is not associated with the input SSN,Lexis Nexis Instant ID,InstantID,6
+2373,53,Risk Codes: The input home phone and work phone are geographically distant (>100 miles),Lexis Nexis Instant ID,InstantID,6
+2374,55,Risk Codes: The input work phone is potentially invalid,Lexis Nexis Instant ID,InstantID,6
+2375,56,Risk Codes: The input work phone is potentially disconnected,Lexis Nexis Instant ID,InstantID,6
+2376,57,Risk Codes: The input work phone is a mobile number,Lexis Nexis Instant ID,InstantID,6
+2377,64,Risk Codes: The input address returns a different phone number,Lexis Nexis Instant ID,InstantID,6
+2378,66,"Risk Codes: The input SSN is associated with a different last name, same first name",Lexis Nexis Instant ID,InstantID,6
+2379,71,Risk Codes: The input SSN is not found in the public record,Lexis Nexis Instant ID,InstantID,6
+2380,72,Risk Codes: The input SSN is associated with a different name and address,Lexis Nexis Instant ID,InstantID,6
+2381,74,Risk Codes: The input phone number is associated with a different name and address,Lexis Nexis Instant ID,InstantID,6
+2382,75,Risk Codes: The input name and address are associated with an unlisted/non-published phone number,Lexis Nexis Instant ID,InstantID,6
+2383,76,Risk Codes: The input name may have been miskeyed,Lexis Nexis Instant ID,InstantID,6
+2384,77,Risk Codes: The input name was missing,Lexis Nexis Instant ID,InstantID,6
+2385,78,Risk Codes: The input address was missing,Lexis Nexis Instant ID,InstantID,6
+2386,79,Risk Codes: The input SSN/TIN was missing or incomplete,Lexis Nexis Instant ID,InstantID,6
+2387,80,Risk Codes: The input phone was missing or incomplete,Lexis Nexis Instant ID,InstantID,6
+2388,81,Risk Codes: The input date-of-birth was missing or incomplete,Lexis Nexis Instant ID,InstantID,6
+2389,82,Risk Codes: The input name and address return a different phone number,Lexis Nexis Instant ID,InstantID,6
+2390,83,Risk Codes: The input date-of-birth may have been miskeyed,Lexis Nexis Instant ID,InstantID,6
+2391,85,Risk Codes: The input SSN was issued to a non-US citizen,Lexis Nexis Instant ID,InstantID,6
+2392,89,Risk Codes: The input SSN was issued within the last three years,Lexis Nexis Instant ID,InstantID,6
+2393,90,Risk Codes: The input SSN was issued after age five (post-1990),Lexis Nexis Instant ID,InstantID,6
+2418,A,Followup Codes: Follow your internal policy regarding potential matches to OFAC database information,Lexis Nexis Instant ID,InstantID,6
+2419,B,"Followup Codes: Verify name with Social (via SSN card, DL if applicable, paycheck stub, or other Government Issued ID)",Lexis Nexis Instant ID,InstantID,6
+2420,C,"Followup Codes: Verify name with Address (via DL, utility bill, Directory Assistance, paycheck stub, or other Government Issued ID)",Lexis Nexis Instant ID,InstantID,6
+2394,CA,Risk Codes: The primary input address is a Commercial Mail Receiving Agency,Lexis Nexis Instant ID,InstantID,6
+2395,CL,Risk Codes: The input SSN is not the primary SSN for the input identity,Lexis Nexis Instant ID,InstantID,6
+2396,CO,Risk Codes: The input zip code is a corporate only zip code,Lexis Nexis Instant ID,InstantID,6
+2397,CZ,Risk Codes: Address mismatch between city/state and zip code,Lexis Nexis Instant ID,InstantID,6
+2421,D,"Followup Codes: Verify phone (Directory Assistance, utility bill)",Lexis Nexis Instant ID,InstantID,6
+2398,DD,Risk Codes: A di erent drivers license number has been found for the input applicant,Lexis Nexis Instant ID,InstantID,6
+2399,DF,Risk Codes: The input drivers license number is valid and is not on record,Lexis Nexis Instant ID,InstantID,6
+2400,DI,Risk Codes: The input identity is reported as deceased,Lexis Nexis Instant ID,InstantID,6
+2401,DM,Risk Codes: The input drivers license number may have been miskeyed,Lexis Nexis Instant ID,InstantID,6
+2402,DV,Risk Codes: Unable to verify drivers license number,Lexis Nexis Instant ID,InstantID,6
+2422,E,Followup Codes: Follow your internal policy regarding poten al matches to non-OFAC global screening lists.,Lexis Nexis Instant ID,InstantID,6
+2423,F,Followup Codes: Ask customer for a utility bill or other documenta on showing a physical address location. CIP rules do not allow booking an account with a PO Box as a primary address.,Lexis Nexis Instant ID,InstantID,6
+2424,G,Followup Codes: ITINs are not to be used for ID purposes. Please consult your organization’s policy.,Lexis Nexis Instant ID,InstantID,6
+2403,IS,"Risk Codes: Input SSN possibly randomly issued by SSA, but invalid when first associated with the input identity",Lexis Nexis Instant ID,InstantID,6
+2404,IT,Risk Codes: The input SSN is an ITIN,Lexis Nexis Instant ID,InstantID,6
+2405,MI,Risk Codes: Multiple identities associated with the input SSN,Lexis Nexis Instant ID,InstantID,6
+2406,MO,Risk Codes: The input zip code is a military only zip code,Lexis Nexis Instant ID,InstantID,6
+2407,MS,Risk Codes: Multiple SSNs reported with applicant,Lexis Nexis Instant ID,InstantID,6
+2408,NB,Risk Codes: No date-of-birth reported for the input identity,Lexis Nexis Instant ID,InstantID,6
+2409,NF,Risk Codes: The input  first name and last name may have been fipped,Lexis Nexis Instant ID,InstantID,6
+2410,PA,Risk Codes: Potential address discrepancy - the Input address may be previous address,Lexis Nexis Instant ID,InstantID,6
+2411,PO,Risk Codes: The primary input address is a PO Box,Lexis Nexis Instant ID,InstantID,6
+2412,RS,Risk Codes: The input SSN was possibly randomly issued by the SSA,Lexis Nexis Instant ID,InstantID,6
+2413,SD,Risk Codes: The input address State is different than the LN best address State for the input identity,Lexis Nexis Instant ID,InstantID,6
+2414,SR,Risk Codes: Address mismatch on secondary address range,Lexis Nexis Instant ID,InstantID,6
+2415,VA,Risk Codes: The input address is a vacant address,Lexis Nexis Instant ID,InstantID,6
+2416,WL,Risk Codes: The input name matches one or more of the non-OFAC global screening list(s),Lexis Nexis Instant ID,InstantID,6
+2417,ZI,Risk Codes: Unable to verify zip code,Lexis Nexis Instant ID,InstantID,6

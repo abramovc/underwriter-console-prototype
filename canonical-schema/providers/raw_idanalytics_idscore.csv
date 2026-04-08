@@ -1,0 +1,94 @@
+reason_code_id,code,description,service_name,service_internal_name,service_id
+2297,010,Fictitious Name or Address,ID Analytics ID Score,IDAnalyticsIDScore,34
+2302,018,Consumers asserted age less than 18,ID Analytics ID Score,IDAnalyticsIDScore,34
+2299,088,Suspected frivolous input,ID Analytics ID Score,IDAnalyticsIDScore,34
+2307,153,Address match to list of business or commercial addresses,ID Analytics ID Score,IDAnalyticsIDScore,34
+2304,157,Address match to list of prison addresses,ID Analytics ID Score,IDAnalyticsIDScore,34
+2305,163,Address match to list of Post Office or private Mail box facility,ID Analytics ID Score,IDAnalyticsIDScore,34
+2306,166,Address is a campground or trailer park,ID Analytics ID Score,IDAnalyticsIDScore,34
+2229,180,EVENT - Application received through known risky channel,ID Analytics ID Score,IDAnalyticsIDScore,34
+2301,230,SSN likely invalid,ID Analytics ID Score,IDAnalyticsIDScore,34
+2294,232,SSN Reported as Deceased,ID Analytics ID Score,IDAnalyticsIDScore,34
+2300,233,SSN likely issued before DOB,ID Analytics ID Score,IDAnalyticsIDScore,34
+2230,238,SSN associated with risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2293,248,"SSN, Name and DOB reported as Deceased",ID Analytics ID Score,IDAnalyticsIDScore,34
+2231,321,EVENT - Home phone number invalid or missing,ID Analytics ID Score,IDAnalyticsIDScore,34
+2232,483,Distance between address and area code of phone number,ID Analytics ID Score,IDAnalyticsIDScore,34
+2233,498,Address associated with confirmed fraud,ID Analytics ID Score,IDAnalyticsIDScore,34
+2234,499,Unusual number of SSNs associated with this identity,ID Analytics ID Score,IDAnalyticsIDScore,34
+2235,500,SSN associated with suspected or confirmed fraud,ID Analytics ID Score,IDAnalyticsIDScore,34
+9204,503,SSN linked to unusual number of addresses,ID Analytics ID Score,IDAnalyticsIDScore,34
+2236,504,SSN linked to unusual number of home phone numbers,ID Analytics ID Score,IDAnalyticsIDScore,34
+2237,506,High number of historic applications using SSN,ID Analytics ID Score,IDAnalyticsIDScore,34
+2238,507,High number of recent applications using SSN,ID Analytics ID Score,IDAnalyticsIDScore,34
+2239,510,NETWORK - Unable to confirm SSN in association with other identity elements,ID Analytics ID Score,IDAnalyticsIDScore,34
+2240,514,SSN linked to unusual number of dates of birth,ID Analytics ID Score,IDAnalyticsIDScore,34
+9205,516,Associated with unusual activity or frauds reported to the ID Network,ID Analytics ID Score,IDAnalyticsIDScore,34
+2241,520,Address associated with suspected or confirmed fraud,ID Analytics ID Score,IDAnalyticsIDScore,34
+2242,524,Address type is generally associated with high risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+9206,526,High number of historic applications using address,ID Analytics ID Score,IDAnalyticsIDScore,34
+2243,539,Historic usage patterns of address are generally associated with high risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2244,554,Unable to confirm name in association with other identity elements,ID Analytics ID Score,IDAnalyticsIDScore,34
+9207,555,Unable to associate name with the address,ID Analytics ID Score,IDAnalyticsIDScore,34
+9208,556,Multiple names associated with address,ID Analytics ID Score,IDAnalyticsIDScore,34
+2245,564,Phone number type is generally associated with high risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2246,567,High number of historic applications using home phone number,ID Analytics ID Score,IDAnalyticsIDScore,34
+2247,568,High number of recent applications using home phone number,ID Analytics ID Score,IDAnalyticsIDScore,34
+2248,569,Unable to confirm home phone number in association with other identity elements,ID Analytics ID Score,IDAnalyticsIDScore,34
+2249,572,Phone number associated with suspected or confirmed fraud,ID Analytics ID Score,IDAnalyticsIDScore,34
+2298,573,Phone number likely fictitious,ID Analytics ID Score,IDAnalyticsIDScore,34
+2250,574,Unusual number of phone numbers linked to this identity,ID Analytics ID Score,IDAnalyticsIDScore,34
+2251,576,Phone type generally associated with risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2252,580,Combination of elements of the email address generally associated with high risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2303,589,Address match to USPIS Hot Address List,ID Analytics ID Score,IDAnalyticsIDScore,34
+2253,591,Historic usage patterns of identity elements are generally associated with high risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2254,592,Recent applications from this identity,ID Analytics ID Score,IDAnalyticsIDScore,34
+2255,593,Recent applications with inconsistent identity elements,ID Analytics ID Score,IDAnalyticsIDScore,34
+2256,594,Historic applications with inconsistent identity elements,ID Analytics ID Score,IDAnalyticsIDScore,34
+2257,595,Recent usage patterns of identity elements associated with risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2258,596,High number of recent applications with inconsistent identity elements,ID Analytics ID Score,IDAnalyticsIDScore,34
+2259,597,High number of historic applications with inconsistent identity elements,ID Analytics ID Score,IDAnalyticsIDScore,34
+2260,600,Phone number associated with confirmed fraud,ID Analytics ID Score,IDAnalyticsIDScore,34
+2261,612,High volume of historic applications for this identity,ID Analytics ID Score,IDAnalyticsIDScore,34
+2262,613,High volume of recent applications for this identity,ID Analytics ID Score,IDAnalyticsIDScore,34
+2263,614,SSN associated with confirmed fraud,ID Analytics ID Score,IDAnalyticsIDScore,34
+2264,616,Recent applications using this phone number,ID Analytics ID Score,IDAnalyticsIDScore,34
+9209,618,Missing date of birth,ID Analytics ID Score,IDAnalyticsIDScore,34
+2265,626,IP address mismatch with phone number,ID Analytics ID Score,IDAnalyticsIDScore,34
+2266,627,IP address mismatch with zip code,ID Analytics ID Score,IDAnalyticsIDScore,34
+2267,628,Internet connection characteristics generally associated with high risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2268,636,Recent applications from this address,ID Analytics ID Score,IDAnalyticsIDScore,34
+2269,637,Unable to confirm DOB in association with other identity elements,ID Analytics ID Score,IDAnalyticsIDScore,34
+2270,639,Unable to confirm address in association with other identity elements,ID Analytics ID Score,IDAnalyticsIDScore,34
+2271,641,Unusual number of emails linked to this identity,ID Analytics ID Score,IDAnalyticsIDScore,34
+9210,642,High number of recent applications using email,ID Analytics ID Score,IDAnalyticsIDScore,34
+9211,643,Recent applications using this email,ID Analytics ID Score,IDAnalyticsIDScore,34
+2272,645,Missing email,ID Analytics ID Score,IDAnalyticsIDScore,34
+2273,646,Historic usage patterns of phone associated with risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2274,657,Unusual number of addresses linked to this identity,ID Analytics ID Score,IDAnalyticsIDScore,34
+2275,658,Unusual number of dates of birth associated with this identity,ID Analytics ID Score,IDAnalyticsIDScore,34
+2276,675,Email type generally associated with high risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2295,700,Name/DOB match with OFAC List,ID Analytics ID Score,IDAnalyticsIDScore,34
+2296,701,Possible name match with OFAC List,ID Analytics ID Score,IDAnalyticsIDScore,34
+2277,721,Insufficient history,ID Analytics ID Score,IDAnalyticsIDScore,34
+9212,722,Lack of history at this address,ID Analytics ID Score,IDAnalyticsIDScore,34
+9213,723,Lack of history at this address and phone,ID Analytics ID Score,IDAnalyticsIDScore,34
+9214,724,Lack of history at this phone,ID Analytics ID Score,IDAnalyticsIDScore,34
+2278,733,Distance between historical addresses,ID Analytics ID Score,IDAnalyticsIDScore,34
+2279,867,High risk patterns associated with address history,ID Analytics ID Score,IDAnalyticsIDScore,34
+9215,904,Historic usage patterns of SSN are generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2280,907,Strong match of identity elements across multiple data sources,ID Analytics ID Score,IDAnalyticsIDScore,34
+2281,908,Identity elements matched across multiple data sources,ID Analytics ID Score,IDAnalyticsIDScore,34
+2282,909,SSN generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+9216,920,Historic usage patterns of address are generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2283,925,Address type is generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2284,934,Low risk patterns associated with address history,ID Analytics ID Score,IDAnalyticsIDScore,34
+2285,946,Email type generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2286,953,Internet connection characteristics generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2287,960,Historic usage patterns of home phone number are generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2288,962,Combination of home phone number with other identity elements is generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2289,963,Phone type generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2290,967,Distance between address and area code of secondary phone number generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+9217,980,Combination of elements of the email address generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2291,992,Historic usage patterns of identity elements are generally associated with low risk,ID Analytics ID Score,IDAnalyticsIDScore,34
+2292,994,Consistent historical assertion of identity elements,ID Analytics ID Score,IDAnalyticsIDScore,34

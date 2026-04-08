@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Underwriter Console - Customer</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <style>
+    .customer-shell {
+      width: min(1320px, 96vw);
+      margin: 0 auto;
+    }
+
+    .customer-hero {
+      margin-bottom: 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fff;
+      padding: 14px 16px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    .customer-hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .customer-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .back-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .risk-pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .customer-meta-row {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    .customer-meta-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 999px;
+      background: #f8fafc;
+      padding: 2px 8px;
+      line-height: 1.4;
+    }
+
+    .meta-separator {
+      color: #94a3b8;
+    }
+
+    .risk-pill {
+      display: inline-flex;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      color: #374151;
+      background: #f8fafc;
+    }
+
+    .case-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .case-main {
+      min-width: 0;
+    }
+
+    .case-sidebar {
+      position: sticky;
+      top: 16px;
+      display: grid;
+      gap: 14px;
+      align-self: start;
+      z-index: 1;
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .decision-box {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .status-row {
+      margin-top: 8px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .status-why-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    .status-why-panel {
+      display: none;
+      margin-top: 8px;
+      border: 1px solid #dbe3ef;
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: 8px 10px;
+      color: #334155;
+      font-size: 13px;
+    }
+
+    .transition-row {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .transition-btn {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      color: #1f2937;
+      padding: 6px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .transition-btn:hover {
+      background: #f8fafc;
+    }
+
+    .section-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fff;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    .section-head {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid #f1f5f9;
+      margin: 10px 0 0 0;
+    }
+
+    .tag-chip,
+    .step-chip,
+    .evidence-tag-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      margin: 0 8px 8px 0;
+      font-size: 13px;
+      background: #fff;
+      cursor: pointer;
+      color: #1f2937;
+    }
+
+    .step-chip {
+      border-radius: 10px;
+      padding: 8px 12px;
+      background: #f9fafb;
+    }
+
+    .tag-chip.is-active,
+    .evidence-tag-chip.is-active {
+      background: #eef2ff;
+      border-color: #a5b4fc;
+      color: #312e81;
+    }
+
+    .accordion-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .accordion-toggle {
+      width: 100%;
+      text-align: left;
+      padding: 10px 12px;
+      border: none;
+      background: #f8fafc;
+      cursor: pointer;
+      color: #1f2937;
+    }
+
+    .accordion-panel {
+      display: none;
+      padding: 10px 12px;
+      border-top: 1px solid #eef2f7;
+    }
+
+    .accordion-caret {
+      float: right;
+      color: #6b7280;
+    }
+
+    .evidence-summary-item {
+      margin-bottom: 6px;
+      padding: 1px 0;
+    }
+
+    .evidence-summary-item.is-highlighted {
+      background: #f8fafc;
+      border-left: 3px solid #cbd5e1;
+      padding-left: 8px;
+      border-radius: 4px;
+    }
+
+    .why-panel {
+      display: none;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      border: 1px solid #dbe3ef;
+      border-radius: 8px;
+      background: #f8fafc;
+    }
+
+    .activity-list {
+      margin: 0 0 0 18px;
+      padding: 0;
+    }
+
+    .primary-btn {
+      background: #111827;
+      color: #fff;
+      border-color: #111827;
+    }
+
+    .primary-btn:hover {
+      background: #0b1220;
+      border-color: #0b1220;
+    }
+
+    .sidebar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar-actions {
+      display: grid;
+      gap: 14px;
+    }
+
+    .action-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+    }
+
+    .action-card h4 {
+      margin: 0 0 4px 0;
+      font-size: 14px;
+    }
+
+    .action-card p {
+      margin: 0 0 8px 0;
+      color: #4b5563;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .action-card-controls {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .action-btn {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      color: #1f2937;
+      padding: 5px 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .action-btn-primary {
+      border-color: #111827;
+      background: #111827;
+      color: #fff;
+    }
+
+    .action-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    .action-helper {
+      margin: 0;
+      color: #6b7280;
+      font-size: 12px;
+    }
+
+    .all-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .action-chip {
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      background: #fff;
+      color: #1f2937;
+      font-size: 12px;
+      padding: 7px 12px;
+      cursor: pointer;
+      transition: background 120ms ease, border-color 120ms ease;
+    }
+
+    .action-chip:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .timeline-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .timeline-list li {
+      border-left: 2px solid #dbe3ef;
+      padding-left: 8px;
+      font-size: 12px;
+      color: #334155;
+    }
+
+    .risk-factor-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .risk-factor-row {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .risk-factor-row.is-selected {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .risk-factor-row.is-dim {
+      opacity: 0.72;
+    }
+
+    .risk-factor-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .risk-factor-meta {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    .evidence-filter-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #f8fafc;
+      margin-bottom: 10px;
+    }
+
+    .risk-reviewed-badge {
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: #4b5563;
+      background: #f8fafc;
+    }
+
+    .severity-pill {
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #f8fafc;
+      color: #334155;
+    }
+
+    .severity-high {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+      color: #1e293b;
+    }
+
+    .severity-medium {
+      background: #f1f5f9;
+      border-color: #dbe3ef;
+      color: #334155;
+    }
+
+    .severity-low {
+      background: #f8fafc;
+      border-color: #e5e7eb;
+      color: #475569;
+    }
+
+    .action-modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.45);
+      z-index: 24;
+    }
+
+    .action-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(620px, 92vw);
+      max-height: 80vh;
+      overflow: auto;
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      z-index: 25;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+    }
+
+    .evidence-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(520px, 92vw);
+      height: 100vh;
+      background: #fff;
+      border-left: 1px solid #d1d5db;
+      box-shadow: -8px 0 20px rgba(15, 23, 42, 0.15);
+      z-index: 26;
+      transform: translateX(100%);
+      transition: transform 140ms ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .evidence-drawer.is-open {
+      transform: translateX(0);
+    }
+
+    .evidence-drawer-head {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .evidence-drawer-body {
+      padding: 12px;
+      overflow: auto;
+      display: grid;
+      gap: 10px;
+    }
+
+    .drawer-section {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .action-modal-form {
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .action-modal-form label {
+      display: grid;
+      gap: 4px;
+      font-size: 13px;
+      color: #374151;
+    }
+
+    .action-modal-form select,
+    .action-modal-form textarea {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    .action-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    @media (max-width: 980px) {
+      .case-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .case-sidebar {
+        position: static;
+      }
+
+      .decision-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #ai-launcher {
+      display: none;
+    }
+
+    #ai-panel {
+      position: fixed;
+      right: 12px;
+      top: 12px;
+      transform: none;
+      width: 360px;
+      height: min(86vh, 900px);
+      min-width: 280px;
+      min-height: 220px;
+      max-width: min(92vw, 760px);
+      max-height: min(86vh, 900px);
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.18);
+      display: none;
+      z-index: 41;
+      overflow: hidden;
+    }
+
+    #ai-panel.ai-open {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #ai-panel.ai-collapsed {
+      height: auto;
+      min-height: 0;
+    }
+
+    #ai-panel.ai-collapsed #ai-body {
+      display: none;
+    }
+
+    #ai-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e5e7eb;
+      background: #f8fafc;
+    }
+
+    #ai-title {
+      margin: 0;
+      font-size: 14px;
+      color: #111827;
+    }
+
+    .ai-btn {
+      border: 1px solid #d1d5db;
+      background: #fff;
+      color: #374151;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    #ai-body {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      flex: 1;
+    }
+
+    #ai-messages {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      padding: 10px 12px;
+      display: grid;
+      gap: 8px;
+      background: #fff;
+    }
+
+    .ai-msg {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 13px;
+      color: #1f2937;
+      max-width: 94%;
+      line-height: 1.4;
+    }
+
+    .ai-msg-user {
+      margin-left: auto;
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .ai-msg-assistant {
+      margin-right: auto;
+      background: #f9fafb;
+      border-color: #e5e7eb;
+    }
+
+    #ai-input-row {
+      display: flex;
+      gap: 8px;
+      border-top: 1px solid #e5e7eb;
+      padding: 10px 12px;
+      background: #fff;
+    }
+
+    #ai-input {
+      flex: 1;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    #ai-send {
+      border: 1px solid #111827;
+      border-radius: 8px;
+      background: #111827;
+      color: #fff;
+      padding: 8px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    #ai-panel.ai-expanded {
+      width: min(680px, 94vw);
+      height: min(82vh, 900px);
+      right: 12px;
+    }
+
+    #ai-tools {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 8px 12px;
+      background: #fff;
+      display: grid;
+      gap: 8px;
+    }
+
+    #ai-suggest-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .ai-suggest-chip {
+      border: 1px solid #d1d5db;
+      background: #fff;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      cursor: pointer;
+      color: #374151;
+    }
+
+    #ai-cite-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #4b5563;
+    }
+
+    #ai-resize {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 16px;
+      height: 16px;
+      cursor: nwse-resize;
+      background:
+        linear-gradient(135deg, transparent 45%, #9ca3af 46%, #9ca3af 54%, transparent 55%),
+        linear-gradient(135deg, transparent 60%, #9ca3af 61%, #9ca3af 69%, transparent 70%);
+      border-bottom-right-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="customer-shell">
+      <nav class="topnav">
+        <div class="nav-left">
+          <a class="logo" href="index.html" aria-label="Home">
+            <img class="logo-img" src="iq.svg" alt="IQ" />
+          </a>
+        </div>
+        <a class="nav-center nav-intel" href="intelligence.html" aria-label="Open Intelligence Center" data-tooltip="Intelligence Center">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="12" cy="12" r="2.3" fill="currentColor"/>
+            <path d="M12 3.5a8.5 8.5 0 0 1 8.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M20.5 12a8.5 8.5 0 0 1-8.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.7"/>
+            <path d="M6.6 7.4l3.2 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span class="sr-only">Intelligence Center</span>
+        </a>
+        <div class="nav-right">
+          <a class="nav-link" href="index.html">Verify</a>
+          <a class="nav-link" href="queue.html">Console</a>
+          <a class="nav-link" href="workflows.html">Workflows</a>
+        </div>
+      </nav>
+      <header class="page-header">
+        <h1 style="margin-top: 10px;">Customer Profile</h1>
+        <p class="muted">Inspect evidence, explanations, and recommended next actions.</p>
+        <hr class="divider" />
+      </header>
+
+      <div id="content"></div>
+    </div>
+  </div>
+
+  <button id="ai-launcher" type="button" aria-controls="ai-panel" aria-expanded="false">AI Chat</button>
+  <section id="ai-panel" aria-label="AI Assistant">
+    <div id="ai-header">
+      <h3 id="ai-title">AI Assistant</h3>
+      <div style="display: inline-flex; gap: 6px;">
+        <button id="ai-expand" type="button" class="ai-btn">Expand</button>
+        <button id="ai-toggle" type="button" class="ai-btn">Collapse</button>
+        <button id="ai-close" type="button" class="ai-btn">Close</button>
+      </div>
+    </div>
+    <div id="ai-body">
+      <div id="ai-tools">
+        <div>
+          <p class="muted" style="font-size: 12px; margin: 0 0 6px 0;">Suggested prompts</p>
+          <div id="ai-suggest-row">
+            <button type="button" class="ai-suggest-chip" data-ai-prompt="Summarize this customer">Summarize</button>
+            <button type="button" class="ai-suggest-chip" data-ai-prompt="What information is missing?">Missing</button>
+            <button type="button" class="ai-suggest-chip" data-ai-prompt="What are the next steps?">Next steps</button>
+            <button type="button" class="ai-suggest-chip" data-ai-prompt="Explain the customer tags">Explain tags</button>
+          </div>
+        </div>
+        <label id="ai-cite-row"><input id="ai-cite" type="checkbox" /> Cite sources</label>
+      </div>
+      <div id="ai-messages">
+        <div class="ai-msg ai-msg-assistant">Hi, I can help summarize this customer and suggest next steps.</div>
+      </div>
+      <div id="ai-input-row">
+        <textarea id="ai-input" placeholder="Ask about this customer..." rows="2" style="resize: none;"></textarea>
+        <button id="ai-send" type="button">Send</button>
+      </div>
+    </div>
+    <div id="ai-resize" aria-hidden="true"></div>
+  </section>
+
+  <script>
+    (function () {
+      var path = window.location.pathname || "";
+      var current = path.split("/").pop() || "index.html";
+      document.querySelectorAll(".nav-link, .nav-intel, .intel-nav-link").forEach(function (el) {
+        var href = el.getAttribute("href") || "";
+        var target = href.split("/").pop();
+        if (target && target === current) {
+          el.classList.add("is-active");
+        }
+      });
+    })();
+  </script>
+  <script>
+    const AUTH_DISABLED = true;
+    const currentUser = AUTH_DISABLED
+      ? { id: "guest", name: "Guest User", role: "underwriter" }
+      : null;
+
+    if (!AUTH_DISABLED && localStorage.getItem("plgAuth") !== "true") {
+      window.location.replace("index.html");
+    }
+
+    const content = document.getElementById("content");
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    window.__currentCustomer = null;
+
+    function renderError(message) {
+      content.innerHTML = `
+        <div class="section-card">
+          <h1 style="margin: 0 0 12px 0;">Customer Not Found</h1>
+          <p style="margin: 0 0 12px 0; color: #4b5563;">${message}</p>
+          <a class="back-link" href="queue.html">&larr; Back to Queue</a>
+        </div>
+      `;
+    }
+
+    function renderCustomer(customer) {
+      window.__currentCustomer = customer;
+      const evidenceOrder = ["KYC", "KYB", "Bank", "Credit", "Web"];
+      const storageKey = "activity:" + id;
+      const decisionKey = "decision:" + id;
+      const initialStatusRaw = String(customer.caseStatus || "IN REVIEW");
+      const statusWhy = customer.caseStatusReason || "The case has mixed signals and needs an underwriter decision.";
+      const allActions = [
+        "Request Documents",
+        "Notify Internal Team",
+        "Trigger Webhook",
+        "Escalate to Compliance",
+        "Freeze Processing",
+        "Call Customer",
+        "Request Bank Statement",
+        "Add Internal Note",
+        "Request Beneficial Owners",
+        "Set Reminder",
+        "Assign Reviewer",
+        "Flag for Audit"
+      ];
+      const actionTypeOptions = allActions
+        .map(function (action) {
+          return `<option value="${action}">${action}</option>`;
+        })
+        .join("");
+      const ACTION_CATALOG = [
+        {
+          id: "request_processing_statements",
+          label: "Request 6 months of processing statements",
+          verb: "Request",
+          supported: false,
+          description: "Evidence is incomplete for underwriting assessment."
+        },
+        {
+          id: "request_documents",
+          label: "Request Documents",
+          verb: "Request",
+          supported: false,
+          description: "Documentation is needed to validate current risk indicators."
+        },
+        {
+          id: "schedule_analyst_review",
+          label: "Schedule Analyst Review",
+          verb: "Schedule",
+          supported: false,
+          description: "Manual analyst review helps resolve conflicting signals."
+        },
+        {
+          id: "notify_internal_team",
+          label: "Notify Internal Team",
+          verb: "Notify",
+          supported: true,
+          description: "Cross-functional stakeholders should be alerted to this case."
+        },
+        {
+          id: "trigger_webhook",
+          label: "Trigger Webhook",
+          verb: "Trigger",
+          supported: true,
+          description: "Push case state updates to connected downstream systems."
+        },
+        {
+          id: "escalate_to_compliance",
+          label: "Escalate to Compliance",
+          verb: "Escalate",
+          supported: false,
+          description: "Risk profile warrants compliance-level review."
+        },
+        {
+          id: "request_bank_statement",
+          label: "Request Bank Statement",
+          verb: "Request",
+          supported: false,
+          description: "Bank records are required to support financial verification."
+        },
+        {
+          id: "request_beneficial_owners",
+          label: "Request Beneficial Owners",
+          verb: "Request",
+          supported: false,
+          description: "Ownership details are needed for enhanced due diligence."
+        },
+        {
+          id: "assign_reviewer",
+          label: "Assign Reviewer",
+          verb: "Assign",
+          supported: false,
+          description: "Assign a specific owner to move the case forward."
+        },
+        {
+          id: "flag_for_audit",
+          label: "Flag for Audit",
+          verb: "Flag",
+          supported: false,
+          description: "Retain an auditable trail for elevated risk signals."
+        },
+        {
+          id: "send_verification_email",
+          label: "Send Verification Email",
+          verb: "Send",
+          supported: false,
+          description: "Request customer confirmation through a verified email path."
+        },
+        {
+          id: "rerun_kyc_checks",
+          label: "Re-run KYC Checks",
+          verb: "Re-run",
+          supported: false,
+          description: "Refresh identity checks to validate recent profile changes."
+        },
+        {
+          id: "log_case_note",
+          label: "Log Case Note",
+          verb: "Log",
+          supported: false,
+          description: "Document rationale and evidence context for future review."
+        }
+      ];
+      const actionCatalogById = ACTION_CATALOG.reduce(function (acc, action) {
+        acc[action.id] = action;
+        return acc;
+      }, {});
+      const RISK_FACTOR_ACTION_MAP = {
+        high_risk_mcc: ["escalate_to_compliance", "request_processing_statements", "notify_internal_team"],
+        new_entity: ["request_documents", "schedule_analyst_review"],
+        sanctions_hit: ["escalate_to_compliance", "notify_internal_team", "log_case_note"],
+        voip_phone: ["request_documents", "send_verification_email", "schedule_analyst_review"],
+        recent_domain: ["request_documents", "send_verification_email", "rerun_kyc_checks"],
+        bank_mismatch: ["request_bank_statement", "request_documents", "schedule_analyst_review"],
+        address_mismatch: ["request_documents", "rerun_kyc_checks", "schedule_analyst_review"],
+        pep_match: ["escalate_to_compliance", "notify_internal_team", "log_case_note"],
+        email_undeliverable: ["send_verification_email", "request_documents", "schedule_analyst_review"],
+        default: ["schedule_analyst_review"]
+      };
+
+      const evidence = customer.evidence || {};
+      const tagEvidenceMap = customer.tagEvidenceMap || {};
+
+      function humanize(text) {
+        return String(text || "")
+          .replace(/[_-]+/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+      }
+
+      function getSeverity(tag) {
+        const t = String(tag || "").toLowerCase();
+        if (t.indexOf("high") >= 0 || t.indexOf("mcc") >= 0) return "High";
+        if (t.indexOf("new") >= 0) return "Medium";
+        return "Low";
+      }
+
+      function getRiskSummary(tag) {
+        const t = String(tag || "").toLowerCase();
+        if (t === "high_risk_mcc") return "Industry category increases chargeback and fraud exposure.";
+        if (t === "new_entity") return "Limited operating history increases underwriting uncertainty.";
+        if (t.indexOf("mcc") >= 0) return "Industry classification requires elevated underwriting controls.";
+        if (t.indexOf("new") >= 0) return "Entity recency reduces confidence in long-term performance trends.";
+        if (t.indexOf("high") >= 0) return "Signal maps to elevated risk exposure and requires additional review.";
+        return "Potential risk signal detected from available customer evidence.";
+      }
+
+      const reviewedStorageKey = "reviewed:" + id;
+      let reviewedMap = {};
+      try {
+        reviewedMap = JSON.parse(localStorage.getItem(reviewedStorageKey) || "{}");
+      } catch (e) {
+        reviewedMap = {};
+      }
+      const severityOrder = { High: 0, Medium: 1, Low: 2 };
+      const rawRiskFactors = (Array.isArray(customer.tags) ? customer.tags : []).map(function (tag, idx) {
+        const evidenceRefs = Array.isArray(tagEvidenceMap[tag]) ? tagEvidenceMap[tag] : [];
+        const uniqueSections = [];
+        evidenceRefs.forEach(function (entry) {
+          const sec = entry.section || "Unknown";
+          if (uniqueSections.indexOf(sec) === -1) uniqueSections.push(sec);
+        });
+        return {
+          id: tag,
+          label: humanize(tag),
+          severity: getSeverity(tag),
+          summary: getRiskSummary(tag),
+          evidenceCount: evidenceRefs.length,
+          sections: uniqueSections,
+          evidenceRefs: evidenceRefs,
+          order: idx
+        };
+      });
+
+      const riskFactors = rawRiskFactors
+        .slice()
+        .sort(function (a, b) {
+          const left = severityOrder[a.severity];
+          const right = severityOrder[b.severity];
+          if (left !== right) return left - right;
+          return a.order - b.order;
+        });
+
+      const topRiskFactors = riskFactors.slice(0, 2);
+      const suggestedFromRiskFactors = [];
+      const seenSuggestedActionIds = {};
+      topRiskFactors.forEach(function (factor) {
+        const mappedIds = RISK_FACTOR_ACTION_MAP[factor.id] || RISK_FACTOR_ACTION_MAP.default;
+        mappedIds.forEach(function (actionId) {
+          if (seenSuggestedActionIds[actionId]) return;
+          const action = actionCatalogById[actionId];
+          if (!action) return;
+          seenSuggestedActionIds[actionId] = true;
+          suggestedFromRiskFactors.push({
+            actionId: action.id,
+            label: action.label,
+            verb: action.verb,
+            supported: !!action.supported,
+            description: action.description,
+            sourceTag: factor.id,
+            sourceLabel: factor.label
+          });
+        });
+      });
+      if (!suggestedFromRiskFactors.length && actionCatalogById.schedule_analyst_review) {
+        suggestedFromRiskFactors.push({
+          actionId: "schedule_analyst_review",
+          label: actionCatalogById.schedule_analyst_review.label,
+          verb: actionCatalogById.schedule_analyst_review.verb,
+          supported: !!actionCatalogById.schedule_analyst_review.supported,
+          description: actionCatalogById.schedule_analyst_review.description,
+          sourceTag: "",
+          sourceLabel: "Default policy"
+        });
+      }
+      const suggestedActions = suggestedFromRiskFactors.slice(0, 3);
+
+      function renderRiskFactorsHtml() {
+        if (!riskFactors.length) {
+          return '<p class="muted" style="margin: 0;">No risk factors generated for this case.</p>';
+        }
+        return riskFactors.map(function (factor) {
+          const severityClass = "severity-" + factor.severity.toLowerCase();
+          const sectionsLabel = factor.sections.length ? factor.sections.join(", ") : "None";
+          const reviewedBadge = reviewedMap[factor.id] ? '<span class="risk-reviewed-badge">Reviewed</span>' : "";
+          return `
+            <article class="risk-factor-row" data-risk-row="${factor.id}">
+              <div class="risk-factor-top">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <h3 style="margin: 0; font-size: 15px;">${factor.label}</h3>
+                  <span class="severity-pill ${severityClass}">${factor.severity}</span>
+                  ${reviewedBadge}
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;">
+                  <button type="button" class="action-btn" data-risk-evidence="${factor.id}">View Evidence</button>
+                  <button type="button" class="action-btn" data-risk-review="${factor.id}">Mark Reviewed</button>
+                </div>
+              </div>
+              <p style="margin: 8px 0 0 0; color: #4b5563; font-size: 13px;">${factor.summary}</p>
+              <p class="risk-factor-meta">Evidence: ${sectionsLabel} (${factor.evidenceCount} signals)</p>
+            </article>
+          `;
+        }).join("");
+      }
+
+      const evidenceHtml = evidenceOrder
+        .map(function (section) {
+          const sectionData = evidence[section] || {};
+          const summaryItems = Array.isArray(sectionData.summary) ? sectionData.summary : [];
+          const summaryHtml = summaryItems.length
+            ? summaryItems.map(function (item) {
+              return `<li class="evidence-summary-item" data-evidence-summary>${item}</li>`;
+            }).join("")
+            : '<li style="color: #6b7280;">No summary available.</li>';
+          const rawPath = sectionData.rawPath || "";
+          const tagsForSection = Object.keys(tagEvidenceMap).filter(function (tag) {
+            const entries = Array.isArray(tagEvidenceMap[tag]) ? tagEvidenceMap[tag] : [];
+            return entries.some(function (entry) {
+              return entry.section === section;
+            });
+          });
+          const tagChipsHtml = tagsForSection.length
+            ? tagsForSection.map(function (tag) {
+              return `<button type="button" class="evidence-tag-chip" data-evidence-tag="${tag}" data-evidence-section="${section}">${tag}</button>`;
+            }).join("")
+            : '<span style="color: #6b7280; font-size: 13px;">No tags mapped.</span>';
+
+          return `
+            <div class="accordion-item">
+              <button type="button" class="accordion-toggle" data-evidence-toggle="${section}">
+                <strong>${section}</strong> <span class="accordion-caret" data-evidence-caret="${section}">▸</span>
+              </button>
+              <div class="accordion-panel" data-evidence-panel="${section}">
+                <ul style="margin: 0 0 10px 18px; padding: 0;">${summaryHtml}</ul>
+                <div style="margin: 0 0 8px 0;">
+                  <p style="margin: 0 0 6px 0; font-size: 13px; color: #4b5563;">Tags triggered by this evidence</p>
+                  <div data-tag-chip-wrap="${section}">${tagChipsHtml}</div>
+                </div>
+                <button type="button" data-view-raw data-evidence-section="${section}" data-raw-path="${rawPath}" style="padding: 6px 10px; border: 1px solid #d1d5db; background: #f9fafb; border-radius: 6px; cursor: pointer;">View raw JSON</button>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      const suggestedActionsHtml = suggestedActions
+        .map(function (action) {
+          return `
+            <article class="action-card">
+              <h4>${action.label}</h4>
+              <p>${action.description}</p>
+              <p class="risk-factor-meta" style="margin-top: 0;">Suggested because: ${action.sourceLabel}</p>
+              <div class="action-card-controls">
+                <button
+                  type="button"
+                  class="action-btn action-btn-primary"
+                  data-suggest-action="${action.actionId}"
+                  data-suggest-tag="${action.sourceTag}"
+                  data-suggest-label="${action.label}"
+                  data-suggest-verb="${action.verb}"
+                >${action.verb}</button>
+                <button
+                  type="button"
+                  class="action-btn"
+                  data-log-action="${action.label}"
+                  data-suggest-tag="${action.sourceTag}"
+                >Log as done</button>
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+
+      const allActionsHtml = allActions
+        .map(function (action) {
+          return `<button type="button" class="action-chip" data-action-chip="${action}">${action}</button>`;
+        })
+        .join("");
+
+      function getAiRecommendation() {
+        const tier = String(customer.riskTier || "").toLowerCase();
+        const score = Number(customer.riskScore || 0);
+        if (tier === "high" || score >= 75) {
+          return { decision: "Decline", confidence: 84, rationale: "High concentration of severe risk indicators across evidence sources." };
+        }
+        if (tier === "medium" || score >= 45) {
+          return { decision: "Review", confidence: 73, rationale: "Mixed evidence quality with unresolved risk factors requiring analyst review." };
+        }
+        return { decision: "Approve", confidence: 78, rationale: "Signals are mostly consistent and below escalation thresholds." };
+      }
+
+      const aiRecommendation = getAiRecommendation();
+      const riskTierText = String(customer.riskTier || "Unknown");
+      const metaRiskText = riskTierText.charAt(0).toUpperCase() + riskTierText.slice(1).toLowerCase() + " Risk";
+      function formatCaseStatusText(value) {
+        return String(value || "")
+          .toLowerCase()
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, function (ch) { return ch.toUpperCase(); });
+      }
+
+      content.innerHTML = `
+        <div class="case-layout">
+          <main class="case-main">
+            <header class="customer-hero">
+              <div class="customer-hero-top">
+                <a class="back-link" href="queue.html">&larr; Back to Queue</a>
+              </div>
+              <div class="customer-title-row">
+                <h1 style="margin: 0 0 4px 0;">${customer.name}</h1>
+              </div>
+              <div class="customer-meta-row">
+                <span class="customer-meta-item">${metaRiskText}</span>
+                <span class="meta-separator">•</span>
+                <span class="customer-meta-item">Score ${customer.riskScore}</span>
+                <span class="meta-separator">•</span>
+                <span id="caseStatusText" class="customer-meta-item">${formatCaseStatusText(initialStatusRaw)}</span>
+                <a id="toggleStatusWhy" class="status-why-link" href="#">Why in review?</a>
+              </div>
+              <div id="statusWhyPanel" class="status-why-panel">${statusWhy}</div>
+              <div class="transition-row" id="transitionRow">
+                <button type="button" class="transition-btn" data-transition="APPROVED">Approve</button>
+                <button type="button" class="transition-btn" data-transition="DECLINED">Decline</button>
+                <button type="button" class="transition-btn" data-transition="IN REVIEW">Request Review</button>
+              </div>
+            </header>
+
+            <section class="section-card">
+              <h2 class="section-head">Final Decision</h2>
+              <div class="decision-grid">
+                <div class="decision-box">
+                  <p style="margin: 0 0 6px 0; color: #4b5563; font-size: 12px;">Recommendation</p>
+                  <p style="margin: 0 0 4px 0;"><strong id="aiDecisionText">${aiRecommendation.decision}</strong> <span style="color: #6b7280;">(${aiRecommendation.confidence}% confidence)</span></p>
+                  <p id="aiDecisionRationale" style="margin: 0; color: #4b5563; font-size: 13px;">${aiRecommendation.rationale}</p>
+                </div>
+                <div class="decision-box">
+                  <p style="margin: 0 0 6px 0; color: #4b5563; font-size: 12px;">Decision</p>
+                  <p id="humanDecisionText" style="margin: 0 0 4px 0;"><strong>Not decided</strong></p>
+                  <p id="humanDecisionReason" style="margin: 0; color: #4b5563; font-size: 13px;">No override reason recorded.</p>
+                </div>
+              </div>
+              <div style="margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <span id="decisionIndicator" class="risk-pill">Decision Status: Pending</span>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <button id="confirmAiDecisionBtn" type="button" class="action-btn action-btn-primary">Confirm Decision</button>
+                  <button id="overrideDecisionBtn" type="button" class="action-btn">Override Decision</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-card">
+              <h2 class="section-head">Risk Factors</h2>
+              <a id="clearExplainTop" href="#" style="display: none; color: #2563eb; text-decoration: none; font-size: 13px;">Clear</a>
+              <div id="riskFactorsGrid" class="risk-factor-list">${renderRiskFactorsHtml()}</div>
+              <hr class="section-divider" />
+            </section>
+
+            <section class="section-card">
+              <h2 class="section-head">Evidence</h2>
+              <div id="evidenceFilterBanner" class="evidence-filter-banner" style="display: none;">
+                <span id="evidenceFilterText" style="font-size: 13px; color: #374151;">Filtered by: </span>
+                <button id="evidenceFilterClear" type="button" class="action-btn">Clear</button>
+              </div>
+              <div id="explainWhyPanel" class="why-panel">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                  <h3 id="explainWhyTitle" style="margin: 0; font-size: 15px;">Why this tag</h3>
+                  <a id="clearExplainMode" href="#" style="color: #2563eb; text-decoration: none; font-size: 13px;">Clear explain mode</a>
+                </div>
+                <div id="explainWhyContent" style="margin-top: 8px;"></div>
+              </div>
+              <div id="evidenceAccordion">${evidenceHtml}</div>
+              <hr class="section-divider" />
+            </section>
+
+            <section class="section-card">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px;">
+                <h2 class="section-head" style="margin: 0;">Activity</h2>
+                <a 
+                  id="viewActivityLogBtn" 
+                  class="btn primary-btn" 
+                  href="log.html?id=${encodeURIComponent(customer.id || "REPLACE_WITH_ID")}&name=${encodeURIComponent(customer.name || "")}"
+                >
+                  View Activity Log
+                </a>
+              </div>
+              <button id="clearActivity" type="button" style="padding: 0; border: none; background: none; color: #2563eb; cursor: pointer; margin-bottom: 10px;">Clear Activity</button>
+              <ul id="activityLog" class="activity-list"></ul>
+            </section>
+          </main>
+
+          <aside class="case-sidebar">
+            <section class="section-card">
+              <button id="openAiAssistantBtn" type="button" class="action-btn">Open Chat</button>
+            </section>
+
+            <section class="section-card">
+              <div class="sidebar-head">
+                <h3 style="margin: 0; font-size: 16px;">Actions</h3>
+                <button id="logManualActionBtn" type="button" class="action-btn">Log Manual Action</button>
+              </div>
+              <h4 style="margin: 0 0 8px 0; font-size: 14px;">Suggested Next Steps</h4>
+              <div id="suggestedActions" class="sidebar-actions">${suggestedActionsHtml}</div>
+              <hr class="section-divider" style="margin-top: 14px;" />
+              <h4 style="margin: 0 0 8px 0; font-size: 14px;">All Actions</h4>
+              <div id="allActionsRow" class="all-actions">${allActionsHtml}</div>
+            </section>
+
+            <section class="section-card">
+              <h3 style="margin: 0 0 10px 0; font-size: 16px;">Case Timeline</h3>
+              <ul id="timelinePreview" class="timeline-list"></ul>
+            </section>
+          </aside>
+        </div>
+
+        <div id="rawJsonModalBackdrop" style="display: none; position: fixed; inset: 0; background: rgba(17, 24, 39, 0.45); z-index: 20;"></div>
+        <div id="rawJsonModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(760px, 92vw); max-height: 80vh; overflow: auto; background: #fff; border: 1px solid #d1d5db; border-radius: 8px; z-index: 21;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #e5e7eb;">
+            <h3 id="rawJsonModalTitle" style="margin: 0; font-size: 16px;">Raw JSON</h3>
+            <button id="rawJsonModalClose" type="button" style="border: 1px solid #d1d5db; background: #fff; border-radius: 4px; width: 28px; height: 28px; cursor: pointer;">X</button>
+          </div>
+          <pre id="rawJsonModalContent" style="margin: 0; padding: 12px; font-size: 12px; white-space: pre-wrap; word-break: break-word;"></pre>
+        </div>
+
+        <div id="evidenceDrawerBackdrop" class="action-modal-backdrop"></div>
+        <aside id="evidenceDrawer" class="evidence-drawer" aria-label="Evidence Drawer">
+          <div class="evidence-drawer-head">
+            <h3 id="evidenceDrawerTitle" style="margin: 0; font-size: 16px;">Evidence</h3>
+            <button id="evidenceDrawerClose" type="button" class="action-btn">Close</button>
+          </div>
+          <div id="evidenceDrawerContent" class="evidence-drawer-body"></div>
+        </aside>
+
+        <div id="actionModalBackdrop" class="action-modal-backdrop"></div>
+        <div id="actionModal" class="action-modal" aria-label="Log Action">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #e5e7eb;">
+            <h3 style="margin: 0; font-size: 16px;">Log Action</h3>
+            <button id="actionModalClose" type="button" style="border: 1px solid #d1d5db; background: #fff; border-radius: 4px; width: 28px; height: 28px; cursor: pointer;">X</button>
+          </div>
+          <form id="actionModalForm" class="action-modal-form">
+            <label>
+              Action type
+              <select id="actionTypeSelect">${actionTypeOptions}</select>
+            </label>
+            <label>
+              Notes
+              <textarea id="actionNotesInput" rows="3" placeholder="Optional notes..."></textarea>
+            </label>
+            <label>
+              Outcome
+              <select id="actionOutcomeSelect">
+                <option value="Completed">Completed</option>
+                <option value="Attempted">Attempted</option>
+                <option value="Blocked">Blocked</option>
+              </select>
+            </label>
+            <div class="action-modal-actions">
+              <button id="actionModalCancel" type="button" class="action-btn">Cancel</button>
+              <button type="submit" class="action-btn action-btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="decisionOverrideBackdrop" class="action-modal-backdrop"></div>
+        <div id="decisionOverrideModal" class="action-modal" aria-label="Override Decision">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #e5e7eb;">
+            <h3 style="margin: 0; font-size: 16px;">Override Decision</h3>
+            <button id="decisionOverrideClose" type="button" style="border: 1px solid #d1d5db; background: #fff; border-radius: 4px; width: 28px; height: 28px; cursor: pointer;">X</button>
+          </div>
+          <form id="decisionOverrideForm" class="action-modal-form">
+            <label>
+              Final decision
+              <select id="overrideDecisionSelect">
+                <option value="Approve">Approve</option>
+                <option value="Decline">Decline</option>
+                <option value="Review">Review</option>
+              </select>
+            </label>
+            <label>
+              Reason
+              <textarea id="overrideReasonInput" rows="3" required placeholder="Why are you overriding?"></textarea>
+            </label>
+            <div class="action-modal-actions">
+              <button id="decisionOverrideCancel" type="button" class="action-btn">Cancel</button>
+              <button type="submit" class="action-btn action-btn-primary">Save Override</button>
+            </div>
+          </form>
+        </div>
+      `;
+
+      function readActivity() {
+        try {
+          const raw = localStorage.getItem(storageKey);
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function saveActivity(entries) {
+        localStorage.setItem(storageKey, JSON.stringify(entries));
+      }
+
+      function renderActivity() {
+        const activityLog = document.getElementById("activityLog");
+        const entries = readActivity();
+
+        if (!entries.length) {
+          activityLog.innerHTML = '<li style="color: #6b7280;">No activity yet.</li>';
+          return;
+        }
+
+        activityLog.innerHTML = entries
+          .map(function (entry) {
+            return `<li style="margin-bottom: 6px;"><strong>${entry.timestamp}</strong> - ${entry.action}</li>`;
+          })
+          .join("");
+      }
+
+      function renderTimelinePreview() {
+        const timeline = document.getElementById("timelinePreview");
+        const entries = readActivity();
+        const recent = entries.slice(-5).reverse();
+
+        if (!recent.length) {
+          timeline.innerHTML = '<li style="color: #6b7280; border-left: none; padding-left: 0;">No events yet.</li>';
+          return;
+        }
+
+        timeline.innerHTML = recent
+          .map(function (entry) {
+            return `<li><strong>${entry.timestamp}</strong><br />${entry.action}</li>`;
+          })
+          .join("");
+      }
+
+      function appendActivity(actionText) {
+        const entries = readActivity();
+        entries.push({
+          timestamp: new Date().toLocaleString(),
+          action: actionText
+        });
+        saveActivity(entries);
+        renderActivity();
+        renderTimelinePreview();
+      }
+
+      function updateCaseStatus(statusText) {
+        const statusTextNode = document.getElementById("caseStatusText");
+        if (statusTextNode) {
+          statusTextNode.textContent = formatCaseStatusText(statusText);
+        }
+      }
+
+      function readDecision() {
+        try {
+          const raw = localStorage.getItem(decisionKey);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function saveDecision(state) {
+        localStorage.setItem(decisionKey, JSON.stringify(state));
+      }
+
+      let currentDecision = readDecision();
+
+      function renderDecisionState() {
+        const humanText = document.getElementById("humanDecisionText");
+        const humanReason = document.getElementById("humanDecisionReason");
+        const indicator = document.getElementById("decisionIndicator");
+        const recommendation = aiRecommendation.decision;
+        if (!currentDecision || !currentDecision.final) {
+          humanText.innerHTML = "<strong>Not decided</strong>";
+          humanReason.textContent = "No override reason recorded.";
+          indicator.textContent = "Decision Status: Pending";
+          return;
+        }
+        humanText.innerHTML = "<strong>" + currentDecision.final + "</strong>";
+        humanReason.textContent = currentDecision.reason || "No reason provided.";
+        indicator.textContent = "Decision Status: " + (currentDecision.final === recommendation ? "Aligned" : "Overridden");
+      }
+
+      function openActionModal(prefilledActionType, prefilledNotes) {
+        const backdrop = document.getElementById("actionModalBackdrop");
+        const modal = document.getElementById("actionModal");
+        const typeSelect = document.getElementById("actionTypeSelect");
+        const notesInput = document.getElementById("actionNotesInput");
+        if (prefilledActionType) {
+          const knownOption = Array.prototype.some.call(typeSelect.options, function (opt) {
+            return opt.value === prefilledActionType;
+          });
+          if (!knownOption) {
+            const extraOption = document.createElement("option");
+            extraOption.value = prefilledActionType;
+            extraOption.textContent = prefilledActionType;
+            typeSelect.appendChild(extraOption);
+          }
+          typeSelect.value = prefilledActionType;
+        }
+        if (prefilledNotes) {
+          notesInput.value = prefilledNotes;
+        }
+        backdrop.style.display = "block";
+        modal.style.display = "block";
+      }
+
+      function closeActionModal() {
+        const backdrop = document.getElementById("actionModalBackdrop");
+        const modal = document.getElementById("actionModal");
+        const notes = document.getElementById("actionNotesInput");
+        const outcome = document.getElementById("actionOutcomeSelect");
+        backdrop.style.display = "none";
+        modal.style.display = "none";
+        notes.value = "";
+        outcome.value = "Completed";
+      }
+
+      function openOverrideModal() {
+        document.getElementById("decisionOverrideBackdrop").style.display = "block";
+        document.getElementById("decisionOverrideModal").style.display = "block";
+      }
+
+      function closeOverrideModal() {
+        document.getElementById("decisionOverrideBackdrop").style.display = "none";
+        document.getElementById("decisionOverrideModal").style.display = "none";
+      }
+
+      function renderEvidenceDrawerContent(riskFactorObject) {
+        const drawerTitle = document.getElementById("evidenceDrawerTitle");
+        const drawerContent = document.getElementById("evidenceDrawerContent");
+        drawerTitle.textContent = "Evidence: " + riskFactorObject.title;
+        if (!riskFactorObject.evidenceRefs.length) {
+          drawerContent.innerHTML = '<p style="margin: 0; color: #6b7280;">No evidence refs mapped for this risk factor.</p>';
+          return;
+        }
+
+        const grouped = {};
+        riskFactorObject.evidenceRefs.forEach(function (ref) {
+          const section = ref.section || "Unknown";
+          if (!grouped[section]) grouped[section] = [];
+          grouped[section].push(ref);
+        });
+
+        drawerContent.innerHTML = Object.keys(grouped).map(function (section) {
+          const items = grouped[section].map(function (ref) {
+            return `
+              <li style="margin-bottom: 8px;">
+                <p style="margin: 0 0 4px 0; font-size: 13px;">${ref.reason || "Signal matched"}</p>
+                <p style="margin: 0 0 6px 0; color: #6b7280; font-size: 12px;">Match: ${ref.match || "n/a"}</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button type="button" class="action-btn" data-drawer-jump="${section}">Jump to accordion section</button>
+                  <button type="button" class="action-btn" data-drawer-raw="${section}">View raw JSON</button>
+                </div>
+              </li>
+            `;
+          }).join("");
+          return `
+            <section class="drawer-section">
+              <h4 style="margin: 0 0 8px 0; font-size: 14px;">${section}</h4>
+              <ul style="margin: 0 0 0 18px; padding: 0;">${items}</ul>
+            </section>
+          `;
+        }).join("");
+      }
+
+      function openEvidenceDrawer(riskFactorId) {
+        const factor = riskFactors.find(function (item) { return item.id === riskFactorId; });
+        if (!factor) return;
+        renderEvidenceDrawerContent(factor);
+        document.getElementById("evidenceDrawerBackdrop").style.display = "block";
+        document.getElementById("evidenceDrawer").classList.add("is-open");
+      }
+
+      function closeEvidenceDrawer() {
+        document.getElementById("evidenceDrawerBackdrop").style.display = "none";
+        document.getElementById("evidenceDrawer").classList.remove("is-open");
+      }
+
+      const evidenceAccordion = document.getElementById("evidenceAccordion");
+      const clearExplainTop = document.getElementById("clearExplainTop");
+      const explainWhyPanel = document.getElementById("explainWhyPanel");
+      const explainWhyTitle = document.getElementById("explainWhyTitle");
+      const explainWhyContent = document.getElementById("explainWhyContent");
+      const clearExplainMode = document.getElementById("clearExplainMode");
+      const rawJsonModalBackdrop = document.getElementById("rawJsonModalBackdrop");
+      const rawJsonModal = document.getElementById("rawJsonModal");
+      const rawJsonModalTitle = document.getElementById("rawJsonModalTitle");
+      const rawJsonModalContent = document.getElementById("rawJsonModalContent");
+      const rawJsonModalClose = document.getElementById("rawJsonModalClose");
+      const statusWhyPanel = document.getElementById("statusWhyPanel");
+      const toggleStatusWhy = document.getElementById("toggleStatusWhy");
+      const transitionRow = document.getElementById("transitionRow");
+      const caseSidebar = document.querySelector(".case-sidebar");
+      const allActionsRow = document.getElementById("allActionsRow");
+      const actionModalBackdrop = document.getElementById("actionModalBackdrop");
+      const actionModalClose = document.getElementById("actionModalClose");
+      const actionModalCancel = document.getElementById("actionModalCancel");
+      const actionModalForm = document.getElementById("actionModalForm");
+      const logManualActionBtn = document.getElementById("logManualActionBtn");
+      const riskFactorsGrid = document.getElementById("riskFactorsGrid");
+      const evidenceDrawerContent = document.getElementById("evidenceDrawerContent");
+      const evidenceDrawerClose = document.getElementById("evidenceDrawerClose");
+      const evidenceDrawerBackdrop = document.getElementById("evidenceDrawerBackdrop");
+      const confirmAiDecisionBtn = document.getElementById("confirmAiDecisionBtn");
+      const overrideDecisionBtn = document.getElementById("overrideDecisionBtn");
+      const decisionOverrideForm = document.getElementById("decisionOverrideForm");
+      const decisionOverrideClose = document.getElementById("decisionOverrideClose");
+      const decisionOverrideCancel = document.getElementById("decisionOverrideCancel");
+      const decisionOverrideBackdrop = document.getElementById("decisionOverrideBackdrop");
+      const openAiAssistantBtn = document.getElementById("openAiAssistantBtn");
+      const evidenceFilterBanner = document.getElementById("evidenceFilterBanner");
+      const evidenceFilterText = document.getElementById("evidenceFilterText");
+      const evidenceFilterClear = document.getElementById("evidenceFilterClear");
+      let activeExplainTag = null;
+      let activeRiskFactorTag = null;
+
+      function openRawJsonModal() {
+        rawJsonModalBackdrop.style.display = "block";
+        rawJsonModal.style.display = "block";
+      }
+
+      function closeRawJsonModal() {
+        rawJsonModalBackdrop.style.display = "none";
+        rawJsonModal.style.display = "none";
+      }
+
+      function openRawForSection(section) {
+        const sectionData = evidence[section] || {};
+        const rawPath = sectionData.rawPath || "";
+        rawJsonModalTitle.textContent = section + " – Raw JSON";
+        rawJsonModalContent.textContent = "Loading...";
+        openRawJsonModal();
+        if (!rawPath) {
+          rawJsonModalContent.textContent = "Could not load raw JSON";
+          return;
+        }
+        fetch(rawPath)
+          .then(function (response) {
+            if (!response.ok) throw new Error("Failed to load raw JSON");
+            return response.json();
+          })
+          .then(function (data) {
+            rawJsonModalContent.textContent = JSON.stringify(data, null, 2);
+          })
+          .catch(function () {
+            rawJsonModalContent.textContent = "Could not load raw JSON";
+          });
+      }
+
+      function setPanelOpen(section, open) {
+        const panel = evidenceAccordion.querySelector('[data-evidence-panel="' + section + '"]');
+        const caret = evidenceAccordion.querySelector('[data-evidence-caret="' + section + '"]');
+        if (!panel || !caret) return;
+        panel.style.display = open ? "block" : "none";
+        caret.textContent = open ? "▾" : "▸";
+      }
+
+      function closeAllPanels() {
+        evidenceOrder.forEach(function (section) {
+          setPanelOpen(section, false);
+        });
+      }
+
+      function clearAllHighlightsAndState() {
+        evidenceAccordion.querySelectorAll('li[data-evidence-summary]').forEach(function (item) {
+          item.classList.remove("is-highlighted");
+        });
+        evidenceAccordion.querySelectorAll('button[data-evidence-tag]').forEach(function (chip) {
+          chip.classList.remove("is-active");
+        });
+        riskFactorsGrid.querySelectorAll('article[data-risk-row]').forEach(function (row) {
+          row.classList.remove("is-selected");
+          row.classList.remove("is-dim");
+        });
+        explainWhyPanel.style.display = "none";
+        explainWhyContent.innerHTML = "";
+        clearExplainTop.style.display = "none";
+      }
+
+      function getTagEntriesBySection(tag) {
+        const entries = Array.isArray(tagEvidenceMap[tag]) ? tagEvidenceMap[tag] : [];
+        const grouped = {};
+        entries.forEach(function (entry) {
+          if (!grouped[entry.section]) grouped[entry.section] = [];
+          grouped[entry.section].push(entry);
+        });
+        return grouped;
+      }
+
+      function clearExplainModeState() {
+        activeExplainTag = null;
+        activeRiskFactorTag = null;
+        clearAllHighlightsAndState();
+        closeAllPanels();
+        evidenceFilterBanner.style.display = "none";
+      }
+
+      function applyRiskFactorSelectionStyles(tag) {
+        const hasSelection = !!tag;
+        riskFactorsGrid.querySelectorAll('article[data-risk-row]').forEach(function (row) {
+          const rowTag = row.getAttribute("data-risk-row");
+          row.classList.toggle("is-selected", hasSelection && rowTag === tag);
+          row.classList.toggle("is-dim", hasSelection && rowTag !== tag);
+        });
+      }
+
+      function updateEvidenceFilterBanner(tag) {
+        if (!tag) {
+          evidenceFilterBanner.style.display = "none";
+          evidenceFilterText.textContent = "Filtered by:";
+          return;
+        }
+        const factor = riskFactors.find(function (item) { return item.id === tag; });
+        const label = factor ? factor.label : humanize(tag);
+        evidenceFilterText.textContent = "Filtered by: " + label;
+        evidenceFilterBanner.style.display = "flex";
+      }
+
+      function getReasonKeywords(reasonText) {
+        const stopWords = {
+          the: true, and: true, for: true, with: true, from: true, this: true,
+          that: true, into: true, have: true, has: true, are: true, was: true,
+          were: true, been: true, being: true, over: true, under: true, risk: true,
+          signal: true, signals: true
+        };
+        return String(reasonText || "")
+          .toLowerCase()
+          .replace(/[^a-z0-9\s]/g, " ")
+          .split(/\s+/)
+          .filter(function (word) { return word.length >= 4 && !stopWords[word]; })
+          .slice(0, 6);
+      }
+
+      function applyExplainMode(tag, options) {
+        const opts = options || {};
+        const showExplainPanel = opts.showExplainPanel !== false;
+        clearAllHighlightsAndState();
+        activeExplainTag = tag;
+        activeRiskFactorTag = tag;
+        const entriesBySection = getTagEntriesBySection(tag);
+        const sections = Object.keys(entriesBySection);
+        closeAllPanels();
+        applyRiskFactorSelectionStyles(tag);
+        updateEvidenceFilterBanner(tag);
+        if (!sections.length) {
+          clearExplainTop.style.display = showExplainPanel ? "inline-block" : "none";
+          return;
+        }
+        sections.forEach(function (section) {
+          setPanelOpen(section, true);
+          const panel = evidenceAccordion.querySelector('[data-evidence-panel="' + section + '"]');
+          if (!panel) return;
+          const sectionEntries = entriesBySection[section];
+          const matches = sectionEntries
+            .map(function (entry) { return String(entry.match || "").toLowerCase().trim(); })
+            .filter(Boolean);
+          const keywords = sectionEntries
+            .map(function (entry) { return getReasonKeywords(entry.reason); })
+            .reduce(function (acc, next) { return acc.concat(next); }, []);
+          let highlightedCount = 0;
+          const summaryItems = panel.querySelectorAll('li[data-evidence-summary]');
+          summaryItems.forEach(function (item) {
+            const text = item.textContent.toLowerCase();
+            const hasMatch = matches.some(function (matchText) { return text.includes(matchText); });
+            const hasKeyword = keywords.some(function (keyword) { return text.includes(keyword); });
+            if (hasMatch || hasKeyword) {
+              item.classList.add("is-highlighted");
+              highlightedCount += 1;
+            }
+          });
+          if (!highlightedCount && summaryItems.length) {
+            summaryItems[0].classList.add("is-highlighted");
+          }
+        });
+        evidenceAccordion.querySelectorAll('button[data-evidence-tag]').forEach(function (chip) {
+          if (chip.getAttribute("data-evidence-tag") === tag) chip.classList.add("is-active");
+        });
+        const whySectionsHtml = sections.map(function (section) {
+          const reasonItems = entriesBySection[section].map(function (entry) {
+            const base = '<li style="margin-bottom: 6px;">' + entry.reason + "</li>";
+            if (entry.source && entry.source !== "summary") {
+              return base + '<li style="margin-bottom: 6px; color: #4b5563;">See raw JSON signals (matched: ' + entry.match + ")</li>";
+            }
+            return base;
+          }).join("");
+          return (
+            '<div style="margin-bottom: 8px;">' +
+            '<p style="margin: 0 0 4px 0;"><strong>' + section + "</strong></p>" +
+            '<ul style="margin: 0 0 0 18px; padding: 0;">' + reasonItems + "</ul>" +
+            "</div>"
+          );
+        }).join("");
+        if (showExplainPanel) {
+          explainWhyTitle.textContent = "Why this tag: " + tag;
+          explainWhyContent.innerHTML = whySectionsHtml;
+          explainWhyPanel.style.display = "block";
+          clearExplainTop.style.display = "inline-block";
+        }
+      }
+
+      function toggleExplainMode(tag) {
+        if (activeExplainTag === tag) {
+          clearExplainModeState();
+          return;
+        }
+        applyExplainMode(tag, { showExplainPanel: true });
+      }
+
+      function selectRiskFactor(tag) {
+        if (activeRiskFactorTag === tag) {
+          return;
+        }
+        if (typeof toggleExplainMode === "function") {
+          applyExplainMode(tag, { showExplainPanel: false });
+          return;
+        }
+        openEvidenceDrawer(tag);
+      }
+
+      document.getElementById("clearActivity").addEventListener("click", function () {
+        localStorage.removeItem(storageKey);
+        renderActivity();
+        renderTimelinePreview();
+      });
+
+      toggleStatusWhy.addEventListener("click", function (event) {
+        event.preventDefault();
+        const open = statusWhyPanel.style.display === "block";
+        statusWhyPanel.style.display = open ? "none" : "block";
+      });
+
+      transitionRow.addEventListener("click", function (event) {
+        const button = event.target.closest("button[data-transition]");
+        if (!button) return;
+        const nextStatus = button.getAttribute("data-transition");
+        updateCaseStatus(nextStatus);
+        appendActivity("Transition: " + button.textContent.trim());
+      });
+
+      caseSidebar.addEventListener("click", function (event) {
+        const primaryBtn = event.target.closest("button[data-suggest-action]");
+        if (primaryBtn) {
+          const actionLabel = primaryBtn.getAttribute("data-suggest-label") || "";
+          const actionVerb = primaryBtn.getAttribute("data-suggest-verb") || "Log";
+          const sourceTag = primaryBtn.getAttribute("data-suggest-tag") || "";
+          const sourceFactor = riskFactors.find(function (factor) { return factor.id === sourceTag; });
+          const sourceLabel = sourceFactor ? sourceFactor.label : "Default policy";
+          appendActivity("Suggested action: " + actionLabel + " — " + actionVerb + " — Because: " + sourceLabel);
+          if (sourceTag) {
+            if (typeof selectRiskFactor === "function") {
+              selectRiskFactor(sourceTag);
+            } else if (typeof toggleExplainMode === "function") {
+              toggleExplainMode(sourceTag);
+            }
+          }
+          return;
+        }
+
+        const logBtn = event.target.closest("button[data-log-action]");
+        if (logBtn) {
+          const actionLabel = logBtn.getAttribute("data-log-action") || "";
+          const sourceTag = logBtn.getAttribute("data-suggest-tag") || "";
+          const sourceFactor = riskFactors.find(function (factor) { return factor.id === sourceTag; });
+          const sourceLabel = sourceFactor ? sourceFactor.label : "Default policy";
+          appendActivity("Suggested action: " + actionLabel + " — Log — Because: " + sourceLabel);
+          if (sourceTag) {
+            if (typeof selectRiskFactor === "function") {
+              selectRiskFactor(sourceTag);
+            } else if (typeof toggleExplainMode === "function") {
+              toggleExplainMode(sourceTag);
+            }
+          }
+          openActionModal(actionLabel, "Suggested because: " + sourceLabel);
+        }
+      });
+
+      allActionsRow.addEventListener("click", function (event) {
+        const chip = event.target.closest("button[data-action-chip]");
+        if (!chip) return;
+        openActionModal(chip.getAttribute("data-action-chip"));
+      });
+
+      logManualActionBtn.addEventListener("click", function () {
+        openActionModal("");
+      });
+
+      actionModalForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const actionType = document.getElementById("actionTypeSelect").value;
+        const notes = document.getElementById("actionNotesInput").value.trim();
+        const outcome = document.getElementById("actionOutcomeSelect").value;
+        const notesSuffix = notes ? " — Notes: " + notes : "";
+        appendActivity("Action: " + actionType + " — " + outcome + notesSuffix);
+        closeActionModal();
+      });
+
+      actionModalClose.addEventListener("click", closeActionModal);
+      actionModalCancel.addEventListener("click", closeActionModal);
+      actionModalBackdrop.addEventListener("click", closeActionModal);
+
+      riskFactorsGrid.addEventListener("click", function (event) {
+        const row = event.target.closest('article[data-risk-row]');
+        const evidenceBtn = event.target.closest("button[data-risk-evidence]");
+        if (evidenceBtn) {
+          selectRiskFactor(evidenceBtn.getAttribute("data-risk-evidence"));
+          return;
+        }
+        const reviewBtn = event.target.closest("button[data-risk-review]");
+        if (reviewBtn) {
+          const riskId = reviewBtn.getAttribute("data-risk-review");
+          const factor = riskFactors.find(function (item) { return item.id === riskId; });
+          const label = factor ? factor.label : humanize(riskId);
+          reviewedMap[riskId] = true;
+          localStorage.setItem(reviewedStorageKey, JSON.stringify(reviewedMap));
+          const row = riskFactorsGrid.querySelector('article[data-risk-row="' + riskId + '"]');
+          if (row && !row.querySelector(".risk-reviewed-badge")) {
+            const insertPoint = row.querySelector(".severity-pill");
+            if (insertPoint) {
+              insertPoint.insertAdjacentHTML("afterend", '<span class="risk-reviewed-badge">Reviewed</span>');
+            }
+          }
+          appendActivity("Reviewed risk factor: " + label);
+          selectRiskFactor(riskId);
+          return;
+        }
+        if (row) {
+          selectRiskFactor(row.getAttribute("data-risk-row"));
+        }
+      });
+
+      evidenceFilterClear.addEventListener("click", function () {
+        clearExplainModeState();
+      });
+
+      evidenceDrawerClose.addEventListener("click", closeEvidenceDrawer);
+      evidenceDrawerBackdrop.addEventListener("click", closeEvidenceDrawer);
+      evidenceDrawerContent.addEventListener("click", function (event) {
+        const jumpBtn = event.target.closest("button[data-drawer-jump]");
+        if (jumpBtn) {
+          const section = jumpBtn.getAttribute("data-drawer-jump");
+          setPanelOpen(section, true);
+          const anchor = evidenceAccordion.querySelector('[data-evidence-toggle="' + section + '"]');
+          if (anchor) {
+            anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        }
+        const rawBtn = event.target.closest("button[data-drawer-raw]");
+        if (rawBtn) {
+          openRawForSection(rawBtn.getAttribute("data-drawer-raw"));
+        }
+      });
+
+      confirmAiDecisionBtn.addEventListener("click", function () {
+        currentDecision = {
+          final: aiRecommendation.decision,
+          reason: "Confirmed recommendation.",
+          mode: "confirmed_ai"
+        };
+        saveDecision(currentDecision);
+        renderDecisionState();
+        appendActivity("Decision: " + currentDecision.final + " (confirmed recommendation)");
+      });
+
+      overrideDecisionBtn.addEventListener("click", openOverrideModal);
+      decisionOverrideClose.addEventListener("click", closeOverrideModal);
+      decisionOverrideCancel.addEventListener("click", closeOverrideModal);
+      decisionOverrideBackdrop.addEventListener("click", closeOverrideModal);
+      decisionOverrideForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const finalDecision = document.getElementById("overrideDecisionSelect").value;
+        const reason = document.getElementById("overrideReasonInput").value.trim();
+        if (!reason) return;
+        currentDecision = {
+          final: finalDecision,
+          reason: reason,
+          mode: "override"
+        };
+        saveDecision(currentDecision);
+        renderDecisionState();
+        appendActivity("Decision: " + finalDecision + " (override) — Reason: " + reason);
+        closeOverrideModal();
+      });
+
+      openAiAssistantBtn.addEventListener("click", function () {
+        if (typeof window.__openAiPanel === "function") {
+          window.__openAiPanel();
+        }
+      });
+
+      evidenceAccordion.addEventListener("click", function (event) {
+        const toggleButton = event.target.closest("button[data-evidence-toggle]");
+        if (toggleButton) {
+          const section = toggleButton.getAttribute("data-evidence-toggle");
+          const panel = evidenceAccordion.querySelector('[data-evidence-panel="' + section + '"]');
+          const caret = evidenceAccordion.querySelector('[data-evidence-caret="' + section + '"]');
+          const isOpen = panel.style.display === "block";
+          panel.style.display = isOpen ? "none" : "block";
+          caret.textContent = isOpen ? "▸" : "▾";
+          return;
+        }
+        const tagChip = event.target.closest("button[data-evidence-tag]");
+        if (tagChip) {
+          toggleExplainMode(tagChip.getAttribute("data-evidence-tag"));
+          return;
+        }
+        const rawButton = event.target.closest("button[data-view-raw]");
+        if (!rawButton) return;
+        openRawForSection(rawButton.getAttribute("data-evidence-section"));
+      });
+
+      rawJsonModalClose.addEventListener("click", closeRawJsonModal);
+      rawJsonModalBackdrop.addEventListener("click", closeRawJsonModal);
+      clearExplainTop.addEventListener("click", function (event) {
+        event.preventDefault();
+        clearExplainModeState();
+      });
+      clearExplainMode.addEventListener("click", function (event) {
+        event.preventDefault();
+        clearExplainModeState();
+      });
+
+      renderDecisionState();
+      renderActivity();
+      renderTimelinePreview();
+    }
+
+    if (!id) {
+      renderError('Missing customer id. Open this page with a query like <strong>?id=acme</strong>.');
+    } else {
+      content.innerHTML = '<p style="margin: 0; color: #4b5563;">Loading...</p>';
+
+      fetch("data/customers.json")
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Fetch failed");
+          }
+          return response.json();
+        })
+        .then(function (customers) {
+          if (!Array.isArray(customers)) {
+            throw new Error("Invalid data");
+          }
+
+          const customer = customers.find(function (item) {
+            return item.id === id;
+          });
+
+          if (!customer) {
+            renderError('No customer found for id: <strong>' + id + "</strong>.");
+            return;
+          }
+
+          renderCustomer(customer);
+        })
+        .catch(function () {
+          renderError("Unable to load customer data right now.");
+        });
+    }
+  </script>
+  <script>
+    (function () {
+      var launcher = document.getElementById("ai-launcher");
+      var panel = document.getElementById("ai-panel");
+      var expandBtn = document.getElementById("ai-expand");
+      var toggleBtn = document.getElementById("ai-toggle");
+      var closeBtn = document.getElementById("ai-close");
+      var messages = document.getElementById("ai-messages");
+      var suggestRow = document.getElementById("ai-suggest-row");
+      var citeCheckbox = document.getElementById("ai-cite");
+      var input = document.getElementById("ai-input");
+      var sendBtn = document.getElementById("ai-send");
+      var resizeHandle = document.getElementById("ai-resize");
+      if (!launcher || !panel || !expandBtn || !toggleBtn || !closeBtn || !messages || !suggestRow || !citeCheckbox || !input || !sendBtn || !resizeHandle) return;
+
+      function isOpen() {
+        return panel.classList.contains("ai-open");
+      }
+
+      function openPanel() {
+        panel.classList.add("ai-open");
+        panel.classList.remove("ai-collapsed");
+        panel.classList.remove("ai-expanded");
+        toggleBtn.textContent = "Collapse";
+        expandBtn.textContent = "Expand";
+        launcher.setAttribute("aria-expanded", "true");
+      }
+
+      function closePanel() {
+        panel.classList.remove("ai-open");
+        launcher.setAttribute("aria-expanded", "false");
+      }
+
+      window.__openAiPanel = function (prefill) {
+        openPanel();
+        if (typeof prefill === "string" && prefill.trim()) {
+          input.value = prefill.trim();
+        }
+        input.focus();
+      };
+
+      function toggleCollapse() {
+        var collapsed = panel.classList.toggle("ai-collapsed");
+        toggleBtn.textContent = collapsed ? "Expand" : "Collapse";
+      }
+
+      function toggleExpand() {
+        var expanded = panel.classList.toggle("ai-expanded");
+        expandBtn.textContent = expanded ? "Shrink" : "Expand";
+      }
+
+      function appendMessage(role, text) {
+        var node = document.createElement("div");
+        node.className = "ai-msg " + (role === "user" ? "ai-msg-user" : "ai-msg-assistant");
+        node.textContent = text;
+        messages.appendChild(node);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function getCustomer() {
+        return window.__currentCustomer || null;
+      }
+
+      function buildSourceSuffix(customer, includeSources) {
+        if (!includeSources || !customer) return "";
+        return " Sources: customer.summary, customer.highlights, customer.nextSteps, customer.tags, customer.evidence.";
+      }
+
+      function getMockReply(userText, includeSources) {
+        var t = userText.toLowerCase();
+        var customer = getCustomer();
+        if (!customer) {
+          return "Mock: No customer record is currently loaded in context.";
+        }
+
+        if (t.indexOf("summary") >= 0 || t.indexOf("summarize") >= 0) {
+          var summary = customer.summary || {};
+          return "Mock summary: " + customer.name + " is " + customer.riskTier + " risk (score " + customer.riskScore + "). KYC: " + (summary.KYC || "n/a") + "; KYB: " + (summary.KYB || "n/a") + "; Bank: " + (summary.Bank || "n/a") + "; Credit: " + (summary.Credit || "n/a") + "." + buildSourceSuffix(customer, includeSources);
+        }
+
+        if (t.indexOf("missing") >= 0) {
+          var missing = [];
+          if (!Array.isArray(customer.highlights) || !customer.highlights.length) missing.push("highlights");
+          if (!Array.isArray(customer.nextSteps) || !customer.nextSteps.length) missing.push("next steps");
+          if (!customer.summary) missing.push("summary");
+          if (!customer.evidence) missing.push("evidence");
+          var msg = missing.length ? "Missing or thin fields: " + missing.join(", ") + "." : "No obvious missing core sections; consider validating freshness of evidence and ownership docs.";
+          return "Mock: " + msg + buildSourceSuffix(customer, includeSources);
+        }
+
+        if (t.indexOf("next") >= 0 || t.indexOf("step") >= 0) {
+          var steps = Array.isArray(customer.nextSteps) ? customer.nextSteps.slice(0, 3) : [];
+          return "Mock next steps: " + (steps.length ? steps.join(" | ") : "Review underwriting checklist, request additional statements, and verify ownership docs.") + "." + buildSourceSuffix(customer, includeSources);
+        }
+
+        if (t.indexOf("tag") >= 0 || t.indexOf("explain") >= 0) {
+          var tags = Array.isArray(customer.tags) ? customer.tags : [];
+          var firstTag = tags[0];
+          var mapping = customer.tagEvidenceMap && firstTag ? customer.tagEvidenceMap[firstTag] : null;
+          var mappingHint = Array.isArray(mapping) && mapping[0] ? " For " + firstTag + ", mapped reason: " + mapping[0].reason + "." : "";
+          return "Mock tag explanation: Active tags are " + (tags.length ? tags.join(", ") : "none") + "." + mappingHint + buildSourceSuffix(customer, includeSources);
+        }
+
+        if (t.indexOf("risk") >= 0) {
+          return "Mock risk view: " + customer.name + " is currently " + customer.riskTier + " (" + customer.riskScore + "). Recommend enhanced review for elevated indicators." + buildSourceSuffix(customer, includeSources);
+        }
+
+        return "Mock: I can summarize this customer, identify missing information, recommend next steps, or explain tag-to-evidence mappings." + buildSourceSuffix(customer, includeSources);
+      }
+
+      function sendMessage() {
+        var text = input.value.trim();
+        if (!text) return;
+        appendMessage("user", text);
+        input.value = "";
+        window.setTimeout(function () {
+          appendMessage("assistant", getMockReply(text, !!citeCheckbox.checked));
+        }, 250);
+      }
+
+      launcher.addEventListener("click", function () {
+        if (isOpen()) {
+          closePanel();
+        } else {
+          openPanel();
+          input.focus();
+        }
+      });
+      closeBtn.addEventListener("click", closePanel);
+      expandBtn.addEventListener("click", toggleExpand);
+      toggleBtn.addEventListener("click", toggleCollapse);
+      sendBtn.addEventListener("click", sendMessage);
+      input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+          sendMessage();
+        }
+      });
+      window.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && isOpen()) {
+          closePanel();
+        }
+      });
+
+      suggestRow.addEventListener("click", function (event) {
+        var chip = event.target.closest("button[data-ai-prompt]");
+        if (!chip) return;
+        var prompt = chip.getAttribute("data-ai-prompt") || "";
+        if (!prompt) return;
+        if (!isOpen()) openPanel();
+        input.value = prompt;
+        input.focus();
+      });
+
+      var resizing = false;
+      var startX = 0;
+      var startY = 0;
+      var startW = 0;
+      var startH = 0;
+
+      resizeHandle.addEventListener("mousedown", function (event) {
+        resizing = true;
+        startX = event.clientX;
+        startY = event.clientY;
+        startW = panel.offsetWidth;
+        startH = panel.offsetHeight;
+        event.preventDefault();
+      });
+
+      window.addEventListener("mousemove", function (event) {
+        if (!resizing) return;
+        var nextW = startW + (event.clientX - startX);
+        var nextH = startH + (event.clientY - startY);
+        panel.style.width = Math.max(280, Math.min(window.innerWidth * 0.92, nextW)) + "px";
+        panel.style.height = Math.max(220, Math.min(window.innerHeight * 0.86, nextH)) + "px";
+      });
+
+      window.addEventListener("mouseup", function () {
+        resizing = false;
+      });
+    })();
+  </script>
+</body>
+</html>

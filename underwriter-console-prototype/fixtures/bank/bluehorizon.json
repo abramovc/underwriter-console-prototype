@@ -1,0 +1,14 @@
+{
+  "provider": "Plaid",
+  "type": "Bank",
+  "customerId": "bluehorizon",
+  "timestamp": "2026-02-13T10:10:00Z",
+  "signals": [
+    { "key": "account_ownership", "value": "match", "confidence": 0.89 },
+    { "key": "balance_stability", "value": "moderate", "confidence": 0.72 }
+  ],
+  "notes": [
+    "Fake bank connectivity output.",
+    "Created for UI development and testing only."
+  ]
+}

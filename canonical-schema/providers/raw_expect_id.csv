@@ -1,0 +1,112 @@
+reason_code_id,code,description,service_name,service_internal_name,service_id
+2545,ADDR,A Velocity alert was triggered  on Located Street Address per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2547,ADDR4,A Velocity alert was triggered on Located Street Address w/SSN4 per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2558,EMAIL,A Velocity alert was triggered on Input Email Address per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2554,IADDR,A Velocity alert was triggered on Input Street Address per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2557,IADDR4,A Velocity alert was triggered on Input street address w/ SSN4 per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2555,IALTADDR,A Velocity alert was triggered on the Alternate Street Address per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2562,IDOC,A Velocity alert was triggered on the Input Document Number per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2561,IIPADDR,A Velocity alert was triggered in Input IP Address per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2551,ILNAME4,A Velocity alert was triggered on Input Last Name and SSN4 per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2552,INAME,A Velocity alert was triggered on Input Last Name and Street Address per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2550,INAME2,A Velocity alert was triggered on Input First Name and Last Name per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2553,INAME4,A Velocity alert was triggered on Input Last Name and Street Address w/ SSN4 per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2559,IPHONE,A Velocity alert was triggered on Input Phone Number per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2560,ISSN9,A Velocity alert was triggered on Input SSN9 per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2556,ISTRNZIP,A Velocity alert was triggered on Input Street Name and ZIP Code per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2563,LDOC,A Velocity alert was triggered on the Located Document Number per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2542,LNAME4,Velocity alert was triggered  on Located Last Name and SSN4 per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2543,NAME,A Velocity alert was triggered  on Located Last Name and Street Address per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2541,NAME2,Velocity alert was triggered on Located First Name and Last Name per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2544,NAME4,A Velocity alert was triggered  on Located Last Name and Street Address w/ SSN4 per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2548,PHONE,A Velocity alert was triggered on Located Phone Number per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2488,resultcode.activation.date.alert,This indicates that the provided Purchase Date of the card is a particular set of days after the Activation Date.,IDology ExpectID,ExpectID,178
+2456,resultcode.address.does.not.match,"Address found does not match address submitted.   This can be due to a typo in the input information, typos or errors in the address located, or the address is actually incorrect, but the subject’s credentials are located in or near the target ZIP code, city, or metropolitan area.",IDology ExpectID,ExpectID,178
+2473,resultcode.address.location.alert,A location-based alert that advises when the located ZIP Code exceeds the Enterprise’s Permitted Distance Radius rule.,IDology ExpectID,ExpectID,178
+2472,resultcode.address.longevity.alert,Specifies how long someone has lived at their current address.,IDology ExpectID,ExpectID,178
+2471,resultcode.address.stability.alert,Indicates how often someone moves based on specific timeframe triggers,IDology ExpectID,ExpectID,178
+2470,resultcode.address.velocity.alert,Warns of the number of addresses someone has had within a defined time period.,IDology ExpectID,ExpectID,178
+2493,resultcode.age.above.maximum,Indicates that the subject is above the maximum age specified in the enterprise configuration.,IDology ExpectID,ExpectID,178
+2492,resultcode.age.below.minimum,Indicates that the subject is below the minimum age specified in the enterprise configuration.,IDology ExpectID,ExpectID,178
+2474,resultcode.alternate.address.alert,Indicates that the Alternate Address could not be verified for the customer. The Alert will be clarified further as to which type with the value of the <alternate-address-type> value.  Those are: • Street Number • Street Name • State • ZIP Code</alternate-address-type>,IDology ExpectID,ExpectID,178
+2491,resultcode.bankruptcy,This indicates that the subject of the search has a chapter 7 or 13 bankruptcy in their public record.,IDology ExpectID,ExpectID,178
+2496,resultcode.blacklist.alert.address,Indicates that the input Address was found on the Alert List for the Enterprise.,IDology ExpectID,ExpectID,178
+2500,resultcode.blacklist.alert.domain,Indicates that the input Email Domain was found on the Alert List for the enterprise.,IDology ExpectID,ExpectID,178
+2499,resultcode.blacklist.alert.email,Indicates that the input Email Address was found on the Alert List for the Enterprise.,IDology ExpectID,ExpectID,178
+2497,resultcode.blacklist.alert.ip,Indicates that the input IP Address was found on the Alert List for the Enterprise.,IDology ExpectID,ExpectID,178
+2498,resultcode.blacklist.alert.phone,Indicates that the input Phone Number was found on the Alert List for the Enterprise.,IDology ExpectID,ExpectID,178
+2495,resultcode.blacklist.alert.ssn,Indicates that the input SSN9 was found on the Alert List for the Enterprise.,IDology ExpectID,ExpectID,178
+2455,resultcode.coppa.alert,"Customer is 13 or under.  COPPA laws forbid conducting e-commerce with people under 14 years of age. When this result is encountered, the input information and located data will not be available in any record of the transaction due to the issues around storing data on children.",IDology ExpectID,ExpectID,178
+2487,resultcode.data.strength.alert,Examines how long someone has been in the public record system and how much data is available.,IDology ExpectID,ExpectID,178
+4930,resultcode.day.of.birth.does.not.match,Day of Birth Does Not Match,IDology ExpectID,ExpectID,178
+4931,resultcode.day.of.birth.not.available,Day of Birth Not Available,IDology ExpectID,ExpectID,178
+2521,resultcode.email.domain.does.not.exist,The email address or domain does not exist.,IDology ExpectID,ExpectID,178
+2517,resultcode.high.risk,Triggered when the total ID Score is greater than or equal to the value entered for the High Risk threshold.,IDology ExpectID,ExpectID,178
+2469,resultcode.high.risk.address.alert,Identifies addresses with a known history of fraud activity.,IDology ExpectID,ExpectID,178
+2523,resultcode.high.risk.email.country,The email address is found to be from a country that is set as restricted within the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2525,resultcode.high.risk.email.domain,The domain has been reported as fraud or is potentially fraudulent.,IDology ExpectID,ExpectID,178
+2524,resultcode.high.risk.email.fraud,The email address has been reported as fraud or is potentially fraudulent.,IDology ExpectID,ExpectID,178
+2522,resultcode.high.risk.email.recently.verified,The email address is high risk because it was only recently verified in our databases.,IDology ExpectID,ExpectID,178
+2511,resultcode.high.risk.ip.bot,Indicates that the IP address is part of a network of computers infected with malware.,IDology ExpectID,ExpectID,178
+2512,resultcode.high.risk.ip.spam,Indicates that the IP address is associated with a device infected with malware.,IDology ExpectID,ExpectID,178
+2513,resultcode.high.risk.ip.tor,Indicates that the IP address is associated with a TOR network.,IDology ExpectID,ExpectID,178
+2459,resultcode.input.address.is.po.box,The input address is a PO Box.,IDology ExpectID,ExpectID,178
+2479,resultcode.input.ssn.is.itin,Indicates that the Input SSN is an ITIN (Individual Taxpayer Identification Number).,IDology ExpectID,ExpectID,178
+2526,resultcode.invalid.email.address,The email address is invalid or does not have the proper syntax of an email address.,IDology ExpectID,ExpectID,178
+2509,resultcode.ip.invalid,Indicates that the IP address submitted does not fit the proper structure of an IP address and/or is found to be an unassigned IP address. This might also indicate that the IP address is a private or multicast address.,IDology ExpectID,ExpectID,178
+2514,resultcode.ip.location.not.available,Indicates that the location of the IP address cannot be determined.,IDology ExpectID,ExpectID,178
+2510,resultcode.ip.not.located,Indicates that the IP address could not be located within IDology data sources.,IDology ExpectID,ExpectID,178
+2508,resultcode.ip.state.does.not.match,Indicates that the located IP State does not match the located State for the customer.,IDology ExpectID,ExpectID,178
+2489,resultcode.last.name.does.not.match,This indicates that the located last name does not match the input last name.,IDology ExpectID,ExpectID,178
+2460,resultcode.located.address.is.po.box,The located address is a PO Box.,IDology ExpectID,ExpectID,178
+2480,resultcode.located.itin,Indicates that the Located SSN is an ITIN (Individual Taxpayer Identification Number).,IDology ExpectID,ExpectID,178
+2515,resultcode.low.risk,Triggered when the total ID Score is less than or equal to the value entered for the Low Risk threshold.,IDology ExpectID,ExpectID,178
+2516,resultcode.medium.risk,Triggered when the total ID Score is between the values entered for the Low and High Risk threshold.,IDology ExpectID,ExpectID,178
+2465,resultcode.mob.does.not.match,This indicates a discrepancy between the month of birth submitted and the month of birth located.  This ID Note is only presented when the year-of-birth matches.,IDology ExpectID,ExpectID,178
+2540,resultcode.mobile.account.status.absent,Mobile account status absent,IDology ExpectID,ExpectID,178
+2537,resultcode.mobile.account.status.active,Mobile account status active,IDology ExpectID,ExpectID,178
+2538,resultcode.mobile.account.status.deactivated,Mobile account status deactivated,IDology ExpectID,ExpectID,178
+2539,resultcode.mobile.account.status.suspended,Mobile account status suspended,IDology ExpectID,ExpectID,178
+2535,resultcode.mobile.account.type.hybrid,Mobile account hybrid,IDology ExpectID,ExpectID,178
+2533,resultcode.mobile.account.type.postpaid,Mobile account postpaid,IDology ExpectID,ExpectID,178
+2534,resultcode.mobile.account.type.prepaid,Mobile account prepaid,IDology ExpectID,ExpectID,178
+2536,resultcode.mobile.account.type.unknown,Mobile account type unknown,IDology ExpectID,ExpectID,178
+2531,resultcode.mobile.change.event.device,Mobile account device changed,IDology ExpectID,ExpectID,178
+2528,resultcode.mobile.change.event.number,Mobile account phone number change,IDology ExpectID,ExpectID,178
+2530,resultcode.mobile.change.event.ported,Mobile account phone number ported,IDology ExpectID,ExpectID,178
+2532,resultcode.mobile.change.event.simswap,Mobile account sim swapped,IDology ExpectID,ExpectID,178
+2529,resultcode.mobile.change.event.status,Mobile Account Network Status Change,IDology ExpectID,ExpectID,178
+2527,resultcode.mobile.id.age.alert,The “age” of the mobile account (account creation date) falls within the specified time range that the Enterprise is configured to monitor.,IDology ExpectID,ExpectID,178
+2467,resultcode.multiple.records.found,Several valid records exist containing conflicting identifying information.,IDology ExpectID,ExpectID,178
+2494,resultcode.multiple.records.found,"Indicates that more than one record was found containing the same located address for the person, but one of the records contains a different SSN than the others.",IDology ExpectID,ExpectID,178
+2502,resultcode.network.alert.address,Indicates that the input Address was found on the Network Alert List.,IDology ExpectID,ExpectID,178
+2507,resultcode.network.alert.document.number,Indicates that the input document number was found on the network alert list for the Enterprise.,IDology ExpectID,ExpectID,178
+2506,resultcode.network.alert.domain,Indicates that the input email domain was found on the Network Alert List.,IDology ExpectID,ExpectID,178
+2504,resultcode.network.alert.email,Indicates that the input email address was found on the Network Alert List.,IDology ExpectID,ExpectID,178
+2503,resultcode.network.alert.ip,Indicates that the input IP Address was found on the Network Alert List.,IDology ExpectID,ExpectID,178
+2505,resultcode.network.alert.phone,Indicates that the input phone number was found on the Network Alert List.,IDology ExpectID,ExpectID,178
+2501,resultcode.network.alert.ssn,Indicates that the input SSN9 was found on the Network Alert List.,IDology ExpectID,ExpectID,178
+2468,resultcode.newer.record.found,"The subject of the search was found at the address submitted, but a more recent record shows a different address for the individual.   If a customer intentionally provides an old address and a new one is located, this result will occur, but it also results from a customer providing a current “home” address and the IDology search locating newer real estate, like a second/vacation home or an investment property.",IDology ExpectID,ExpectID,178
+2475,resultcode.no.dob.available,"The individual was identified, but DOB information was not available in the records located. This does not mean the search failed.  Numerous public-record data sources do not include DOB information in their records.",IDology ExpectID,ExpectID,178
+2466,resultcode.no.mob.available,This indicates that no month-of-birth was included in the records that were located.,IDology ExpectID,ExpectID,178
+2519,resultcode.pa.dob.does.not.match,Indicates that the input DOB does not match the located DOB on the PA Watch List record.,IDology ExpectID,ExpectID,178
+2518,resultcode.pa.dob.match,Indicates that the input DOB matches the located DOB on the PA Watch List record.,IDology ExpectID,ExpectID,178
+2520,resultcode.pa.dob.not.available,Indicates that there is no located DOB on the PA Watch List record to match against the input DOB.,IDology ExpectID,ExpectID,178
+2486,resultcode.single.address.in.file,This indicates that only a single address record was located for the individual.,IDology ExpectID,ExpectID,178
+2477,resultcode.ssn.does.not.match,"SSN found does not match SSN submitted.  This does not necessarily mean the ID Located is invalid, especially when the MOB+YOB or YOB was provided as well.  There can be errors in the located SSN data.",IDology ExpectID,ExpectID,178
+2484,resultcode.ssn.issued.prior.to.dob,"This indicates that the SSN number was issued before the individual’s DOB, a serious fraud flag.",IDology ExpectID,ExpectID,178
+2476,resultcode.ssn.not.available,"The individual was identified, but SSN information was not available.  This does not mean the search failed.  Numerous public-record data sources do not include SSN information in their records.",IDology ExpectID,ExpectID,178
+2485,resultcode.ssn.not.valid,The located SSN does not match the structure of a valid SSN.,IDology ExpectID,ExpectID,178
+2481,resultcode.ssn.tied.to.multiple.names,The SSN provided is tied to two or more individuals.,IDology ExpectID,ExpectID,178
+2478,resultcode.ssn.within.one.digit,"This indicates a discrepancy of one digit between the SSN submitted and the SSN located.  If the SSN submitted is off by one digit from the located SSN, the ID Note is presented.",IDology ExpectID,ExpectID,178
+2483,resultcode.state.does.not.match,This indicates that the State located does not match the state input as part of the address.  This ID Note is a very specialized response and is only available if configured by IDology.,IDology ExpectID,ExpectID,178
+2457,resultcode.street.name.does.not.match,The submitted street name does not match the located data.  This can be due to a typo in the input or the located data.  This note will always be accompanied by the resultcode.address.does.not.match ID Note.,IDology ExpectID,ExpectID,178
+2458,resultcode.street.number.does.not.match,The submitted street number does not match the located data.  This can be due to a typo in the input or the located data.  This note will always be accompanied by the resultcode.address.does.not.match ID Note.,IDology ExpectID,ExpectID,178
+2482,resultcode.subject.deceased,Records indicate that the subject in question is deceased.,IDology ExpectID,ExpectID,178
+2490,resultcode.thin.file,"This indicates that the record located had very little information, specifically only name + address (Personal Info or “PI” only), and lacks any information that can be used to link to other records.",IDology ExpectID,ExpectID,178
+2461,resultcode.warm.address.alert,This indicates that the located address is a warm address.  Warm addresses will be clarified further as to which type with the value of the <warm-address-list> value.  Those are:  • mail drop • hospital  • hotel  • prison  • campground • college  • university  •  USPO</warm-address-list>,IDology ExpectID,ExpectID,178
+2463,resultcode.yob.does.not.match,"The year of birth located does not match.  If neither the month-of-birth nor the year-of-birth match, this ID Note is presented.",IDology ExpectID,ExpectID,178
+2464,resultcode.yob.within.one.year,"This indicates a discrepancy of one year between the YOB submitted and the YOB located.  If the YOB submitted is 1970 and the YOB located is 1971, this ID Note is presented.",IDology ExpectID,ExpectID,178
+2462,resultcode.zip.does.not.match,ZIP code located does not match the ZIP code submitted.,IDology ExpectID,ExpectID,178
+2549,SSN9,A Velocity alert was triggered on Located SSN9 per the Enterprise configuration.,IDology ExpectID,ExpectID,178
+2546,STRNZIP,A Velocity alert was triggered on Located Street Name and ZIP Code per the Enterprise configuration.,IDology ExpectID,ExpectID,178

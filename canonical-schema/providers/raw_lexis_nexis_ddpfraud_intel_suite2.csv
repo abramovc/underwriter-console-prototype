@@ -1,0 +1,178 @@
+reason_code_id,code,description,service_name,service_internal_name,service_id
+11248,010,Fictitious Name or Address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11253,018,Consumer's asserted age less than 18,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11250,088,Suspected frivolous input,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11257,153,Address is a business or commercial address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11254,157,Address is a prison address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11255,163,Address is a Post Office or private Mailbox facility,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11256,166,Address is a campground or trailer park,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11258,173,Input Address is reported as vacant,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11252,230,SSN likely invalid,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11247,232,SSN Reported as Deceased,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11251,233,SSN likely issued before DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11246,248,Identity reported as Deceased,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11249,573,Primary phone number likely fictitious,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11082,A1,File address reporting history associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11083,A10,Input address characteristics associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11084,A12,"Input address likely invalid, missing, or incomplete",LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11085,A13,Input address likely not family owned,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11086,A14,Input address mail delivery status associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11087,A15,Input address may have been miskeyed,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11088,A17,Input address not found on file,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11089,A18,Input address only found on national credit bureaus for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11090,A19,Input address type generally associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11091,A2,File address characteristics associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11092,A20,Mailing address on the property record does not match input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11093,A21,Mailing address on the property record does not match the subject file address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11094,A22,Length of time at file address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11095,A23,No record of ownership by subject of file address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11096,A24,No record of ownership by subject of input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11097,A25,No address history on file for the identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11098,A6,File address type associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11099,A7,Distance between current and previous address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11100,A8,Input address associated with inquiries,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11101,A9,Input address associated with reported fraud,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11102,C1,Number of sources corroborating identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11103,C10,Number of sources corroborating input name association with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11104,C11,Number of sources corroborating input SSN association with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11105,C12,Corroboration of PII elements with input email address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11106,C13,Number of credit bureau sources corroborating identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11107,C14,Number of credit bureau sources corroborating identity association with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11108,C15,Number of credit bureau sources corroborating identity association with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11109,C16,Number of credit bureau sources corroborating identity association with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11110,C17,Length of time on credit bureau sources corroborating identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11111,C18,Length of time on credit bureau sources corroborating identity association with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11112,C19,Length of time on credit bureau sources corroborating identity association with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11113,C2,Number of sources corroborating identity association with file address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11114,C20,Length of time on credit bureau sources corroborating identity association with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11115,C21,Length of time on sources corroborating identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11116,C22,Length of time on sources corroborating identity association with file address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11117,C23,Length of time on sources corroborating identity association with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11118,C24,Length of time on sources corroborating identity association with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11119,C25,Length of time on sources corroborating identity association with input email,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11120,C26,Length of time on sources corroborating identity association with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11121,C27,Length of time on sources corroborating identity association with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11122,C28,Length of time since inquiries with matching identity element,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11123,C29,Length of time since inquiries with mismatching identity element,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11124,C3,Number of sources corroborating identity association with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11125,C4,Number of sources corroborating identity association with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11126,C5,Number of sources corroborating identity association with input email,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11127,C7,Number of sources corroborating identity association with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11128,C8,Number of sources corroborating identity association with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11129,C9,Number of sources corroborating input address association with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11130,D2,Input DOB may have been miskeyed,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11131,D3,Input DOB not found on credit bureau sources for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11132,D4,Input DOB not found on file for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11133,D5,Input DOB only found on credit bureaus for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11134,DL1,"Input driver license is likely invalid, missing, or incomplete",LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11135,E1,File email reporting history associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11136,E2,Input email characteristics associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11137,E3,"Input email is likely invalid, missing, or incomplete",LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11138,E4,Input email not the most currently reported for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11139,E5,Number of email sources associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11140,E6,Length of time since input email first seen,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11141,IP1,Distance between input IP and input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11142,IP2,Input IP characteristics associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11143,IP3,Input IP is assigned to a different state/province than input address state/province,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11144,IP4,"Input IP is likely invalid, missing, or incomplete",LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11145,IP5,Input IP is not U.S. based,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11146,IP6,Internet connection characteristics generally associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11147,L1,Identity associated with inquiries,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11148,L2,Identity associated with reported fraud,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11149,L3,Identity characteristics associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11150,L4,Identity credit bureau emergence pattern associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11151,L5,Identity elements associated with inquiries,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11152,L6,Identity emergence pattern associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11153,L7,Identity not found on credit bureau sources,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11154,N1,Input name inconsistent with information on file for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11155,N4,Input name not found on file for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11156,PH1,Input phone associated with inquiries,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11157,PH2,Input phone associated with reported fraud,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11158,PH3,Input phone characteristics associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11159,PH4,"Input phone is likely invalid, missing, or incomplete",LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11160,PH5,Input phone may have been miskeyed,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11161,PH6,Input phone not found on file for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11162,PH7,Input phone type generally associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11163,RA1,Number of relatives and associates on file for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11164,RA2,Number of household members on file for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11165,RA3,No relatives or associates on file for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11166,RA4,Relative & associate characteristics associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11167,RH1,Input PII reporting history associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11168,RH2,Insufficient reporting history,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11169,RH3,Source reporting history associated with risk,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11170,S1,Input SSN associated with inquiries,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11171,S2,Input SSN associated with reported fraud,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11172,S3,"Input SSN is likely invalid, missing, or incomplete",LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11173,S4,Input SSN may have been miskeyed,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11174,S5,Input SSN not found on credit bureau source,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11175,S6,Input SSN not found on file for identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11176,S7,Input SSN only found on credit bureau source,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11177,S8,Input SSN not found on file,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11178,U1,Number of unique addresses associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11179,U10,Number of unique DOB in inquires associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11180,U11,Number of unique DOB in inquiries associated with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11181,U12,Number of unique DOB in inquiries associated with input email,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11182,U14,Number of unique DOB in inquiries associated with input name,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11183,U15,Number of unique DOB in inquiries associated with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11184,U16,Number of unique DOB in inquiries associated with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11185,U17,Number of unique emails associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11186,U19,Number of unique emails in inquiries associated with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11187,U2,Number of unique addresses in inquiries associated with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11188,U20,Number of unique emails in inquiries associated with input IP,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11189,U21,Number of unique emails in inquiries associated with input name,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11190,U22,Number of unique emails in inquiries associated with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11191,U23,Number of unique emails in inquiries associated with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11192,U24,Number of unique identities associated with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11193,U25,Number of unique identities in inquiries associated with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11194,U26,Number of unique identities in inquiries associated with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11195,U27,Number of unique identities in inquiries associated with input email,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11196,U28,Number of unique identities in inquiries associated with input IP,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11197,U29,Number of unique identities in inquiries associated with input name,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11198,U3,Number of unique addresses in inquiries associated with input email,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11199,U30,Number of unique identities in inquiries associated with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11200,U31,Number of unique identities in inquiries associated with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11201,U32,Number of unique IP in inquires associated with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11202,U33,Number of unique IP in inquires associated with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11203,U34,Number of unique IP in inquires associated with input email,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11204,U35,Number of unique IP in inquires associated with input name,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11205,U36,Number of unique IP in inquires associated with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11206,U37,Number of unique IP in inquires associated with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11207,U38,Number of unique IP in inquires associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11208,U39,Number of unique names in inquiries associated with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11209,U40,Number of unique names in inquiries associated with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11210,U42,Number of unique names in inquiries associated with input IP,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11211,U43,Number of unique names in inquiries associated with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11212,U44,Number of unique names in inquiries associated with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11213,U46,Number of unique phones associated with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11214,U47,Number of unique phones associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11215,U48,Number of unique phones in inquiries associated with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11216,U49,Number of unique phones in inquiries associated with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11217,U50,Number of unique phones in inquiries associated with input email,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11218,U51,Number of unique phones in inquiries associated with input IP,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11219,U52,Number of unique phones in inquiries associated with input name,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11220,U53,Number of unique phones in inquiries associated with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11221,U54,Number of unique phones in inquiries associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11222,U55,Number of unique SSN associated with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11223,U56,Number of unique SSN associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11224,U57,Number of unique SSN in inquiries associated with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11225,U58,Number of unique SSN in inquiries associated with input DOB,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11226,U59,Number of unique SSN in inquiries associated with input email,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11227,U6,Number of unique addresses in inquiries associated with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11228,U60,Number of unique SSN in inquiries associated with input IP,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11229,U61,Number of unique SSN in inquiries associated with input name,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11230,U62,Number of unique SSN in inquiries associated with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11231,U63,Number of unique SSN in inquiries associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11232,U7,Number of unique addresses inquiries associated with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11233,U8,Number of unique addresses in inquiries associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11234,U9,Number of unique DOB associated with this identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11235,V1,Number of inquiries associated with identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11236,V10,No inquiries associated with identity,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11237,V2,Number of inquiries associated with input address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11238,V3,Number of inquiries associated with input email,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11239,V4,Number of inquiries associated with input IP address,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11240,V5,Number of inquiries associated with input Name,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11241,V6,Number of inquiries associated with input phone,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11242,V7,Number of inquiries associated with input SSN,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11243,V8,Number of inquiries with matching identity elements from input,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11244,V9,Number of inquiries with mismatching identity elements from input,LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718
+11245,WP1,"Input work phone is likely invalid, missing, or incomplete",LexisNexisDDP Fraud Intel Suite 2,LexisNexisDDPFraudIntelSuite2,3718

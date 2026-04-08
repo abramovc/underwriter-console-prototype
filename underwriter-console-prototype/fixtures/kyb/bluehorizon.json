@@ -1,0 +1,14 @@
+{
+  "provider": "Middesk",
+  "type": "KYB",
+  "customerId": "bluehorizon",
+  "timestamp": "2026-02-13T10:05:00Z",
+  "signals": [
+    { "key": "entity_registration", "value": "verified", "confidence": 0.91 },
+    { "key": "beneficial_owner_linkage", "value": "partial", "confidence": 0.69 }
+  ],
+  "notes": [
+    "Placeholder business verification record.",
+    "Fields and values are synthetic."
+  ]
+}

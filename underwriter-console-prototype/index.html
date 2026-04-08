@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verification Home</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <style>
+    .hero {
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 4.2vw, 48px);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p {
+      max-width: 760px;
+      font-size: 15px;
+    }
+
+    .card {
+      border: 1px solid #d1d5db;
+      border-radius: 14px;
+      background: #fff;
+      padding: 14px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    .card-hover {
+      transition: transform 170ms ease, border-color 170ms ease, box-shadow 170ms ease, background 170ms ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-2px);
+      border-color: #93c5fd;
+      box-shadow: 0 8px 22px rgba(16, 24, 40, 0.08);
+      background: #f8fbff;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .option-card {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .option-label {
+      display: block;
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .option-help {
+      display: block;
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .logo-iq { font-weight: 700; letter-spacing: -0.02em; }
+    .nav-muted { color: #9ca3af; cursor: default; user-select: none; }
+
+    @media (max-width: 860px) {
+      .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="container">
+      <nav class="topnav">
+        <div class="nav-left">
+          <a class="logo" href="index.html" aria-label="Home">
+            <img class="logo-img" src="iq.svg" alt="IQ" />
+          </a>
+        </div>
+        <a class="nav-center nav-intel" href="intelligence.html" aria-label="Open Intelligence Center" data-tooltip="Intelligence Center">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="12" cy="12" r="2.3" fill="currentColor"/>
+            <path d="M12 3.5a8.5 8.5 0 0 1 8.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M20.5 12a8.5 8.5 0 0 1-8.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.7"/>
+            <path d="M6.6 7.4l3.2 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span class="sr-only">Intelligence Center</span>
+        </a>
+        <div class="nav-right">
+          <a class="nav-link" href="index.html">Verify</a>
+          <a class="nav-link" href="queue.html">Console</a>
+          <a class="nav-link" href="workflows.html">Workflows</a>
+        </div>
+      </nav>
+      <main>
+        <header class="hero">
+          <h1>What would you like to verify today?</h1>
+          <p class="muted">Run lightweight checks across public signals and get a clear outcome + AI summary in seconds.</p>
+          <p class="muted" style="margin-top: 6px;"><a href="intelligence.html" style="text-decoration: none;">Intelligence Center</a></p>
+          <hr class="divider" />
+        </header>
+
+        <div class="grid-3 options-grid" id="optionsGrid"></div>
+      </main>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var path = window.location.pathname || "";
+      var current = path.split("/").pop() || "index.html";
+      document.querySelectorAll(".nav-link, .nav-intel, .intel-nav-link").forEach(function (el) {
+        var href = el.getAttribute("href") || "";
+        var target = href.split("/").pop();
+        if (target && target === current) {
+          el.classList.add("is-active");
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var VERIFICATION_TYPES = [
+        { key: "website", label: "Website", placeholder: "example.com", helper: "Domain age, DNS, SSL, tech footprint" },
+        { key: "email", label: "Email Address", placeholder: "name@domain.com", helper: "Deliverability, domain posture, risk traits" },
+        { key: "phone", label: "Phone Number", placeholder: "+1 602 555 0123", helper: "Line type, carrier, country" },
+        { key: "person", label: "Person", placeholder: "First Last", helper: "Identity consistency, basic screening" },
+        { key: "business", label: "Business", placeholder: "Acme Processing LLC", helper: "Registry footprint, web presence" },
+        { key: "address", label: "Address", placeholder: "123 Main St, Phoenix, AZ 85004", helper: "Deliverability, geocode, consistency" }
+      ];
+
+      var optionsGrid = document.getElementById("optionsGrid");
+      if (!optionsGrid) return;
+      VERIFICATION_TYPES.forEach(function (item) {
+        var card = document.createElement("a");
+        card.className = "card card-hover option-card";
+        card.href = "verify.html?type=" + encodeURIComponent(item.key);
+        card.innerHTML = '<span class="option-label">' + item.label + '</span><span class="option-help">' + item.helper + "</span>";
+        optionsGrid.appendChild(card);
+      });
+    })();
+  </script>
+</body>
+</html>

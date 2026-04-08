@@ -1,0 +1,48 @@
+concept,bucket,severity,default_action,display_label,is_top_level,description
+identity_verified,identity,low,No action needed,Identity Verified,N,Identity was successfully corroborated or verified.
+identity_supporting,identity,low,Use as supporting evidence only,Identity Supporting Evidence,N,Positive identity evidence that supports confidence but is not a top-level finding.
+identity_not_verified,identity,high,Request identity documentation,Identity Not Verified,Y,Identity could not be sufficiently verified.
+identity_mismatch,identity,medium,Confirm applicant data and request correction if needed,Identity Mismatch,Y,One or more identity attributes are inconsistent or do not align across sources.
+identity_deceased,identity,high,Deny or escalate immediately,Identity Deceased,Y,Identity or SSN is reported as deceased.
+identity_review_required,identity,medium,Manual review required,Identity Review Required,Y,Identity needs analyst review before proceeding.
+fraud_high_risk,fraud,high,Escalate to fraud team,High Fraud Risk,Y,Strong fraud indicators are present.
+fraud_medium_risk,fraud,medium,Manual fraud review,Medium Fraud Risk,Y,Moderate fraud indicators are present.
+fraud_supporting,fraud,low,Use as supporting evidence only,Fraud Supporting Evidence,N,Positive or contextual fraud-related evidence that supports the review.
+synthetic_identity_high,fraud,high,Escalate to fraud team,High Synthetic Identity Risk,Y,Signals indicate likely synthetic identity risk.
+synthetic_identity_medium,fraud,medium,Manual fraud review,Medium Synthetic Identity Risk,Y,Signals indicate moderate synthetic identity risk.
+synthetic_identity_review,fraud,medium,Manual fraud review,Synthetic Identity Review,Y,Synthetic identity indicators require review.
+synthetic_supporting,fraud,low,Use as supporting evidence only,Synthetic Supporting Evidence,N,Positive or contextual synthetic-identity evidence.
+velocity_risk,fraud,medium,Review recent application and entity activity,Velocity Risk,Y,Recent activity frequency or recurrence appears elevated.
+email_risky,contact,medium,Verify email ownership or request alternate email,Email Risk,Y,Email characteristics or history indicate risk.
+phone_risky,contact,medium,Verify phone ownership or request alternate phone,Phone Risk,Y,Phone characteristics or history indicate risk.
+address_risky,contact,medium,Verify address or request updated address,Address Risk,Y,Address characteristics or history indicate risk.
+contact_mismatch,contact,medium,Confirm contact details with applicant,Contact Mismatch,Y,Contact information is inconsistent across sources.
+email_supporting,contact,low,Use as supporting evidence only,Email Supporting Evidence,N,Positive email-related evidence.
+phone_supporting,contact,low,Use as supporting evidence only,Phone Supporting Evidence,N,Positive phone-related evidence.
+address_supporting,contact,low,Use as supporting evidence only,Address Supporting Evidence,N,Positive address-related evidence.
+phone_invalid,contact,high,Request valid phone number,Phone Invalid,Y,Provided phone number is invalid or unusable.
+address_invalid,contact,high,Request updated address,Address Invalid,Y,Provided address is invalid or does not exist.
+bank_valid,bank,low,No action needed,Bank Account Valid,Y,Bank account appears valid and able to transact.
+bank_supporting,bank,low,Use as supporting evidence only,Bank Supporting Evidence,N,Positive bank-account evidence supporting confidence.
+bank_review,bank,medium,Review bank details manually,Bank Review,Y,Bank account requires analyst review.
+bank_invalid,bank,high,Request new bank account or updated banking details,Bank Account Invalid,Y,"Bank account is invalid, closed, blocked, or otherwise unusable."
+bank_unknown,bank,medium,Verify bank account details,Bank Account Unknown,Y,Bank account status or ownership could not be determined.
+bank_ownership_match,bank,low,No action needed,Bank Ownership Match,Y,Ownership of the bank account aligns with the applicant or business.
+bank_ownership_mismatch,bank,high,Request bank statement or proof of ownership,Bank Ownership Mismatch,Y,Ownership of the bank account does not align with the applicant or business.
+bank_ownership_unknown,bank,medium,Verify ownership,Bank Ownership Unknown,Y,Ownership information is unavailable or inconclusive.
+pep_match,compliance,high,Escalate to compliance / run EDD,PEP Match,Y,Potential politically exposed person match identified.
+sanctions_match,compliance,high,Escalate immediately,Sanctions Match,Y,Potential sanctions-related match identified.
+adverse_media,compliance,medium,Review adverse media details,Adverse Media,Y,Negative media or reputational risk signal identified.
+watchlist_match,compliance,high,Escalate to compliance,Watchlist Match,Y,Potential match to a watchlist or related compliance list.
+compliance_supporting,compliance,low,Use as supporting evidence only,Compliance Supporting Evidence,N,Positive or contextual compliance evidence.
+business_verified,business,low,No action needed,Business Verified,Y,Business identity or registration was successfully corroborated.
+business_not_found,business,high,Request business formation or registration documents,Business Not Found,Y,Business could not be found or verified in expected records.
+business_mismatch,business,medium,Verify business details,Business Mismatch,Y,"Business name, address, FEIN, or registration details are inconsistent."
+business_inactive,business,high,Verify business status,Business Inactive,Y,"Business appears inactive, unknown, or not in good standing."
+high_risk_industry,business,medium,Review industry risk and policy fit,High Risk Industry,Y,Business operates in an industry requiring additional scrutiny.
+credit_approved,credit,low,No action needed,Credit Approved,Y,Credit-related decisioning indicates approval.
+credit_denied,credit,high,Deny or review manually,Credit Denied,Y,Credit-related decisioning indicates denial.
+credit_review_required,credit,medium,Manual credit review,Credit Review Required,Y,Credit file requires manual review.
+bankruptcy_detected,legal,high,Review bankruptcy history,Bankruptcy Detected,Y,Bankruptcy history was identified.
+liens_detected,legal,medium,Review lien details,Liens Detected,Y,Open or recent liens were identified.
+litigation_detected,legal,medium,Review litigation history,Litigation Detected,Y,Litigation history was identified.

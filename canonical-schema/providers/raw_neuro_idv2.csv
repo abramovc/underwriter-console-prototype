@@ -1,0 +1,7 @@
+reason_code_id,code,description,service_name,service_internal_name,service_id
+13620,A2100,The data entry method on PII fields is not representative of Genuine or risky behavior.,NeuroId V2,NeuroIdv2,1927
+13619,A2300,The editing on PII fields is not representative of Genuine or Risky behavior.,NeuroId V2,NeuroIdv2,1927
+13618,A2805,The transition timing on non-PII fields is not representative of Genuine or Risky behavior.,NeuroId V2,NeuroIdv2,1927
+13429,A3100,The data entry method on PII fields is representative of Risky behavior.,NeuroId V2,NeuroIdv2,1927
+13430,A3300,The editing on PII fields is representative of Risky behavior.,NeuroId V2,NeuroIdv2,1927
+13431,A3700,The transition method on PII fields is representative of Risky behavior.,NeuroId V2,NeuroIdv2,1927

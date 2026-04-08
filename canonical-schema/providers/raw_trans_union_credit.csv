@@ -1,0 +1,444 @@
+reason_code_id,code,description,service_name,service_internal_name,service_id
+4010,creditvisionbankruptcyscore-000,No adverse factors,TransUnion Credit,TransUnionCredit,706
+4011,creditvisionbankruptcyscore-001,Available credit on bankcard accounts is too low,TransUnion Credit,TransUnionCredit,706
+4012,creditvisionbankruptcyscore-006,Bankcard account balances are too high in proportion to credit limits,TransUnion Credit,TransUnionCredit,706
+4013,creditvisionbankruptcyscore-010,Too many delinquencies,TransUnion Credit,TransUnionCredit,706
+4014,creditvisionbankruptcyscore-013,Revolving account balances are too high in proportion to credit limits,TransUnion Credit,TransUnionCredit,706
+4015,creditvisionbankruptcyscore-015,Number of satisfactory accounts is too low in proportion to total number of accounts,TransUnion Credit,TransUnionCredit,706
+4016,creditvisionbankruptcyscore-020,Length of time revolving accounts have been established is too short,TransUnion Credit,TransUnionCredit,706
+4017,creditvisionbankruptcyscore-022,Too many inquiries,TransUnion Credit,TransUnionCredit,706
+4018,creditvisionbankruptcyscore-023,Months since most recent delinquency,TransUnion Credit,TransUnionCredit,706
+4019,creditvisionbankruptcyscore-024,Too many serious delinquencies,TransUnion Credit,TransUnionCredit,706
+4020,creditvisionbankruptcyscore-025,Months since most recent serious delinquency is too short,TransUnion Credit,TransUnionCredit,706
+4021,creditvisionbankruptcyscore-026,Number of delinquent accounts is too high in proportion to total number of accounts,TransUnion Credit,TransUnionCredit,706
+4022,creditvisionbankruptcyscore-029,Retail account balances are too high in proportion to credit limits,TransUnion Credit,TransUnionCredit,706
+4023,creditvisionbankruptcyscore-031,Revolving account balances are too high in proportion to credit limits,TransUnion Credit,TransUnionCredit,706
+4024,creditvisionbankruptcyscore-032,Not enough revolving debt experience,TransUnion Credit,TransUnionCredit,706
+4025,creditvisionbankruptcyscore-035,Length of time accounts have been established is too short,TransUnion Credit,TransUnionCredit,706
+4026,creditvisionbankruptcyscore-037,Too few bankcard accounts,TransUnion Credit,TransUnionCredit,706
+4027,creditvisionbankruptcyscore-043,Too few open revolving accounts,TransUnion Credit,TransUnionCredit,706
+4028,creditvisionbankruptcyscore-048,Too few active mortgage accounts,TransUnion Credit,TransUnionCredit,706
+4029,creditvisionbankruptcyscore-050,Too many accounts with a balance,TransUnion Credit,TransUnionCredit,706
+4030,creditvisionbankruptcyscore-053,Too many derogatory accounts or public records,TransUnion Credit,TransUnionCredit,706
+4031,creditvisionbankruptcyscore-054,Too many finance installment accounts,TransUnion Credit,TransUnionCredit,706
+4032,creditvisionbankruptcyscore-060,Too many recent mortgage delinquencies,TransUnion Credit,TransUnionCredit,706
+4033,creditvisionbankruptcyscore-066,Too many serious derogatory items,TransUnion Credit,TransUnionCredit,706
+4034,creditvisionbankruptcyscore-069,Not enough debt experience,TransUnion Credit,TransUnionCredit,706
+4035,creditvisionbankruptcyscore-071,Too many bankcard accounts with balances,TransUnion Credit,TransUnionCredit,706
+4036,creditvisionbankruptcyscore-073,Not enough mortgage debt experience,TransUnion Credit,TransUnionCredit,706
+4037,creditvisionbankruptcyscore-076,Total amount past due is too high,TransUnion Credit,TransUnionCredit,706
+4038,creditvisionbankruptcyscore-079,Too few bank revolving accounts,TransUnion Credit,TransUnionCredit,706
+4039,creditvisionbankruptcyscore-080,Too many accounts with a balance currently past due,TransUnion Credit,TransUnionCredit,706
+4040,creditvisionbankruptcyscore-081,Length of time since most recent derogatory public record is too short,TransUnion Credit,TransUnionCredit,706
+4041,creditvisionbankruptcyscore-083,Total balance of revolving accounts is too high,TransUnion Credit,TransUnionCredit,706
+4042,creditvisionbankruptcyscore-088,Length of time since most recent mortgage account delinquency is too short,TransUnion Credit,TransUnionCredit,706
+4043,creditvisionbankruptcyscore-093,Length of time since oldest mortgage account has been established is too short,TransUnion Credit,TransUnionCredit,706
+4044,creditvisionbankruptcyscore-097,Bank revolving account balances are too high in proportion to credit limits,TransUnion Credit,TransUnionCredit,706
+4045,creditvisionbankruptcyscore-099,Too many revolving accounts with balances too high in proportion to credit limits,TransUnion Credit,TransUnionCredit,706
+4046,creditvisionbankruptcyscore-101,Total balance of finance installment accounts is too high,TransUnion Credit,TransUnionCredit,706
+4047,creditvisionbankruptcyscore-103,Not enough available credit,TransUnion Credit,TransUnionCredit,706
+4048,creditvisionbankruptcyscore-105,Too few revolving accounts,TransUnion Credit,TransUnionCredit,706
+4049,creditvisionbankruptcyscore-111,Not enough bankcard debt experience,TransUnion Credit,TransUnionCredit,706
+4050,creditvisionbankruptcyscore-117,Length of time since most seriously delinquent account has been established is too short,TransUnion Credit,TransUnionCredit,706
+4051,creditvisionbankruptcyscore-119,Total balance of bankcard accounts is too high,TransUnion Credit,TransUnionCredit,706
+4052,creditvisionbankruptcyscore-132,Too few open accounts,TransUnion Credit,TransUnionCredit,706
+4053,creditvisionbankruptcyscore-135,Too many finance or installment accounts,TransUnion Credit,TransUnionCredit,706
+4054,creditvisionbankruptcyscore-136,Too many revolving accounts,TransUnion Credit,TransUnionCredit,706
+4055,creditvisionbankruptcyscore-141,Too few accounts recently updated,TransUnion Credit,TransUnionCredit,706
+4056,creditvisionbankruptcyscore-142,Not enough balance decreases on active non-mortgage accounts,TransUnion Credit,TransUnionCredit,706
+4057,creditvisionbankruptcyscore-143,Not enough balance decreases on mortgage trades,TransUnion Credit,TransUnionCredit,706
+4058,creditvisionbankruptcyscore-144,Change of indebtedness or too many balance increases on non-mortgage accounts,TransUnion Credit,TransUnionCredit,706
+4059,creditvisionbankruptcyscore-145,Total balance are too high in proportion to credit limits on mature mortgage trades,TransUnion Credit,TransUnionCredit,706
+4060,creditvisionbankruptcyscore-148,Ratio of payment to minimum obligation on revolving accounts,TransUnion Credit,TransUnionCredit,706
+4061,creditvisionbankruptcyscore-150,Insufficient credit activity on revolving accounts,TransUnion Credit,TransUnionCredit,706
+4062,creditvisionbankruptcyscore-151,Ratio of payment to minimum obligation on bankcard accounts,TransUnion Credit,TransUnionCredit,706
+4063,creditvisionbankruptcyscore-152,Insufficient credit activity on bankcard accounts,TransUnion Credit,TransUnionCredit,706
+4064,creditvisionbankruptcyscore-155,Recency of max aggregate bankcard balance over the last year,TransUnion Credit,TransUnionCredit,706
+4065,creditvisionbankruptcyscore-164,Too few non-mortgage trades,TransUnion Credit,TransUnionCredit,706
+4066,creditvisionbankruptcyscore-166,Too many bankcard balance shifts in recent months,TransUnion Credit,TransUnionCredit,706
+4067,creditvisionbankruptcyscore-167,Too high max aggregate bankcard utilization over the last quarter,TransUnion Credit,TransUnionCredit,706
+4068,creditvisionbankruptcyscore-174,Too few open bankcard accounts,TransUnion Credit,TransUnionCredit,706
+4069,creditvisionbankruptcyscore-175,Length of time since oldest bankcard account has been established is too short,TransUnion Credit,TransUnionCredit,706
+4070,creditvisionbankruptcyscore-179,Too many recently opened finance installment trades,TransUnion Credit,TransUnionCredit,706
+4071,creditvisionbankruptcyscore-180,Too many consecutive occurrences of bankcard past due amounts,TransUnion Credit,TransUnionCredit,706
+4072,creditvisionbankruptcyscore-181,High recent balance range relative to previous balance range,TransUnion Credit,TransUnionCredit,706
+4073,creditvisionbankruptcyscore-182,Monthly obligations are too high,TransUnion Credit,TransUnionCredit,706
+4074,creditvisionbankruptcyscore-183,Total balance of bank revolving accounts is too high,TransUnion Credit,TransUnionCredit,706
+4075,creditvisionbankruptcyscore-184,Length of time most recent bank revolving account has been established is too short,TransUnion Credit,TransUnionCredit,706
+5145,ficoscore8-000,NO ADVERSE FACTOR,TransUnion Credit,TransUnionCredit,706
+5146,ficoscore8-001,AMOUNT OWED ON ACCOUNTS IS TOO HIGH,TransUnion Credit,TransUnionCredit,706
+5147,ficoscore8-002,LEVEL OF DELINQUENCY ON ACCOUNTS,TransUnion Credit,TransUnionCredit,706
+5148,ficoscore8-003,PROPORTION OF LOAN BALANCES TO LOAN AMOUNTS IS TOO HIGH,TransUnion Credit,TransUnionCredit,706
+5149,ficoscore8-004,LACK OF RECENT INSTALLMENT LOAN INFORMATION,TransUnion Credit,TransUnionCredit,706
+5150,ficoscore8-005,TOO MANY ACCOUNTS WITH BALANCES,TransUnion Credit,TransUnionCredit,706
+5151,ficoscore8-006,TOO MANY CONSUMER FINANCE COMPANY ACCOUNTS,TransUnion Credit,TransUnionCredit,706
+5152,ficoscore8-007,ACCOUNT PAYMENT HISTORY TOO NEW TO RATE,TransUnion Credit,TransUnionCredit,706
+5153,ficoscore8-008,TOO MANY INQUIRIES LAST 12 MONTHS,TransUnion Credit,TransUnionCredit,706
+5154,ficoscore8-009,TOO MANY ACCOUNTS RECENTLY OPENED,TransUnion Credit,TransUnionCredit,706
+5155,ficoscore8-010,PROPORTION OF BALANCES TO CREDIT LIMITS IS TOO HIGH ON BANK REVOLVING OR OTHER REVOLVING ACCOUNTS,TransUnion Credit,TransUnionCredit,706
+5156,ficoscore8-011,AMOUNT OWED ON REVOLVING ACCOUNTS IS TOO HIGH,TransUnion Credit,TransUnionCredit,706
+5157,ficoscore8-012,LENGTH OF TIME REVOLVING ACCOUNTS HAVE BEEN ESTABLISHED,TransUnion Credit,TransUnionCredit,706
+5158,ficoscore8-013,TIME SINCE DELINQUENCY IS TOO RECENT OR UNKNOWN,TransUnion Credit,TransUnionCredit,706
+5159,ficoscore8-014,LENGTH OF TIME ACCOUNTS HAVE BEEN ESTABLISHED,TransUnion Credit,TransUnionCredit,706
+5160,ficoscore8-015,LACK OF RECENT BANK REVOLVING INFORMATION,TransUnion Credit,TransUnionCredit,706
+5161,ficoscore8-016,LACK OF RECENT REVOLVING ACCOUNT INFORMATION,TransUnion Credit,TransUnionCredit,706
+5162,ficoscore8-017,NO RECENT NON-MORTGAGE BALANCE INFORMATION,TransUnion Credit,TransUnionCredit,706
+5163,ficoscore8-018,NUMBER OF ACCOUNTS WITH DELINQUENCY,TransUnion Credit,TransUnionCredit,706
+5164,ficoscore8-019,DATE OF LAST INQUIRY TOO RECENT,TransUnion Credit,TransUnionCredit,706
+5165,ficoscore8-020,LENGTH OF TIME SINCE DEROGATORY PUBLIC RECORD OR COLLECTION IS TOO SHORT,TransUnion Credit,TransUnionCredit,706
+5166,ficoscore8-021,AMOUNT PAST DUE ON ACCOUNTS,TransUnion Credit,TransUnionCredit,706
+5167,ficoscore8-022,"SERIOUS DELINQUENCY, DEROGATORY PUBLIC RECORD, OR COLLECTION FILED",TransUnion Credit,TransUnionCredit,706
+5168,ficoscore8-024,NO RECENT REVOLVING BALANCES,TransUnion Credit,TransUnionCredit,706
+5169,ficoscore8-026,NUMBER OF BANK REVOLVING OR OTHER REVOLVING ACCOUNTS,TransUnion Credit,TransUnionCredit,706
+5170,ficoscore8-027,TOO FEW ACCOUNTS CURRENTLY PAID AS AGREED,TransUnion Credit,TransUnionCredit,706
+5171,ficoscore8-028,NUMBER OF ESTABLISHED ACCOUNTS,TransUnion Credit,TransUnionCredit,706
+5172,ficoscore8-029,NO RECENT BANKCARD BALANCES,TransUnion Credit,TransUnionCredit,706
+5173,ficoscore8-030,TIME SINCE MOST RECENT ACCOUNT OPENING IS TOO SHORT,TransUnion Credit,TransUnionCredit,706
+5174,ficoscore8-031,AMOUNT OWED ON DELINQUENT ACCOUNTS,TransUnion Credit,TransUnionCredit,706
+5175,ficoscore8-036,PAYMENTS DUE ON ACCOUNTS,TransUnion Credit,TransUnionCredit,706
+5176,ficoscore8-038,"SERIOUS DELINQUENCY, AND PUBLIC RECORD OR COLLECTION FILED",TransUnion Credit,TransUnionCredit,706
+5177,ficoscore8-039,SERIOUS DELINQUENCY,TransUnion Credit,TransUnionCredit,706
+5178,ficoscore8-040,DEROGATORY PUBLIC RECORD OR COLLECTION FILED,TransUnion Credit,TransUnionCredit,706
+5179,ficoscore8-041,NO RECENT RETAIL BALANCES,TransUnion Credit,TransUnionCredit,706
+5180,ficoscore8-042,LENGTH OF TIME SINCE MOST RECENT CONSUMER FINANCE COMPANY ACCOUNTS ESTABLISHED,TransUnion Credit,TransUnionCredit,706
+5181,ficoscore8-050,LACK OF RECENT RETAIL ACCOUNT INFORMATION,TransUnion Credit,TransUnionCredit,706
+5182,ficoscore8-056,AMOUNT OWED ON RETAIL ACCOUNTS,TransUnion Credit,TransUnionCredit,706
+5183,ficoscore8-097,LACK OF RECENT AUTO LOAN INFORMATION,TransUnion Credit,TransUnionCredit,706
+5184,ficoscore8-098,LENGTH OF TIME CONSUMER FINANCE COMPANY LOANS HAVE BEEN ESTABLISHED,TransUnion Credit,TransUnionCredit,706
+5185,ficoscore8-099,LACK OF RECENT CONSUMER FINANCE COMPANY ACCOUNT INFORMATION,TransUnion Credit,TransUnionCredit,706
+13043,ficoscore9-000,No adverse factor,TransUnion Credit,TransUnionCredit,706
+13044,ficoscore9-001,Amount owed on accounts is too high,TransUnion Credit,TransUnionCredit,706
+13045,ficoscore9-002,Level of delinquency on accounts,TransUnion Credit,TransUnionCredit,706
+13046,ficoscore9-003,Proportion of loan balances to loan amounts is too high,TransUnion Credit,TransUnionCredit,706
+13047,ficoscore9-004,Lack of recent installment loan information,TransUnion Credit,TransUnionCredit,706
+13048,ficoscore9-005,Too many accounts with balances,TransUnion Credit,TransUnionCredit,706
+13049,ficoscore9-006,Too many consumer finance company accounts,TransUnion Credit,TransUnionCredit,706
+13050,ficoscore9-007,Account payment history too new to rate,TransUnion Credit,TransUnionCredit,706
+13051,ficoscore9-008,Too many inquiries last 12 months,TransUnion Credit,TransUnionCredit,706
+13052,ficoscore9-009,Too many accounts recently opened,TransUnion Credit,TransUnionCredit,706
+13053,ficoscore9-010,Proportion of balances to credit limits is too high on bank revolving or other revolving accounts,TransUnion Credit,TransUnionCredit,706
+13054,ficoscore9-011,Amount owed on revolving accounts is too high,TransUnion Credit,TransUnionCredit,706
+13055,ficoscore9-012,Length of time revolving accounts have been established,TransUnion Credit,TransUnionCredit,706
+13056,ficoscore9-013,013time since delinquency is too recent or unknown,TransUnion Credit,TransUnionCredit,706
+13057,ficoscore9-014,Length of time accounts have been established,TransUnion Credit,TransUnionCredit,706
+13058,ficoscore9-015,Lack of recent bank revolving information,TransUnion Credit,TransUnionCredit,706
+13059,ficoscore9-016,Lack of recent revolving account information,TransUnion Credit,TransUnionCredit,706
+13060,ficoscore9-017,No recent non-mortgage balance information,TransUnion Credit,TransUnionCredit,706
+13061,ficoscore9-018,Number of accounts with delinquency,TransUnion Credit,TransUnionCredit,706
+13062,ficoscore9-019,Date of last inquiry too recent,TransUnion Credit,TransUnionCredit,706
+13063,ficoscore9-020,Length of time since derogatory public record or collection is too short,TransUnion Credit,TransUnionCredit,706
+13064,ficoscore9-021,Amount past due on accounts,TransUnion Credit,TransUnionCredit,706
+13065,ficoscore9-024,No recent revolving balances,TransUnion Credit,TransUnionCredit,706
+13066,ficoscore9-027,Too few accounts currently paid as agreed,TransUnion Credit,TransUnionCredit,706
+13067,ficoscore9-028,Number of established accounts,TransUnion Credit,TransUnionCredit,706
+13068,ficoscore9-029,No recent bankcard balances,TransUnion Credit,TransUnionCredit,706
+13069,ficoscore9-030,Time since most recent account opening is too short,TransUnion Credit,TransUnionCredit,706
+13070,ficoscore9-038,"Serious delinquency, and public record or collection filed",TransUnion Credit,TransUnionCredit,706
+13071,ficoscore9-039,Serious delinquency,TransUnion Credit,TransUnionCredit,706
+13072,ficoscore9-040,Derogatory public record or collection filed,TransUnion Credit,TransUnionCredit,706
+13073,ficoscore9-041,No recent retail balances,TransUnion Credit,TransUnionCredit,706
+13074,ficoscore9-042,Length of time since most recent consumer finance company accounts established,TransUnion Credit,TransUnionCredit,706
+13075,ficoscore9-050,Lack of recent retail account information,TransUnion Credit,TransUnionCredit,706
+13076,ficoscore9-056,Amount owed on retail accounts,TransUnion Credit,TransUnionCredit,706
+13077,ficoscore9-098,Length of time consumer finance company loans have been established,TransUnion Credit,TransUnionCredit,706
+3763,idvision-alerts-0001,address is a mail receiving/forwarding service,TransUnion Credit,TransUnionCredit,706
+3764,idvision-alerts-0002,address is a hotel/motel or temporary residence,TransUnion Credit,TransUnionCredit,706
+3765,idvision-alerts-0003,address is a credit correction service,TransUnion Credit,TransUnionCredit,706
+3766,idvision-alerts-0004,address is a camp site,TransUnion Credit,TransUnionCredit,706
+3767,idvision-alerts-0005,address is a secretarial service,TransUnion Credit,TransUnionCredit,706
+3768,idvision-alerts-0006,address is a check cashing service,TransUnion Credit,TransUnionCredit,706
+3769,idvision-alerts-0007,address is a restaurant/bar/nightclub,TransUnion Credit,TransUnionCredit,706
+3770,idvision-alerts-0008,address is a storage facility,TransUnion Credit,TransUnionCredit,706
+3771,idvision-alerts-0009,address is an airport/airfield,TransUnion Credit,TransUnionCredit,706
+3772,idvision-alerts-0010,address is a truck stop,TransUnion Credit,TransUnionCredit,706
+3773,idvision-alerts-0500,address is commercial,TransUnion Credit,TransUnionCredit,706
+3774,idvision-alerts-0501,address is a correctional institution,TransUnion Credit,TransUnionCredit,706
+3775,idvision-alerts-0502,address is a hospital or clinic,TransUnion Credit,TransUnionCredit,706
+3776,idvision-alerts-0503,address is a nursing home,TransUnion Credit,TransUnionCredit,706
+3777,idvision-alerts-1000,address is institutional,TransUnion Credit,TransUnionCredit,706
+3778,idvision-alerts-1001,address is a U.S. Post Office,TransUnion Credit,TransUnionCredit,706
+3779,idvision-alerts-1500,address is governmental,TransUnion Credit,TransUnionCredit,706
+3780,idvision-alerts-1501,address reported as Suspicious,TransUnion Credit,TransUnionCredit,706
+3781,idvision-alerts-1502,address is a multi-unit building reported as suspicious,TransUnion Credit,TransUnionCredit,706
+3782,idvision-alerts-1503,address reported misused and requires further investigation,TransUnion Credit,TransUnionCredit,706
+3783,idvision-alerts-1504,address is a multi-unit building reported misused and requires further investigation,TransUnion Credit,TransUnionCredit,706
+3784,idvision-alerts-2001,address reported used in true name fraud or credit fraud,TransUnion Credit,TransUnionCredit,706
+3785,idvision-alerts-2010,More recent address available for consumer.,TransUnion Credit,TransUnionCredit,706
+3786,idvision-alerts-25011,Input address has been used (6) times in the last (30) days on different inquiries,TransUnion Credit,TransUnionCredit,706
+3787,idvision-alerts-2502,address has been reported more than once,TransUnion Credit,TransUnionCredit,706
+3788,idvision-alerts-2503,File address tenure indicative of fraud,TransUnion Credit,TransUnionCredit,706
+3789,idvision-alerts-2504,Input current address has an unusual number (5) of inquiries in the last (2) days,TransUnion Credit,TransUnionCredit,706
+3790,idvision-alerts-2505,Input current address has an unusual number (8) of inquiries in the last (4) days,TransUnion Credit,TransUnionCredit,706
+3791,idvision-alerts-2506,Input current address has an unusual number (15) of inquiries in the last (7) days,TransUnion Credit,TransUnionCredit,706
+3792,idvision-alerts-2507,Input current address tenure is (XXX) months,TransUnion Credit,TransUnionCredit,706
+3793,idvision-alerts-2999,address is a multi-unit building,TransUnion Credit,TransUnionCredit,706
+3794,idvision-alerts-3000,address requires further investigation,TransUnion Credit,TransUnionCredit,706
+3795,idvision-alerts-3001,SSN reported as suspicious,TransUnion Credit,TransUnionCredit,706
+3796,idvision-alerts-3003,SSN reported misused and requires further investigation,TransUnion Credit,TransUnionCredit,706
+3797,idvision-alerts-3004,Input SSN belongs to a minor,TransUnion Credit,TransUnionCredit,706
+3798,idvision-alerts-3005,Input SSN associated with multiple consumers as primary SSN,TransUnion Credit,TransUnionCredit,706
+3799,idvision-alerts-3006,Input SSN associated with multiple consumers,TransUnion Credit,TransUnionCredit,706
+3800,idvision-alerts-3007,Multiple SSNs on consumer file,TransUnion Credit,TransUnionCredit,706
+3801,idvision-alerts-3008,Input SSN involved in burst velocity usage in multiple consumer files,TransUnion Credit,TransUnionCredit,706
+3802,idvision-alerts-3010,Input SSN is invalid – Potential ITIN,TransUnion Credit,TransUnionCredit,706
+3803,idvision-alerts-3012,Input SSN is invalid – Format,TransUnion Credit,TransUnionCredit,706
+3804,idvision-alerts-3501,SSN reported used in true name fraud or credit fraud,TransUnion Credit,TransUnionCredit,706
+3805,idvision-alerts-4001,SSN is reported deceased,TransUnion Credit,TransUnionCredit,706
+3806,idvision-alerts-4501,SSN likely not issued prior to June 2011,TransUnion Credit,TransUnionCredit,706
+3807,idvision-alerts-4506,Input SSN is unverifiable,TransUnion Credit,TransUnionCredit,706
+3808,idvision-alerts-5501,Input SSN has been used 6 times in the last 30 days on different inquiries,TransUnion Credit,TransUnionCredit,706
+3809,idvision-alerts-5502,SSN associated with additional subject(s) not displayed/returned,TransUnion Credit,TransUnionCredit,706
+3810,idvision-alerts-5503,SSN issued within the last X years; Year issued: 19XX; State: XX; Est. age obtained XX,TransUnion Credit,TransUnionCredit,706
+3811,idvision-alerts-5504,SSN issued: 19XX; State: XX Est. Age obtained: XX,TransUnion Credit,TransUnionCredit,706
+3812,idvision-alerts-5506,Input SSN has an unusual number (5) of inquiries in the last (2) days,TransUnion Credit,TransUnionCredit,706
+3813,idvision-alerts-5507,Input SSN has an unusual number (8) of inquiries in the last (4) days,TransUnion Credit,TransUnionCredit,706
+3814,idvision-alerts-5508,Input SSN has an unusual number (15) of inquiries in the last (7) days,TransUnion Credit,TransUnionCredit,706
+3815,idvision-alerts-5999,SSN requires further investigation,TransUnion Credit,TransUnionCredit,706
+3816,idvision-alerts-6000,SSN used in death benefits claim,TransUnion Credit,TransUnionCredit,706
+3817,idvision-alerts-6001,telephone number is an answering service,TransUnion Credit,TransUnionCredit,706
+3818,idvision-alerts-6002,telephone number is a cellular telephone,TransUnion Credit,TransUnionCredit,706
+3819,idvision-alerts-6003,telephone number is a public/pay phone,TransUnion Credit,TransUnionCredit,706
+3820,idvision-alerts-6021,Input telephone number has an unusual number (5) of inquiries in the last (2) days,TransUnion Credit,TransUnionCredit,706
+3821,idvision-alerts-6022,Input telephone number has an unusual number (8) of inquiries in the last (4) days,TransUnion Credit,TransUnionCredit,706
+3822,idvision-alerts-6023,Input telephone number has an unusual number (15) of inquiries in the last (7) days,TransUnion Credit,TransUnionCredit,706
+3823,idvision-alerts-6500,telephone number is commercial,TransUnion Credit,TransUnionCredit,706
+3824,idvision-alerts-7000,telephone number is institutional,TransUnion Credit,TransUnionCredit,706
+3825,idvision-alerts-7500,telephone number is governmental,TransUnion Credit,TransUnionCredit,706
+3826,idvision-alerts-7501,telephone number reported as suspicious,TransUnion Credit,TransUnionCredit,706
+3827,idvision-alerts-7503,telephone number reported misused and requires further investigation,TransUnion Credit,TransUnionCredit,706
+3828,idvision-alerts-8001,telephone number reported used in true name fraud or credit fraud,TransUnion Credit,TransUnionCredit,706
+3829,idvision-alerts-9000,Input telephone number requires further investigation,TransUnion Credit,TransUnionCredit,706
+3830,idvision-alerts-9001,"Input address, SSN and/or telephone number reported together in suspected misuse",TransUnion Credit,TransUnionCredit,706
+3831,idvision-alerts-9002,"address, SSN, or telephone number reported by more than one source",TransUnion Credit,TransUnionCredit,706
+3832,idvision-alerts-9003,Consumer statement on file relates to true name or credit fraud,TransUnion Credit,TransUnionCredit,706
+3833,idvision-alerts-9004,Active duty alert on file,TransUnion Credit,TransUnionCredit,706
+3834,idvision-alerts-9005,Initial fraud alert on file,TransUnion Credit,TransUnionCredit,706
+3835,idvision-alerts-9006,Extended fraud alert on file,TransUnion Credit,TransUnionCredit,706
+3836,idvision-alerts-9011,Potential synthetic identity,TransUnion Credit,TransUnionCredit,706
+3837,idvision-alerts-9014,New or recent identity in network – created within last (2) days,TransUnion Credit,TransUnionCredit,706
+3838,idvision-alerts-9016,Input consumer identity elements – not verified,TransUnion Credit,TransUnionCredit,706
+3839,idvision-alerts-9017,Input consumer identity elements – verified,TransUnion Credit,TransUnionCredit,706
+3840,idvision-alerts-9996,IDVision Alerts system is partially available,TransUnion Credit,TransUnionCredit,706
+3841,idvision-alerts-9997,IDVision Alerts clear/clear for all searches performed,TransUnion Credit,TransUnionCredit,706
+3842,idvision-alerts-9998,IDVision Alerts system is temporarily unavailable,TransUnion Credit,TransUnionCredit,706
+3843,idvision-alerts-9999,IDVision Alerts system access not authorized,TransUnion Credit,TransUnionCredit,706
+3732,public-record-1D,Public Record Type: Ch 11 bankruptcy dismissed/closed,TransUnion Credit,TransUnionCredit,706
+3734,public-record-1F,Public Record Type: Chapter 11 bankruptcy filing,TransUnion Credit,TransUnionCredit,706
+3736,public-record-1V,Public Record Type: Chapter 11 bankruptcy voluntary dismissal,TransUnion Credit,TransUnionCredit,706
+3738,public-record-1X,Public Record Type: Chapter 11 bankruptcy discharged,TransUnion Credit,TransUnionCredit,706
+3740,public-record-2D,Public Record Type: Ch 12 bankruptcy dismissed/closed,TransUnion Credit,TransUnionCredit,706
+3742,public-record-2F,Public Record Type: Chapter 12 bankruptcy filing,TransUnion Credit,TransUnionCredit,706
+3744,public-record-2V,Public Record Type: Chapter 12 bankruptcy voluntary dismissal,TransUnion Credit,TransUnionCredit,706
+3746,public-record-2X,Public Record Type: Chapter 12 bankruptcy discharged,TransUnion Credit,TransUnionCredit,706
+3748,public-record-3D,Public Record Type: Ch 13 bankruptcy dismissed/closed,TransUnion Credit,TransUnionCredit,706
+3750,public-record-3F,Public Record Type: Chapter 13 bankruptcy filing,TransUnion Credit,TransUnionCredit,706
+3752,public-record-3V,Public Record Type: Chapter 13 bankruptcy voluntary dismissal,TransUnion Credit,TransUnionCredit,706
+3754,public-record-3X,Public Record Type: Chapter 13 bankruptcy discharged,TransUnion Credit,TransUnionCredit,706
+3756,public-record-7D,Public Record Type: Ch 7 bankruptcy dismissed/closed,TransUnion Credit,TransUnionCredit,706
+3758,public-record-7F,Public Record Type: Chapter 7 bankruptcy filing,TransUnion Credit,TransUnionCredit,706
+3760,public-record-7V,Public Record Type: Chapter 7 bankruptcy voluntary dismissal,TransUnion Credit,TransUnionCredit,706
+3762,public-record-7X,Public Record Type: Chapter 7 bankruptcy discharged,TransUnion Credit,TransUnionCredit,706
+3709,public-record-AM,Public Record Type: Attachment,TransUnion Credit,TransUnionCredit,706
+3711,public-record-CB,Public Record Type: Civil judgment in bankruptcy,TransUnion Credit,TransUnionCredit,706
+3713,public-record-CJ,Public Record Type: Civil judgment,TransUnion Credit,TransUnionCredit,706
+3715,public-record-CP,Public Record Type: Child support,TransUnion Credit,TransUnionCredit,706
+3717,public-record-CS,Public Record Type: Civil suit filed,TransUnion Credit,TransUnionCredit,706
+3719,public-record-DF,Public Record Type: Dismissed foreclosure,TransUnion Credit,TransUnionCredit,706
+3721,public-record-DS,Public Record Type: Dismissal of court suit,TransUnion Credit,TransUnionCredit,706
+3723,public-record-FC,Public Record Type: Foreclosure,TransUnion Credit,TransUnionCredit,706
+3725,public-record-FD,Public Record Type: Forcible detainer,TransUnion Credit,TransUnionCredit,706
+3727,public-record-FF,Public Record Type: Forcible detainer dismissed,TransUnion Credit,TransUnionCredit,706
+3729,public-record-FT,Public Record Type: Federal tax lien,TransUnion Credit,TransUnionCredit,706
+3731,public-record-GN,Public Record Type: Garnishment,TransUnion Credit,TransUnionCredit,706
+3733,public-record-HA,Public Record Type: Homeowner’s association assessment lien,TransUnion Credit,TransUnionCredit,706
+3735,public-record-HF,Public Record Type: Hospital lien satisfied,TransUnion Credit,TransUnionCredit,706
+3737,public-record-HL,Public Record Type: Hospital lien,TransUnion Credit,TransUnionCredit,706
+3739,public-record-JL,Public Record Type: Judicial lien,TransUnion Credit,TransUnionCredit,706
+3741,public-record-JM,Public Record Type: Judgment dismissed,TransUnion Credit,TransUnionCredit,706
+3743,public-record-LR,Public Record Type: A lien attached to real property,TransUnion Credit,TransUnionCredit,706
+3745,public-record-ML,Public Record Type: Mechanics lien,TransUnion Credit,TransUnionCredit,706
+3747,public-record-PC,Public Record Type: Paid civil judgment,TransUnion Credit,TransUnionCredit,706
+3749,public-record-PF,Public Record Type: Paid federal tax lien,TransUnion Credit,TransUnionCredit,706
+3751,public-record-PG,Public Record Type: Paving assessment lien,TransUnion Credit,TransUnionCredit,706
+3753,public-record-PL,Public Record Type: Paid tax lien,TransUnion Credit,TransUnionCredit,706
+3755,public-record-PQ,Public Record Type: Paving assessment lien satisfied,TransUnion Credit,TransUnionCredit,706
+3757,public-record-PT,Public Record Type: Puerto Rico tax lien,TransUnion Credit,TransUnionCredit,706
+3759,public-record-PV,"Public Record Type: Judgment paid, vacated",TransUnion Credit,TransUnionCredit,706
+3761,public-record-RL,Public Record Type: Release of tax lien,TransUnion Credit,TransUnionCredit,706
+3710,public-record-RM,Public Record Type: Release of mechanic’s lien,TransUnion Credit,TransUnionCredit,706
+3712,public-record-RS,Public Record Type: Real estate attachment satisfied,TransUnion Credit,TransUnionCredit,706
+3714,public-record-SF,Public Record Type: Satisfied foreclosure,TransUnion Credit,TransUnionCredit,706
+3716,public-record-SL,Public Record Type: State tax lien,TransUnion Credit,TransUnionCredit,706
+3718,public-record-TB,Public Record Type: Tax lien included in bankruptcy,TransUnion Credit,TransUnionCredit,706
+3720,public-record-TC,Public Record Type: Trusteeship canceled,TransUnion Credit,TransUnionCredit,706
+3722,public-record-TL,Public Record Type: Tax lien,TransUnion Credit,TransUnionCredit,706
+3724,public-record-TP,Public Record Type: Trusteeship paid/state amortization satisfied,TransUnion Credit,TransUnionCredit,706
+3726,public-record-TR,Public Record Type: Trusteeship paid/state amortization,TransUnion Credit,TransUnionCredit,706
+3728,public-record-TX,Public Record Type: Tax lien revived,TransUnion Credit,TransUnionCredit,706
+3730,public-record-WS,Public Record Type: Water and sewer lien,TransUnion Credit,TransUnionCredit,706
+3844,vantagescore30-04,The balances on your accounts are too high compared to loan amounts,TransUnion Credit,TransUnionCredit,706
+3845,vantagescore30-05,Too many of the delinquencies on your accounts are recent,TransUnion Credit,TransUnionCredit,706
+3846,vantagescore30-06,You have too many accounts that were opened recently,TransUnion Credit,TransUnionCredit,706
+3847,vantagescore30-07,You have too many delinquent or derogatory accounts,TransUnion Credit,TransUnionCredit,706
+3848,vantagescore30-08,You have either very few loans or too many loans with recent delinquencies,TransUnion Credit,TransUnionCredit,706
+3849,vantagescore30-09,The worst payment status on your accounts is delinquent or derogatory,TransUnion Credit,TransUnionCredit,706
+3850,vantagescore30-10,You have either very few loans or too many loans with delinquencies,TransUnion Credit,TransUnionCredit,706
+3851,vantagescore30-11,The total of your delinquent or derogatory account balances is too high,TransUnion Credit,TransUnionCredit,706
+3852,vantagescore30-12,The date that you opened your oldest account is too recent,TransUnion Credit,TransUnionCredit,706
+3853,vantagescore30-13,Your most recently opened account is too new,TransUnion Credit,TransUnionCredit,706
+3854,vantagescore30-14,Lack of sufficient credit history,TransUnion Credit,TransUnionCredit,706
+3855,vantagescore30-15,Newest delinquent or derogatory payment status on your accounts is too recent,TransUnion Credit,TransUnionCredit,706
+3856,vantagescore30-16,The total of all balances on your open accounts is too high,TransUnion Credit,TransUnionCredit,706
+3857,vantagescore30-17,Balances on previously delinquent accounts are too high compared to loan amounts,TransUnion Credit,TransUnionCredit,706
+3858,vantagescore30-18,Total of balances on accounts never late is too high compared to loan amounts,TransUnion Credit,TransUnionCredit,706
+3859,vantagescore30-21,No open accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3860,vantagescore30-22,No recently reported account information,TransUnion Credit,TransUnionCredit,706
+3861,vantagescore30-23,Lack of sufficient relevant account information,TransUnion Credit,TransUnionCredit,706
+3862,vantagescore30-29,Too many of your open bankcard or revolving accounts have a balance,TransUnion Credit,TransUnionCredit,706
+3863,vantagescore30-30,Too few of your bankcard or other revolving accounts have high limits,TransUnion Credit,TransUnionCredit,706
+3864,vantagescore30-31,Too many bankcard or other revolving accounts were opened recently,TransUnion Credit,TransUnionCredit,706
+3865,vantagescore30-32,Balances on bankcard or revolving accounts too high compared to credit limits,TransUnion Credit,TransUnionCredit,706
+3866,vantagescore30-33,Your worst bankcard or revolving account status is delinquent or derogatory,TransUnion Credit,TransUnionCredit,706
+3867,vantagescore30-34,Total of all balances on bankcard or revolving accounts is too high,TransUnion Credit,TransUnionCredit,706
+3868,vantagescore30-35,Your highest bankcard or revolving account balance is too high,TransUnion Credit,TransUnionCredit,706
+3869,vantagescore30-36,Your largest credit limit on open bankcard or revolving accounts is too low,TransUnion Credit,TransUnionCredit,706
+3870,vantagescore30-39,Available credit on your open bankcard or revolving accounts is too low,TransUnion Credit,TransUnionCredit,706
+3871,vantagescore30-40,The date you opened your oldest bankcard or revolving account is too recent,TransUnion Credit,TransUnionCredit,706
+3872,vantagescore30-42,The date you opened your newest bankcard or revolving account is too recent,TransUnion Credit,TransUnionCredit,706
+3873,vantagescore30-43,Lack of sufficient credit history on bankcard or revolving accounts,TransUnion Credit,TransUnionCredit,706
+3874,vantagescore30-44,Too many bankcard or revolving accounts with delinquent or derogatory status,TransUnion Credit,TransUnionCredit,706
+3875,vantagescore30-45,Total balances too high on delinquent/derogatory bankcard or revolving accounts,TransUnion Credit,TransUnionCredit,706
+3876,vantagescore30-47,No open bankcard or revolving accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3877,vantagescore30-48,No bankcard or revolving recently reported account information,TransUnion Credit,TransUnionCredit,706
+3878,vantagescore30-49,Lack of sufficient relevant bankcard or revolving account information,TransUnion Credit,TransUnionCredit,706
+3879,vantagescore30-53,The worst status on your real estate accounts is delinquent or derogatory,TransUnion Credit,TransUnionCredit,706
+3880,vantagescore30-54,The amount of balance paid down on your open real estate accounts is too low,TransUnion Credit,TransUnionCredit,706
+3881,vantagescore30-55,Open real estate account balances are too high compared to their loan amounts,TransUnion Credit,TransUnionCredit,706
+3882,vantagescore30-57,Too many real estate accounts with delinquent or derogatory payment status,TransUnion Credit,TransUnionCredit,706
+3883,vantagescore30-58,The total of all balances on your open real estate accounts is too high,TransUnion Credit,TransUnionCredit,706
+3884,vantagescore30-61,No open real estate accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3885,vantagescore30-62,No recently reported real estate account information,TransUnion Credit,TransUnionCredit,706
+3886,vantagescore30-63,Lack of sufficient relevant real estate account information,TransUnion Credit,TransUnionCredit,706
+3887,vantagescore30-64,No open first mortgage accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3888,vantagescore30-65,Lack of sufficient relevant first mortgage account information,TransUnion Credit,TransUnionCredit,706
+3889,vantagescore30-66,Your open auto account balances are too high compared to their loan amounts,TransUnion Credit,TransUnionCredit,706
+3890,vantagescore30-68,No open auto accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3891,vantagescore30-69,Lack of sufficient relevant auto account information,TransUnion Credit,TransUnionCredit,706
+3892,vantagescore30-71,You have either very few installment loans or too many with delinquencies,TransUnion Credit,TransUnionCredit,706
+3893,vantagescore30-72,Too many installment accounts with a delinquent or derogatory payment status,TransUnion Credit,TransUnionCredit,706
+3894,vantagescore30-73,The worst status on your installment accounts is delinquent or derogatory,TransUnion Credit,TransUnionCredit,706
+3895,vantagescore30-74,The balance amount paid down on your open installment accounts is too low,TransUnion Credit,TransUnionCredit,706
+3896,vantagescore30-75,The installment account that you opened most recently is too new,TransUnion Credit,TransUnionCredit,706
+3897,vantagescore30-76,You have insufficient credit history on installment loans,TransUnion Credit,TransUnionCredit,706
+3898,vantagescore30-77,Newest delinquent or derogatory status on installment accounts is too recent,TransUnion Credit,TransUnionCredit,706
+3899,vantagescore30-78,Balances on installment accounts are too high compared to their loan amounts,TransUnion Credit,TransUnionCredit,706
+3900,vantagescore30-79,Too many of the delinquencies on your installment accounts are recent,TransUnion Credit,TransUnionCredit,706
+3901,vantagescore30-81,No open installment accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3902,vantagescore30-83,Lack of sufficient relevant installment account information,TransUnion Credit,TransUnionCredit,706
+3903,vantagescore30-84,"The number of inquiries was also a factor, but effect was not significant",TransUnion Credit,TransUnionCredit,706
+3904,vantagescore30-85,You have too many inquiries on your credit report,TransUnion Credit,TransUnionCredit,706
+3905,vantagescore30-86,Your credit report contains too many derogatory public records,TransUnion Credit,TransUnionCredit,706
+3906,vantagescore30-87,Your credit report contains too many unsatisfied public records,TransUnion Credit,TransUnionCredit,706
+3907,vantagescore30-88,One or more derogatory public records in your credit file is too recent,TransUnion Credit,TransUnionCredit,706
+3908,vantagescore30-90,Too few discharged bankruptcies,TransUnion Credit,TransUnionCredit,706
+3909,vantagescore30-93,The worst status on your student loan accounts is delinquent or derogatory,TransUnion Credit,TransUnionCredit,706
+3910,vantagescore30-94,The balance amount paid down on your open student loan accounts is too low,TransUnion Credit,TransUnionCredit,706
+3911,vantagescore30-95,You have too many collection agency accounts that are unpaid,TransUnion Credit,TransUnionCredit,706
+3912,vantagescore30-96,The total you owe on collection agency accounts is high,TransUnion Credit,TransUnionCredit,706
+3913,vantagescore30-97,You have too few credit accounts,TransUnion Credit,TransUnionCredit,706
+3914,vantagescore30-98,There is a bankruptcy on your credit report,TransUnion Credit,TransUnionCredit,706
+3915,vantagescore40-03,Average time since accounts opened is too recent,TransUnion Credit,TransUnionCredit,706
+3916,vantagescore40-04,Balances on accounts too high compared to credit limits and loan amounts,TransUnion Credit,TransUnionCredit,706
+3917,vantagescore40-05,Too many recent delinquencies,TransUnion Credit,TransUnionCredit,706
+3918,vantagescore40-06,Too many accounts recently opened,TransUnion Credit,TransUnionCredit,706
+3919,vantagescore40-07,Too many delinquent or derogatory accounts,TransUnion Credit,TransUnionCredit,706
+3920,vantagescore40-08,Too few accounts recently paid as agreed,TransUnion Credit,TransUnionCredit,706
+3921,vantagescore40-09,Delinquent or derogatory account,TransUnion Credit,TransUnionCredit,706
+3922,vantagescore40-10,Too few accounts paid as agreed,TransUnion Credit,TransUnionCredit,706
+3923,vantagescore40-11,Oldest account was opened too recently,TransUnion Credit,TransUnionCredit,706
+3924,vantagescore40-12,Delinquent or derogatory status on accounts is too recent,TransUnion Credit,TransUnionCredit,706
+3925,vantagescore40-13,Balances on delinquent or derogatory accounts are too high,TransUnion Credit,TransUnionCredit,706
+3926,vantagescore40-14,Too high proportion of accounts recently opened,TransUnion Credit,TransUnionCredit,706
+3927,vantagescore40-15,Lack of recently reported accounts,TransUnion Credit,TransUnionCredit,706
+3928,vantagescore40-16,Total of credit limits and loan amounts is too low,TransUnion Credit,TransUnionCredit,706
+3929,vantagescore40-17,No open accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3930,vantagescore40-18,Lack of account information,TransUnion Credit,TransUnionCredit,706
+3931,vantagescore40-19,<No negative reason code>,TransUnion Credit,TransUnionCredit,706
+3932,vantagescore40-20,Delinquent or derogatory bankcard,TransUnion Credit,TransUnionCredit,706
+3933,vantagescore40-21,Too many bankcards with a high balance,TransUnion Credit,TransUnionCredit,706
+3934,vantagescore40-22,Too few bankcards with high credit limit,TransUnion Credit,TransUnionCredit,706
+3935,vantagescore40-23,Too high proportion of bankcards recently opened,TransUnion Credit,TransUnionCredit,706
+3936,vantagescore40-24,Too many bankcards with high balance compared to credit limit,TransUnion Credit,TransUnionCredit,706
+3937,vantagescore40-25,Too high proportion of balances from bankcards,TransUnion Credit,TransUnionCredit,706
+3938,vantagescore40-26,Balances on bankcards are too high,TransUnion Credit,TransUnionCredit,706
+3939,vantagescore40-27,Delinquent or derogatory status on revolving accounts is too recent,TransUnion Credit,TransUnionCredit,706
+3940,vantagescore40-28,Average credit limit on open bankcards is too low,TransUnion Credit,TransUnionCredit,706
+3941,vantagescore40-29,Balances on bankcards are too high compared with credit limits,TransUnion Credit,TransUnionCredit,706
+3942,vantagescore40-30,Too few open revolving accounts,TransUnion Credit,TransUnionCredit,706
+3943,vantagescore40-31,Not enough available credit on revolving accounts,TransUnion Credit,TransUnionCredit,706
+3944,vantagescore40-32,Oldest bankcard was opened too recently,TransUnion Credit,TransUnionCredit,706
+3945,vantagescore40-33,Not enough balance paid down over time on bankcards,TransUnion Credit,TransUnionCredit,706
+3946,vantagescore40-34,Most recently opened revolving account is too new,TransUnion Credit,TransUnionCredit,706
+3947,vantagescore40-35,Lack of revolving account information,TransUnion Credit,TransUnionCredit,706
+3948,vantagescore40-36,Lack of recently reported revolving accounts,TransUnion Credit,TransUnionCredit,706
+3949,vantagescore40-37,No open bankcards in your credit file,TransUnion Credit,TransUnionCredit,706
+3950,vantagescore40-38,Lack of bankcard account information,TransUnion Credit,TransUnionCredit,706
+3951,vantagescore40-39,Balances on delinquent or derogatory bankcards are too high,TransUnion Credit,TransUnionCredit,706
+3952,vantagescore40-40,Too many delinquent or derogatory revolving accounts,TransUnion Credit,TransUnionCredit,706
+3953,vantagescore40-41,Average time since revolving accounts opened is too recent,TransUnion Credit,TransUnionCredit,706
+3954,vantagescore40-42,Total credit limits on open revolving accounts are too low,TransUnion Credit,TransUnionCredit,706
+3955,vantagescore40-43,Too many revolving accounts with high balance compared to credit limit,TransUnion Credit,TransUnionCredit,706
+3956,vantagescore40-44,Balances on revolving accounts are too high compared with credit limits,TransUnion Credit,TransUnionCredit,706
+3957,vantagescore40-45,Not enough balance paid down over time on retail accounts,TransUnion Credit,TransUnionCredit,706
+3958,vantagescore40-46,Oldest revolving account was opened too recently,TransUnion Credit,TransUnionCredit,706
+3959,vantagescore40-47,No open retail accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3960,vantagescore40-48,Lack of retail account information,TransUnion Credit,TransUnionCredit,706
+3961,vantagescore40-49,Not enough balance paid down over time on revolving accounts,TransUnion Credit,TransUnionCredit,706
+3962,vantagescore40-50,Balances on personal installment accounts too high compared to loan amounts,TransUnion Credit,TransUnionCredit,706
+3963,vantagescore40-51,Too few installment accounts recently paid as agreed,TransUnion Credit,TransUnionCredit,706
+3964,vantagescore40-52,Delinquent or derogatory installment account,TransUnion Credit,TransUnionCredit,706
+3965,vantagescore40-53,Not enough balance paid down over time on installment accounts,TransUnion Credit,TransUnionCredit,706
+3966,vantagescore40-54,Delinquent or derogatory status on installment accounts is too recent,TransUnion Credit,TransUnionCredit,706
+3967,vantagescore40-55,Lack of recently reported auto accounts,TransUnion Credit,TransUnionCredit,706
+3968,vantagescore40-56,Lack of recently reported installment accounts,TransUnion Credit,TransUnionCredit,706
+3969,vantagescore40-57,No open installment accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3970,vantagescore40-58,Lack of installment account information,TransUnion Credit,TransUnionCredit,706
+3971,vantagescore40-59,Balances on retail cards are too high compared with credit limits,TransUnion Credit,TransUnionCredit,706
+3972,vantagescore40-60,Total delinquent or derogatory balances on real estate loans too high,TransUnion Credit,TransUnionCredit,706
+3973,vantagescore40-61,No open first mortgage accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3974,vantagescore40-62,Lack of first mortgage account information,TransUnion Credit,TransUnionCredit,706
+3975,vantagescore40-63,Delinquent or derogatory real estate secured loan,TransUnion Credit,TransUnionCredit,706
+3976,vantagescore40-64,Not enough balance paid down over time on real estate secured loans,TransUnion Credit,TransUnionCredit,706
+3977,vantagescore40-65,No recently opened real estate secured loan,TransUnion Credit,TransUnionCredit,706
+3978,vantagescore40-66,Delinquent or derogatory status on real estate loans is too recent,TransUnion Credit,TransUnionCredit,706
+3979,vantagescore40-67,No open real estate secured loans in your credit file,TransUnion Credit,TransUnionCredit,706
+3980,vantagescore40-68,Lack of real estate secured loan information,TransUnion Credit,TransUnionCredit,706
+3981,vantagescore40-69,Too high proportion of balances from loans not secured by real estate,TransUnion Credit,TransUnionCredit,706
+3982,vantagescore40-70,Too high proportion of auto accounts are delinquent or derogatory,TransUnion Credit,TransUnionCredit,706
+3983,vantagescore40-71,Not enough balance paid down over time on auto accounts,TransUnion Credit,TransUnionCredit,706
+3984,vantagescore40-72,Too few auto accounts paid as agreed,TransUnion Credit,TransUnionCredit,706
+3985,vantagescore40-73,Delinquent or derogatory auto account,TransUnion Credit,TransUnionCredit,706
+3986,vantagescore40-74,Balances on auto accounts are too high compared with loan amounts,TransUnion Credit,TransUnionCredit,706
+3987,vantagescore40-75,Payments on auto accounts less than scheduled amount,TransUnion Credit,TransUnionCredit,706
+3988,vantagescore40-76,Delinquent or derogatory status on auto accounts is too recent,TransUnion Credit,TransUnionCredit,706
+3989,vantagescore40-77,No open auto accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+3990,vantagescore40-78,Lack of auto account information,TransUnion Credit,TransUnionCredit,706
+3991,vantagescore40-79,<No negative reason code>,TransUnion Credit,TransUnionCredit,706
+3992,vantagescore40-80,Delinquent or derogatory student loan,TransUnion Credit,TransUnionCredit,706
+3993,vantagescore40-81,Not enough balance paid down over time on student loans,TransUnion Credit,TransUnionCredit,706
+3994,vantagescore40-82,Lack of recently reported student loans,TransUnion Credit,TransUnionCredit,706
+3995,vantagescore40-83,<No negative reason code>,TransUnion Credit,TransUnionCredit,706
+3996,vantagescore40-84,Number of inquiries was a factor in determining the score,TransUnion Credit,TransUnionCredit,706
+3997,vantagescore40-85,Too many inquiries,TransUnion Credit,TransUnionCredit,706
+3998,vantagescore40-86,Derogatory public records,TransUnion Credit,TransUnionCredit,706
+3999,vantagescore40-87,Unpaid collections,TransUnion Credit,TransUnionCredit,706
+4000,vantagescore40-88,Bankruptcy,TransUnion Credit,TransUnionCredit,706
+4001,vantagescore40-89,<No negative reason code>,TransUnion Credit,TransUnionCredit,706
+4002,vantagescore40-90,No open revolving accounts in your credit file,TransUnion Credit,TransUnionCredit,706
+4003,vantagescore40-91,Balances on delinquent or derogatory revolving accounts are too high,TransUnion Credit,TransUnionCredit,706
+4004,vantagescore40-92,Delinquent or derogatory first mortgage,TransUnion Credit,TransUnionCredit,706
+4005,vantagescore40-93,Not enough balance paid down over time on first mortgage accounts,TransUnion Credit,TransUnionCredit,706
+4006,vantagescore40-94,<No negative reason code>,TransUnion Credit,TransUnionCredit,706
+4007,vantagescore40-95,<No negative reason code>,TransUnion Credit,TransUnionCredit,706
+4008,vantagescore40-96,Too few open accounts,TransUnion Credit,TransUnionCredit,706
+4009,vantagescore40-97,Too few accounts,TransUnion Credit,TransUnionCredit,706
