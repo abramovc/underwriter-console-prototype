@@ -469,7 +469,7 @@
     const directionRank = { negative: 3, neutral: 2, positive: 1 };
 
     async function loadMappings() {
-      const response = await fetch("/data/provider-mappings.json");
+      const response = await fetch("/underwriter-console-prototype/data/provider-mappings.json");
       if (!response.ok) {
         throw new Error("Could not load provider mappings");
       }
