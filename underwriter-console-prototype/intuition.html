@@ -560,13 +560,13 @@
   </div>
 
   <script type="module">
-    import { buildIntuitionReview } from "/js/normalizePayload.js";
+    import { buildIntuitionReview } from "/underwriter-console-prototype/js/normalizePayload.js";
     import {
       DISPLAY_BUCKET_ORDER,
       DISPLAY_BUCKET_META,
       getSignalDisplayBucket
     } from "/js/conceptGroups.js";
-    import { getGroupNarrative } from "/js/narratives.js";
+    import { getGroupNarrative } from "/underwriter-console-prototype/js/narratives.js";
 
     let PROVIDER_MAPPINGS = {};
 
@@ -590,7 +590,7 @@
     const sourceRowsEl = document.getElementById("sourceRows");
 
     async function loadMappings() {
-      const response = await fetch(`/data/provider-mappings.json?t=${Date.now()}`, { cache: "no-store" });
+      const response = await fetch("/underwriter-console-prototype/data/provider-mappings.json");
       if (!response.ok) {
         throw new Error("Could not load provider mappings");
       }
