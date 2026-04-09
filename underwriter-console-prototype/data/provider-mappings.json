@@ -1445,7 +1445,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R214",
       "sourceDescription": "Input National ID is not found in best-matched identity",
-      "canonicalConcept": "identity_not_found",
+      "canonicalConcept": "identity_ssn_not_verified",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -1456,14 +1456,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_not_found"
+      "displayLabel": "identity_ssn_not_verified"
     },
     "R219": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R219",
       "sourceDescription": "Input National ID is not found in public records",
-      "canonicalConcept": "identity_not_found",
+      "canonicalConcept": "identity_ssn_not_verified",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -1474,7 +1474,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_not_found"
+      "displayLabel": "identity_ssn_not_verified"
     },
     "R712": {
       "provider": "socure",
@@ -1553,7 +1553,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R901",
       "sourceDescription": "SSN/ITIN cannot be resolved to the individual",
-      "canonicalConcept": "identity_not_found",
+      "canonicalConcept": "identity_ssn_not_verified",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -1564,14 +1564,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_not_found"
+      "displayLabel": "identity_ssn_not_verified"
     },
     "R902": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R902",
       "sourceDescription": "Name cannot be resolved to the individual",
-      "canonicalConcept": "identity_not_found",
+      "canonicalConcept": "identity_name_not_found",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -1582,16 +1582,16 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_not_found"
+      "displayLabel": "identity_name_not_found"
     },
     "R919": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R919",
       "sourceDescription": "Address cannot be resolved to the individual",
-      "canonicalConcept": "identity_not_found",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "address_unresolvable",
+      "conceptGroup": "contactability",
+      "signalClass": "contactability",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -1600,14 +1600,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_not_found"
+      "displayLabel": "address_unresolvable"
     },
     "R922": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R922",
       "sourceDescription": "DOB cannot be resolved to the individual",
-      "canonicalConcept": "identity_not_found",
+      "canonicalConcept": "identity_unverifiable",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -1618,7 +1618,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_not_found"
+      "displayLabel": "identity_unverifiable"
     },
     "I1004": {
       "provider": "socure",
@@ -2453,7 +2453,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R1005",
       "sourceDescription": "Found at least 3 distinct emails associated with the given identity",
-      "canonicalConcept": "contactability_email_risk",
+      "canonicalConcept": "contactability_email_anomaly",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -2464,14 +2464,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_email_risk"
+      "displayLabel": "contactability_email_anomaly"
     },
     "R1058": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R1058",
       "sourceDescription": "Found at least 4 distinct emails associated with the given identity",
-      "canonicalConcept": "contactability_email_risk",
+      "canonicalConcept": "contactability_email_anomaly",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -2482,14 +2482,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_email_risk"
+      "displayLabel": "contactability_email_anomaly"
     },
     "R1061": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R1061",
       "sourceDescription": "Seen input phone number with in at least 4 distinct emails in transaction consortium",
-      "canonicalConcept": "contactability_email_risk",
+      "canonicalConcept": "contactability_email_anomaly",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -2500,7 +2500,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_email_risk"
+      "displayLabel": "contactability_email_anomaly"
     },
     "R110": {
       "provider": "socure",
@@ -2633,7 +2633,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R520",
       "sourceDescription": "Emailrisk score represents high risk",
-      "canonicalConcept": "contactability_email_risk",
+      "canonicalConcept": "email_risky",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -2644,7 +2644,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_email_risk"
+      "displayLabel": "email_risky"
     },
     "R551": {
       "provider": "socure",
@@ -2705,7 +2705,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R559",
       "sourceDescription": "Email address cannot be resolved to the individual",
-      "canonicalConcept": "contactability_email_risk",
+      "canonicalConcept": "email_risky",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -2716,7 +2716,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_email_risk"
+      "displayLabel": "email_risky"
     },
     "R560": {
       "provider": "socure",
@@ -2939,7 +2939,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R573",
       "sourceDescription": "The email handle contains patterns of characters that exhibit an unusually low frequency of occurrences",
-      "canonicalConcept": "contactability_email_risk",
+      "canonicalConcept": "contactability_email_anomaly",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -2950,7 +2950,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_email_risk"
+      "displayLabel": "contactability_email_anomaly"
     },
     "R574": {
       "provider": "socure",
@@ -3029,7 +3029,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R579",
       "sourceDescription": "The email handle is not consistent with Socures consortium email-handle patterns",
-      "canonicalConcept": "contactability_email_risk",
+      "canonicalConcept": "contactability_email_anomaly",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -3040,7 +3040,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_email_risk"
+      "displayLabel": "contactability_email_anomaly"
     },
     "R580": {
       "provider": "socure",
@@ -4019,9 +4019,9 @@
       "sourceType": "reason_code",
       "sourceCode": "R224",
       "sourceDescription": "4 or more different National IDs have been found to be inquired against the input phone",
-      "canonicalConcept": "contactability_phone_risk",
-      "conceptGroup": "contactability",
-      "signalClass": "contactability",
+      "canonicalConcept": "fraud_identity_frequency_anomaly",
+      "conceptGroup": "fraud",
+      "signalClass": "fraud",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -4030,14 +4030,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_phone_risk"
+      "displayLabel": "fraud_identity_frequency_anomaly"
     },
     "R226": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R226",
       "sourceDescription": "Multiple phones are marked current for the input National ID",
-      "canonicalConcept": "contactability_phone_risk",
+      "canonicalConcept": "phone_risky",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -4048,7 +4048,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_phone_risk"
+      "displayLabel": "phone_risky"
     },
     "R307": {
       "provider": "socure",
@@ -4199,7 +4199,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R608",
       "sourceDescription": "Phone number cannot be resolved to the individual",
-      "canonicalConcept": "contactability_phone_risk",
+      "canonicalConcept": "phone_risky",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -4210,7 +4210,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_phone_risk"
+      "displayLabel": "phone_risky"
     },
     "R611": {
       "provider": "socure",
@@ -4343,7 +4343,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R620",
       "sourceDescription": "Phonerisk score represents high risk",
-      "canonicalConcept": "contactability_phone_risk",
+      "canonicalConcept": "phone_risky",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -4354,7 +4354,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_phone_risk"
+      "displayLabel": "phone_risky"
     },
     "R621": {
       "provider": "socure",
@@ -4775,7 +4775,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R664",
       "sourceDescription": "Phone number and national ID show low correlation in Socures network",
-      "canonicalConcept": "contactability_phone_risk",
+      "canonicalConcept": "phone_risky",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -4786,14 +4786,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_phone_risk"
+      "displayLabel": "phone_risky"
     },
     "R666": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R666",
       "sourceDescription": "Phone characteristics show anomalous behavior",
-      "canonicalConcept": "contactability_phone_risk",
+      "canonicalConcept": "phone_risky",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -4804,7 +4804,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_phone_risk"
+      "displayLabel": "phone_risky"
     },
     "R671": {
       "provider": "socure",
@@ -4919,9 +4919,9 @@
       "sourceType": "reason_code",
       "sourceCode": "R918",
       "sourceDescription": "Unable to verify name, address, SSN/TIN and phone",
-      "canonicalConcept": "contactability_phone_risk",
-      "conceptGroup": "contactability",
-      "signalClass": "contactability",
+      "canonicalConcept": "identity_unverifiable",
+      "conceptGroup": "identity",
+      "signalClass": "identity",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -4930,7 +4930,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "contactability_phone_risk"
+      "displayLabel": "identity_unverifiable"
     },
     "R921": {
       "provider": "socure",
@@ -5711,7 +5711,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R941",
       "sourceDescription": "SSN/ITIN is correlated with at least 1 other name and address",
-      "canonicalConcept": "identity_address_match",
+      "canonicalConcept": "identity_ssn_name_address_association",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -5722,7 +5722,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_address_match"
+      "displayLabel": "identity_ssn_name_address_association"
     },
     "I705": {
       "provider": "socure",
@@ -5963,7 +5963,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R235",
       "sourceDescription": "Input full name could not be fuzzy-matched with full names associated with SSN in header and inquiry records",
-      "canonicalConcept": "identity_ssn_match",
+      "canonicalConcept": "identity_name_mismatch",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -5974,7 +5974,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_ssn_match"
+      "displayLabel": "identity_name_mismatch"
     },
     "R305": {
       "provider": "socure",
@@ -6017,7 +6017,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R933",
       "sourceDescription": "Last name is not correlated with the SSN/ITIN on record",
-      "canonicalConcept": "identity_ssn_match",
+      "canonicalConcept": "identity_last_name_mismatch",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -6028,14 +6028,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_ssn_match"
+      "displayLabel": "identity_last_name_mismatch"
     },
     "R934": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R934",
       "sourceDescription": "First name is not correlated with the SSN/ITIN on record",
-      "canonicalConcept": "identity_ssn_match",
+      "canonicalConcept": "identity_first_name_mismatch",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -6046,7 +6046,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_ssn_match"
+      "displayLabel": "identity_first_name_mismatch"
     },
     "R939": {
       "provider": "socure",
@@ -6089,7 +6089,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R955",
       "sourceDescription": "SSN/ITIN is correlated to multiple identities",
-      "canonicalConcept": "identity_ssn_match",
+      "canonicalConcept": "identity_multiple_identities",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -6100,14 +6100,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_ssn_match"
+      "displayLabel": "identity_multiple_identities"
     },
     "R956": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R956",
       "sourceDescription": "Identity is correlated to multiple SSN/ITINs",
-      "canonicalConcept": "identity_ssn_match",
+      "canonicalConcept": "identity_multiple_identities",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -6118,14 +6118,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_ssn_match"
+      "displayLabel": "identity_multiple_identities"
     },
     "R993": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R993",
       "sourceDescription": "SSN cannot be verified by the SSA",
-      "canonicalConcept": "identity_ssn_match",
+      "canonicalConcept": "identity_ssn_not_verified",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -6136,14 +6136,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_ssn_match"
+      "displayLabel": "identity_ssn_not_verified"
     },
     "R995": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R995",
       "sourceDescription": "Better matching SSN is found in the file",
-      "canonicalConcept": "identity_ssn_match",
+      "canonicalConcept": "identity_ssn_not_verified",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -6154,14 +6154,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_ssn_match"
+      "displayLabel": "identity_ssn_not_verified"
     },
     "R998": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R998",
       "sourceDescription": "Name, SSN and DOB correlation unverified by SSA",
-      "canonicalConcept": "identity_ssn_match",
+      "canonicalConcept": "identity_unverifiable",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -6172,7 +6172,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_ssn_match"
+      "displayLabel": "identity_unverifiable"
     },
     "I211": {
       "provider": "socure",
@@ -6611,7 +6611,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R1053",
       "sourceDescription": "Found at least 7 distinct emails associated with the given fullname and date of birth combination",
-      "canonicalConcept": "identity_dob_match",
+      "canonicalConcept": "contactability_email_anomaly",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -6622,7 +6622,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_dob_match"
+      "displayLabel": "contactability_email_anomaly"
     },
     "R1056": {
       "provider": "socure",
@@ -6665,7 +6665,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R1059",
       "sourceDescription": "Found at least 3 to 6 distinct emails associated with the given fullname and date of birth combination",
-      "canonicalConcept": "identity_dob_match",
+      "canonicalConcept": "contactability_email_anomaly",
       "conceptGroup": "contactability",
       "signalClass": "contactability",
       "severity": "medium",
@@ -6676,7 +6676,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_dob_match"
+      "displayLabel": "contactability_email_anomaly"
     },
     "R216": {
       "provider": "socure",
@@ -6701,7 +6701,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R228",
       "sourceDescription": "Only 1 component of the input DOB matches the best matched entity",
-      "canonicalConcept": "identity_dob_match",
+      "canonicalConcept": "identity_dob_partial_match",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -6712,14 +6712,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_dob_match"
+      "displayLabel": "identity_dob_partial_match"
     },
     "R229": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R229",
       "sourceDescription": "Only 2 components of the input DOB matches the best matched entity",
-      "canonicalConcept": "identity_dob_match",
+      "canonicalConcept": "identity_dob_partial_match",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -6730,7 +6730,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_dob_match"
+      "displayLabel": "identity_dob_partial_match"
     },
     "R237": {
       "provider": "socure",
@@ -6827,7 +6827,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R946",
       "sourceDescription": "DOB was fuzzy matched to the DOB on record",
-      "canonicalConcept": "identity_dob_match",
+      "canonicalConcept": "identity_dob_partial_match",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -6838,7 +6838,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_dob_match"
+      "displayLabel": "identity_dob_partial_match"
     },
     "R957": {
       "provider": "socure",
@@ -7115,9 +7115,9 @@
       "sourceType": "reason_code",
       "sourceCode": "R1008",
       "sourceDescription": "Found at least 2 applications within 30 days of each other associated with the given identity",
-      "canonicalConcept": "fraud_velocity_risk",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "fraud_velocity_high",
+      "conceptGroup": "fraud",
+      "signalClass": "fraud",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -7126,16 +7126,16 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "fraud_velocity_risk"
+      "displayLabel": "fraud_velocity_high"
     },
     "R1009": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R1009",
       "sourceDescription": "Found at least 2 applications within 90 days of each other associated with the given identity",
-      "canonicalConcept": "fraud_velocity_risk",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "fraud_velocity_high",
+      "conceptGroup": "fraud",
+      "signalClass": "fraud",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -7144,16 +7144,16 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "fraud_velocity_risk"
+      "displayLabel": "fraud_velocity_high"
     },
     "R1017": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R1017",
       "sourceDescription": "Found at least 2 accounts that were opened within 30 days from each other associated with the given identity",
-      "canonicalConcept": "fraud_velocity_risk",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "fraud_velocity_high",
+      "conceptGroup": "fraud",
+      "signalClass": "fraud",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -7162,7 +7162,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "fraud_velocity_risk"
+      "displayLabel": "fraud_velocity_high"
     },
     "I350": {
       "provider": "socure",
@@ -11150,7 +11150,7 @@
       "canonicalConcept": "fraud_synthetic_identity_risk",
       "conceptGroup": "identity",
       "signalClass": "identity",
-      "severity": "medium",
+      "severity": "high",
       "direction": "negative",
       "requiresReview": true,
       "canContributeToDecline": false,
@@ -11723,9 +11723,9 @@
       "sourceType": "reason_code",
       "sourceCode": "R705",
       "sourceDescription": "Address cannot be resolved to the individual",
-      "canonicalConcept": "identity_address_risk",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "address_unresolvable",
+      "conceptGroup": "contactability",
+      "signalClass": "contactability",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -11734,7 +11734,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "identity_address_risk"
+      "displayLabel": "address_unresolvable"
     },
     "R708": {
       "provider": "socure",
@@ -13181,9 +13181,9 @@
       "sourceType": "reason_code",
       "sourceCode": "R1018",
       "sourceDescription": "Found at least 2 accounts that were opened within 90 days from each other associated with the given identity",
-      "canonicalConcept": "needs_review",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "fraud_velocity_high",
+      "conceptGroup": "fraud",
+      "signalClass": "fraud",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -13192,7 +13192,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "fraud_velocity_high"
     },
     "R1019": {
       "provider": "socure",
@@ -13505,9 +13505,9 @@
       "sourceType": "reason_code",
       "sourceCode": "R183",
       "sourceDescription": "Entity has at least 1 match on an enforcement list",
-      "canonicalConcept": "needs_review",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "compliance_watchlist_match",
+      "conceptGroup": "compliance",
+      "signalClass": "compliance",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -13516,16 +13516,16 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "compliance_watchlist_match"
     },
     "R184": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R184",
       "sourceDescription": "Entity has at least 1 hit on a politically exposed person list",
-      "canonicalConcept": "needs_review",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "compliance_pep_match",
+      "conceptGroup": "compliance",
+      "signalClass": "compliance",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -13534,7 +13534,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "compliance_pep_match"
     },
     "R187": {
       "provider": "socure",
@@ -13577,7 +13577,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R201",
       "sourceDescription": "Input National ID is invalid",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_ssn_not_verified",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -13588,14 +13588,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_ssn_not_verified"
     },
     "R203": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R203",
       "sourceDescription": "Multiple identities are associated with input National ID",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_multiple_identities",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -13606,14 +13606,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_multiple_identities"
     },
     "R204": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R204",
       "sourceDescription": "Input National ID is associated with multiple last names",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_multiple_last_names",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -13624,14 +13624,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_multiple_last_names"
     },
     "R206": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R206",
       "sourceDescription": "Input National ID was issued prior to the input date-of-birth",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_issued_before_dob",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -13642,7 +13642,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_issued_before_dob"
     },
     "R207": {
       "provider": "socure",
@@ -13703,9 +13703,9 @@
       "sourceType": "reason_code",
       "sourceCode": "R210",
       "sourceDescription": "Frequency of SSN in Socure records is unusually high",
-      "canonicalConcept": "needs_review",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "fraud_identity_frequency_anomaly",
+      "conceptGroup": "fraud",
+      "signalClass": "fraud",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -13714,7 +13714,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "fraud_identity_frequency_anomaly"
     },
     "R211": {
       "provider": "socure",
@@ -13739,7 +13739,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R212",
       "sourceDescription": "Input last name is not associated with the National ID",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_last_name_mismatch",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -13750,14 +13750,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_last_name_mismatch"
     },
     "R213": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R213",
       "sourceDescription": "Name does not correlate with the name for the resolved individual",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_name_mismatch",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -13768,14 +13768,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_name_mismatch"
     },
     "R215": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R215",
       "sourceDescription": "First name is not associated with the National ID",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_first_name_mismatch",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -13786,7 +13786,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_first_name_mismatch"
     },
     "R217": {
       "provider": "socure",
@@ -13847,7 +13847,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R222",
       "sourceDescription": "Input SSN could not be confirmed",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_ssn_not_verified",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -13858,16 +13858,16 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_ssn_not_verified"
     },
     "R227": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R227",
       "sourceDescription": "National ID is found to be inquired at an unusually high frequency (more than once a month)",
-      "canonicalConcept": "needs_review",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "fraud_velocity_high",
+      "conceptGroup": "fraud",
+      "signalClass": "fraud",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -13876,7 +13876,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "fraud_velocity_high"
     },
     "R230": {
       "provider": "socure",
@@ -14225,7 +14225,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R665",
       "sourceDescription": "Presented identity shows low overall correlation in Socures network",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_unverifiable",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -14236,7 +14236,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_unverifiable"
     },
     "R667": {
       "provider": "socure",
@@ -14315,9 +14315,9 @@
       "sourceType": "reason_code",
       "sourceCode": "R720",
       "sourceDescription": "Addressrisk score represents high risk",
-      "canonicalConcept": "needs_review",
-      "conceptGroup": "identity",
-      "signalClass": "identity",
+      "canonicalConcept": "address_risky",
+      "conceptGroup": "contactability",
+      "signalClass": "contactability",
       "severity": "medium",
       "direction": "negative",
       "requiresReview": true,
@@ -14326,7 +14326,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "address_risky"
     },
     "R722": {
       "provider": "socure",
@@ -14495,7 +14495,7 @@
       "sourceType": "reason_code",
       "sourceCode": "R927",
       "sourceDescription": "Name does not correlate with the name for the resolved individual",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_name_mismatch",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -14506,14 +14506,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_name_mismatch"
     },
     "R928": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R928",
       "sourceDescription": "SSN/ITIN is associated with multiple last names",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_multiple_last_names",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -14524,14 +14524,14 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_multiple_last_names"
     },
     "R930": {
       "provider": "socure",
       "sourceType": "reason_code",
       "sourceCode": "R930",
       "sourceDescription": "First name does not correlate with the first name for the resolved individual",
-      "canonicalConcept": "needs_review",
+      "canonicalConcept": "identity_first_name_mismatch",
       "conceptGroup": "identity",
       "signalClass": "identity",
       "severity": "medium",
@@ -14542,7 +14542,7 @@
       "narrativeKey": "",
       "notes": "",
       "status": "active",
-      "displayLabel": "needs_review"
+      "displayLabel": "identity_first_name_mismatch"
     },
     "R942": {
       "provider": "socure",

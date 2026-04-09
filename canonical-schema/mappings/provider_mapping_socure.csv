@@ -92,16 +92,16 @@ compliance_watchlist_match,,,,,,,,,,,,,,,
 ,socure,reason_code,R960,Entered name match on non-OFAC global watchlists,compliance_watchlist_match,compliance,compliance,high,negative,TRUE,TRUE,R960,,,active
 identity_not_found,,,,,,,,,,,,,,,
 ,socure,reason_code,I1001,Identity not found within Consortium Institutions,identity_not_found,identity,identity,low,positive,FALSE,FALSE,I1001,,,active
-,socure,reason_code,R214,Input National ID is not found in best-matched identity,identity_not_found,identity,identity,medium,negative,TRUE,FALSE,R214,,,active
-,socure,reason_code,R219,Input National ID is not found in public records,identity_not_found,identity,identity,medium,negative,TRUE,FALSE,R219,,,active
+,socure,reason_code,R214,Input National ID is not found in best-matched identity,identity_ssn_not_verified,identity,identity,medium,negative,TRUE,FALSE,R214,,,active
+,socure,reason_code,R219,Input National ID is not found in public records,identity_ssn_not_verified,identity,identity,medium,negative,TRUE,FALSE,R219,,,active
 ,socure,reason_code,R712,"Unable to verify ZIP code for the input address, city and state combination",identity_not_found,identity,identity,medium,warning,TRUE,FALSE,R712,,,inactive_not_used
 ,socure,reason_code,R940,SSN/ITIN not found in public records,identity_not_found,identity,identity,medium,negative,TRUE,FALSE,R940,,,active
 ,socure,reason_code,R952,(Deprecated) - Unable to verify driver license number,identity_not_found,identity,identity,medium,negative,TRUE,FALSE,R952,,,deprecated
 ,socure,reason_code,I1002,National ID was not provided and Socure was unable to prefill National ID for the given identity,identity_not_found,identity,identity,low,negative,FALSE,FALSE,I1002,,,active
-,socure,reason_code,R901,SSN/ITIN cannot be resolved to the individual,identity_not_found,identity,identity,medium,negative,TRUE,FALSE,R901,,,active
-,socure,reason_code,R902,Name cannot be resolved to the individual,identity_not_found,identity,identity,medium,negative,TRUE,FALSE,R902,,,active
-,socure,reason_code,R919,Address cannot be resolved to the individual,identity_not_found,identity,identity,medium,warning,TRUE,FALSE,R919,,,active
-,socure,reason_code,R922,DOB cannot be resolved to the individual,identity_not_found,identity,identity,medium,negative,TRUE,FALSE,R922,,,active
+,socure,reason_code,R901,SSN/ITIN cannot be resolved to the individual,identity_ssn_not_verified,identity,identity,medium,negative,TRUE,FALSE,R901,,,active
+,socure,reason_code,R902,Name cannot be resolved to the individual,identity_name_not_found,identity,identity,medium,negative,TRUE,FALSE,R902,,,active
+,socure,reason_code,R919,Address cannot be resolved to the individual,address_unresolvable,contactability,contactability,medium,warning,TRUE,FALSE,R919,,,active
+,socure,reason_code,R922,DOB cannot be resolved to the individual,identity_unverifiable,identity,identity,medium,negative,TRUE,FALSE,R922,,,active
 identity_strong_positive_signal,,,,,,,,,,,,,,,
 ,socure,reason_code,I1004,Matched identity onto at least 1 other Consortium Institution,identity_strong_positive_signal,identity,identity,low,positive,FALSE,FALSE,I1004,,,active
 ,socure,reason_code,I1005,Matched identity onto at least 4 other Consortium Institutions,identity_strong_positive_signal,identity,identity,low,positive,FALSE,FALSE,I1005,,,active
@@ -150,9 +150,9 @@ contactability_email_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,I721,Email address is correlated with the input physical address,contactability_email_risk,identity,identity,low,positive,FALSE,FALSE,I721,,,active
 ,socure,reason_code,I722,Email address is partially correlated with the input physical address,contactability_email_risk,identity,identity,low,positive,FALSE,FALSE,I722,,,active
 ,socure,reason_code,I923,Email address was not provided at input,contactability_email_risk,identity,identity,low,positive,FALSE,FALSE,I923,,,active
-,socure,reason_code,R1005,Found at least 3 distinct emails associated with the given identity,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R1005,,,active
-,socure,reason_code,R1058,Found at least 4 distinct emails associated with the given identity,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R1058,,,active
-,socure,reason_code,R1061,Seen input phone number with in at least 4 distinct emails in transaction consortium,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R1061,,,active
+,socure,reason_code,R1005,Found at least 3 distinct emails associated with the given identity,contactability_email_anomaly,contactability,contactability,medium,warning,TRUE,FALSE,R1005,,,active
+,socure,reason_code,R1058,Found at least 4 distinct emails associated with the given identity,contactability_email_anomaly,contactability,contactability,medium,warning,TRUE,FALSE,R1058,,,active
+,socure,reason_code,R1061,Seen input phone number with in at least 4 distinct emails in transaction consortium,contactability_email_anomaly,contactability,contactability,medium,warning,TRUE,FALSE,R1061,,,active
 ,socure,reason_code,R110,Alert List email address match,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R110,,,active
 ,socure,reason_code,R140,Email address tagged as negative,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R140,,,active
 ,socure,reason_code,R141,Email domain tagged as negative,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R141,,,active
@@ -160,11 +160,11 @@ contactability_email_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R161,Email domain tagged as suspect,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R161,,,active
 ,socure,reason_code,R172,Email is from an OFAC sanctioned country,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R172,,,active
 ,socure,reason_code,R190,Email has at least 1 match on a sanctions watchlist,contactability_email_risk,compliance,compliance,high,negative,TRUE,TRUE,R190,,,active
-,socure,reason_code,R520,Emailrisk score represents high risk,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R520,,,active
+,socure,reason_code,R520,Emailrisk score represents high risk,email_risky,contactability,contactability,medium,warning,TRUE,FALSE,R520,,,active
 ,socure,reason_code,R551,Email address is invalid,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R551,,,active
 ,socure,reason_code,R557,Email address is disposable,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R557,,,active
 ,socure,reason_code,R558,(Deprecated) - Email address is auto-generated,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R558,,,deprecated
-,socure,reason_code,R559,Email address cannot be resolved to the individual,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R559,,,active
+,socure,reason_code,R559,Email address cannot be resolved to the individual,email_risky,contactability,contactability,medium,warning,TRUE,FALSE,R559,,,active
 ,socure,reason_code,R560,Majority of the characters in the input email are numbers,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R560,,,active
 ,socure,reason_code,R561,Email address is less than 180 days old,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R561,,,active
 ,socure,reason_code,R562,Email address domain is less than 180 days old,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R562,,,active
@@ -177,12 +177,12 @@ contactability_email_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R569,Email string is unusually long,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R569,,,active
 ,socure,reason_code,R571,Low activity observed on the email address in the last 180 days,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R571,,,active
 ,socure,reason_code,R572,Email associated with more than 2 phone numbers in the last 2 years,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R572,,,active
-,socure,reason_code,R573,The email handle contains patterns of characters that exhibit an unusually low frequency of occurrences,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R573,,,active
+,socure,reason_code,R573,The email handle contains patterns of characters that exhibit an unusually low frequency of occurrences,contactability_email_anomaly,contactability,contactability,medium,warning,TRUE,FALSE,R573,,,active
 ,socure,reason_code,R574,Email handle is composed of more than 50% duplicate characters,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R574,,,active
 ,socure,reason_code,R575,High probability of tumbling activity in input email,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R575,,,active
 ,socure,reason_code,R577,Email handle has an abnormal number pattern,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R577,,,active
 ,socure,reason_code,R578,Email handle has an abnormal special character pattern,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R578,,,active
-,socure,reason_code,R579,The email handle is not consistent with Socures consortium email-handle patterns,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R579,,,active
+,socure,reason_code,R579,The email handle is not consistent with Socures consortium email-handle patterns,contactability_email_anomaly,contactability,contactability,medium,warning,TRUE,FALSE,R579,,,active
 ,socure,reason_code,R580,The email handle exhibits abnormal input behavior,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R580,,,active
 ,socure,reason_code,R582,Email is first seen under 30 days,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R582,,,active
 ,socure,reason_code,R583,Email is first seen between 30 to 60 days,contactability_email_risk,contactability,contactability,medium,warning,TRUE,FALSE,R583,,,active
@@ -241,8 +241,8 @@ contactability_phone_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R191,Phone number has at least 1 match on a sanctions watchlist,contactability_phone_risk,compliance,compliance,high,negative,TRUE,TRUE,R191,,,active
 ,socure,reason_code,R221,National ID associated with input phone number could not be confirmed,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R221,,,active
 ,socure,reason_code,R223,Input National ID did not match any of the National IDs associated with the input phone number in the last two years,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R223,,,active
-,socure,reason_code,R224,4 or more different National IDs have been found to be inquired against the input phone,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R224,,,active
-,socure,reason_code,R226,Multiple phones are marked current for the input National ID,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R226,,,active
+,socure,reason_code,R224,4 or more different National IDs have been found to be inquired against the input phone,fraud_identity_frequency_anomaly,fraud,fraud,medium,warning,TRUE,FALSE,R224,,,active
+,socure,reason_code,R226,Multiple phones are marked current for the input National ID,phone_risky,contactability,contactability,medium,warning,TRUE,FALSE,R226,,,active
 ,socure,reason_code,R307,Account is not correlated with the phone,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R307,,,active
 ,socure,reason_code,R307,Account is not correlated with the phone,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R307,,,active
 ,socure,reason_code,R601,Phone number associated address is not correlated with the input address,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R601,,,active
@@ -252,7 +252,7 @@ contactability_phone_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R605,Phone number has not been actively used for more than 90 days,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R605,,,active
 ,socure,reason_code,R606,There has been minimal activity associated with the phone number,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R606,,,active
 ,socure,reason_code,R607,Phone number associated address is partially correlated with the input address,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R607,,,active
-,socure,reason_code,R608,Phone number cannot be resolved to the individual,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R608,,,active
+,socure,reason_code,R608,Phone number cannot be resolved to the individual,phone_risky,contactability,contactability,medium,warning,TRUE,FALSE,R608,,,active
 ,socure,reason_code,R611,Phone number is not allowed for consumers,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R611,,,active
 ,socure,reason_code,R613,Phone number is fixed or traditional VoIP,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R613,,,active
 ,socure,reason_code,R614,Phone number is toll-free,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R614,,,active
@@ -260,7 +260,7 @@ contactability_phone_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R616,Phone number is prepaid,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R616,,,active
 ,socure,reason_code,R617,Phone number is not associated with a major carrier,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R617,,,active
 ,socure,reason_code,R618,Phone number has been in service between 90 and 365 days,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R618,,,active
-,socure,reason_code,R620,Phonerisk score represents high risk,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R620,,,active
+,socure,reason_code,R620,Phonerisk score represents high risk,phone_risky,contactability,contactability,medium,warning,TRUE,FALSE,R620,,,active
 ,socure,reason_code,R621,(Deprecated) - Phone number has been in service less than 7 days,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R621,,,deprecated
 ,socure,reason_code,R622,Phone number has been in service for less than 30 days,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R622,,,active
 ,socure,reason_code,R623,Phone number has been in service between 30 and 90 days,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R623,,,active
@@ -284,15 +284,15 @@ contactability_phone_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R660,Two or more addresses are marked as current in the phone public records,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R660,,,active
 ,socure,reason_code,R661,No inquiry is found against this phone number,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R661,,,active
 ,socure,reason_code,R662,The phone number was first seen less than sixty days ago within Socure network,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R662,,,active
-,socure,reason_code,R664,Phone number and national ID show low correlation in Socures network,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R664,,,active
-,socure,reason_code,R666,Phone characteristics show anomalous behavior,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R666,,,active
+,socure,reason_code,R664,Phone number and national ID show low correlation in Socures network,phone_risky,contactability,contactability,medium,warning,TRUE,FALSE,R664,,,active
+,socure,reason_code,R666,Phone characteristics show anomalous behavior,phone_risky,contactability,contactability,medium,warning,TRUE,FALSE,R666,,,active
 ,socure,reason_code,R671,There is a more recent phone number associated with the identity,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R671,,,active
 ,socure,reason_code,R673,Phone number is deactivated,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R673,,,active
 ,socure,reason_code,R912,(Deprecated) - Entered last name and SSN verified but not with entered address and phone,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R912,,,deprecated
 ,socure,reason_code,R914,(Deprecated) - Entered phone number may be disconnected,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R914,,,deprecated
 ,socure,reason_code,R915,Entered phone number potentially invalid,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R915,,,active
 ,socure,reason_code,R917,(Deprecated) - Entered phone number and input ZIP code combination invalid,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R917,,,inactive_not_used
-,socure,reason_code,R918,"Unable to verify name, address, SSN/TIN and phone",contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R918,,,active
+,socure,reason_code,R918,"Unable to verify name, address, SSN/TIN and phone",identity_unverifiable,identity,identity,medium,warning,TRUE,FALSE,R918,,,active
 ,socure,reason_code,R921,(Deprecated) - Unable to verify phone number,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R921,,,deprecated
 ,socure,reason_code,R925,(Deprecated) - Entered phone number possibly miskeyed,contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R925,,,deprecated
 ,socure,reason_code,R931,(Deprecated) - Entered phone and address geographically distant (>10 miles),contactability_phone_risk,contactability,contactability,medium,warning,TRUE,FALSE,R931,,,deprecated
@@ -340,7 +340,7 @@ identity_address_match,,,,,,,,,,,,,,,
 ,socure,reason_code,R893,Address zip 5 did not match AAMVA,identity_address_match,identity,identity,medium,warning,TRUE,FALSE,R893,,,inactive_not_used
 ,socure,reason_code,R894,Address zip 4 did not match AAMVA,identity_address_match,identity,identity,medium,warning,TRUE,FALSE,R894,,,inactive_not_used
 ,socure,reason_code,R924,Address was fuzzy matched to the address on record,identity_address_match,identity,identity,medium,warning,TRUE,FALSE,R924,,,active
-,socure,reason_code,R941,SSN/ITIN is correlated with at least 1 other name and address,identity_address_match,identity,identity,medium,warning,TRUE,FALSE,R941,,,active
+,socure,reason_code,R941,SSN/ITIN is correlated with at least 1 other name and address,identity_ssn_name_address_association,identity,identity,medium,warning,TRUE,FALSE,R941,,,active
 ,socure,reason_code,I705,Address is single unit,identity_address_match,identity,identity,low,positive,FALSE,FALSE,I705,,,active
 ,socure,reason_code,I707,Address is residential,identity_address_match,identity,identity,low,positive,FALSE,FALSE,I707,,,active
 ,socure,reason_code,I708,Address can be resolved to the individual,identity_address_match,identity,identity,low,positive,FALSE,FALSE,I708,,,active
@@ -357,19 +357,19 @@ identity_ssn_match,,,,,,,,,,,,,,,
 ,socure,reason_code,I993,SSN verified by the SSA,identity_ssn_match,identity,identity,low,positive,FALSE,FALSE,I993,,,active
 ,socure,reason_code,I998,"Name, SSN and DOB correlation verified by SSA",identity_ssn_match,identity,identity,low,positive,FALSE,FALSE,I998,,,active
 ,socure,reason_code,R111,Alert List SSN/ITIN match,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R111,,,active
-,socure,reason_code,R235,Input full name could not be fuzzy-matched with full names associated with SSN in header and inquiry records,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R235,,,active
+,socure,reason_code,R235,Input full name could not be fuzzy-matched with full names associated with SSN in header and inquiry records,identity_name_mismatch,identity,identity,medium,negative,TRUE,FALSE,R235,,,active
 ,socure,reason_code,R305,Account is not correlated with the SSN,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R305,,,active
 ,socure,reason_code,R305,Account is not correlated with the SSN,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R305,,,active
 ,socure,reason_code,R923,SSN/ITIN was fuzzy matched to the SSN/ITIN on record,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R923,,,active
-,socure,reason_code,R933,Last name is not correlated with the SSN/ITIN on record,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R933,,,active
-,socure,reason_code,R934,First name is not correlated with the SSN/ITIN on record,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R934,,,active
+,socure,reason_code,R933,Last name is not correlated with the SSN/ITIN on record,identity_last_name_mismatch,identity,identity,medium,negative,TRUE,FALSE,R933,,,active
+,socure,reason_code,R934,First name is not correlated with the SSN/ITIN on record,identity_first_name_mismatch,identity,identity,medium,negative,TRUE,FALSE,R934,,,active
 ,socure,reason_code,R939,SSN/ITIN is correlated with the first name but not the last name,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R939,,,active
 ,socure,reason_code,R950,Input national ID is an ITIN but has a better matching SSN,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R950,,,active
-,socure,reason_code,R955,SSN/ITIN is correlated to multiple identities,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R955,,,active
-,socure,reason_code,R956,Identity is correlated to multiple SSN/ITINs,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R956,,,active
-,socure,reason_code,R993,SSN cannot be verified by the SSA,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R993,,,active
-,socure,reason_code,R995,Better matching SSN is found in the file,identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R995,,,active
-,socure,reason_code,R998,"Name, SSN and DOB correlation unverified by SSA",identity_ssn_match,identity,identity,medium,negative,TRUE,FALSE,R998,,,active
+,socure,reason_code,R955,SSN/ITIN is correlated to multiple identities,identity_multiple_identities,identity,identity,medium,negative,TRUE,FALSE,R955,,,active
+,socure,reason_code,R956,Identity is correlated to multiple SSN/ITINs,identity_multiple_identities,identity,identity,medium,negative,TRUE,FALSE,R956,,,active
+,socure,reason_code,R993,SSN cannot be verified by the SSA,identity_ssn_not_verified,identity,identity,medium,negative,TRUE,FALSE,R993,,,active
+,socure,reason_code,R995,Better matching SSN is found in the file,identity_ssn_not_verified,identity,identity,medium,negative,TRUE,FALSE,R995,,,active
+,socure,reason_code,R998,"Name, SSN and DOB correlation unverified by SSA",identity_unverifiable,identity,identity,medium,negative,TRUE,FALSE,R998,,,active
 identity_dob_match,,,,,,,,,,,,,,,
 ,socure,reason_code,I211,Input full name and dob matches a drivers license record,identity_dob_match,identity,identity,low,positive,FALSE,FALSE,I211,,,active
 ,socure,reason_code,I310,Account is correlated with the DOB,identity_dob_match,identity,identity,low,positive,FALSE,FALSE,I310,,,active
@@ -397,20 +397,20 @@ identity_dob_match,,,,,,,,,,,,,,,
 ,socure,reason_code,namePhonetic-dobExact,"Name match based on phonetic similarity, exact DOB match",identity_dob_match,unknown,unknown,low,neutral,FALSE,FALSE,namePhonetic-dobExact,,,active
 ,socure,reason_code,namePhonetic-dobFuzzy,"Name match based on phonetic similarity, fuzzy DOB match",identity_dob_match,unknown,unknown,low,neutral,FALSE,FALSE,namePhonetic-dobFuzzy,,,active
 ,socure,reason_code,namePhonetic-dobNotOnRecord,"Name match based on phonetic similarity, source did not return a DOB",identity_dob_match,unknown,unknown,low,neutral,FALSE,FALSE,namePhonetic-dobNotOnRecord,,,active
-,socure,reason_code,R1053,Found at least 7 distinct emails associated with the given fullname and date of birth combination,identity_dob_match,contactability,contactability,medium,warning,TRUE,FALSE,R1053,,,active
+,socure,reason_code,R1053,Found at least 7 distinct emails associated with the given fullname and date of birth combination,contactability_email_anomaly,contactability,contactability,medium,warning,TRUE,FALSE,R1053,,,active
 ,socure,reason_code,R1056,Matched Fullname and date of birth combination onto at least 16 other transaction consortium institutions,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R1056,,,active
 ,socure,reason_code,R1057,"Matched Fullname, date of birth and SSN combination onto at least 10 other transaction consortium institutions",identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R1057,,,active
-,socure,reason_code,R1059,Found at least 3 to 6 distinct emails associated with the given fullname and date of birth combination,identity_dob_match,contactability,contactability,medium,warning,TRUE,FALSE,R1059,,,active
+,socure,reason_code,R1059,Found at least 3 to 6 distinct emails associated with the given fullname and date of birth combination,contactability_email_anomaly,contactability,contactability,medium,warning,TRUE,FALSE,R1059,,,active
 ,socure,reason_code,R216,Input DOB is not found in best-matched identity,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R216,,,active
-,socure,reason_code,R228,Only 1 component of the input DOB matches the best matched entity,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R228,,,active
-,socure,reason_code,R229,Only 2 components of the input DOB matches the best matched entity,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R229,,,active
+,socure,reason_code,R228,Only 1 component of the input DOB matches the best matched entity,identity_dob_partial_match,identity,identity,medium,negative,TRUE,FALSE,R228,,,active
+,socure,reason_code,R229,Only 2 components of the input DOB matches the best matched entity,identity_dob_partial_match,identity,identity,medium,negative,TRUE,FALSE,R229,,,active
 ,socure,reason_code,R237,Input National ID is not an exact match to the National IDs associated with the given full name and DOB,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R237,,,active
 ,socure,reason_code,R243,Individual seems to be changing their date of birth to appear 18 or older,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R243,,,active
 ,socure,reason_code,R244,Individual seems to be changing their date of birth to appear 21 or older,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R244,,,active
 ,socure,reason_code,R304,Account is not correlated with the DOB,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R304,,,active
 ,socure,reason_code,R304,Account is not correlated with the DOB,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R304,,,active
 ,socure,reason_code,R870,DOB did not match AAMVA,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R870,,,inactive_not_used
-,socure,reason_code,R946,DOB was fuzzy matched to the DOB on record,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R946,,,active
+,socure,reason_code,R946,DOB was fuzzy matched to the DOB on record,identity_dob_partial_match,identity,identity,medium,negative,TRUE,FALSE,R946,,,active
 ,socure,reason_code,R957,DOB is not on record and cannot be verified,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R957,,,active
 ,socure,reason_code,R994,DOB cannot be verified by the SSA,identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,R994,,,active
 ,socure,reason_code,removedPersonalTitle-dobExact,"Partial name match due to the removal of an honorary title within the input name, exact DOB match",identity_dob_match,identity,identity,medium,negative,TRUE,FALSE,removedPersonalTitle-dobExact,,,active
@@ -427,9 +427,9 @@ fraud_velocity_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,I334,Indicates if the account has been seen in the between 90 and 120 days,fraud_velocity_risk,identity,identity,low,positive,FALSE,FALSE,I334,,,active
 ,socure,reason_code,I335,Indicates if the account has been seen in the between 120 and 150 days,fraud_velocity_risk,identity,identity,low,positive,FALSE,FALSE,I335,,,active
 ,socure,reason_code,I336,Indicates if the account has been seen in the between 150 and 180 days,fraud_velocity_risk,identity,identity,low,positive,FALSE,FALSE,I336,,,active
-,socure,reason_code,R1008,Found at least 2 applications within 30 days of each other associated with the given identity,fraud_velocity_risk,identity,identity,medium,negative,TRUE,FALSE,R1008,,,active
-,socure,reason_code,R1009,Found at least 2 applications within 90 days of each other associated with the given identity,fraud_velocity_risk,identity,identity,medium,negative,TRUE,FALSE,R1009,,,active
-,socure,reason_code,R1017,Found at least 2 accounts that were opened within 30 days from each other associated with the given identity,fraud_velocity_risk,identity,identity,medium,negative,TRUE,FALSE,R1017,,,active
+,socure,reason_code,R1008,Found at least 2 applications within 30 days of each other associated with the given identity,fraud_velocity_high,fraud,fraud,medium,negative,TRUE,FALSE,R1008,,,active
+,socure,reason_code,R1009,Found at least 2 applications within 90 days of each other associated with the given identity,fraud_velocity_high,fraud,fraud,medium,negative,TRUE,FALSE,R1009,,,active
+,socure,reason_code,R1017,Found at least 2 accounts that were opened within 30 days from each other associated with the given identity,fraud_velocity_high,fraud,fraud,medium,negative,TRUE,FALSE,R1017,,,active
 identity_age_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,I350,DOB indicates an age between 18 and 20,identity_age_risk,identity,identity,low,positive,FALSE,FALSE,I350,,,active
 ,socure,reason_code,I351,DOB indicates an age of 21 and over,identity_age_risk,identity,identity,low,positive,FALSE,FALSE,I351,,,active
@@ -662,7 +662,7 @@ identity_name_mismatch,,,,,,,,,,,,,,,
 ,socure,reason_code,R839,(Deprecated) - Name on the ID does not match the name from the Bar code/MRZ,identity_name_mismatch,identity,identity,medium,negative,TRUE,FALSE,R839,,,deprecated
 fraud_synthetic_identity_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R298,Identity resembles a manipulated Synthetic identity,fraud_synthetic_identity_risk,identity,identity,medium,negative,TRUE,FALSE,R298,,,active
-,socure,reason_code,R299,Identity resembles a fabricated Synthetic identity,fraud_synthetic_identity_risk,identity,identity,medium,negative,TRUE,FALSE,R299,,,active
+,socure,reason_code,R299,Identity resembles a fabricated Synthetic identity,fraud_synthetic_identity_risk,identity,identity,high,negative,TRUE,FALSE,R299,,,active
 bank_account_supporting_signal,,,,,,,,,,,,,,,
 ,socure,reason_code,R309,Provided routing number is invalid,bank_account_supporting_signal,identity,identity,medium,negative,TRUE,FALSE,R309,,,active
 ,socure,reason_code,R309,Provided routing number is invalid,bank_account_supporting_signal,identity,identity,medium,negative,TRUE,FALSE,R309,,,active
@@ -703,7 +703,7 @@ identity_address_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,I716,Address is a Small Office/Home Office (SOHO),identity_address_risk,identity,identity,low,positive,FALSE,FALSE,I716,,,active
 ,socure,reason_code,R702,Address is not confirmed as deliverable,identity_address_risk,identity,identity,medium,warning,TRUE,FALSE,R702,,,active
 ,socure,reason_code,R704,Address is a correctional facility,identity_address_risk,identity,identity,medium,warning,TRUE,FALSE,R704,,,active
-,socure,reason_code,R705,Address cannot be resolved to the individual,identity_address_risk,identity,identity,medium,warning,TRUE,FALSE,R705,,,active
+,socure,reason_code,R705,Address cannot be resolved to the individual,address_unresolvable,contactability,contactability,medium,warning,TRUE,FALSE,R705,,,active
 ,socure,reason_code,R708,Address is a PO Box,identity_address_risk,identity,identity,medium,warning,TRUE,FALSE,R708,,,active
 ,socure,reason_code,R710,Address is a military location,identity_address_risk,identity,identity,medium,warning,TRUE,FALSE,R710,,,active
 ,socure,reason_code,R724,Address is a filler address,identity_address_risk,identity,identity,medium,warning,TRUE,FALSE,R724,,,active
@@ -808,7 +808,7 @@ identity_liveness_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,I975,Non-MLA covered borrower status,needs_review,identity,identity,low,positive,FALSE,FALSE,I975,,,active
 ,socure,reason_code,I990,Either emergent address or recent move,needs_review,identity,identity,low,positive,FALSE,FALSE,I990,,,active
 ,socure,reason_code,R1015,Found at least 1 closed account associated with the given identity,needs_review,identity,identity,medium,negative,TRUE,FALSE,R1015,,,active
-,socure,reason_code,R1018,Found at least 2 accounts that were opened within 90 days from each other associated with the given identity,needs_review,identity,identity,medium,negative,TRUE,FALSE,R1018,,,active
+,socure,reason_code,R1018,Found at least 2 accounts that were opened within 90 days from each other associated with the given identity,fraud_velocity_high,fraud,fraud,medium,negative,TRUE,FALSE,R1018,,,active
 ,socure,reason_code,R1019,Found at least 2 accounts that were closed within 30 days from each other associated with the given identity,needs_review,identity,identity,medium,negative,TRUE,FALSE,R1019,,,active
 ,socure,reason_code,R1021,Found at least 1 account that has been closed within 30 days from opening associated with the given identity,needs_review,identity,identity,medium,negative,TRUE,FALSE,R1021,,,active
 ,socure,reason_code,R1027,Found at least 1 ACH transaction reported as Delinquency associated with the given identity,needs_review,identity,identity,medium,negative,TRUE,FALSE,R1027,,,active
@@ -826,27 +826,27 @@ identity_liveness_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R129,(Deprecated) - Social accounts connections unnatural,,identity,identity,medium,negative,TRUE,FALSE,R129,,,deprecated
 ,socure,reason_code,R130,(Deprecated) - Social accounts activity unnatural,,identity,identity,medium,negative,TRUE,FALSE,R130,,,deprecated
 ,socure,reason_code,R131,(Deprecated) - Social accounts unmaintained,,identity,identity,medium,negative,TRUE,FALSE,R131,,,deprecated
-,socure,reason_code,R183,Entity has at least 1 match on an enforcement list,needs_review,identity,identity,medium,negative,TRUE,FALSE,R183,,,active
-,socure,reason_code,R184,Entity has at least 1 hit on a politically exposed person list,needs_review,identity,identity,medium,negative,TRUE,FALSE,R184,,,active
+,socure,reason_code,R183,Entity has at least 1 match on an enforcement list,compliance_watchlist_match,compliance,compliance,medium,negative,TRUE,FALSE,R183,,,active
+,socure,reason_code,R184,Entity has at least 1 hit on a politically exposed person list,compliance_pep_match,compliance,compliance,medium,negative,TRUE,FALSE,R184,,,active
 ,socure,reason_code,R187,Address resolves to a High-Intensity Drug Trafficking Area,needs_review,identity,identity,medium,warning,TRUE,FALSE,R187,,,active
 ,socure,reason_code,R188,Address resolves to a High-Intensity Financial Crime Area,needs_review,identity,identity,medium,warning,TRUE,FALSE,R188,,,active
-,socure,reason_code,R201,Input National ID is invalid,needs_review,identity,identity,medium,negative,TRUE,FALSE,R201,,,active
-,socure,reason_code,R203,Multiple identities are associated with input National ID,needs_review,identity,identity,medium,negative,TRUE,FALSE,R203,,,active
-,socure,reason_code,R204,Input National ID is associated with multiple last names,needs_review,identity,identity,medium,negative,TRUE,FALSE,R204,,,active
-,socure,reason_code,R206,Input National ID was issued prior to the input date-of-birth,needs_review,identity,identity,medium,negative,TRUE,FALSE,R206,,,active
+,socure,reason_code,R201,Input National ID is invalid,identity_ssn_not_verified,identity,identity,medium,negative,TRUE,FALSE,R201,,,active
+,socure,reason_code,R203,Multiple identities are associated with input National ID,identity_multiple_identities,identity,identity,medium,negative,TRUE,FALSE,R203,,,active
+,socure,reason_code,R204,Input National ID is associated with multiple last names,identity_multiple_last_names,identity,identity,medium,negative,TRUE,FALSE,R204,,,active
+,socure,reason_code,R206,Input National ID was issued prior to the input date-of-birth,identity_issued_before_dob,identity,identity,medium,negative,TRUE,FALSE,R206,,,active
 ,socure,reason_code,R207,Input National ID is associated with multiple DOBs,identity_dob_mismatch,identity,identity,medium,negative,TRUE,FALSE,R207,,,active
 ,socure,reason_code,R208,SSN/ITIN is associated with multiple addresses,needs_review,identity,identity,medium,warning,TRUE,FALSE,R208,,,active
 ,socure,reason_code,R209,No former addresses associated with the National ID,needs_review,identity,identity,medium,warning,TRUE,FALSE,R209,,,active
-,socure,reason_code,R210,Frequency of SSN in Socure records is unusually high,needs_review,identity,identity,medium,negative,TRUE,FALSE,R210,,,active
+,socure,reason_code,R210,Frequency of SSN in Socure records is unusually high,fraud_identity_frequency_anomaly,fraud,fraud,medium,negative,TRUE,FALSE,R210,,,active
 ,socure,reason_code,R211,SSN seen in frozen credit files,needs_review,identity,identity,medium,negative,TRUE,FALSE,R211,,,active
-,socure,reason_code,R212,Input last name is not associated with the National ID,needs_review,identity,identity,medium,negative,TRUE,FALSE,R212,,,active
-,socure,reason_code,R213,Name does not correlate with the name for the resolved individual,needs_review,identity,identity,medium,negative,TRUE,FALSE,R213,,,active
-,socure,reason_code,R215,First name is not associated with the National ID,needs_review,identity,identity,medium,negative,TRUE,FALSE,R215,,,active
+,socure,reason_code,R212,Input last name is not associated with the National ID,identity_last_name_mismatch,identity,identity,medium,negative,TRUE,FALSE,R212,,,active
+,socure,reason_code,R213,Name does not correlate with the name for the resolved individual,identity_name_mismatch,identity,identity,medium,negative,TRUE,FALSE,R213,,,active
+,socure,reason_code,R215,First name is not associated with the National ID,identity_first_name_mismatch,identity,identity,medium,negative,TRUE,FALSE,R215,,,active
 ,socure,reason_code,R217,SSN was randomly-issued by the SSA,needs_review,identity,identity,medium,negative,TRUE,FALSE,R217,,,active
 ,socure,reason_code,R218,Input National ID is not the primary National ID for the resolved identity,needs_review,identity,identity,medium,negative,TRUE,FALSE,R218,,,active
 ,socure,reason_code,R220,Issue date for the provided SSN could not be resolved,needs_review,identity,identity,medium,negative,TRUE,FALSE,R220,,,active
-,socure,reason_code,R222,Input SSN could not be confirmed,needs_review,identity,identity,medium,negative,TRUE,FALSE,R222,,,active
-,socure,reason_code,R227,National ID is found to be inquired at an unusually high frequency (more than once a month),needs_review,identity,identity,medium,negative,TRUE,FALSE,R227,,,active
+,socure,reason_code,R222,Input SSN could not be confirmed,identity_ssn_not_verified,identity,identity,medium,negative,TRUE,FALSE,R222,,,active
+,socure,reason_code,R227,National ID is found to be inquired at an unusually high frequency (more than once a month),fraud_velocity_high,fraud,fraud,medium,negative,TRUE,FALSE,R227,,,active
 ,socure,reason_code,R230,National ID was first seen in credit header records within the last 1 year,needs_review,identity,identity,medium,negative,TRUE,FALSE,R230,,,active
 ,socure,reason_code,R231,National ID was first seen in credit header records between 1 to 3 years ago,needs_review,identity,identity,medium,negative,TRUE,FALSE,R231,,,active
 ,socure,reason_code,R232,National ID was first seen in credit header records between 3 to 5 years ago,needs_review,identity,identity,medium,negative,TRUE,FALSE,R232,,,active
@@ -866,12 +866,12 @@ identity_liveness_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R581,The domain appears to occur far more frequently than usual based on our consortium data,needs_review,identity,identity,medium,negative,TRUE,FALSE,R581,,,active
 ,socure,reason_code,R637,(Deprecated) - Mobile SIM tenure is less than 90 days,,identity,identity,medium,negative,TRUE,FALSE,R637,,,deprecated
 ,socure,reason_code,R641,"Proxy is from services that change location to beat DRM,TOR points, temporary proxies and other masking services",needs_review,identity,identity,medium,negative,TRUE,FALSE,R641,,,active
-,socure,reason_code,R665,Presented identity shows low overall correlation in Socures network,needs_review,identity,identity,medium,negative,TRUE,FALSE,R665,,,active
+,socure,reason_code,R665,Presented identity shows low overall correlation in Socures network,identity_unverifiable,identity,identity,medium,negative,TRUE,FALSE,R665,,,active
 ,socure,reason_code,R667,Presented identity uses uncommon communication channels,needs_review,identity,identity,medium,negative,TRUE,FALSE,R667,,,active
 ,socure,reason_code,R668,Transaction characteristics match an ongoing anomaly,needs_review,identity,identity,medium,negative,TRUE,FALSE,R668,,,active
 ,socure,reason_code,R669,"PII operates greater than 1,000 miles from usual location",needs_review,identity,identity,medium,negative,TRUE,FALSE,R669,,,active
 ,socure,reason_code,R711,"Address is a unique ZIP code, or corporate only, routing all mail internally by the assigned organization rather than by the USPS",,identity,identity,medium,warning,TRUE,FALSE,R711,,,inactive_not_used
-,socure,reason_code,R720,Addressrisk score represents high risk,needs_review,identity,identity,medium,warning,TRUE,FALSE,R720,,,active
+,socure,reason_code,R720,Addressrisk score represents high risk,address_risky,contactability,contactability,medium,warning,TRUE,FALSE,R720,,,active
 ,socure,reason_code,R722,The input state or ZIP was corrected during address standardisation,,identity,identity,medium,warning,TRUE,FALSE,R722,,,inactive_not_used
 ,socure,reason_code,R803,Check Digit Assessment failed on the barcode,needs_review,identity,identity,medium,negative,TRUE,FALSE,R803,,,active
 ,socure,reason_code,R811,Invalidated or voided ID,needs_review,identity,identity,medium,negative,TRUE,FALSE,R811,,,active
@@ -881,9 +881,9 @@ identity_liveness_risk,,,,,,,,,,,,,,,
 ,socure,reason_code,R903,(Deprecated) - DOB cannot be resolved to the individual,,identity,identity,medium,negative,TRUE,FALSE,R903,,,deprecated
 ,socure,reason_code,R904,(Deprecated) - KYC record validation failed on Address,,identity,identity,medium,warning,TRUE,FALSE,R904,,,deprecated
 ,socure,reason_code,R905,(Deprecated) - KYC record validation failed on Mobile Number,,identity,identity,medium,negative,TRUE,FALSE,R905,,,deprecated
-,socure,reason_code,R927,Name does not correlate with the name for the resolved individual,needs_review,identity,identity,medium,negative,TRUE,FALSE,R927,,,active
-,socure,reason_code,R928,SSN/ITIN is associated with multiple last names,needs_review,identity,identity,medium,negative,TRUE,FALSE,R928,,,active
-,socure,reason_code,R930,First name does not correlate with the first name for the resolved individual,needs_review,identity,identity,medium,negative,TRUE,FALSE,R930,,,active
+,socure,reason_code,R927,Name does not correlate with the name for the resolved individual,identity_name_mismatch,identity,identity,medium,negative,TRUE,FALSE,R927,,,active
+,socure,reason_code,R928,SSN/ITIN is associated with multiple last names,identity_multiple_last_names,identity,identity,medium,negative,TRUE,FALSE,R928,,,active
+,socure,reason_code,R930,First name does not correlate with the first name for the resolved individual,identity_first_name_mismatch,identity,identity,medium,negative,TRUE,FALSE,R930,,,active
 ,socure,reason_code,R942,The resolved identity has greater than1 SSN on record,needs_review,identity,identity,medium,negative,TRUE,FALSE,R942,,,active
 ,socure,reason_code,R947,SSN/ITIN is not the primary SSN/ITIN for the resolved identity,needs_review,identity,identity,medium,negative,TRUE,FALSE,R947,,,active
 ,socure,reason_code,R953,(Deprecated) - SSN was randomly-issued by the SSA and cannot be resolved to the individual,,identity,identity,medium,negative,TRUE,FALSE,R953,,,deprecated

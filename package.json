@@ -1,0 +1,8 @@
+{
+  "name": "iq-dev",
+  "private": true,
+  "scripts": {
+    "export:mappings": "node canonical-schema/exportMappings.js",
+    "watch:mappings": "node canonical-schema/watchMappings.js"
+  }
+}
