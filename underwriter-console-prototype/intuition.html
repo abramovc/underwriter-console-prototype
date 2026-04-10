@@ -208,7 +208,7 @@
       border: 1px solid #e5e7eb;
       border-radius: 14px;
       background: #fff;
-      padding: 14px;
+      padding: 16px;
       display: grid;
       gap: 12px;
     }
@@ -222,7 +222,7 @@
 
     .signal-main {
       display: grid;
-      gap: 5px;
+      gap: 7px;
       min-width: 0;
     }
 
@@ -233,26 +233,36 @@
     }
 
     .signal-subtitle {
-      font-size: 12px;
-      color: #6b7280;
-      line-height: 1.45;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #475569;
+      margin-top: 2px;
+    }
+
+    .signal-evidence-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     .signal-code-line {
       font-size: 12px;
-      color: #475569;
+      color: #64748b;
       line-height: 1.45;
       word-break: break-word;
     }
 
     .signal-code-line strong {
-      color: #334155;
+      color: #475569;
     }
 
     .signal-meta-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      align-items: center;
     }
 
     .signal-collapsible {
@@ -566,7 +576,7 @@
       DISPLAY_BUCKET_META,
       getSignalDisplayBucket
     } from "/underwriter-console-prototype/js/conceptGroups.js";
-    import { getGroupNarrative } from "/underwriter-console-prototype/js/narratives.js";
+    import { getGroupNarrative, getSignalNarrative } from "/underwriter-console-prototype/js/narratives.js";
 
     let PROVIDER_MAPPINGS = {};
 
@@ -672,31 +682,44 @@
       renderTagList(mediumSeveritySignalsEl, mediumSeverity);
     }
 
-    function createSignalCard(signal) {
-      const signalLabel = signal.sourceDescription || signal.displayLabel || signal.canonicalConcept;
-      const card = document.createElement("div");
-      card.className = "signal-card";
-      card.innerHTML = `
-        <div class="signal-top">
-          <div class="signal-main">
-            <div class="signal-title">${signalLabel}</div>
-            <div class="signal-subtitle">${signal.canonicalConcept}</div>
-            <div class="signal-code-line">
-              <strong>${signal.sourceCode}</strong> — ${signalLabel}
-            </div>
-          </div>
-          <div class="signal-meta-row">
-            <span class="badge ${signal.severity}">${signal.severity}</span>
-            <span class="chip ${signal.direction === "positive" ? "positive" : signal.direction === "negative" ? "negative" : "neutral"}">${signal.direction}</span>
-          </div>
+function createSignalCard(signal) {
+  const signalLabel = signal.sourceDescription || signal.displayLabel || signal.canonicalConcept;
+  const signalNarrative = getSignalNarrative(signal);
+
+  const sourceCode = signal.sourceCode
+    ? `<strong>${signal.sourceCode}</strong> — ${signalLabel}`
+    : signalLabel;
+
+  const card = document.createElement("div");
+  card.className = "signal-card";
+
+  card.innerHTML = `
+    <div class="signal-top">
+      <div class="signal-main">
+        <div class="signal-title">${signalLabel}</div>
+        <div class="signal-subtitle">${signalNarrative}</div>
+        <div class="signal-evidence-label">Provider signal</div>
+        <div class="signal-code-line">${sourceCode}</div>
+        <div class="signal-meta-row">
+          <span class="badge ${signal.severity}">${signal.severity}</span>
+          <span class="chip ${
+            signal.direction === "positive"
+              ? "positive"
+              : signal.direction === "negative"
+              ? "negative"
+              : "neutral"
+          }">${signal.direction}</span>
         </div>
         <div class="signal-meta-row">
           <span class="chip">${signal.providerDisplayName || signal.provider}</span>
           <span class="chip">${signal.signalClass}</span>
         </div>
-      `;
-      return card;
-    }
+      </div>
+    </div>
+  `;
+
+  return card;
+}
 
     function groupSignalsByDisplayBucket(signals) {
       return signals.reduce((groups, signal) => {
