@@ -19,9 +19,9 @@ export const INSIGHT_BUCKETS = {
     reviewQuestion:
       'Does this identity appear real, consistent, and attributable to the applicant?',
     recommendedActions: [
-      'request_selfie_id',
-      'request_manual_identity_review',
-      'request_document_upload'
+      'request_selfie_id_liveness',
+      'request_identity_documents',
+      'escalate_manual_review'
     ],
     conceptMatchers: [
       'identity',
@@ -82,9 +82,9 @@ export const INSIGHT_BUCKETS = {
     reviewQuestion:
       'Can we confidently reach this applicant through the provided contact details?',
     recommendedActions: [
-      'send_otp',
+      'request_text_otp',
       'request_email_confirmation',
-      'request_manual_contact_review'
+      'escalate_manual_review'
     ],
     conceptMatchers: [
       'contactability',
@@ -142,8 +142,8 @@ export const INSIGHT_BUCKETS = {
     reviewQuestion:
       'Do these patterns suggest fraud, repeated attempts, or suspicious reuse of identity attributes?',
     recommendedActions: [
-      'request_selfie_id',
-      'send_otp',
+      'request_selfie_id_liveness',
+      'request_text_otp',
       'escalate_fraud_review'
     ],
     conceptMatchers: [
@@ -195,8 +195,7 @@ export const INSIGHT_BUCKETS = {
     reviewQuestion:
       'Is there any sanctions, watchlist, PEP, or adverse media concern that requires escalation?',
     recommendedActions: [
-      'escalate_compliance_review',
-      'request_manual_compliance_review'
+      'escalate_compliance_review'
     ],
     conceptMatchers: [
       'watchlist',
@@ -234,7 +233,7 @@ export const INSIGHT_BUCKETS = {
       'Does the business appear legitimate, active, and consistent across business records?',
     recommendedActions: [
       'request_business_documents',
-      'request_manual_business_review',
+      'order_secretary_of_state_documents',
       'escalate_business_review'
     ],
     conceptMatchers: [
@@ -279,9 +278,9 @@ export const INSIGHT_BUCKETS = {
     reviewQuestion:
       'Do we trust that the payout account belongs to and is controlled by the applicant or business?',
     recommendedActions: [
-      'request_plaid',
-      'request_bank_documentation',
-      'request_manual_bank_review'
+      'request_bank_connection_plaid',
+      'request_bank_documents',
+      'escalate_manual_review'
     ],
     conceptMatchers: [
       'bank',
@@ -397,39 +396,11 @@ function matchesCode(code, regex) {
   return regex.test(String(code).trim());
 }
 
-function isExplicitlyNegative(signal = {}) {
-  const disposition = normalizeText(signal.disposition);
-  const searchText = getSignalSearchText(signal);
-
-  if (disposition === 'negative') return true;
-
-  const negativeTerms = [
-    'watchlist',
-    'ofac',
-    'sanctions',
-    'pep',
-    'adverse media',
-    'fraud',
-    'velocity',
-    'deceased',
-    'synthetic',
-    'invalid',
-    'mismatch',
-    'warning',
-    'review',
-    'denied',
-    'risk'
-  ];
-
-  return negativeTerms.some((term) => searchText.includes(term));
-}
-
 function looksPositive(signal = {}) {
   const disposition = normalizeText(signal.disposition);
   const concept = normalizeText(signal.canonicalConcept);
   const searchText = getSignalSearchText(signal);
 
-  // 🔥 HARD BLOCK (never positive)
   const blockedPositiveTerms = [
     'deceased',
     'watchlist',
@@ -445,17 +416,13 @@ function looksPositive(signal = {}) {
     'risk'
   ];
 
-  if (blockedPositiveTerms.some(term => searchText.includes(term))) {
+  if (blockedPositiveTerms.some((term) => searchText.includes(term))) {
     return false;
   }
 
-  // Explicit negative always wins
   if (disposition === 'negative') return false;
-
-  // Explicit positive is OK
   if (disposition === 'positive') return true;
 
-  // Strong positive concept matches only
   const positiveConceptTerms = [
     'ssn match',
     'dob match',
@@ -473,8 +440,8 @@ function looksPositive(signal = {}) {
     'business verified'
   ];
 
-  if (positiveConceptTerms.some(term => concept.includes(term))) return true;
-  if (positiveConceptTerms.some(term => searchText.includes(term))) return true;
+  if (positiveConceptTerms.some((term) => concept.includes(term))) return true;
+  if (positiveConceptTerms.some((term) => searchText.includes(term))) return true;
 
   return false;
 }

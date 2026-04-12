@@ -1068,341 +1068,390 @@
   </div>
 
   <script type="module">
-    import { buildIntuitionReview } from "/underwriter-console-prototype/js/normalizePayload.js";
-    import {
-      DISPLAY_BUCKET_ORDER,
-      DISPLAY_BUCKET_META,
-      getSignalDisplayBucket
-    } from "/underwriter-console-prototype/js/conceptGroups.js";
-    import { getGroupNarrative, getSignalNarrative } from "/underwriter-console-prototype/js/narratives.js";
-    import { buildInsightSummaries, formatBucketDebug } from "/underwriter-console-prototype/js/insightSummaries.js";
-    import {
-      detectCaseComposition,
-      formatCaseComposition
-    } from "/underwriter-console-prototype/js/caseComposition.js";
+  import { buildIntuitionReview } from "/underwriter-console-prototype/js/normalizePayload.js";
+  import {
+    DISPLAY_BUCKET_ORDER,
+    DISPLAY_BUCKET_META,
+    getSignalDisplayBucket
+  } from "/underwriter-console-prototype/js/conceptGroups.js";
+  import { getGroupNarrative, getSignalNarrative } from "/underwriter-console-prototype/js/narratives.js";
+  import { buildInsightSummaries, formatBucketDebug } from "/underwriter-console-prototype/js/insightSummaries.js";
+  import {
+    detectCaseComposition,
+    formatCaseComposition
+  } from "/underwriter-console-prototype/js/caseComposition.js";
 
-    let PROVIDER_MAPPINGS = {};
+  let PROVIDER_MAPPINGS = {};
 
-    const inputEl = document.getElementById("input");
-    const outputEl = document.getElementById("output");
+  const inputEl = document.getElementById("input");
+  const outputEl = document.getElementById("output");
 
-    // Decision-first elements
-    const decisionHeroEl = document.getElementById("decisionHero");
-    const insightGridEl = document.getElementById("insightGrid");
+  // Decision-first elements
+  const decisionHeroEl = document.getElementById("decisionHero");
+  const insightGridEl = document.getElementById("insightGrid");
 
-    // Legacy/raw evidence elements
-    const summaryServicesRunEl = document.getElementById("summaryServicesRun");
-    const summaryPositiveTagsEl = document.getElementById("summaryPositiveTags");
-    const summaryHighTagsEl = document.getElementById("summaryHighTags");
-    const summaryOutcomeEl = document.getElementById("summaryOutcome");
+  // Legacy/raw evidence elements
+  const summaryServicesRunEl = document.getElementById("summaryServicesRun");
+  const summaryPositiveTagsEl = document.getElementById("summaryPositiveTags");
+  const summaryHighTagsEl = document.getElementById("summaryHighTags");
+  const summaryOutcomeEl = document.getElementById("summaryOutcome");
 
-    const positiveSignalsEl = document.getElementById("positiveSignals");
-    const highSeveritySignalsEl = document.getElementById("highSeveritySignals");
-    const mediumSeveritySignalsEl = document.getElementById("mediumSeveritySignals");
+  const positiveSignalsEl = document.getElementById("positiveSignals");
+  const highSeveritySignalsEl = document.getElementById("highSeveritySignals");
+  const mediumSeveritySignalsEl = document.getElementById("mediumSeveritySignals");
 
-    const positiveSignalCountEl = document.getElementById("positiveSignalCount");
-    const highSeveritySignalCountEl = document.getElementById("highSeveritySignalCount");
-    const mediumSeveritySignalCountEl = document.getElementById("mediumSeveritySignalCount");
+  const positiveSignalCountEl = document.getElementById("positiveSignalCount");
+  const highSeveritySignalCountEl = document.getElementById("highSeveritySignalCount");
+  const mediumSeveritySignalCountEl = document.getElementById("mediumSeveritySignalCount");
 
-    const normalizedSignalsEl = document.getElementById("normalizedSignals");
-    const sourceRowsEl = document.getElementById("sourceRows");
+  const normalizedSignalsEl = document.getElementById("normalizedSignals");
+  const sourceRowsEl = document.getElementById("sourceRows");
 
-    async function loadMappings() {
-      const response = await fetch("/underwriter-console-prototype/data/provider-mappings.json");
-      if (!response.ok) {
-        throw new Error("Could not load provider mappings");
-      }
-      PROVIDER_MAPPINGS = await response.json();
+  async function loadMappings() {
+    const response = await fetch("/underwriter-console-prototype/data/provider-mappings.json");
+    if (!response.ok) {
+      throw new Error("Could not load provider mappings");
     }
+    PROVIDER_MAPPINGS = await response.json();
+  }
 
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
 
-    function titleCase(value) {
-      return String(value || "")
-        .replace(/[_-]+/g, " ")
-        .replace(/\b\w/g, (char) => char.toUpperCase())
-        .trim();
-    }
+  function titleCase(value) {
+    return String(value || "")
+      .replace(/[_-]+/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase())
+      .trim();
+  }
 
-    function pillClassForSeverity(severity) {
-      if (severity === "high") return "insight-pill-high";
-      if (severity === "medium") return "insight-pill-medium";
-      return "insight-pill-low";
-    }
+  function pillClassForSeverity(severity) {
+    if (severity === "high") return "insight-pill-high";
+    if (severity === "medium") return "insight-pill-medium";
+    return "insight-pill-low";
+  }
 
-    function joinBucketLabels(labels = []) {
-      const filtered = labels.filter(Boolean).slice(0, 2);
-      if (!filtered.length) return "the surfaced signals";
-      if (filtered.length === 1) return filtered[0];
-      return `${filtered[0]} and ${filtered[1]}`;
-    }
+  function joinBucketLabels(labels = []) {
+    const filtered = labels.filter(Boolean).slice(0, 2);
+    if (!filtered.length) return "the surfaced signals";
+    if (filtered.length === 1) return filtered[0];
+    return `${filtered[0]} and ${filtered[1]}`;
+  }
 
-    function getTopBucketLabels(insightResult, stance) {
-      return (insightResult?.summaries || [])
-        .filter((summary) => summary.stance === stance)
-        .map((summary) => summary.label)
-        .filter(Boolean)
-        .slice(0, 2);
-    }
+  function getTopBucketLabels(insightResult, stance) {
+    return (insightResult?.summaries || [])
+      .filter((summary) => summary.stance === stance)
+      .map((summary) => summary.label)
+      .filter(Boolean)
+      .slice(0, 2);
+  }
 
-    function getCompositionDomain(composition = {}) {
-      const activeDomains = [
-        composition.business ? "business" : null,
-        composition.contact ? "contact" : null
-      ].filter(Boolean);
+  function getCompositionDomain(composition = {}) {
+    const activeDomains = [
+      composition.business ? "business" : null,
+      composition.contact ? "contact" : null
+    ].filter(Boolean);
 
-      if (!activeDomains.length) return "unknown";
-      if (activeDomains.length > 1) return "mixed";
-      return activeDomains[0];
-    }
+    if (!activeDomains.length) return "unknown";
+    if (activeDomains.length > 1) return "mixed";
+    return activeDomains[0];
+  }
 
-    function getDecisionHeroCopy(review, insightResult, composition = {}) {
-      const summaries = insightResult?.summaries || [];
-      const blocking = summaries.filter((summary) => summary.stance === "blocking");
-      const reviewBuckets = summaries.filter((summary) => summary.stance === "review");
-      const supportive = summaries.filter((summary) => summary.stance === "supportive");
+  function getPrimaryDriverLabels(result) {
+    const primary = result?.primaryDriverBucket;
+    if (!primary?.label) return [];
 
-      const primaryBuckets = blocking.length
-        ? blocking
-        : reviewBuckets.length
-        ? reviewBuckets
-        : supportive;
-      const bucketLabelText = joinBucketLabels(primaryBuckets.map((summary) => summary.label));
-      const blockingLabelText = joinBucketLabels(getTopBucketLabels(insightResult, "blocking"));
-      const reviewLabelText = joinBucketLabels(getTopBucketLabels(insightResult, "review"));
-      const supportiveLabelText = joinBucketLabels(getTopBucketLabels(insightResult, "supportive"));
-      const primaryDomain = getCompositionDomain(composition);
+    const secondary = (result?.summaries || [])
+      .filter((summary) => summary.label && summary.label !== primary.label)
+      .filter((summary) => summary.stance === "blocking" || summary.stance === "review")
+      .map((summary) => summary.label)
+      .slice(0, 1);
 
-      if (review?.outcome === "Denied") {
-        if (primaryDomain === "business") {
-          return {
-            headline: `This business application was denied due to elevated concern in ${blockingLabelText}.`,
-            subheadline: "The current business verification, registration, or industry signals materially support a denial outcome."
-          };
-        }
+    return [primary.label, ...secondary];
+  }
 
-        if (primaryDomain === "mixed") {
-          return {
-            headline: "This application was denied after elevated concern across business and contact verification signals.",
-            subheadline: "Multiple verification domains surfaced materially adverse signals that support a denial decision."
-          };
-        }
+  function getDecisionHeroCopy(review, insightResult, composition = {}) {
+    const summaries = insightResult?.summaries || [];
+    const blocking = summaries.filter((summary) => summary.stance === "blocking");
+    const reviewBuckets = summaries.filter((summary) => summary.stance === "review");
+    const supportive = summaries.filter((summary) => summary.stance === "supportive");
+    const primaryDriver = insightResult?.primaryDriverBucket || null;
 
+    const primaryBuckets = blocking.length
+      ? blocking
+      : reviewBuckets.length
+      ? reviewBuckets
+      : primaryDriver
+      ? [primaryDriver]
+      : supportive;
+
+    const bucketLabelText = joinBucketLabels(primaryBuckets.map((summary) => summary.label));
+    const blockingLabelText = joinBucketLabels(
+      blocking.length
+        ? getTopBucketLabels(insightResult, "blocking")
+        : primaryDriver?.label
+        ? [primaryDriver.label]
+        : []
+    );
+    const reviewLabelText = joinBucketLabels(
+      reviewBuckets.length
+        ? getTopBucketLabels(insightResult, "review")
+        : primaryDriver?.label
+        ? [primaryDriver.label]
+        : []
+    );
+    const primaryDomain = getCompositionDomain(composition);
+
+    if (review?.outcome === "Denied") {
+      if (primaryDomain === "business") {
         return {
-          headline: `This application was denied due to elevated concern in ${blockingLabelText}.`,
-          subheadline: "The current signals materially support a denial outcome based on the available evidence."
+          headline: `This business application was denied due to elevated concern in ${blockingLabelText}.`,
+          subheadline: "The current business verification, registration, or industry signals materially support a denial outcome."
         };
       }
 
-      if (review?.outcome === "Approved") {
-        if (primaryDomain === "business") {
-          return {
-            headline: "This business application appears approvable based on the current evidence.",
-            subheadline: "Business legitimacy and registration signals are largely supportive in the current review."
-          };
-        }
-
-        if (primaryDomain === "mixed") {
-          return {
-            headline: "This application appears approvable across business and contact verification signals.",
-            subheadline: "Supportive evidence outweighs the currently surfaced concerns across the major review domains."
-          };
-        }
-
+      if (primaryDomain === "mixed") {
         return {
-          headline: "This application appears approvable based on the current evidence.",
-          subheadline: primaryDomain === "contact"
-            ? "Contact and identity verification signals are broadly supportive and outweigh the currently surfaced review triggers."
-            : "Supportive signals outweigh the currently surfaced review triggers."
+          headline: "This application was denied after elevated concern across business and contact verification signals.",
+          subheadline: "Multiple verification domains surfaced materially adverse signals that support a denial decision."
         };
       }
 
-      if (review?.outcome === "Manual Review") {
-        if (primaryDomain === "business") {
-          const hasBusinessLegitimacy = reviewLabelText.toLowerCase().includes("business") || blockingLabelText.toLowerCase().includes("business");
-          const hasIndustryRisk = reviewLabelText.toLowerCase().includes("industry") || blockingLabelText.toLowerCase().includes("industry");
+      return {
+        headline: `This application was denied due to elevated concern in ${blockingLabelText}.`,
+        subheadline: "The current signals materially support a denial outcome based on the available evidence."
+      };
+    }
 
-          if (hasBusinessLegitimacy || hasIndustryRisk) {
-            return {
-              headline: "Manual review is warranted due to elevated concern in business legitimacy and industry risk.",
-              subheadline: "The case contains business verification signals that should materially influence the review decision."
-            };
-          }
+    if (review?.outcome === "Approved") {
+      if (primaryDomain === "business") {
+        return {
+          headline: "This business application appears approvable based on the current evidence.",
+          subheadline: "Business legitimacy and registration signals are largely supportive in the current review."
+        };
+      }
 
+      if (primaryDomain === "mixed") {
+        return {
+          headline: "This application appears approvable across business and contact verification signals.",
+          subheadline: "Supportive evidence outweighs the currently surfaced concerns across the major review domains."
+        };
+      }
+
+      return {
+        headline: "This application appears approvable based on the current evidence.",
+        subheadline: primaryDomain === "contact"
+          ? "Contact and identity verification signals are broadly supportive and outweigh the currently surfaced review triggers."
+          : "Supportive signals outweigh the currently surfaced review triggers."
+      };
+    }
+
+    if (review?.outcome === "Manual Review") {
+      if (primaryDomain === "business") {
+        const driverText = (primaryDriver?.label || bucketLabelText).toLowerCase();
+        const hasBusinessLegitimacy = driverText.includes("business");
+        const hasIndustryRisk = driverText.includes("industry");
+
+        if (hasBusinessLegitimacy || hasIndustryRisk) {
           return {
-            headline: `Manual review is warranted due to elevated concern in ${reviewLabelText}.`,
-            subheadline: "Business-oriented verification signals need human review before proceeding."
-          };
-        }
-
-        if (primaryDomain === "mixed") {
-          return {
-            headline: "Manual review is warranted due to mixed verification across business and contact domains.",
-            subheadline: "Multiple review lenses surfaced meaningful concerns, so a combined human decision is appropriate."
+            headline: "Manual review is warranted due to elevated concern in business legitimacy and industry risk.",
+            subheadline: "The case contains business verification signals that should materially influence the review decision."
           };
         }
 
         return {
           headline: `Manual review is warranted due to elevated concern in ${reviewLabelText}.`,
-          subheadline: primaryDomain === "contact"
-            ? "The application contains contact and identity-oriented signals that should materially influence the review decision."
-            : "The application contains signals that should materially influence the review decision."
+          subheadline: "Business-oriented verification signals need human review before proceeding."
+        };
+      }
+
+      if (primaryDomain === "mixed") {
+        return {
+          headline: "Manual review is warranted due to mixed verification across business and contact domains.",
+          subheadline: "Multiple review lenses surfaced meaningful concerns, so a combined human decision is appropriate."
         };
       }
 
       return {
-        headline: insightResult?.overview?.headline || "No analysis yet",
-        subheadline: insightResult?.overview?.subheadline || "Run an analysis to see the distilled decision view."
+        headline: `Manual review is warranted due to elevated concern in ${reviewLabelText}.`,
+        subheadline: primaryDomain === "contact"
+          ? "The application contains contact and identity-oriented signals that should materially influence the review decision."
+          : "The application contains signals that should materially influence the review decision."
       };
     }
 
-    function getPrimaryDecisionDrivers(result) {
-      const summaries = result?.summaries || [];
-      const primary = summaries.filter((summary) => summary.stance === "blocking");
-      const fallback = primary.length
-        ? primary
-        : summaries.filter((summary) => summary.stance === "review");
+    return {
+      headline: insightResult?.overview?.headline || "No analysis yet",
+      subheadline: insightResult?.overview?.subheadline || "Run an analysis to see the distilled decision view."
+    };
+  }
 
-      return fallback
-        .map((summary) => summary.label)
-        .filter(Boolean)
-        .slice(0, 3);
-    }
+  function getPrimaryDecisionDrivers(result) {
+    const labels = getPrimaryDriverLabels(result);
+    if (labels.length) return labels;
 
-    function getSupportiveThemes(result) {
-      return (result?.summaries || [])
-        .filter((summary) => summary.stance === "supportive")
-        .map((summary) => summary.label)
-        .filter(Boolean)
-        .slice(0, 3);
-    }
+    return (result?.summaries || [])
+      .filter((summary) => summary.stance === "blocking" || summary.stance === "review")
+      .map((summary) => summary.label)
+      .filter(Boolean)
+      .slice(0, 2);
+  }
 
-    function renderQuickContextCard(review, extraClass = "", options = {}) {
-      const highSeverityCount = (review?.reviewTags || []).filter((tag) => tag.severity === "high").length;
-      const className = ["decision-secondary-card", extraClass].filter(Boolean).join(" ");
-      const signalMix = options.showSignalMix
-        ? `<div class="decision-signal-mix">Signal mix: ${escapeHtml(String(options.blockingCount ?? 0))} Blocking · ${escapeHtml(String(options.reviewCount ?? 0))} Review · ${escapeHtml(String(options.supportiveCount ?? 0))} Supportive</div>`
-        : "";
-      const compositionLine = options.compositionLabel
-        ? `<div class="decision-signal-mix">Case composition: ${escapeHtml(options.compositionLabel)}</div>`
-        : "";
+  function getSupportiveThemes(result) {
+    return (result?.summaries || [])
+      .filter((summary) => summary.stance === "supportive")
+      .map((summary) => summary.label)
+      .filter(Boolean)
+      .slice(0, 3);
+  }
 
-      return `
-        <div class="${className}">
-          <div class="decision-section-label">Quick context</div>
-          ${signalMix}
-          ${compositionLine}
-          <div class="decision-quick-stats">
-            <div class="quick-stat">
-              <span class="quick-stat-label">Outcome</span>
-              <div id="quickOutcome" class="quick-stat-value">${escapeHtml(review?.outcome || "—")}</div>
-              <div class="quick-stat-sub">Workflow outcome from the payload.</div>
-            </div>
-            <div class="quick-stat">
-              <span class="quick-stat-label">Services run</span>
-              <div id="quickServicesRun" class="quick-stat-value">${escapeHtml(String(review?.servicesRun ?? 0))}</div>
-              <div class="quick-stat-sub">Executed identity, fraud, and compliance services.</div>
-            </div>
-            <div class="quick-stat">
-              <span class="quick-stat-label">High-severity tags</span>
-              <div id="quickHighTags" class="quick-stat-value">${escapeHtml(String(highSeverityCount))}</div>
-              <div class="quick-stat-sub">Workflow tags that likely influenced the case path.</div>
-            </div>
+  function renderQuickContextCard(review, extraClass = "", options = {}) {
+    const highSeverityCount = (review?.reviewTags || []).filter((tag) => tag.severity === "high").length;
+    const className = ["decision-secondary-card", extraClass].filter(Boolean).join(" ");
+    const signalMix = options.showSignalMix
+      ? `<div class="decision-signal-mix">Signal mix: ${escapeHtml(String(options.blockingCount ?? 0))} Blocking · ${escapeHtml(String(options.reviewCount ?? 0))} Review · ${escapeHtml(String(options.supportiveCount ?? 0))} Supportive</div>`
+      : "";
+    const compositionLine = options.compositionLabel
+      ? `<div class="decision-signal-mix">Case composition: ${escapeHtml(options.compositionLabel)}</div>`
+      : "";
+
+    return `
+      <div class="${className}">
+        <div class="decision-section-label">Quick context</div>
+        ${signalMix}
+        ${compositionLine}
+        <div class="decision-quick-stats">
+          <div class="quick-stat">
+            <span class="quick-stat-label">Outcome</span>
+            <div id="quickOutcome" class="quick-stat-value">${escapeHtml(review?.outcome || "—")}</div>
+            <div class="quick-stat-sub">Workflow outcome from the payload.</div>
+          </div>
+          <div class="quick-stat">
+            <span class="quick-stat-label">Services run</span>
+            <div id="quickServicesRun" class="quick-stat-value">${escapeHtml(String(review?.servicesRun ?? 0))}</div>
+            <div class="quick-stat-sub">Executed identity, fraud, and compliance services.</div>
+          </div>
+          <div class="quick-stat">
+            <span class="quick-stat-label">High-severity tags</span>
+            <div id="quickHighTags" class="quick-stat-value">${escapeHtml(String(highSeverityCount))}</div>
+            <div class="quick-stat-sub">Workflow tags that likely influenced the case path.</div>
           </div>
         </div>
-      `;
+      </div>
+    `;
+  }
+
+  function renderChipList(id, labels = [], emptyMessage) {
+    if (!labels.length) {
+      return `<div id="${id}" class="action-chip-row"><span class="empty">${escapeHtml(emptyMessage)}</span></div>`;
     }
 
-    function renderChipList(id, labels = [], emptyMessage) {
-      if (!labels.length) {
-        return `<div id="${id}" class="action-chip-row"><span class="empty">${escapeHtml(emptyMessage)}</span></div>`;
-      }
+    return `
+      <div id="${id}" class="action-chip-row">
+        ${labels.map((label) => `<span class="action-chip">${escapeHtml(label)}</span>`).join("")}
+      </div>
+    `;
+  }
 
-      return `
-        <div id="${id}" class="action-chip-row">
-          ${labels.map((label) => `<span class="action-chip">${escapeHtml(label)}</span>`).join("")}
-        </div>
-      `;
-    }
+  function renderTopActionCard(result) {
+    const topAction = result?.overview?.topRecommendedAction || null;
+    const title = topAction?.label || "No recommendation yet";
+    const copy = topAction?.shortWhy || "Run an analysis to generate a recommended next step.";
+    const trigger = topAction?.sourceBuckets?.length
+      ? `Triggered by: ${topAction.sourceBuckets.join(", ")}`
+      : "";
 
-    function renderTopActionCard(result) {
-      const topAction = result?.overview?.topRecommendedAction || null;
-      const title = topAction?.label || "No recommendation yet";
-      const copy = topAction?.shortWhy || "Run an analysis to generate a recommended next step.";
-      const trigger = topAction?.sourceBuckets?.length
-        ? `Triggered by: ${topAction.sourceBuckets.join(", ")}`
-        : "";
+    return `
+      <div class="decision-primary-card">
+        <div class="decision-section-label">Top recommended action</div>
+        <h3 id="topActionTitle" class="top-action-title">${escapeHtml(title)}</h3>
+        <p id="topActionCopy" class="top-action-copy">${escapeHtml(copy)}</p>
+        <div id="topActionTrigger" class="top-action-trigger">${escapeHtml(trigger)}</div>
+      </div>
+    `;
+  }
 
-      return `
-        <div class="decision-primary-card">
-          <div class="decision-section-label">Top recommended action</div>
-          <h3 id="topActionTitle" class="top-action-title">${escapeHtml(title)}</h3>
-          <p id="topActionCopy" class="top-action-copy">${escapeHtml(copy)}</p>
-          <div id="topActionTrigger" class="top-action-trigger">${escapeHtml(trigger)}</div>
-        </div>
-      `;
-    }
+  function renderDriverCard(labels, title = "Primary decision drivers", emptyMessage = "No primary drivers were surfaced.") {
+    return `
+      <div class="decision-driver-card">
+        <div id="decisionOutcomeLabel" class="decision-section-label">${escapeHtml(title)}</div>
+        ${renderChipList("decisionOutcomeDrivers", labels, emptyMessage)}
+      </div>
+    `;
+  }
 
-    function renderDriverCard(labels, title = "Primary decision drivers", emptyMessage = "No primary drivers were surfaced.") {
-      return `
-        <div class="decision-driver-card">
-          <div id="decisionOutcomeLabel" class="decision-section-label">${escapeHtml(title)}</div>
-          ${renderChipList("decisionOutcomeDrivers", labels, emptyMessage)}
-        </div>
-      `;
-    }
-
-    function renderApprovedCard(labels) {
-      if (!labels.length) {
-        return `
-          <div class="decision-approved-card">
-            <div class="decision-section-label">Current action state</div>
-            <p id="decisionOutcomeNote" class="decision-approved-empty">No immediate action recommended.</p>
-          </div>
-        `;
-      }
-
+  function renderApprovedCard(labels) {
+    if (!labels.length) {
       return `
         <div class="decision-approved-card">
-          <div class="decision-section-label">Supportive themes</div>
-          ${renderChipList("decisionOutcomeDrivers", labels, "No supportive themes were surfaced.")}
+          <div class="decision-section-label">Current action state</div>
+          <p id="decisionOutcomeNote" class="decision-approved-empty">No immediate action recommended.</p>
         </div>
       `;
     }
 
-    function renderCrossBucketActions(result) {
-      const labels = (result?.recommendedActions || []).map((action) => action.label).filter(Boolean);
+    return `
+      <div class="decision-approved-card">
+        <div class="decision-section-label">Supportive themes</div>
+        ${renderChipList("decisionOutcomeDrivers", labels, "No supportive themes were surfaced.")}
+      </div>
+    `;
+  }
 
-      return `
-        <div id="decisionCrossActions" class="decision-cross-actions">
-          <div class="decision-section-label">Cross-bucket recommended actions</div>
-          ${renderChipList("crossBucketActions", labels, "No recommended actions yet.")}
+  function renderCrossBucketActions(result) {
+    const primary = result?.primaryDriverBucket;
+
+    const secondaryBuckets = (result?.summaries || [])
+      .filter((s) => s.label && s.label !== primary?.label)
+      .filter((s) => s.stance === "blocking" || s.stance === "review");
+
+    const orderedBuckets = [
+      ...(primary ? [primary] : []),
+      ...secondaryBuckets
+    ];
+
+    const labels = orderedBuckets
+      .flatMap((bucket) => bucket.recommendedActions || [])
+      .map((action) => action.label)
+      .filter(Boolean);
+
+    // dedupe while preserving order
+    const uniqueLabels = [...new Set(labels)];
+
+    return `
+      <div id="decisionCrossActions" class="decision-cross-actions">
+        <div class="decision-section-label">Additional recommended actions</div>
+        ${renderChipList(
+          "crossBucketActions",
+          uniqueLabels,
+          "No additional actions recommended."
+        )}
+      </div>
+    `;
+  }
+
+  function renderDecisionHero(review, result, composition) {
+    const heroCopy = getDecisionHeroCopy(review, result, composition);
+    const outcome = review?.outcome || "";
+    const compositionLabel = formatCaseComposition(composition);
+
+    const heroTop = `
+      <div class="decision-hero-top">
+        <div>
+          <div class="decision-kicker">Decision Summary</div>
+          <h2 id="decisionHeadline" class="decision-headline">${escapeHtml(heroCopy.headline)}</h2>
+          <p id="decisionSubheadline" class="decision-subheadline">${escapeHtml(heroCopy.subheadline)}</p>
         </div>
-      `;
-    }
+      </div>
+    `;
 
-    function renderDecisionHero(review, result, composition) {
-      const heroCopy = getDecisionHeroCopy(review, result, composition);
-      const outcome = review?.outcome || "";
-      const compositionLabel = formatCaseComposition(composition);
-      const heroTop = `
-        <div class="decision-hero-top">
-          <div>
-            <div class="decision-kicker">Decision Summary</div>
-            <h2 id="decisionHeadline" class="decision-headline">${escapeHtml(heroCopy.headline)}</h2>
-            <p id="decisionSubheadline" class="decision-subheadline">${escapeHtml(heroCopy.subheadline)}</p>
-          </div>
-        </div>
-      `;
-
-      if (outcome === "Denied") {
+    if (outcome === "Denied") {
       decisionHeroEl.innerHTML = `
         <div class="decision-hero-denied">
           ${heroTop}
@@ -1414,583 +1463,583 @@
           </div>
         </div>
       `;
-        return;
-      }
+      return;
+    }
 
-      if (outcome === "Approved") {
-        decisionHeroEl.innerHTML = `
+    if (outcome === "Approved") {
+      decisionHeroEl.innerHTML = `
         <div class="decision-hero-approved">
           ${heroTop}
           <div class="decision-approved-grid">
             ${renderApprovedCard(getSupportiveThemes(result))}
-              ${renderQuickContextCard(review, "", {
-                compositionLabel
-              })}
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      decisionHeroEl.innerHTML = `
-        <div class="decision-hero-manual">
-          ${heroTop}
-          <div class="decision-manual-grid">
-            <div class="decision-manual-stack">
-              ${renderTopActionCard(result)}
-              ${renderDriverCard(getPrimaryDecisionDrivers(result))}
-              ${renderCrossBucketActions(result)}
-            </div>
-            <div class="decision-manual-context-column">
-              ${renderQuickContextCard(review, "decision-manual-context", {
-                showSignalMix: true,
-                blockingCount: result?.overview?.blockingCount ?? 0,
-                reviewCount: result?.overview?.reviewCount ?? 0,
-                supportiveCount: result?.overview?.supportiveCount ?? 0,
-                compositionLabel
-              })}
-            </div>
+            ${renderQuickContextCard(review, "", {
+              compositionLabel
+            })}
           </div>
         </div>
       `;
+      return;
     }
 
-    function renderInsightCards(result) {
-      insightGridEl.innerHTML = "";
+    decisionHeroEl.innerHTML = `
+      <div class="decision-hero-manual">
+        ${heroTop}
+        <div class="decision-manual-grid">
+          <div class="decision-manual-stack">
+            ${renderTopActionCard(result)}
+            ${renderDriverCard(getPrimaryDecisionDrivers(result))}
+            ${renderCrossBucketActions(result)}
+          </div>
+          <div class="decision-manual-context-column">
+            ${renderQuickContextCard(review, "decision-manual-context", {
+              showSignalMix: true,
+              blockingCount: result?.overview?.blockingCount ?? 0,
+              reviewCount: result?.overview?.reviewCount ?? 0,
+              supportiveCount: result?.overview?.supportiveCount ?? 0,
+              compositionLabel
+            })}
+          </div>
+        </div>
+      </div>
+    `;
+  }
 
-      const summaries = result?.summaries || [];
-      if (!summaries.length) {
-        insightGridEl.innerHTML = '<div class="empty">No insight summaries were generated.</div>';
-        return;
-      }
+  function renderInsightCards(result) {
+    insightGridEl.innerHTML = "";
 
-      summaries.forEach((summary) => {
-        const card = document.createElement("section");
-        card.className = "insight-card";
+    const summaries = result?.summaries || [];
+    if (!summaries.length) {
+      insightGridEl.innerHTML = '<div class="empty">No insight summaries were generated.</div>';
+      return;
+    }
 
-        const actionsHtml = (summary.recommendedActions || []).length
-          ? `
-            <div class="action-chip-row">
-              ${(summary.recommendedActions || [])
-                .map((action) => `<span class="action-chip">${escapeHtml(action.label)}</span>`)
-                .join("")}
-            </div>
-          `
-          : `<div class="empty">No recommended actions</div>`;
+    summaries.forEach((summary) => {
+      const card = document.createElement("section");
+      card.className = "insight-card";
 
-        const evidenceHtml = (summary.evidencePreview || []).length
-          ? `
-            <div class="insight-evidence-list">
-              ${(summary.evidencePreview || []).map((item) => `
-                <div class="insight-evidence-item">
-                  <div class="insight-evidence-label">${escapeHtml(item.label || "Unnamed signal")}</div>
-                  <div class="insight-evidence-meta">
-                    <span>${escapeHtml(item.provider || "Unknown provider")}</span>
-                    ${item.code ? `<span>Code: ${escapeHtml(item.code)}</span>` : ""}
-                    ${item.canonicalConcept ? `<span>${escapeHtml(titleCase(item.canonicalConcept))}</span>` : ""}
-                  </div>
-                  <div class="signal-meta-row">
-                    <span class="badge ${escapeHtml(item.severity || "low")}">${escapeHtml(titleCase(item.severity || "low"))}</span>
-                    <span class="chip ${
-                      item.disposition === "positive"
-                        ? "positive"
-                        : item.disposition === "negative"
-                        ? "negative"
-                        : "neutral"
-                    }">${escapeHtml(titleCase(item.disposition || "neutral"))}</span>
-                  </div>
+      const actionsHtml = (summary.recommendedActions || []).length
+        ? `
+          <div class="action-chip-row">
+            ${(summary.recommendedActions || [])
+              .map((action) => `<span class="action-chip">${escapeHtml(action.label)}</span>`)
+              .join("")}
+          </div>
+        `
+        : `<div class="empty">No recommended actions</div>`;
+
+      const evidenceHtml = (summary.evidencePreview || []).length
+        ? `
+          <div class="insight-evidence-list">
+            ${(summary.evidencePreview || []).map((item) => `
+              <div class="insight-evidence-item">
+                <div class="insight-evidence-label">${escapeHtml(item.label || "Unnamed signal")}</div>
+                <div class="insight-evidence-meta">
+                  <span>${escapeHtml(item.provider || "Unknown provider")}</span>
+                  ${item.code ? `<span>Code: ${escapeHtml(item.code)}</span>` : ""}
+                  ${item.canonicalConcept ? `<span>${escapeHtml(titleCase(item.canonicalConcept))}</span>` : ""}
                 </div>
-              `).join("")}
-            </div>
-          `
-          : `<div class="empty">No evidence preview available</div>`;
-
-        const debugJson = JSON.stringify(formatBucketDebug(summary), null, 2);
-
-        card.innerHTML = `
-          <div class="insight-card-header">
-            <div>
-              <h3 class="insight-card-title">${escapeHtml(summary.label)}</h3>
-              <p class="insight-card-question">${escapeHtml(summary.reviewQuestion || "")}</p>
-            </div>
-
-            <div class="insight-card-stats">
-              <span class="insight-pill ${pillClassForSeverity(summary.severity)}">${escapeHtml(titleCase(summary.severity))}</span>
-              <span class="insight-pill insight-pill-${escapeHtml(summary.stance)}">${escapeHtml(titleCase(summary.stance))}</span>
-              <span class="insight-pill">${escapeHtml(String(summary.count))} signal${summary.count === 1 ? "" : "s"}</span>
-            </div>
+                <div class="signal-meta-row">
+                  <span class="badge ${escapeHtml(item.severity || "low")}">${escapeHtml(titleCase(item.severity || "low"))}</span>
+                  <span class="chip ${
+                    item.disposition === "positive"
+                      ? "positive"
+                      : item.disposition === "negative"
+                      ? "negative"
+                      : "neutral"
+                  }">${escapeHtml(titleCase(item.disposition || "neutral"))}</span>
+                </div>
+              </div>
+            `).join("")}
           </div>
+        `
+        : `<div class="empty">No evidence preview available</div>`;
 
-          <p class="insight-narrative">${escapeHtml(summary.narrative || "")}</p>
+      const debugJson = JSON.stringify(formatBucketDebug(summary), null, 2);
 
+      card.innerHTML = `
+        <div class="insight-card-header">
           <div>
-            <div class="insight-subsection-title">Recommended actions</div>
-            ${actionsHtml}
+            <h3 class="insight-card-title">${escapeHtml(summary.label)}</h3>
+            <p class="insight-card-question">${escapeHtml(summary.reviewQuestion || "")}</p>
           </div>
 
-          <div>
-            <div class="insight-subsection-title">Evidence preview</div>
-            ${evidenceHtml}
+          <div class="insight-card-stats">
+            <span class="insight-pill ${pillClassForSeverity(summary.severity)}">${escapeHtml(titleCase(summary.severity))}</span>
+            <span class="insight-pill insight-pill-${escapeHtml(summary.stance)}">${escapeHtml(titleCase(summary.stance))}</span>
+            <span class="insight-pill">${escapeHtml(String(summary.count))} signal${summary.count === 1 ? "" : "s"}</span>
           </div>
+        </div>
 
-          <details class="insight-debug-toggle">
-            <summary>Why this was grouped</summary>
-            <pre>${escapeHtml(debugJson)}</pre>
-          </details>
-        `;
+        <p class="insight-narrative">${escapeHtml(summary.narrative || "")}</p>
 
-        insightGridEl.appendChild(card);
-      });
+        <div>
+          <div class="insight-subsection-title">Recommended actions</div>
+          ${actionsHtml}
+        </div>
+
+        <div>
+          <div class="insight-subsection-title">Evidence preview</div>
+          ${evidenceHtml}
+        </div>
+
+        <details class="insight-debug-toggle">
+          <summary>Why this was grouped</summary>
+          <pre>${escapeHtml(debugJson)}</pre>
+        </details>
+      `;
+
+      insightGridEl.appendChild(card);
+    });
+  }
+
+  function renderSummary(review) {
+    summaryServicesRunEl.textContent = String(review.servicesRun);
+    summaryPositiveTagsEl.textContent = String(
+      review.reviewTags.filter((t) => t.direction === "positive").length
+    );
+    summaryHighTagsEl.textContent = String(
+      review.reviewTags.filter((t) => t.severity === "high").length
+    );
+    summaryOutcomeEl.textContent = review.outcome;
+  }
+
+  function renderOutcomeReasons(reasons) {
+    const section = document.getElementById("outcomeReasonsSection");
+    const container = document.getElementById("outcomeReasons");
+    container.innerHTML = "";
+
+    if (!reasons.length) {
+      section.hidden = true;
+      return;
     }
 
-    function renderSummary(review) {
-      summaryServicesRunEl.textContent = String(review.servicesRun);
-      summaryPositiveTagsEl.textContent = String(
-        review.reviewTags.filter((t) => t.direction === "positive").length
-      );
-      summaryHighTagsEl.textContent = String(
-        review.reviewTags.filter((t) => t.severity === "high").length
-      );
-      summaryOutcomeEl.textContent = review.outcome;
-    }
+    section.hidden = false;
 
-    function renderOutcomeReasons(reasons) {
-      const section = document.getElementById("outcomeReasonsSection");
-      const container = document.getElementById("outcomeReasons");
-      container.innerHTML = "";
-
-      if (!reasons.length) {
-        section.hidden = true;
-        return;
-      }
-
-      section.hidden = false;
-
-      reasons.forEach((reason) => {
-        const card = document.createElement("div");
-        card.className = "signal-card";
-
-        card.innerHTML = `
-          <div class="signal-top">
-            <div class="signal-main">
-              <div class="signal-title">${reason.label}</div>
-              <div class="signal-subtitle">Outcome reason</div>
-            </div>
-          </div>
-        `;
-
-        container.appendChild(card);
-      });
-    }
-
-    function renderTagList(container, items) {
-      container.innerHTML = "";
-
-      if (!items.length) {
-        container.innerHTML = '<div class="empty">No signals found.</div>';
-        return;
-      }
-
-      items.forEach((tag) => {
-        const row = document.createElement("div");
-        row.className = "tag-row";
-        row.innerHTML = `
-          <div class="tag-text">
-            <div class="tag-name">${tag.tag}</div>
-            <div class="tag-concept">${tag.canonicalConcept}</div>
-          </div>
-        `;
-        container.appendChild(row);
-      });
-    }
-
-    function renderTags(reviewTags) {
-      const positive = reviewTags.filter((tag) => tag.direction === "positive");
-      const highSeverity = reviewTags.filter((tag) => tag.severity === "high");
-      const mediumSeverity = reviewTags.filter((tag) => tag.severity === "medium");
-
-      positiveSignalCountEl.textContent = `${positive.length} item(s)`;
-      highSeveritySignalCountEl.textContent = `${highSeverity.length} item(s)`;
-      mediumSeveritySignalCountEl.textContent = `${mediumSeverity.length} item(s)`;
-
-      renderTagList(positiveSignalsEl, positive);
-      renderTagList(highSeveritySignalsEl, highSeverity);
-      renderTagList(mediumSeveritySignalsEl, mediumSeverity);
-    }
-
-    function createSignalCard(signal) {
-      const signalLabel = signal.sourceDescription || signal.displayLabel || signal.canonicalConcept;
-      const signalNarrative = getSignalNarrative(signal);
-
-      const sourceCode = signal.sourceCode
-        ? `<strong>${signal.sourceCode}</strong> — ${signalLabel}`
-        : signalLabel;
-
+    reasons.forEach((reason) => {
       const card = document.createElement("div");
       card.className = "signal-card";
 
       card.innerHTML = `
         <div class="signal-top">
           <div class="signal-main">
-            <div class="signal-title">${signalLabel}</div>
-            <div class="signal-subtitle">${signalNarrative}</div>
-            <div class="signal-evidence-label">Provider signal</div>
-            <div class="signal-code-line">${sourceCode}</div>
-            <div class="signal-meta-row">
-              <span class="badge ${signal.severity}">${signal.severity}</span>
-              <span class="chip ${
-                signal.direction === "positive"
-                  ? "positive"
-                  : signal.direction === "negative"
-                  ? "negative"
-                  : "neutral"
-              }">${signal.direction}</span>
-            </div>
-            <div class="signal-meta-row">
-              <span class="chip">${signal.providerDisplayName || signal.provider}</span>
-              <span class="chip">${signal.signalClass}</span>
-            </div>
+            <div class="signal-title">${reason.label}</div>
+            <div class="signal-subtitle">Outcome reason</div>
           </div>
         </div>
       `;
 
-      return card;
+      container.appendChild(card);
+    });
+  }
+
+  function renderTagList(container, items) {
+    container.innerHTML = "";
+
+    if (!items.length) {
+      container.innerHTML = '<div class="empty">No signals found.</div>';
+      return;
     }
 
-    function groupSignalsByDisplayBucket(signals) {
-      return signals.reduce((groups, signal) => {
-        const bucket = getSignalDisplayBucket(signal);
-
-        if (!groups[bucket]) {
-          groups[bucket] = [];
-        }
-
-        groups[bucket].push(signal);
-        return groups;
-      }, {});
-    }
-
-    function getOrderedDisplayBuckets(groupedSignals) {
-      const availableGroups = new Set(Object.keys(groupedSignals));
-      const orderedGroups = DISPLAY_BUCKET_ORDER.filter((group) => availableGroups.has(group));
-      const extraGroups = Object.keys(groupedSignals).filter((group) => !DISPLAY_BUCKET_ORDER.includes(group));
-
-      return [...orderedGroups, ...extraGroups];
-    }
-
-    function renderNormalizedSignals(signals) {
-      normalizedSignalsEl.innerHTML = "";
-
-      if (!signals.length) {
-        normalizedSignalsEl.innerHTML = '<div class="empty">No normalized signals found.</div>';
-        return;
-      }
-
-      const positiveSignals = signals.filter((signal) => (
-        signal.direction === "positive" &&
-        signal.severity === "low" &&
-        !signal.requiresReview &&
-        !signal.canContributeToDecline
-      ));
-      const primarySignals = signals.filter((signal) => !positiveSignals.includes(signal));
-      const groupedSignals = groupSignalsByDisplayBucket(primarySignals);
-      const orderedGroups = getOrderedDisplayBuckets(groupedSignals);
-
-      orderedGroups.forEach((groupKey) => {
-        const groupSignals = groupedSignals[groupKey] || [];
-        if (!groupSignals.length) return;
-
-        const groupSection = document.createElement("details");
-        groupSection.className = "signal-group";
-        groupSection.open = true;
-
-        const groupHead = document.createElement("summary");
-        groupHead.className = "signal-group-head";
-
-        const groupTitle = document.createElement("div");
-        groupTitle.className = "signal-group-title";
-        groupTitle.textContent = DISPLAY_BUCKET_META[groupKey]?.label || DISPLAY_BUCKET_META.other_signals.label;
-
-        const groupCopy = document.createElement("div");
-        groupCopy.className = "signal-group-copy";
-        groupCopy.textContent = getGroupNarrative(groupKey, groupSignals);
-
-        const groupBody = document.createElement("div");
-        groupBody.className = "signal-group-body";
-
-        groupSignals.forEach((signal) => {
-          groupBody.appendChild(createSignalCard(signal));
-        });
-
-        groupHead.appendChild(groupTitle);
-        groupHead.appendChild(groupCopy);
-        groupSection.appendChild(groupHead);
-        groupSection.appendChild(groupBody);
-        normalizedSignalsEl.appendChild(groupSection);
-      });
-
-      if (positiveSignals.length) {
-        const details = document.createElement("details");
-        details.className = "signal-collapsible";
-
-        const summary = document.createElement("summary");
-        summary.textContent = `Positive verification signals (${positiveSignals.length})`;
-        details.appendChild(summary);
-
-        const helper = document.createElement("div");
-        helper.className = "signal-collapsible-copy";
-        helper.textContent = "Low-severity positive evidence from providers.";
-        details.appendChild(helper);
-
-        const positiveGrid = document.createElement("div");
-        positiveGrid.className = "signals-grid";
-
-        positiveSignals.forEach((signal) => {
-          positiveGrid.appendChild(createSignalCard(signal));
-        });
-
-        details.appendChild(positiveGrid);
-        normalizedSignalsEl.appendChild(details);
-      }
-    }
-
-    function renderSources(signals) {
-      sourceRowsEl.innerHTML = "";
-
-      if (!signals.length) {
-        sourceRowsEl.innerHTML = '<div class="empty">No source rows found.</div>';
-        return;
-      }
-
-      signals.forEach((signal) => {
-        const sourceCode = signal.provider === "middesk" ? "" : signal.sourceCode;
-        const row = document.createElement("div");
-        row.className = "source-row";
-        row.innerHTML = `
-          <div class="source-service">${signal.providerDisplayName || signal.provider}</div>
-          <div class="source-concept">${signal.canonicalConcept}</div>
-          <div class="source-label">${signal.sourceDescription}</div>
-          <div class="source-code">${sourceCode}</div>
-        `;
-        sourceRowsEl.appendChild(row);
-      });
-    }
-
-    function normalizeText(value) {
-      return String(value || "")
-        .toLowerCase()
-        .replace(/[_-]+/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-    }
-
-    function buildInsightSignals(review) {
-      const tagSignals = (review.reviewTags || []).map((tag, index) => ({
-        id: `insight_tag:${index}:${tag.tag}`,
-        provider: "workflow",
-        service: "Workflow",
-        providerDisplayName: "Workflow",
-
-        tag: tag.tag,
-        code: tag.tag,
-        canonicalConcept: tag.canonicalConcept,
-
-        label: tag.tag,
-        fullLabel: tag.tag,
-
-        description: `${tag.tag} triggered by workflow rules.`,
-        summary: `${tag.tag} triggered by workflow rules.`,
-
-        reason: tag.tag,
-        severity: tag.severity,
-        disposition: tag.direction,
-        direction: tag.direction,
-
-        signalClass: tag.group || "workflow",
-        sourceType: "review_tag",
-        requiresReview: !!tag.requiresReview,
-        canContributeToDecline: !!tag.canContributeToDecline,
-
-        dedupeKey: `tag:${normalizeText(tag.tag)}`
-      }));
-
-      const providerSignals = (review.supportingSignals || []).map((signal, index) => ({
-        id: `insight_signal:${index}:${signal.id || signal.sourceCode || signal.canonicalConcept}`,
-        provider: signal.provider,
-        service: signal.product || signal.providerDisplayName || signal.provider,
-        providerDisplayName: signal.providerDisplayName || signal.provider,
-
-        tag: signal.displayLabel || signal.sourceDescription || signal.canonicalConcept,
-        code: signal.sourceCode,
-        canonicalConcept: signal.canonicalConcept,
-
-        label: signal.displayLabel || signal.sourceDescription || signal.canonicalConcept,
-        fullLabel: signal.sourceDescription || signal.displayLabel || signal.canonicalConcept,
-
-        description: signal.sourceDescription || signal.displayLabel || signal.canonicalConcept,
-        summary: signal.sourceDescription || signal.displayLabel || signal.canonicalConcept,
-        reason: signal.sourceDescription || signal.displayLabel || signal.canonicalConcept,
-
-        severity: signal.severity,
-        disposition: signal.direction,
-        direction: signal.direction,
-
-        signalClass: signal.signalClass || signal.conceptGroup || "unknown",
-        sourceType: signal.sourceType || "provider_signal",
-        requiresReview: !!signal.requiresReview,
-        canContributeToDecline: !!signal.canContributeToDecline,
-
-        dedupeKey: signal.dedupeKey || `${signal.provider}:${signal.sourceCode || signal.canonicalConcept}:${index}`
-      }));
-
-      return [...tagSignals, ...providerSignals];
-    }
-
-    function resetDecisionView() {
-      decisionHeroEl.innerHTML = `
-        <div class="decision-hero-manual">
-          <div class="decision-hero-top">
-            <div>
-              <div class="decision-kicker">Decision Summary</div>
-              <h2 id="decisionHeadline" class="decision-headline">No analysis yet</h2>
-              <p id="decisionSubheadline" class="decision-subheadline">Run an analysis to see the distilled decision view.</p>
-            </div>
-          </div>
-          <div class="decision-manual-grid">
-            <div class="decision-manual-stack">
-              ${renderTopActionCard(null)}
-              ${renderDriverCard([], "Primary decision drivers")}
-              ${renderCrossBucketActions(null)}
-            </div>
-            <div class="decision-manual-context-column">
-              ${renderQuickContextCard(null, "decision-manual-context", {
-                showSignalMix: true,
-                blockingCount: 0,
-                reviewCount: 0,
-                supportiveCount: 0,
-                compositionLabel: "Unknown"
-              })}
-            </div>
-          </div>
+    items.forEach((tag) => {
+      const row = document.createElement("div");
+      row.className = "tag-row";
+      row.innerHTML = `
+        <div class="tag-text">
+          <div class="tag-name">${tag.tag}</div>
+          <div class="tag-concept">${tag.canonicalConcept}</div>
         </div>
       `;
-      insightGridEl.innerHTML = "";
-    }
+      container.appendChild(row);
+    });
+  }
 
-    function resetView() {
-      outputEl.hidden = true;
+  function renderTags(reviewTags) {
+    const positive = reviewTags.filter((tag) => tag.direction === "positive");
+    const highSeverity = reviewTags.filter((tag) => tag.severity === "high");
+    const mediumSeverity = reviewTags.filter((tag) => tag.severity === "medium");
 
-      resetDecisionView();
+    positiveSignalCountEl.textContent = `${positive.length} item(s)`;
+    highSeveritySignalCountEl.textContent = `${highSeverity.length} item(s)`;
+    mediumSeveritySignalCountEl.textContent = `${mediumSeverity.length} item(s)`;
 
-      summaryServicesRunEl.textContent = "0";
-      summaryPositiveTagsEl.textContent = "0";
-      summaryHighTagsEl.textContent = "0";
-      summaryOutcomeEl.textContent = "—";
+    renderTagList(positiveSignalsEl, positive);
+    renderTagList(highSeveritySignalsEl, highSeverity);
+    renderTagList(mediumSeveritySignalsEl, mediumSeverity);
+  }
 
-      positiveSignalCountEl.textContent = "0 item(s)";
-      highSeveritySignalCountEl.textContent = "0 item(s)";
-      mediumSeveritySignalCountEl.textContent = "0 item(s)";
+  function createSignalCard(signal) {
+    const signalLabel = signal.sourceDescription || signal.displayLabel || signal.canonicalConcept;
+    const signalNarrative = getSignalNarrative(signal);
 
-      positiveSignalsEl.innerHTML = "";
-      highSeveritySignalsEl.innerHTML = "";
-      mediumSeveritySignalsEl.innerHTML = "";
-      document.getElementById("outcomeReasons").innerHTML = "";
-      normalizedSignalsEl.innerHTML = "";
-      sourceRowsEl.innerHTML = "";
-    }
+    const sourceCode = signal.sourceCode
+      ? `<strong>${signal.sourceCode}</strong> — ${signalLabel}`
+      : signalLabel;
 
-    document.getElementById("analyze").addEventListener("click", async () => {
-      let raw;
+    const card = document.createElement("div");
+    card.className = "signal-card";
 
-      try {
-        raw = JSON.parse(inputEl.value);
-      } catch (err) {
-        alert("Invalid JSON");
-        return;
+    card.innerHTML = `
+      <div class="signal-top">
+        <div class="signal-main">
+          <div class="signal-title">${signalLabel}</div>
+          <div class="signal-subtitle">${signalNarrative}</div>
+          <div class="signal-evidence-label">Provider signal</div>
+          <div class="signal-code-line">${sourceCode}</div>
+          <div class="signal-meta-row">
+            <span class="badge ${signal.severity}">${signal.severity}</span>
+            <span class="chip ${
+              signal.direction === "positive"
+                ? "positive"
+                : signal.direction === "negative"
+                ? "negative"
+                : "neutral"
+            }">${signal.direction}</span>
+          </div>
+          <div class="signal-meta-row">
+            <span class="chip">${signal.providerDisplayName || signal.provider}</span>
+            <span class="chip">${signal.signalClass}</span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    return card;
+  }
+
+  function groupSignalsByDisplayBucket(signals) {
+    return signals.reduce((groups, signal) => {
+      const bucket = getSignalDisplayBucket(signal);
+
+      if (!groups[bucket]) {
+        groups[bucket] = [];
       }
 
-      try {
-        if (
-          !PROVIDER_MAPPINGS.socure ||
-          Object.keys(PROVIDER_MAPPINGS.socure).length === 0 ||
-          !PROVIDER_MAPPINGS.lexis_nexis_instant_id ||
-          Object.keys(PROVIDER_MAPPINGS.lexis_nexis_instant_id).length === 0 ||
-          !PROVIDER_MAPPINGS.id_analytics ||
-          Object.keys(PROVIDER_MAPPINGS.id_analytics).length === 0 ||
-          !PROVIDER_MAPPINGS.middesk_kyb ||
-          Object.keys(PROVIDER_MAPPINGS.middesk_kyb).length === 0 ||
-          !PROVIDER_MAPPINGS.middesk_mcc ||
-          Object.keys(PROVIDER_MAPPINGS.middesk_mcc).length === 0 ||
-          !PROVIDER_MAPPINGS.middesk_naics ||
-          Object.keys(PROVIDER_MAPPINGS.middesk_naics).length === 0
-        ) {
-          await loadMappings();
-        }
-      } catch (err) {
-        alert("Could not load provider mappings JSON");
-        return;
-      }
+      groups[bucket].push(signal);
+      return groups;
+    }, {});
+  }
 
-      const review = buildIntuitionReview(raw, PROVIDER_MAPPINGS);
-      const composition = detectCaseComposition(raw);
-      const insightSignals = buildInsightSignals(review);
-      const insightResult = buildInsightSummaries(insightSignals);
+  function getOrderedDisplayBuckets(groupedSignals) {
+    const availableGroups = new Set(Object.keys(groupedSignals));
+    const orderedGroups = DISPLAY_BUCKET_ORDER.filter((group) => availableGroups.has(group));
+    const extraGroups = Object.keys(groupedSignals).filter((group) => !DISPLAY_BUCKET_ORDER.includes(group));
 
-      renderDecisionHero(review, insightResult, composition);
-      renderInsightCards(insightResult);
+    return [...orderedGroups, ...extraGroups];
+  }
 
-      renderSummary(review);
-      renderOutcomeReasons(review.outcomeReasons);
-      renderTags(review.reviewTags);
-      renderNormalizedSignals(review.supportingSignals);
-      renderSources(review.supportingSignals);
+  function renderNormalizedSignals(signals) {
+    normalizedSignalsEl.innerHTML = "";
 
-      outputEl.hidden = false;
+    if (!signals.length) {
+      normalizedSignalsEl.innerHTML = '<div class="empty">No normalized signals found.</div>';
+      return;
+    }
+
+    const positiveSignals = signals.filter((signal) => (
+      signal.direction === "positive" &&
+      signal.severity === "low" &&
+      !signal.requiresReview &&
+      !signal.canContributeToDecline
+    ));
+    const primarySignals = signals.filter((signal) => !positiveSignals.includes(signal));
+    const groupedSignals = groupSignalsByDisplayBucket(primarySignals);
+    const orderedGroups = getOrderedDisplayBuckets(groupedSignals);
+
+    orderedGroups.forEach((groupKey) => {
+      const groupSignals = groupedSignals[groupKey] || [];
+      if (!groupSignals.length) return;
+
+      const groupSection = document.createElement("details");
+      groupSection.className = "signal-group";
+      groupSection.open = true;
+
+      const groupHead = document.createElement("summary");
+      groupHead.className = "signal-group-head";
+
+      const groupTitle = document.createElement("div");
+      groupTitle.className = "signal-group-title";
+      groupTitle.textContent = DISPLAY_BUCKET_META[groupKey]?.label || DISPLAY_BUCKET_META.other_signals.label;
+
+      const groupCopy = document.createElement("div");
+      groupCopy.className = "signal-group-copy";
+      groupCopy.textContent = getGroupNarrative(groupKey, groupSignals);
+
+      const groupBody = document.createElement("div");
+      groupBody.className = "signal-group-body";
+
+      groupSignals.forEach((signal) => {
+        groupBody.appendChild(createSignalCard(signal));
+      });
+
+      groupHead.appendChild(groupTitle);
+      groupHead.appendChild(groupCopy);
+      groupSection.appendChild(groupHead);
+      groupSection.appendChild(groupBody);
+      normalizedSignalsEl.appendChild(groupSection);
     });
 
-    document.getElementById("sample").addEventListener("click", () => {
-      inputEl.value = JSON.stringify({
-        summary: {
-          tags: [
-            "Watchlist Review",
-            "Fraud Review",
-            "SSN Velocity Warning",
-            "Velocity Warning",
-            "Socure SSN Match",
-            "Socure Name Match",
-            "Socure DOB Match",
-            "Socure Address Match",
-            "KYC Approved"
-          ],
-          outcome_reasons: ["Watchlist Review", "Fraud Review"],
-          outcome: "Manual Review",
-          score: 0.91,
-          services: {
-            "Identity Element Velocity": "executed",
-            "ID Analytics ID Score": "executed",
-            "Socure 30": "executed"
+    if (positiveSignals.length) {
+      const details = document.createElement("details");
+      details.className = "signal-collapsible";
+
+      const summary = document.createElement("summary");
+      summary.textContent = `Positive verification signals (${positiveSignals.length})`;
+      details.appendChild(summary);
+
+      const helper = document.createElement("div");
+      helper.className = "signal-collapsible-copy";
+      helper.textContent = "Low-severity positive evidence from providers.";
+      details.appendChild(helper);
+
+      const positiveGrid = document.createElement("div");
+      positiveGrid.className = "signals-grid";
+
+      positiveSignals.forEach((signal) => {
+        positiveGrid.appendChild(createSignalCard(signal));
+      });
+
+      details.appendChild(positiveGrid);
+      normalizedSignalsEl.appendChild(details);
+    }
+  }
+
+  function renderSources(signals) {
+    sourceRowsEl.innerHTML = "";
+
+    if (!signals.length) {
+      sourceRowsEl.innerHTML = '<div class="empty">No source rows found.</div>';
+      return;
+    }
+
+    signals.forEach((signal) => {
+      const sourceCode = signal.provider === "middesk" ? "" : signal.sourceCode;
+      const row = document.createElement("div");
+      row.className = "source-row";
+      row.innerHTML = `
+        <div class="source-service">${signal.providerDisplayName || signal.provider}</div>
+        <div class="source-concept">${signal.canonicalConcept}</div>
+        <div class="source-label">${signal.sourceDescription}</div>
+        <div class="source-code">${sourceCode}</div>
+      `;
+      sourceRowsEl.appendChild(row);
+    });
+  }
+
+  function normalizeText(value) {
+    return String(value || "")
+      .toLowerCase()
+      .replace(/[_-]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function buildInsightSignals(review) {
+    const tagSignals = (review.reviewTags || []).map((tag, index) => ({
+      id: `insight_tag:${index}:${tag.tag}`,
+      provider: "workflow",
+      service: "Workflow",
+      providerDisplayName: "Workflow",
+
+      tag: tag.tag,
+      code: tag.tag,
+      canonicalConcept: tag.canonicalConcept,
+
+      label: tag.tag,
+      fullLabel: tag.tag,
+
+      description: `${tag.tag} triggered by workflow rules.`,
+      summary: `${tag.tag} triggered by workflow rules.`,
+
+      reason: tag.tag,
+      severity: tag.severity,
+      disposition: tag.direction,
+      direction: tag.direction,
+
+      signalClass: tag.group || "workflow",
+      sourceType: "review_tag",
+      requiresReview: !!tag.requiresReview,
+      canContributeToDecline: !!tag.canContributeToDecline,
+
+      dedupeKey: `tag:${normalizeText(tag.tag)}`
+    }));
+
+    const providerSignals = (review.supportingSignals || []).map((signal, index) => ({
+      id: `insight_signal:${index}:${signal.id || signal.sourceCode || signal.canonicalConcept}`,
+      provider: signal.provider,
+      service: signal.product || signal.providerDisplayName || signal.provider,
+      providerDisplayName: signal.providerDisplayName || signal.provider,
+
+      tag: signal.displayLabel || signal.sourceDescription || signal.canonicalConcept,
+      code: signal.sourceCode,
+      canonicalConcept: signal.canonicalConcept,
+
+      label: signal.displayLabel || signal.sourceDescription || signal.canonicalConcept,
+      fullLabel: signal.sourceDescription || signal.displayLabel || signal.canonicalConcept,
+
+      description: signal.sourceDescription || signal.displayLabel || signal.canonicalConcept,
+      summary: signal.sourceDescription || signal.displayLabel || signal.canonicalConcept,
+      reason: signal.sourceDescription || signal.displayLabel || signal.canonicalConcept,
+
+      severity: signal.severity,
+      disposition: signal.direction,
+      direction: signal.direction,
+
+      signalClass: signal.signalClass || signal.conceptGroup || "unknown",
+      sourceType: signal.sourceType || "provider_signal",
+      requiresReview: !!signal.requiresReview,
+      canContributeToDecline: !!signal.canContributeToDecline,
+
+      dedupeKey: signal.dedupeKey || `${signal.provider}:${signal.sourceCode || signal.canonicalConcept}:${index}`
+    }));
+
+    return [...tagSignals, ...providerSignals];
+  }
+
+  function resetDecisionView() {
+    decisionHeroEl.innerHTML = `
+      <div class="decision-hero-manual">
+        <div class="decision-hero-top">
+          <div>
+            <div class="decision-kicker">Decision Summary</div>
+            <h2 id="decisionHeadline" class="decision-headline">No analysis yet</h2>
+            <p id="decisionSubheadline" class="decision-subheadline">Run an analysis to see the distilled decision view.</p>
+          </div>
+        </div>
+        <div class="decision-manual-grid">
+          <div class="decision-manual-stack">
+            ${renderTopActionCard(null)}
+            ${renderDriverCard([], "Primary decision drivers")}
+            ${renderCrossBucketActions(null)}
+          </div>
+          <div class="decision-manual-context-column">
+            ${renderQuickContextCard(null, "decision-manual-context", {
+              showSignalMix: true,
+              blockingCount: 0,
+              reviewCount: 0,
+              supportiveCount: 0,
+              compositionLabel: "Unknown"
+            })}
+          </div>
+        </div>
+      </div>
+    `;
+    insightGridEl.innerHTML = "";
+  }
+
+  function resetView() {
+    outputEl.hidden = true;
+
+    resetDecisionView();
+
+    summaryServicesRunEl.textContent = "0";
+    summaryPositiveTagsEl.textContent = "0";
+    summaryHighTagsEl.textContent = "0";
+    summaryOutcomeEl.textContent = "—";
+
+    positiveSignalCountEl.textContent = "0 item(s)";
+    highSeveritySignalCountEl.textContent = "0 item(s)";
+    mediumSeveritySignalCountEl.textContent = "0 item(s)";
+
+    positiveSignalsEl.innerHTML = "";
+    highSeveritySignalsEl.innerHTML = "";
+    mediumSeveritySignalsEl.innerHTML = "";
+    document.getElementById("outcomeReasons").innerHTML = "";
+    normalizedSignalsEl.innerHTML = "";
+    sourceRowsEl.innerHTML = "";
+  }
+
+  document.getElementById("analyze").addEventListener("click", async () => {
+    let raw;
+
+    try {
+      raw = JSON.parse(inputEl.value);
+    } catch (err) {
+      alert("Invalid JSON");
+      return;
+    }
+
+    try {
+      if (
+        !PROVIDER_MAPPINGS.socure ||
+        Object.keys(PROVIDER_MAPPINGS.socure).length === 0 ||
+        !PROVIDER_MAPPINGS.lexis_nexis_instant_id ||
+        Object.keys(PROVIDER_MAPPINGS.lexis_nexis_instant_id).length === 0 ||
+        !PROVIDER_MAPPINGS.id_analytics ||
+        Object.keys(PROVIDER_MAPPINGS.id_analytics).length === 0 ||
+        !PROVIDER_MAPPINGS.middesk_kyb ||
+        Object.keys(PROVIDER_MAPPINGS.middesk_kyb).length === 0 ||
+        !PROVIDER_MAPPINGS.middesk_mcc ||
+        Object.keys(PROVIDER_MAPPINGS.middesk_mcc).length === 0 ||
+        !PROVIDER_MAPPINGS.middesk_naics ||
+        Object.keys(PROVIDER_MAPPINGS.middesk_naics).length === 0
+      ) {
+        await loadMappings();
+      }
+    } catch (err) {
+      alert("Could not load provider mappings JSON");
+      return;
+    }
+
+    const review = buildIntuitionReview(raw, PROVIDER_MAPPINGS);
+    const composition = detectCaseComposition(raw);
+    const insightSignals = buildInsightSignals(review);
+    const insightResult = buildInsightSummaries(insightSignals);
+
+    renderDecisionHero(review, insightResult, composition);
+    renderInsightCards(insightResult);
+
+    renderSummary(review);
+    renderOutcomeReasons(review.outcomeReasons);
+    renderTags(review.reviewTags);
+    renderNormalizedSignals(review.supportingSignals);
+    renderSources(review.supportingSignals);
+
+    outputEl.hidden = false;
+  });
+
+  document.getElementById("sample").addEventListener("click", () => {
+    inputEl.value = JSON.stringify({
+      summary: {
+        tags: [
+          "Watchlist Review",
+          "Fraud Review",
+          "SSN Velocity Warning",
+          "Velocity Warning",
+          "Socure SSN Match",
+          "Socure Name Match",
+          "Socure DOB Match",
+          "Socure Address Match",
+          "KYC Approved"
+        ],
+        outcome_reasons: ["Watchlist Review", "Fraud Review"],
+        outcome: "Manual Review",
+        score: 0.91,
+        services: {
+          "Identity Element Velocity": "executed",
+          "ID Analytics ID Score": "executed",
+          "Socure 30": "executed"
+        }
+      },
+      formatted_responses: {
+        "ID Analytics ID Score": {
+          data: {
+            idScore: 855,
+            reason_codes: ["909", "925", "934"]
           }
         },
-        formatted_responses: {
-          "ID Analytics ID Score": {
-            data: {
-              idScore: 855,
-              reason_codes: ["909", "925", "934"]
-            }
-          },
-          "Socure 30": {
-            data: {
-              reasonCodes: ["R202", "R707"]
-            }
+        "Socure 30": {
+          data: {
+            reasonCodes: ["R202", "R707"]
           }
         }
-      }, null, 2);
-    });
+      }
+    }, null, 2);
+  });
 
-    document.getElementById("clear").addEventListener("click", () => {
-      inputEl.value = "";
-      resetView();
-    });
-  </script>
+  document.getElementById("clear").addEventListener("click", () => {
+    inputEl.value = "";
+    resetView();
+  });
+</script>
 </body>
 </html>

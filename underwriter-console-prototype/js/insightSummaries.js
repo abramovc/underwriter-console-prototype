@@ -3,89 +3,61 @@ import {
   getBucketMeta
 } from './insightBuckets.js';
 
-const SEVERITY_ORDER = ['low', 'medium', 'high'];
-const ACTION_PRIORITY = [
-  'request_selfie_id',
-  'send_otp',
-  'request_plaid',
-  'escalate_fraud_review',
-  'escalate_compliance_review',
-  'request_manual_identity_review',
-  'request_manual_contact_review',
-  'request_manual_business_review',
-  'request_manual_bank_review',
-  'request_document_upload',
-  'request_business_documents',
-  'request_bank_documentation',
-  'request_email_confirmation'
-];
+import {
+  ACTION_LIBRARY,
+  sortActions,
+  getActionLibrary,
+  getActionByKey
+} from './recommendedActions.js';
 
-const ACTION_LIBRARY = {
-  request_selfie_id: {
-    key: 'request_selfie_id',
-    label: 'Request selfie + ID capture',
-    shortWhy: 'Resolve identity uncertainty and confirm applicant authenticity.'
-  },
-  send_otp: {
-    key: 'send_otp',
-    label: 'Send 6-digit authentication code',
-    shortWhy: 'Test whether the applicant controls the provided phone number.'
-  },
-  request_plaid: {
-    key: 'request_plaid',
-    label: 'Request bank connection via Plaid',
-    shortWhy: 'Validate payout ownership and strengthen bank-account confidence.'
-  },
-  escalate_fraud_review: {
-    key: 'escalate_fraud_review',
-    label: 'Escalate fraud review',
-    shortWhy: 'Patterns suggest elevated abuse risk that may require specialist review.'
-  },
-  escalate_compliance_review: {
-    key: 'escalate_compliance_review',
-    label: 'Escalate compliance review',
-    shortWhy: 'Compliance-related screening signals may require a separate review path.'
-  },
-  request_manual_identity_review: {
-    key: 'request_manual_identity_review',
-    label: 'Send to manual identity review',
-    shortWhy: 'Identity signals are mixed enough that manual review is warranted.'
-  },
-  request_manual_contact_review: {
-    key: 'request_manual_contact_review',
-    label: 'Review contact details manually',
-    shortWhy: 'Phone or email confidence is weak and may need human judgment.'
-  },
-  request_manual_business_review: {
-    key: 'request_manual_business_review',
-    label: 'Review business details manually',
-    shortWhy: 'Business legitimacy signals need human validation.'
-  },
-  request_manual_bank_review: {
-    key: 'request_manual_bank_review',
-    label: 'Review bank ownership manually',
-    shortWhy: 'Ownership or payout-control signals are not strong enough to trust outright.'
-  },
-  request_document_upload: {
-    key: 'request_document_upload',
-    label: 'Request supporting identity documents',
-    shortWhy: 'Additional documents can help resolve missing or conflicting identity evidence.'
-  },
-  request_business_documents: {
-    key: 'request_business_documents',
-    label: 'Request business formation documents',
-    shortWhy: 'Business documentation can confirm legitimacy and formation details.'
-  },
-  request_bank_documentation: {
-    key: 'request_bank_documentation',
-    label: 'Request bank documentation',
-    shortWhy: 'Bank statements or voided checks can help verify ownership.'
-  },
-  request_email_confirmation: {
-    key: 'request_email_confirmation',
-    label: 'Request email confirmation',
-    shortWhy: 'Useful when email quality is weak but not enough to block the case by itself.'
-  }
+import {
+  getConceptActions
+} from './conceptActions.js';
+
+const SEVERITY_ORDER = ['low', 'medium', 'high'];
+
+const BUCKET_ACTION_AFFINITY = {
+  identity_integrity: [
+    'request_selfie_id_liveness',
+    'request_identity_documents',
+    'request_data_correction',
+    'escalate_manual_review',
+    'run_additional_verification'
+  ],
+  contactability: [
+    'request_text_otp',
+    'request_email_confirmation',
+    'request_address_proof',
+    'request_data_correction',
+    'escalate_manual_review'
+  ],
+  fraud_velocity: [
+    'request_selfie_id_liveness',
+    'run_additional_verification',
+    'escalate_fraud_review',
+    'request_text_otp'
+  ],
+  compliance_screening: [
+    'escalate_compliance_review'
+  ],
+  business_legitimacy: [
+    'request_business_documents',
+    'order_secretary_of_state_documents',
+    'escalate_business_review',
+    'request_data_correction'
+  ],
+  bank_ownership: [
+    'request_bank_connection_plaid',
+    'request_bank_documents',
+    'escalate_manual_review'
+  ],
+  positive_verification: [
+    'proceed_with_monitoring'
+  ],
+  other: [
+    'run_additional_verification',
+    'escalate_manual_review'
+  ]
 };
 
 function normalizeText(value) {
@@ -93,13 +65,6 @@ function normalizeText(value) {
     .toLowerCase()
     .replace(/[_-]+/g, ' ')
     .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function toTitleCase(value) {
-  return String(value || '')
-    .replace(/[_-]+/g, ' ')
-    .replace(/\b\w/g, (char) => char.toUpperCase())
     .trim();
 }
 
@@ -369,7 +334,47 @@ function buildBucketNarrative(bucketKey, severity, signals, bucketMeta) {
   }
 }
 
-function recommendedActionsForBucket(bucketKey, severity, signalCount) {
+function getRankedConcepts(signals = [], maxConcepts = 4) {
+  const conceptMap = new Map();
+
+  for (const signal of signals) {
+    const concept = String(signal.canonicalConcept || '').trim();
+    if (!concept) continue;
+
+    const existing = conceptMap.get(concept);
+
+    if (!existing) {
+      conceptMap.set(concept, {
+        concept,
+        weight: signalWeight(signal),
+        signalCount: 1,
+        severity: getSignalSeverity(signal)
+      });
+      continue;
+    }
+
+    existing.weight += signalWeight(signal);
+    existing.signalCount += 1;
+
+    if (severityRank(getSignalSeverity(signal)) > severityRank(existing.severity)) {
+      existing.severity = getSignalSeverity(signal);
+    }
+  }
+
+  return Array.from(conceptMap.values())
+    .sort((a, b) => {
+      const weightDiff = b.weight - a.weight;
+      if (weightDiff !== 0) return weightDiff;
+
+      const severityDiff = severityRank(b.severity) - severityRank(a.severity);
+      if (severityDiff !== 0) return severityDiff;
+
+      return a.concept.localeCompare(b.concept);
+    })
+    .slice(0, maxConcepts);
+}
+
+function getBucketFallbackActionKeys(bucketKey, severity, signalCount) {
   const bucketMeta = getBucketMeta(bucketKey);
   const baseActions = [...(bucketMeta.recommendedActions || [])];
 
@@ -378,26 +383,64 @@ function recommendedActionsForBucket(bucketKey, severity, signalCount) {
   }
 
   if (severity === 'low' && signalCount <= 1) {
-    return baseActions.slice(0, 1).map((key) => ACTION_LIBRARY[key]).filter(Boolean);
+    return baseActions.slice(0, 1);
   }
 
   if (severity === 'medium') {
-    return baseActions.slice(0, 2).map((key) => ACTION_LIBRARY[key]).filter(Boolean);
+    return baseActions.slice(0, 2);
   }
 
-  return baseActions.slice(0, 3).map((key) => ACTION_LIBRARY[key]).filter(Boolean);
+  return baseActions.slice(0, 3);
 }
 
-function sortActions(actions = []) {
-  return [...actions].sort((a, b) => {
-    const aIdx = ACTION_PRIORITY.indexOf(a.key);
-    const bIdx = ACTION_PRIORITY.indexOf(b.key);
+function getBucketAffinityRank(bucketKey, actionKey) {
+  const bucketActions = BUCKET_ACTION_AFFINITY[bucketKey] || BUCKET_ACTION_AFFINITY.other || [];
+  const idx = bucketActions.indexOf(actionKey);
+  return idx === -1 ? 999 : idx;
+}
 
-    const aRank = aIdx === -1 ? 999 : aIdx;
-    const bRank = bIdx === -1 ? 999 : bIdx;
+function buildRecommendedActionsForBucket(bucketKey, severity, signals = []) {
+  const rankedConcepts = getRankedConcepts(signals, 4);
+  const conceptDerivedActionKeys = [];
 
-    return aRank - bRank;
+  for (const item of rankedConcepts) {
+    const actionKeys = getConceptActions(item.concept);
+    for (const actionKey of actionKeys) {
+      conceptDerivedActionKeys.push(actionKey);
+    }
+  }
+
+  const fallbackActionKeys = getBucketFallbackActionKeys(bucketKey, severity, signals.length);
+
+  const combined = [];
+  const seen = new Set();
+
+  for (const key of [...conceptDerivedActionKeys, ...fallbackActionKeys]) {
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+
+    const action = ACTION_LIBRARY[key];
+    if (!action) continue;
+
+    combined.push({
+      ...action,
+      __affinityRank: getBucketAffinityRank(bucketKey, key)
+    });
+  }
+
+  combined.sort((a, b) => {
+    const affinityDiff = a.__affinityRank - b.__affinityRank;
+    if (affinityDiff !== 0) return affinityDiff;
+
+    const sorted = sortActions([a, b]);
+    if (sorted[0].key === a.key) return -1;
+    if (sorted[0].key === b.key) return 1;
+    return 0;
   });
+
+  return combined
+    .slice(0, 3)
+    .map(({ __affinityRank, ...action }) => action);
 }
 
 function deriveBucketStance(bucketKey, severity) {
@@ -428,10 +471,10 @@ export function summarizeBucket(bucket = {}) {
     dedupedSignals,
     bucketMeta
   );
-  const actions = recommendedActionsForBucket(
+  const actions = buildRecommendedActionsForBucket(
     bucket.key,
     severity,
-    dedupedSignals.length
+    dedupedSignals
   );
 
   return {
@@ -450,26 +493,66 @@ export function summarizeBucket(bucket = {}) {
   };
 }
 
+function getSummaryPriority(summary = {}) {
+  const stanceRankMap = {
+    blocking: 0,
+    review: 1,
+    monitor: 2,
+    supportive: 3
+  };
+
+  const stanceRank = stanceRankMap[summary.stance] ?? 99;
+  const severityScore = severityRank(summary.severity);
+  const countScore = Number(summary.count || 0);
+
+  return {
+    stanceRank,
+    severityScore,
+    countScore
+  };
+}
+
+function compareSummaryPriority(a = {}, b = {}) {
+  const aPriority = getSummaryPriority(a);
+  const bPriority = getSummaryPriority(b);
+
+  if (aPriority.stanceRank !== bPriority.stanceRank) {
+    return aPriority.stanceRank - bPriority.stanceRank;
+  }
+
+  const severityDiff = bPriority.severityScore - aPriority.severityScore;
+  if (severityDiff !== 0) return severityDiff;
+
+  const countDiff = bPriority.countScore - aPriority.countScore;
+  if (countDiff !== 0) return countDiff;
+
+  return String(a.label || '').localeCompare(String(b.label || ''));
+}
+
+function pickPrimaryDriverBucket(summaries = []) {
+  const candidates = summaries.filter((summary) => summary.stance !== 'supportive');
+
+  if (!candidates.length) {
+    return summaries.length ? [...summaries].sort(compareSummaryPriority)[0] : null;
+  }
+
+  return [...candidates].sort(compareSummaryPriority)[0] || null;
+}
+
 export function buildInsightSummaries(signals = []) {
   const bucketed = bucketSignals(signals);
   const summaries = bucketed
     .map((bucket) => summarizeBucket(bucket))
-    .sort((a, b) => {
-      if (a.key === 'positive_verification' && b.key !== 'positive_verification') return 1;
-      if (b.key === 'positive_verification' && a.key !== 'positive_verification') return -1;
-
-      const severityDiff = severityRank(b.severity) - severityRank(a.severity);
-      if (severityDiff !== 0) return severityDiff;
-
-      return b.count - a.count;
-    });
+    .sort(compareSummaryPriority);
 
   const recommendedActions = collectRecommendedActions(summaries);
+  const primaryDriverBucket = pickPrimaryDriverBucket(summaries);
 
   return {
     summaries,
     recommendedActions,
-    overview: buildInsightOverview(summaries, recommendedActions)
+    primaryDriverBucket,
+    overview: buildInsightOverview(summaries, recommendedActions, primaryDriverBucket)
   };
 }
 
@@ -502,7 +585,7 @@ function collectRecommendedActions(summaries = []) {
   return sortActions(Array.from(actionMap.values())).slice(0, 4);
 }
 
-function buildInsightOverview(summaries = [], recommendedActions = []) {
+function buildInsightOverview(summaries = [], recommendedActions = [], primaryDriverBucket = null) {
   const blocking = summaries.filter((s) => s.stance === 'blocking');
   const review = summaries.filter((s) => s.stance === 'review');
   const supportive = summaries.filter((s) => s.stance === 'supportive');
@@ -519,10 +602,18 @@ function buildInsightOverview(summaries = [], recommendedActions = []) {
   } else if (review.length) {
     headline = `The case appears reviewable, with uncertainty concentrated in ${topReview.join(' and ')}.`;
     subheadline = 'The evidence is mixed enough to justify targeted follow-up before a final decision.';
+  } else if (primaryDriverBucket) {
+    headline = 'Manual review is warranted due to elevated concern in the surfaced signals.';
+    subheadline = `${primaryDriverBucket.label}-oriented verification signals need human review before proceeding.`;
   } else if (supportive.length) {
     headline = 'The application contains multiple supportive verification signals.';
     subheadline = 'Positive evidence may offset weaker or isolated review triggers.';
   }
+
+  const topRecommendedAction =
+    (primaryDriverBucket?.recommendedActions || [])[0] ||
+    recommendedActions[0] ||
+    null;
 
   return {
     headline,
@@ -530,17 +621,11 @@ function buildInsightOverview(summaries = [], recommendedActions = []) {
     blockingCount: blocking.length,
     reviewCount: review.length,
     supportiveCount: supportive.length,
-    topRecommendedAction: recommendedActions[0] || null
+    topRecommendedAction
   };
 }
 
-export function getActionLibrary() {
-  return ACTION_LIBRARY;
-}
-
-export function getActionByKey(actionKey) {
-  return ACTION_LIBRARY[actionKey] || null;
-}
+export { getActionLibrary, getActionByKey };
 
 export function groupSignalsForDisplay(signals = []) {
   const result = buildInsightSummaries(signals);
