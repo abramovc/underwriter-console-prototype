@@ -5,6 +5,10 @@
       "destination": "/underwriter-console-prototype/intuition.html"
     },
     {
+      "source": "/docs",
+      "destination": "/underwriter-console-prototype/docs.html"
+    },
+    {
       "source": "/intelligence",
       "destination": "/underwriter-console-prototype/intelligence.html"
     },
