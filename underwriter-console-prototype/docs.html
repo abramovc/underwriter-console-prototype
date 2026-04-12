@@ -638,48 +638,118 @@
         </section>
 
         <section class="doc-section" id="recommended-actions">
-          <h3>Recommended actions</h3>
-          <p class="section-copy">
-            Recommended actions are the next-step suggestions surfaced by Intuition. They are intentionally structured
-            around audience so the system can distinguish between something the applicant should do, something the
-            underwriter should do, and something the system can do automatically.
-          </p>
+  <h3>Action framework</h3>
+  <p class="section-copy">
+    Intuition draws from a defined action library and selects the most relevant next steps based on the dominant
+    underwriting theme, supporting signals, and intended audience. Actions are structured so the system can distinguish
+    between something the applicant should do, something the underwriter should do, and something the system can do
+    automatically.
+  </p>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Audience</th>
-                <th>Examples</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Applicant</td>
-                <td>Request selfie + ID verification, send text OTP, request business documents, connect bank account via Plaid.</td>
-              </tr>
-              <tr>
-                <td>Underwriter</td>
-                <td>Escalate manual review, escalate fraud review, escalate compliance review, escalate business review.</td>
-              </tr>
-              <tr>
-                <td>System</td>
-                <td>Order state registration documents, run additional verification.</td>
-              </tr>
-            </tbody>
-          </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Audience</th>
+        <th>Action</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Applicant</td>
+        <td>Request selfie + ID verification</td>
+        <td>Confirm identity authenticity using liveness and document verification.</td>
+      </tr>
+      <tr>
+        <td>Applicant</td>
+        <td>Send 6-digit authentication code</td>
+        <td>Verify that the applicant controls the provided phone number.</td>
+      </tr>
+      <tr>
+        <td>Applicant</td>
+        <td>Connect bank account via Plaid</td>
+        <td>Validate ownership of the payout account and strengthen identity confidence.</td>
+      </tr>
+      <tr>
+        <td>Applicant</td>
+        <td>Request email confirmation</td>
+        <td>Confirm ownership and validity of the email address.</td>
+      </tr>
+      <tr>
+        <td>Applicant</td>
+        <td>Request identity documents</td>
+        <td>Collect documentation to resolve identity inconsistencies.</td>
+      </tr>
+      <tr>
+        <td>Applicant</td>
+        <td>Request business documents</td>
+        <td>Verify business legitimacy using formation or registration documents.</td>
+      </tr>
+      <tr>
+        <td>Applicant</td>
+        <td>Request bank documentation</td>
+        <td>Confirm account ownership using statements or supporting documents.</td>
+      </tr>
+      <tr>
+        <td>Applicant</td>
+        <td>Request proof of address</td>
+        <td>Validate residency or business location using supporting address documentation.</td>
+      </tr>
+      <tr>
+        <td>Applicant</td>
+        <td>Request data correction</td>
+        <td>Resolve inconsistencies by allowing the applicant to correct submitted information.</td>
+      </tr>
+      <tr>
+        <td>Underwriter</td>
+        <td>Escalate to manual review</td>
+        <td>Route the case to an underwriter for further evaluation.</td>
+      </tr>
+      <tr>
+        <td>Underwriter</td>
+        <td>Escalate fraud review</td>
+        <td>Route the case for specialist fraud review.</td>
+      </tr>
+      <tr>
+        <td>Underwriter</td>
+        <td>Escalate compliance review</td>
+        <td>Route the case for compliance review before proceeding.</td>
+      </tr>
+      <tr>
+        <td>Underwriter</td>
+        <td>Escalate business review</td>
+        <td>Route the case for additional business legitimacy review.</td>
+      </tr>
+      <tr>
+        <td>Underwriter</td>
+        <td>Proceed with monitoring</td>
+        <td>Take no immediate step-up action and continue monitoring the case.</td>
+      </tr>
+      <tr>
+        <td>System</td>
+        <td>Order state registration documents</td>
+        <td>Retrieve official business records from the Secretary of State.</td>
+      </tr>
+      <tr>
+        <td>System</td>
+        <td>Run additional verification checks</td>
+        <td>Trigger additional providers or workflows to gather more evidence.</td>
+      </tr>
+    </tbody>
+  </table>
 
-          <h4>Current source</h4>
-          <p>
-            <code class="inline">underwriter-console-prototype/js/recommendedActions.js</code>
-          </p>
+  <h4>Current source</h4>
+  <p>
+    <code class="inline">underwriter-console-prototype/js/recommendedActions.js</code>
+  </p>
 
-          <h4>Current selection model</h4>
-          <ul>
-            <li>Top recommended action should align with the primary driver bucket.</li>
-            <li>Additional recommended actions should support the same dominant theme first.</li>
-            <li>Low-severity monitor buckets should not overpower the hero action.</li>
-          </ul>
-        </section>
+  <h4>Current selection model</h4>
+  <ul>
+    <li>Top recommended action should align with the primary driver bucket.</li>
+    <li>Additional recommended actions should support the same dominant theme first.</li>
+    <li>Low-severity monitor buckets should not overpower the hero action.</li>
+  </ul>
+</section>
 
         <section class="doc-section" id="mapping-library">
           <h3>Mapping library</h3>
