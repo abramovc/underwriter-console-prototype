@@ -14,9 +14,10 @@
       --text: #0f172a;
       --muted: #64748b;
       --heading: #111827;
-      --accent: #0f172a;
       --link: #2563eb;
       --code-bg: #f8fafc;
+      --chip-bg: #eff6ff;
+      --chip-text: #1d4ed8;
     }
 
     * {
@@ -36,7 +37,7 @@
 
     .layout {
       display: grid;
-      grid-template-columns: 280px minmax(0, 1fr);
+      grid-template-columns: 260px minmax(0, 1fr);
       min-height: 100vh;
     }
 
@@ -92,20 +93,14 @@
       text-decoration: none;
       font-size: 14px;
       line-height: 1.4;
-      padding: 6px 9px;
+      padding: 7px 9px;
       border-radius: 10px;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
     .sidebar a:hover {
       background: rgba(148, 163, 184, 0.12);
       color: #f8fafc;
-    }
-
-    .sidebar .sub-link {
-      padding-left: 18px;
-      color: #94a3b8;
-      font-size: 13px;
     }
 
     .content {
@@ -122,14 +117,6 @@
       border-radius: 18px;
       padding: 24px 24px 20px;
       margin-bottom: 18px;
-    }
-
-    .hero-kicker {
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 10px;
     }
 
     .hero h2 {
@@ -175,7 +162,7 @@
       color: #475569;
       font-size: 15px;
       line-height: 1.65;
-      max-width: 900px;
+      max-width: 920px;
     }
 
     h4 {
@@ -192,7 +179,7 @@
       line-height: 1.7;
     }
 
-    ul {
+    ul, ol {
       margin: 7px 0 12px 18px;
       padding: 0;
       color: #334155;
@@ -262,17 +249,6 @@
       color: #0f172a;
     }
 
-    pre {
-      margin: 10px 0 18px;
-      background: #0f172a;
-      color: #e2e8f0;
-      border-radius: 12px;
-      padding: 14px 16px;
-      overflow-x: auto;
-      font-size: 12px;
-      line-height: 1.65;
-    }
-
     a.inline-link {
       color: var(--link);
       text-decoration: none;
@@ -295,6 +271,127 @@
       line-height: 1.6;
     }
 
+    .flow-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .flow-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fcfcfd;
+    }
+
+    .flow-card-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .flow-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--heading);
+      margin-bottom: 6px;
+    }
+
+    .flow-card p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .concept-scroller {
+      max-height: 420px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      background: #fbfcfe;
+      margin-top: 14px;
+    }
+
+    .concept-group {
+      margin-top: 20px;
+    }
+
+    .concept-group h4 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    .concept-scroll {
+      max-height: 520px;
+      overflow-y: auto;
+      margin-top: 14px;
+      padding-right: 4px;
+    }
+
+    .concept-subgroup {
+      margin-top: 10px;
+    }
+
+    .concept-subgroup-label {
+      margin: 0 0 8px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .pill-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      margin: 4px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .pill.positive {
+      background: #e6f7ec;
+      color: #1f7a3f;
+    }
+
+    .pill.negative {
+      background: #fde8e8;
+      color: #b42318;
+    }
+
+    .pill.warning {
+      background: #fff4e5;
+      color: #b54708;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .mini-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fcfcfd;
+    }
+
+    .mini-card h4 {
+      margin-top: 0;
+    }
+
     @media (max-width: 1100px) {
       .layout {
         grid-template-columns: 1fr;
@@ -314,13 +411,17 @@
       }
     }
 
+    @media (max-width: 900px) {
+      .flow-row,
+      .mini-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 760px) {
       .hero h2 {
         font-size: 36px;
-      }
-
-      .two-col {
-        grid-template-columns: 1fr;
       }
 
       section.doc-section {
@@ -334,45 +435,20 @@
     <aside class="sidebar">
       <div class="sidebar-kicker">Internal Spec</div>
       <h1>Intuition Docs</h1>
+      <p class="sidebar-copy">
+        Lightweight internal notes for how Intuition works, where updates happen, and how the logic gets smaller and clearer.
+      </p>
 
       <div class="sidebar-link-group">
-        <div class="sidebar-group-label">Overview</div>
+        <div class="sidebar-group-label">Sections</div>
         <a href="#overview">Overview</a>
-        <a href="#current-state">Current state</a>
-      </div>
-
-      <div class="sidebar-link-group">
-        <div class="sidebar-group-label">System</div>
-        <a href="#source-of-truth">Source of truth</a>
-        <a href="#editing-workflow">Editing workflow</a>
-        <a href="#google-sheet">Schema &amp; Mapping Library</a>
-      </div>
-
-      <div class="sidebar-link-group">
-        <div class="sidebar-group-label">Schema</div>
+        <a href="#current-system">Current system</a>
+        <a href="#schema-library">Schema &amp; mapping library</a>
         <a href="#canonical-concepts">Canonical concepts</a>
         <a href="#canonical-insights">Canonical insights</a>
-        <a href="#recommended-actions">Recommended actions</a>
-      </div>
-
-      <div class="sidebar-link-group">
-        <div class="sidebar-group-label">Mappings</div>
-        <a href="#mapping-library">Mapping library</a>
-        <a href="#providers">Providers</a>
-        <a href="#concept-to-action">Concept to action</a>
-      </div>
-
-      <div class="sidebar-link-group">
-        <div class="sidebar-group-label">Application</div>
-        <a href="#intuition-page">Intuition page logic</a>
-        <a href="#testing-guide">Testing guide</a>
-      </div>
-
-      <div class="sidebar-link-group">
-        <div class="sidebar-group-label">Editing guide</div>
-        <a href="#editing-guide">Editing guide</a>
-        <a href="#change-rules" class="sub-link">Change rules</a>
-        <a href="#safe-updates" class="sub-link">Safe update pattern</a>
+        <a href="#recommended-actions">Action framework</a>
+        <a href="#intuition-logic">Intuition logic</a>
+        <a href="#making-updates">Making updates</a>
       </div>
     </aside>
 
@@ -381,112 +457,81 @@
         <section class="hero" id="overview">
           <h2>How Intuition works.</h2>
           <p>
-            Intuition is the internal decision support layer that translates workflow tags and provider-native
-            signals into clear underwriting themes, recommended actions, and a decision-first review surface.
-            This page documents the current state of the system, where the source of truth lives, and how to
-            edit the system safely.
+            Intuition takes workflow tags and provider-native signals, normalizes them into canonical concepts,
+            groups them into cleaner underwriting insights, and turns those into recommended actions for review.
+            The goal is to make manual review easier to understand without overcomplicating the editing process for a small team.
           </p>
           <p class="hero-meta">
-            <a class="inline-link" href="/intuition" target="_blank" rel="noopener noreferrer">
-  View Intuition</a>
+            <a class="inline-link" href="/intuition" target="_blank" rel="noopener noreferrer">View Intuition</a>
           </p>
         </section>
 
-        <section class="doc-section" id="current-state">
-          <h3>Current state</h3>
+        <section class="doc-section" id="current-system">
+          <h3>Current system</h3>
           <p class="section-copy">
-            Today, Intuition takes raw and formatted provider responses, normalizes them into canonical concepts,
-            groups them into underwriting insight buckets, and then surfaces a top recommended action plus
-            supporting actions for the underwriter.
+            Today, Intuition starts with raw tags and provider signals, maps them into shared concepts, rolls those
+            up into insight buckets, and then picks the best next actions for the underwriter or applicant.
           </p>
 
-          <h4>Current goals</h4>
-          <ul>
-            <li>Make manual review easier to understand.</li>
-            <li>Translate raw tags and reason codes into clearer underwriting language.</li>
-            <li>Keep the logic editable without making production behavior fragile.</li>
-            <li>Separate collaboration from production source of truth.</li>
-          </ul>
+          <div class="flow-row">
+            <div class="flow-card">
+              <div class="flow-card-label">Step 1</div>
+              <div class="flow-card-title">Raw signals</div>
+              <p>Workflow tags, reason codes, and provider-specific inputs come in.</p>
+            </div>
+            <div class="flow-card">
+              <div class="flow-card-label">Step 2</div>
+              <div class="flow-card-title">Canonical concepts</div>
+              <p>Those signals get normalized into shared meanings the team can reason about.</p>
+            </div>
+            <div class="flow-card">
+              <div class="flow-card-label">Step 3</div>
+              <div class="flow-card-title">Canonical insights</div>
+              <p>Related concepts are grouped into cleaner underwriting themes.</p>
+            </div>
+            <div class="flow-card">
+              <div class="flow-card-label">Step 4</div>
+              <div class="flow-card-title">Actions</div>
+              <p>The system recommends the next best follow-up steps based on the dominant concern.</p>
+            </div>
+          </div>
 
-          <h4>Current output layers</h4>
-          <ul>
-            <li><strong>Canonical concepts</strong> — normalized meaning for raw provider signals.</li>
-            <li><strong>Canonical insights</strong> — grouped underwriting themes such as Business Legitimacy or Contactability.</li>
-            <li><strong>Recommended actions</strong> — suggested next steps for applicant, underwriter, or system.</li>
-            <li><strong>Decision summary</strong> — hero headline, primary driver, and additional recommended actions.</li>
-          </ul>
-        </section>
-
-        <section class="doc-section" id="source-of-truth">
-          <h3>Source of truth</h3>
-          <p class="section-copy">
-            Best practice for this system is to keep production truth in code and use a shared spreadsheet as the
-            collaboration layer. The spreadsheet is where the team proposes and discusses changes. The repository is
-            where approved changes are implemented, versioned, tested, and deployed.
-          </p>
-
+          <h4>Where the team works</h4>
           <table>
             <thead>
               <tr>
                 <th>Layer</th>
-                <th>Purpose</th>
-                <th>Current owner</th>
+                <th>What it is for</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Google Sheet</td>
-                <td>Collaboration, comments, proposals, review.</td>
-                <td>Product / Risk / internal team</td>
+                <td>Where the team reviews, comments, and proposes changes.</td>
               </tr>
               <tr>
-                <td>CSV + JS in repo</td>
-                <td>Production source of truth.</td>
-                <td>Engineering implementation</td>
+                <td>Repo files</td>
+                <td>Where approved changes are actually implemented and shipped.</td>
               </tr>
               <tr>
                 <td>Intuition UI</td>
-                <td>Rendered decision support experience.</td>
-                <td>Engineering</td>
+                <td>Where the final decision support experience is rendered.</td>
               </tr>
             </tbody>
           </table>
 
           <div class="callout">
             <p>
-              <strong>Rule:</strong> the Google Sheet is not the production source of truth. It is the collaboration
-              layer. Production behavior should only change after the corresponding code or CSV files are updated,
-              tested, committed, and deployed.
+              The Google Sheet is the collaboration layer. The repo is the production source of truth.
             </p>
           </div>
         </section>
 
-        <section class="doc-section" id="editing-workflow">
-          <h3>Editing workflow</h3>
+        <section class="doc-section" id="schema-library">
+          <h3>Schema &amp; mapping library</h3>
           <p class="section-copy">
-            The safest workflow is: discuss in the sheet, implement in code, validate in Intuition, then deploy.
-          </p>
-
-          <ol>
-            <li>Propose a change in the shared Google Sheet.</li>
-            <li>Review the change for meaning, impact, and naming consistency.</li>
-            <li>Implement the approved change in the repo.</li>
-            <li>Test with representative payloads in <code class="inline">intuition.html</code>.</li>
-            <li>Commit, push, and verify in production.</li>
-          </ol>
-
-          <div class="callout">
-            <p>
-              This keeps collaboration open while preserving version control, rollback capability, and a clean audit trail.
-            </p>
-          </div>
-        </section>
-
-        <section class="doc-section" id="google-sheet">
-          <h3>Schema &amp; Mapping Library</h3>
-          <p class="section-copy">
-            The shared spreadsheet is the team-facing library for concepts and mappings. Team members can review,
-            comment, and propose changes there before anything is implemented in production.
+            This is the main collaboration point for the team. If someone wants a concept, mapping, or naming change,
+            they can leave a comment in the shared sheet and we can sync the approved update into the repo.
           </p>
 
           <p>
@@ -500,7 +545,7 @@
             </a>
           </p>
 
-          <h4>Current tabs</h4>
+          <h4>Main tabs</h4>
           <ul>
             <li><code class="inline">concept_dictionary</code></li>
             <li><code class="inline">provider_mapping_socure</code></li>
@@ -511,75 +556,208 @@
             <li><code class="inline">provider_mapping_middesk_mcc</code></li>
             <li><code class="inline">provider_mapping_middesk_naics</code></li>
           </ul>
+
+          <h4>Production files</h4>
+          <p>
+            The main production updates still flow through
+            <code class="inline">canonical-schema/mappings/concept_dictionary.csv</code>
+            and the provider mapping CSVs in the repo.
+          </p>
         </section>
 
         <section class="doc-section" id="canonical-concepts">
           <h3>Canonical concepts</h3>
           <p class="section-copy">
-            Canonical concepts are the normalized meanings assigned to provider tags, reason codes, and raw review
-            signals. They are the base layer of the system. If a provider returns a raw signal, Intuition should try
-            to map that signal to a canonical concept before it does anything else.
+            Raw provider signals are normalized into a shared set of canonical concepts. These concepts group similar
+            signals across providers and make underwriting decisions easier to interpret. This is intentionally a larger
+            layer so the reader can see how many source-level signals collapse into a smaller set of insights and
+            actions.
           </p>
 
-          <h4>Current concept groups</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>Group</th>
-                <th>What it covers</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Identity</td>
-                <td>Name, DOB, SSN, mismatch, deceased, unresolved identity signals.</td>
-              </tr>
-              <tr>
-                <td>Fraud</td>
-                <td>Synthetic identity, fraud risk, velocity, frequency anomalies.</td>
-              </tr>
-              <tr>
-                <td>Contact</td>
-                <td>Email, phone, address risk and supporting verification signals.</td>
-              </tr>
-              <tr>
-                <td>Bank</td>
-                <td>Bank validity, ownership match, ownership mismatch, unknown bank state.</td>
-              </tr>
-              <tr>
-                <td>Compliance</td>
-                <td>Watchlist, sanctions, PEP, adverse media, supporting compliance signals.</td>
-              </tr>
-              <tr>
-                <td>Business</td>
-                <td>Business legitimacy, registration, status, high-risk industry, mismatch.</td>
-              </tr>
-              <tr>
-                <td>Credit / Legal</td>
-                <td>Credit outcomes, bankruptcy, liens, litigation.</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="concept-scroll">
+            <div class="concept-group">
+              <h4>Identity</h4>
 
-          <h4>Current source</h4>
-          <p>
-            <code class="inline">canonical-schema/mappings/concept_dictionary.csv</code>
-          </p>
+              <div class="concept-subgroup">
+                <div class="concept-subgroup-label">Matches &amp; Positive Signals</div>
+                <div class="pill-container">
+                  <span class="pill positive">identity_name_match_exact</span>
+                  <span class="pill positive">identity_name_match_fuzzy</span>
+                  <span class="pill positive">identity_address_match</span>
+                  <span class="pill positive">identity_ssn_match</span>
+                  <span class="pill positive">identity_dob_match</span>
+                  <span class="pill positive">identity_document_verification</span>
+                  <span class="pill positive">identity_graph_supporting_signal</span>
+                  <span class="pill positive">identity_strong_positive_signal</span>
+                  <span class="pill positive">identity_low_risk</span>
+                  <span class="pill positive">identity_ssn_low_risk</span>
+                  <span class="pill positive">identity_longevity_signal</span>
+                  <span class="pill positive">identity_inquiry_pattern</span>
+                </div>
+              </div>
 
-          <h4>Editing guidance</h4>
-          <ul>
-            <li>Add a new concept only if an existing concept does not already cover the meaning.</li>
-            <li>Prefer stable names over provider-specific wording.</li>
-            <li>Do not silently change meaning of an existing concept.</li>
-            <li>If the concept meaning changes materially, re-test affected payloads.</li>
-          </ul>
+              <div class="concept-subgroup">
+                <div class="concept-subgroup-label">Mismatches, Gaps &amp; Conflicts</div>
+                <div class="pill-container">
+                  <span class="pill negative">identity_not_found</span>
+                  <span class="pill negative">identity_name_mismatch</span>
+                  <span class="pill negative">identity_address_mismatch</span>
+                  <span class="pill negative">identity_ssn_mismatch</span>
+                  <span class="pill negative">identity_dob_mismatch</span>
+                  <span class="pill negative">identity_conflict</span>
+                  <span class="pill negative">identity_inconsistency</span>
+                  <span class="pill negative">identity_insufficient_history</span>
+                  <span class="pill negative">ssn_invalid</span>
+                  <span class="pill negative">ssn_unverifiable</span>
+                  <span class="pill negative">ssn_issued_before_dob</span>
+                  <span class="pill negative">dob_missing</span>
+                  <span class="pill negative">dob_unverifiable</span>
+                  <span class="pill negative">name_unverifiable</span>
+                </div>
+              </div>
+
+              <div class="concept-subgroup">
+                <div class="concept-subgroup-label">Risk Signals</div>
+                <div class="pill-container">
+                  <span class="pill warning">identity_risky</span>
+                  <span class="pill warning">identity_age_risk</span>
+                  <span class="pill warning">identity_age_under_18</span>
+                  <span class="pill warning">identity_address_risk</span>
+                  <span class="pill warning">identity_input_error</span>
+                  <span class="pill warning">identity_identifier_type</span>
+                  <span class="pill warning">identity_device_risk</span>
+                  <span class="pill warning">identity_ip_risk</span>
+                  <span class="pill warning">identity_proxy_risk</span>
+                  <span class="pill warning">identity_geographic_consistency</span>
+                  <span class="pill warning">identity_liveness_risk</span>
+                </div>
+              </div>
+
+              <div class="concept-subgroup">
+                <div class="concept-subgroup-label">High Severity</div>
+                <div class="pill-container">
+                  <span class="pill negative">identity_deceased</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="concept-group">
+              <h4>Contactability</h4>
+              <div class="pill-container">
+                <span class="pill warning">contactability_email_risk</span>
+                <span class="pill positive">contactability_email_low_risk</span>
+                <span class="pill warning">contactability_email_missing</span>
+                <span class="pill warning">contactability_phone_risk</span>
+              </div>
+            </div>
+
+            <div class="concept-group">
+              <h4>Address</h4>
+              <div class="pill-container">
+                <span class="pill warning">address_high_risk</span>
+                <span class="pill warning">address_risky</span>
+                <span class="pill positive">address_low_risk</span>
+                <span class="pill warning">address_unverifiable</span>
+                <span class="pill warning">address_po_box</span>
+                <span class="pill warning">address_insufficient_history</span>
+                <span class="pill positive">address_distance_variation</span>
+              </div>
+            </div>
+
+            <div class="concept-group">
+              <h4>Phone</h4>
+              <div class="pill-container">
+                <span class="pill warning">phone_risky</span>
+                <span class="pill warning">phone_high_risk</span>
+                <span class="pill positive">phone_low_risk</span>
+                <span class="pill warning">phone_unverifiable</span>
+                <span class="pill warning">phone_address_mismatch</span>
+                <span class="pill positive">phone_insufficient_history</span>
+              </div>
+            </div>
+
+            <div class="concept-group">
+              <h4>Fraud</h4>
+              <div class="pill-container">
+                <span class="pill negative">fraud_synthetic_identity_risk</span>
+                <span class="pill negative">fraud_velocity_risk</span>
+                <span class="pill negative">fraud_known_fraud_association</span>
+                <span class="pill negative">fraud_identity_flag</span>
+                <span class="pill negative">fraud_risky</span>
+              </div>
+            </div>
+
+            <div class="concept-group">
+              <h4>Compliance</h4>
+              <div class="pill-container">
+                <span class="pill negative">compliance_watchlist_match</span>
+                <span class="pill warning">compliance_adverse_media</span>
+              </div>
+            </div>
+
+            <div class="concept-group">
+              <h4>Bank &amp; Financial</h4>
+              <div class="pill-container">
+                <span class="pill positive">bank_account_ownership_match</span>
+                <span class="pill positive">bank_account_supporting_signal</span>
+                <span class="pill negative">bank_account_ownership_mismatch</span>
+                <span class="pill warning">bank_account_risk</span>
+              </div>
+            </div>
+
+            <div class="concept-group">
+              <h4>Network</h4>
+              <div class="pill-container">
+                <span class="pill warning">network_mismatch</span>
+                <span class="pill warning">network_high_risk</span>
+                <span class="pill positive">network_low_risk</span>
+              </div>
+            </div>
+
+            <div class="concept-group">
+              <h4>Credit</h4>
+              <div class="pill-container">
+                <span class="pill warning">credit_account_history</span>
+                <span class="pill negative">credit_account_risk</span>
+              </div>
+            </div>
+
+            <div class="concept-group">
+              <h4>Business</h4>
+              <div class="pill-container">
+                <span class="pill negative">business_adult_content</span>
+                <span class="pill negative">business_aggregation</span>
+                <span class="pill negative">business_cannabis</span>
+                <span class="pill negative">business_counterfeit_goods</span>
+                <span class="pill negative">business_drug_of_concern</span>
+                <span class="pill negative">business_drug_paraphernalia</span>
+                <span class="pill negative">business_gambling</span>
+                <span class="pill negative">business_high_risk_marketing</span>
+                <span class="pill negative">business_gift_card</span>
+                <span class="pill negative">business_financial_services</span>
+                <span class="pill negative">business_legal_services</span>
+                <span class="pill negative">business_mlm</span>
+                <span class="pill negative">business_pseudo_pharma</span>
+                <span class="pill negative">business_regulated_or_illegal</span>
+                <span class="pill negative">business_social_media_manipulation</span>
+                <span class="pill negative">business_virtual_currency</span>
+              </div>
+            </div>
+
+            <div class="concept-group">
+              <h4>Operational</h4>
+              <div class="pill-container">
+                <span class="pill warning">provider_operational_warning</span>
+                <span class="pill warning">provider_data_unavailable</span>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section class="doc-section" id="canonical-insights">
           <h3>Canonical insights</h3>
           <p class="section-copy">
-            Canonical insights are the underwriting themes shown in the Intuition UI. These are bucketed views of
-            the normalized signals, designed to help an underwriter understand what kind of concern is being surfaced.
+            The concept layer above gets rolled into a smaller set of underwriting themes that are easier to read in the UI.
           </p>
 
           <table>
@@ -592,7 +770,7 @@
             <tbody>
               <tr>
                 <td>Identity Integrity</td>
-                <td>Is the applicant identity real, consistent, and attributable to one person?</td>
+                <td>Is the identity real, consistent, and attributable to one person?</td>
               </tr>
               <tr>
                 <td>Contactability</td>
@@ -600,15 +778,15 @@
               </tr>
               <tr>
                 <td>Fraud / Velocity</td>
-                <td>Are there abuse, synthetic identity, or repeated-attempt patterns?</td>
+                <td>Are there synthetic, abuse, or repeated-attempt patterns?</td>
               </tr>
               <tr>
                 <td>Compliance Screening</td>
-                <td>Are there sanctions, watchlist, PEP, or other compliance concerns?</td>
+                <td>Are there sanctions, watchlist, PEP, or adverse media concerns?</td>
               </tr>
               <tr>
                 <td>Business Legitimacy</td>
-                <td>Does the business appear real, registered, and consistent across sources?</td>
+                <td>Does the business appear real, registered, and consistent?</td>
               </tr>
               <tr>
                 <td>Bank Ownership</td>
@@ -620,369 +798,193 @@
               </tr>
               <tr>
                 <td>Other Signals</td>
-                <td>Signals that do not yet fit a cleaner underwriting bucket.</td>
+                <td>Anything that does not yet fit a cleaner bucket.</td>
               </tr>
             </tbody>
           </table>
 
-          <h4>Current source</h4>
           <p>
+            Current source:
             <code class="inline">underwriter-console-prototype/js/insightBuckets.js</code>
-          </p>
-
-          <h4>Bucket behavior</h4>
-          <p>
-            Buckets do two things: they group signals into an underwriting theme, and they define a default set of
-            recommended actions for that theme.
           </p>
         </section>
 
         <section class="doc-section" id="recommended-actions">
-  <h3>Action framework</h3>
-  <p class="section-copy">
-    Intuition draws from a defined action library and selects the most relevant next steps based on the dominant
-    underwriting theme, supporting signals, and intended audience. Actions are structured so the system can distinguish
-    between something the applicant should do, something the underwriter should do, and something the system can do
-    automatically.
-  </p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Audience</th>
-        <th>Action</th>
-        <th>Purpose</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Applicant</td>
-        <td>Request selfie + ID verification</td>
-        <td>Confirm identity authenticity using liveness and document verification.</td>
-      </tr>
-      <tr>
-        <td>Applicant</td>
-        <td>Send 6-digit authentication code</td>
-        <td>Verify that the applicant controls the provided phone number.</td>
-      </tr>
-      <tr>
-        <td>Applicant</td>
-        <td>Connect bank account via Plaid</td>
-        <td>Validate ownership of the payout account and strengthen identity confidence.</td>
-      </tr>
-      <tr>
-        <td>Applicant</td>
-        <td>Request email confirmation</td>
-        <td>Confirm ownership and validity of the email address.</td>
-      </tr>
-      <tr>
-        <td>Applicant</td>
-        <td>Request identity documents</td>
-        <td>Collect documentation to resolve identity inconsistencies.</td>
-      </tr>
-      <tr>
-        <td>Applicant</td>
-        <td>Request business documents</td>
-        <td>Verify business legitimacy using formation or registration documents.</td>
-      </tr>
-      <tr>
-        <td>Applicant</td>
-        <td>Request bank documentation</td>
-        <td>Confirm account ownership using statements or supporting documents.</td>
-      </tr>
-      <tr>
-        <td>Applicant</td>
-        <td>Request proof of address</td>
-        <td>Validate residency or business location using supporting address documentation.</td>
-      </tr>
-      <tr>
-        <td>Applicant</td>
-        <td>Request data correction</td>
-        <td>Resolve inconsistencies by allowing the applicant to correct submitted information.</td>
-      </tr>
-      <tr>
-        <td>Underwriter</td>
-        <td>Escalate to manual review</td>
-        <td>Route the case to an underwriter for further evaluation.</td>
-      </tr>
-      <tr>
-        <td>Underwriter</td>
-        <td>Escalate fraud review</td>
-        <td>Route the case for specialist fraud review.</td>
-      </tr>
-      <tr>
-        <td>Underwriter</td>
-        <td>Escalate compliance review</td>
-        <td>Route the case for compliance review before proceeding.</td>
-      </tr>
-      <tr>
-        <td>Underwriter</td>
-        <td>Escalate business review</td>
-        <td>Route the case for additional business legitimacy review.</td>
-      </tr>
-      <tr>
-        <td>Underwriter</td>
-        <td>Proceed with monitoring</td>
-        <td>Take no immediate step-up action and continue monitoring the case.</td>
-      </tr>
-      <tr>
-        <td>System</td>
-        <td>Order state registration documents</td>
-        <td>Retrieve official business records from the Secretary of State.</td>
-      </tr>
-      <tr>
-        <td>System</td>
-        <td>Run additional verification checks</td>
-        <td>Trigger additional providers or workflows to gather more evidence.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Current source</h4>
-  <p>
-    <code class="inline">underwriter-console-prototype/js/recommendedActions.js</code>
-  </p>
-
-  <h4>Current selection model</h4>
-  <ul>
-    <li>Top recommended action should align with the primary driver bucket.</li>
-    <li>Additional recommended actions should support the same dominant theme first.</li>
-    <li>Low-severity monitor buckets should not overpower the hero action.</li>
-  </ul>
-</section>
-
-        <section class="doc-section" id="mapping-library">
-          <h3>Mapping library</h3>
+          <h3>Action framework</h3>
           <p class="section-copy">
-            Provider mappings are where raw external inputs are translated into canonical concepts. This is one of
-            the highest leverage parts of the system because mapping quality directly affects summaries, actions, and
-            decision clarity.
+            This is the smallest layer. After signals are normalized and grouped, Intuition picks the most relevant
+            next steps for the applicant, underwriter, or system.
           </p>
 
-          <h4>Current mapping files</h4>
           <table>
             <thead>
               <tr>
-                <th>File</th>
+                <th>Audience</th>
+                <th>Action</th>
                 <th>Purpose</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><code class="inline">provider_mapping_alloy.csv</code></td>
-                <td>Maps Alloy workflow tags into canonical concepts.</td>
+                <td>Applicant</td>
+                <td>Request selfie + ID verification</td>
+                <td>Confirm identity authenticity using liveness and document verification.</td>
               </tr>
               <tr>
-                <td><code class="inline">provider_mapping_socure.csv</code></td>
-                <td>Maps Socure reason codes into canonical concepts.</td>
+                <td>Applicant</td>
+                <td>Send 6-digit authentication code</td>
+                <td>Verify control of the provided phone number.</td>
               </tr>
               <tr>
-                <td><code class="inline">provider_mapping_id_analytics.csv</code></td>
-                <td>Maps ID Analytics codes and signals into canonical concepts.</td>
+                <td>Applicant</td>
+                <td>Connect bank account via Plaid</td>
+                <td>Validate payout account ownership.</td>
               </tr>
               <tr>
-                <td><code class="inline">provider_mapping_lexis_nexis_instant_id.csv</code></td>
-                <td>Maps LexisNexis InstantID output into canonical concepts.</td>
+                <td>Applicant</td>
+                <td>Request email confirmation</td>
+                <td>Confirm ownership and validity of the email address.</td>
               </tr>
               <tr>
-                <td><code class="inline">provider_mapping_middesk_kyb.csv</code></td>
-                <td>Maps Middesk KYB classifications and review signals.</td>
+                <td>Applicant</td>
+                <td>Request identity documents</td>
+                <td>Resolve identity inconsistencies with supporting docs.</td>
               </tr>
               <tr>
-                <td><code class="inline">provider_mapping_middesk_mcc.csv</code></td>
-                <td>Maps Middesk MCC classifications.</td>
+                <td>Applicant</td>
+                <td>Request business documents</td>
+                <td>Verify business legitimacy using registration documents.</td>
               </tr>
               <tr>
-                <td><code class="inline">provider_mapping_middesk_naics.csv</code></td>
-                <td>Maps Middesk NAICS classifications.</td>
+                <td>Applicant</td>
+                <td>Request bank documentation</td>
+                <td>Confirm bank ownership with statements or support docs.</td>
+              </tr>
+              <tr>
+                <td>Applicant</td>
+                <td>Request proof of address</td>
+                <td>Validate address details with supporting documentation.</td>
+              </tr>
+              <tr>
+                <td>Applicant</td>
+                <td>Request data correction</td>
+                <td>Let the applicant correct mismatched or incomplete data.</td>
+              </tr>
+              <tr>
+                <td>Underwriter</td>
+                <td>Escalate to manual review</td>
+                <td>Route the case for deeper review.</td>
+              </tr>
+              <tr>
+                <td>Underwriter</td>
+                <td>Escalate fraud review</td>
+                <td>Route the case for specialist fraud review.</td>
+              </tr>
+              <tr>
+                <td>Underwriter</td>
+                <td>Escalate compliance review</td>
+                <td>Route the case for compliance review.</td>
+              </tr>
+              <tr>
+                <td>Underwriter</td>
+                <td>Escalate business review</td>
+                <td>Route the case for business legitimacy review.</td>
+              </tr>
+              <tr>
+                <td>Underwriter</td>
+                <td>Proceed with monitoring</td>
+                <td>Take no immediate step-up action and continue monitoring.</td>
+              </tr>
+              <tr>
+                <td>System</td>
+                <td>Order state registration documents</td>
+                <td>Retrieve official business records automatically.</td>
+              </tr>
+              <tr>
+                <td>System</td>
+                <td>Run additional verification checks</td>
+                <td>Trigger more evidence gathering when needed.</td>
               </tr>
             </tbody>
           </table>
+
+          <p>
+            Current source:
+            <code class="inline">underwriter-console-prototype/js/recommendedActions.js</code>
+          </p>
         </section>
 
-        <section class="doc-section" id="providers">
-          <h3>Providers</h3>
+        <section class="doc-section" id="intuition-logic">
+          <h3>Intuition logic</h3>
           <p class="section-copy">
-            Intuition currently works across workflow-level tags and provider-native data. The current system is
-            especially shaped by Alloy tags and Middesk, Socure, ID Analytics, and LexisNexis mapping files.
+            The page itself is lightweight, but the logic underneath still follows a clear chain:
+            normalize signals, group them, summarize them, then select actions.
           </p>
 
-          <div class="two-col">
-            <div>
-              <h4>Workflow layer</h4>
-              <ul>
-                <li>Alloy tags are outcome-oriented and often decision-adjacent.</li>
-                <li>They are useful, but they are not the same as provider-native evidence.</li>
-                <li>Intuition normalizes them so they can sit beside provider evidence.</li>
-              </ul>
+          <div class="mini-grid">
+            <div class="mini-card">
+              <h4>Normalize</h4>
+              <p>
+                <code class="inline">normalizePayload.js</code> builds the normalized review object from raw input and mappings.
+              </p>
             </div>
-            <div>
-              <h4>Provider layer</h4>
-              <ul>
-                <li>Provider-native codes supply the raw evidence layer.</li>
-                <li>These signals should be translated before they are summarized for the underwriter.</li>
-                <li>The mapping layer is where provider-specific noise is reduced.</li>
-              </ul>
+            <div class="mini-card">
+              <h4>Group + summarize</h4>
+              <p>
+                <code class="inline">conceptGroups.js</code>,
+                <code class="inline">narratives.js</code>,
+                <code class="inline">insightBuckets.js</code>, and
+                <code class="inline">insightSummaries.js</code>
+                shape the underwriting story.
+              </p>
             </div>
+            <div class="mini-card">
+              <h4>Action selection</h4>
+              <p>
+                <code class="inline">conceptActions.js</code> and
+                <code class="inline">recommendedActions.js</code>
+                translate the dominant concern into next steps.
+              </p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <p>
+              Concept-to-action logic and page logic are tightly related, so keeping them together here makes the system easier to understand.
+            </p>
           </div>
         </section>
 
-        <section class="doc-section" id="concept-to-action">
-          <h3>Concept to action</h3>
+        <section class="doc-section" id="making-updates">
+          <h3>Making updates</h3>
           <p class="section-copy">
-            After raw signals are mapped into canonical concepts, Intuition uses concept-to-action logic to decide
-            which follow-up steps make sense. This helps avoid generic next steps and keeps the hero action aligned
-            with the dominant concern.
+            This does not need to be overly formal. For this team, the cleanest update path is simple.
           </p>
 
-          <h4>Current source</h4>
-          <p>
-            <code class="inline">underwriter-console-prototype/js/conceptActions.js</code>
-          </p>
+          <ol>
+            <li>Leave a comment or note in the Google Sheet.</li>
+            <li>Review the change and decide what should actually ship.</li>
+            <li>Update the relevant CSV or JS file in the repo.</li>
+            <li>Test in Intuition with a few representative payloads.</li>
+            <li>Commit, deploy, and verify the output.</li>
+          </ol>
 
-          <h4>Design goal</h4>
-          <p>
-            A business-led case should prefer business actions. A contactability-led case should prefer OTP or email
-            confirmation. A fraud-led case can still elevate selfie + ID or fraud review when appropriate.
-          </p>
-        </section>
-
-        <section class="doc-section" id="intuition-page">
-          <h3>Intuition page logic</h3>
-          <p class="section-copy">
-            The Intuition page is currently a static HTML page with imported JS modules. The page is intentionally
-            lightweight, but the logic stack underneath it is layered.
-          </p>
-
-          <table>
-            <thead>
-              <tr>
-                <th>File</th>
-                <th>Role</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code class="inline">normalizePayload.js</code></td>
-                <td>Builds the normalized review object from the input payload and provider mappings.</td>
-              </tr>
-              <tr>
-                <td><code class="inline">caseComposition.js</code></td>
-                <td>Determines whether the case is business, contact, or mixed.</td>
-              </tr>
-              <tr>
-                <td><code class="inline">conceptGroups.js</code></td>
-                <td>Groups supporting signals for the raw evidence display.</td>
-              </tr>
-              <tr>
-                <td><code class="inline">narratives.js</code></td>
-                <td>Provides group-level and signal-level narrative text.</td>
-              </tr>
-              <tr>
-                <td><code class="inline">insightBuckets.js</code></td>
-                <td>Defines canonical insight buckets and their default actions.</td>
-              </tr>
-              <tr>
-                <td><code class="inline">recommendedActions.js</code></td>
-                <td>Defines the current action library and action priority.</td>
-              </tr>
-              <tr>
-                <td><code class="inline">conceptActions.js</code></td>
-                <td>Maps canonical concepts to action keys.</td>
-              </tr>
-              <tr>
-                <td><code class="inline">insightSummaries.js</code></td>
-                <td>Scores summaries, determines primary driver bucket, and selects hero and additional actions.</td>
-              </tr>
-              <tr>
-                <td><code class="inline">intuition.html</code></td>
-                <td>Renders the final decision-first experience and the raw evidence views.</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section class="doc-section" id="testing-guide">
-          <h3>Testing guide</h3>
-          <p class="section-copy">
-            Any meaningful logic update should be tested against representative payloads before deployment.
-          </p>
-
-          <h4>Minimum test coverage</h4>
+          <h4>Quick guide</h4>
           <ul>
-            <li>Manual business review payload</li>
-            <li>Manual contact review payload</li>
-            <li>Mixed business + contact review payload</li>
-            <li>Payload with strong positive verification</li>
-            <li>Payload with explicit compliance escalation</li>
+            <li>If you want to change a concept, start with <code class="inline">concept_dictionary.csv</code>.</li>
+            <li>If you want to change a mapping, update the matching provider CSV.</li>
+            <li>If you want to change an insight bucket, update <code class="inline">insightBuckets.js</code>.</li>
+            <li>If you want to change an action, update <code class="inline">recommendedActions.js</code> and sometimes <code class="inline">conceptActions.js</code>.</li>
+            <li>If you want to change hero behavior, review <code class="inline">insightSummaries.js</code>.</li>
           </ul>
 
-          <h4>What to validate</h4>
-          <ul>
-            <li>Top recommended action</li>
-            <li>Primary decision driver</li>
-            <li>Additional recommended actions</li>
-            <li>Insight bucket severity and stance</li>
-            <li>Narrative readability</li>
-          </ul>
-        </section>
-
-        <section class="doc-section" id="editing-guide">
-          <h3>Editing guide</h3>
-          <p class="section-copy">
-            Use this section when you need to change the system without creating drift between concepts, mappings,
-            summaries, and actions.
-          </p>
-
-          <section id="change-rules">
-            <h4>Change rules</h4>
-            <ul>
-              <li>Do not use the Google Sheet as production truth.</li>
-              <li>Do not silently rename a concept that already has mappings.</li>
-              <li>Do not add a generic action when a more specific action is available.</li>
-              <li>Do not change summary logic without testing at least one business and one contact payload.</li>
-            </ul>
-          </section>
-
-          <section id="safe-updates">
-            <h4>Safe update pattern</h4>
-            <ol>
-              <li>Propose or review the change in the Google Sheet.</li>
-              <li>Update the relevant CSV or JS file in the repo.</li>
-              <li>Run Intuition locally and test representative payloads.</li>
-              <li>Commit with a clear message describing the behavior change.</li>
-              <li>Deploy and verify the rendered output in production.</li>
-            </ol>
-          </section>
-
-          <h4>If you want to change a concept</h4>
           <p>
-            Start with <code class="inline">concept_dictionary.csv</code>, then update the affected mapping files,
-            and re-test the payloads where that concept appears.
-          </p>
-
-          <h4>If you want to change an action</h4>
-          <p>
-            Update <code class="inline">recommendedActions.js</code> and, if needed,
-            <code class="inline">conceptActions.js</code> so the right concepts still point to the right action.
-          </p>
-
-          <h4>If you want to change a bucket</h4>
-          <p>
-            Update <code class="inline">insightBuckets.js</code> first, then verify how
-            <code class="inline">insightSummaries.js</code> ranks that bucket in practice.
-          </p>
-
-          <h4>If you want to change hero behavior</h4>
-          <p>
-            Review <code class="inline">insightSummaries.js</code> first. Hero behavior should be driven by the
-            dominant bucket, not by flat action priority alone.
+            For non-engineering edits, team members can route changes through you and you can decide what is worth syncing into the repo.
           </p>
         </section>
 
         <p class="footer-note">
-          This document describes the current Intuition system as implemented today. It should be updated whenever the
-          schema, mapping strategy, action library, or summary logic changes materially.
+          This page is meant to stay lightweight. If the team grows or the system gets more complex, the docs can expand again later.
         </p>
       </div>
     </main>
