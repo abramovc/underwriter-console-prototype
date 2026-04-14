@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decision</title>
+
+  <link rel="stylesheet" href="./styles/base.css" />
+  <link rel="stylesheet" href="./styles/decision.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header card">
+    <div>
+      <div class="eyebrow">Application Review</div>
+      <h1>DLUXE MAG LLC</h1>
+      <div class="subtext">Ronald Colandrea · Apr 10, 2026 · Assigned: Unassigned</div>
+    </div>
+
+    <div class="badge warning">Manual Review</div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" data-tab="decision">Decision</button>
+    <button class="tab" data-tab="evidence">Evidence</button>
+    <button class="tab" data-tab="raw">Raw Data & Logs</button>
+  </div>
+
+  <!-- ========================= -->
+  <!-- DECISION TAB -->
+  <!-- ========================= -->
+  <div class="tab-panel active" id="decision">
+
+    <div class="grid-2">
+
+      <!-- LEFT -->
+      <div class="card">
+
+        <div class="eyebrow">Decision Summary</div>
+        <h2>Manual Review Required</h2>
+
+        <p class="muted">
+          Compliance and fraud-related signals require manual review before proceeding.
+        </p>
+
+        <!-- TOP ACTION -->
+        <div class="action-box">
+          <div class="label">Top Recommended Action</div>
+          <div class="action">Escalate compliance review</div>
+          <div class="muted">
+            Watchlist-related and fraud-oriented signals materially influence the current review path.
+          </div>
+        </div>
+
+        <!-- WHY -->
+        <div class="section-block">
+          <div class="label">Why this decision</div>
+
+          <div class="table compact">
+            <div class="row">
+              <strong>1 watchlist-related concern</strong>
+              <div class="row-subtext">Compliance Screening · Workflow · High</div>
+            </div>
+
+            <div class="row">
+              <strong>Multiple velocity indicators observed</strong>
+              <div class="row-subtext">Fraud / Velocity · Socure · ID Analytics · Medium/High</div>
+            </div>
+
+            <div class="row">
+              <strong>Identity signals are mostly supportive</strong>
+              <div class="row-subtext">Identity Integrity · Socure · Low</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIONS (LIMITED TO 2) -->
+        <div class="section-block">
+          <div class="label">Recommended actions</div>
+
+          <div class="chips">
+            <span class="chip">Escalate compliance review</span>
+            <span class="chip">Request selfie + ID verification</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="card">
+
+        <div class="stat">
+          <div class="label">Outcome</div>
+          <div class="value">Manual Review</div>
+        </div>
+
+        <div class="stat">
+          <div class="label">Services run</div>
+          <div class="value">5</div>
+        </div>
+
+        <div class="stat">
+          <div class="label">High-risk themes</div>
+          <div class="value">2</div>
+        </div>
+
+        <div class="stat">
+          <div class="label">Supportive themes</div>
+          <div class="value">1</div>
+        </div>
+
+        <div class="stat">
+          <div class="label">Case composition</div>
+          <div class="value small">Identity · Contact · Compliance</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CANONICAL INSIGHTS -->
+    <div class="section">
+      <h3>Canonical Insights</h3>
+      <p class="muted">
+        Decision-first underwriting themes distilled from workflow tags and provider-native signals.
+      </p>
+
+      <div class="grid-3">
+
+        <!-- Compliance -->
+        <div class="card insight-card">
+          <div class="insight-title">Compliance Screening</div>
+          <div class="insight-meta">High · Blocking · 4 signals</div>
+
+          <p class="muted">
+            Watchlist-related evidence requires dedicated review before proceeding.
+          </p>
+
+          <div class="mini-summary">
+            <strong>Most relevant evidence:</strong>
+            <div class="muted">
+              Watchlist Review (Workflow)<br/>
+              Watchlist Warning (Workflow)<br/>
+              OFAC match concern (Socure · R180)
+            </div>
+          </div>
+
+          <div class="chips">
+            <span class="chip">Escalate compliance review</span>
+          </div>
+        </div>
+
+        <!-- Fraud -->
+        <div class="card insight-card">
+          <div class="insight-title">Fraud / Velocity</div>
+          <div class="insight-meta">High · Review · 3 signals</div>
+
+          <p class="muted">
+            Velocity-related patterns suggest elevated risk and should be reviewed in context.
+          </p>
+
+          <div class="mini-summary">
+            <strong>Most relevant evidence:</strong>
+            <div class="muted">
+              Fraud Review (Workflow)<br/>
+              SSN Velocity Warning (Socure)<br/>
+              Velocity Warning (ID Analytics)
+            </div>
+          </div>
+
+          <div class="chips">
+            <span class="chip">Request selfie + ID verification</span>
+          </div>
+        </div>
+
+        <!-- Identity -->
+        <div class="card insight-card">
+          <div class="insight-title">Identity Integrity</div>
+          <div class="insight-meta">Low · Monitor · 7 signals</div>
+
+          <p class="muted">
+            Identity evidence is mostly supportive, with limited inconsistency across verification checks.
+          </p>
+
+          <div class="mini-summary">
+            <strong>Most relevant evidence:</strong>
+            <div class="muted">
+              KYC Name Verified (Workflow)<br/>
+              KYC DOB Verified (Workflow)<br/>
+              SSN Not Verified (Workflow)
+            </div>
+          </div>
+
+          <div class="chips">
+            <span class="chip">Request identity documents</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="card">
+      <h3>Decision Notes</h3>
+      <p class="muted">
+        Use this area for underwriter rationale, follow-up needs, or approval conditions.
+      </p>
+
+      <div class="note-callout">
+        <strong>Suggested rationale</strong><br/>
+        Manual review recommended due to compliance-related signals and elevated fraud indicators, despite generally supportive identity verification.
+      </div>
+
+      <textarea
+        class="notes-input"
+        placeholder="Document review notes, rationale, next steps, and conditions for approval or decline..."
+      ></textarea>
+    </div>
+
+  </div>
+
+  <!-- ========================= -->
+  <!-- EVIDENCE TAB -->
+  <!-- ========================= -->
+  <div class="tab-panel" id="evidence">
+
+    <div class="evidence-layout">
+
+      <!-- LEFT NAV -->
+      <div class="evidence-nav card">
+        <button class="evidence-item active" data-evidence="identity">Identity</button>
+        <button class="evidence-item" data-evidence="contact">Contact</button>
+        <button class="evidence-item" data-evidence="business">Business</button>
+        <button class="evidence-item" data-evidence="bank">Bank</button>
+        <button class="evidence-item" data-evidence="compliance">Compliance</button>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="evidence-content">
+
+        <!-- IDENTITY -->
+        <div class="card evidence-panel active" id="evidence-identity">
+
+          <h3>Identity</h3>
+
+          <p class="muted">
+            Signals related to whether the applicant appears real, consistent, and attributable to one person.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Socure</span>
+            <span class="chip">ID Analytics</span>
+            <span class="chip">Workflow</span>
+          </div>
+
+          <!-- SUPPORTIVE -->
+          <div class="evidence-group">
+            <div class="group-title">Supportive</div>
+
+            <div class="table compact">
+              <div class="row">KYC Name Verified <div class="row-subtext">Workflow · Positive · Low</div></div>
+              <div class="row">KYC DOB Verified <div class="row-subtext">Workflow · Positive · Low</div></div>
+              <div class="row">Socure DOB Match <div class="row-subtext">Socure · Positive · Low</div></div>
+            </div>
+          </div>
+
+          <!-- NEEDS REVIEW (HIGHLIGHTED VIA CSS) -->
+          <div class="evidence-group needs-review">
+            <div class="group-title">Needs Review</div>
+
+            <div class="table compact">
+              <div class="row">
+                SSN Not Verified
+                <div class="row-subtext">Workflow · Neutral · Low</div>
+              </div>
+
+              <div class="row">
+                Identity resembles a fabricated synthetic identity
+                <div class="row-subtext">Socure · identity_synthetic · R299 · High</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ========================= -->
+  <!-- RAW DATA & LOGS -->
+  <!-- ========================= -->
+  <div class="tab-panel" id="raw">
+
+    <div class="grid-2">
+
+      <!-- OUTCOME -->
+      <div class="card">
+        <h3>Outcome Reasons</h3>
+        <p class="muted">Primary drivers behind the current decision.</p>
+
+        <div class="table">
+          <div class="row">Denied Fraud <span class="row-subtext">Workflow Outcome Reason</span></div>
+          <div class="row">Fraud Review <span class="row-subtext">Workflow Tag</span></div>
+        </div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="card">
+        <h3>Summary</h3>
+
+        <div class="table compact">
+          <div class="row">Services Run <strong>5</strong></div>
+          <div class="row">Positive Tags <strong>4</strong></div>
+          <div class="row">High Severity Tags <strong>3</strong></div>
+          <div class="row">Outcome <strong>Manual Review</strong></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- USER ACTIVITY LOG -->
+    <div class="card">
+      <h3>User Activity Log</h3>
+      <p class="muted">
+        Actions taken on this application by users and system workflows.
+      </p>
+
+      <div class="table">
+        <div class="row">
+          Status changed to Manual Review
+          <div class="row-subtext">Mike Abramovic · Apr 10, 2026 · 5:47 PM</div>
+        </div>
+
+        <div class="row">
+          Notes added
+          <div class="row-subtext">Mike Abramovic · Apr 10, 2026 · 5:52 PM</div>
+        </div>
+
+        <div class="row">
+          Escalated to Compliance
+          <div class="row-subtext">Danielle Smith · Apr 10, 2026 · 6:03 PM</div>
+        </div>
+
+        <div class="row">
+          Requested identity documents
+          <div class="row-subtext">System · Apr 10, 2026 · 6:05 PM</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="./js/decision.js"></script>
+</body>
+</html>

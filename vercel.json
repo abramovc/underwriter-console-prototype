@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/decision",
+      "destination": "/underwriter-console-prototype/decision.html"
+    },
+    {
       "source": "/intuition",
       "destination": "/underwriter-console-prototype/intuition.html"
     },
