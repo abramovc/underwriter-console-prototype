@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Underwriting Circle</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: rgba(255, 255, 255, 0.04);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --text: rgba(255, 255, 255, 0.94);
+      --muted: rgba(255, 255, 255, 0.56);
+      --hairline: rgba(255, 255, 255, 0.1);
+      --glow: rgba(255, 255, 255, 0.06);
+      --accent: rgba(255, 255, 255, 0.88);
+      --danger: #ff6262;
+      --warn: #ffad5c;
+      --ok: #6ce3a1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.03), transparent 30%),
+        radial-gradient(circle at bottom, rgba(255,255,255,0.02), transparent 40%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      padding: 32px;
+    }
+
+    .page {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(640px, 1.2fr) minmax(320px, 420px);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .viz-shell {
+      position: relative;
+      position: sticky;
+      top: 24px;
+      min-height: 860px;
+      border: 1px solid var(--panel-border);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+        rgba(255,255,255,0.015);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.38),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      overflow: hidden;
+      transform-origin: center center;
+      transition: transform 0.28s ease, opacity 0.28s ease, filter 0.28s ease;
+    }
+
+    .viz-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.18;
+      pointer-events: none;
+      mask-image: radial-gradient(circle at center, black 18%, transparent 88%);
+    }
+
+    .viz-noise {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), transparent 45%),
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.025), transparent 20%),
+        radial-gradient(circle at 70% 75%, rgba(255,255,255,0.02), transparent 24%);
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hud {
+      position: absolute;
+      left: 28px;
+      top: 28px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hud-time {
+      font-size: 24px;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .hud-title {
+      font-size: 48px;
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-top: 6px;
+      color: rgba(255,255,255,0.94);
+    }
+
+    .hud-sub {
+      margin-top: 8px;
+      font-size: 15px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.46);
+    }
+
+    .hud-line {
+      position: absolute;
+      width: 220px;
+      height: 1px;
+      background: rgba(255,255,255,0.18);
+      top: 122px;
+      left: 210px;
+      transform-origin: left center;
+      pointer-events: none;
+    }
+
+    .legend {
+      position: absolute;
+      left: 28px;
+      bottom: 24px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+
+    .legend-pill {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.46);
+      padding: 0;
+    }
+
+    .panel {
+      border: 1px solid var(--panel-border);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01)),
+        rgba(255,255,255,0.015);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      padding: 24px;
+      min-height: 860px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, opacity 0.28s ease, filter 0.28s ease;
+    }
+
+    .panel.focused {
+      border-color: rgba(255,255,255,0.14);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.038), rgba(255,255,255,0.012)),
+        rgba(255,255,255,0.02);
+      box-shadow:
+        0 34px 90px rgba(0,0,0,0.36),
+        inset 0 1px 0 rgba(255,255,255,0.055),
+        inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .panel-top {
+      flex: 0 0 auto;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 18px;
+    }
+
+    .panel-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .panel-body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .panel-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .panel-body::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+    }
+
+    .panel-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .panel h2 {
+      margin: 0;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+    }
+
+    .panel-copy {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+
+    .stat {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.025);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .stat-kicker {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-weight: 600;
+    }
+
+    .section {
+      margin-top: 22px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .concept-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .concept-item {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.025);
+      border-radius: 18px;
+      padding: 14px;
+      transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+    }
+
+    .concept-item:hover {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-1px);
+    }
+
+    .concept-item.resolved {
+      border-color: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.012);
+      opacity: 0.7;
+    }
+
+    .concept-item.next-focus {
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.045);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .concept-name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .concept-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .concept-resolved {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.56);
+      white-space: nowrap;
+    }
+
+    .concept-meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .concept-action {
+      margin-top: 10px;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .concept-action strong {
+      font-weight: 500;
+      color: rgba(255,255,255,0.84);
+    }
+
+    .concept-severity-row {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+    }
+
+    .concept-footer {
+      margin-top: 12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .concept-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .concept-item.resolved .action-trigger,
+    .concept-item.resolved .note-button,
+    .concept-item.resolved .reconcile-button {
+      opacity: 0.42;
+      pointer-events: none;
+    }
+
+    .action-trigger,
+    .note-button,
+    .reconcile-button {
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .action-trigger {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      color: rgba(255,255,255,0.72);
+    }
+
+    .note-button {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: transparent;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .reconcile-button {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.025);
+      color: rgba(255,255,255,0.76);
+    }
+
+    .severity-bar {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .severity-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.4), rgba(255,255,255,0.92));
+    }
+
+    .evidence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .evidence-item {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .evidence-item:last-child {
+      border-bottom: none;
+    }
+
+    .evidence-provider {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.48);
+      margin-bottom: 6px;
+    }
+
+    .evidence-text {
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.36);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+      z-index: 30;
+    }
+
+    .workspace-drawer {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      bottom: 18px;
+      width: min(440px, calc(100vw - 36px));
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)),
+        rgba(5,5,5,0.985);
+      box-shadow:
+        0 36px 96px rgba(0,0,0,0.58),
+        0 8px 24px rgba(0,0,0,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.035);
+      backdrop-filter: blur(14px);
+      transform: translateX(calc(100% + 28px));
+      transition: transform 0.22s ease;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-open .drawer-backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-open .workspace-drawer {
+      transform: translateX(0);
+    }
+
+    .drawer-open .viz-shell {
+      transform: scale(0.94);
+      opacity: 0.72;
+      filter: saturate(0.88);
+    }
+
+    .drawer-open .panel {
+      opacity: 0.64;
+      filter: saturate(0.85) blur(1.5px);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .drawer-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+    }
+
+    .drawer-title {
+      margin: 0;
+      font-size: 30px;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      font-weight: 650;
+    }
+
+    .drawer-meta {
+      margin-top: 12px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.54);
+    }
+
+    .drawer-close {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      color: rgba(255,255,255,0.7);
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .drawer-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      padding-top: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .drawer-body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .drawer-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .drawer-body::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+    }
+
+    .drawer-section-title {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.56);
+      margin-bottom: 12px;
+    }
+
+    .drawer-evidence-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 34ch;
+    }
+
+    .drawer-evidence-item {
+      padding: 0 0 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .drawer-evidence-item:last-child {
+      border-bottom: none;
+    }
+
+    .drawer-select,
+    .drawer-notes {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.02);
+      color: rgba(255,255,255,0.82);
+      padding: 12px 14px;
+      font: inherit;
+    }
+
+    .drawer-select {
+      height: 50px;
+      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      font-size: 14px;
+    }
+
+    .drawer-notes {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.74);
+    }
+
+    .drawer-submit {
+      margin-top: auto;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.92);
+      border-radius: 16px;
+      height: 48px;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .drawer-submit:disabled {
+      cursor: default;
+      background: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.82);
+      opacity: 0.9;
+    }
+
+    .workspace-drawer.resolved .drawer-header,
+    .workspace-drawer.resolved .drawer-body {
+      opacity: 0.68;
+      transform: scale(0.992);
+    }
+
+    .workspace-drawer.resolved .drawer-submit {
+      opacity: 1;
+      transform: none;
+    }
+
+    .workspace-drawer.resolving .drawer-header,
+    .workspace-drawer.resolving .drawer-body {
+      opacity: 0.6;
+      transition: opacity 120ms ease;
+    }
+
+    .hover-card {
+      position: absolute;
+      z-index: 4;
+      min-width: 240px;
+      max-width: 320px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(8, 8, 8, 0.92);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.38);
+    }
+
+    .hover-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hover-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+
+    .hover-name {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .hover-copy {
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.74);
+    }
+
+    .hover-metrics {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.64);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1180px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .viz-shell,
+      .panel {
+        min-height: 720px;
+      }
+
+      .viz-shell {
+        position: relative;
+        top: auto;
+      }
+
+      .workspace-drawer {
+        top: 12px;
+        right: 12px;
+        bottom: 12px;
+        width: min(440px, calc(100vw - 24px));
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 16px;
+      }
+
+      .viz-shell,
+      .panel {
+        min-height: 620px;
+        border-radius: 22px;
+      }
+
+      .viz-shell {
+        position: relative;
+        top: auto;
+      }
+
+      .workspace-drawer {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 24px 24px 0 0;
+        min-height: 72vh;
+      }
+
+      .drawer-open .viz-shell,
+      .drawer-open .panel {
+        transform: none;
+        opacity: 0.56;
+      }
+
+      .hud-title {
+        font-size: 34px;
+      }
+
+      .hud-line {
+        width: 140px;
+        left: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div>
+        <div class="eyebrow">Experimental / decision intelligence</div>
+        <h1 class="title">Underwriting Circle</h1>
+        <div class="subtitle">
+          A cinematic exploration for viewing underwriting risk. <br> Quiet where the data matches, dense where anomalies are detected.
+        </div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="viz-shell" id="vizShell">
+        <div class="viz-grid"></div>
+        <div class="viz-noise"></div>
+
+        <div class="hud">
+          <div class="hud-time">04.17.39</div>
+          <div class="hud-title">System Initiated</div>
+          <div class="hud-sub" id="hudSub">Undisclosed location / build 0.06</div>
+        </div>
+        <div class="hud-line" id="hudLine"></div>
+
+        <canvas id="circleCanvas" width="1200" height="1200"></canvas>
+
+        <div class="hover-card" id="hoverCard">
+          <div class="hover-label">Canonical insight</div>
+          <div class="hover-name" id="hoverName">Identity</div>
+          <div class="hover-copy" id="hoverCopy"></div>
+          <div class="hover-metrics" id="hoverMetrics"></div>
+        </div>
+
+        <div class="legend">
+          <div class="legend-pill">Click to lock a zone</div>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="panel-top">
+          <div class="panel-label">Selected zone</div>
+          <h2 id="panelTitle">No selection</h2>
+          <div class="panel-copy" id="panelCopy">
+            The circle stays calm until it encounters concentrated evidence. Click to inspect canonical concepts, severity, and provider output.
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="stat-row">
+            <div class="stat">
+              <div class="stat-kicker">Anomaly score</div>
+              <div class="stat-value" id="statScore">—</div>
+            </div>
+            <div class="stat">
+              <div class="stat-kicker">Concept count</div>
+              <div class="stat-value" id="statCount">—</div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Canonical concepts</div>
+            <div class="concept-list" id="conceptList"></div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Representative evidence</div>
+            <div class="evidence-list" id="evidenceList"></div>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="workspace-drawer" id="workspaceDrawer" aria-hidden="true">
+      <div class="drawer-header">
+        <div>
+          <div class="drawer-eyebrow" id="drawerEyebrow">Workspace</div>
+          <h2 class="drawer-title" id="drawerTitle">No concept selected</h2>
+          <div class="drawer-meta" id="drawerMeta">Severity —</div>
+        </div>
+        <button class="drawer-close" id="drawerClose" type="button" aria-label="Close drawer">×</button>
+      </div>
+      <div class="drawer-body">
+        <div>
+          <div class="drawer-section-title">Evidence</div>
+          <div class="drawer-evidence-list" id="drawerEvidenceList"></div>
+        </div>
+        <div>
+          <div class="drawer-section-title">Action</div>
+          <select class="drawer-select" id="drawerActionSelect"></select>
+        </div>
+        <div>
+          <div class="drawer-section-title">Notes</div>
+          <textarea class="drawer-notes" id="drawerNotes" placeholder="Capture underwriting context, reconciliation notes, or follow-up steps."></textarea>
+        </div>
+        <button class="drawer-submit" id="drawerSubmit" type="button">Resolve issue</button>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    const insights = [
+      {
+        key: "identity",
+        label: "Identity",
+        short: "Identity verification friction",
+        weight: 0.24,
+        baseIntensity: 0.92,
+        concepts: [
+          {
+            name: "Name mismatch",
+            severity: 0.88,
+            text: "Applicant identity fields do not consistently reconcile across upstream sources.",
+            proposedAction: "Verify submitted identity against source documents"
+          },
+          {
+            name: "DOB inconsistency",
+            severity: 0.66,
+            text: "Birth date evidence conflicts or remains partially unresolved.",
+            proposedAction: "Reconfirm date of birth across application and vendor records"
+          },
+          {
+            name: "Thin identity file",
+            severity: 0.54,
+            text: "Insufficient supporting depth across identity verification records.",
+            proposedAction: "Request additional identity support to deepen file confidence"
+          },
+          {
+            name: "SSN mismatch",
+            severity: 0.81,
+            text: "Core identity identifier mismatch requires human review.",
+            proposedAction: "Review SSN evidence and resolve source-level mismatch"
+          }
+        ],
+        evidence: [
+          { provider: "Socure", text: "Reason codes suggest identity conflicts and lower confidence across core person attributes." },
+          { provider: "ID Analytics", text: "Signal cluster indicates elevated risk associated with asserted identity quality." },
+          { provider: "Alloy", text: "Normalized identity bucket contributed meaningfully to the review outcome." }
+        ]
+      },
+      {
+        key: "contactability",
+        label: "Contactability",
+        short: "Reachability and communication confidence",
+        weight: 0.18,
+        baseIntensity: 0.58,
+        concepts: [
+          {
+            name: "Phone unreachable",
+            severity: 0.72,
+            text: "Phone data indicates poor reachability or low confidence in active ownership.",
+            proposedAction: "Confirm phone ownership and recent activity"
+          },
+          {
+            name: "Email mismatch",
+            severity: 0.61,
+            text: "Email-related evidence does not align cleanly with the asserted profile.",
+            proposedAction: "Validate email ownership against asserted profile"
+          },
+          {
+            name: "VoIP number detected",
+            severity: 0.46,
+            text: "Contact method may be valid but presents lower confidence for trust and persistence.",
+            proposedAction: "Assess whether alternate contact evidence is required"
+          }
+        ],
+        evidence: [
+          { provider: "Socure", text: "Contactability signals cluster around phone and email trust quality." },
+          { provider: "Twilio", text: "Verification pathway may succeed, but ownership confidence remains mixed." }
+        ]
+      },
+      {
+        key: "business",
+        label: "Business",
+        short: "Entity formation and business legitimacy",
+        weight: 0.23,
+        baseIntensity: 0.76,
+        concepts: [
+          {
+            name: "Commercial address risk",
+            severity: 0.62,
+            text: "Address evidence introduces ambiguity around the operating profile of the business.",
+            proposedAction: "Validate the operating address with supporting documentation"
+          },
+          {
+            name: "Entity mismatch",
+            severity: 0.83,
+            text: "Legal entity data does not cleanly reconcile across vendor sources.",
+            proposedAction: "Request business registration support to reconcile entity details"
+          },
+          {
+            name: "High-risk industry",
+            severity: 0.57,
+            text: "Industry or business classification increases scrutiny requirements.",
+            proposedAction: "Review underwriting policy fit for stated industry"
+          },
+          {
+            name: "Registration inconsistency",
+            severity: 0.68,
+            text: "Formation or registration attributes require secondary review.",
+            proposedAction: "Confirm registration status with primary formation evidence"
+          }
+        ],
+        evidence: [
+          { provider: "Middesk", text: "KYB output suggests meaningful variance in entity details and registration confidence." },
+          { provider: "Alloy", text: "Business-oriented tags support additional underwriting review." }
+        ]
+      },
+      {
+        key: "bank",
+        label: "Bank",
+        short: "Banking ownership and account confidence",
+        weight: 0.2,
+        baseIntensity: 0.24,
+        concepts: [
+          {
+            name: "Account mismatch",
+            severity: 0.34,
+            text: "Account ownership data introduces minor reconciliation needs.",
+            proposedAction: "Review bank ownership evidence against applicant details"
+          },
+          {
+            name: "New account age",
+            severity: 0.28,
+            text: "Account recency slightly reduces confidence but is not currently dominant.",
+            proposedAction: "Confirm whether recent account opening aligns with business context"
+          }
+        ],
+        evidence: [
+          { provider: "Plaid", text: "Ownership alignment appears mostly stable with a small amount of residual friction." }
+        ]
+      },
+      {
+        key: "compliance",
+        label: "Compliance",
+        short: "Sanctions, policy, and regulatory screening",
+        weight: 0.15,
+        baseIntensity: 0.14,
+        concepts: [
+          {
+            name: "Policy review",
+            severity: 0.22,
+            text: "No dominant sanctions issue detected, though policy review remains available.",
+            proposedAction: "Review policy screening notes for residual compliance questions"
+          }
+        ],
+        evidence: [
+          { provider: "Alloy", text: "Compliance signals are currently quiet relative to the rest of the file." }
+        ]
+      }
+    ];
+
+    const shell = document.getElementById("vizShell");
+    const canvas = document.getElementById("circleCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const hoverCard = document.getElementById("hoverCard");
+    const hoverName = document.getElementById("hoverName");
+    const hoverCopy = document.getElementById("hoverCopy");
+    const hoverMetrics = document.getElementById("hoverMetrics");
+
+    const panel = document.querySelector(".panel");
+    const page = document.querySelector(".page");
+    const panelTitle = document.getElementById("panelTitle");
+    const panelCopy = document.getElementById("panelCopy");
+    const statScore = document.getElementById("statScore");
+    const statCount = document.getElementById("statCount");
+    const conceptList = document.getElementById("conceptList");
+    const evidenceList = document.getElementById("evidenceList");
+    const hudSub = document.getElementById("hudSub");
+    const hudLine = document.getElementById("hudLine");
+    const workspaceDrawer = document.getElementById("workspaceDrawer");
+    const drawerBackdrop = document.getElementById("drawerBackdrop");
+    const drawerClose = document.getElementById("drawerClose");
+    const drawerEyebrow = document.getElementById("drawerEyebrow");
+    const drawerTitle = document.getElementById("drawerTitle");
+    const drawerMeta = document.getElementById("drawerMeta");
+    const drawerEvidenceList = document.getElementById("drawerEvidenceList");
+    const drawerActionSelect = document.getElementById("drawerActionSelect");
+    const drawerNotes = document.getElementById("drawerNotes");
+    const drawerSubmit = document.getElementById("drawerSubmit");
+
+    let hoveredInsight = null;
+    let lockedInsight = null;
+    let currentPanelInsight = null;
+    let drawerState = null;
+    let mouse = { x: 0, y: 0, inside: false };
+    let resolveAnimationFrame = null;
+    let nextIssueTimeout = null;
+    let nextHighlightedConceptId = null;
+
+    const conceptMenuOptions = [
+      "Request documentation",
+      "Reconcile manually",
+      "Escalate for review",
+      "Mark resolved"
+    ];
+
+    function degToRad(deg) {
+      return (deg * Math.PI) / 180;
+    }
+
+    function normalizeAngle(angle) {
+      let a = angle % (Math.PI * 2);
+      if (a < 0) a += Math.PI * 2;
+      return a;
+    }
+
+    function angleBetween(angle, start, end) {
+      angle = normalizeAngle(angle);
+      start = normalizeAngle(start);
+      end = normalizeAngle(end);
+
+      if (start <= end) {
+        return angle >= start && angle <= end;
+      }
+      return angle >= start || angle <= end;
+    }
+
+    function seededNoise(seed) {
+      const x = Math.sin(seed * 12.9898) * 43758.5453;
+      return x - Math.floor(x);
+    }
+
+    function clamp(num, min, max) {
+      return Math.max(min, Math.min(max, num));
+    }
+
+    function computeInsightAngles(items, startOffsetDeg) {
+      const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+      let cursor = startOffsetDeg;
+
+      items.forEach((item) => {
+        const spanDeg = (item.weight / totalWeight) * 360;
+        item.startDeg = cursor;
+        item.endDeg = cursor + spanDeg;
+        item.spanDeg = spanDeg;
+        item.start = degToRad(item.startDeg);
+        item.end = degToRad(item.endDeg);
+        item.midDeg = item.startDeg + spanDeg / 2;
+        item.mid = degToRad(item.midDeg);
+        cursor += spanDeg;
+      });
+    }
+
+    function buildSegments(insight) {
+      const segments = [];
+      const safeSpan = insight.spanDeg;
+      const intensity = Math.pow(insight.score / 100, 1.18);
+      const density = Math.floor(64 + intensity * 210 + insight.concepts.length * 18);
+      const conceptCount = insight.concepts.length;
+      const conceptWindows = insight.concepts.map((concept, index) => {
+        const centerTBase = (index + 0.6) / (conceptCount + 0.2);
+        const drift = (seededNoise((index + 1) * 3.41 + insight.baseIntensity * 9.2) - 0.5) * 0.16;
+        const centerT = clamp(centerTBase + drift, 0.1, 0.9);
+        const spread = 0.08 + concept.severity * 0.08 + seededNoise((index + 1) * 8.13 + safeSpan) * 0.025;
+        return {
+          concept,
+          centerT,
+          spread
+        };
+      });
+
+      for (let i = 0; i < density; i++) {
+        const t = i / density;
+        const deg = insight.startDeg + safeSpan * t;
+        const angle = degToRad(deg);
+
+        const n1 = seededNoise(i * 0.113 + insight.baseIntensity * 7.1 + safeSpan);
+        const n2 = seededNoise(i * 0.067 + insight.startDeg * 0.21);
+        const n3 = seededNoise(i * 0.031 + insight.endDeg * 0.17);
+
+        let conceptCluster = 0;
+        let conceptDensity = 0;
+
+        conceptWindows.forEach((window, index) => {
+          const distance = Math.abs(t - window.centerT);
+          const falloff = Math.exp(-(distance * distance) / (2 * window.spread * window.spread));
+          const grain = 0.72 + seededNoise(i * 0.083 + index * 5.31 + insight.baseIntensity * 11.7) * 0.82;
+          const severityWeight = Math.pow(window.concept.severity, 1.2);
+
+          conceptCluster += falloff * severityWeight * grain;
+          conceptDensity += falloff * (0.65 + severityWeight * 0.75);
+        });
+
+        const baseCluster =
+          Math.pow(n1, 3.2) * intensity * 80 +
+          Math.pow(n2, 5.4) * intensity * 102 +
+          Math.pow(n3, 7.4) * intensity * 128;
+
+        const pulse = Math.sin(t * Math.PI * (1.2 + intensity * 5.2)) * 0.5 + 0.5;
+        const cluster = baseCluster + conceptCluster * 110 * intensity;
+        const spike = cluster * (0.5 + pulse * 0.34) + conceptDensity * 26;
+
+        const opacity =
+          0.024 +
+          Math.pow(n2, 2.2) * 0.13 +
+          intensity * 0.11 +
+          Math.min(conceptDensity * 0.05, 0.1) +
+          Math.min(spike / 320, 0.17);
+
+        segments.push({
+          angle,
+          spike,
+          opacity,
+          width: 0.9 + n1 * 2.4 + conceptDensity * 0.38
+        });
+      }
+
+      return segments;
+    }
+
+    computeInsightAngles(insights, -110);
+
+    insights.forEach((insight) => {
+      insight.score = Math.round(insight.baseIntensity * 100);
+      insight.visualResolvedRatio = 0;
+      insight.segments = buildSegments(insight);
+    });
+
+    const primaryInsight = insights.reduce((best, insight) => {
+      if (!best || insight.score > best.score) return insight;
+      return best;
+    }, null);
+
+    const labelNudges = {
+      identity: { x: 12, y: -20 },
+      contactability: { x: -18, y: -2 },
+      business: { x: -26, y: 18 },
+      bank: { x: -18, y: 14 },
+      compliance: { x: -24, y: -10 }
+    };
+
+    function getActiveInsight() {
+      return lockedInsight || hoveredInsight;
+    }
+
+    function getCircleGeometry(rect) {
+        return {
+            cx: rect.width * 0.505,
+            cy: rect.height * 0.465,
+            radius: Math.min(rect.width, rect.height) * 0.245
+        };
+    }
+
+    function resizeCanvas() {
+      const rect = shell.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      canvas.style.width = rect.width + "px";
+      canvas.style.height = rect.height + "px";
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+    }
+
+    function drawBaseRing(cx, cy, radius) {
+      ctx.save();
+
+      ctx.strokeStyle = "rgba(255,255,255,0.17)";
+      ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = "rgba(255,255,255,0.06)";
+      ctx.lineWidth = 16;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = "rgba(255,255,255,0.04)";
+      ctx.lineWidth = 32;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius + 18, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    function drawCenterGlow(cx, cy, radius) {
+      const glow = ctx.createRadialGradient(cx, cy, radius * 0.1, cx, cy, radius * 1.4);
+      glow.addColorStop(0, "rgba(255,255,255,0.02)");
+      glow.addColorStop(0.55, "rgba(255,255,255,0.01)");
+      glow.addColorStop(1, "rgba(255,255,255,0)");
+
+      ctx.save();
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius * 1.7, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawQuietDust(cx, cy, radius) {
+      ctx.save();
+      for (let i = 0; i < 240; i++) {
+        const a = degToRad(i * 3.17);
+        const r = radius + 6 + seededNoise(i * 0.19) * 16;
+        const x = cx + Math.cos(a) * r;
+        const y = cy + Math.sin(a) * r;
+        const s = 0.5 + seededNoise(i * 0.37) * 1.4;
+        ctx.fillStyle = `rgba(255,255,255,${0.02 + seededNoise(i * 0.11) * 0.045})`;
+        ctx.beginPath();
+        ctx.arc(x, y, s, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function drawInsight(insight, cx, cy, radius, isActive, hasActive, isPrimaryIdle) {
+      ctx.save();
+
+      const resolvedRatio = insight.visualResolvedRatio || 0;
+      const resolvedSpikeFactor = 1 - resolvedRatio * 0.12;
+      const resolvedOpacityReduction = resolvedRatio * 0.03;
+      const resolvedArcReduction = resolvedRatio * 0.05;
+
+      const lineAlpha = isActive ? 0.62 - resolvedArcReduction : hasActive ? 0.04 : isPrimaryIdle ? 0.22 - resolvedArcReduction : 0.17 - resolvedArcReduction;
+      const spikeBoost = (isActive ? 1.22 : hasActive ? 0.56 : 1) * resolvedSpikeFactor;
+      const widthBoost = isActive ? 1.34 : hasActive ? 0.82 : 1;
+      const opacityBoost = isActive ? 0.16 : hasActive ? -0.05 : isPrimaryIdle ? 0.03 : 0;
+
+      for (const seg of insight.segments) {
+        const rawSpike = seg.spike * spikeBoost;
+        const softCap = radius * (insight.key === "business" ? 0.62 : 0.8);
+        const spike = softCap * (1 - Math.exp(-rawSpike / softCap));
+        const inner = radius - 2;
+        const outer = radius + spike;
+
+        const x1 = cx + Math.cos(seg.angle) * inner;
+        const y1 = cy + Math.sin(seg.angle) * inner;
+        const x2 = cx + Math.cos(seg.angle) * outer;
+        const y2 = cy + Math.sin(seg.angle) * outer;
+
+        ctx.strokeStyle = `rgba(255,255,255,${clamp(seg.opacity + opacityBoost - resolvedOpacityReduction, hasActive ? 0.012 : 0.02, isActive ? 0.62 : isPrimaryIdle ? 0.33 : 0.28)})`;
+        ctx.lineWidth = seg.width * widthBoost;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+
+      ctx.strokeStyle = `rgba(255,255,255,${lineAlpha})`;
+      ctx.lineWidth = isActive ? 3.4 : hasActive ? 1.4 : 2;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, insight.start, insight.end);
+      ctx.stroke();
+
+      if (isActive) {
+        ctx.strokeStyle = "rgba(255,255,255,0.2)";
+        ctx.lineWidth = 7;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius + 1.5, insight.start, insight.end);
+        ctx.stroke();
+      }
+
+      const startX = cx + Math.cos(insight.start) * radius;
+      const startY = cy + Math.sin(insight.start) * radius;
+      const endX = cx + Math.cos(insight.end) * radius;
+      const endY = cy + Math.sin(insight.end) * radius;
+
+      ctx.fillStyle = `rgba(255,255,255,${isActive ? 0.58 : hasActive ? 0.08 : isPrimaryIdle ? 0.18 : 0.14})`;
+      ctx.beginPath();
+      ctx.arc(startX, startY, isActive ? 3 : hasActive ? 1.45 : isPrimaryIdle ? 1.95 : 1.8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(endX, endY, isActive ? 3 : hasActive ? 1.45 : isPrimaryIdle ? 1.95 : 1.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function drawLabels(rect, cx, cy, radius) {
+      ctx.save();
+      ctx.font = "500 11px Inter, system-ui, sans-serif";
+      ctx.fillStyle = "rgba(255,255,255,0.42)";
+      ctx.textBaseline = "middle";
+
+      insights.forEach((insight) => {
+        const labelRadius = radius + 142;
+        const mid = normalizeAngle(insight.mid);
+        const nudge = labelNudges[insight.key] || { x: 0, y: 0 };
+        const label = insight.label.toUpperCase();
+        let x = cx + Math.cos(mid) * labelRadius + nudge.x;
+        let y = cy + Math.sin(mid) * labelRadius + nudge.y;
+        const horizontalBias = Math.cos(mid);
+        const edgePadding = 34;
+
+        if (horizontalBias > 0.22) {
+          ctx.textAlign = "left";
+        } else if (horizontalBias < -0.22) {
+          ctx.textAlign = "right";
+        } else {
+          ctx.textAlign = "center";
+        }
+
+        const textWidth = ctx.measureText(label).width;
+
+        if (ctx.textAlign === "left") {
+          x = clamp(x, edgePadding, rect.width - edgePadding - textWidth);
+        } else if (ctx.textAlign === "right") {
+          x = clamp(x, edgePadding + textWidth, rect.width - edgePadding);
+        } else {
+          x = clamp(x, edgePadding + textWidth / 2, rect.width - edgePadding - textWidth / 2);
+        }
+
+        y = clamp(y, edgePadding, rect.height - edgePadding);
+        ctx.fillText(label, x, y);
+      });
+
+      ctx.restore();
+    }
+
+    function drawConnector(cx, cy, radius, insight) {
+      if (!insight) return;
+
+      const mid = normalizeAngle((insight.start + insight.end) / 2);
+      const x1 = cx + Math.cos(mid) * (radius + 22);
+      const y1 = cy + Math.sin(mid) * (radius + 22);
+      const x2 = 258;
+      const y2 = 138;
+
+      ctx.save();
+      ctx.strokeStyle = "rgba(255,255,255,0.22)";
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      ctx.restore();
+
+      const angleDeg = (Math.atan2(y1 - y2, x1 - x2) * 180) / Math.PI;
+      hudLine.style.transform = `rotate(${angleDeg}deg)`;
+    }
+
+    function draw() {
+      const rect = shell.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      let needsAnotherFrame = false;
+
+      insights.forEach((insight) => {
+        const resolvedCount = insight.concepts.filter((concept) => concept.resolved).length;
+        const targetResolvedRatio = insight.concepts.length ? resolvedCount / insight.concepts.length : 0;
+        const currentResolvedRatio = insight.visualResolvedRatio || 0;
+        const delta = targetResolvedRatio - currentResolvedRatio;
+
+        if (Math.abs(delta) > 0.002) {
+          insight.visualResolvedRatio = currentResolvedRatio + delta * 0.2;
+          needsAnotherFrame = true;
+        } else {
+          insight.visualResolvedRatio = targetResolvedRatio;
+        }
+      });
+
+      const { cx, cy, radius } = getCircleGeometry(rect);
+
+      drawCenterGlow(cx, cy, radius);
+      drawQuietDust(cx, cy, radius);
+      drawBaseRing(cx, cy, radius);
+
+      const active = getActiveInsight();
+      const hasActive = Boolean(active);
+
+      insights.forEach((insight) => {
+        const isActive = active && active.key === insight.key;
+        const isPrimaryIdle = !hasActive && primaryInsight && insight.key === primaryInsight.key;
+        drawInsight(insight, cx, cy, radius, isActive, hasActive, isPrimaryIdle);
+      });
+
+      drawLabels(rect, cx, cy, radius);
+      drawConnector(cx, cy, radius, active);
+
+      if (needsAnotherFrame && !resolveAnimationFrame) {
+        resolveAnimationFrame = window.requestAnimationFrame(() => {
+          resolveAnimationFrame = null;
+          draw();
+        });
+      }
+    }
+
+    function getInsightAtPoint(clientX, clientY) {
+      const rect = canvas.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+
+      const { cx, cy, radius } = getCircleGeometry(rect);
+
+      const dx = x - cx;
+      const dy = y - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < radius - 36 || dist > radius + 220) {
+        return null;
+      }
+
+      const angle = Math.atan2(dy, dx);
+
+      for (const insight of insights) {
+        if (angleBetween(angle, insight.start, insight.end)) {
+          return insight;
+        }
+      }
+
+      return null;
+    }
+
+    function setHoverCardPosition(clientX, clientY) {
+      const shellRect = shell.getBoundingClientRect();
+      const cardRect = hoverCard.getBoundingClientRect();
+
+      let left = clientX - shellRect.left + 20;
+      let top = clientY - shellRect.top + 20;
+
+      if (left + cardRect.width > shellRect.width - 16) {
+        left = clientX - shellRect.left - cardRect.width - 20;
+      }
+
+      if (top + cardRect.height > shellRect.height - 16) {
+        top = clientY - shellRect.top - cardRect.height - 20;
+      }
+
+      left = clamp(left, 16, shellRect.width - cardRect.width - 16);
+      top = clamp(top, 16, shellRect.height - cardRect.height - 16);
+
+      hoverCard.style.left = `${left}px`;
+      hoverCard.style.top = `${top}px`;
+    }
+
+    function showHoverCard(insight, clientX, clientY) {
+      hoverName.textContent = insight.label;
+      hoverCopy.textContent = insight.short;
+
+      hoverMetrics.innerHTML = `
+        <div>Score <strong>${insight.score}</strong></div>
+        <div>Concepts <strong>${insight.concepts.length}</strong></div>
+        <div>Evidence <strong>${insight.evidence.length}</strong></div>
+      `;
+
+      setHoverCardPosition(clientX, clientY);
+      hoverCard.classList.add("visible");
+    }
+
+    function hideHoverCard() {
+      hoverCard.classList.remove("visible");
+    }
+
+    function getConceptId(insight, concept) {
+      return `${insight.key}:${insight.concepts.indexOf(concept)}`;
+    }
+
+    function findNextConcept(insight, currentConcept) {
+      return insight.concepts
+        .filter((concept) => !concept.resolved && concept !== currentConcept)
+        .sort((a, b) => b.severity - a.severity)[0] || null;
+    }
+
+    function openDrawer(insight, concept, source) {
+      if (nextIssueTimeout) {
+        window.clearTimeout(nextIssueTimeout);
+        nextIssueTimeout = null;
+      }
+      drawerState = { insight, concept, source, resolved: Boolean(concept.resolved) };
+      drawerEyebrow.textContent =
+        source === "reconcile"
+          ? "Reconcile workspace"
+          : source === "next"
+            ? "Next issue →"
+            : "Action workspace";
+      drawerTitle.textContent = concept.name;
+      drawerMeta.textContent = `Severity ${Math.round(concept.severity * 100)} · ${insight.label}`;
+      drawerEvidenceList.innerHTML = insight.evidence
+        .map(
+          (item) => `
+            <div class="drawer-evidence-item">
+              <div class="evidence-provider">${item.provider}</div>
+              <div class="evidence-text">${item.text}</div>
+            </div>
+          `
+        )
+        .join("");
+      drawerActionSelect.innerHTML = conceptMenuOptions
+        .map((option) => `<option value="${option}">${option}</option>`)
+        .join("");
+      drawerActionSelect.value = concept.resolved ? "Mark resolved" : source === "reconcile" ? "Reconcile manually" : conceptMenuOptions[0];
+      drawerNotes.value = "";
+      drawerSubmit.textContent = concept.resolved ? "Resolved ✓" : drawerActionSelect.value === "Mark resolved" ? "Mark resolved" : "Resolve issue";
+      drawerSubmit.disabled = Boolean(concept.resolved);
+      drawerActionSelect.disabled = Boolean(concept.resolved);
+      drawerNotes.disabled = Boolean(concept.resolved);
+      workspaceDrawer.classList.remove("resolving");
+      workspaceDrawer.classList.toggle("resolved", Boolean(concept.resolved));
+      document.body.classList.add("drawer-open");
+      workspaceDrawer.setAttribute("aria-hidden", "false");
+    }
+
+    function closeDrawer() {
+      if (!drawerState) return;
+      if (nextIssueTimeout) {
+        window.clearTimeout(nextIssueTimeout);
+        nextIssueTimeout = null;
+      }
+      drawerState = null;
+      document.body.classList.remove("drawer-open");
+      workspaceDrawer.setAttribute("aria-hidden", "true");
+      workspaceDrawer.classList.remove("resolving");
+      workspaceDrawer.classList.remove("resolved");
+      drawerSubmit.disabled = false;
+      drawerActionSelect.disabled = false;
+      drawerNotes.disabled = false;
+      drawerNotes.value = "";
+    }
+
+    function handleDrawerActionChange() {
+      if (drawerState && drawerState.resolved) return;
+      drawerSubmit.textContent = drawerActionSelect.value === "Mark resolved" ? "Mark resolved" : "Resolve issue";
+    }
+
+    function handleDrawerSubmit() {
+      if (!drawerState) return;
+      drawerState.concept.resolved = true;
+      drawerState.resolved = true;
+      const resolvedInsight = drawerState.insight;
+      const resolvedConcept = drawerState.concept;
+      drawerSubmit.textContent = "Resolved ✓";
+      drawerSubmit.disabled = true;
+      drawerActionSelect.disabled = true;
+      drawerNotes.disabled = true;
+      workspaceDrawer.classList.add("resolved");
+      workspaceDrawer.classList.add("resolving");
+      if (currentPanelInsight) {
+        renderPanel(currentPanelInsight);
+      } else {
+        draw();
+      }
+
+      const nextConcept = findNextConcept(resolvedInsight, resolvedConcept);
+      if (nextConcept) {
+        nextHighlightedConceptId = getConceptId(resolvedInsight, nextConcept);
+        renderPanel(resolvedInsight);
+        nextIssueTimeout = window.setTimeout(() => {
+          nextIssueTimeout = null;
+          workspaceDrawer.classList.remove("resolving");
+          openDrawer(resolvedInsight, nextConcept, "next");
+        }, 180);
+      } else {
+        window.setTimeout(() => {
+          workspaceDrawer.classList.remove("resolving");
+        }, 180);
+      }
+    }
+
+    function renderPanel(insight) {
+      if (!insight) {
+        currentPanelInsight = null;
+        panel.classList.remove("focused");
+        panelTitle.textContent = "No selection";
+        panelCopy.textContent = "The circle stays calm until it encounters concentrated evidence. Click to inspect canonical concepts, severity, and provider output.";
+        statScore.textContent = "—";
+        statCount.textContent = "—";
+        conceptList.innerHTML = "";
+        evidenceList.innerHTML = "";
+        hudSub.textContent = primaryInsight ? `${primaryInsight.label.toUpperCase()} / dominant cluster in view` : "Undisclosed location / build 0.06";
+        draw();
+        return;
+      }
+
+      currentPanelInsight = insight;
+      panel.classList.toggle("focused", Boolean(lockedInsight));
+      panelTitle.textContent = insight.label;
+      panelCopy.textContent = insight.short;
+      statScore.textContent = insight.score;
+      statCount.textContent = insight.concepts.length;
+      hudSub.textContent = `${insight.label.toUpperCase()} / anomaly cluster engaged`;
+
+      conceptList.innerHTML = insight.concepts
+        .map((concept, index) => {
+          const width = Math.round(concept.severity * 100);
+          const conceptId = `${insight.key}:${index}`;
+          return `
+            <div class="concept-item ${concept.resolved ? "resolved" : ""} ${nextHighlightedConceptId === conceptId ? "next-focus" : ""}">
+              <div class="concept-heading">
+                <div class="concept-name">${concept.name}</div>
+                ${concept.resolved ? '<div class="concept-resolved">Resolved</div>' : ""}
+              </div>
+              <div class="concept-meta">${concept.text}</div>
+              <div class="concept-action">Proposed action: <strong>${concept.proposedAction}</strong></div>
+              <div class="concept-severity-row">
+                <div class="stat-kicker">Severity ${width}</div>
+              </div>
+              <div class="severity-bar">
+                <div class="severity-fill" style="width: ${width}%"></div>
+              </div>
+              <div class="concept-footer">
+                <button class="action-trigger" type="button" data-concept-index="${index}">Action</button>
+                <div class="concept-controls">
+                  <button class="note-button" type="button">Add note</button>
+                  <button class="reconcile-button" type="button" data-concept-index="${index}">Reconcile</button>
+                </div>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      if (nextHighlightedConceptId) {
+        window.setTimeout(() => {
+          if (nextHighlightedConceptId) {
+            nextHighlightedConceptId = null;
+            if (currentPanelInsight === insight) {
+              renderPanel(insight);
+            }
+          }
+        }, 480);
+      }
+
+      evidenceList.innerHTML = insight.evidence
+        .map(
+          (item) => `
+            <div class="evidence-item">
+              <div class="evidence-provider">${item.provider}</div>
+              <div class="evidence-text">${item.text}</div>
+            </div>
+          `
+        )
+        .join("");
+
+      draw();
+    }
+
+    function handleConceptListClick(event) {
+      const actionTrigger = event.target.closest(".action-trigger");
+      if (actionTrigger) {
+        const conceptIndex = Number(actionTrigger.dataset.conceptIndex);
+        if (currentPanelInsight && currentPanelInsight.concepts[conceptIndex]) {
+          openDrawer(currentPanelInsight, currentPanelInsight.concepts[conceptIndex], "action");
+        }
+        return;
+      }
+
+      const reconcileTrigger = event.target.closest(".reconcile-button");
+      if (reconcileTrigger) {
+        const conceptIndex = Number(reconcileTrigger.dataset.conceptIndex);
+        if (currentPanelInsight && currentPanelInsight.concepts[conceptIndex]) {
+          openDrawer(currentPanelInsight, currentPanelInsight.concepts[conceptIndex], "reconcile");
+        }
+      }
+    }
+
+    function handlePointerMove(event) {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+      mouse.inside = true;
+
+      const insight = getInsightAtPoint(event.clientX, event.clientY);
+      hoveredInsight = insight;
+
+      if (insight) {
+        showHoverCard(insight, event.clientX, event.clientY);
+      } else {
+        hideHoverCard();
+      }
+
+      if (!lockedInsight) {
+        const active = hoveredInsight || null;
+        panel.classList.remove("focused");
+
+        if (active) {
+          panelTitle.textContent = active.label;
+          panelCopy.textContent = active.short;
+          statScore.textContent = active.score;
+          statCount.textContent = active.concepts.length;
+          hudSub.textContent = `${active.label.toUpperCase()} / anomaly cluster engaged`;
+        } else {
+          panelTitle.textContent = "No selection";
+          panelCopy.textContent = "The circle stays calm until it encounters concentrated evidence. Click to inspect canonical concepts, severity, and provider output.";
+          statScore.textContent = "—";
+          statCount.textContent = "—";
+          hudSub.textContent = primaryInsight ? `${primaryInsight.label.toUpperCase()} / dominant cluster in view` : "Undisclosed location / build 0.06";
+        }
+      }
+
+      draw();
+    }
+
+    function handlePointerLeave() {
+      mouse.inside = false;
+      hoveredInsight = null;
+      hideHoverCard();
+
+      if (!lockedInsight) {
+        renderPanel(null);
+      } else {
+        draw();
+      }
+    }
+
+    function handleClick(event) {
+      const insight = getInsightAtPoint(event.clientX, event.clientY);
+
+      if (!insight) {
+        lockedInsight = null;
+        renderPanel(null);
+        return;
+      }
+
+      if (lockedInsight && lockedInsight.key === insight.key) {
+        lockedInsight = null;
+        renderPanel(null);
+        return;
+      }
+
+      lockedInsight = insight;
+      renderPanel(insight);
+      showHoverCard(insight, event.clientX, event.clientY);
+    }
+
+    canvas.addEventListener("mousemove", handlePointerMove);
+    canvas.addEventListener("mouseleave", handlePointerLeave);
+    canvas.addEventListener("click", handleClick);
+    conceptList.addEventListener("click", handleConceptListClick);
+    drawerBackdrop.addEventListener("click", closeDrawer);
+    drawerClose.addEventListener("click", closeDrawer);
+    drawerActionSelect.addEventListener("change", handleDrawerActionChange);
+    drawerSubmit.addEventListener("click", handleDrawerSubmit);
+
+    window.addEventListener("resize", resizeCanvas);
+
+    resizeCanvas();
+    renderPanel(null);
+  </script>
+</body>
+</html>
