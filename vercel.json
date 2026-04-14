@@ -4,6 +4,10 @@
       "source": "/decision",
       "destination": "/underwriter-console-prototype/decision.html"
     },
+     {
+      "source": "/circle",
+      "destination": "/underwriter-console-prototype/circle.html"
+    },
     {
       "source": "/intuition",
       "destination": "/underwriter-console-prototype/intuition.html"
