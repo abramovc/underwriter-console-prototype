@@ -1132,7 +1132,7 @@
           <div class="drawer-section-title">Notes</div>
           <textarea class="drawer-notes" id="drawerNotes" placeholder="Capture underwriting context, reconciliation notes, or follow-up steps."></textarea>
         </div>
-        <button class="drawer-submit" id="drawerSubmit" type="button">Resolve issue</button>
+        <button class="drawer-submit" id="drawerSubmit" type="button">Reconcile issue</button>
       </div>
     </aside>
   </div>
@@ -1155,7 +1155,7 @@
           {
             name: "DOB inconsistency",
             severity: 0.66,
-            text: "Birth date evidence conflicts or remains partially unresolved.",
+            text: "Birth date evidence conflicts or remains partially unreconciled.",
             proposedAction: "Reconfirm date of birth across application and vendor records"
           },
           {
@@ -1168,7 +1168,7 @@
             name: "SSN mismatch",
             severity: 0.81,
             text: "Core identity identifier mismatch requires human review.",
-            proposedAction: "Review SSN evidence and resolve source-level mismatch"
+            proposedAction: "Review SSN evidence and reconcile source-level mismatch"
           }
         ],
         evidence: [
@@ -1342,7 +1342,7 @@
       "Request documentation",
       "Reconcile manually",
       "Escalate for review",
-      "Mark resolved"
+      "Mark reconciled"
     ];
 
     const zoneReconcileReasonOptions = [
@@ -1894,9 +1894,9 @@
       drawerActionSelect.innerHTML = conceptMenuOptions
         .map((option) => `<option value="${option}">${option}</option>`)
         .join("");
-      drawerActionSelect.value = concept.resolved ? "Mark resolved" : source === "reconcile" ? "Reconcile manually" : conceptMenuOptions[0];
+      drawerActionSelect.value = concept.resolved ? "Mark reconciled" : source === "reconcile" ? "Reconcile manually" : conceptMenuOptions[0];
       drawerNotes.value = "";
-      drawerSubmit.textContent = concept.resolved ? "Resolved ✓" : drawerActionSelect.value === "Mark resolved" ? "Mark resolved" : "Resolve issue";
+      drawerSubmit.textContent = concept.resolved ? "Reconciled ✓" : drawerActionSelect.value === "Mark reconciled" ? "Mark reconciled" : "Reconcile issue";
       drawerSubmit.disabled = Boolean(concept.resolved);
       drawerActionSelect.disabled = Boolean(concept.resolved);
       drawerNotes.disabled = Boolean(concept.resolved);
@@ -1925,7 +1925,7 @@
 
     function handleDrawerActionChange() {
       if (drawerState && drawerState.resolved) return;
-      drawerSubmit.textContent = drawerActionSelect.value === "Mark resolved" ? "Mark resolved" : "Resolve issue";
+      drawerSubmit.textContent = drawerActionSelect.value === "Mark reconciled" ? "Mark reconciled" : "Reconcile issue";
     }
 
     function handleDrawerSubmit() {
@@ -1934,7 +1934,7 @@
       drawerState.resolved = true;
       const resolvedInsight = drawerState.insight;
       const resolvedConcept = drawerState.concept;
-      drawerSubmit.textContent = "Resolved ✓";
+      drawerSubmit.textContent = "Reconciled ✓";
       drawerSubmit.disabled = true;
       drawerActionSelect.disabled = true;
       drawerNotes.disabled = true;
@@ -2003,7 +2003,7 @@
             <div class="concept-item ${concept.resolved ? "resolved" : ""} ${nextHighlightedConceptId === conceptId ? "next-focus" : ""}">
               <div class="concept-heading">
                 <div class="concept-name">${concept.name}</div>
-                ${concept.resolved ? '<div class="concept-resolved">Resolved</div>' : ""}
+                ${concept.resolved ? '<div class="concept-resolved">Reconciled</div>' : ""}
               </div>
               <div class="concept-meta">${concept.text}</div>
               <div class="concept-action">Proposed action: <strong>${concept.proposedAction}</strong></div>
