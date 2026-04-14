@@ -225,6 +225,18 @@
       margin-bottom: 18px;
     }
 
+    .panel-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .panel-header-copy {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
     .panel-body {
       flex: 1 1 auto;
       min-height: 0;
@@ -266,6 +278,133 @@
       color: var(--muted);
       line-height: 1.6;
       font-size: 14px;
+    }
+
+    .zone-reconcile-button {
+      flex: 0 0 auto;
+      min-height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.84);
+      padding: 0 14px;
+      font: inherit;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1;
+      cursor: pointer;
+      transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+    }
+
+    .zone-reconcile-button[hidden] {
+      display: none;
+    }
+
+    .zone-reconcile-button:disabled {
+      opacity: 0.42;
+      cursor: default;
+    }
+
+    .zone-reconcile-form {
+      margin-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .zone-reconcile-form[hidden] {
+      display: none;
+    }
+
+    .zone-reconcile-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .zone-reconcile-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .zone-reconcile-select,
+    .zone-reconcile-textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      color: rgba(255,255,255,0.8);
+      padding: 12px 14px;
+      font: inherit;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .zone-reconcile-select {
+      min-height: 48px;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.44) 50%),
+        linear-gradient(135deg, rgba(255,255,255,0.44) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) 21px,
+        calc(100% - 13px) 21px;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      padding-right: 36px;
+    }
+
+    .zone-reconcile-textarea {
+      min-height: 108px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    .zone-reconcile-textarea::placeholder {
+      color: rgba(255,255,255,0.34);
+    }
+
+    .zone-reconcile-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .zone-reconcile-cancel,
+    .zone-reconcile-confirm {
+      border-radius: 999px;
+      min-height: 34px;
+      padding: 0 14px;
+      font: inherit;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .zone-reconcile-cancel {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: transparent;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .zone-reconcile-confirm {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.065);
+      color: rgba(255,255,255,0.88);
+    }
+
+    .zone-reconcile-confirm:disabled {
+      opacity: 0.42;
+      cursor: default;
     }
 
     .stat-row {
@@ -700,7 +839,17 @@
     .note-button:focus,
     .note-button:focus-visible,
     .reconcile-button:focus,
-    .reconcile-button:focus-visible {
+    .reconcile-button:focus-visible,
+    .zone-reconcile-button:focus,
+    .zone-reconcile-button:focus-visible,
+    .zone-reconcile-select:focus,
+    .zone-reconcile-select:focus-visible,
+    .zone-reconcile-textarea:focus,
+    .zone-reconcile-textarea:focus-visible,
+    .zone-reconcile-cancel:focus,
+    .zone-reconcile-cancel:focus-visible,
+    .zone-reconcile-confirm:focus,
+    .zone-reconcile-confirm:focus-visible {
       outline: none;
       border-color: rgba(255,255,255,0.16);
       box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
@@ -909,10 +1058,29 @@
 
       <aside class="panel">
         <div class="panel-top">
-          <div class="panel-label">Selected zone</div>
-          <h2 id="panelTitle">No selection</h2>
-          <div class="panel-copy" id="panelCopy">
-            The circle stays calm until it encounters concentrated evidence. Click to inspect canonical concepts, severity, and provider output.
+          <div class="panel-header-row">
+            <div class="panel-header-copy">
+              <div class="panel-label">Selected zone</div>
+              <h2 id="panelTitle">No selection</h2>
+              <div class="panel-copy" id="panelCopy">
+                The circle stays calm until it encounters concentrated evidence. Click to inspect canonical concepts, severity, and provider output.
+              </div>
+            </div>
+            <button class="zone-reconcile-button" id="zoneReconcileButton" type="button" hidden>Reconcile All</button>
+          </div>
+          <div class="zone-reconcile-form" id="zoneReconcileForm" hidden>
+            <div class="zone-reconcile-field">
+              <div class="zone-reconcile-label">Reconciliation reason</div>
+              <select class="zone-reconcile-select" id="zoneReconcileReason"></select>
+            </div>
+            <div class="zone-reconcile-field">
+              <div class="zone-reconcile-label">Required note</div>
+              <textarea class="zone-reconcile-textarea" id="zoneReconcileNotes" placeholder="Explain why all open concepts in this zone are being reconciled."></textarea>
+            </div>
+            <div class="zone-reconcile-actions">
+              <button class="zone-reconcile-cancel" id="zoneReconcileCancel" type="button">Cancel</button>
+              <button class="zone-reconcile-confirm" id="zoneReconcileConfirm" type="button" disabled>Confirm Reconcile All</button>
+            </div>
           </div>
         </div>
 
@@ -1134,6 +1302,12 @@
     const page = document.querySelector(".page");
     const panelTitle = document.getElementById("panelTitle");
     const panelCopy = document.getElementById("panelCopy");
+    const zoneReconcileButton = document.getElementById("zoneReconcileButton");
+    const zoneReconcileForm = document.getElementById("zoneReconcileForm");
+    const zoneReconcileReason = document.getElementById("zoneReconcileReason");
+    const zoneReconcileNotes = document.getElementById("zoneReconcileNotes");
+    const zoneReconcileCancel = document.getElementById("zoneReconcileCancel");
+    const zoneReconcileConfirm = document.getElementById("zoneReconcileConfirm");
     const statScore = document.getElementById("statScore");
     const statCount = document.getElementById("statCount");
     const conceptList = document.getElementById("conceptList");
@@ -1156,6 +1330,9 @@
     let currentPanelInsight = null;
     let drawerState = null;
     let expandedNoteConceptId = null;
+    let zoneReconcileAllOpen = false;
+    let zoneReconcileAllReason = "Verified by supporting documentation";
+    let zoneReconcileAllNotes = "";
     let mouse = { x: 0, y: 0, inside: false };
     let resolveAnimationFrame = null;
     let nextIssueTimeout = null;
@@ -1166,6 +1343,13 @@
       "Reconcile manually",
       "Escalate for review",
       "Mark resolved"
+    ];
+
+    const zoneReconcileReasonOptions = [
+      "Verified by supporting documentation",
+      "Acceptable variance",
+      "Duplicate / overlapping signals",
+      "Manual underwriter override"
     ];
 
     function degToRad(deg) {
@@ -1629,6 +1813,60 @@
         .sort((a, b) => b.severity - a.severity)[0] || null;
     }
 
+    function resetZoneReconcileAllState() {
+      zoneReconcileAllOpen = false;
+      zoneReconcileAllReason = zoneReconcileReasonOptions[0];
+      zoneReconcileAllNotes = "";
+    }
+
+    function updateZoneReconcileAllUI(insight) {
+      const hasInsight = Boolean(insight);
+      const unresolvedCount = insight ? insight.concepts.filter((concept) => !concept.resolved).length : 0;
+
+      zoneReconcileButton.hidden = !hasInsight;
+      zoneReconcileButton.disabled = !hasInsight || unresolvedCount === 0;
+      zoneReconcileButton.textContent = "Reconcile All";
+      zoneReconcileForm.hidden = !hasInsight || !zoneReconcileAllOpen;
+
+      if (!hasInsight) {
+        return;
+      }
+
+      zoneReconcileReason.innerHTML = zoneReconcileReasonOptions
+        .map((option) => `<option value="${option}">${option}</option>`)
+        .join("");
+      zoneReconcileReason.value = zoneReconcileAllReason;
+      zoneReconcileNotes.value = zoneReconcileAllNotes;
+      zoneReconcileConfirm.disabled = zoneReconcileAllNotes.trim().length === 0 || unresolvedCount === 0;
+    }
+
+    function toggleZoneReconcileAllForm() {
+      if (!currentPanelInsight) return;
+
+      if (zoneReconcileAllOpen) {
+        resetZoneReconcileAllState();
+      } else {
+        zoneReconcileAllOpen = true;
+        zoneReconcileAllReason = zoneReconcileReasonOptions[0];
+        zoneReconcileAllNotes = "";
+      }
+
+      updateZoneReconcileAllUI(currentPanelInsight);
+    }
+
+    function handleZoneReconcileAllConfirm() {
+      if (!currentPanelInsight || zoneReconcileAllNotes.trim().length === 0) return;
+
+      currentPanelInsight.concepts.forEach((concept) => {
+        if (!concept.resolved) {
+          concept.resolved = true;
+        }
+      });
+
+      resetZoneReconcileAllState();
+      renderPanel(currentPanelInsight);
+    }
+
     function openDrawer(insight, concept, source) {
       if (nextIssueTimeout) {
         window.clearTimeout(nextIssueTimeout);
@@ -1725,9 +1963,12 @@
     }
 
     function renderPanel(insight) {
+      const previousInsightKey = currentPanelInsight ? currentPanelInsight.key : null;
+
       if (!insight) {
         currentPanelInsight = null;
         expandedNoteConceptId = null;
+        resetZoneReconcileAllState();
         panel.classList.remove("focused");
         panelTitle.textContent = "No selection";
         panelCopy.textContent = "The circle stays calm until it encounters concentrated evidence. Click to inspect canonical concepts, severity, and provider output.";
@@ -1735,15 +1976,21 @@
         statCount.textContent = "—";
         conceptList.innerHTML = "";
         evidenceList.innerHTML = "";
+        updateZoneReconcileAllUI(null);
         hudSub.textContent = primaryInsight ? `${primaryInsight.label.toUpperCase()} / dominant cluster in view` : "Undisclosed location / build 0.06";
         draw();
         return;
+      }
+
+      if (previousInsightKey && previousInsightKey !== insight.key) {
+        resetZoneReconcileAllState();
       }
 
       currentPanelInsight = insight;
       panel.classList.toggle("focused", Boolean(lockedInsight));
       panelTitle.textContent = insight.label;
       panelCopy.textContent = insight.short;
+      updateZoneReconcileAllUI(insight);
       statScore.textContent = insight.score;
       statCount.textContent = insight.concepts.length;
       hudSub.textContent = `${insight.label.toUpperCase()} / anomaly cluster engaged`;
@@ -1909,6 +2156,20 @@
     drawerClose.addEventListener("click", closeDrawer);
     drawerActionSelect.addEventListener("change", handleDrawerActionChange);
     drawerSubmit.addEventListener("click", handleDrawerSubmit);
+    zoneReconcileButton.addEventListener("click", toggleZoneReconcileAllForm);
+    zoneReconcileReason.addEventListener("change", () => {
+      zoneReconcileAllReason = zoneReconcileReason.value;
+      updateZoneReconcileAllUI(currentPanelInsight);
+    });
+    zoneReconcileNotes.addEventListener("input", () => {
+      zoneReconcileAllNotes = zoneReconcileNotes.value;
+      updateZoneReconcileAllUI(currentPanelInsight);
+    });
+    zoneReconcileCancel.addEventListener("click", () => {
+      resetZoneReconcileAllState();
+      updateZoneReconcileAllUI(currentPanelInsight);
+    });
+    zoneReconcileConfirm.addEventListener("click", handleZoneReconcileAllConfirm);
 
     window.addEventListener("resize", resizeCanvas);
 
