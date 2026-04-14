@@ -394,7 +394,7 @@
       margin-top: 12px;
       display: flex;
       align-items: flex-start;
-      justify-content: space-between;
+      justify-content: flex-end;
       gap: 12px;
     }
 
@@ -402,16 +402,15 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      margin-left: auto;
     }
 
-    .concept-item.resolved .action-trigger,
     .concept-item.resolved .note-button,
     .concept-item.resolved .reconcile-button {
       opacity: 0.42;
       pointer-events: none;
     }
 
-    .action-trigger,
     .note-button,
     .reconcile-button {
       border-radius: 999px;
@@ -421,12 +420,6 @@
       text-transform: uppercase;
       line-height: 1;
       cursor: pointer;
-    }
-
-    .action-trigger {
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-      color: rgba(255,255,255,0.72);
     }
 
     .note-button {
@@ -439,6 +432,38 @@
       border: 1px solid rgba(255,255,255,0.1);
       background: rgba(255,255,255,0.025);
       color: rgba(255,255,255,0.76);
+    }
+
+    .concept-notes {
+      margin-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 14px;
+    }
+
+    .concept-notes-textarea {
+      width: 100%;
+      min-height: 80px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.018);
+      color: rgba(255,255,255,0.8);
+      padding: 12px 13px;
+      font: inherit;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .concept-notes-textarea::placeholder {
+      color: rgba(255,255,255,0.34);
+    }
+
+    .concept-notes-textarea:focus,
+    .concept-notes-textarea:focus-visible {
+      outline: none;
+      border-color: rgba(255,255,255,0.16);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.03);
     }
 
     .severity-bar {
@@ -642,6 +667,8 @@
       color: rgba(255,255,255,0.82);
       padding: 12px 14px;
       font: inherit;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
 
     .drawer-select {
@@ -656,6 +683,28 @@
       resize: vertical;
       line-height: 1.55;
       color: rgba(255,255,255,0.74);
+    }
+
+    .drawer-notes::placeholder {
+      color: rgba(255,255,255,0.34);
+    }
+
+    .drawer-select:focus,
+    .drawer-select:focus-visible,
+    .drawer-notes:focus,
+    .drawer-notes:focus-visible,
+    .drawer-submit:focus,
+    .drawer-submit:focus-visible,
+    .drawer-close:focus,
+    .drawer-close:focus-visible,
+    .note-button:focus,
+    .note-button:focus-visible,
+    .reconcile-button:focus,
+    .reconcile-button:focus-visible {
+      outline: none;
+      border-color: rgba(255,255,255,0.16);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.04);
     }
 
     .drawer-submit {
@@ -1106,6 +1155,7 @@
     let lockedInsight = null;
     let currentPanelInsight = null;
     let drawerState = null;
+    let expandedNoteConceptId = null;
     let mouse = { x: 0, y: 0, inside: false };
     let resolveAnimationFrame = null;
     let nextIssueTimeout = null;
@@ -1677,6 +1727,7 @@
     function renderPanel(insight) {
       if (!insight) {
         currentPanelInsight = null;
+        expandedNoteConceptId = null;
         panel.classList.remove("focused");
         panelTitle.textContent = "No selection";
         panelCopy.textContent = "The circle stays calm until it encounters concentrated evidence. Click to inspect canonical concepts, severity, and provider output.";
@@ -1716,12 +1767,16 @@
                 <div class="severity-fill" style="width: ${width}%"></div>
               </div>
               <div class="concept-footer">
-                <button class="action-trigger" type="button" data-concept-index="${index}">Action</button>
                 <div class="concept-controls">
-                  <button class="note-button" type="button">Add note</button>
+                  <button class="note-button" type="button">Notes</button>
                   <button class="reconcile-button" type="button" data-concept-index="${index}">Reconcile</button>
                 </div>
               </div>
+              ${expandedNoteConceptId === conceptId ? `
+                <div class="concept-notes">
+                  <textarea class="concept-notes-textarea" placeholder="Add underwriting notes..."></textarea>
+                </div>
+              ` : ""}
             </div>
           `;
         })
@@ -1753,12 +1808,19 @@
     }
 
     function handleConceptListClick(event) {
-      const actionTrigger = event.target.closest(".action-trigger");
-      if (actionTrigger) {
-        const conceptIndex = Number(actionTrigger.dataset.conceptIndex);
-        if (currentPanelInsight && currentPanelInsight.concepts[conceptIndex]) {
-          openDrawer(currentPanelInsight, currentPanelInsight.concepts[conceptIndex], "action");
+      const noteTrigger = event.target.closest(".note-button");
+      if (noteTrigger && currentPanelInsight) {
+        const conceptItem = noteTrigger.closest(".concept-item");
+        const conceptIndex = Array.from(conceptItem.parentNode.children).indexOf(conceptItem);
+        const conceptId = `${currentPanelInsight.key}:${conceptIndex}`;
+
+        if (expandedNoteConceptId === conceptId) {
+          expandedNoteConceptId = null;
+        } else {
+          expandedNoteConceptId = conceptId;
         }
+
+        renderPanel(currentPanelInsight);
         return;
       }
 

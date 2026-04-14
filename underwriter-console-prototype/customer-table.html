@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Queue</title>
+  <style>
+    :root {
+      --bg: #0f1012;
+      --bg-top-glow: rgba(255,255,255,0.035);
+      --bg-bottom-glow: rgba(255,255,255,0.024);
+      --card-bg: #141519;
+      --card-bg-alt: rgba(255,255,255,0.026);
+      --card-bg-soft: rgba(255,255,255,0.018);
+      --card-bg-strong: rgba(255,255,255,0.05);
+      --card-bg-hover: rgba(255,255,255,0.036);
+      --text-primary: rgba(255,255,255,0.95);
+      --text-secondary: rgba(255,255,255,0.8);
+      --text-secondary-soft: rgba(255,255,255,0.68);
+      --text-muted: rgba(255,255,255,0.58);
+      --text-faint: rgba(255,255,255,0.44);
+      --border: rgba(255,255,255,0.08);
+      --border-soft: rgba(255,255,255,0.06);
+      --border-strong: rgba(255,255,255,0.14);
+      --focus-ring: rgba(255,255,255,0.05);
+      --table-head-bg: rgba(20,21,25,0.94);
+      --backdrop: rgba(0,0,0,0.3);
+      --shadow-lg: rgba(0,0,0,0.3);
+      --shadow-md: rgba(0,0,0,0.24);
+      --drawer-bg:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.008)),
+        rgba(12,12,14,0.975);
+    }
+
+    body.theme-light {
+      --bg: #f4f1eb;
+      --bg-top-glow: rgba(255,255,255,0.66);
+      --bg-bottom-glow: rgba(58,43,22,0.035);
+      --card-bg: #fcfbf8;
+      --card-bg-alt: rgba(255,255,255,0.78);
+      --card-bg-soft: rgba(255,255,255,0.62);
+      --card-bg-strong: rgba(255,255,255,0.94);
+      --card-bg-hover: rgba(255,255,255,0.88);
+      --text-primary: #1a1a1d;
+      --text-secondary: rgba(26,26,29,0.8);
+      --text-secondary-soft: rgba(26,26,29,0.66);
+      --text-muted: #67645d;
+      --text-faint: rgba(26,26,29,0.5);
+      --border: rgba(0,0,0,0.08);
+      --border-soft: rgba(0,0,0,0.06);
+      --border-strong: rgba(0,0,0,0.12);
+      --focus-ring: rgba(0,0,0,0.05);
+      --table-head-bg: rgba(249,246,240,0.96);
+      --backdrop: rgba(30,24,16,0.16);
+      --shadow-lg: rgba(42,35,24,0.1);
+      --shadow-md: rgba(42,35,24,0.06);
+      --drawer-bg:
+        linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.7)),
+        rgba(248,244,237,0.98);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, var(--bg-top-glow), transparent 30%),
+        radial-gradient(circle at bottom, var(--bg-bottom-glow), transparent 40%),
+        var(--bg);
+      color: var(--text-primary);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      padding: 32px;
+    }
+
+    .page {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      max-width: 760px;
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .queue-shell {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: var(--card-bg);
+      box-shadow:
+        0 28px 72px var(--shadow-lg),
+        inset 0 1px 0 color-mix(in srgb, var(--text-primary) 4%, transparent);
+      overflow: hidden;
+      transition: opacity 0.28s ease, filter 0.28s ease, transform 0.28s ease;
+    }
+
+    .queue-top {
+      padding: 24px;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--text-primary) 4%, transparent), transparent 36%),
+        linear-gradient(180deg, color-mix(in srgb, var(--text-primary) 2%, transparent), transparent),
+        var(--card-bg);
+    }
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .control-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      white-space: nowrap;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card-bg-alt);
+    }
+
+    .theme-toggle-button {
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .theme-toggle-button.active {
+      background: var(--card-bg-strong);
+      color: var(--text-primary);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-primary) 4%, transparent);
+    }
+
+    .theme-toggle-button:focus,
+    .theme-toggle-button:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 1px var(--focus-ring);
+      background: var(--card-bg-hover);
+    }
+
+    .queue-select {
+      height: 38px;
+      min-width: 82px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card-bg-alt);
+      color: var(--text-secondary);
+      padding: 0 34px 0 14px;
+      font: inherit;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, color-mix(in srgb, var(--text-primary) 48%, transparent) 50%),
+        linear-gradient(135deg, color-mix(in srgb, var(--text-primary) 48%, transparent) 50%, transparent 50%);
+      background-position:
+        calc(100% - 16px) 16px,
+        calc(100% - 11px) 16px;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+    }
+
+    .queue-select:focus,
+    .queue-select:focus-visible {
+      outline: none;
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 1px var(--focus-ring);
+      background-color: var(--card-bg-strong);
+    }
+
+    .section-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 0 0 auto;
+      align-self: center;
+    }
+
+    .section-select {
+      height: 30px;
+      min-width: 62px;
+      border: 1px solid color-mix(in srgb, var(--border) 38%, transparent);
+      border-radius: 999px;
+      background: var(--card-bg-soft);
+      color: var(--text-secondary);
+      padding: 0 26px 0 12px;
+      font: inherit;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, color-mix(in srgb, var(--text-primary) 44%, transparent) 50%),
+        linear-gradient(135deg, color-mix(in srgb, var(--text-primary) 44%, transparent) 50%, transparent 50%);
+      background-position:
+        calc(100% - 14px) 12px,
+        calc(100% - 10px) 12px;
+      background-size: 4px 4px, 4px 4px;
+      background-repeat: no-repeat;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+    }
+
+    .section-select:focus,
+    .section-select:focus-visible {
+      outline: none;
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 1px var(--focus-ring);
+      background-color: var(--card-bg-strong);
+    }
+
+    .section-toggle-button {
+      height: 30px;
+      border: 1px solid color-mix(in srgb, var(--border) 38%, transparent);
+      border-radius: 999px;
+      background: var(--card-bg-soft);
+      color: var(--text-muted);
+      padding: 0 12px;
+      font: inherit;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      line-height: 1;
+      cursor: pointer;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+    }
+
+    .section-toggle-button:hover {
+      border-color: color-mix(in srgb, var(--border) 86%, transparent);
+      background: var(--card-bg-strong);
+      color: var(--text-primary);
+    }
+
+    .section-toggle-button:focus,
+    .section-toggle-button:focus-visible {
+      outline: none;
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 1px var(--focus-ring);
+      background: var(--card-bg-strong);
+      color: var(--text-primary);
+    }
+
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .summary-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--card-bg-alt);
+      padding: 16px;
+      min-height: 110px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+      background: var(--card-bg-hover);
+    }
+
+    .summary-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .summary-value {
+      margin-top: 14px;
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+    }
+
+    .summary-note {
+      margin-top: 12px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--text-faint);
+      max-width: 24ch;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card-bg-alt);
+      color: var(--text-muted);
+      padding: 9px 13px;
+      font: inherit;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      line-height: 1;
+      cursor: default;
+    }
+
+    .filter-pill.active {
+      border-color: var(--border-strong);
+      background: var(--card-bg-strong);
+      color: var(--text-primary);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-primary) 4%, transparent);
+    }
+
+    .filter-pill:focus,
+    .filter-pill:focus-visible {
+      outline: none;
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 1px var(--focus-ring);
+      background: var(--card-bg-strong);
+    }
+
+    .section-list {
+      padding: 0 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .queue-section {
+      border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--text-primary) 2%, transparent), transparent 28%),
+        color-mix(in srgb, var(--card-bg-alt) 84%, var(--card-bg));
+      overflow: hidden;
+      box-shadow:
+        inset 0 1px 0 color-mix(in srgb, var(--text-primary) 2.2%, transparent),
+        inset 0 -1px 0 color-mix(in srgb, var(--border) 24%, transparent);
+    }
+
+    .section-header {
+      border: 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--text-primary) 3.8%, transparent), transparent 72%),
+        color-mix(in srgb, var(--card-bg) 90%, var(--card-bg-alt));
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .queue-section:hover .section-header {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--text-primary) 4.6%, transparent), transparent 72%),
+        color-mix(in srgb, var(--card-bg-hover) 72%, var(--card-bg));
+      border-bottom-color: var(--border-strong);
+      box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--text-primary) 4%, transparent);
+    }
+
+    .section-header-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 680;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .section-count {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      white-space: nowrap;
+    }
+
+    .section-panel {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows 0.22s ease;
+    }
+
+    .queue-section.collapsed .section-panel {
+      grid-template-rows: 0fr;
+    }
+
+    .section-panel-inner {
+      min-height: 0;
+      overflow: hidden;
+      padding: 8px 14px 6px;
+    }
+
+    .table-shell {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      min-width: 1180px;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      padding-top: 0;
+    }
+
+    .queue-guidance {
+      padding: 0 24px 12px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-faint);
+    }
+
+    .table-scroll::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .table-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .table-scroll::-webkit-scrollbar-thumb {
+      background: color-mix(in srgb, var(--text-primary) 8%, transparent);
+      border-radius: 999px;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 12px 14px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      font-weight: 500;
+      white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--table-head-bg);
+      backdrop-filter: blur(8px);
+    }
+
+    tbody tr {
+      background: color-mix(in srgb, var(--card-bg-alt) 76%, var(--card-bg-soft));
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    }
+
+    tbody tr:hover {
+      background: color-mix(in srgb, var(--card-bg-hover) 78%, var(--card-bg-soft));
+      transform: translateY(-1px);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-primary) 4%, transparent);
+    }
+
+    tbody td {
+      padding: 16px 14px;
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    tbody td:first-child {
+      border-left: 1px solid var(--border-soft);
+      border-top-left-radius: 18px;
+      border-bottom-left-radius: 18px;
+    }
+
+    tbody td:last-child {
+      border-right: 1px solid var(--border-soft);
+      border-top-right-radius: 18px;
+      border-bottom-right-radius: 18px;
+    }
+
+    tbody tr:hover td {
+      border-top-color: var(--border);
+      border-bottom-color: var(--border);
+    }
+
+    tbody tr:hover td:first-child {
+      border-left-color: var(--border);
+    }
+
+    tbody tr:hover td:last-child {
+      border-right-color: var(--border);
+    }
+
+    .business-name {
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .personal-name {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      margin-bottom: 3px;
+    }
+
+    .cell-main {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .cell-sub {
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+
+    .metric-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .anomaly-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 108px;
+    }
+
+    .anomaly-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .anomaly-score {
+      font-size: 26px;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      font-weight: 600;
+      color: var(--text-primary);
+      min-width: 44px;
+    }
+
+    .anomaly-density {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+      width: 54px;
+    }
+
+    .anomaly-density span {
+      height: 18px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--text-primary) 8%, transparent);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-primary) 2%, transparent);
+    }
+
+    .anomaly-density span.active {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--text-primary) 42%, transparent), color-mix(in srgb, var(--text-primary) 16%, transparent));
+    }
+
+    .anomaly-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card-bg-alt);
+      padding: 6px 10px;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .pill::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--text-primary) 34%, transparent);
+      flex: 0 0 auto;
+    }
+
+    .pill-strong {
+      border-color: var(--border-strong);
+      background: var(--card-bg-strong);
+      color: var(--text-primary);
+    }
+
+    .pill-faint {
+      color: var(--text-faint);
+      background: var(--card-bg-soft);
+    }
+
+    .status-pill {
+      width: fit-content;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card-bg-alt);
+      padding: 7px 11px;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .status-pill.status-strong {
+      border-color: var(--border-strong);
+      background: var(--card-bg-strong);
+      color: var(--text-primary);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-primary) 4%, transparent);
+    }
+
+    .status-pill.status-muted {
+      color: var(--text-muted);
+      background: var(--card-bg-soft);
+    }
+
+    .date-main,
+    .assignee-main,
+    .workflow-main {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .preview-copy {
+      max-width: 34ch;
+      font-size: 13px;
+      color: var(--text-secondary-soft);
+      line-height: 1.6;
+    }
+
+    .preview-cell {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .preview-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card-bg-alt);
+      color: var(--text-secondary);
+      padding: 8px 10px;
+      font: inherit;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      line-height: 1;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .preview-trigger::after {
+      content: "›";
+      font-size: 14px;
+      line-height: 1;
+      color: var(--text-muted);
+    }
+
+    .preview-trigger:focus,
+    .preview-trigger:focus-visible {
+      outline: none;
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 1px var(--focus-ring);
+      background: var(--card-bg-strong);
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: var(--backdrop);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease;
+      z-index: 30;
+    }
+
+    .preview-drawer {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      bottom: 18px;
+      width: min(420px, calc(100vw - 36px));
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: var(--drawer-bg);
+      box-shadow:
+        0 30px 88px var(--shadow-lg),
+        0 8px 22px var(--shadow-md),
+        inset 0 1px 0 color-mix(in srgb, var(--text-primary) 4%, transparent);
+      backdrop-filter: blur(12px);
+      transform: translateX(calc(100% + 28px));
+      transition: transform 0.22s ease;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-open .drawer-backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer-open .preview-drawer {
+      transform: translateX(0);
+    }
+
+    .drawer-open .queue-shell {
+      opacity: 0.68;
+      filter: saturate(0.84) blur(1.2px);
+      transform: scale(0.992);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .drawer-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 12px;
+    }
+
+    .drawer-title {
+      margin: 0;
+      font-size: 28px;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      font-weight: 650;
+    }
+
+    .drawer-subtitle {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      letter-spacing: -0.01em;
+    }
+
+    .drawer-meta {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .drawer-close {
+      border: 1px solid var(--border);
+      background: var(--card-bg-alt);
+      color: var(--text-secondary);
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .drawer-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .drawer-body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .drawer-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .drawer-body::-webkit-scrollbar-thumb {
+      background: color-mix(in srgb, var(--text-primary) 8%, transparent);
+      border-radius: 999px;
+    }
+
+    .drawer-section-title {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .insight-list,
+    .log-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .insight-item,
+    .log-item {
+      border: 1px solid var(--border-soft);
+      border-radius: 18px;
+      background: var(--card-bg-alt);
+      padding: 14px;
+    }
+
+    .insight-name,
+    .log-title {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .insight-copy,
+    .log-meta {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .drawer-select,
+    .drawer-notes {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--card-bg-alt);
+      color: var(--text-secondary);
+      padding: 12px 14px;
+      font: inherit;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .drawer-select {
+      height: 50px;
+      border-color: var(--border);
+      background: var(--card-bg-strong);
+      font-size: 14px;
+    }
+
+    .drawer-notes {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    .drawer-notes::placeholder {
+      color: var(--text-faint);
+    }
+
+    .drawer-select:focus,
+    .drawer-select:focus-visible,
+    .drawer-notes:focus,
+    .drawer-notes:focus-visible,
+    .drawer-close:focus,
+    .drawer-close:focus-visible {
+      outline: none;
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 1px var(--focus-ring);
+      background: var(--card-bg-strong);
+    }
+
+    .footer-note {
+      padding: 0 24px 24px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1180px) {
+      .summary-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 16px;
+      }
+
+      .queue-shell {
+        border-radius: 22px;
+      }
+
+      .queue-top {
+        padding: 18px;
+      }
+
+      .summary-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .controls-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .queue-guidance {
+        padding: 0 18px 12px;
+      }
+
+      .section-list {
+        padding: 0 12px 12px;
+        gap: 20px;
+      }
+
+      .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .section-controls {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .section-panel-inner {
+        padding: 6px 10px 4px;
+      }
+
+      .preview-drawer {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 100%;
+        min-height: 72vh;
+        border-radius: 24px 24px 0 0;
+      }
+
+      .drawer-open .queue-shell {
+        transform: none;
+        opacity: 0.56;
+      }
+    }
+  </style>
+</head>
+<body class="theme-dark">
+  <div class="page">
+    <div class="header">
+      <div>
+        <div class="eyebrow">Operational queue / underwriting inbox</div>
+        <h1 class="title">Customer Queue</h1>
+        <div class="subtitle">
+          A smart underwriting inbox for triaging what needs attention now, what is waiting on counterparties, and which records are drifting toward escalation or stagnation.
+        </div>
+      </div>
+    </div>
+
+    <section class="queue-shell">
+      <div class="queue-top">
+        <div class="controls-row">
+          <div class="controls-group">
+            <div class="control-label">Theme</div>
+            <div class="theme-toggle" role="tablist" aria-label="Theme toggle">
+              <button class="theme-toggle-button active" id="themeDarkButton" type="button" data-theme-choice="dark">Dark</button>
+              <button class="theme-toggle-button" id="themeLightButton" type="button" data-theme-choice="light">Light</button>
+            </div>
+          </div>
+        </div>
+        <div class="summary-strip" id="summaryStrip"></div>
+        <div class="filter-row" id="filterRow"></div>
+      </div>
+      <div class="queue-guidance">Click a row to open the full record. Use Preview for quick triage.</div>
+
+      <div class="section-list" id="queueSections"></div>
+    </section>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="preview-drawer" id="previewDrawer" aria-hidden="true">
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-eyebrow">Quick preview / underwriting triage</div>
+        <h2 class="drawer-title" id="drawerBusinessName">No file selected</h2>
+        <div class="drawer-subtitle" id="drawerPersonalName">Choose a queue item to inspect the file context.</div>
+        <div class="drawer-meta" id="drawerMeta"></div>
+      </div>
+      <button class="drawer-close" id="drawerClose" type="button" aria-label="Close preview drawer">×</button>
+    </div>
+    <div class="drawer-body">
+      <div>
+        <div class="drawer-section-title">Top Canonical Insights</div>
+        <div class="insight-list" id="drawerInsightList"></div>
+      </div>
+      <div>
+        <div class="drawer-section-title">Action</div>
+        <select class="drawer-select" id="drawerActionSelect"></select>
+      </div>
+      <div>
+        <div class="drawer-section-title">Notes</div>
+        <textarea class="drawer-notes" id="drawerNotes" placeholder="Capture quick triage context before opening the full record."></textarea>
+      </div>
+      <div>
+        <div class="drawer-section-title">Logs</div>
+        <div class="log-list" id="drawerLogList"></div>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    const themeStorageKey = "underwriter-queue-theme";
+    const currentUnderwriter = "M. Abramovic";
+    const previewActions = [
+      "Open record",
+      "Assign to me",
+      "Escalate",
+      "Request documentation",
+      "Mark waiting on them"
+    ];
+
+    const queueRows = [
+      {
+        id: "northline-freight",
+        businessName: "Northline Freight Systems LLC",
+        personalName: "Ava Martinez",
+        anomaly: "High",
+        anomalyScore: 91,
+        workflow: "Initial review",
+        status: "Waiting on Us",
+        assignee: "M. Abramovic",
+        lastUpdated: "12 min ago",
+        created: "Today, 8:14 AM",
+        preview: "Entity structure mismatch against supplied registration packet. Beneficial owner graph still incomplete.",
+        insights: [
+          { name: "Business entity inconsistency", copy: "Secretary-of-state registration and submitted ownership packet do not reconcile cleanly." },
+          { name: "Bank ownership review", copy: "Account authority evidence does not yet align with the declared beneficial owner set." }
+        ],
+        logs: [
+          { title: "Assigned to Mike", meta: "Today, 8:21 AM" },
+          { title: "Requested ownership support", meta: "Today, 8:34 AM" },
+          { title: "Awaiting internal follow-up", meta: "Today, 8:47 AM" }
+        ],
+        escalated: false,
+        returnedResponse: false,
+        stagnant: false
+      },
+      {
+        id: "blue-cedar",
+        businessName: "Blue Cedar Wellness Group",
+        personalName: "Daniel Kim",
+        anomaly: "Low",
+        anomalyScore: 34,
+        workflow: "Document follow-up",
+        status: "Waiting on Them",
+        assignee: null,
+        lastUpdated: "1 hr ago",
+        created: "Today, 7:42 AM",
+        preview: "Awaiting refreshed bank statement and signed operating agreement. Risk posture otherwise stable.",
+        insights: [
+          { name: "Contactability friction", copy: "Follow-up requests remain open despite otherwise stable underwriting signals." },
+          { name: "Bank ownership review", copy: "Updated statement is needed to complete account-holder verification." }
+        ],
+        logs: [
+          { title: "Unassigned intake", meta: "Today, 7:42 AM" },
+          { title: "Requested bank statement", meta: "Today, 7:58 AM" },
+          { title: "Awaiting customer response", meta: "Today, 8:06 AM" }
+        ],
+        escalated: false,
+        returnedResponse: false,
+        stagnant: false
+      },
+      {
+        id: "red-harbor",
+        businessName: "Red Harbor Imports Inc.",
+        personalName: "Leila Hassan",
+        anomaly: "High",
+        anomalyScore: 96,
+        workflow: "Escalated review",
+        status: "Escalated",
+        assignee: "M. Abramovic",
+        lastUpdated: "3 hrs ago",
+        created: "Yesterday, 2:18 PM",
+        preview: "Cross-border payment pattern conflicts with stated supplier base. Manual review requested by policy lead.",
+        insights: [
+          { name: "Match monitoring hit", copy: "External watchlist proximity requires manual review before progression." },
+          { name: "Credit risk", copy: "Transaction behavior suggests concentrated exposure outside the stated operating profile." }
+        ],
+        logs: [
+          { title: "Escalated to policy review", meta: "Yesterday, 3:02 PM" },
+          { title: "Assigned to Mike", meta: "Yesterday, 3:17 PM" },
+          { title: "Awaiting underwriter decision", meta: "Today, 9:12 AM" }
+        ],
+        escalated: true,
+        returnedResponse: false,
+        stagnant: false
+      },
+      {
+        id: "elm-street",
+        businessName: "Elm Street Hospitality Partners",
+        personalName: "Thomas Reed",
+        anomaly: "Low",
+        anomalyScore: 41,
+        workflow: "Returned response",
+        status: "Returned Response",
+        assignee: "J. Singh",
+        lastUpdated: "5 hrs ago",
+        created: "Yesterday, 9:03 AM",
+        preview: "Customer responded with amended lease packet. Queue requires final underwriting pass and closeout.",
+        insights: [
+          { name: "Business entity inconsistency", copy: "Earlier lease naming mismatch appears corrected but still needs final validation." },
+          { name: "Identity mismatch", copy: "Signer naming sequence should be reconciled against the amended packet." }
+        ],
+        logs: [
+          { title: "Returned customer response", meta: "Today, 6:54 AM" },
+          { title: "Lease packet replaced", meta: "Today, 7:03 AM" },
+          { title: "Queued for underwriter review", meta: "Today, 7:18 AM" }
+        ],
+        escalated: false,
+        returnedResponse: true,
+        stagnant: false
+      },
+      {
+        id: "atlas-equipment",
+        businessName: "Atlas Equipment Leasing Co.",
+        personalName: "Priya Nair",
+        anomaly: "High",
+        anomalyScore: 88,
+        workflow: "Ownership review",
+        status: "Stagnant",
+        assignee: null,
+        lastUpdated: "2 days ago",
+        created: "Apr 10, 11:26 AM",
+        preview: "Ownership percentages remain inconsistent across secretary-of-state record and uploaded cap table.",
+        insights: [
+          { name: "Business entity inconsistency", copy: "Ownership percentages vary materially across corporate documentation sources." },
+          { name: "Bank ownership review", copy: "Authorized signer evidence remains incomplete relative to the ownership structure." }
+        ],
+        logs: [
+          { title: "Ownership issue detected", meta: "Apr 10, 12:11 PM" },
+          { title: "Requested cap table clarification", meta: "Apr 11, 9:05 AM" },
+          { title: "No response received", meta: "Apr 12, 4:39 PM" }
+        ],
+        escalated: false,
+        returnedResponse: false,
+        stagnant: true
+      },
+      {
+        id: "quiet-oak",
+        businessName: "Quiet Oak Family Dental",
+        personalName: "Monica Alvarez",
+        anomaly: "Low",
+        anomalyScore: 27,
+        workflow: "Fresh intake",
+        status: "Waiting on Us",
+        assignee: "M. Abramovic",
+        lastUpdated: "24 min ago",
+        created: "Today, 9:11 AM",
+        preview: "Low-anomaly intake queued for first touch. Standard identity verification and business legitimacy checks pending.",
+        insights: [
+          { name: "Identity mismatch", copy: "Minor signer formatting difference should be cleared during first-touch review." },
+          { name: "Contactability friction", copy: "Primary contact verification has not yet been completed." }
+        ],
+        logs: [
+          { title: "Assigned to Mike", meta: "Today, 9:16 AM" },
+          { title: "Queued for first touch", meta: "Today, 9:18 AM" },
+          { title: "No outbound request sent yet", meta: "Today, 9:19 AM" }
+        ],
+        escalated: false,
+        returnedResponse: false,
+        stagnant: false
+      },
+      {
+        id: "silver-current",
+        businessName: "Silver Current Marine Supply",
+        personalName: "Jonah Brooks",
+        anomaly: "High",
+        anomalyScore: 93,
+        workflow: "Escalated review",
+        status: "Escalated",
+        assignee: "R. Patel",
+        lastUpdated: "1 day ago",
+        created: "Apr 11, 4:37 PM",
+        preview: "Invoice cadence and declared shipping volume diverge materially from historical merchant activity.",
+        insights: [
+          { name: "Credit risk", copy: "Declared shipping scale and observed invoice rhythm point to elevated exposure." },
+          { name: "Match monitoring hit", copy: "Merchant counterparties require closer screening before progression." }
+        ],
+        logs: [
+          { title: "Escalated to senior underwriter", meta: "Apr 11, 5:02 PM" },
+          { title: "Assigned to R. Patel", meta: "Apr 11, 5:14 PM" },
+          { title: "Manual review in progress", meta: "Apr 12, 10:26 AM" }
+        ],
+        escalated: true,
+        returnedResponse: false,
+        stagnant: false
+      },
+      {
+        id: "crescent-ridge",
+        businessName: "Crescent Ridge Home Services",
+        personalName: "Nina Wallace",
+        anomaly: "Low",
+        anomalyScore: 39,
+        workflow: "Document follow-up",
+        status: "Stagnant",
+        assignee: null,
+        lastUpdated: "4 days ago",
+        created: "Apr 8, 10:04 AM",
+        preview: "No reply on payroll substantiation request. Record is beginning to age out of expected SLA window.",
+        insights: [
+          { name: "Contactability friction", copy: "Customer responsiveness has declined across repeated document requests." },
+          { name: "Credit risk", copy: "Payroll substantiation is still needed to validate the reported operating footprint." }
+        ],
+        logs: [
+          { title: "Document request sent", meta: "Apr 8, 10:32 AM" },
+          { title: "Reminder issued", meta: "Apr 10, 9:08 AM" },
+          { title: "Record flagged stagnant", meta: "Apr 12, 3:46 PM" }
+        ],
+        escalated: false,
+        returnedResponse: false,
+        stagnant: true
+      },
+      {
+        id: "foundry-peak",
+        businessName: "Foundry Peak Design Studio",
+        personalName: "Ethan Cole",
+        anomaly: "High",
+        anomalyScore: 84,
+        workflow: "Returned response",
+        status: "Returned Response",
+        assignee: "M. Abramovic",
+        lastUpdated: "48 min ago",
+        created: "Yesterday, 11:57 AM",
+        preview: "Customer submitted corrected tax ID evidence and clarifying narrative. Queue ready for anomaly reconciliation.",
+        insights: [
+          { name: "Identity mismatch", copy: "Tax ID evidence appears corrected but still needs record-level reconciliation." },
+          { name: "Business entity inconsistency", copy: "Narrative clarification helps, though source records still need confirmation." }
+        ],
+        logs: [
+          { title: "Returned customer response", meta: "Today, 8:01 AM" },
+          { title: "Assigned to Mike", meta: "Today, 8:07 AM" },
+          { title: "Awaiting quick triage", meta: "Today, 8:25 AM" }
+        ],
+        escalated: false,
+        returnedResponse: true,
+        stagnant: false
+      },
+      {
+        id: "harborline-clinical",
+        businessName: "Harborline Clinical Staffing",
+        personalName: "Grace Okafor",
+        anomaly: "High",
+        anomalyScore: 86,
+        workflow: "Assignment pending",
+        status: "Unassigned",
+        assignee: null,
+        lastUpdated: "7 hrs ago",
+        created: "Today, 6:28 AM",
+        preview: "Concentrated contractor payout activity warrants review. Intake is unassigned and above normal anomaly threshold.",
+        insights: [
+          { name: "Credit risk", copy: "Payout concentration is elevated relative to the declared staffing footprint." },
+          { name: "Bank ownership review", copy: "Account-level authority should be confirmed before assignment progression." }
+        ],
+        logs: [
+          { title: "Intake received", meta: "Today, 6:28 AM" },
+          { title: "Flagged above anomaly threshold", meta: "Today, 6:41 AM" },
+          { title: "Awaiting assignment", meta: "Today, 7:03 AM" }
+        ],
+        escalated: false,
+        returnedResponse: false,
+        stagnant: false
+      }
+    ];
+
+    const summaryCards = [
+      {
+        label: "My Queue",
+        value: () => queueRows.filter((row) => row.assignee === currentUnderwriter).length,
+        note: "Records currently assigned to you for triage, evidence review, or reconciliation."
+      },
+      {
+        label: "Unassigned",
+        value: () => queueRows.filter((row) => !row.assignee).length,
+        note: "Fresh or drifting work without an owner, ready for intake distribution."
+      },
+      {
+        label: "Escalated",
+        value: () => queueRows.filter((row) => row.escalated).length,
+        note: "Cases raised for policy, manual judgment, or concentrated anomaly review."
+      },
+      {
+        label: "Returned Response",
+        value: () => queueRows.filter((row) => row.returnedResponse).length,
+        note: "Customer replies now back on our side for the next underwriting decision."
+      }
+    ];
+
+    const filters = [
+      { label: "High Anomaly", active: true },
+      { label: "Low Anomaly", active: false },
+      { label: "Stagnant", active: false },
+      { label: "Waiting on Us", active: true },
+      { label: "Waiting on Them", active: false }
+    ];
+
+    const sectionConfig = [
+      {
+        key: "my-queue",
+        label: "My Queue",
+        defaultExpanded: true,
+        getRows: () => queueRows.filter((row) => row.assignee === currentUnderwriter)
+      },
+      {
+        key: "unassigned",
+        label: "Unassigned",
+        defaultExpanded: true,
+        getRows: () => queueRows.filter((row) => !row.assignee)
+      },
+      {
+        key: "escalated",
+        label: "Escalated",
+        defaultExpanded: true,
+        getRows: () => queueRows.filter((row) => row.escalated)
+      },
+      {
+        key: "returned-response",
+        label: "Returned Response",
+        defaultExpanded: false,
+        getRows: () => queueRows.filter((row) => row.returnedResponse)
+      }
+    ];
+
+    const summaryStrip = document.getElementById("summaryStrip");
+    const filterRow = document.getElementById("filterRow");
+    const queueSections = document.getElementById("queueSections");
+    const themeDarkButton = document.getElementById("themeDarkButton");
+    const themeLightButton = document.getElementById("themeLightButton");
+    const drawerBackdrop = document.getElementById("drawerBackdrop");
+    const previewDrawer = document.getElementById("previewDrawer");
+    const drawerClose = document.getElementById("drawerClose");
+    const drawerBusinessName = document.getElementById("drawerBusinessName");
+    const drawerPersonalName = document.getElementById("drawerPersonalName");
+    const drawerMeta = document.getElementById("drawerMeta");
+    const drawerInsightList = document.getElementById("drawerInsightList");
+    const drawerActionSelect = document.getElementById("drawerActionSelect");
+    const drawerNotes = document.getElementById("drawerNotes");
+    const drawerLogList = document.getElementById("drawerLogList");
+    const sectionState = Object.fromEntries(
+      sectionConfig.map((section) => [section.key, { expanded: section.defaultExpanded, visibleCount: 5 }])
+    );
+    let activeTheme = window.localStorage.getItem(themeStorageKey) || "dark";
+    let activePreviewRowId = null;
+
+    function applyTheme(theme) {
+      activeTheme = theme === "light" ? "light" : "dark";
+      document.body.classList.remove("theme-dark", "theme-light");
+      document.body.classList.add(`theme-${activeTheme}`);
+      themeDarkButton.classList.toggle("active", activeTheme === "dark");
+      themeLightButton.classList.toggle("active", activeTheme === "light");
+      themeDarkButton.setAttribute("aria-pressed", activeTheme === "dark" ? "true" : "false");
+      themeLightButton.setAttribute("aria-pressed", activeTheme === "light" ? "true" : "false");
+      window.localStorage.setItem(themeStorageKey, activeTheme);
+    }
+
+    function buildPill(label, variant) {
+      return `<span class="pill ${variant || ""}">${label}</span>`;
+    }
+
+    function buildDensity(score) {
+      const activeBars = Math.max(1, Math.min(6, Math.round(score / 16.7)));
+      return `
+        <div class="anomaly-density" aria-hidden="true">
+          ${Array.from({ length: 6 }, (_, index) => `<span class="${index < activeBars ? "active" : ""}"></span>`).join("")}
+        </div>
+      `;
+    }
+
+    function getStatusVariant(status) {
+      if (status === "Escalated" || status === "Unassigned" || status === "Stagnant") {
+        return "status-strong";
+      }
+
+      if (status === "Waiting on Them") {
+        return "status-muted";
+      }
+
+      return "";
+    }
+
+    function openPreviewDrawer(rowId) {
+      const row = queueRows.find((item) => item.id === rowId);
+      if (!row) return;
+
+      activePreviewRowId = rowId;
+      drawerBusinessName.textContent = row.businessName;
+      drawerPersonalName.textContent = `${row.personalName} · ${row.workflow}`;
+      drawerMeta.innerHTML = `
+        ${buildPill(`Anomaly ${row.anomalyScore}`, row.anomaly === "High" ? "pill-strong" : "pill-faint")}
+        <div class="status-pill ${getStatusVariant(row.status)}">${row.status}</div>
+        ${buildPill(row.assignee || "Unassigned", row.assignee ? "pill-faint" : "pill-strong")}
+      `;
+      drawerInsightList.innerHTML = row.insights
+        .slice(0, 2)
+        .map(
+          (insight) => `
+            <div class="insight-item">
+              <div class="insight-name">${insight.name}</div>
+              <div class="insight-copy">${insight.copy}</div>
+            </div>
+          `
+        )
+        .join("");
+      drawerActionSelect.innerHTML = previewActions
+        .map((action) => `<option value="${action}">${action}</option>`)
+        .join("");
+      drawerActionSelect.value = previewActions[0];
+      drawerNotes.value = "";
+      drawerLogList.innerHTML = row.logs
+        .map(
+          (log) => `
+            <div class="log-item">
+              <div class="log-title">${log.title}</div>
+              <div class="log-meta">${log.meta}</div>
+            </div>
+          `
+        )
+        .join("");
+
+      document.body.classList.add("drawer-open");
+      previewDrawer.setAttribute("aria-hidden", "false");
+    }
+
+    function closePreviewDrawer() {
+      activePreviewRowId = null;
+      document.body.classList.remove("drawer-open");
+      previewDrawer.setAttribute("aria-hidden", "true");
+    }
+
+    function handleQueueBodyClick(event) {
+      const previewTrigger = event.target.closest(".preview-trigger");
+      if (previewTrigger) {
+        event.stopPropagation();
+        const rowId = previewTrigger.dataset.rowId;
+        if (!rowId) return;
+
+        openPreviewDrawer(rowId);
+        return;
+      }
+
+      const rowElement = event.target.closest("tr[data-href]");
+      if (!rowElement) return;
+
+      window.location.href = rowElement.dataset.href;
+    }
+
+    function handleSectionListChange(event) {
+      const sectionSelect = event.target.closest(".section-select");
+      if (sectionSelect) {
+        const sectionKey = sectionSelect.dataset.sectionKey;
+        if (!sectionKey || !sectionState[sectionKey]) return;
+        sectionState[sectionKey].visibleCount = Number(sectionSelect.value);
+        renderSections();
+        return;
+      }
+    }
+
+    function handleSectionListClick(event) {
+      const sectionToggleButton = event.target.closest(".section-toggle-button");
+      if (sectionToggleButton) {
+        const sectionKey = sectionToggleButton.dataset.sectionKey;
+        if (!sectionKey) return;
+        sectionState[sectionKey].expanded = !sectionState[sectionKey].expanded;
+        renderSections();
+        return;
+      }
+
+      handleQueueBodyClick(event);
+    }
+
+    function renderSummary() {
+      summaryStrip.innerHTML = summaryCards
+        .map(
+          (card) => `
+            <article class="summary-card">
+              <div>
+                <div class="summary-label">${card.label}</div>
+                <div class="summary-value">${card.value()}</div>
+              </div>
+              <div class="summary-note">${card.note}</div>
+            </article>
+          `
+        )
+        .join("");
+    }
+
+    function renderFilters() {
+      filterRow.innerHTML = filters
+        .map((filter) => `<button class="filter-pill ${filter.active ? "active" : ""}" type="button">${filter.label}</button>`)
+        .join("");
+    }
+
+    function renderRows(rows) {
+      return rows
+        .map((row) => {
+          const anomalyVariant = row.anomaly === "High" ? "pill-strong" : "pill-faint";
+          const assigneeLabel = row.assignee || "Unassigned";
+          const statusVariant = getStatusVariant(row.status);
+
+          return `
+            <tr data-href="./circlev2.html">
+              <td>
+                <div class="business-name">${row.businessName}</div>
+                <div class="cell-sub">Commercial applicant</div>
+              </td>
+              <td>
+                <div class="personal-name">${row.personalName}</div>
+                <div class="cell-sub">Primary contact</div>
+              </td>
+              <td>
+                <div class="anomaly-stack">
+                  <div class="anomaly-top">
+                    <div class="anomaly-score">${row.anomalyScore}</div>
+                    ${buildDensity(row.anomalyScore)}
+                  </div>
+                  <div class="anomaly-meta">
+                    ${buildPill(`${row.anomaly} anomaly`, anomalyVariant)}
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="workflow-main">${row.workflow}</div>
+                <div class="cell-sub">${row.escalated ? "Manual path engaged" : "Standard queue path"}</div>
+              </td>
+              <td>
+                <div class="metric-stack">
+                  <div class="status-pill ${statusVariant}">${row.status}</div>
+                </div>
+              </td>
+              <td>
+                <div class="metric-stack">
+                  <div class="assignee-main">${assigneeLabel}</div>
+                  <div class="cell-sub">${row.assignee ? "Owned" : "Awaiting owner"}</div>
+                </div>
+              </td>
+              <td>
+                <div class="date-main">${row.lastUpdated}</div>
+                <div class="cell-sub">${row.stagnant ? "Requires attention" : "Within expected rhythm"}</div>
+              </td>
+              <td>
+                <div class="date-main">${row.created}</div>
+                <div class="cell-sub">Queue entry</div>
+              </td>
+              <td>
+                <div class="preview-cell">
+                  <div class="preview-copy">${row.preview}</div>
+                  <button class="preview-trigger" type="button" data-row-id="${row.id}" aria-label="Preview ${row.businessName}">Preview</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+    function renderSections() {
+      queueSections.innerHTML = sectionConfig
+        .map((section) => {
+          const totalRows = section.getRows().length;
+          const visibleCount = sectionState[section.key].visibleCount;
+          const rows = section.getRows().slice(0, visibleCount);
+          const isExpanded = sectionState[section.key].expanded;
+
+          return `
+            <section class="queue-section ${isExpanded ? "" : "collapsed"}">
+              <div class="section-header">
+                <div class="section-header-main">
+                  <div class="section-title">${section.label} <span class="section-count">· ${totalRows} ${totalRows === 1 ? "record" : "records"}</span></div>
+                </div>
+                <div class="section-controls">
+                  <select class="section-select" data-section-key="${section.key}" aria-label="Visible records for ${section.label}">
+                    <option value="5" ${visibleCount === 5 ? "selected" : ""}>5</option>
+                    <option value="10" ${visibleCount === 10 ? "selected" : ""}>10</option>
+                    <option value="25" ${visibleCount === 25 ? "selected" : ""}>25</option>
+                  </select>
+                  <button
+                    class="section-toggle-button"
+                    type="button"
+                    data-section-key="${section.key}"
+                    aria-expanded="${isExpanded ? "true" : "false"}"
+                    aria-controls="section-panel-${section.key}"
+                  >${isExpanded ? "Collapse" : "Expand"}</button>
+                </div>
+              </div>
+              <div class="section-panel" id="section-panel-${section.key}">
+                <div class="section-panel-inner">
+                  <div class="table-scroll">
+                    <table class="table-shell">
+                      <thead>
+                        <tr>
+                          <th>Business Name</th>
+                          <th>Personal Name</th>
+                          <th>Anomaly</th>
+                          <th>Workflow</th>
+                          <th>Status</th>
+                          <th>Assignee</th>
+                          <th>Last Updated</th>
+                          <th>Created</th>
+                          <th>Preview</th>
+                        </tr>
+                      </thead>
+                      <tbody>${renderRows(rows)}</tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+          `;
+        })
+        .join("");
+    }
+
+    renderSummary();
+    renderFilters();
+    renderSections();
+    applyTheme(activeTheme);
+    themeDarkButton.addEventListener("click", () => applyTheme("dark"));
+    themeLightButton.addEventListener("click", () => applyTheme("light"));
+    queueSections.addEventListener("change", handleSectionListChange);
+    queueSections.addEventListener("click", handleSectionListClick);
+    drawerBackdrop.addEventListener("click", closePreviewDrawer);
+    drawerClose.addEventListener("click", closePreviewDrawer);
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && activePreviewRowId) {
+        closePreviewDrawer();
+      }
+    });
+  </script>
+</body>
+</html>
