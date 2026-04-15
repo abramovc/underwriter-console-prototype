@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Underwriting Circle — System</title>
+  <style>
+    :root {
+      --page-bg: #f8f7f3;
+      --page-bg-2: #f5f4ef;
+      --stage-bg: #f6f5f0;
+      --stage-bg-2: #f2f1eb;
+      --text: rgba(8, 8, 8, 0.95);
+      --muted: rgba(8, 8, 8, 0.56);
+      --faint: rgba(8, 8, 8, 0.34);
+      --panel-border: rgba(0, 0, 0, 0.08);
+      --hairline: rgba(0, 0, 0, 0.05);
+      --card: rgba(255, 255, 255, 0.52);
+      --ink: rgba(10, 10, 10, 0.88);
+      --ink-soft: rgba(10, 10, 10, 0.62);
+      --ink-faint: rgba(10, 10, 10, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.92), transparent 34%),
+        radial-gradient(circle at bottom, rgba(0,0,0,0.015), transparent 42%),
+        linear-gradient(180deg, var(--page-bg), var(--page-bg-2));
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      padding: 28px;
+    }
+
+    .page {
+      max-width: 1480px;
+      margin: 0 auto;
+    }
+
+    .header {
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: clamp(36px, 5vw, 62px);
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      margin: 0;
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      max-width: 860px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .stage {
+      position: relative;
+      min-height: 920px;
+      border: 1px solid var(--panel-border);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 50% 44%, rgba(255,255,255,0.24), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.26), rgba(255,255,255,0.12)),
+        linear-gradient(180deg, var(--stage-bg), var(--stage-bg-2));
+      box-shadow:
+        0 20px 60px rgba(36, 30, 20, 0.08),
+        inset 0 1px 0 rgba(255,255,255,0.55);
+      overflow: hidden;
+    }
+
+    .stage-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.22;
+      pointer-events: none;
+      mask-image: radial-gradient(circle at center, black 16%, transparent 88%);
+    }
+
+    .stage-noise {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(0,0,0,0.018), transparent 44%),
+        radial-gradient(circle at 28% 20%, rgba(255,255,255,0.13), transparent 22%),
+        radial-gradient(circle at 75% 78%, rgba(0,0,0,0.015), transparent 28%);
+      opacity: 0.52;
+      pointer-events: none;
+    }
+
+    .hud {
+      position: absolute;
+      left: 30px;
+      top: 28px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .hud-time {
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      color: rgba(8,8,8,0.8);
+    }
+
+    .hud-title {
+      font-size: clamp(36px, 4vw, 56px);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      font-weight: 560;
+      margin-top: 8px;
+      color: rgba(8,8,8,0.96);
+    }
+
+    .hud-sub {
+      margin-top: 10px;
+      font-size: 13px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: rgba(8,8,8,0.48);
+      max-width: 640px;
+    }
+
+    .legend {
+      position: absolute;
+      right: 28px;
+      top: 28px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 7px;
+      pointer-events: none;
+    }
+
+    .legend-line {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(8,8,8,0.42);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hover-card {
+      position: absolute;
+      z-index: 5;
+      min-width: 260px;
+      max-width: 340px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: rgba(248, 246, 240, 0.96);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 18px 44px rgba(40, 34, 24, 0.1);
+    }
+
+    .hover-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hover-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(8,8,8,0.48);
+      margin-bottom: 8px;
+    }
+
+    .hover-name {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      color: rgba(8,8,8,0.96);
+    }
+
+    .hover-copy {
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(8,8,8,0.76);
+    }
+
+    .hover-metrics {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(8,8,8,0.58);
+    }
+
+    .status-strip {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 24px;
+      display: grid;
+      grid-template-columns: minmax(220px, 260px) 1fr minmax(220px, 280px);
+      gap: 14px;
+      align-items: stretch;
+      z-index: 3;
+    }
+
+    .status-card {
+      border: 1px solid rgba(0,0,0,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.36), rgba(255,255,255,0.16)),
+        var(--card);
+      border-radius: 18px;
+      padding: 14px 16px;
+      min-height: 92px;
+      backdrop-filter: blur(8px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.58);
+    }
+
+    .status-kicker {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(8,8,8,0.46);
+      margin-bottom: 10px;
+    }
+
+    .status-value {
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+      color: rgba(8,8,8,0.94);
+    }
+
+    .status-copy {
+      margin-top: 8px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(8,8,8,0.64);
+    }
+
+    .status-center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .status-center .status-value {
+      font-size: 22px;
+    }
+
+    .status-center .status-copy {
+      margin-top: 6px;
+    }
+
+    @media (max-width: 980px) {
+      .stage {
+        min-height: 780px;
+      }
+
+      .status-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .legend {
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 16px;
+      }
+
+      .stage {
+        min-height: 680px;
+        border-radius: 24px;
+      }
+
+      .hud {
+        left: 18px;
+        top: 18px;
+      }
+
+      .status-strip {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="eyebrow">Experimental / divergence intelligence</div>
+      <h1 class="title">Underwriting Circle</h1>
+      <div class="subtitle">
+        A larger system view of anomaly pressure, drift, and reconciliation load. Quiet sectors remain controlled. Active sectors accumulate pressure and begin to bleed outward.
+      </div>
+    </div>
+
+    <section class="stage" id="stage">
+      <div class="stage-grid"></div>
+      <div class="stage-noise"></div>
+
+      <div class="hud">
+        <div class="hud-time">04.17.39</div>
+        <div class="hud-title">Divergence Field Active</div>
+        <div class="hud-sub" id="hudSub">
+          Quiet sectors remain stable while localized anomaly pressure builds across adjacent zones.
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-line">System-scale divergence field</div>
+        <div class="legend-line">Hover to inspect local pressure</div>
+      </div>
+
+      <canvas id="fieldCanvas" width="1440" height="920"></canvas>
+
+      <div class="hover-card" id="hoverCard">
+        <div class="hover-label">Hovered zone</div>
+        <div class="hover-name" id="hoverName">Identity</div>
+        <div class="hover-copy" id="hoverCopy"></div>
+        <div class="hover-metrics" id="hoverMetrics"></div>
+      </div>
+
+      <div class="status-strip">
+        <div class="status-card">
+          <div class="status-kicker">Anomaly pressure</div>
+          <div class="status-value" id="pressureValue">91</div>
+          <div class="status-copy" id="pressureCopy">
+            Business is carrying the dominant divergence load, with identity acting as the secondary pressure zone.
+          </div>
+        </div>
+
+        <div class="status-card status-center">
+          <div class="status-kicker">System state</div>
+          <div class="status-value" id="stateValue">Contained pressure</div>
+          <div class="status-copy" id="stateCopy">
+            Divergence is still controlled, but a few sectors are beginning to build enough pressure to leak beyond the ring.
+          </div>
+        </div>
+
+        <div class="status-card">
+          <div class="status-kicker">Hovered readout</div>
+          <div class="status-value" id="readoutValue">No zone selected</div>
+          <div class="status-copy" id="readoutCopy">
+            Move around the circle to inspect where pressure is building, where drift is spreading, and where the system remains quiet.
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<script>
+  const zones = [
+    {
+      key: "identity",
+      label: "Identity",
+      intensity: 0.86,
+      drift: 0.80,
+      spread: 0.88,
+      narrative: "Identity divergence is building across source-level attributes and unresolved reconciliation boundaries."
+    },
+    {
+      key: "contact",
+      label: "Contact",
+      intensity: 0.12,
+      drift: 0.18,
+      spread: 0.24,
+      narrative: "Contact signals remain mixed, with lower-pressure reachability drift extending beyond the core field."
+    },
+    {
+      key: "business",
+      label: "Business",
+      intensity: 1.0,
+      drift: 0.98,
+      spread: 1.0,
+      narrative: "Business pressure is concentrating around formation, ownership, and legitimacy mismatch patterns."
+    },
+    {
+      key: "bank",
+      label: "Bank",
+      intensity: 0.14,
+      drift: 0.14,
+      spread: 0.20,
+      narrative: "Bank divergence is present but relatively quiet, with only light residual ownership friction."
+    },
+    {
+      key: "compliance",
+      label: "Compliance",
+      intensity: 0.05,
+      drift: 0.07,
+      spread: 0.14,
+      narrative: "Compliance sectors remain largely calm, with minor residual policy turbulence near the edge."
+    },
+    {
+      key: "credit",
+      label: "Credit",
+      intensity: 0.10,
+      drift: 0.12,
+      spread: 0.18,
+      narrative: "Credit pressure is diffuse and secondary, showing early-stage clustering without dominant escalation."
+    }
+  ];
+
+  const stage = document.getElementById("stage");
+  const canvas = document.getElementById("fieldCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const hoverCard = document.getElementById("hoverCard");
+  const hoverName = document.getElementById("hoverName");
+  const hoverCopy = document.getElementById("hoverCopy");
+  const hoverMetrics = document.getElementById("hoverMetrics");
+
+  const hudSub = document.getElementById("hudSub");
+  const readoutValue = document.getElementById("readoutValue");
+  const readoutCopy = document.getElementById("readoutCopy");
+
+  let hoveredZone = null;
+  let frameTick = 0;
+  let animationFrame = null;
+  let hoverFramePending = false;
+  let lastMouseEvent = null;
+
+  function degToRad(deg) {
+    return (deg * Math.PI) / 180;
+  }
+
+  function normalizeAngle(angle) {
+    let a = angle % (Math.PI * 2);
+    if (a < 0) a += Math.PI * 2;
+    return a;
+  }
+
+  function angleBetween(angle, start, end) {
+    angle = normalizeAngle(angle);
+    start = normalizeAngle(start);
+    end = normalizeAngle(end);
+
+    if (start <= end) {
+      return angle >= start && angle <= end;
+    }
+    return angle >= start || angle <= end;
+  }
+
+  function clamp(num, min, max) {
+    return Math.max(min, Math.min(max, num));
+  }
+
+  function seededNoise(seed) {
+    const x = Math.sin(seed * 12.9898) * 43758.5453;
+    return x - Math.floor(x);
+  }
+
+  function centeredSample(seed) {
+    return (
+      seededNoise(seed) +
+      seededNoise(seed + 1.37) +
+      seededNoise(seed + 3.11) +
+      seededNoise(seed + 5.23)
+    ) / 4;
+  }
+
+  function computeAngles(items, startOffsetDeg) {
+    const equalSpan = 360 / items.length;
+    let cursor = startOffsetDeg;
+
+    items.forEach((item) => {
+      item.startDeg = cursor;
+      item.endDeg = cursor + equalSpan;
+      item.spanDeg = equalSpan;
+      item.start = degToRad(item.startDeg);
+      item.end = degToRad(item.endDeg);
+      item.midDeg = item.startDeg + equalSpan / 2;
+      item.mid = degToRad(item.midDeg);
+      cursor += equalSpan;
+    });
+  }
+
+  computeAngles(zones, -90);
+
+  function getGeometry(rect) {
+    return {
+      cx: rect.width * 0.5,
+      cy: rect.height * 0.49,
+      radius: Math.min(rect.width, rect.height) * 0.158
+    };
+  }
+
+  function resizeCanvas() {
+    const rect = stage.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = Math.floor(rect.width * dpr);
+    canvas.height = Math.floor(rect.height * dpr);
+    canvas.style.width = rect.width + "px";
+    canvas.style.height = rect.height + "px";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  }
+
+  function zoneEvolution(zone, tick) {
+    const phase = tick * 0.008 + zone.startDeg * 0.022;
+    const swell = Math.sin(phase) * 0.5 + 0.5;
+    const bloom = Math.sin(phase * 0.63 + 1.7) * 0.5 + 0.5;
+    const migrate = Math.sin(phase * 0.41 + 3.1) * 0.5 + 0.5;
+
+    return {
+      density: zone.intensity * (0.9 + swell * 0.5),
+      spread: zone.spread * (0.82 + bloom * 0.28),
+      drift: zone.drift * (0.84 + migrate * 0.36),
+      migrationOffset: (migrate - 0.5) * 0.11
+    };
+  }
+
+  function zonePriority(zone) {
+    const emphasisMap = {
+      business: 3.4,
+      identity: 2.7,
+      contact: 0.72,
+      credit: 0.62,
+      bank: 0.52,
+      compliance: 0.42
+    };
+
+    return emphasisMap[zone.key] || 0.8;
+  }
+
+  function drawContainment(cx, cy, radius) {
+    ctx.save();
+
+    const halo = ctx.createRadialGradient(cx, cy, radius * 0.78, cx, cy, radius * 1.52);
+    halo.addColorStop(0, "rgba(0,0,0,0)");
+    halo.addColorStop(0.68, "rgba(0,0,0,0.006)");
+    halo.addColorStop(0.86, "rgba(0,0,0,0.010)");
+    halo.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = halo;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * 1.58, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = "rgba(18,18,18,0.085)";
+    ctx.lineWidth = 0.55;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.stroke();
+
+    const ghostRing = ctx.createRadialGradient(cx, cy, radius * 1.02, cx, cy, radius * 1.16);
+    ghostRing.addColorStop(0, "rgba(0,0,0,0)");
+    ghostRing.addColorStop(0.58, "rgba(0,0,0,0.018)");
+    ghostRing.addColorStop(0.82, "rgba(0,0,0,0.012)");
+    ghostRing.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = ghostRing;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * 1.18, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+   }
+
+  function drawAmbientDust(cx, cy, radius) {
+    ctx.save();
+
+    for (let i = 0; i < 56; i++) {
+      const angle = degToRad(i * 1.97 + frameTick * 0.028);
+      const r = radius + 4 + seededNoise(i * 0.43) * 7;
+      const x = cx + Math.cos(angle) * r;
+      const y = cy + Math.sin(angle) * r;
+      const size = 0.08 + seededNoise(i * 0.14) * 0.18;
+      const alpha = 0.001 + seededNoise(i * 0.28) * 0.0018;
+
+      ctx.fillStyle = `rgba(12,12,12,${alpha})`;
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+
+  function drawZoneWash(zone, cx, cy, radius, isHovered) {
+    ctx.save();
+
+    const evo = zoneEvolution(zone, frameTick);
+    const priority = zonePriority(zone);
+    const mid = zone.mid + evo.migrationOffset * 0.32;
+    const cloudRadius = radius + 4 + evo.drift * 5;
+    const cloudX = cx + Math.cos(mid) * cloudRadius;
+    const cloudY = cy + Math.sin(mid) * cloudRadius;
+    const cloudSize = 8 + evo.density * 6 * priority + (isHovered ? 5 : 0);
+
+    const gradient = ctx.createRadialGradient(cloudX, cloudY, 0, cloudX, cloudY, cloudSize);
+    const alpha = (isHovered ? 0.01 : hoveredZone ? 0.0018 : 0.0032) * priority;
+    gradient.addColorStop(0, `rgba(8,8,8,${alpha})`);
+    gradient.addColorStop(0.32, `rgba(8,8,8,${alpha * 0.16})`);
+    gradient.addColorStop(1, "rgba(8,8,8,0)");
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(cloudX, cloudY, cloudSize, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  function drawZoneRoot(zone, cx, cy, radius, isHovered) {
+    ctx.save();
+
+    const evo = zoneEvolution(zone, frameTick);
+    const priority = zonePriority(zone);
+    const hoverBoost = isHovered ? 1.42 : hoveredZone ? 0.72 : 1;
+    const zoneRange = zone.end - zone.start;
+    const rootStrength = (0.45 + evo.density * 1.1 + evo.spread * 0.24) * priority * hoverBoost;
+    const fragments = Math.floor(92 + evo.density * 150 * priority + (isHovered ? 90 : 0));
+
+    ctx.lineCap = "round";
+
+    for (let i = 0; i < fragments; i++) {
+      const tSeed = centeredSample(i * 0.618 + zone.intensity * 4.9 + frameTick * 0.00045);
+      const centerBias = 1 - Math.abs(tSeed - 0.5) * 2;
+      const concentration = Math.pow(clamp(centerBias, 0, 1), 1.35);
+      const rootBias = Math.pow(seededNoise(i * 0.57 + zone.spread * 7.3), 1.85);
+      const theta = zone.start + zoneRange * tSeed + evo.migrationOffset * 0.06;
+      const sweep =
+        (0.0048 + seededNoise(i * 0.31 + zone.spread * 6.1) * 0.012) *
+        (0.82 + concentration * 1.28) *
+        (0.72 + rootBias * 0.55);
+      const ringRadius =
+        radius +
+        0.2 +
+        rootBias * 1.05 +
+        (seededNoise(i * 0.47 + zone.startDeg) - 0.5) * 0.7;
+      const alpha = clamp(
+        (0.02 + concentration * 0.05 + rootBias * 0.022 + evo.density * 0.026) * rootStrength,
+        0.01,
+        isHovered ? 0.22 : 0.175
+      );
+
+      ctx.strokeStyle = `rgba(18,18,18,${alpha})`;
+      ctx.lineWidth = 0.22 + concentration * 0.82 + rootBias * 0.36 + seededNoise(i * 0.21) * 0.3;
+      ctx.beginPath();
+      ctx.arc(cx, cy, ringRadius, theta - sweep * 0.5, theta + sweep * 0.5);
+      ctx.stroke();
+    }
+
+    const pooledArcAlpha = clamp((0.068 + evo.density * 0.09) * priority * hoverBoost, 0.03, isHovered ? 0.25 : 0.16);
+    ctx.strokeStyle = `rgba(20,20,20,${pooledArcAlpha})`;
+    ctx.lineWidth = isHovered ? 1.9 : 1.3;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius + 0.7, zone.start + 0.018, zone.end - 0.018);
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  function drawZoneBleed(zone, cx, cy, radius, isHovered) {
+    ctx.save();
+
+    const evo = zoneEvolution(zone, frameTick);
+    const priority = zonePriority(zone);
+    const hoverBoost = isHovered ? 1.75 : hoveredZone ? 0.74 : 1;
+    const count = Math.floor((520 + evo.density * 1200 + evo.spread * 260) * priority + (isHovered ? 260 : 0));
+    const zoneRange = zone.end - zone.start;
+
+    ctx.lineCap = "round";
+
+    for (let i = 0; i < count; i++) {
+        const sample = centeredSample(i * 0.217 + zone.startDeg * 0.11);
+        const t = clamp(0.5 + (sample - 0.5) * 0.88, 0.02, 0.98);
+        const centerBias = 1 - Math.abs(t - 0.5) * 2;
+        const centerWeight = Math.pow(clamp(centerBias, 0, 1), 1.6);
+
+        const angleBase = zone.start + zoneRange * t;
+        const jitter = (seededNoise(i * 0.541 + zone.drift * 4.2) - 0.5) * (0.0018 + evo.drift * 0.0022);
+        const angle = angleBase + jitter;
+
+        const outwardX = Math.cos(angle);
+        const outwardY = Math.sin(angle);
+        const tangentX = -outwardY;
+        const tangentY = outwardX;
+
+        const nearEdgeBias = Math.pow(seededNoise(i * 0.404 + zone.spread * 2.3), 2.15);
+        const originRadius = radius + (seededNoise(i * 0.31 + zone.startDeg * 0.17) - 0.5) * 0.9;
+
+        const rootX = cx + outwardX * originRadius;
+        const rootY = cy + outwardY * originRadius;
+
+        const baseLength =
+        (3.2 + nearEdgeBias * 7.5 + centerWeight * 4.5 + evo.drift * 4.5) *
+        hoverBoost;
+
+        const dominantLift =
+        priority > 2
+            ? (5 + nearEdgeBias * 18 + centerWeight * 10)
+            : (1.5 + nearEdgeBias * 4);
+
+        const trailLength = baseLength + dominantLift;
+
+        const lateralDrift =
+        (seededNoise(i * 0.771 + zone.spread * 9.2) - 0.5) *
+        (0.14 + nearEdgeBias * 0.48);
+
+        const endX =
+        rootX +
+        outwardX * trailLength +
+        tangentX * lateralDrift;
+
+        const endY =
+        rootY +
+        outwardY * trailLength +
+        tangentY * ((seededNoise(i * 0.689 + zone.drift * 8.1) - 0.5) * (0.14 + nearEdgeBias * 0.48));
+
+        const alphaRoot = clamp(
+        (0.018 + evo.density * 0.02 + centerWeight * 0.024 + nearEdgeBias * 0.014) * priority * hoverBoost,
+        0.01,
+        isHovered ? 0.19 : 0.14
+        );
+
+        const alphaTip = alphaRoot * 0.02;
+
+        const gradient = ctx.createLinearGradient(rootX, rootY, endX, endY);
+        gradient.addColorStop(0, `rgba(20,20,20,${alphaRoot})`);
+        gradient.addColorStop(0.22, `rgba(20,20,20,${alphaRoot * 0.42})`);
+        gradient.addColorStop(0.58, `rgba(20,20,20,${alphaRoot * 0.12})`);
+        gradient.addColorStop(1, `rgba(20,20,20,${alphaTip})`);
+
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth =
+        0.16 +
+        centerWeight * 0.14 +
+        nearEdgeBias * 0.16 +
+        seededNoise(i * 0.17 + zone.intensity * 4.7) * 0.1;
+
+        ctx.beginPath();
+        ctx.moveTo(rootX, rootY);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+    }
+
+    if (isHovered) {
+        ctx.strokeStyle = "rgba(8,8,8,0.08)";
+        ctx.lineWidth = 0.45;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius + 0.3, zone.start, zone.end);
+        ctx.stroke();
+    }
+
+    ctx.restore();
+  }
+
+  function drawCoreReadout(cx, cy) {
+    ctx.save();
+
+    const coreGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 48);
+    coreGlow.addColorStop(0, "rgba(20,20,20,0.10)");
+    coreGlow.addColorStop(0.52, "rgba(20,20,20,0.04)");
+    coreGlow.addColorStop(1, "rgba(20,20,20,0)");
+    ctx.fillStyle = coreGlow;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 48, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    ctx.fillStyle = "rgba(28,28,30,0.84)";
+    ctx.font = '600 34px Inter, system-ui, sans-serif';
+    ctx.fillText("91", cx, cy - 3);
+
+    ctx.fillStyle = "rgba(28,28,30,0.42)";
+    ctx.font = '600 12px Inter, system-ui, sans-serif';
+    ctx.fillText("ANOMALY", cx, cy + 22);
+
+    ctx.restore();
+  }
+
+  function draw() {
+    const rect = stage.getBoundingClientRect();
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    const { cx, cy, radius } = getGeometry(rect);
+
+    drawContainment(cx, cy, radius);
+    drawAmbientDust(cx, cy, radius);
+
+    zones.forEach((zone) => {
+      const isHovered = hoveredZone && hoveredZone.key === zone.key;
+      drawZoneWash(zone, cx, cy, radius, isHovered);
+    });
+
+    zones.forEach((zone) => {
+      const isHovered = hoveredZone && hoveredZone.key === zone.key;
+      drawZoneRoot(zone, cx, cy, radius, isHovered);
+    });
+
+    zones.forEach((zone) => {
+      const isHovered = hoveredZone && hoveredZone.key === zone.key;
+      drawZoneBleed(zone, cx, cy, radius, isHovered);
+    });
+
+    drawCoreReadout(cx, cy);
+  }
+
+  function getZoneAtPoint(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+
+    const { cx, cy, radius } = getGeometry(rect);
+
+    const dx = x - cx;
+    const dy = y - cy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (dist < radius - 24 || dist > radius + 132) {
+      return null;
+    }
+
+    const angle = Math.atan2(dy, dx);
+
+    for (const zone of zones) {
+      if (angleBetween(angle, zone.start, zone.end)) {
+        return zone;
+      }
+    }
+
+    return null;
+  }
+
+  function setHoverCardPosition(clientX, clientY) {
+    const shellRect = stage.getBoundingClientRect();
+    const cardRect = hoverCard.getBoundingClientRect();
+
+    let left = clientX - shellRect.left + 18;
+    let top = clientY - shellRect.top + 18;
+
+    if (left + cardRect.width > shellRect.width - 16) {
+      left = clientX - shellRect.left - cardRect.width - 18;
+    }
+
+    if (top + cardRect.height > shellRect.height - 16) {
+      top = clientY - shellRect.top - cardRect.height - 18;
+    }
+
+    left = clamp(left, 16, shellRect.width - cardRect.width - 16);
+    top = clamp(top, 16, shellRect.height - cardRect.height - 16);
+
+    hoverCard.style.left = `${left}px`;
+    hoverCard.style.top = `${top}px`;
+  }
+
+  function showHover(zone, clientX, clientY) {
+    hoverName.textContent = zone.label;
+    hoverCopy.textContent = zone.narrative;
+    hoverMetrics.innerHTML = `
+      <div>Divergence <strong>${Math.round(zone.intensity * 100)}</strong></div>
+      <div>Drift <strong>${Math.round(zone.drift * 100)}</strong></div>
+      <div>Spread <strong>${Math.round(zone.spread * 100)}</strong></div>
+    `;
+
+    readoutValue.textContent = zone.label;
+    readoutCopy.textContent = zone.narrative;
+    hudSub.textContent = `${zone.label.toUpperCase()} / localized divergence field engaged`;
+
+    setHoverCardPosition(clientX, clientY);
+    hoverCard.classList.add("visible");
+  }
+
+  function hideHover() {
+    hoverCard.classList.remove("visible");
+    readoutValue.textContent = "No zone selected";
+    readoutCopy.textContent = "Move around the circle to inspect where pressure is building, where drift is spreading, and where the system remains quiet.";
+    hudSub.textContent = "Quiet sectors remain stable while localized anomaly pressure builds across adjacent zones.";
+  }
+
+  function tick() {
+    frameTick += 1;
+    draw();
+    animationFrame = window.requestAnimationFrame(tick);
+  }
+
+  canvas.addEventListener("mousemove", (event) => {
+    lastMouseEvent = event;
+    if (hoverFramePending) return;
+
+    hoverFramePending = true;
+    requestAnimationFrame(() => {
+      hoverFramePending = false;
+      if (!lastMouseEvent) return;
+
+      const zone = getZoneAtPoint(lastMouseEvent.clientX, lastMouseEvent.clientY);
+      hoveredZone = zone;
+
+      if (zone) {
+        showHover(zone, lastMouseEvent.clientX, lastMouseEvent.clientY);
+      } else {
+        hideHover();
+      }
+
+      draw();
+    });
+  });
+
+  canvas.addEventListener("mouseleave", () => {
+    hoveredZone = null;
+    hideHover();
+    draw();
+  });
+
+  window.addEventListener("resize", resizeCanvas);
+
+  resizeCanvas();
+  draw();
+  // tick();
+</script>
+</body>
+</html>

@@ -1050,18 +1050,21 @@
 
     .drawer-circle-shell {
       border: 1px solid var(--border-soft);
-      border-radius: 22px;
+      border-radius: 20px;
       background:
-        radial-gradient(circle at top, color-mix(in srgb, var(--text-primary) 4%, transparent), transparent 48%),
+        radial-gradient(circle at top, color-mix(in srgb, var(--text-primary) 3%, transparent), transparent 52%),
+        linear-gradient(180deg, color-mix(in srgb, var(--text-primary) 2%, transparent), transparent 34%),
         var(--card-bg-alt);
-      padding: 18px;
+      padding: 10px 10px 16px;
     }
 
     .drawer-mini-circle {
       position: relative;
-      width: min(100%, 420px);
-      height: 420px;
+      width: min(100%, 520px);
+      height: 520px;
       margin: 0 auto;
+      display: grid;
+      place-items: center;
     }
 
     .drawer-mini-circle canvas {
@@ -1073,37 +1076,37 @@
 
     .drawer-circle-detail {
       min-width: 0;
-      margin-top: 16px;
+      margin-top: 12px;
       padding-top: 14px;
       border-top: 1px solid var(--border-soft);
     }
 
     .drawer-circle-kicker {
       font-size: 10px;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--text-faint);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .drawer-circle-zone {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 600;
       letter-spacing: -0.03em;
       color: var(--text-primary);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .drawer-circle-meta {
       font-size: 12px;
-      line-height: 1.55;
+      line-height: 1.5;
       color: var(--text-secondary);
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
     .drawer-circle-copy {
       font-size: 13px;
-      line-height: 1.6;
+      line-height: 1.58;
       color: var(--text-muted);
     }
 
@@ -1321,8 +1324,8 @@
       }
 
       .drawer-mini-circle {
-        width: min(100%, 320px);
-        height: 320px;
+        width: min(100%, 380px);
+        height: 380px;
       }
     }
   </style>
@@ -2039,19 +2042,10 @@
       return (deg * Math.PI) / 180;
     }
 
-    function miniClamp(num, min, max) {
-      return Math.max(min, Math.min(max, num));
-    }
-
-    function miniSeededNoise(seed) {
-      const value = Math.sin(seed * 12.9898) * 43758.5453;
-      return value - Math.floor(value);
-    }
-
     function miniNormalizeAngle(angle) {
-      let normalized = angle % (Math.PI * 2);
-      if (normalized < 0) normalized += Math.PI * 2;
-      return normalized;
+      let a = angle % (Math.PI * 2);
+      if (a < 0) a += Math.PI * 2;
+      return a;
     }
 
     function miniAngleBetween(angle, start, end) {
@@ -2062,131 +2056,101 @@
       if (start <= end) {
         return angle >= start && angle <= end;
       }
-
       return angle >= start || angle <= end;
     }
 
-    function getMiniCircleGeometry(size) {
+    function miniClamp(num, min, max) {
+      return Math.max(min, Math.min(max, num));
+    }
+
+    function miniSeededNoise(seed) {
+      const x = Math.sin(seed * 12.9898) * 43758.5453;
+      return x - Math.floor(x);
+    }
+
+    function miniCenteredSample(seed) {
+      return (
+        miniSeededNoise(seed) +
+        miniSeededNoise(seed + 1.37) +
+        miniSeededNoise(seed + 3.11) +
+        miniSeededNoise(seed + 5.23)
+      ) / 4;
+    }
+
+    function miniComputeAngles(items, startOffsetDeg) {
+      const equalSpan = 360 / items.length;
+      let cursor = startOffsetDeg;
+
+      items.forEach((item) => {
+        item.startDeg = cursor;
+        item.endDeg = cursor + equalSpan;
+        item.spanDeg = equalSpan;
+        item.start = miniDegToRad(item.startDeg);
+        item.end = miniDegToRad(item.endDeg);
+        item.midDeg = item.startDeg + equalSpan / 2;
+        item.mid = miniDegToRad(item.midDeg);
+        cursor += equalSpan;
+      });
+    }
+
+    function getMiniCircleGeometry(rect) {
       return {
-        cx: size * 0.5,
-        cy: size * 0.5,
-        radius: size * 0.275
+        cx: rect.width * 0.5,
+        cy: rect.height * 0.49,
+        radius: Math.min(rect.width, rect.height) * 0.14
       };
     }
 
     function buildMiniCircleZones(row) {
-      const spanDeg = 360 / miniCircleZones.length;
-      let cursor = -120;
+      const zones = miniCircleZones.map((zone) => {
+        const zoneKey = zone.key;
+        const normalizedKey = zoneKey === "contactability" ? "contact" : zoneKey;
+        const summary = getZoneSummary(row, zoneKey);
+        const intensity = getMiniCircleZoneIntensity(row, zoneKey);
+        const insightWeight = row.insights.some((insight) => inferZoneKeyFromInsightName(insight.name) === zoneKey) ? 0.08 : 0;
+        const anomalyInfluence = miniClamp(row.anomalyScore / 100, 0.2, 0.98);
 
-      return miniCircleZones.map((zone) => {
-        const startDeg = cursor;
-        const endDeg = cursor + spanDeg;
-        cursor += spanDeg;
         return {
-          key: zone.key,
+          key: normalizedKey,
+          sourceKey: zoneKey,
           label: zone.label,
-          intensity: getMiniCircleZoneIntensity(row, zone.key),
-          insight: getZoneInsight(row, zone.key),
-          startDeg,
-          endDeg,
-          spanDeg,
-          start: miniDegToRad(startDeg),
-          end: miniDegToRad(endDeg),
-          midDeg: startDeg + spanDeg / 2,
-          mid: miniDegToRad(startDeg + spanDeg / 2)
+          intensity,
+          drift: miniClamp(0.16 + intensity * 0.54 + anomalyInfluence * 0.08 + insightWeight, 0.16, 0.92),
+          spread: miniClamp(0.42 + intensity * 0.34 + anomalyInfluence * 0.05, 0.42, 0.88),
+          narrative: summary.copy
         };
       });
+
+      miniComputeAngles(zones, -90);
+      return zones;
     }
 
-    function buildMiniCircleSegments(zone, anomalyScore) {
-      const segments = [];
-      const intensity = Math.pow(zone.intensity, 1.1);
-      const anomalyLift = 0.72 + anomalyScore / 180;
-      const safeSpan = zone.spanDeg;
-      const density = Math.floor(32 + intensity * 96);
-      const sourceWindows = [
-        {
-          centerT: miniClamp(0.18 + miniSeededNoise(zone.midDeg * 0.021) * 0.18, 0.08, 0.92),
-          spread: 0.09 + intensity * 0.08,
-          lift: 0.62 + intensity * 0.56
-        },
-        {
-          centerT: miniClamp(0.5 + (miniSeededNoise(zone.startDeg * 0.043 + 4.7) - 0.5) * 0.34, 0.08, 0.92),
-          spread: 0.12 + intensity * 0.11,
-          lift: 0.48 + intensity * 0.72
-        },
-        {
-          centerT: miniClamp(0.82 + (miniSeededNoise(zone.endDeg * 0.031 + 8.9) - 0.5) * 0.18, 0.08, 0.92),
-          spread: 0.08 + intensity * 0.09,
-          lift: 0.42 + intensity * 0.54
-        }
-      ];
-      const atmosphericBands = Array.from({ length: 2 + Math.ceil(intensity * 3) }, (_, index) => ({
-        centerT: miniClamp(miniSeededNoise((index + 1) * 5.31 + zone.midDeg * 0.019), 0.04, 0.96),
-        spread: 0.09 + miniSeededNoise(index * 1.73 + zone.startDeg * 0.013) * 0.16,
-        lift: 0.24 + miniSeededNoise(index * 3.27 + zone.endDeg * 0.021) * (0.45 + intensity * 0.42)
-      }));
+    function miniZoneEvolution(zone, tick) {
+      const phase = tick * 0.008 + zone.startDeg * 0.022;
+      const swell = Math.sin(phase) * 0.5 + 0.5;
+      const bloom = Math.sin(phase * 0.63 + 1.7) * 0.5 + 0.5;
+      const migrate = Math.sin(phase * 0.41 + 3.1) * 0.5 + 0.5;
 
-      for (let i = 0; i < density; i++) {
-        const tBase = density === 1 ? 0.5 : i / (density - 1);
-        const t = miniClamp(
-          tBase + (miniSeededNoise(i * 0.163 + zone.startDeg * 0.017) - 0.5) * (0.022 + intensity * 0.038),
-          0,
-          1
-        );
-        const deg = zone.startDeg + safeSpan * t;
-        const angle = miniDegToRad(deg);
-        const n1 = miniSeededNoise(i * 0.113 + zone.midDeg * 0.016);
-        const n2 = miniSeededNoise(i * 0.071 + zone.startDeg * 0.018 + 11.3);
-        const n3 = miniSeededNoise(i * 0.047 + zone.endDeg * 0.019 + 17.1);
-        const n4 = miniSeededNoise(i * 0.133 + zone.midDeg * 0.012 + 29.7);
+      return {
+        density: zone.intensity * (0.9 + swell * 0.5),
+        spread: zone.spread * (0.82 + bloom * 0.28),
+        drift: zone.drift * (0.84 + migrate * 0.36),
+        migrationOffset: (migrate - 0.5) * 0.11,
+        dissolve: 0.56 + bloom * 0.24
+      };
+    }
 
-        let localCluster = 0;
-        let localDensity = 0;
-        let nearestDistance = 1;
+    function miniZonePriority(zone) {
+      const emphasisMap = {
+        business: 1.18,
+        identity: 1.14,
+        contact: 0.94,
+        credit: 0.78,
+        bank: 0.66,
+        compliance: 0.58
+      };
 
-        sourceWindows.forEach((window, index) => {
-          const distance = Math.abs(t - window.centerT);
-          nearestDistance = Math.min(nearestDistance, distance);
-          const falloff = Math.exp(-(distance * distance) / (2 * window.spread * window.spread));
-          const grain = 0.74 + miniSeededNoise(i * 0.081 + index * 4.19 + zone.midDeg * 0.013) * 0.94;
-          localCluster += falloff * window.lift * grain;
-          localDensity += falloff * (0.48 + window.lift * 0.7);
-        });
-
-        const atmosphericLift = atmosphericBands.reduce((sum, band, index) => {
-          const distance = Math.abs(t - band.centerT);
-          const falloff = Math.exp(-(distance * distance) / (2 * band.spread * band.spread));
-          const turbulence = 0.7 + miniSeededNoise(i * 0.057 + index * 3.41 + zone.midDeg * 0.014) * 0.82;
-          return sum + falloff * band.lift * turbulence;
-        }, 0);
-
-        const buildup = Math.exp(-(nearestDistance * nearestDistance) / (2 * Math.pow(0.085 + intensity * 0.11, 2)));
-        const baseCluster =
-          Math.pow(n1, 3.8) * intensity * anomalyLift * 42 +
-          Math.pow(n2, 6.2) * intensity * anomalyLift * 58 +
-          Math.pow(n3, 8.5) * intensity * anomalyLift * 76;
-        const pulse = Math.sin(t * Math.PI * (1.25 + intensity * 5.4) + n4 * Math.PI) * 0.5 + 0.5;
-        const dissipation = 0.56 + Math.sin((t * 8.2 + n4 * 1.6) * Math.PI) * 0.14 + n2 * 0.18;
-        const sparsePocket = miniClamp(0.42 + n3 * 0.88 - n1 * 0.16, 0.16, 1.04);
-        const spike = (baseCluster + localCluster * 82 + atmosphericLift * 18 + buildup * 15) * (0.32 + pulse * 0.24) * dissipation * sparsePocket;
-        const opacity =
-          0.008 +
-          Math.pow(n2, 2.6) * 0.08 +
-          intensity * 0.06 +
-          Math.min(localDensity * 0.04, 0.08) +
-          Math.min(atmosphericLift * 0.014, 0.04) +
-          Math.min(spike / 220, 0.12);
-
-        segments.push({
-          angle,
-          spike,
-          opacity: opacity * sparsePocket,
-          width: 0.45 + n1 * 1.35 + localDensity * 0.24 + atmosphericLift * 0.06
-        });
-      }
-
-      return segments;
+      return emphasisMap[zone.key] || 0.8;
     }
 
     function renderDrawerCircleDetail(row, zoneKey) {
@@ -2198,16 +2162,12 @@
     }
 
     function renderDrawerMiniCircle(row) {
-      const dominantZoneKey = drawerHoveredZoneKey || getDominantZoneKey(row);
-      const size = drawerMiniCircle.clientWidth || 420;
-      const zones = buildMiniCircleZones(row).map((zone) => ({
-        ...zone,
-        score: Math.round(zone.intensity * 100),
-        segments: buildMiniCircleSegments(zone, row.anomalyScore)
-      }));
+      const rect = drawerMiniCircle.getBoundingClientRect();
+      const size = Math.round(Math.min(rect.width || 520, rect.height || 520));
+      const zones = buildMiniCircleZones(row);
 
       if (!drawerMiniCircle.querySelector("canvas")) {
-        drawerMiniCircle.innerHTML = '<canvas aria-label="Mini circle preview"></canvas>';
+        drawerMiniCircle.innerHTML = '<canvas aria-label="Compact anomaly circle preview"></canvas>';
       }
 
       const canvas = drawerMiniCircle.querySelector("canvas");
@@ -2217,151 +2177,274 @@
       canvas.style.width = `${size}px`;
       canvas.style.height = `${size}px`;
 
-      const context = canvas.getContext("2d");
-      context.setTransform(dpr, 0, 0, dpr, 0, 0);
-      context.clearRect(0, 0, size, size);
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, size, size);
 
-      const styles = getComputedStyle(document.body);
-      const { cx, cy, radius } = getMiniCircleGeometry(size);
-      const activeZoneKey = dominantZoneKey;
-      const hasActive = Boolean(activeZoneKey);
+      const localRect = { width: size, height: size };
+      const { cx, cy, radius } = getMiniCircleGeometry(localRect);
+      const hoveredZone = drawerHoveredZoneKey
+        ? zones.find((zone) => zone.sourceKey === drawerHoveredZoneKey) || null
+        : null;
+      const frameTick = 0;
 
-      const centerShade = context.createRadialGradient(cx, cy, radius * 0.06, cx, cy, radius * 0.98);
-      centerShade.addColorStop(0, activeTheme === "light" ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.32)");
-      centerShade.addColorStop(0.58, activeTheme === "light" ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.2)");
-      centerShade.addColorStop(1, "rgba(0,0,0,0)");
-      context.fillStyle = centerShade;
-      context.beginPath();
-      context.arc(cx, cy, radius * 1.06, 0, Math.PI * 2);
-      context.fill();
+      function drawContainment() {
+        ctx.save();
 
-      const centerGlow = context.createRadialGradient(cx, cy, radius * 0.08, cx, cy, radius * 1.24);
-      centerGlow.addColorStop(0, activeTheme === "light" ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.012)");
-      centerGlow.addColorStop(0.48, activeTheme === "light" ? "rgba(255,255,255,0.012)" : "rgba(255,255,255,0.005)");
-      centerGlow.addColorStop(1, "rgba(255,255,255,0)");
-      context.fillStyle = centerGlow;
-      context.beginPath();
-      context.arc(cx, cy, radius * 1.52, 0, Math.PI * 2);
-      context.fill();
+        const halo = ctx.createRadialGradient(cx, cy, radius * 0.82, cx, cy, radius * 1.56);
+        halo.addColorStop(0, "rgba(0,0,0,0)");
+        halo.addColorStop(0.62, "rgba(0,0,0,0.003)");
+        halo.addColorStop(0.82, "rgba(0,0,0,0.006)");
+        halo.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = halo;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius * 1.62, 0, Math.PI * 2);
+        ctx.fill();
 
-      for (let i = 0; i < 120; i++) {
-        const angle = miniDegToRad(i * 3.11);
-        const dustRadius = radius + 6 + miniSeededNoise(i * 0.27) * 16;
-        const x = cx + Math.cos(angle) * dustRadius;
-        const y = cy + Math.sin(angle) * dustRadius;
-        const dotSize = 0.22 + miniSeededNoise(i * 0.37) * 0.9;
-        const alpha = (activeTheme === "light" ? 0.014 : 0.008) + miniSeededNoise(i * 0.19) * (activeTheme === "light" ? 0.02 : 0.025);
-        context.fillStyle = activeTheme === "light" ? `rgba(26,26,29,${alpha})` : `rgba(255,255,255,${alpha})`;
-        context.beginPath();
-        context.arc(x, y, dotSize, 0, Math.PI * 2);
-        context.fill();
+        ctx.strokeStyle = activeTheme === "light" ? "rgba(18,18,18,0.12)" : "rgba(255,255,255,0.14)";
+        ctx.lineWidth = 0.3;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = activeTheme === "light" ? "rgba(24,24,24,0.8)" : "rgba(18,18,20,0.9)";
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius * 0.72, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
       }
 
-      context.strokeStyle = activeTheme === "light" ? "rgba(26,26,29,0.1)" : "rgba(255,255,255,0.12)";
-      context.lineWidth = 1.2;
-      context.beginPath();
-      context.arc(cx, cy, radius, 0, Math.PI * 2);
-      context.stroke();
+      function drawAmbientDust() {
+        ctx.save();
 
-      context.strokeStyle = activeTheme === "light" ? "rgba(26,26,29,0.04)" : "rgba(255,255,255,0.04)";
-      context.lineWidth = 9;
-      context.beginPath();
-      context.arc(cx, cy, radius, 0, Math.PI * 2);
-      context.stroke();
+        for (let i = 0; i < 40; i++) {
+          const angle = miniDegToRad(i * 1.97 + frameTick * 0.028);
+          const r = radius + 2 + miniSeededNoise(i * 0.43) * 3.8;
+          const x = cx + Math.cos(angle) * r;
+          const y = cy + Math.sin(angle) * r;
+          const dustSize = 0.05 + miniSeededNoise(i * 0.14) * 0.12;
+          const alpha = 0.0008 + miniSeededNoise(i * 0.28) * 0.0012;
 
-      context.strokeStyle = activeTheme === "light" ? "rgba(26,26,29,0.022)" : "rgba(255,255,255,0.022)";
-      context.lineWidth = 18;
-      context.beginPath();
-      context.arc(cx, cy, radius + 12, 0, Math.PI * 2);
-      context.stroke();
-
-      zones.forEach((zone) => {
-        const isActive = zone.key === activeZoneKey;
-        const isPrimaryIdle = !hasActive && zone.key === getDominantZoneKey(row);
-        const lineAlpha = isActive ? 0.64 : hasActive ? 0.018 : isPrimaryIdle ? 0.18 : 0.1;
-        const spikeBoost = isActive ? 1.36 : hasActive ? 0.42 : 1;
-        const widthBoost = isActive ? 1.52 : hasActive ? 0.72 : 1;
-        const opacityBoost = isActive ? 0.2 : hasActive ? -0.08 : isPrimaryIdle ? 0.02 : -0.012;
-        const hazeAlpha = isActive ? 0.08 : hasActive ? 0.006 : isPrimaryIdle ? 0.022 : 0.013;
-        const outerHazeAlpha = isActive ? 0.034 : hasActive ? 0.003 : isPrimaryIdle ? 0.01 : 0.006;
-
-        context.strokeStyle = activeTheme === "light"
-          ? `rgba(26,26,29,${hazeAlpha})`
-          : `rgba(255,255,255,${hazeAlpha})`;
-        context.lineWidth = isActive ? 16 : isPrimaryIdle ? 11 : 9;
-        context.lineCap = "round";
-        context.beginPath();
-        context.arc(cx, cy, radius + 11, zone.start, zone.end);
-        context.stroke();
-
-        context.strokeStyle = activeTheme === "light"
-          ? `rgba(26,26,29,${outerHazeAlpha})`
-          : `rgba(255,255,255,${outerHazeAlpha})`;
-        context.lineWidth = isActive ? 30 : 20;
-        context.beginPath();
-        context.arc(cx, cy, radius + 22, zone.start, zone.end);
-        context.stroke();
-
-        zone.segments.forEach((segment) => {
-          const rawSpike = segment.spike * spikeBoost;
-          const softCap = radius * 0.72;
-          const spike = softCap * (1 - Math.exp(-rawSpike / softCap));
-          const inner = radius - 1.5;
-          const outer = radius + spike;
-          const x1 = cx + Math.cos(segment.angle) * inner;
-          const y1 = cy + Math.sin(segment.angle) * inner;
-          const x2 = cx + Math.cos(segment.angle) * outer;
-          const y2 = cy + Math.sin(segment.angle) * outer;
-          const alpha = miniClamp(segment.opacity + opacityBoost, hasActive ? 0.003 : 0.01, isActive ? 0.74 : isPrimaryIdle ? 0.22 : 0.15);
-
-          context.strokeStyle = activeTheme === "light"
-            ? `rgba(26,26,29,${alpha})`
-            : `rgba(255,255,255,${alpha})`;
-          context.lineWidth = segment.width * widthBoost;
-          context.beginPath();
-          context.moveTo(x1, y1);
-          context.lineTo(x2, y2);
-          context.stroke();
-        });
-
-        context.strokeStyle = activeTheme === "light"
-          ? `rgba(26,26,29,${lineAlpha})`
-          : `rgba(255,255,255,${lineAlpha})`;
-        context.lineWidth = isActive ? 2.3 : hasActive ? 0.95 : 1.45;
-        context.beginPath();
-        context.arc(cx, cy, radius, zone.start, zone.end);
-        context.stroke();
-
-        if (isActive) {
-          context.strokeStyle = activeTheme === "light" ? "rgba(26,26,29,0.14)" : "rgba(255,255,255,0.16)";
-          context.lineWidth = 4.1;
-          context.beginPath();
-          context.arc(cx, cy, radius + 1.3, zone.start, zone.end);
-          context.stroke();
+          ctx.fillStyle = activeTheme === "light" ? `rgba(12,12,12,${alpha})` : `rgba(255,255,255,${alpha * 2.1})`;
+          ctx.beginPath();
+          ctx.arc(x, y, dustSize, 0, Math.PI * 2);
+          ctx.fill();
         }
 
+        ctx.restore();
+      }
+
+      function drawZoneWash(zone, isHovered) {
+        ctx.save();
+
+        const evo = miniZoneEvolution(zone, frameTick);
+        const priority = miniZonePriority(zone);
+        const mid = zone.mid + evo.migrationOffset * 0.32;
+        const cloudRadius = radius + 2.4 + evo.drift * 2;
+        const cloudX = cx + Math.cos(mid) * cloudRadius;
+        const cloudY = cy + Math.sin(mid) * cloudRadius;
+        const cloudSize = 3.2 + evo.density * 2.6 * priority + (isHovered ? 1.8 : 0);
+
+        const gradient = ctx.createRadialGradient(cloudX, cloudY, 0, cloudX, cloudY, cloudSize);
+        const alpha = (isHovered ? 0.008 : hoveredZone ? 0.0012 : 0.0022) * priority;
+        const ink = activeTheme === "light" ? "8,8,8" : "255,255,255";
+        gradient.addColorStop(0, `rgba(${ink},${activeTheme === "light" ? alpha : alpha * 0.45})`);
+        gradient.addColorStop(0.3, `rgba(${ink},${activeTheme === "light" ? alpha * 0.1 : alpha * 0.07})`);
+        gradient.addColorStop(1, `rgba(${ink},0)`);
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(cloudX, cloudY, cloudSize, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      function drawZoneRoot(zone, isHovered) {
+        ctx.save();
+
+        const evo = miniZoneEvolution(zone, frameTick);
+        const priority = miniZonePriority(zone);
+        const hoverBoost = isHovered ? 1.42 : hoveredZone ? 0.72 : 1;
+        const zoneRange = zone.end - zone.start;
+        const rootStrength = (0.45 + evo.density * 1.1 + evo.spread * 0.24) * priority * hoverBoost;
+        const fragments = Math.floor(68 + evo.density * 126 * priority + (isHovered ? 84 : 0));
+        const ink = activeTheme === "light" ? "18,18,18" : "255,255,255";
+        const pooledInk = activeTheme === "light" ? "20,20,20" : "255,255,255";
+
+        ctx.lineCap = "round";
+
+        for (let i = 0; i < fragments; i++) {
+          const tSeed = miniCenteredSample(i * 0.618 + zone.intensity * 4.9 + frameTick * 0.00045);
+          const centerBias = 1 - Math.abs(tSeed - 0.5) * 2;
+          const concentration = Math.pow(miniClamp(centerBias, 0, 1), 1.35);
+          const rootBias = Math.pow(miniSeededNoise(i * 0.57 + zone.spread * 7.3), 1.85);
+          const theta = zone.start + zoneRange * tSeed + evo.migrationOffset * 0.06;
+          const sweep =
+            (0.0042 + miniSeededNoise(i * 0.31 + zone.spread * 6.1) * 0.011) *
+            (0.82 + concentration * 1.28) *
+            (0.72 + rootBias * 0.55);
+          const ringRadius =
+            radius +
+            0.12 +
+            rootBias * 0.72 +
+            (miniSeededNoise(i * 0.47 + zone.startDeg) - 0.5) * 0.42;
+          const alpha = miniClamp(
+            (0.02 + concentration * 0.05 + rootBias * 0.022 + evo.density * 0.026) * rootStrength,
+            0.01,
+            isHovered ? 0.22 : 0.175
+          );
+
+          ctx.strokeStyle = `rgba(${ink},${activeTheme === "light" ? alpha : alpha * 0.62})`;
+          ctx.lineWidth = 0.2 + concentration * 0.78 + rootBias * 0.34 + miniSeededNoise(i * 0.21) * 0.28;
+          ctx.beginPath();
+          ctx.arc(cx, cy, ringRadius, theta - sweep * 0.5, theta + sweep * 0.5);
+          ctx.stroke();
+        }
+
+        const pooledArcAlpha = miniClamp((0.068 + evo.density * 0.09) * priority * hoverBoost, 0.03, isHovered ? 0.25 : 0.16);
+        ctx.strokeStyle = `rgba(${pooledInk},${activeTheme === "light" ? pooledArcAlpha : pooledArcAlpha * 0.7})`;
+        ctx.lineWidth = isHovered ? 1.7 : 1.22;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius + 0.48, zone.start + 0.018, zone.end - 0.018);
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      function drawZoneBleed(zone, isHovered) {
+        ctx.save();
+
+        const evo = miniZoneEvolution(zone, frameTick);
+        const priority = miniZonePriority(zone);
+        const hoverBoost = isHovered ? 1.85 : hoveredZone ? 0.68 : 1;
+        const count = Math.floor((480 + evo.density * 1200 + evo.spread * 260) * priority + (isHovered ? 500 : 0));
+        const zoneRange = zone.end - zone.start;
+        const ink = activeTheme === "light" ? "20,20,20" : "255,255,255";
+
+        ctx.lineCap = "round";
+
+        for (let i = 0; i < count; i++) {
+          const sample = miniCenteredSample(i * 0.217 + zone.startDeg * 0.11 + frameTick * 0.00016);
+          const spreadChance = miniSeededNoise(i * 0.913 + zone.intensity * 8.3);
+          const t = 0.5 + (sample - 0.5) * (0.6 + Math.pow(spreadChance, 1.9) * 0.7);
+          const clampedT = miniClamp(t, 0.015, 0.985);
+          const centerBias = 1 - Math.abs(clampedT - 0.5) * 2;
+          const centerWeight = Math.pow(miniClamp(centerBias, 0, 1), 2.1);
+          const angleBase = zone.start + zoneRange * clampedT + evo.migrationOffset * 0.08;
+          const distanceBias = Math.pow(miniSeededNoise(i * 0.404 + zone.spread * 2.3), 3.05);
+          const wobble = (miniSeededNoise(i * 0.541 + frameTick * 0.0014 + zone.drift * 4.2) - 0.5) *
+            (0.0028 + evo.drift * 0.0034 + distanceBias * 0.006);
+          const angle = angleBase + wobble;
+
+          const outwardX = Math.cos(angle);
+          const outwardY = Math.sin(angle);
+          const tangentX = -outwardY;
+          const tangentY = outwardX;
+
+          const originRadius = radius + (miniSeededNoise(i * 0.31 + zone.startDeg * 0.17) - 0.5) * 0.95;
+          const rootX = cx + outwardX * originRadius;
+          const rootY = cy + outwardY * originRadius;
+
+          const escapeChance = miniSeededNoise(i * 0.863 + zone.drift * 3.6);
+          const shortLength = 2.2 + Math.pow(miniSeededNoise(i * 0.27 + zone.drift * 6.4), 1.7) * 6.4;
+          const longLength = 10.5 + miniSeededNoise(i * 0.129 + zone.spread * 4.1) * 8.8;
+          const escapeWeight = escapeChance > (0.994 - evo.drift * 0.024 - evo.spread * 0.018 - (isHovered ? 0.016 : 0))
+            ? 0.82
+            : escapeChance > (0.968 - evo.spread * 0.03)
+              ? 0.24
+              : 0;
+          const rootDrag = Math.pow(distanceBias, 1.16) * (1.3 + evo.density * 1.8) * hoverBoost;
+          const nearSourceHold = 1 - Math.pow(distanceBias, 0.7) * 0.4;
+          const trailLength =
+            (shortLength * (1 - escapeWeight) + longLength * escapeWeight) *
+            hoverBoost *
+            nearSourceHold;
+          const wobbleDrift = (miniSeededNoise(i * 0.771 + zone.spread * 9.2) - 0.5) * (0.16 + distanceBias * 0.75 + escapeWeight * 0.42);
+          const endX =
+            rootX +
+            outwardX * (trailLength + rootDrag) +
+            tangentX * wobbleDrift;
+          const endY =
+            rootY +
+            outwardY * (trailLength + rootDrag) +
+            tangentY * ((miniSeededNoise(i * 0.689 + zone.drift * 8.1) - 0.5) * (0.22 + distanceBias * 1.05 + escapeWeight * 0.65));
+
+          const alphaRoot = miniClamp(
+            (0.034 + evo.density * 0.034 + centerWeight * 0.05 + (1 - distanceBias) * 0.016) * priority * hoverBoost,
+            0.014,
+            isHovered ? 0.25 : 0.2
+          );
+          const alphaTip = alphaRoot * (0.05 + escapeWeight * 0.07);
+          const gradient = ctx.createLinearGradient(rootX, rootY, endX, endY);
+          const rootAlpha = activeTheme === "light" ? alphaRoot : alphaRoot * 0.62;
+          const tipAlpha = activeTheme === "light" ? alphaTip : alphaTip * 0.62;
+          gradient.addColorStop(0, `rgba(${ink},${rootAlpha})`);
+          gradient.addColorStop(0.28, `rgba(${ink},${rootAlpha * 0.54})`);
+          gradient.addColorStop(0.62, `rgba(${ink},${rootAlpha * 0.22})`);
+          gradient.addColorStop(1, `rgba(${ink},${tipAlpha})`);
+
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth =
+            0.16 +
+            centerWeight * 0.24 +
+            (1 - distanceBias) * 0.14 +
+            miniSeededNoise(i * 0.17 + zone.intensity * 4.7) * 0.18 +
+            (escapeWeight > 0 ? 0.04 : 0);
+          ctx.beginPath();
+          ctx.moveTo(rootX, rootY);
+          ctx.lineTo(endX, endY);
+          ctx.stroke();
+        }
+
+        if (isHovered) {
+          ctx.strokeStyle = activeTheme === "light" ? "rgba(8,8,8,0.12)" : "rgba(255,255,255,0.12)";
+          ctx.lineWidth = 0.45;
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius + 0.25, zone.start, zone.end);
+          ctx.stroke();
+        }
+
+        ctx.restore();
+      }
+
+      function drawCoreReadout() {
+        ctx.save();
+
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        ctx.fillStyle = activeTheme === "light" ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.94)";
+        ctx.font = '600 26px Inter, system-ui, sans-serif';
+        ctx.fillText(String(row.anomalyScore), cx, cy - 2);
+
+        ctx.fillStyle = activeTheme === "light" ? "rgba(255,255,255,0.48)" : "rgba(255,255,255,0.54)";
+        ctx.font = '600 10px Inter, system-ui, sans-serif';
+        ctx.fillText("ANOMALY", cx, cy + 18);
+
+        ctx.restore();
+      }
+
+      drawContainment();
+      drawAmbientDust();
+
+      zones.forEach((zone) => {
+        const isHovered = hoveredZone && hoveredZone.sourceKey === zone.sourceKey;
+        drawZoneWash(zone, isHovered);
       });
 
-      context.fillStyle = activeTheme === "light" ? "rgba(248,244,237,0.9)" : "rgba(9,9,11,0.84)";
-      context.beginPath();
-      context.arc(cx, cy, size * 0.085, 0, Math.PI * 2);
-      context.fill();
+      zones.forEach((zone) => {
+        const isHovered = hoveredZone && hoveredZone.sourceKey === zone.sourceKey;
+        drawZoneRoot(zone, isHovered);
+      });
 
-      context.strokeStyle = activeTheme === "light" ? "rgba(26,26,29,0.05)" : "rgba(255,255,255,0.035)";
-      context.lineWidth = 1;
-      context.beginPath();
-      context.arc(cx, cy, size * 0.085, 0, Math.PI * 2);
-      context.stroke();
+      zones.forEach((zone) => {
+        const isHovered = hoveredZone && hoveredZone.sourceKey === zone.sourceKey;
+        drawZoneBleed(zone, isHovered);
+      });
 
-      context.fillStyle = styles.getPropertyValue("--text-secondary-soft").trim() || (activeTheme === "light" ? "rgba(26,26,29,0.68)" : "rgba(255,255,255,0.7)");
-      context.font = `600 ${Math.max(12, Math.round(size * 0.05))}px Inter, system-ui, sans-serif`;
-      context.textAlign = "center";
-      context.textBaseline = "middle";
-      context.fillText(String(row.anomalyScore), cx, cy - 5);
-
-      context.fillStyle = styles.getPropertyValue("--text-faint").trim() || (activeTheme === "light" ? "rgba(26,26,29,0.46)" : "rgba(255,255,255,0.42)");
-      context.font = `${Math.max(7, Math.round(size * 0.02))}px Inter, system-ui, sans-serif`;
-      context.fillText("ANOMALY", cx, cy + 13);
+      drawCoreReadout();
 
       drawerMiniCircleState = {
         rowId: row.id,
@@ -2371,11 +2454,12 @@
           cx,
           cy,
           radius,
-          innerHitRadius: radius - 26,
-          outerHitRadius: radius + 86
+          innerHitRadius: radius - 10,
+          outerHitRadius: radius + 92
         }
       };
-      renderDrawerCircleDetail(row, dominantZoneKey);
+
+      renderDrawerCircleDetail(row, hoveredZone ? hoveredZone.sourceKey : getDominantZoneKey(row));
     }
 
     function getStepupActions(row) {
@@ -2529,9 +2613,12 @@
       if (!drawerMiniCircleState) return null;
 
       const rect = drawerMiniCircle.getBoundingClientRect();
-      const scale = drawerMiniCircleState.size / rect.width;
-      const x = (event.clientX - rect.left) * scale;
-      const y = (event.clientY - rect.top) * scale;
+      if (!rect.width || !rect.height) return null;
+
+      const scaleX = drawerMiniCircleState.size / rect.width;
+      const scaleY = drawerMiniCircleState.size / rect.height;
+      const x = (event.clientX - rect.left) * scaleX;
+      const y = (event.clientY - rect.top) * scaleY;
       const { cx, cy, innerHitRadius, outerHitRadius } = drawerMiniCircleState.geometry;
       const dx = x - cx;
       const dy = y - cy;
@@ -2551,18 +2638,18 @@
       if (!row) return;
 
       const zone = getMiniCircleZoneAtPoint(event);
-      const nextZoneKey = zone ? zone.key : getDominantZoneKey(row);
+      const nextZoneKey = zone ? zone.sourceKey : null;
 
-      if (drawerHoveredZoneKey === nextZoneKey || (!zone && drawerHoveredZoneKey === null)) {
+      if (drawerHoveredZoneKey === nextZoneKey) {
         return;
       }
 
-      drawerHoveredZoneKey = zone ? zone.key : null;
+      drawerHoveredZoneKey = nextZoneKey;
       renderDrawerMiniCircle(row);
     }
 
     function resetDrawerMiniCircleHover() {
-      if (!activePreviewRowId) return;
+      if (!activePreviewRowId || drawerHoveredZoneKey === null) return;
       const row = getRowById(activePreviewRowId);
       if (!row) return;
 
