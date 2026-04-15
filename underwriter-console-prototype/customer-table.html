@@ -320,6 +320,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      cursor: pointer;
       transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
     }
 
@@ -327,6 +328,23 @@
       transform: translateY(-1px);
       border-color: var(--border-strong);
       background: var(--card-bg-hover);
+    }
+
+    .summary-card:focus,
+    .summary-card:focus-visible {
+      outline: none;
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 1px var(--focus-ring);
+      background: var(--card-bg-hover);
+    }
+
+    .summary-card.active {
+      border-color: var(--border-strong);
+      background: var(--card-bg-strong);
+      box-shadow:
+        inset 0 0 0 1px color-mix(in srgb, var(--text-primary) 4%, transparent),
+        0 8px 24px color-mix(in srgb, var(--shadow-md) 55%, transparent);
+      transform: translateY(-1px);
     }
 
     .summary-label {
@@ -350,6 +368,18 @@
       line-height: 1.55;
       color: var(--text-faint);
       max-width: 24ch;
+    }
+
+    .showing-line {
+      margin-top: 14px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-faint);
+    }
+
+    .showing-line strong {
+      color: var(--text-secondary);
+      font-weight: 600;
     }
 
     .filter-row {
@@ -774,13 +804,13 @@
       top: 18px;
       right: 18px;
       bottom: 18px;
-      width: min(420px, calc(100vw - 36px));
+      width: min(840px, calc(100vw - 36px));
       padding: 20px;
       border: 1px solid var(--border);
       border-radius: 28px;
       background: var(--drawer-bg);
       box-shadow:
-        0 30px 88px var(--shadow-lg),
+        0 40px 112px var(--shadow-lg),
         0 8px 22px var(--shadow-md),
         inset 0 1px 0 color-mix(in srgb, var(--text-primary) 4%, transparent);
       backdrop-filter: blur(12px);
@@ -811,8 +841,13 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 14px;
-      padding-bottom: 18px;
+      padding-bottom: 16px;
       border-bottom: 1px solid var(--border);
+    }
+
+    .drawer-header-main {
+      min-width: 0;
+      flex: 1 1 auto;
     }
 
     .drawer-eyebrow {
@@ -838,11 +873,78 @@
       letter-spacing: -0.01em;
     }
 
-    .drawer-meta {
-      margin-top: 14px;
+    .drawer-operational-line {
+      margin-top: 8px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .drawer-open-record {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      background: var(--card-bg-strong);
+      color: var(--text-primary);
+      padding: 0 16px;
+      font: inherit;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1;
+      cursor: pointer;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, transform 0.18s ease;
+    }
+
+    .drawer-owner-stack {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 8px;
+      padding-top: 4px;
+    }
+
+    .drawer-owner-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .drawer-owner-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      white-space: nowrap;
+    }
+
+    .drawer-owner-select {
+      min-width: 164px;
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card-bg-alt);
+      color: var(--text-secondary);
+      padding: 0 34px 0 14px;
+      font: inherit;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, color-mix(in srgb, var(--text-primary) 44%, transparent) 50%),
+        linear-gradient(135deg, color-mix(in srgb, var(--text-primary) 44%, transparent) 50%, transparent 50%);
+      background-position:
+        calc(100% - 16px) 15px,
+        calc(100% - 11px) 15px;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
 
     .drawer-close {
@@ -862,10 +964,10 @@
       flex: 1 1 auto;
       min-height: 0;
       overflow-y: auto;
-      padding-top: 20px;
+      padding-top: 18px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
     }
 
     .drawer-body::-webkit-scrollbar {
@@ -889,38 +991,221 @@
       margin-bottom: 12px;
     }
 
-    .insight-list,
-    .log-list {
+    .drawer-collapsible {
+      border-top: 1px solid var(--border-soft);
+      padding-top: 14px;
+    }
+
+    .drawer-collapsible-toggle {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .drawer-collapsible-main {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .drawer-collapsible-summary {
+      margin-top: 4px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--text-faint);
+    }
+
+    .drawer-collapsible-icon {
+      flex: 0 0 auto;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      white-space: nowrap;
+    }
+
+    .drawer-collapsible-content {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows 0.2s ease, margin-top 0.2s ease;
+      margin-top: 12px;
+    }
+
+    .drawer-collapsible.collapsed .drawer-collapsible-content {
+      grid-template-rows: 0fr;
+      margin-top: 0;
+    }
+
+    .drawer-collapsible-inner {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .drawer-circle-shell {
+      border: 1px solid var(--border-soft);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at top, color-mix(in srgb, var(--text-primary) 4%, transparent), transparent 48%),
+        var(--card-bg-alt);
+      padding: 18px;
+    }
+
+    .drawer-mini-circle {
+      position: relative;
+      width: min(100%, 420px);
+      height: 420px;
+      margin: 0 auto;
+    }
+
+    .drawer-mini-circle canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .drawer-circle-detail {
+      min-width: 0;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .drawer-circle-kicker {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 10px;
+    }
+
+    .drawer-circle-zone {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .drawer-circle-meta {
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .drawer-circle-copy {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .log-list,
+    .stepup-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .insight-item,
-    .log-item {
+    .log-item,
+    .stepup-item,
+    .stepup-empty {
       border: 1px solid var(--border-soft);
       border-radius: 18px;
       background: var(--card-bg-alt);
       padding: 14px;
     }
 
-    .insight-name,
     .log-title {
-      font-size: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .log-meta {
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .stepup-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .stepup-copy {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .stepup-name {
+      font-size: 13px;
       font-weight: 600;
       letter-spacing: -0.02em;
       color: var(--text-primary);
       margin-bottom: 6px;
     }
 
-    .insight-copy,
-    .log-meta {
-      font-size: 13px;
+    .stepup-description {
+      font-size: 12px;
       line-height: 1.55;
       color: var(--text-muted);
     }
 
-    .drawer-select,
+    .stepup-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      flex: 0 0 auto;
+      text-align: right;
+    }
+
+    .stepup-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card-bg-strong);
+      color: var(--text-primary);
+      padding: 0 12px;
+      font: inherit;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      line-height: 1;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .stepup-status {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      white-space: nowrap;
+    }
+
+    .stepup-empty {
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--text-faint);
+    }
+
     .drawer-notes {
       width: 100%;
       border: 1px solid var(--border);
@@ -931,13 +1216,6 @@
       font: inherit;
       outline: none;
       transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-    }
-
-    .drawer-select {
-      height: 50px;
-      border-color: var(--border);
-      background: var(--card-bg-strong);
-      font-size: 14px;
     }
 
     .drawer-notes {
@@ -951,10 +1229,16 @@
       color: var(--text-faint);
     }
 
-    .drawer-select:focus,
-    .drawer-select:focus-visible,
     .drawer-notes:focus,
     .drawer-notes:focus-visible,
+    .drawer-open-record:focus,
+    .drawer-open-record:focus-visible,
+    .drawer-owner-select:focus,
+    .drawer-owner-select:focus-visible,
+    .stepup-button:focus,
+    .stepup-button:focus-visible,
+    .drawer-collapsible-toggle:focus,
+    .drawer-collapsible-toggle:focus-visible,
     .drawer-close:focus,
     .drawer-close:focus-visible {
       outline: none;
@@ -1035,6 +1319,11 @@
         transform: none;
         opacity: 0.56;
       }
+
+      .drawer-mini-circle {
+        width: min(100%, 320px);
+        height: 320px;
+      }
     }
   </style>
 </head>
@@ -1044,9 +1333,6 @@
       <div>
         <div class="eyebrow">Operational queue / underwriting inbox</div>
         <h1 class="title">Customer Queue</h1>
-        <div class="subtitle">
-          A smart underwriting inbox for triaging what needs attention now, what is waiting on counterparties, and which records are drifting toward escalation or stagnation.
-        </div>
       </div>
     </div>
 
@@ -1063,6 +1349,7 @@
         </div>
         <div class="summary-strip" id="summaryStrip"></div>
         <div class="filter-row" id="filterRow"></div>
+        <div class="showing-line" id="showingLine"></div>
       </div>
       <div class="queue-guidance">Click a row to open the full record. Use Preview for quick triage.</div>
 
@@ -1073,30 +1360,66 @@
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="preview-drawer" id="previewDrawer" aria-hidden="true">
     <div class="drawer-header">
-      <div>
+      <div class="drawer-header-main">
         <div class="drawer-eyebrow">Quick preview / underwriting triage</div>
         <h2 class="drawer-title" id="drawerBusinessName">No file selected</h2>
         <div class="drawer-subtitle" id="drawerPersonalName">Choose a queue item to inspect the file context.</div>
-        <div class="drawer-meta" id="drawerMeta"></div>
+        <div class="drawer-operational-line" id="drawerOperationalLine">Owner: — · Status unavailable · Anomaly —</div>
       </div>
       <button class="drawer-close" id="drawerClose" type="button" aria-label="Close preview drawer">×</button>
     </div>
     <div class="drawer-body">
       <div>
-        <div class="drawer-section-title">Top Canonical Insights</div>
-        <div class="insight-list" id="drawerInsightList"></div>
+        <button class="drawer-open-record" id="drawerOpenRecord" type="button">Open Record</button>
       </div>
       <div>
-        <div class="drawer-section-title">Action</div>
-        <select class="drawer-select" id="drawerActionSelect"></select>
+        <div class="drawer-circle-shell">
+          <div class="drawer-mini-circle" id="drawerMiniCircle"></div>
+          <div class="drawer-circle-detail">
+            <div class="drawer-circle-kicker">Hovered zone</div>
+            <div class="drawer-circle-zone" id="drawerCircleZoneName">No zone selected</div>
+            <div class="drawer-circle-meta" id="drawerCircleZoneMeta">Move over a zone to inspect the anomaly mix.</div>
+            <div class="drawer-circle-copy" id="drawerCircleZoneCopy">Open the full record for deeper circle review and reconciliation.</div>
+          </div>
+        </div>
       </div>
       <div>
-        <div class="drawer-section-title">Notes</div>
-        <textarea class="drawer-notes" id="drawerNotes" placeholder="Capture quick triage context before opening the full record."></textarea>
+        <div class="drawer-section-title">Step-up Actions</div>
+        <div class="stepup-list" id="drawerStepupList"></div>
       </div>
       <div>
-        <div class="drawer-section-title">Logs</div>
-        <div class="log-list" id="drawerLogList"></div>
+        <div class="drawer-owner-stack">
+          <div class="drawer-owner-label">Owner</div>
+          <select class="drawer-owner-select" id="drawerOwnerSelect"></select>
+        </div>
+      </div>
+      <div class="drawer-collapsible collapsed" id="drawerNotesSection">
+        <button class="drawer-collapsible-toggle" id="drawerNotesToggle" type="button" aria-expanded="false">
+          <div class="drawer-collapsible-main">
+            <div class="drawer-section-title">Notes</div>
+            <div class="drawer-collapsible-summary" id="drawerNotesSummary">No notes yet</div>
+          </div>
+          <div class="drawer-collapsible-icon" id="drawerNotesIcon">Expand</div>
+        </button>
+        <div class="drawer-collapsible-content">
+          <div class="drawer-collapsible-inner">
+            <textarea class="drawer-notes" id="drawerNotes" placeholder="Capture quick triage context before opening the full record."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="drawer-collapsible collapsed" id="drawerLogsSection">
+        <button class="drawer-collapsible-toggle" id="drawerLogsToggle" type="button" aria-expanded="false">
+          <div class="drawer-collapsible-main">
+            <div class="drawer-section-title">Logs</div>
+            <div class="drawer-collapsible-summary" id="drawerLogsSummary">Recent activity</div>
+          </div>
+          <div class="drawer-collapsible-icon" id="drawerLogsIcon">Expand</div>
+        </button>
+        <div class="drawer-collapsible-content">
+          <div class="drawer-collapsible-inner">
+            <div class="log-list" id="drawerLogList"></div>
+          </div>
+        </div>
       </div>
     </div>
   </aside>
@@ -1104,13 +1427,35 @@
   <script>
     const themeStorageKey = "underwriter-queue-theme";
     const currentUnderwriter = "M. Abramovic";
-    const previewActions = [
-      "Open record",
-      "Assign to me",
-      "Escalate",
-      "Request documentation",
-      "Mark waiting on them"
+    const underwriterOptions = [
+      "Unassigned",
+      "M. Abramovic",
+      "J. Singh",
+      "R. Patel",
+      "A. Chen"
     ];
+
+    const miniCircleZones = [
+      { key: "identity", label: "Identity" },
+      { key: "contactability", label: "Contact" },
+      { key: "business", label: "Business" },
+      { key: "bank", label: "Bank" },
+      { key: "compliance", label: "Compliance" },
+      { key: "credit", label: "Credit" }
+    ];
+
+    function buildZoneProfile(overrides) {
+      return {
+        identity: 0,
+        business: 0,
+        bank: 0,
+        contactability: 0,
+        compliance: 0,
+        credit: 0,
+        match: 0,
+        ...overrides
+      };
+    }
 
     const queueRows = [
       {
@@ -1134,6 +1479,7 @@
           { title: "Requested ownership support", meta: "Today, 8:34 AM" },
           { title: "Awaiting internal follow-up", meta: "Today, 8:47 AM" }
         ],
+        zoneMap: buildZoneProfile({ identity: 0.32, business: 0.86, bank: 0.64, contactability: 0.22, compliance: 0.1, credit: 0.08, match: 0.04 }),
         escalated: false,
         returnedResponse: false,
         stagnant: false
@@ -1159,6 +1505,7 @@
           { title: "Requested bank statement", meta: "Today, 7:58 AM" },
           { title: "Awaiting customer response", meta: "Today, 8:06 AM" }
         ],
+        zoneMap: buildZoneProfile({ identity: 0.18, business: 0.12, bank: 0.58, contactability: 0.62, compliance: 0.06, credit: 0.04, match: 0.02 }),
         escalated: false,
         returnedResponse: false,
         stagnant: false
@@ -1184,6 +1531,7 @@
           { title: "Assigned to Mike", meta: "Yesterday, 3:17 PM" },
           { title: "Awaiting underwriter decision", meta: "Today, 9:12 AM" }
         ],
+        zoneMap: buildZoneProfile({ identity: 0.12, business: 0.26, bank: 0.12, contactability: 0.08, compliance: 0.22, credit: 0.78, match: 0.84 }),
         escalated: true,
         returnedResponse: false,
         stagnant: false
@@ -1209,6 +1557,7 @@
           { title: "Lease packet replaced", meta: "Today, 7:03 AM" },
           { title: "Queued for underwriter review", meta: "Today, 7:18 AM" }
         ],
+        zoneMap: buildZoneProfile({ identity: 0.44, business: 0.68, bank: 0.08, contactability: 0.16, compliance: 0.04, credit: 0.02, match: 0.02 }),
         escalated: false,
         returnedResponse: true,
         stagnant: false
@@ -1234,6 +1583,7 @@
           { title: "Requested cap table clarification", meta: "Apr 11, 9:05 AM" },
           { title: "No response received", meta: "Apr 12, 4:39 PM" }
         ],
+        zoneMap: buildZoneProfile({ identity: 0.1, business: 0.88, bank: 0.72, contactability: 0.06, compliance: 0.04, credit: 0.18, match: 0.02 }),
         escalated: false,
         returnedResponse: false,
         stagnant: true
@@ -1259,6 +1609,7 @@
           { title: "Queued for first touch", meta: "Today, 9:18 AM" },
           { title: "No outbound request sent yet", meta: "Today, 9:19 AM" }
         ],
+        zoneMap: buildZoneProfile({ identity: 0.42, business: 0.14, bank: 0.06, contactability: 0.38, compliance: 0.02, credit: 0.01, match: 0.01 }),
         escalated: false,
         returnedResponse: false,
         stagnant: false
@@ -1284,6 +1635,7 @@
           { title: "Assigned to R. Patel", meta: "Apr 11, 5:14 PM" },
           { title: "Manual review in progress", meta: "Apr 12, 10:26 AM" }
         ],
+        zoneMap: buildZoneProfile({ identity: 0.08, business: 0.14, bank: 0.1, contactability: 0.06, compliance: 0.12, credit: 0.8, match: 0.7 }),
         escalated: true,
         returnedResponse: false,
         stagnant: false
@@ -1309,6 +1661,7 @@
           { title: "Reminder issued", meta: "Apr 10, 9:08 AM" },
           { title: "Record flagged stagnant", meta: "Apr 12, 3:46 PM" }
         ],
+        zoneMap: buildZoneProfile({ identity: 0.06, business: 0.1, bank: 0.08, contactability: 0.64, compliance: 0.04, credit: 0.52, match: 0.02 }),
         escalated: false,
         returnedResponse: false,
         stagnant: true
@@ -1334,6 +1687,7 @@
           { title: "Assigned to Mike", meta: "Today, 8:07 AM" },
           { title: "Awaiting quick triage", meta: "Today, 8:25 AM" }
         ],
+        zoneMap: buildZoneProfile({ identity: 0.74, business: 0.58, bank: 0.08, contactability: 0.1, compliance: 0.04, credit: 0.06, match: 0.02 }),
         escalated: false,
         returnedResponse: true,
         stagnant: false
@@ -1359,6 +1713,7 @@
           { title: "Flagged above anomaly threshold", meta: "Today, 6:41 AM" },
           { title: "Awaiting assignment", meta: "Today, 7:03 AM" }
         ],
+        zoneMap: buildZoneProfile({ identity: 0.18, business: 0.34, bank: 0.7, contactability: 0.12, compliance: 0.06, credit: 0.62, match: 0.08 }),
         escalated: false,
         returnedResponse: false,
         stagnant: false
@@ -1367,33 +1722,37 @@
 
     const summaryCards = [
       {
+        key: "my-queue",
         label: "My Queue",
         value: () => queueRows.filter((row) => row.assignee === currentUnderwriter).length,
-        note: "Records currently assigned to you for triage, evidence review, or reconciliation."
+        note: "Assigned to you"
       },
       {
+        key: "unassigned",
         label: "Unassigned",
         value: () => queueRows.filter((row) => !row.assignee).length,
-        note: "Fresh or drifting work without an owner, ready for intake distribution."
+        note: "Needs ownership"
       },
       {
+        key: "escalated",
         label: "Escalated",
         value: () => queueRows.filter((row) => row.escalated).length,
-        note: "Cases raised for policy, manual judgment, or concentrated anomaly review."
+        note: "Requires attention"
       },
       {
+        key: "returned-response",
         label: "Returned Response",
         value: () => queueRows.filter((row) => row.returnedResponse).length,
-        note: "Customer replies now back on our side for the next underwriting decision."
+        note: "Ready for next decision"
       }
     ];
 
     const filters = [
-      { label: "High Anomaly", active: true },
-      { label: "Low Anomaly", active: false },
-      { label: "Stagnant", active: false },
-      { label: "Waiting on Us", active: true },
-      { label: "Waiting on Them", active: false }
+      { key: "high-anomaly", label: "High Anomaly" },
+      { key: "low-anomaly", label: "Low Anomaly" },
+      { key: "stagnant", label: "Stagnant" },
+      { key: "waiting-on-us", label: "Waiting on Us" },
+      { key: "waiting-on-them", label: "Waiting on Them" }
     ];
 
     const sectionConfig = [
@@ -1425,24 +1784,78 @@
 
     const summaryStrip = document.getElementById("summaryStrip");
     const filterRow = document.getElementById("filterRow");
+    const showingLine = document.getElementById("showingLine");
     const queueSections = document.getElementById("queueSections");
     const themeDarkButton = document.getElementById("themeDarkButton");
     const themeLightButton = document.getElementById("themeLightButton");
     const drawerBackdrop = document.getElementById("drawerBackdrop");
     const previewDrawer = document.getElementById("previewDrawer");
     const drawerClose = document.getElementById("drawerClose");
+    const drawerOpenRecord = document.getElementById("drawerOpenRecord");
     const drawerBusinessName = document.getElementById("drawerBusinessName");
     const drawerPersonalName = document.getElementById("drawerPersonalName");
-    const drawerMeta = document.getElementById("drawerMeta");
-    const drawerInsightList = document.getElementById("drawerInsightList");
-    const drawerActionSelect = document.getElementById("drawerActionSelect");
+    const drawerOperationalLine = document.getElementById("drawerOperationalLine");
+    const drawerOwnerSelect = document.getElementById("drawerOwnerSelect");
+    const drawerMiniCircle = document.getElementById("drawerMiniCircle");
+    const drawerCircleZoneName = document.getElementById("drawerCircleZoneName");
+    const drawerCircleZoneMeta = document.getElementById("drawerCircleZoneMeta");
+    const drawerCircleZoneCopy = document.getElementById("drawerCircleZoneCopy");
+    const drawerStepupList = document.getElementById("drawerStepupList");
+    const drawerNotesSection = document.getElementById("drawerNotesSection");
+    const drawerNotesToggle = document.getElementById("drawerNotesToggle");
+    const drawerNotesSummary = document.getElementById("drawerNotesSummary");
+    const drawerNotesIcon = document.getElementById("drawerNotesIcon");
     const drawerNotes = document.getElementById("drawerNotes");
+    const drawerLogsSection = document.getElementById("drawerLogsSection");
+    const drawerLogsToggle = document.getElementById("drawerLogsToggle");
+    const drawerLogsSummary = document.getElementById("drawerLogsSummary");
+    const drawerLogsIcon = document.getElementById("drawerLogsIcon");
     const drawerLogList = document.getElementById("drawerLogList");
     const sectionState = Object.fromEntries(
       sectionConfig.map((section) => [section.key, { expanded: section.defaultExpanded, visibleCount: 5 }])
     );
     let activeTheme = window.localStorage.getItem(themeStorageKey) || "dark";
     let activePreviewRowId = null;
+    let activeBucket = "my-queue";
+    let activeLenses = [];
+    let drawerHoveredZoneKey = null;
+    let drawerMiniCircleState = null;
+    let stepupExecutionState = {};
+    let drawerNotesExpanded = false;
+    let drawerLogsExpanded = false;
+
+    const stepupExecutionCatalog = {
+      onfido_identity_verification: {
+        name: "Onfido identity verification",
+        description: "Confirm identity using selfie capture plus photo identification.",
+        cta: "Launch Onfido",
+        status: "Onfido Launched"
+      },
+      twilio_otp: {
+        name: "Twilio OTP",
+        description: "Verify control of the provided phone number using a 6-digit authentication code.",
+        cta: "Send OTP",
+        status: "OTP Sent"
+      },
+      prove_phone_identification: {
+        name: "Prove phone identification",
+        description: "Use phone-based identity signals to strengthen confidence in applicant identity.",
+        cta: "Run Prove",
+        status: "Prove Requested"
+      },
+      plaid_bank_verification: {
+        name: "Plaid bank verification",
+        description: "Verify bank ownership and account access directly through Plaid.",
+        cta: "Connect Plaid",
+        status: "Plaid Requested"
+      },
+      middesk_secretary_of_state_docs: {
+        name: "Middesk secretary of state docs",
+        description: "Retrieve official state registration documents for the applicant’s business.",
+        cta: "Order Docs",
+        status: "Docs Ordered"
+      }
+    };
 
     function applyTheme(theme) {
       activeTheme = theme === "light" ? "light" : "dark";
@@ -1453,6 +1866,13 @@
       themeDarkButton.setAttribute("aria-pressed", activeTheme === "dark" ? "true" : "false");
       themeLightButton.setAttribute("aria-pressed", activeTheme === "light" ? "true" : "false");
       window.localStorage.setItem(themeStorageKey, activeTheme);
+
+      if (activePreviewRowId) {
+        const row = getRowById(activePreviewRowId);
+        if (row) {
+          renderDrawerMiniCircle(row);
+        }
+      }
     }
 
     function buildPill(label, variant) {
@@ -1480,33 +1900,587 @@
       return "";
     }
 
+    function rowMatchesBucket(row) {
+      if (activeBucket === "my-queue") {
+        return row.assignee === currentUnderwriter;
+      }
+
+      if (activeBucket === "unassigned") {
+        return !row.assignee;
+      }
+
+      if (activeBucket === "escalated") {
+        return row.escalated === true;
+      }
+
+      if (activeBucket === "returned-response") {
+        return row.returnedResponse === true;
+      }
+
+      return true;
+    }
+
+    function rowMatchesLens(row, lensKey) {
+      if (lensKey === "high-anomaly") {
+        return row.anomalyScore >= 75;
+      }
+
+      if (lensKey === "low-anomaly") {
+        return row.anomalyScore < 50;
+      }
+
+      if (lensKey === "stagnant") {
+        return row.stagnant === true;
+      }
+
+      if (lensKey === "waiting-on-us") {
+        return row.status === "Waiting on Us";
+      }
+
+      if (lensKey === "waiting-on-them") {
+        return row.status === "Waiting on Them";
+      }
+
+      return true;
+    }
+
+    function getFilteredRows(rows) {
+      return rows.filter((row) => {
+        if (!rowMatchesBucket(row)) {
+          return false;
+        }
+
+        if (!activeLenses.length) {
+          return true;
+        }
+
+        return activeLenses.some((lensKey) => rowMatchesLens(row, lensKey));
+      });
+    }
+
+    function renderShowingLine() {
+      const bucketLabel = summaryCards.find((card) => card.key === activeBucket)?.label || "All";
+      const lensLabels = filters
+        .filter((filter) => activeLenses.includes(filter.key))
+        .map((filter) => filter.label);
+
+      showingLine.innerHTML = `<strong>Showing:</strong> ${[bucketLabel, ...lensLabels].join(" · ")}`;
+    }
+
+    function getRowById(rowId) {
+      return queueRows.find((item) => item.id === rowId) || null;
+    }
+
+    function getMiniCircleZoneIntensity(row, zoneKey) {
+      const zoneMap = row.zoneMap || {};
+
+      if (zoneKey === "compliance") {
+        return Math.max(zoneMap.compliance || 0, (zoneMap.match || 0) * 0.82);
+      }
+
+      return zoneMap[zoneKey] || 0;
+    }
+
+    function inferZoneKeyFromInsightName(name) {
+      const value = name.toLowerCase();
+
+      if (value.includes("identity")) return "identity";
+      if (value.includes("contactability")) return "contactability";
+      if (value.includes("bank")) return "bank";
+      if (value.includes("business")) return "business";
+      if (value.includes("credit")) return "credit";
+      if (value.includes("match")) return "match";
+      if (value.includes("compliance")) return "compliance";
+
+      return null;
+    }
+
+    function getDominantZoneKey(row) {
+      return miniCircleZones
+        .slice()
+        .sort((a, b) => getMiniCircleZoneIntensity(row, b.key) - getMiniCircleZoneIntensity(row, a.key))[0]?.key || miniCircleZones[0].key;
+    }
+
+    function getZoneInsight(row, zoneKey) {
+      if (zoneKey === "compliance") {
+        return row.insights.find((insight) => {
+          const inferredZoneKey = inferZoneKeyFromInsightName(insight.name);
+          return inferredZoneKey === "compliance" || inferredZoneKey === "match";
+        }) || null;
+      }
+
+      return row.insights.find((insight) => inferZoneKeyFromInsightName(insight.name) === zoneKey) || null;
+    }
+
+    function getZoneLabel(zoneKey) {
+      return miniCircleZones.find((zone) => zone.key === zoneKey)?.label || zoneKey;
+    }
+
+    function getZoneSummary(row, zoneKey) {
+      const insight = getZoneInsight(row, zoneKey);
+      const contribution = Math.round(getMiniCircleZoneIntensity(row, zoneKey) * 100);
+
+      if (insight) {
+        return {
+          label: getZoneLabel(zoneKey),
+          meta: `${contribution} contribution · ${insight.name}`,
+          copy: insight.copy
+        };
+      }
+
+      return {
+        label: getZoneLabel(zoneKey),
+        meta: `${contribution} contribution · No dominant concept`,
+        copy: "This zone is present in the preview mix but is not the primary driver of queue triage."
+      };
+    }
+
+    function miniDegToRad(deg) {
+      return (deg * Math.PI) / 180;
+    }
+
+    function miniClamp(num, min, max) {
+      return Math.max(min, Math.min(max, num));
+    }
+
+    function miniSeededNoise(seed) {
+      const value = Math.sin(seed * 12.9898) * 43758.5453;
+      return value - Math.floor(value);
+    }
+
+    function miniNormalizeAngle(angle) {
+      let normalized = angle % (Math.PI * 2);
+      if (normalized < 0) normalized += Math.PI * 2;
+      return normalized;
+    }
+
+    function miniAngleBetween(angle, start, end) {
+      angle = miniNormalizeAngle(angle);
+      start = miniNormalizeAngle(start);
+      end = miniNormalizeAngle(end);
+
+      if (start <= end) {
+        return angle >= start && angle <= end;
+      }
+
+      return angle >= start || angle <= end;
+    }
+
+    function getMiniCircleGeometry(size) {
+      return {
+        cx: size * 0.5,
+        cy: size * 0.5,
+        radius: size * 0.275
+      };
+    }
+
+    function buildMiniCircleZones(row) {
+      const spanDeg = 360 / miniCircleZones.length;
+      let cursor = -120;
+
+      return miniCircleZones.map((zone) => {
+        const startDeg = cursor;
+        const endDeg = cursor + spanDeg;
+        cursor += spanDeg;
+        return {
+          key: zone.key,
+          label: zone.label,
+          intensity: getMiniCircleZoneIntensity(row, zone.key),
+          insight: getZoneInsight(row, zone.key),
+          startDeg,
+          endDeg,
+          spanDeg,
+          start: miniDegToRad(startDeg),
+          end: miniDegToRad(endDeg),
+          midDeg: startDeg + spanDeg / 2,
+          mid: miniDegToRad(startDeg + spanDeg / 2)
+        };
+      });
+    }
+
+    function buildMiniCircleSegments(zone, anomalyScore) {
+      const segments = [];
+      const intensity = Math.pow(zone.intensity, 1.1);
+      const anomalyLift = 0.72 + anomalyScore / 180;
+      const safeSpan = zone.spanDeg;
+      const density = Math.floor(32 + intensity * 96);
+      const sourceWindows = [
+        {
+          centerT: miniClamp(0.18 + miniSeededNoise(zone.midDeg * 0.021) * 0.18, 0.08, 0.92),
+          spread: 0.09 + intensity * 0.08,
+          lift: 0.62 + intensity * 0.56
+        },
+        {
+          centerT: miniClamp(0.5 + (miniSeededNoise(zone.startDeg * 0.043 + 4.7) - 0.5) * 0.34, 0.08, 0.92),
+          spread: 0.12 + intensity * 0.11,
+          lift: 0.48 + intensity * 0.72
+        },
+        {
+          centerT: miniClamp(0.82 + (miniSeededNoise(zone.endDeg * 0.031 + 8.9) - 0.5) * 0.18, 0.08, 0.92),
+          spread: 0.08 + intensity * 0.09,
+          lift: 0.42 + intensity * 0.54
+        }
+      ];
+      const atmosphericBands = Array.from({ length: 2 + Math.ceil(intensity * 3) }, (_, index) => ({
+        centerT: miniClamp(miniSeededNoise((index + 1) * 5.31 + zone.midDeg * 0.019), 0.04, 0.96),
+        spread: 0.09 + miniSeededNoise(index * 1.73 + zone.startDeg * 0.013) * 0.16,
+        lift: 0.24 + miniSeededNoise(index * 3.27 + zone.endDeg * 0.021) * (0.45 + intensity * 0.42)
+      }));
+
+      for (let i = 0; i < density; i++) {
+        const tBase = density === 1 ? 0.5 : i / (density - 1);
+        const t = miniClamp(
+          tBase + (miniSeededNoise(i * 0.163 + zone.startDeg * 0.017) - 0.5) * (0.022 + intensity * 0.038),
+          0,
+          1
+        );
+        const deg = zone.startDeg + safeSpan * t;
+        const angle = miniDegToRad(deg);
+        const n1 = miniSeededNoise(i * 0.113 + zone.midDeg * 0.016);
+        const n2 = miniSeededNoise(i * 0.071 + zone.startDeg * 0.018 + 11.3);
+        const n3 = miniSeededNoise(i * 0.047 + zone.endDeg * 0.019 + 17.1);
+        const n4 = miniSeededNoise(i * 0.133 + zone.midDeg * 0.012 + 29.7);
+
+        let localCluster = 0;
+        let localDensity = 0;
+        let nearestDistance = 1;
+
+        sourceWindows.forEach((window, index) => {
+          const distance = Math.abs(t - window.centerT);
+          nearestDistance = Math.min(nearestDistance, distance);
+          const falloff = Math.exp(-(distance * distance) / (2 * window.spread * window.spread));
+          const grain = 0.74 + miniSeededNoise(i * 0.081 + index * 4.19 + zone.midDeg * 0.013) * 0.94;
+          localCluster += falloff * window.lift * grain;
+          localDensity += falloff * (0.48 + window.lift * 0.7);
+        });
+
+        const atmosphericLift = atmosphericBands.reduce((sum, band, index) => {
+          const distance = Math.abs(t - band.centerT);
+          const falloff = Math.exp(-(distance * distance) / (2 * band.spread * band.spread));
+          const turbulence = 0.7 + miniSeededNoise(i * 0.057 + index * 3.41 + zone.midDeg * 0.014) * 0.82;
+          return sum + falloff * band.lift * turbulence;
+        }, 0);
+
+        const buildup = Math.exp(-(nearestDistance * nearestDistance) / (2 * Math.pow(0.085 + intensity * 0.11, 2)));
+        const baseCluster =
+          Math.pow(n1, 3.8) * intensity * anomalyLift * 42 +
+          Math.pow(n2, 6.2) * intensity * anomalyLift * 58 +
+          Math.pow(n3, 8.5) * intensity * anomalyLift * 76;
+        const pulse = Math.sin(t * Math.PI * (1.25 + intensity * 5.4) + n4 * Math.PI) * 0.5 + 0.5;
+        const dissipation = 0.56 + Math.sin((t * 8.2 + n4 * 1.6) * Math.PI) * 0.14 + n2 * 0.18;
+        const sparsePocket = miniClamp(0.42 + n3 * 0.88 - n1 * 0.16, 0.16, 1.04);
+        const spike = (baseCluster + localCluster * 82 + atmosphericLift * 18 + buildup * 15) * (0.32 + pulse * 0.24) * dissipation * sparsePocket;
+        const opacity =
+          0.008 +
+          Math.pow(n2, 2.6) * 0.08 +
+          intensity * 0.06 +
+          Math.min(localDensity * 0.04, 0.08) +
+          Math.min(atmosphericLift * 0.014, 0.04) +
+          Math.min(spike / 220, 0.12);
+
+        segments.push({
+          angle,
+          spike,
+          opacity: opacity * sparsePocket,
+          width: 0.45 + n1 * 1.35 + localDensity * 0.24 + atmosphericLift * 0.06
+        });
+      }
+
+      return segments;
+    }
+
+    function renderDrawerCircleDetail(row, zoneKey) {
+      const safeZoneKey = zoneKey || getDominantZoneKey(row);
+      const summary = getZoneSummary(row, safeZoneKey);
+      drawerCircleZoneName.textContent = summary.label;
+      drawerCircleZoneMeta.textContent = summary.meta;
+      drawerCircleZoneCopy.textContent = summary.copy;
+    }
+
+    function renderDrawerMiniCircle(row) {
+      const dominantZoneKey = drawerHoveredZoneKey || getDominantZoneKey(row);
+      const size = drawerMiniCircle.clientWidth || 420;
+      const zones = buildMiniCircleZones(row).map((zone) => ({
+        ...zone,
+        score: Math.round(zone.intensity * 100),
+        segments: buildMiniCircleSegments(zone, row.anomalyScore)
+      }));
+
+      if (!drawerMiniCircle.querySelector("canvas")) {
+        drawerMiniCircle.innerHTML = '<canvas aria-label="Mini circle preview"></canvas>';
+      }
+
+      const canvas = drawerMiniCircle.querySelector("canvas");
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.floor(size * dpr);
+      canvas.height = Math.floor(size * dpr);
+      canvas.style.width = `${size}px`;
+      canvas.style.height = `${size}px`;
+
+      const context = canvas.getContext("2d");
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      context.clearRect(0, 0, size, size);
+
+      const styles = getComputedStyle(document.body);
+      const { cx, cy, radius } = getMiniCircleGeometry(size);
+      const activeZoneKey = dominantZoneKey;
+      const hasActive = Boolean(activeZoneKey);
+
+      const centerShade = context.createRadialGradient(cx, cy, radius * 0.06, cx, cy, radius * 0.98);
+      centerShade.addColorStop(0, activeTheme === "light" ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.32)");
+      centerShade.addColorStop(0.58, activeTheme === "light" ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.2)");
+      centerShade.addColorStop(1, "rgba(0,0,0,0)");
+      context.fillStyle = centerShade;
+      context.beginPath();
+      context.arc(cx, cy, radius * 1.06, 0, Math.PI * 2);
+      context.fill();
+
+      const centerGlow = context.createRadialGradient(cx, cy, radius * 0.08, cx, cy, radius * 1.24);
+      centerGlow.addColorStop(0, activeTheme === "light" ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.012)");
+      centerGlow.addColorStop(0.48, activeTheme === "light" ? "rgba(255,255,255,0.012)" : "rgba(255,255,255,0.005)");
+      centerGlow.addColorStop(1, "rgba(255,255,255,0)");
+      context.fillStyle = centerGlow;
+      context.beginPath();
+      context.arc(cx, cy, radius * 1.52, 0, Math.PI * 2);
+      context.fill();
+
+      for (let i = 0; i < 120; i++) {
+        const angle = miniDegToRad(i * 3.11);
+        const dustRadius = radius + 6 + miniSeededNoise(i * 0.27) * 16;
+        const x = cx + Math.cos(angle) * dustRadius;
+        const y = cy + Math.sin(angle) * dustRadius;
+        const dotSize = 0.22 + miniSeededNoise(i * 0.37) * 0.9;
+        const alpha = (activeTheme === "light" ? 0.014 : 0.008) + miniSeededNoise(i * 0.19) * (activeTheme === "light" ? 0.02 : 0.025);
+        context.fillStyle = activeTheme === "light" ? `rgba(26,26,29,${alpha})` : `rgba(255,255,255,${alpha})`;
+        context.beginPath();
+        context.arc(x, y, dotSize, 0, Math.PI * 2);
+        context.fill();
+      }
+
+      context.strokeStyle = activeTheme === "light" ? "rgba(26,26,29,0.1)" : "rgba(255,255,255,0.12)";
+      context.lineWidth = 1.2;
+      context.beginPath();
+      context.arc(cx, cy, radius, 0, Math.PI * 2);
+      context.stroke();
+
+      context.strokeStyle = activeTheme === "light" ? "rgba(26,26,29,0.04)" : "rgba(255,255,255,0.04)";
+      context.lineWidth = 9;
+      context.beginPath();
+      context.arc(cx, cy, radius, 0, Math.PI * 2);
+      context.stroke();
+
+      context.strokeStyle = activeTheme === "light" ? "rgba(26,26,29,0.022)" : "rgba(255,255,255,0.022)";
+      context.lineWidth = 18;
+      context.beginPath();
+      context.arc(cx, cy, radius + 12, 0, Math.PI * 2);
+      context.stroke();
+
+      zones.forEach((zone) => {
+        const isActive = zone.key === activeZoneKey;
+        const isPrimaryIdle = !hasActive && zone.key === getDominantZoneKey(row);
+        const lineAlpha = isActive ? 0.64 : hasActive ? 0.018 : isPrimaryIdle ? 0.18 : 0.1;
+        const spikeBoost = isActive ? 1.36 : hasActive ? 0.42 : 1;
+        const widthBoost = isActive ? 1.52 : hasActive ? 0.72 : 1;
+        const opacityBoost = isActive ? 0.2 : hasActive ? -0.08 : isPrimaryIdle ? 0.02 : -0.012;
+        const hazeAlpha = isActive ? 0.08 : hasActive ? 0.006 : isPrimaryIdle ? 0.022 : 0.013;
+        const outerHazeAlpha = isActive ? 0.034 : hasActive ? 0.003 : isPrimaryIdle ? 0.01 : 0.006;
+
+        context.strokeStyle = activeTheme === "light"
+          ? `rgba(26,26,29,${hazeAlpha})`
+          : `rgba(255,255,255,${hazeAlpha})`;
+        context.lineWidth = isActive ? 16 : isPrimaryIdle ? 11 : 9;
+        context.lineCap = "round";
+        context.beginPath();
+        context.arc(cx, cy, radius + 11, zone.start, zone.end);
+        context.stroke();
+
+        context.strokeStyle = activeTheme === "light"
+          ? `rgba(26,26,29,${outerHazeAlpha})`
+          : `rgba(255,255,255,${outerHazeAlpha})`;
+        context.lineWidth = isActive ? 30 : 20;
+        context.beginPath();
+        context.arc(cx, cy, radius + 22, zone.start, zone.end);
+        context.stroke();
+
+        zone.segments.forEach((segment) => {
+          const rawSpike = segment.spike * spikeBoost;
+          const softCap = radius * 0.72;
+          const spike = softCap * (1 - Math.exp(-rawSpike / softCap));
+          const inner = radius - 1.5;
+          const outer = radius + spike;
+          const x1 = cx + Math.cos(segment.angle) * inner;
+          const y1 = cy + Math.sin(segment.angle) * inner;
+          const x2 = cx + Math.cos(segment.angle) * outer;
+          const y2 = cy + Math.sin(segment.angle) * outer;
+          const alpha = miniClamp(segment.opacity + opacityBoost, hasActive ? 0.003 : 0.01, isActive ? 0.74 : isPrimaryIdle ? 0.22 : 0.15);
+
+          context.strokeStyle = activeTheme === "light"
+            ? `rgba(26,26,29,${alpha})`
+            : `rgba(255,255,255,${alpha})`;
+          context.lineWidth = segment.width * widthBoost;
+          context.beginPath();
+          context.moveTo(x1, y1);
+          context.lineTo(x2, y2);
+          context.stroke();
+        });
+
+        context.strokeStyle = activeTheme === "light"
+          ? `rgba(26,26,29,${lineAlpha})`
+          : `rgba(255,255,255,${lineAlpha})`;
+        context.lineWidth = isActive ? 2.3 : hasActive ? 0.95 : 1.45;
+        context.beginPath();
+        context.arc(cx, cy, radius, zone.start, zone.end);
+        context.stroke();
+
+        if (isActive) {
+          context.strokeStyle = activeTheme === "light" ? "rgba(26,26,29,0.14)" : "rgba(255,255,255,0.16)";
+          context.lineWidth = 4.1;
+          context.beginPath();
+          context.arc(cx, cy, radius + 1.3, zone.start, zone.end);
+          context.stroke();
+        }
+
+      });
+
+      context.fillStyle = activeTheme === "light" ? "rgba(248,244,237,0.9)" : "rgba(9,9,11,0.84)";
+      context.beginPath();
+      context.arc(cx, cy, size * 0.085, 0, Math.PI * 2);
+      context.fill();
+
+      context.strokeStyle = activeTheme === "light" ? "rgba(26,26,29,0.05)" : "rgba(255,255,255,0.035)";
+      context.lineWidth = 1;
+      context.beginPath();
+      context.arc(cx, cy, size * 0.085, 0, Math.PI * 2);
+      context.stroke();
+
+      context.fillStyle = styles.getPropertyValue("--text-secondary-soft").trim() || (activeTheme === "light" ? "rgba(26,26,29,0.68)" : "rgba(255,255,255,0.7)");
+      context.font = `600 ${Math.max(12, Math.round(size * 0.05))}px Inter, system-ui, sans-serif`;
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillText(String(row.anomalyScore), cx, cy - 5);
+
+      context.fillStyle = styles.getPropertyValue("--text-faint").trim() || (activeTheme === "light" ? "rgba(26,26,29,0.46)" : "rgba(255,255,255,0.42)");
+      context.font = `${Math.max(7, Math.round(size * 0.02))}px Inter, system-ui, sans-serif`;
+      context.fillText("ANOMALY", cx, cy + 13);
+
+      drawerMiniCircleState = {
+        rowId: row.id,
+        size,
+        zones,
+        geometry: {
+          cx,
+          cy,
+          radius,
+          innerHitRadius: radius - 26,
+          outerHitRadius: radius + 86
+        }
+      };
+      renderDrawerCircleDetail(row, dominantZoneKey);
+    }
+
+    function getStepupActions(row) {
+      const actions = [];
+      const seen = new Set();
+      const zoneMap = row.zoneMap || {};
+
+      function pushAction(key) {
+        if (!seen.has(key)) {
+          actions.push({ id: key, ...stepupExecutionCatalog[key] });
+          seen.add(key);
+        }
+      }
+
+      if (zoneMap.identity >= 0.45 || row.insights.some((insight) => inferZoneKeyFromInsightName(insight.name) === "identity")) {
+        pushAction("onfido_identity_verification");
+        pushAction("twilio_otp");
+      }
+
+      if (zoneMap.contactability >= 0.4 || row.insights.some((insight) => inferZoneKeyFromInsightName(insight.name) === "contactability")) {
+        pushAction("prove_phone_identification");
+        pushAction("twilio_otp");
+      }
+
+      if (zoneMap.bank >= 0.45 || row.insights.some((insight) => inferZoneKeyFromInsightName(insight.name) === "bank")) {
+        pushAction("plaid_bank_verification");
+      }
+
+      if (zoneMap.business >= 0.5 || row.insights.some((insight) => inferZoneKeyFromInsightName(insight.name) === "business")) {
+        pushAction("middesk_secretary_of_state_docs");
+      }
+
+      return actions.slice(0, 3);
+    }
+
+    function renderDrawerStepups(row) {
+      const actions = getStepupActions(row);
+
+      if (!actions.length) {
+        drawerStepupList.innerHTML = `
+          <div class="stepup-empty">
+            No direct step-up action recommended in preview.
+            Open the full record for deeper reconciliation.
+          </div>
+        `;
+        return;
+      }
+
+      drawerStepupList.innerHTML = actions
+        .map((action) => {
+          const status = stepupExecutionState[`${row.id}:${action.id}`] || "";
+          return `
+            <div class="stepup-item">
+              <div class="stepup-copy">
+                <div class="stepup-name">${action.name}</div>
+                <div class="stepup-description">${action.description}</div>
+              </div>
+              <div class="stepup-meta">
+                <button class="stepup-button" type="button" data-stepup-action-id="${action.id}" ${status ? "disabled" : ""}>${status ? action.status : action.cta}</button>
+                ${status ? `<div class="stepup-status">${status}</div>` : ""}
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function renderDrawerOwner(row) {
+      drawerOwnerSelect.innerHTML = underwriterOptions
+        .map((option) => `<option value="${option}" ${(row.assignee || "Unassigned") === option ? "selected" : ""}>${option}</option>`)
+        .join("");
+    }
+
+    function renderDrawerHeader(row) {
+      const ownerLabel = row.assignee || "Unassigned";
+      drawerBusinessName.textContent = row.businessName;
+      drawerPersonalName.textContent = `${row.personalName} · ${row.workflow}`;
+      drawerOperationalLine.textContent = `Owner: ${ownerLabel} · ${row.status} · Anomaly ${row.anomalyScore}`;
+      renderDrawerOwner(row);
+    }
+
+    function renderDrawerCollapsibles(row) {
+      drawerNotesSection.classList.toggle("collapsed", !drawerNotesExpanded);
+      drawerNotesToggle.setAttribute("aria-expanded", drawerNotesExpanded ? "true" : "false");
+      drawerNotesIcon.textContent = drawerNotesExpanded ? "Collapse" : "Expand";
+      drawerNotesSummary.textContent = drawerNotes.value.trim() ? "Draft" : "No notes yet";
+
+      const lastLog = row.logs[0];
+      drawerLogsSection.classList.toggle("collapsed", !drawerLogsExpanded);
+      drawerLogsToggle.setAttribute("aria-expanded", drawerLogsExpanded ? "true" : "false");
+      drawerLogsIcon.textContent = drawerLogsExpanded ? "Collapse" : "Expand";
+      drawerLogsSummary.textContent = row.logs.length ? `${row.logs.length} entries · ${lastLog.meta}` : "No recent activity";
+    }
+
     function openPreviewDrawer(rowId) {
-      const row = queueRows.find((item) => item.id === rowId);
+      const row = getRowById(rowId);
       if (!row) return;
 
       activePreviewRowId = rowId;
-      drawerBusinessName.textContent = row.businessName;
-      drawerPersonalName.textContent = `${row.personalName} · ${row.workflow}`;
-      drawerMeta.innerHTML = `
-        ${buildPill(`Anomaly ${row.anomalyScore}`, row.anomaly === "High" ? "pill-strong" : "pill-faint")}
-        <div class="status-pill ${getStatusVariant(row.status)}">${row.status}</div>
-        ${buildPill(row.assignee || "Unassigned", row.assignee ? "pill-faint" : "pill-strong")}
-      `;
-      drawerInsightList.innerHTML = row.insights
-        .slice(0, 2)
-        .map(
-          (insight) => `
-            <div class="insight-item">
-              <div class="insight-name">${insight.name}</div>
-              <div class="insight-copy">${insight.copy}</div>
-            </div>
-          `
-        )
-        .join("");
-      drawerActionSelect.innerHTML = previewActions
-        .map((action) => `<option value="${action}">${action}</option>`)
-        .join("");
-      drawerActionSelect.value = previewActions[0];
+      drawerHoveredZoneKey = null;
+      drawerNotesExpanded = false;
+      drawerLogsExpanded = false;
+      renderDrawerHeader(row);
+      renderDrawerMiniCircle(row);
+      renderDrawerStepups(row);
       drawerNotes.value = "";
       drawerLogList.innerHTML = row.logs
         .map(
@@ -1518,6 +2492,7 @@
           `
         )
         .join("");
+      renderDrawerCollapsibles(row);
 
       document.body.classList.add("drawer-open");
       previewDrawer.setAttribute("aria-hidden", "false");
@@ -1525,8 +2500,102 @@
 
     function closePreviewDrawer() {
       activePreviewRowId = null;
+      drawerHoveredZoneKey = null;
+      drawerMiniCircleState = null;
       document.body.classList.remove("drawer-open");
       previewDrawer.setAttribute("aria-hidden", "true");
+    }
+
+    function handleDrawerStepupClick(event) {
+      const stepupButton = event.target.closest(".stepup-button");
+      if (!stepupButton || !activePreviewRowId) return;
+
+      const row = getRowById(activePreviewRowId);
+      if (!row) return;
+
+      const actionId = stepupButton.dataset.stepupActionId;
+      const action = stepupExecutionCatalog[actionId];
+      if (!action) return;
+
+      stepupExecutionState = {
+        ...stepupExecutionState,
+        [`${row.id}:${actionId}`]: action.status
+      };
+
+      renderDrawerStepups(row);
+    }
+
+    function getMiniCircleZoneAtPoint(event) {
+      if (!drawerMiniCircleState) return null;
+
+      const rect = drawerMiniCircle.getBoundingClientRect();
+      const scale = drawerMiniCircleState.size / rect.width;
+      const x = (event.clientX - rect.left) * scale;
+      const y = (event.clientY - rect.top) * scale;
+      const { cx, cy, innerHitRadius, outerHitRadius } = drawerMiniCircleState.geometry;
+      const dx = x - cx;
+      const dy = y - cy;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < innerHitRadius || distance > outerHitRadius) {
+        return null;
+      }
+
+      const angle = Math.atan2(dy, dx);
+      return drawerMiniCircleState.zones.find((zone) => miniAngleBetween(angle, zone.start, zone.end)) || null;
+    }
+
+    function handleDrawerMiniCircleHover(event) {
+      if (!activePreviewRowId) return;
+      const row = getRowById(activePreviewRowId);
+      if (!row) return;
+
+      const zone = getMiniCircleZoneAtPoint(event);
+      const nextZoneKey = zone ? zone.key : getDominantZoneKey(row);
+
+      if (drawerHoveredZoneKey === nextZoneKey || (!zone && drawerHoveredZoneKey === null)) {
+        return;
+      }
+
+      drawerHoveredZoneKey = zone ? zone.key : null;
+      renderDrawerMiniCircle(row);
+    }
+
+    function resetDrawerMiniCircleHover() {
+      if (!activePreviewRowId) return;
+      const row = getRowById(activePreviewRowId);
+      if (!row) return;
+
+      drawerHoveredZoneKey = null;
+      renderDrawerMiniCircle(row);
+    }
+
+    function handleDrawerOwnerChange() {
+      if (!activePreviewRowId) return;
+      const row = getRowById(activePreviewRowId);
+      if (!row) return;
+
+      row.assignee = drawerOwnerSelect.value === "Unassigned" ? null : drawerOwnerSelect.value;
+      renderDrawerHeader(row);
+      renderSummary();
+      renderShowingLine();
+      renderSections();
+    }
+
+    function toggleDrawerNotes() {
+      if (!activePreviewRowId) return;
+      const row = getRowById(activePreviewRowId);
+      if (!row) return;
+      drawerNotesExpanded = !drawerNotesExpanded;
+      renderDrawerCollapsibles(row);
+    }
+
+    function toggleDrawerLogs() {
+      if (!activePreviewRowId) return;
+      const row = getRowById(activePreviewRowId);
+      if (!row) return;
+      drawerLogsExpanded = !drawerLogsExpanded;
+      renderDrawerCollapsibles(row);
     }
 
     function handleQueueBodyClick(event) {
@@ -1570,11 +2639,43 @@
       handleQueueBodyClick(event);
     }
 
+    function handleFocusControlsClick(event) {
+      const summaryCard = event.target.closest(".summary-card");
+      if (summaryCard) {
+        const bucketKey = summaryCard.dataset.bucketKey;
+        if (!bucketKey) return;
+        activeBucket = bucketKey;
+        renderSummary();
+        renderFilters();
+        renderShowingLine();
+        renderSections();
+        return;
+      }
+
+      const filterPill = event.target.closest(".filter-pill");
+      if (filterPill) {
+        const filterKey = filterPill.dataset.filterKey;
+        if (!filterKey) return;
+
+        if (activeLenses.includes(filterKey)) {
+          activeLenses = activeLenses.filter((key) => key !== filterKey);
+        } else {
+          activeLenses = [...activeLenses, filterKey];
+        }
+
+        renderSummary();
+        renderFilters();
+        renderShowingLine();
+        renderSections();
+        return;
+      }
+    }
+
     function renderSummary() {
       summaryStrip.innerHTML = summaryCards
         .map(
           (card) => `
-            <article class="summary-card">
+            <article class="summary-card ${activeBucket === card.key ? "active" : ""}" data-bucket-key="${card.key}" tabindex="0" role="button" aria-pressed="${activeBucket === card.key ? "true" : "false"}">
               <div>
                 <div class="summary-label">${card.label}</div>
                 <div class="summary-value">${card.value()}</div>
@@ -1588,7 +2689,7 @@
 
     function renderFilters() {
       filterRow.innerHTML = filters
-        .map((filter) => `<button class="filter-pill ${filter.active ? "active" : ""}" type="button">${filter.label}</button>`)
+        .map((filter) => `<button class="filter-pill ${activeLenses.includes(filter.key) ? "active" : ""}" type="button" data-filter-key="${filter.key}" aria-pressed="${activeLenses.includes(filter.key) ? "true" : "false"}">${filter.label}</button>`)
         .join("");
     }
 
@@ -1658,9 +2759,14 @@
     function renderSections() {
       queueSections.innerHTML = sectionConfig
         .map((section) => {
-          const totalRows = section.getRows().length;
+          const filteredRows = getFilteredRows(section.getRows());
+          if (!filteredRows.length) {
+            return "";
+          }
+
+          const totalRows = filteredRows.length;
           const visibleCount = sectionState[section.key].visibleCount;
-          const rows = section.getRows().slice(0, visibleCount);
+          const rows = filteredRows.slice(0, visibleCount);
           const isExpanded = sectionState[section.key].expanded;
 
           return `
@@ -1714,18 +2820,42 @@
 
     renderSummary();
     renderFilters();
+    renderShowingLine();
     renderSections();
     applyTheme(activeTheme);
     themeDarkButton.addEventListener("click", () => applyTheme("dark"));
     themeLightButton.addEventListener("click", () => applyTheme("light"));
+    summaryStrip.addEventListener("click", handleFocusControlsClick);
+    filterRow.addEventListener("click", handleFocusControlsClick);
     queueSections.addEventListener("change", handleSectionListChange);
     queueSections.addEventListener("click", handleSectionListClick);
     drawerBackdrop.addEventListener("click", closePreviewDrawer);
     drawerClose.addEventListener("click", closePreviewDrawer);
+    drawerOpenRecord.addEventListener("click", () => {
+      window.location.href = "./circlev2.html";
+    });
+    drawerStepupList.addEventListener("click", handleDrawerStepupClick);
+    drawerMiniCircle.addEventListener("mousemove", handleDrawerMiniCircleHover);
+    drawerMiniCircle.addEventListener("mouseleave", resetDrawerMiniCircleHover);
+    drawerOwnerSelect.addEventListener("change", handleDrawerOwnerChange);
+    drawerNotesToggle.addEventListener("click", toggleDrawerNotes);
+    drawerLogsToggle.addEventListener("click", toggleDrawerLogs);
+    drawerNotes.addEventListener("input", () => {
+      if (!activePreviewRowId) return;
+      const row = getRowById(activePreviewRowId);
+      if (!row) return;
+      renderDrawerCollapsibles(row);
+    });
     window.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && activePreviewRowId) {
         closePreviewDrawer();
       }
+    });
+    window.addEventListener("resize", () => {
+      if (!activePreviewRowId) return;
+      const row = getRowById(activePreviewRowId);
+      if (!row) return;
+      renderDrawerMiniCircle(row);
     });
   </script>
 </body>

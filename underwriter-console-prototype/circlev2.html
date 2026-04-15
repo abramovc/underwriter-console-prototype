@@ -448,6 +448,94 @@
       margin-bottom: 12px;
     }
 
+    .step-up-section {
+      margin-top: 4px;
+    }
+
+    .step-up-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-up-item {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.022);
+      border-radius: 18px;
+      padding: 14px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .step-up-copy {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .step-up-name {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 6px;
+    }
+
+    .step-up-description {
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .step-up-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .step-up-button {
+      min-height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.82);
+      padding: 0 12px;
+      font: inherit;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+    }
+
+    .step-up-button:disabled {
+      opacity: 0.72;
+      cursor: default;
+    }
+
+    .step-up-status {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.52);
+      white-space: nowrap;
+    }
+
+    .step-up-empty {
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.016);
+      border-radius: 18px;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.56);
+    }
+
     .concept-list {
       display: flex;
       flex-direction: column;
@@ -840,6 +928,8 @@
     .note-button:focus-visible,
     .reconcile-button:focus,
     .reconcile-button:focus-visible,
+    .step-up-button:focus,
+    .step-up-button:focus-visible,
     .zone-reconcile-button:focus,
     .zone-reconcile-button:focus-visible,
     .zone-reconcile-select:focus,
@@ -1096,6 +1186,11 @@
             </div>
           </div>
 
+          <div class="section step-up-section" id="stepUpSection" hidden>
+            <div class="section-title">Step-up Actions</div>
+            <div class="step-up-list" id="stepUpList"></div>
+          </div>
+
           <div class="section">
             <div class="section-title">Canonical concepts</div>
             <div class="concept-list" id="conceptList"></div>
@@ -1310,6 +1405,8 @@
     const zoneReconcileConfirm = document.getElementById("zoneReconcileConfirm");
     const statScore = document.getElementById("statScore");
     const statCount = document.getElementById("statCount");
+    const stepUpSection = document.getElementById("stepUpSection");
+    const stepUpList = document.getElementById("stepUpList");
     const conceptList = document.getElementById("conceptList");
     const evidenceList = document.getElementById("evidenceList");
     const hudSub = document.getElementById("hudSub");
@@ -1333,6 +1430,7 @@
     let zoneReconcileAllOpen = false;
     let zoneReconcileAllReason = "Verified by supporting documentation";
     let zoneReconcileAllNotes = "";
+    let stepUpActionState = {};
     let mouse = { x: 0, y: 0, inside: false };
     let resolveAnimationFrame = null;
     let nextIssueTimeout = null;
@@ -1351,6 +1449,83 @@
       "Duplicate / overlapping signals",
       "Manual underwriter override"
     ];
+
+    const stepUpActionMapping = {
+      identity: {
+        actions: [
+          {
+            id: "twilio-otp",
+            name: "Twilio OTP",
+            description: "Verify control of the provided phone number using a 6-digit authentication code.",
+            cta: "Send OTP",
+            status: "OTP Sent"
+          },
+          {
+            id: "prove-phone-identification",
+            name: "Prove phone identification",
+            description: "Use phone-based identity signals to strengthen confidence in applicant identity.",
+            cta: "Run Prove",
+            status: "Prove Requested"
+          },
+          {
+            id: "onfido-identity-verification",
+            name: "Onfido identity verification",
+            description: "Confirm identity using selfie capture plus photo identification.",
+            cta: "Launch Onfido",
+            status: "Onfido Launched"
+          }
+        ]
+      },
+      contactability: {
+        actions: [
+          {
+            id: "twilio-otp",
+            name: "Twilio OTP",
+            description: "Verify control of the provided phone number using a 6-digit authentication code.",
+            cta: "Send OTP",
+            status: "OTP Sent"
+          },
+          {
+            id: "prove-phone-identification",
+            name: "Prove phone identification",
+            description: "Use phone-based identity signals to strengthen confidence in applicant identity.",
+            cta: "Run Prove",
+            status: "Prove Requested"
+          }
+        ]
+      },
+      bank: {
+        actions: [
+          {
+            id: "plaid-bank-verification",
+            name: "Plaid bank verification",
+            description: "Verify bank ownership and account access directly through Plaid.",
+            cta: "Connect Plaid",
+            status: "Plaid Requested"
+          }
+        ]
+      },
+      business: {
+        actions: [
+          {
+            id: "middesk-secretary-of-state-docs",
+            name: "Middesk secretary of state docs",
+            description: "Retrieve official state registration documents for the applicant’s business.",
+            cta: "Order Docs",
+            status: "Docs Ordered"
+          }
+        ]
+      },
+      compliance: {
+        message: "No direct step-up actions recommended for this zone."
+      },
+      credit: {
+        message: "This zone is more likely to require underwriting judgment than additional step-up verification."
+      },
+      match: {
+        message: "This zone is more likely to require underwriting judgment than additional step-up verification."
+      }
+    };
 
     function degToRad(deg) {
       return (deg * Math.PI) / 180;
@@ -1417,20 +1592,42 @@
         };
       });
 
+      const atmosphericBands = Array.from({ length: 3 + Math.ceil(intensity * 3) }, (_, index) => {
+        const centerT = clamp(
+          seededNoise((index + 1) * 6.37 + insight.baseIntensity * 17.2),
+          0.06,
+          0.94
+        );
+        return {
+          centerT,
+          spread: 0.08 + seededNoise((index + 1) * 3.71 + safeSpan) * 0.18,
+          lift: 0.28 + seededNoise((index + 1) * 8.41 + insight.startDeg) * 0.9
+        };
+      });
+
       for (let i = 0; i < density; i++) {
-        const t = i / density;
+        const tBase = density === 1 ? 0.5 : i / (density - 1);
+        const t = clamp(
+          tBase + (seededNoise(i * 0.173 + safeSpan * 0.031) - 0.5) * (0.014 + intensity * 0.022),
+          0,
+          1
+        );
         const deg = insight.startDeg + safeSpan * t;
         const angle = degToRad(deg);
 
         const n1 = seededNoise(i * 0.113 + insight.baseIntensity * 7.1 + safeSpan);
         const n2 = seededNoise(i * 0.067 + insight.startDeg * 0.21);
         const n3 = seededNoise(i * 0.031 + insight.endDeg * 0.17);
+        const n4 = seededNoise(i * 0.149 + insight.midDeg * 0.13);
+        const n5 = seededNoise(i * 0.089 + insight.endDeg * 0.11 + 41.7);
 
         let conceptCluster = 0;
         let conceptDensity = 0;
+        let nearestWindowDistance = 1;
 
         conceptWindows.forEach((window, index) => {
           const distance = Math.abs(t - window.centerT);
+          nearestWindowDistance = Math.min(nearestWindowDistance, distance);
           const falloff = Math.exp(-(distance * distance) / (2 * window.spread * window.spread));
           const grain = 0.72 + seededNoise(i * 0.083 + index * 5.31 + insight.baseIntensity * 11.7) * 0.82;
           const severityWeight = Math.pow(window.concept.severity, 1.2);
@@ -1439,27 +1636,38 @@
           conceptDensity += falloff * (0.65 + severityWeight * 0.75);
         });
 
-        const baseCluster =
-          Math.pow(n1, 3.2) * intensity * 80 +
-          Math.pow(n2, 5.4) * intensity * 102 +
-          Math.pow(n3, 7.4) * intensity * 128;
+        const atmosphericLift = atmosphericBands.reduce((sum, band, index) => {
+          const distance = Math.abs(t - band.centerT);
+          const falloff = Math.exp(-(distance * distance) / (2 * band.spread * band.spread));
+          const turbulence = 0.7 + seededNoise(i * 0.061 + index * 4.37 + insight.baseIntensity * 19.3) * 0.95;
+          return sum + falloff * band.lift * turbulence;
+        }, 0);
 
-        const pulse = Math.sin(t * Math.PI * (1.2 + intensity * 5.2)) * 0.5 + 0.5;
-        const cluster = baseCluster + conceptCluster * 110 * intensity;
-        const spike = cluster * (0.5 + pulse * 0.34) + conceptDensity * 26;
+        const baseCluster =
+          Math.pow(n1, 3.6) * intensity * 66 +
+          Math.pow(n2, 5.9) * intensity * 92 +
+          Math.pow(n3, 8.2) * intensity * 124;
+
+        const pulse = Math.sin(t * Math.PI * (1.4 + intensity * 6.4) + n4 * Math.PI) * 0.5 + 0.5;
+        const buildup = Math.exp(-(nearestWindowDistance * nearestWindowDistance) / (2 * Math.pow(0.09 + intensity * 0.1, 2)));
+        const dissipation = 0.58 + Math.sin((t * 9.5 + n5 * 2.1) * Math.PI) * 0.12 + n4 * 0.16;
+        const sparsePocket = clamp(0.46 + n5 * 0.8 - n2 * 0.18, 0.18, 1.05);
+        const cluster = baseCluster + conceptCluster * 124 * intensity + atmosphericLift * 24;
+        const spike = (cluster * (0.34 + pulse * 0.22) + conceptDensity * 22 + buildup * 26) * dissipation * sparsePocket;
 
         const opacity =
-          0.024 +
-          Math.pow(n2, 2.2) * 0.13 +
-          intensity * 0.11 +
-          Math.min(conceptDensity * 0.05, 0.1) +
-          Math.min(spike / 320, 0.17);
+          0.012 +
+          Math.pow(n2, 2.7) * 0.1 +
+          intensity * 0.08 +
+          Math.min(conceptDensity * 0.045, 0.085) +
+          Math.min(atmosphericLift * 0.018, 0.05) +
+          Math.min(spike / 420, 0.14);
 
         segments.push({
           angle,
           spike,
-          opacity,
-          width: 0.9 + n1 * 2.4 + conceptDensity * 0.38
+          opacity: opacity * sparsePocket,
+          width: 0.55 + n1 * 1.9 + conceptDensity * 0.34 + atmosphericLift * 0.06
         });
       }
 
@@ -1515,20 +1723,25 @@
     function drawBaseRing(cx, cy, radius) {
       ctx.save();
 
-      ctx.strokeStyle = "rgba(255,255,255,0.17)";
-      ctx.lineWidth = 2.2;
+      ctx.fillStyle = "rgba(0,0,0,0.2)";
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius * 0.92, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = "rgba(255,255,255,0.13)";
+      ctx.lineWidth = 1.7;
       ctx.beginPath();
       ctx.arc(cx, cy, radius, 0, Math.PI * 2);
       ctx.stroke();
 
-      ctx.strokeStyle = "rgba(255,255,255,0.06)";
-      ctx.lineWidth = 16;
+      ctx.strokeStyle = "rgba(255,255,255,0.045)";
+      ctx.lineWidth = 12;
       ctx.beginPath();
       ctx.arc(cx, cy, radius, 0, Math.PI * 2);
       ctx.stroke();
 
-      ctx.strokeStyle = "rgba(255,255,255,0.04)";
-      ctx.lineWidth = 32;
+      ctx.strokeStyle = "rgba(255,255,255,0.024)";
+      ctx.lineWidth = 24;
       ctx.beginPath();
       ctx.arc(cx, cy, radius + 18, 0, Math.PI * 2);
       ctx.stroke();
@@ -1537,28 +1750,40 @@
     }
 
     function drawCenterGlow(cx, cy, radius) {
-      const glow = ctx.createRadialGradient(cx, cy, radius * 0.1, cx, cy, radius * 1.4);
-      glow.addColorStop(0, "rgba(255,255,255,0.02)");
-      glow.addColorStop(0.55, "rgba(255,255,255,0.01)");
+      const coreShade = ctx.createRadialGradient(cx, cy, radius * 0.04, cx, cy, radius * 0.98);
+      coreShade.addColorStop(0, "rgba(0,0,0,0.28)");
+      coreShade.addColorStop(0.58, "rgba(0,0,0,0.18)");
+      coreShade.addColorStop(1, "rgba(0,0,0,0)");
+
+      ctx.save();
+      ctx.fillStyle = coreShade;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius * 1.02, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      const glow = ctx.createRadialGradient(cx, cy, radius * 0.08, cx, cy, radius * 1.25);
+      glow.addColorStop(0, "rgba(255,255,255,0.008)");
+      glow.addColorStop(0.48, "rgba(255,255,255,0.004)");
       glow.addColorStop(1, "rgba(255,255,255,0)");
 
       ctx.save();
       ctx.fillStyle = glow;
       ctx.beginPath();
-      ctx.arc(cx, cy, radius * 1.7, 0, Math.PI * 2);
+      ctx.arc(cx, cy, radius * 1.48, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
     }
 
     function drawQuietDust(cx, cy, radius) {
       ctx.save();
-      for (let i = 0; i < 240; i++) {
+      for (let i = 0; i < 180; i++) {
         const a = degToRad(i * 3.17);
-        const r = radius + 6 + seededNoise(i * 0.19) * 16;
+        const r = radius + 8 + seededNoise(i * 0.19) * 14;
         const x = cx + Math.cos(a) * r;
         const y = cy + Math.sin(a) * r;
-        const s = 0.5 + seededNoise(i * 0.37) * 1.4;
-        ctx.fillStyle = `rgba(255,255,255,${0.02 + seededNoise(i * 0.11) * 0.045})`;
+        const s = 0.3 + seededNoise(i * 0.37) * 1.05;
+        ctx.fillStyle = `rgba(255,255,255,${0.008 + seededNoise(i * 0.11) * 0.028})`;
         ctx.beginPath();
         ctx.arc(x, y, s, 0, Math.PI * 2);
         ctx.fill();
@@ -1574,10 +1799,27 @@
       const resolvedOpacityReduction = resolvedRatio * 0.03;
       const resolvedArcReduction = resolvedRatio * 0.05;
 
-      const lineAlpha = isActive ? 0.62 - resolvedArcReduction : hasActive ? 0.04 : isPrimaryIdle ? 0.22 - resolvedArcReduction : 0.17 - resolvedArcReduction;
-      const spikeBoost = (isActive ? 1.22 : hasActive ? 0.56 : 1) * resolvedSpikeFactor;
-      const widthBoost = isActive ? 1.34 : hasActive ? 0.82 : 1;
-      const opacityBoost = isActive ? 0.16 : hasActive ? -0.05 : isPrimaryIdle ? 0.03 : 0;
+      const lineAlpha = isActive ? 0.68 - resolvedArcReduction : hasActive ? 0.025 : isPrimaryIdle ? 0.18 - resolvedArcReduction : 0.12 - resolvedArcReduction;
+      const spikeBoost = (isActive ? 1.34 : hasActive ? 0.46 : 1) * resolvedSpikeFactor;
+      const widthBoost = isActive ? 1.48 : hasActive ? 0.72 : 1;
+      const opacityBoost = isActive ? 0.21 : hasActive ? -0.085 : isPrimaryIdle ? 0.018 : -0.012;
+      const hazeAlpha = isActive ? 0.082 : hasActive ? 0.008 : isPrimaryIdle ? 0.026 : 0.016;
+      const outerHazeAlpha = isActive ? 0.038 : hasActive ? 0.003 : isPrimaryIdle ? 0.011 : 0.007;
+
+      ctx.save();
+      ctx.strokeStyle = `rgba(255,255,255,${Math.max(hazeAlpha - resolvedArcReduction * 0.4, 0)})`;
+      ctx.lineWidth = isActive ? 20 : isPrimaryIdle ? 14 : 11;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius + 16, insight.start, insight.end);
+      ctx.stroke();
+
+      ctx.strokeStyle = `rgba(255,255,255,${Math.max(outerHazeAlpha - resolvedArcReduction * 0.3, 0)})`;
+      ctx.lineWidth = isActive ? 40 : 26;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius + 30, insight.start, insight.end);
+      ctx.stroke();
+      ctx.restore();
 
       for (const seg of insight.segments) {
         const rawSpike = seg.spike * spikeBoost;
@@ -1591,7 +1833,7 @@
         const x2 = cx + Math.cos(seg.angle) * outer;
         const y2 = cy + Math.sin(seg.angle) * outer;
 
-        ctx.strokeStyle = `rgba(255,255,255,${clamp(seg.opacity + opacityBoost - resolvedOpacityReduction, hasActive ? 0.012 : 0.02, isActive ? 0.62 : isPrimaryIdle ? 0.33 : 0.28)})`;
+        ctx.strokeStyle = `rgba(255,255,255,${clamp(seg.opacity + opacityBoost - resolvedOpacityReduction, hasActive ? 0.004 : 0.012, isActive ? 0.72 : isPrimaryIdle ? 0.23 : 0.16)})`;
         ctx.lineWidth = seg.width * widthBoost;
         ctx.beginPath();
         ctx.moveTo(x1, y1);
@@ -1600,14 +1842,14 @@
       }
 
       ctx.strokeStyle = `rgba(255,255,255,${lineAlpha})`;
-      ctx.lineWidth = isActive ? 3.4 : hasActive ? 1.4 : 2;
+      ctx.lineWidth = isActive ? 2.8 : hasActive ? 1.05 : 1.6;
       ctx.beginPath();
       ctx.arc(cx, cy, radius, insight.start, insight.end);
       ctx.stroke();
 
       if (isActive) {
-        ctx.strokeStyle = "rgba(255,255,255,0.2)";
-        ctx.lineWidth = 7;
+        ctx.strokeStyle = "rgba(255,255,255,0.16)";
+        ctx.lineWidth = 4.8;
         ctx.beginPath();
         ctx.arc(cx, cy, radius + 1.5, insight.start, insight.end);
         ctx.stroke();
@@ -1867,6 +2109,71 @@
       renderPanel(currentPanelInsight);
     }
 
+    function getStepUpConfig(insight) {
+      if (!insight) return null;
+      return stepUpActionMapping[insight.key] || {
+        message: "No direct step-up actions recommended for this zone."
+      };
+    }
+
+    function getStepUpActionStateKey(insightKey, actionId) {
+      return `${insightKey}:${actionId}`;
+    }
+
+    function renderStepUpSection(insight) {
+      if (!insight) {
+        stepUpSection.hidden = true;
+        stepUpList.innerHTML = "";
+        return;
+      }
+
+      const config = getStepUpConfig(insight);
+      stepUpSection.hidden = false;
+
+      if (!config.actions || config.actions.length === 0) {
+        stepUpList.innerHTML = `<div class="step-up-empty">${config.message}</div>`;
+        return;
+      }
+
+      stepUpList.innerHTML = config.actions
+        .map((action) => {
+          const stateKey = getStepUpActionStateKey(insight.key, action.id);
+          const currentStatus = stepUpActionState[stateKey] || "";
+
+          return `
+            <div class="step-up-item">
+              <div class="step-up-copy">
+                <div class="step-up-name">${action.name}</div>
+                <div class="step-up-description">${action.description}</div>
+              </div>
+              <div class="step-up-controls">
+                <button class="step-up-button" type="button" data-step-up-action-id="${action.id}">${action.cta}</button>
+                ${currentStatus ? `<div class="step-up-status">${currentStatus}</div>` : ""}
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function handleStepUpActionClick(event) {
+      const actionTrigger = event.target.closest(".step-up-button");
+      if (!actionTrigger || !currentPanelInsight) return;
+
+      const config = getStepUpConfig(currentPanelInsight);
+      if (!config || !config.actions) return;
+
+      const action = config.actions.find((item) => item.id === actionTrigger.dataset.stepUpActionId);
+      if (!action) return;
+
+      stepUpActionState = {
+        ...stepUpActionState,
+        [getStepUpActionStateKey(currentPanelInsight.key, action.id)]: action.status
+      };
+
+      renderStepUpSection(currentPanelInsight);
+    }
+
     function openDrawer(insight, concept, source) {
       if (nextIssueTimeout) {
         window.clearTimeout(nextIssueTimeout);
@@ -1974,6 +2281,7 @@
         panelCopy.textContent = "The circle stays calm until it encounters concentrated evidence. Click to inspect canonical concepts, severity, and provider output.";
         statScore.textContent = "—";
         statCount.textContent = "—";
+        renderStepUpSection(null);
         conceptList.innerHTML = "";
         evidenceList.innerHTML = "";
         updateZoneReconcileAllUI(null);
@@ -1993,6 +2301,7 @@
       updateZoneReconcileAllUI(insight);
       statScore.textContent = insight.score;
       statCount.textContent = insight.concepts.length;
+      renderStepUpSection(insight);
       hudSub.textContent = `${insight.label.toUpperCase()} / anomaly cluster engaged`;
 
       conceptList.innerHTML = insight.concepts
@@ -2152,6 +2461,7 @@
     canvas.addEventListener("mouseleave", handlePointerLeave);
     canvas.addEventListener("click", handleClick);
     conceptList.addEventListener("click", handleConceptListClick);
+    stepUpList.addEventListener("click", handleStepUpActionClick);
     drawerBackdrop.addEventListener("click", closeDrawer);
     drawerClose.addEventListener("click", closeDrawer);
     drawerActionSelect.addEventListener("change", handleDrawerActionChange);
