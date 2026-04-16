@@ -390,49 +390,49 @@
     {
       key: "identity",
       label: "Identity",
-      intensity: 0.86,
-      drift: 0.80,
-      spread: 0.88,
+      intensity: 0.52,
+      drift: 0.56,
+      spread: 0.58,
       narrative: "Identity divergence is building across source-level attributes and unresolved reconciliation boundaries."
     },
     {
       key: "contact",
       label: "Contact",
-      intensity: 0.12,
-      drift: 0.18,
-      spread: 0.24,
+      intensity: 0.08,
+      drift: 0.12,
+      spread: 0.16,
       narrative: "Contact signals remain mixed, with lower-pressure reachability drift extending beyond the core field."
     },
     {
       key: "business",
       label: "Business",
       intensity: 1.0,
-      drift: 0.98,
+      drift: 1.0,
       spread: 1.0,
       narrative: "Business pressure is concentrating around formation, ownership, and legitimacy mismatch patterns."
     },
     {
       key: "bank",
       label: "Bank",
-      intensity: 0.14,
-      drift: 0.14,
-      spread: 0.20,
+      intensity: 0.06,
+      drift: 0.08,
+      spread: 0.12,
       narrative: "Bank divergence is present but relatively quiet, with only light residual ownership friction."
     },
     {
       key: "compliance",
       label: "Compliance",
-      intensity: 0.05,
-      drift: 0.07,
-      spread: 0.14,
+      intensity: 0.03,
+      drift: 0.05,
+      spread: 0.08,
       narrative: "Compliance sectors remain largely calm, with minor residual policy turbulence near the edge."
     },
     {
       key: "credit",
       label: "Credit",
-      intensity: 0.10,
-      drift: 0.12,
-      spread: 0.18,
+      intensity: 0.05,
+      drift: 0.08,
+      spread: 0.12,
       narrative: "Credit pressure is diffuse and secondary, showing early-stage clustering without dominant escalation."
     }
   ];
@@ -517,7 +517,7 @@
     return {
       cx: rect.width * 0.5,
       cy: rect.height * 0.49,
-      radius: Math.min(rect.width, rect.height) * 0.158
+      radius: Math.min(rect.width, rect.height) * 0.142
     };
   }
 
@@ -550,15 +550,15 @@
 
   function zonePriority(zone) {
     const emphasisMap = {
-      business: 3.4,
-      identity: 2.7,
-      contact: 0.72,
-      credit: 0.62,
-      bank: 0.52,
-      compliance: 0.42
+      business: 4.6,
+      identity: 2.8,
+      contact: 0.22,
+      credit: 0.16,
+      bank: 0.12,
+      compliance: 0.08
     };
 
-    return emphasisMap[zone.key] || 0.8;
+    return emphasisMap[zone.key] || 0.2;
   }
 
   function drawContainment(cx, cy, radius) {
@@ -596,22 +596,22 @@
   function drawAmbientDust(cx, cy, radius) {
     ctx.save();
 
-    for (let i = 0; i < 56; i++) {
-      const angle = degToRad(i * 1.97 + frameTick * 0.028);
-      const r = radius + 4 + seededNoise(i * 0.43) * 7;
-      const x = cx + Math.cos(angle) * r;
-      const y = cy + Math.sin(angle) * r;
-      const size = 0.08 + seededNoise(i * 0.14) * 0.18;
-      const alpha = 0.001 + seededNoise(i * 0.28) * 0.0018;
+    for (let i = 0; i < 28; i++) {
+        const angle = degToRad(i * 3.9 + frameTick * 0.02);
+        const r = radius + 5 + seededNoise(i * 0.43) * 5.5;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        const size = 0.05 + seededNoise(i * 0.14) * 0.1;
+        const alpha = 0.0005 + seededNoise(i * 0.28) * 0.0009;
 
-      ctx.fillStyle = `rgba(12,12,12,${alpha})`;
-      ctx.beginPath();
-      ctx.arc(x, y, size, 0, Math.PI * 2);
-      ctx.fill();
+        ctx.fillStyle = `rgba(12,12,12,${alpha})`;
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
     }
 
     ctx.restore();
-  }
+}
 
   function drawZoneWash(zone, cx, cy, radius, isHovered) {
     ctx.save();
@@ -646,7 +646,7 @@
     const hoverBoost = isHovered ? 1.42 : hoveredZone ? 0.72 : 1;
     const zoneRange = zone.end - zone.start;
     const rootStrength = (0.45 + evo.density * 1.1 + evo.spread * 0.24) * priority * hoverBoost;
-    const fragments = Math.floor(92 + evo.density * 150 * priority + (isHovered ? 90 : 0));
+    const fragments = Math.floor(40 + evo.density * 138 * priority + (isHovered ? 52 : 0));
 
     ctx.lineCap = "round";
 
@@ -678,7 +678,7 @@
       ctx.stroke();
     }
 
-    const pooledArcAlpha = clamp((0.068 + evo.density * 0.09) * priority * hoverBoost, 0.03, isHovered ? 0.25 : 0.16);
+    const pooledArcAlpha = clamp((0.038 + evo.density * 0.056) * priority * hoverBoost, 0.01, isHovered ? 0.15 : 0.12);
     ctx.strokeStyle = `rgba(20,20,20,${pooledArcAlpha})`;
     ctx.lineWidth = isHovered ? 1.9 : 1.3;
     ctx.beginPath();
@@ -693,8 +693,8 @@
 
     const evo = zoneEvolution(zone, frameTick);
     const priority = zonePriority(zone);
-    const hoverBoost = isHovered ? 1.75 : hoveredZone ? 0.74 : 1;
-    const count = Math.floor((520 + evo.density * 1200 + evo.spread * 260) * priority + (isHovered ? 260 : 0));
+    const hoverBoost = isHovered ? 1.18 : hoveredZone ? 0.86 : 1.18;
+    const count = Math.floor((520 + evo.density * 2350 + evo.spread * 520) * priority + (isHovered ? 300 : 0));
     const zoneRange = zone.end - zone.start;
 
     ctx.lineCap = "round";
@@ -721,13 +721,13 @@
         const rootY = cy + outwardY * originRadius;
 
         const baseLength =
-        (3.2 + nearEdgeBias * 7.5 + centerWeight * 4.5 + evo.drift * 4.5) *
+        (4.1 + nearEdgeBias * 8.8 + centerWeight * 5.2 + evo.drift * 5.4) *
         hoverBoost;
 
         const dominantLift =
         priority > 2
-            ? (5 + nearEdgeBias * 18 + centerWeight * 10)
-            : (1.5 + nearEdgeBias * 4);
+            ? (7.2 + nearEdgeBias * 19.5 + centerWeight * 11.5)
+            : (1.5 + nearEdgeBias * 4.2);
 
         const trailLength = baseLength + dominantLift;
 
@@ -746,9 +746,9 @@
         tangentY * ((seededNoise(i * 0.689 + zone.drift * 8.1) - 0.5) * (0.14 + nearEdgeBias * 0.48));
 
         const alphaRoot = clamp(
-        (0.018 + evo.density * 0.02 + centerWeight * 0.024 + nearEdgeBias * 0.014) * priority * hoverBoost,
-        0.01,
-        isHovered ? 0.19 : 0.14
+            (0.02 + evo.density * 0.021 + centerWeight * 0.024 + nearEdgeBias * 0.013) * priority * hoverBoost,
+            0.011,
+            isHovered ? 0.16 : 0.14
         );
 
         const alphaTip = alphaRoot * 0.02;
@@ -761,10 +761,10 @@
 
         ctx.strokeStyle = gradient;
         ctx.lineWidth =
-        0.16 +
-        centerWeight * 0.14 +
-        nearEdgeBias * 0.16 +
-        seededNoise(i * 0.17 + zone.intensity * 4.7) * 0.1;
+        0.15 +
+        centerWeight * 0.13 +
+        nearEdgeBias * 0.14 +
+        seededNoise(i * 0.17 + zone.intensity * 4.7) * 0.09;
 
         ctx.beginPath();
         ctx.moveTo(rootX, rootY);
